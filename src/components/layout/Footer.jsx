@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Icon from '../ui/Icon.jsx';
 import { brand, footerColumns, payments, policies, trustItems } from '../../data/site.js';
 import './Footer.css';
@@ -51,9 +52,7 @@ export default function Footer() {
               <h3>{col.title}</h3>
               <ul>
                 {col.links.map((l) => (
-                  <li key={l}>
-                    <a href="#top">{l}</a>
-                  </li>
+                  <li key={l.label}>{l.to ? <Link to={l.to}>{l.label}</Link> : <a href={l.href}>{l.label}</a>}</li>
                 ))}
               </ul>
             </div>
@@ -66,10 +65,10 @@ export default function Footer() {
 
         <div className="container footer__mid">
           <div className="footer__social">
-            <a href="#top" aria-label="Instagram">
+            <a href="#" aria-label="Instagram">
               <Icon name="instagram" size={20} />
             </a>
-            <a href="#top" aria-label="TikTok">
+            <a href="#" aria-label="TikTok">
               <Icon name="tiktok" size={20} />
             </a>
           </div>
@@ -89,7 +88,7 @@ export default function Footer() {
             <ul>
               {policies.map((p) => (
                 <li key={p}>
-                  <a href="#top">{p}</a>
+                  <a href="#">{p}</a>
                 </li>
               ))}
             </ul>

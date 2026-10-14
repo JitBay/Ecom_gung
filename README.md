@@ -12,12 +12,28 @@ npm run dev
 
 Open http://localhost:5173. `npm run build` makes a production build in `dist/`.
 
+## Pages
+
+| URL | Page |
+|---|---|
+| `/` and `/products/3d-sculpting-anti-cellulite-leggings-instant-lift-smooth` | Long leggings page |
+| `/collections/all` | Shop ALL |
+| `/collections/frontpage` | Best Sellers |
+| `/collections/sculpt-collection` | Sculpt™ Collection |
+| `/collections/sculpt-swim` | Sculpt™ Swim |
+| `/collections/posture-support` | Posture & Support |
+| `/collections/wellness-supplements` | Wellness & Supplements |
+| `/products/<handle>` | Standard product page (shorts, tee, bra, sleeves, swimsuits, collagen) |
+
+Collection pages have the same filter drawer ("In stock only" + sort) and "Sort by" menu as the reference.
+
 ## Where things are
 
 | What | File |
 |---|---|
+| Products, prices, the 6 collections (tabs) | `src/data/catalog.js` |
 | Brand name, menu, footer links | `src/data/site.js` |
-| Product, prices, bundles, sizes, colours | `src/data/product.js` |
+| Leggings page: bundles, sizes, benefits | `src/data/product.js` |
 | Reviews, video testimonials | `src/data/reviews.js` |
 | FAQ | `src/data/faq.js` |
 | Colours, fonts, spacing | `src/styles/global.css` (`:root`) |

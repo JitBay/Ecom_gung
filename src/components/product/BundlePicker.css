@@ -152,35 +152,6 @@
   flex: none;
 }
 
-.select {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  min-width: 0;
-  height: 36px;
-  padding: 0 10px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--white);
-}
-
-.select select {
-  appearance: none;
-  border: 0;
-  background: none;
-  padding-right: 18px;
-  font-size: 14px;
-  cursor: pointer;
-  outline: none;
-}
-
-.select svg {
-  position: absolute;
-  right: 8px;
-  pointer-events: none;
-}
-
 .select__dot {
   width: 14px;
   height: 14px;

@@ -1,0 +1,147 @@
+/* Uses .drawer-backdrop from Header.css */
+.filters {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  width: min(380px, 90vw);
+  background: var(--white);
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.3, 0.7, 0.2, 1);
+}
+
+.drawer-backdrop.is-open .filters {
+  transform: none;
+}
+
+.filters__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--line);
+}
+
+.filters__head h2 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.filters__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 22px;
+}
+
+.filters fieldset {
+  margin: 0;
+  padding: 18px 0;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.filters legend {
+  padding: 0;
+  margin-bottom: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.filters__radio {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 7px 0;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.filters__radio input,
+.switch input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.filters__radio span {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  border-radius: 50%;
+  border: 1.5px solid #cfc5b5;
+  transition: border 0.2s;
+}
+
+.filters__radio input:checked + span {
+  border: 5px solid var(--ink);
+}
+
+.filters__radio input:focus-visible + span,
+.switch input:focus-visible + span {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.switch {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.switch span {
+  position: relative;
+  width: 40px;
+  height: 22px;
+  border-radius: 11px;
+  background: var(--stone);
+  transition: background 0.2s;
+}
+
+.switch span::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--white);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.switch input:checked + span {
+  background: var(--ink);
+}
+
+.switch input:checked + span::after {
+  transform: translateX(18px);
+}
+
+.filters__foot {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 22px 22px;
+  border-top: 1px solid var(--line);
+}
+
+.filters__foot .btn {
+  flex: 1;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 15px;
+}
+
+.filters__clear {
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

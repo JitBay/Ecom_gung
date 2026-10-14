@@ -1,5 +1,10 @@
 // Brand, navigation and footer content. Change the brand name here.
+import { collectionUrl, collections } from './catalog.js';
+
 export const brand = { name: 'VELA', suffix: 'LABS' };
+
+// Header tabs: one per collection, same labels and order as the reference site.
+export const nav = collections.map((c) => ({ label: c.label, to: collectionUrl(c.handle) }));
 
 export const announcements = [
   '90-day money-back guarantee',
@@ -7,23 +12,15 @@ export const announcements = [
   '250,000+ women already wear them',
 ];
 
-export const nav = [
-  'Shop All',
-  'Best Sellers',
-  'Sculpt Collection',
-  'Sculpt Swim',
-  'Posture & Support',
-  'Wellness & Supplements',
-];
-
+// Footer link columns. `to` = page inside this app; `href` = placeholder link.
 export const footerColumns = [
   {
     title: `${brand.name} Labs`,
-    links: ['Refer a Friend – Give €10, Get €10', ...nav],
+    links: [{ label: 'Refer a Friend – Give $10, Get $10', href: '#' }, ...nav],
   },
   {
     title: 'Support',
-    links: ['Track Your Order', 'Contact Us', 'Shipping Info', 'Returns & Warranty', 'Subscription Management'],
+    links: ['Track Your Order', 'Contact Us', 'Shipping Info', 'Returns & Warranty', 'Subscription management'].map((label) => ({ label, href: '#' })),
   },
 ];
 
@@ -33,6 +30,7 @@ export const policies = [
   'Shipping policy',
   'Terms of service',
   'Contact information',
+  'Cancellation policy',
   'Cookie preferences',
 ];
 

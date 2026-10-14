@@ -220,6 +220,55 @@ ul {
   }
 }
 
+/* Custom select with a chevron icon */
+.select {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+}
+
+.select select {
+  appearance: none;
+  border: 0;
+  background: none;
+  padding-right: 18px;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+}
+
+.select svg {
+  position: absolute;
+  right: 8px;
+  pointer-events: none;
+}
+
+/* Show/hide helpers: phones < 750px, nav collapses < 1100px */
+@media (min-width: 1100px) {
+  .hide-desktop {
+    display: none !important;
+  }
+}
+
+@media (min-width: 750px) {
+  .hide-tablet-up {
+    display: none !important;
+  }
+}
+
+@media (max-width: 749px) {
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
 /* Flag emoji do not render on Windows, so draw it */
 .flag-fr {
   display: inline-block;

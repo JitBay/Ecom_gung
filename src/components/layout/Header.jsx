@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import Icon from '../ui/Icon.jsx';
 import { announcements, brand, nav } from '../../data/site.js';
 import { useCart } from '../../context/CartContext.jsx';
@@ -7,10 +8,10 @@ import './Header.css';
 
 export function Logo() {
   return (
-    <a href="#top" className="logo" aria-label={`${brand.name} ${brand.suffix} home`}>
+    <Link to="/" className="logo" aria-label={`${brand.name} ${brand.suffix} home`}>
       <strong>{brand.name}</strong>
       <span>{brand.suffix}</span>
-    </a>
+    </Link>
   );
 }
 
@@ -40,16 +41,16 @@ function MobileMenu({ open, onClose }) {
         </div>
         <ul>
           {nav.map((item) => (
-            <li key={item}>
-              <a href="#product" onClick={onClose}>
-                {item}
+            <li key={item.to}>
+              <NavLink to={item.to} onClick={onClose}>
+                {item.label}
                 <Icon name="arrow" size={18} />
-              </a>
+              </NavLink>
             </li>
           ))}
         </ul>
         <div className="mobile-menu__foot">
-          <a href="#product">
+          <a href="#">
             <Icon name="user" /> Account
           </a>
           <span>English · EUR €</span>
@@ -87,9 +88,9 @@ export default function Header() {
 
           <nav className="header__nav" aria-label="Main">
             {nav.map((item) => (
-              <a key={item} href="#product">
-                {item}
-              </a>
+              <NavLink key={item.to} to={item.to}>
+                {item.label}
+              </NavLink>
             ))}
           </nav>
 

@@ -88,6 +88,13 @@ const paths = {
     </>
   ),
   trend: <path d="m3 17 6-6 4 4 8-8M15 7h6v6" />,
+  filter: (
+    <>
+      <path d="M4 7h10M18 7h2M4 17h4M12 17h8" />
+      <circle cx="16" cy="7" r="2" />
+      <circle cx="10" cy="17" r="2" />
+    </>
+  ),
   instagram: (
     <>
       <rect x="3.5" y="3.5" width="17" height="17" rx="5" />

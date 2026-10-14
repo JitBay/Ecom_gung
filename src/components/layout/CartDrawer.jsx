@@ -62,7 +62,7 @@ export default function CartDrawer() {
                 </div>
                 <div className="cart__price">
                   <strong>{price(l.price * l.qty)}</strong>
-                  <s>{price(l.compareAt * l.qty)}</s>
+                  {l.compareAt > l.price && <s>{price(l.compareAt * l.qty)}</s>}
                 </div>
               </li>
             ))}

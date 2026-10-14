@@ -98,8 +98,13 @@
   transition: transform 0.25s;
 }
 
-.header__nav a:hover::after {
+.header__nav a:hover::after,
+.header__nav a.active::after {
   transform: scaleX(1);
+}
+
+.mobile-menu li a.active {
+  color: var(--gold-dark);
 }
 
 .icon-btn {
@@ -260,22 +265,7 @@
   }
 }
 
-@media (min-width: 1100px) {
-  .hide-desktop {
-    display: none !important;
-  }
-}
-
-@media (min-width: 750px) {
-  .hide-tablet-up {
-    display: none !important;
-  }
-}
-
 @media (max-width: 749px) {
-  .hide-mobile {
-    display: none !important;
-  }
   .header__inner {
     min-height: 60px;
   }
