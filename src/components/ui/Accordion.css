@@ -1,0 +1,112 @@
+.accordion__item {
+  border-bottom: 1px solid var(--line);
+}
+
+.accordion__head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 18px 0;
+  text-align: left;
+  font-weight: 600;
+}
+
+.accordion__title {
+  flex: 1;
+}
+
+.accordion__icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  transition: transform 0.3s;
+  color: var(--muted);
+}
+
+.accordion--line .is-open .accordion__icon {
+  transform: rotate(180deg);
+}
+
+/* Smooth height animation using grid rows */
+.accordion__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s ease;
+}
+
+.is-open .accordion__panel {
+  grid-template-rows: 1fr;
+}
+
+.accordion__inner {
+  overflow: hidden;
+  color: var(--ink-soft);
+  font-size: 14px;
+}
+
+.is-open .accordion__inner {
+  padding-bottom: 20px;
+}
+
+/* Card variant (big FAQ) */
+.accordion--card .accordion__head {
+  padding: 22px 0;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.accordion__tag {
+  flex: none;
+  min-width: 96px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: var(--sand);
+  color: var(--gold-dark);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.accordion--card .accordion__icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  transition: background 0.2s, color 0.2s;
+}
+
+.accordion--card .is-open .accordion__icon {
+  background: var(--ink);
+  color: var(--white);
+}
+
+.accordion--card .accordion__inner {
+  padding-left: 110px;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+@media (max-width: 600px) {
+  .accordion--card .accordion__head {
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    font-size: 16px;
+  }
+  .accordion--card .accordion__tag {
+    min-width: 0;
+  }
+  .accordion--card .accordion__title {
+    order: 3;
+    flex-basis: 100%;
+  }
+  .accordion--card .accordion__icon {
+    margin-left: auto;
+  }
+  .accordion--card .accordion__inner {
+    padding-left: 0;
+  }
+}

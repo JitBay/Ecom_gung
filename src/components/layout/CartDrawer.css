@@ -1,0 +1,163 @@
+.cart-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  background: rgba(11, 14, 17, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.cart-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.cart {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  width: min(420px, 100vw);
+  background: var(--white);
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.3, 0.7, 0.2, 1);
+}
+
+.cart-backdrop.is-open .cart {
+  transform: none;
+}
+
+.cart__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--line);
+}
+
+.cart__head h2 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.cart__ship {
+  padding: 14px 22px;
+  background: var(--cream-2);
+  font-size: 13px;
+}
+
+.cart__ship > i {
+  display: block;
+  height: 6px;
+  margin-top: 8px;
+  border-radius: 3px;
+  background: var(--stone);
+  overflow: hidden;
+}
+
+.cart__ship i i {
+  display: block;
+  height: 100%;
+  background: var(--gold);
+  transition: width 0.4s ease;
+}
+
+.cart__empty {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 14px;
+  flex: 1;
+  color: var(--muted);
+}
+
+.cart__lines {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 22px;
+}
+
+.cart__lines li {
+  display: flex;
+  gap: 14px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.cart__thumb {
+  width: 72px;
+  height: 88px;
+  flex: none;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+}
+
+.cart__info {
+  display: grid;
+  align-content: start;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+  font-size: 14px;
+}
+
+.cart__info span {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.qty {
+  display: inline-flex;
+  align-items: center;
+  width: max-content;
+  margin-top: 6px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+}
+
+.qty button {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+}
+
+.qty span {
+  min-width: 18px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.cart__price {
+  display: grid;
+  align-content: start;
+  text-align: right;
+  font-size: 14px;
+}
+
+.cart__price s {
+  font-size: 12px;
+  color: var(--muted-2);
+}
+
+.cart__foot {
+  display: grid;
+  gap: 12px;
+  padding: 18px 22px 22px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+
+.cart__foot p {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+}
+
+.cart__foot small {
+  color: var(--muted);
+}

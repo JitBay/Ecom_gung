@@ -1,0 +1,257 @@
+.bundles__heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 26px 0 14px;
+  font-weight: 700;
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+.bundles__heading::before,
+.bundles__heading::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.6;
+}
+
+.bundles ul {
+  display: grid;
+  gap: 12px;
+}
+
+.bundle {
+  overflow: hidden;
+  border: 1.5px solid #e7dfd2;
+  border-radius: var(--radius);
+  background: #f6f2ec;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.bundle:hover {
+  border-color: var(--gold);
+}
+
+.bundle.is-selected {
+  border-color: var(--gold);
+  background: var(--white);
+  box-shadow: 0 8px 24px rgba(201, 169, 110, 0.18);
+}
+
+.bundle__head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+}
+
+.radio {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1.5px solid #cfc5b5;
+  background: var(--white);
+  transition: border 0.2s;
+}
+
+.is-selected .radio {
+  border: 6px solid var(--gold);
+}
+
+.bundle__title {
+  flex: 1;
+  min-width: 0;
+}
+
+.bundle__title p {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+}
+
+.bundle__title strong {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.bundle__title span {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.bundle__badge {
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: var(--sand);
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.bundle__price {
+  display: grid;
+  text-align: right;
+  font-size: 16px;
+}
+
+.bundle__price strong {
+  font-weight: 600;
+}
+
+.bundle__price s {
+  font-size: 13px;
+  color: var(--muted-2);
+}
+
+.bundle__body {
+  padding: 0 18px 16px;
+  cursor: default;
+  animation: open 0.3s ease;
+}
+
+@keyframes open {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+.bundle__ship {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.variants__label {
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.variant {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.variant__thumb {
+  width: 34px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: 6px;
+  flex: none;
+}
+
+.select {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+}
+
+.select select {
+  appearance: none;
+  border: 0;
+  background: none;
+  padding-right: 18px;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+}
+
+.select svg {
+  position: absolute;
+  right: 8px;
+  pointer-events: none;
+}
+
+.select__dot {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  border-radius: 50%;
+}
+
+.bundle__gift {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  background: var(--gold);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+/* Gold frame with scrolling "Limited offer" text around the best deal */
+.offer-frame {
+  position: relative;
+  padding: 18px 10px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #b89356, var(--gold) 45%, #b89356);
+  overflow: hidden;
+}
+
+.offer-frame .bundle {
+  border-color: transparent;
+}
+
+.offer-frame__text {
+  position: absolute;
+  left: 0;
+  white-space: nowrap;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white);
+  animation: marquee 18s linear infinite;
+}
+
+.offer-frame__text.is-top {
+  top: 2px;
+}
+
+.offer-frame__text.is-bottom {
+  bottom: 2px;
+  animation-direction: reverse;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 420px) {
+  .bundle__head {
+    padding: 14px;
+    gap: 10px;
+  }
+  .bundle__title strong {
+    font-size: 15px;
+  }
+  .variant {
+    gap: 6px;
+  }
+  .select {
+    padding: 0 8px;
+  }
+}

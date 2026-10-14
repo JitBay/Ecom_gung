@@ -1,0 +1,227 @@
+.quality {
+  padding: clamp(64px, 9vw, 110px) 0;
+  background: var(--night);
+  color: var(--white);
+}
+
+.quality__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+}
+
+/* Fabric close-ups drawn with CSS gradients */
+.quality__tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+
+.tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1;
+  padding: 16px;
+  text-align: center;
+  background-color: #141414;
+}
+
+.tile strong {
+  position: relative;
+  font-family: var(--serif);
+  font-size: clamp(20px, 2.4vw, 30px);
+  font-weight: 400;
+  line-height: 1.1;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+}
+
+.tile span {
+  position: relative;
+  margin-top: 4px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.tile--ribs {
+  background-image: repeating-linear-gradient(115deg, #262626 0 3px, #111 3px 9px);
+}
+
+.tile--band {
+  background-image: linear-gradient(180deg, #2a2a2a 0 22%, transparent 22%),
+    repeating-linear-gradient(90deg, #1d1d1d 0 2px, #121212 2px 6px);
+}
+
+.tile--lift {
+  background-image: radial-gradient(ellipse at 50% 110%, #3a1f2c 0 40%, transparent 41%),
+    repeating-linear-gradient(60deg, #222 0 3px, #121212 3px 8px);
+}
+
+.tile--lift::before {
+  content: '';
+  position: absolute;
+  inset: 22% 18%;
+  border: 2px solid #b0548a;
+  border-top-color: transparent;
+  border-radius: 0 0 50% 50%;
+  opacity: 0.8;
+}
+
+.tile--knit {
+  background-image: radial-gradient(circle, #2a2a2a 1.2px, transparent 1.6px), linear-gradient(#141414, #141414);
+  background-size: 7px 7px, auto;
+}
+
+.quality__pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.quality__pills span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid rgba(241, 240, 236, 0.16);
+  border-radius: 30px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.quality .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+.quality .eyebrow {
+  color: var(--gold);
+}
+
+.quality .eyebrow::before {
+  display: none;
+}
+
+.quality .title {
+  margin: 14px 0 16px;
+}
+
+.quality .title em {
+  color: var(--gold);
+}
+
+.quality__lead {
+  color: rgba(241, 240, 236, 0.7);
+  font-size: 16px;
+}
+
+.quality__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 28px 0;
+  border-top: 1px solid rgba(241, 240, 236, 0.12);
+  border-bottom: 1px solid rgba(241, 240, 236, 0.12);
+}
+
+.quality__stats div {
+  display: grid;
+  gap: 4px;
+  padding: 18px 0;
+}
+
+.quality__stats div + div {
+  padding-left: 18px;
+  border-left: 1px solid rgba(241, 240, 236, 0.12);
+}
+
+.quality__stats b {
+  font-family: var(--serif);
+  font-size: clamp(32px, 3.4vw, 44px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--gold);
+}
+
+.quality__stats small {
+  font-size: 0.55em;
+}
+
+.quality__stats span {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(241, 240, 236, 0.6);
+}
+
+.quality__features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.feature {
+  padding: 18px;
+  border: 1px solid rgba(241, 240, 236, 0.1);
+  border-radius: var(--radius);
+  background: var(--night-2);
+  transition: border-color 0.25s;
+}
+
+.feature:hover {
+  border-color: rgba(201, 169, 110, 0.5);
+}
+
+.feature__icon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  margin-bottom: 12px;
+  border-radius: 50%;
+  background: rgba(201, 169, 110, 0.12);
+  color: var(--gold);
+}
+
+.feature strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 15px;
+}
+
+.feature p {
+  font-size: 13px;
+  line-height: 1.55;
+  color: rgba(241, 240, 236, 0.6);
+}
+
+.quality__note {
+  margin-top: 12px;
+  font-size: 13px;
+  color: rgba(241, 240, 236, 0.55);
+}
+
+@media (max-width: 899px) {
+  .quality__inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .quality__features {
+    grid-template-columns: 1fr;
+  }
+  .quality .btn {
+    width: 100%;
+  }
+}

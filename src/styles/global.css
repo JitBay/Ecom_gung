@@ -1,0 +1,240 @@
+/* Design tokens taken from the reference page */
+:root {
+  --ink: #1a1a18;
+  --ink-soft: #4a453e;
+  --muted: #6b6357;
+  --muted-2: #9e9588;
+  --line: rgba(26, 26, 24, 0.12);
+  --cream: #fafaf8;
+  --cream-2: #faf7f4;
+  --sand: #f2ece3;
+  --stone: #e8e4dd;
+  --gold: #c9a96e;
+  --gold-dark: #8c7d5e;
+  --gold-tint: rgba(201, 169, 110, 0.12);
+  --night: #0b0e11;
+  --night-2: #15191d;
+  --white: #fff;
+  --green: #3e8e5a;
+
+  --serif: Georgia, 'Times New Roman', serif;
+  --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --radius-sm: 10px;
+  --radius: 14px;
+  --radius-lg: 22px;
+  --page: 1280px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --header-h: 72px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* Shared section heading: serif title with gold italic accent */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+}
+
+.eyebrow::before,
+.eyebrow::after {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+.title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(30px, 4.2vw, 48px);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.title em {
+  color: var(--gold-dark);
+}
+
+.subtitle {
+  color: var(--muted);
+  max-width: 520px;
+  margin: 14px auto 0;
+}
+
+.section-head {
+  text-align: center;
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  margin-bottom: clamp(28px, 5vw, 48px);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 30px;
+  border-radius: var(--radius);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn--dark {
+  background: var(--ink);
+  color: var(--white);
+  box-shadow: 0 10px 24px rgba(26, 26, 24, 0.18);
+}
+
+.btn--gold {
+  background: var(--gold);
+  color: var(--ink);
+  box-shadow: 0 10px 28px rgba(201, 169, 110, 0.3);
+}
+
+.btn--block {
+  width: 100%;
+}
+
+/* Horizontal scroller used on mobile for card rows */
+.scroller {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+
+.scroller::-webkit-scrollbar {
+  display: none;
+}
+
+.scroller > * {
+  scroll-snap-align: start;
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Flag emoji do not render on Windows, so draw it */
+.flag-fr {
+  display: inline-block;
+  width: 16px;
+  height: 11px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #1f3c88 33%, #fff 33% 66%, #d6293b 66%);
+  box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.15);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
