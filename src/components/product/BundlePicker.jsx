@@ -1,26 +1,28 @@
 import Icon from '../ui/Icon.jsx';
-import ProductArt from '../ui/ProductArt.jsx';
 import { bundles, colors, sizes } from '../../data/product.js';
 import { price } from '../../lib/format.js';
 import './BundlePicker.css';
 
-const marquee = Array(14).fill('Limited offer').join(' • ');
+const marquee = Array(12).fill('Offre Limitée').join(' • ');
 
-// One colour + size row per item in the selected bundle.
-function VariantRows({ variants, onChange }) {
+function VariantRows({ variants, onChange, productImage }) {
   return (
     <div className="variants">
-      <p className="variants__label">Color, Size</p>
+      <p className="variants__label">Couleur & Taille par article :</p>
       {variants.map((v, i) => {
-        const hex = colors.find((c) => c.id === v.color).hex;
+        const currentColor = colors.find((c) => c.id === v.color) || colors[0];
         return (
           <div className="variant" key={i}>
             <div className="variant__thumb">
-              <ProductArt color={hex} pose="side" />
+              <img
+                src={productImage || '/images/products/demi-manches/1.jpg'}
+                alt="Miniature"
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
             </div>
             <label className="select">
-              <span className="select__dot" style={{ background: hex }} />
-              <select value={v.color} onChange={(e) => onChange(i, { color: e.target.value })} aria-label={`Color ${i + 1}`}>
+              <span className="select__dot" style={{ background: currentColor.hex }} />
+              <select value={v.color} onChange={(e) => onChange(i, { color: e.target.value })} aria-label={`Couleur article ${i + 1}`}>
                 {colors.map((c) => (
                   <option key={c.id} value={c.id}>
                     {c.label}
@@ -30,7 +32,7 @@ function VariantRows({ variants, onChange }) {
               <Icon name="chevron" size={14} />
             </label>
             <label className="select">
-              <select value={v.size} onChange={(e) => onChange(i, { size: e.target.value })} aria-label={`Size ${i + 1}`}>
+              <select value={v.size} onChange={(e) => onChange(i, { size: e.target.value })} aria-label={`Taille article ${i + 1}`}>
                 {sizes.map((s) => (
                   <option key={s}>{s}</option>
                 ))}
@@ -44,7 +46,7 @@ function VariantRows({ variants, onChange }) {
   );
 }
 
-function BundleCard({ bundle, selected, onSelect, variants, onVariantChange }) {
+function BundleCard({ bundle, selected, onSelect, variants, onVariantChange, productImage }) {
   const card = (
     <div className={`bundle ${selected ? 'is-selected' : ''}`} onClick={onSelect}>
       <div className="bundle__head">
@@ -66,10 +68,10 @@ function BundleCard({ bundle, selected, onSelect, variants, onVariantChange }) {
         <div className="bundle__body" onClick={(e) => e.stopPropagation()}>
           {bundle.freeShipping && (
             <p className="bundle__ship">
-              <Icon name="check" size={16} strokeWidth={2.4} /> FREE Shipping
+              <Icon name="check" size={16} strokeWidth={2.4} /> LIVRAISON OFFERTE
             </p>
           )}
-          <VariantRows variants={variants} onChange={onVariantChange} />
+          <VariantRows variants={variants} onChange={onVariantChange} productImage={productImage} />
         </div>
       )}
 
@@ -97,10 +99,12 @@ function BundleCard({ bundle, selected, onSelect, variants, onVariantChange }) {
   );
 }
 
-export default function BundlePicker({ selectedId, onSelect, variants, onVariantChange }) {
+export default function BundlePicker({ selectedId, onSelect, variants, onVariantChange, productImage }) {
   return (
     <div className="bundles">
-      <p className="bundles__heading">Try it risk-free — 90-day guarantee</p>
+      <p className="bundles__heading">
+        <Icon name="shield" size={16} /> Essayez sans risque — Garantie Satisfait ou Remboursé de 30 jours
+      </p>
       <ul>
         {bundles.map((b) => (
           <BundleCard
@@ -110,6 +114,7 @@ export default function BundlePicker({ selectedId, onSelect, variants, onVariant
             onSelect={() => onSelect(b.id)}
             variants={variants}
             onVariantChange={onVariantChange}
+            productImage={productImage}
           />
         ))}
       </ul>

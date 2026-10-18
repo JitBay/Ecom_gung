@@ -1,0 +1,45 @@
+{
+  "general": {
+    "brand_name": "Vela Labs",
+    "legal_entity": "Vella",
+    "tagline": "T-shirt gainant ergonomique pour homme",
+    "guarantee_badge": "Garantie Satisfait ou Remboursé de 30 jours",
+    "free_shipping": "Livraison suivie offerte dès 55 € ou dès 2 t-shirts"
+  },
+  "products": {
+    "category": "Vêtements de compression et gainants pour hommes",
+    "flagship": "T-shirt de compression gainant ergonomique pour homme",
+    "model_sans_manches": "Vela Sculpt™ — Sans Manches (Débardeur)",
+    "model_demi_manches": "Vela Sculpt™ — Demi-Manches (Manches courtes)",
+    "model_manches_longues": "Vela Sculpt™ — Manches Longues",
+    "features": {
+      "shaping": "T-shirt gainant pour lissage du torse et de la sangle abdominale",
+      "posture": "Maintien postural actif pour le dos et les épaules",
+      "silhouette": "Silhouette athlétique et naturelle sous tous vos vêtements",
+      "knit": "Maille tridimensionnelle respirante anti-odeur",
+      "stealth": "Tissu seconde peau ultra-discret, col dégagé et coutures invisibles"
+    }
+  },
+  "offers": {
+    "offer_1": {
+      "title": "Silhouette plus nette, sans changer ta garde-robe",
+      "hook": "Obtiens une silhouette visuellement plus lisse sous tes tee-shirts et chemises grâce à un t-shirt de compression discret, conçu pour accompagner tes tenues quotidiennes sans ajouter de couches compliquées ni bouleverser tes habitudes.",
+      "guarantee": "Essaie-le pendant 30 jours. Si tu n'es pas satisfait du confort ou du rendu, demande un remboursement conformément aux conditions de la garantie."
+    },
+    "offer_2": {
+      "title": "Le confort avant tout",
+      "hook": "Profite d'un maintien ajusté qui s'intègre facilement à ta journée, au bureau comme en sortie, avec un t-shirt de compression pensé pour rester discret sous tes vêtements et t'éviter de choisir entre maintien et confort.",
+      "guarantee": "Bénéficie de 30 jours pour évaluer le confort et l'ajustement du produit. Si l'expérience ne te convient pas, tu peux demander un remboursement selon les conditions annoncées."
+    },
+    "offer_3": {
+      "title": "Porte tes vêtements avec plus de confiance",
+      "hook": "Porte tes chemises et tes tee-shirts avec davantage d'assurance grâce à une couche gainante discrète qui aide à lisser visuellement la silhouette, sans devoir renouveler ta garde-robe ni adopter une routine compliquée.",
+      "guarantee": "Tu disposes de 30 jours pour décider si le produit répond à tes attentes. Si ce n'est pas le cas, tu peux demander un remboursement selon les modalités de retour clairement communiquées lors de l'achat."
+    },
+    "offer_4": {
+      "title": "Une solution simple pour le quotidien",
+      "hook": "Simplifie ta routine vestimentaire avec un seul t-shirt de compression conçu pour associer maintien, discrétion et facilité d'utilisation, afin de profiter d'une silhouette visuellement plus lisse sous tes vêtements, sans effort supplémentaire au quotidien.",
+      "guarantee": "Profite d'une garantie satisfait ou remboursé de 30 jours, avec des conditions transparentes concernant les retours, les frais éventuels et les modalités de remboursement."
+    }
+  }
+}

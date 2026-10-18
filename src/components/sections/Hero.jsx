@@ -1,45 +1,67 @@
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Icon from '../ui/Icon.jsx';
 import Stars from '../ui/Stars.jsx';
-import ProductArt from '../ui/ProductArt.jsx';
-import { colors } from '../../data/product.js';
+import { products } from '../../data/catalog.js';
 import './Hero.css';
 
-const perks = ['Lighter legs from hour one', 'Invisible under clothes', 'Comfortable enough to forget'];
+const perks = [
+  'Silhouette lissée sous t-shirt et chemise',
+  'Maintien postural actif pour le dos et les épaules',
+  'Maille 3D respirante, invisible & seconde peau',
+];
 
 export default function Hero() {
+  const [selectedIdx, setSelectedIdx] = useState(0);
+  const heroProducts = products.slice(0, 3);
+  const currentProduct = heroProducts[selectedIdx];
+
   return (
     <section className="hero">
       <div className="hero__text">
         <div className="hero__rating">
           <Stars value={5} size={17} />
           <span>
-            <strong>4.8</strong>/5 <i>|</i> <strong>250,000+</strong> women
+            <strong>4.9</strong>/5 <i>|</i> <strong>45 000+</strong> hommes conquis
           </span>
         </div>
 
         <h1 className="hero__title">
-          <span>Lighter legs.</span>
-          <span>Smoother-looking skin.</span>
+          <span>Une silhouette plus nette.</span>
+          <span>Un maintien postural naturel.</span>
           <span>
-            The minute you <u>pull them on</u>.
+            Dès que vous <u>l’enfilez</u>.
           </span>
         </h1>
 
         <p className="hero__lead">
-          3D-sculpt compression leggings for heavy, achy legs and skin that looks smoother. Not a cream. Not a
-          wait-and-see. <strong>Wear them 90 days or get your money back.</strong>
+          Le t-shirt de compression ergonomique pour homme conçu pour <strong>lisser visuellement la silhouette sous vos vêtements</strong> et soutenir vos lombaires tout au long de la journée. Discret, respirant et sans coutures gênantes.
         </p>
 
-        <a href="#product" className="btn btn--dark hero__cta">
-          Try risk-free for 90 days <Icon name="arrow" size={18} />
-        </a>
+        <div className="hero__model-pills" aria-label="Choisir une coupe">
+          {heroProducts.map((p, idx) => (
+            <button
+              key={p.handle}
+              className={`hero__pill ${idx === selectedIdx ? 'is-active' : ''}`}
+              onClick={() => setSelectedIdx(idx)}
+            >
+              {p.shortTitle}
+            </button>
+          ))}
+        </div>
+
+        <div className="hero__cta-group">
+          <a href="#product" className="btn btn--dark hero__cta">
+            Commander avec la Garantie 30 Jours <Icon name="arrow" size={18} />
+          </a>
+        </div>
 
         <div className="hero__proof">
           <span>
-            <Icon name="shield" size={17} /> 90-day money-back guarantee
+            <Icon name="shield" size={17} /> Garantie Satisfait ou Remboursé de 30 jours
           </span>
           <span>
-            <i className="live-dot" /> 3,000+ women order these every single day
+            <i className="live-dot" /> Expédié sous 24/48h avec suivi
           </span>
         </div>
 
@@ -56,22 +78,29 @@ export default function Hero() {
       </div>
 
       <div className="hero__media">
-        <div className="hero__figures">
-          {colors.slice(0, 3).map((c, i) => (
-            <ProductArt key={c.id} color={c.hex} pose={['side', 'front', 'back'][i]} className="hero__figure" />
-          ))}
+        <div className="hero__image-card">
+          <img
+            src={currentProduct.images[0]}
+            alt={currentProduct.title}
+            className="hero__main-photo"
+          />
+          <div className="hero__badge-model">
+            <strong>{currentProduct.title}</strong>
+            <span>{currentProduct.tagline}</span>
+          </div>
         </div>
+
         <div className="hero__badge">
-          <b>90</b>
+          <b>30</b>
           <div>
-            <strong>Days to decide</strong>
-            <span>Full money-back guarantee</span>
+            <strong>Jours pour essayer</strong>
+            <span>Garantie Satisfait ou Remboursé</span>
           </div>
           <p>
             <span className="tick">
               <Icon name="check" size={12} strokeWidth={2.6} />
             </span>
-            Trusted by 250,000+ women worldwide
+            Adopté par plus de 45 000 hommes au quotidien
           </p>
         </div>
       </div>

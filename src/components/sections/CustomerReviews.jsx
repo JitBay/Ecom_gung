@@ -22,20 +22,42 @@ function ReviewForm({ onSubmit }) {
   const submit = (e) => {
     e.preventDefault();
     if (!text.trim()) return;
-    onSubmit({ name: name.trim() || 'Anonymous', rating, text: text.trim(), date: new Date().toISOString().slice(0, 10), photos: 0 });
+    onSubmit({
+      name: name.trim() || 'Acheteur Anonyme',
+      rating,
+      text: text.trim(),
+      date: new Date().toISOString().slice(0, 10),
+      photos: 0,
+    });
   };
   return (
     <form className="review-form" onSubmit={submit}>
       <div className="review-form__stars">
         {[1, 2, 3, 4, 5].map((n) => (
-          <button type="button" key={n} className={n <= rating ? 'is-on' : ''} onClick={() => setRating(n)} aria-label={`${n} stars`}>
+          <button
+            type="button"
+            key={n}
+            className={n <= rating ? 'is-on' : ''}
+            onClick={() => setRating(n)}
+            aria-label={`${n} étoiles`}
+          >
             ★
           </button>
         ))}
       </div>
-      <input placeholder="Your name" value={name} onChange={(e) => setName(e.target.value)} />
-      <textarea placeholder="How do they feel?" rows={3} value={text} onChange={(e) => setText(e.target.value)} required />
-      <button className="btn btn--dark">Submit review</button>
+      <input
+        placeholder="Votre prénom ou nom"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <textarea
+        placeholder="Quel est votre ressenti sous vos chemises / t-shirts ?"
+        rows={3}
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        required
+      />
+      <button className="btn btn--dark">Publier mon avis vérifié</button>
     </form>
   );
 }
@@ -48,7 +70,7 @@ function Review({ r }) {
         <span className="review__avatar">{r.name[0]}</span>
         <strong>{r.name}</strong>
         <em>
-          <Icon name="check" size={11} strokeWidth={3} /> Verified
+          <Icon name="check" size={11} strokeWidth={3} /> Achat Vérifié
         </em>
         <time>{shortDate(r.date)}</time>
       </header>
@@ -86,13 +108,13 @@ export default function CustomerReviews() {
 
   return (
     <section className="reviews container" id="reviews">
-      <h2 className="reviews__title">Customer Reviews</h2>
+      <h2 className="reviews__title">Avis Clients Vérifiés</h2>
 
       <div className="reviews__summary">
         <div className="reviews__score">
-          <b>4.8</b>
-          <Stars value={4.8} size={20} />
-          <span>{total.toLocaleString('en-US')} reviews</span>
+          <b>4.9</b>
+          <Stars value={4.9} size={20} />
+          <span>{total.toLocaleString('fr-FR')} avis clients</span>
         </div>
         <ul className="reviews__bars">
           {ratingBreakdown.map((r) => (
@@ -107,14 +129,18 @@ export default function CustomerReviews() {
         </ul>
         <div className="reviews__actions">
           <button className="btn btn--gold" onClick={() => setWriting((w) => !w)}>
-            {writing ? 'Cancel' : 'Write a review'}
+            {writing ? 'Annuler' : 'Laisser un avis'}
           </button>
           <label className="select">
-            <select value={sort} onChange={(e) => (setSort(e.target.value), setPage(0))} aria-label="Sort reviews">
-              <option value="recent">Most recent</option>
-              <option value="high">Highest rating</option>
-              <option value="low">Lowest rating</option>
-              <option value="photos">Only pictures</option>
+            <select
+              value={sort}
+              onChange={(e) => { setSort(e.target.value); setPage(0); }}
+              aria-label="Trier les avis"
+            >
+              <option value="recent">Plus récents</option>
+              <option value="high">Meilleures notes</option>
+              <option value="low">Notes les plus basses</option>
+              <option value="photos">Avec photos</option>
             </select>
             <Icon name="chevron" size={14} />
           </label>
@@ -124,7 +150,7 @@ export default function CustomerReviews() {
       {writing && <ReviewForm onSubmit={addReview} />}
 
       <div className="reviews__ai">
-        <strong>Customers say</strong>
+        <strong>Synthèse des retours clients</strong>
         <p>{reviewSummary}</p>
       </div>
 
@@ -135,7 +161,7 @@ export default function CustomerReviews() {
       </div>
 
       {pages > 1 && (
-        <nav className="pager" aria-label="Review pages">
+        <nav className="pager" aria-label="Pagination des avis">
           {Array.from({ length: pages }, (_, i) => (
             <button key={i} className={i === page ? 'is-active' : ''} onClick={() => setPage(i)}>
               {i + 1}

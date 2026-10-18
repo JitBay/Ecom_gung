@@ -1,6 +1,7 @@
 import Accordion from '../ui/Accordion.jsx';
 import Icon from '../ui/Icon.jsx';
 import { faq } from '../../data/faq.js';
+import { brand } from '../../data/site.js';
 import { useReveal } from '../../lib/hooks.js';
 import './Faq.css';
 
@@ -9,23 +10,23 @@ const items = faq.map((f) => ({ tag: f.tag, title: f.q, content: <p>{f.a}</p> })
 export default function Faq() {
   const ref = useReveal();
   return (
-    <section className="faq" ref={ref}>
+    <section className="faq" ref={ref} id="faq">
       <div className="faq__inner">
         <div className="section-head reveal">
-          <span className="eyebrow">Your questions, answered</span>
+          <span className="eyebrow">Foire Aux Questions</span>
           <h2 className="title">
-            Everything you're <em>wondering about.</em>
+            Tout ce que vous <em>souhaitez savoir.</em>
           </h2>
-          <p className="subtitle">The questions our customers ask most before buying — answered honestly.</p>
+          <p className="subtitle">Les réponses transparentes aux questions les plus posées avant de commander.</p>
           <div className="faq__trust">
             <span>
-              <Icon name="shield" size={15} /> 90-Day Guarantee
+              <Icon name="shield" size={15} /> Garantie 30 Jours
             </span>
             <span>
-              <Icon name="sparkle" size={15} /> Patented Technology
+              <Icon name="sparkle" size={15} /> Maille 3D Respirante
             </span>
             <span>
-              <Icon name="user" size={15} /> 250,000+ Women
+              <Icon name="user" size={15} /> 45 000+ Hommes
             </span>
           </div>
         </div>
@@ -35,9 +36,9 @@ export default function Faq() {
         </div>
 
         <div className="faq__contact reveal">
-          <p>Still have a question? We usually reply within a few hours.</p>
-          <a href="mailto:hello@example.com" className="btn btn--dark">
-            Contact us
+          <p>Vous avez une autre question ? Notre équipe francophone vous répond sous 24h.</p>
+          <a href={`mailto:${brand.supportEmail}`} className="btn btn--dark">
+            Contacter le support client
           </a>
         </div>
       </div>

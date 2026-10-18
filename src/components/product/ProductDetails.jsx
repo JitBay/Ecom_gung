@@ -1,68 +1,45 @@
-// The accordion panels under the Add to cart button.
 import Accordion from '../ui/Accordion.jsx';
-import { fabric, howItWorks, quickFaq, shipping, sizeChart, timeline } from '../../data/product.js';
+import { fabric, quickFaq, shipping, sizeChart } from '../../data/product.js';
 import './ProductDetails.css';
 
-const HowItWorks = (
+const FeaturesContent = (
   <div className="details">
-    <p>Most leggings hide the problem. These work on it: the 3D-ribbed texture massages the skin with every step.</p>
-    <ol className="details__steps">
-      {howItWorks.map((s, i) => (
-        <li key={s.title}>
-          <b>{i + 1}</b>
-          <div>
-            <strong>{s.title}</strong>
-            <p>{s.text}</p>
-          </div>
-        </li>
+    <p>
+      Le t-shirt de compression ergonomique <strong>Vela Sculpt™</strong> utilise un tricot technique tridimensionnel conçu pour lisser les formes sans comprimer excessivement la cage thoracique.
+    </p>
+    <dl className="details__specs">
+      {fabric.map(([k, v]) => (
+        <div key={k}>
+          <dt>{k}</dt>
+          <dd>{v}</dd>
+        </div>
       ))}
-    </ol>
-    <ul className="details__timeline">
-      {timeline.map((t) => (
-        <li key={t.when}>
-          <strong>{t.when}</strong>
-          <span>{t.what}</span>
-        </li>
-      ))}
-    </ul>
+    </dl>
   </div>
 );
 
-const Fabric = (
-  <dl className="details__specs">
-    {fabric.map(([k, v]) => (
-      <div key={k}>
-        <dt>{k}</dt>
-        <dd>{v}</dd>
-      </div>
-    ))}
-  </dl>
-);
-
-const SizeFit = (
+const SizeFitContent = (
   <div className="details">
-    <p>Your weight picks the size; your height tells you how the leg will sit.</p>
+    <p>Choisissez votre taille habituelle de t-shirt. En cas d’hésitation entre deux tailles : optez pour la plus petite pour une compression sportive prononcée, ou la plus grande pour un confort souple de bureau.</p>
     <div className="details__table">
       <table className="size-table">
         <thead>
           <tr>
-            <th>Size</th>
-            <th>Weight</th>
-            <th>Height</th>
-            <th>Leg</th>
+            <th>Taille</th>
+            <th>Poids (kg)</th>
+            <th>Taille (cm)</th>
+            <th>Poitrine</th>
+            <th>Taille</th>
           </tr>
         </thead>
         <tbody>
           {sizeChart.map((r) => (
             <tr key={r.size}>
-              <td>{r.size}</td>
-              <td>
-                {r.kg[0]}–{r.kg[1]} kg
-              </td>
-              <td>
-                {r.cm[0]}–{r.cm[1]} cm
-              </td>
-              <td>{r.leg} cm</td>
+              <td><strong>{r.size}</strong></td>
+              <td>{r.kg[0]}–{r.kg[1]} kg</td>
+              <td>{r.cm[0]}–{r.cm[1]} cm</td>
+              <td>{r.chest}</td>
+              <td>{r.waist}</td>
             </tr>
           ))}
         </tbody>
@@ -71,36 +48,35 @@ const SizeFit = (
   </div>
 );
 
-const Shipping = (
+const ShippingContent = (
   <div className="details">
-    <strong>Shipping</strong>
+    <strong>Expédition & Délais</strong>
     <ul className="details__list">
       {shipping.lines.map((l) => (
         <li key={l}>{l}</li>
       ))}
     </ul>
-    <strong>Returns</strong>
+    <strong>Garantie Satisfait ou Remboursé de 30 Jours</strong>
     <p>{shipping.returns}</p>
   </div>
 );
 
-const Questions = (
+const QuestionsContent = (
   <div className="details">
     {quickFaq.map((f) => (
-      <div key={f.q}>
+      <div key={f.q} style={{ marginBottom: 14 }}>
         <strong>{f.q}</strong>
-        <p>{f.a}</p>
+        <p style={{ marginTop: 4 }}>{f.a}</p>
       </div>
     ))}
   </div>
 );
 
 const items = [
-  { title: 'How It Works', content: HowItWorks },
-  { title: 'Features & Fabric', content: Fabric },
-  { title: 'Size & Fit', content: SizeFit },
-  { title: 'Shipping & Returns', content: Shipping },
-  { title: 'Common Questions', content: Questions },
+  { title: 'Caractéristiques Techniques & Matière', content: FeaturesContent },
+  { title: 'Guide des Tailles & Coupe Homme', content: SizeFitContent },
+  { title: 'Livraison & Garantie 30 Jours', content: ShippingContent },
+  { title: 'Questions Fréquentes', content: QuestionsContent },
 ];
 
 export default function ProductDetails() {

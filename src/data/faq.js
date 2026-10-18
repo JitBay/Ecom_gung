@@ -1,11 +1,38 @@
-// Questions for the big FAQ section near the bottom of the page.
+// FAQ for Vela Labs men's compression t-shirts
 export const faq = [
-  { tag: 'Results', q: 'How long until I see a difference?', a: 'The lift and shaping are instant. Most women feel lighter legs within the first week, and see smoother-looking skin after about 30 days of regular wear.' },
-  { tag: 'Technology', q: 'What makes these different from regular compression leggings?', a: 'Regular leggings just squeeze. The 3D-ribbed knit adds 47+ micro-massage points that move against the skin with every step, which helps circulation instead of only hiding things.' },
-  { tag: 'Fabric', q: 'Are they see-through? Will they hold up?', a: 'No, they are 100% squat-proof. The compression-grade knit keeps its shape after many washes when you follow the care label.' },
-  { tag: 'Pregnancy', q: 'Can I wear these during pregnancy?', a: 'Please ask your doctor or midwife first. Many customers wear them after pregnancy to support recovery.' },
-  { tag: 'Menopause', q: 'I am going through menopause — will these help with my leg changes?', a: 'Many customers in menopause tell us their legs feel lighter and less puffy. The compression supports circulation, which often changes during this time.' },
-  { tag: 'Weight loss', q: 'I have lost a lot of weight and have loose skin. Can these help?', a: 'They give firm, smooth support straight away, and the micro-massage supports the skin over time. They will not replace medical treatment.' },
-  { tag: 'Circulation', q: 'I have varicose veins and heavy legs. Is this safe for me?', a: 'Light compression helps many people with heavy legs. If you have a vein condition, check with your doctor before using any compression garment.' },
-  { tag: 'Guarantee', q: 'What if they do not work for me?', a: 'You have 90 days. If you do not love them, contact us and we refund you in full — no questions asked.' },
+  {
+    tag: 'Discrétion',
+    q: 'Le t-shirt Vela Sculpt™ est-il réellement invisible sous les vêtements ?',
+    a: 'Oui, c’est le cœur de notre conception technique. Grâce à une découpe d’encolure ergonomique et des micro-coutures ultra-plates thermosoudées, le t-shirt ne crée aucun bourrelet ni démarcation visible, même sous une chemise de travail blanche ou un t-shirt ajusté.',
+  },
+  {
+    tag: 'Taille & Ajustement',
+    q: 'Quelle taille dois-je commander ?',
+    a: 'Fiez-vous à notre Guide des Tailles basé sur votre poids et votre taille. Dans 95% des cas, votre taille de t-shirt habituelle convient parfaitement. Si vous êtes entre deux tailles et désirez un gainage ferme, optez pour la taille en-dessous ; pour un confort plus décontracté, prenez la taille au-dessus.',
+  },
+  {
+    tag: 'Confort Quotidien',
+    q: 'Peut-on le porter confortablement toute la journée ?',
+    a: 'Oui. Le tissu combine 88% de polyamide micro-respirant et 12% d’élasthanne à mémoire de forme. Il gaine efficacement la sangle abdominale sans comprimer la cage thoracique ni gêner la respiration. La maille évacue activement la transpiration pour vous maintenir au frais.',
+  },
+  {
+    tag: 'Maintien Postural',
+    q: 'En quoi aide-t-il la posture et le dos ?',
+    a: 'La conception intègre des bandes de compression croisées dans le haut du dos qui stimulent les récepteurs proprioceptifs. Cela invite naturellement vos épaules à s’ouvrir et votre torse à se redresser, réduisant les tensions musculaires lors des longues stations assises ou debout.',
+  },
+  {
+    tag: 'Garantie 30 Jours',
+    q: 'Comment fonctionne la Garantie Satisfait ou Remboursé de 30 jours ?',
+    a: 'Vous disposez de 30 jours à compter de la réception de votre commande pour tester votre t-shirt Vela Sculpt™ dans votre quotidien. Si le confort, la taille ou le rendu ne vous apportent pas 100% de satisfaction, contactez simplement notre service client pour organiser votre retour et remboursement.',
+  },
+  {
+    tag: 'Entretien',
+    q: 'Comment laver et entretenir mon t-shirt Vela Sculpt™ ?',
+    a: 'Lavez-le en machine à 30°C sur cycle délicat, avec des couleurs similaires. Laissez-le sécher à l’air libre (il sèche très rapidement). Évitez le sèche-linge et le repassage pour préserver l’élasticité de la maille technique dans le temps.',
+  },
+  {
+    tag: 'Livraison & Suivi',
+    q: 'Quels sont les délais et modalités d’expédition ?',
+    a: 'Toutes les commandes sont préparées sous 24 à 48 heures ouvrées. La livraison en France et en Europe prend généralement 3 à 5 jours ouvrés. Vous recevez un numéro de suivi dès que le colis quitte nos entrepôts. La livraison est offerte dès 55 € ou avec les packs 2 et 3 t-shirts.',
+  },
 ];

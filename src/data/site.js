@@ -1,44 +1,101 @@
-// Brand, navigation and footer content. Change the brand name here.
+// Brand identity, legal entity, navigation and footer links for Vela Labs (legal entity: Vella)
 import { collectionUrl, collections } from './catalog.js';
 
-export const brand = { name: 'VELA', suffix: 'LABS' };
+export const brand = {
+  name: 'Vela',
+  suffix: 'Labs',
+  fullName: 'Vela Labs',
+  legalName: 'Vella',
+  email: 'contact@velalabs.co',
+  supportEmail: 'support@velalabs.co',
+  privacyEmail: 'privacy@velalabs.co',
+  tagline: 'Compression discrète & maintien postural pour hommes',
+};
 
-// Header tabs: one per collection, same labels and order as the reference site.
-export const nav = collections.map((c) => ({ label: c.label, to: collectionUrl(c.handle) }));
-
-export const announcements = [
-  '90-day money-back guarantee',
-  'Free shipping on orders over €55',
-  '250,000+ women already wear them',
+// Header main menu
+export const nav = [
+  { label: 'Accueil', to: '/' },
+  {
+    label: 'Nos Modèles',
+    to: '/collections/all',
+    children: [
+      { label: 'Sans Manches (Débardeur)', to: '/products/vela-sculpt-sans-manches' },
+      { label: 'Demi-Manches (Manches courtes)', to: '/products/vela-sculpt-demi-manches' },
+      { label: 'Manches Longues', to: '/products/vela-sculpt-manches-longues' },
+    ],
+  },
+  { label: 'Nos Packs & Offres', to: '/pages/offres' },
+  { label: 'Pourquoi Vela Labs ?', to: '/pages/notre-technologie' },
+  { label: 'Garantie 30 Jours', to: '/pages/garantie' },
+  { label: 'Avis Clients', to: '/#reviews' },
 ];
 
-// Footer link columns. `to` = page inside this app; `href` = placeholder link.
+export const announcements = [
+  'Garantie Satisfait ou Remboursé de 30 jours',
+  'Livraison Suivie Offerte dès 55 € d’achat ou dès 2 t-shirts',
+  'Plus de 45 000 hommes portent Vela Sculpt™ au quotidien',
+];
+
 export const footerColumns = [
   {
-    title: `${brand.name} Labs`,
-    links: [{ label: 'Refer a Friend – Give $10, Get $10', href: '#' }, ...nav],
+    title: 'Vela Labs',
+    links: [
+      { label: 'Accueil', to: '/' },
+      { label: 'Tous nos modèles', to: '/collections/all' },
+      { label: 'Nos Packs & Offres', to: '/pages/offres' },
+      { label: 'Notre Technologie', to: '/pages/notre-technologie' },
+      { label: 'Garantie 30 Jours', to: '/pages/garantie' },
+      { label: 'Avis Vérifiés', to: '/#reviews' },
+    ],
   },
   {
-    title: 'Support',
-    links: ['Track Your Order', 'Contact Us', 'Shipping Info', 'Returns & Warranty', 'Subscription management'].map((label) => ({ label, href: '#' })),
+    title: 'Support & Aide',
+    links: [
+      { label: 'Suivi de commande', to: '/pages/suivi-commande' },
+      { label: 'Guide des tailles', to: '/pages/guide-tailles' },
+      { label: 'Foire Aux Questions (FAQ)', to: '/#faq' },
+      { label: 'Contactez-nous', to: '/pages/contact' },
+    ],
+  },
+  {
+    title: 'Informations Légales',
+    links: [
+      { label: 'Politique de Confidentialité', to: '/policies/privacy-policy' },
+      { label: 'Conditions Générales de Vente (CGV)', to: '/policies/terms-of-service' },
+      { label: 'Politique de Retour & Remboursement (30j)', to: '/policies/refund-policy' },
+      { label: 'Mentions Légales', to: '/policies/legal-notice' },
+    ],
   },
 ];
 
 export const policies = [
-  'Privacy policy',
-  'Refund policy',
-  'Shipping policy',
-  'Terms of service',
-  'Contact information',
-  'Cancellation policy',
-  'Cookie preferences',
+  { label: 'Politique de Confidentialité', to: '/policies/privacy-policy' },
+  { label: 'Conditions Générales de Vente', to: '/policies/terms-of-service' },
+  { label: 'Retours & Remboursements (30 jours)', to: '/policies/refund-policy' },
+  { label: 'Mentions Légales', to: '/policies/legal-notice' },
 ];
 
-export const payments = ['VISA', 'MC', 'AMEX', 'PayPal', 'Apple Pay', 'G Pay', 'Klarna'];
+export const payments = ['Shop Pay', 'Apple Pay', 'Visa', 'Mastercard', 'American Express', 'PayPal', 'Klarna'];
 
 export const trustItems = [
-  { icon: 'shield', title: '90-Day Guarantee', text: 'Ninety days to decide. Full refund if it is not right.' },
-  { icon: 'return', title: 'Under 2% Come Back', text: 'Fewer than 2 in 100 orders are returned.' },
-  { icon: 'chat', title: 'Real Human Support', text: 'A real person answers. No bots, no scripts.' },
-  { icon: 'lock', title: 'Secure Checkout', text: 'Encrypted payments on every order.' },
+  {
+    icon: 'shield',
+    title: 'Garantie 30 Jours',
+    text: 'Testez l’effet gainant chez vous pendant 30 jours. Satisfait ou remboursé selon nos conditions.',
+  },
+  {
+    icon: 'truck',
+    title: 'Expédition Suivie 24/48h',
+    text: 'Colis expédié avec soin depuis nos entrepôts. Numéro de suivi en temps réel transmis par email.',
+  },
+  {
+    icon: 'lock',
+    title: 'Paiement 100% Sécurisé',
+    text: 'Transactions chiffrées SSL 256 bits via Shop Pay, Apple Pay, Cartes Bancaires et PayPal.',
+  },
+  {
+    icon: 'chat',
+    title: 'Support Client Réactif',
+    text: 'Une équipe francophone disponible et réactive pour répondre à toutes vos questions 7j/7.',
+  },
 ];

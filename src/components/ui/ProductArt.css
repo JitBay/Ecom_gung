@@ -1,12 +1,18 @@
-.product-art {
-  display: grid;
-  place-items: center;
+.art-wrapper {
+  position: relative;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, #ececea 0%, #e2e1de 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: inherit;
 }
 
-.product-art svg {
-  height: 88%;
-  width: auto;
+.art-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
 }

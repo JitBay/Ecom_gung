@@ -22,16 +22,16 @@ function Newsletter() {
   const [done, setDone] = useState(false);
   return (
     <div className="footer__news">
-      <h3>Join the {brand.name.charAt(0) + brand.name.slice(1).toLowerCase()} Club</h3>
-      <p>Get exclusive deals, early access to new drops, and real stories from women who wear them daily.</p>
+      <h3>Le Club {brand.name}</h3>
+      <p>Recevez nos conseils posture, offres privées et l’accès anticipé à nos nouvelles coupes techniques.</p>
       {done ? (
         <p className="footer__thanks">
-          <Icon name="check" size={16} /> Thanks — you are on the list.
+          <Icon name="check" size={16} /> Merci — vous êtes bien inscrit.
         </p>
       ) : (
-        <form onSubmit={(e) => (e.preventDefault(), setDone(true))}>
-          <input type="email" placeholder="E-mail" required aria-label="E-mail" />
-          <button aria-label="Subscribe">
+        <form onSubmit={(e) => { e.preventDefault(); setDone(true); }}>
+          <input type="email" placeholder="Votre adresse e-mail" required aria-label="E-mail" />
+          <button aria-label="S’inscrire">
             <Icon name="arrow" size={16} />
           </button>
         </form>
@@ -52,14 +52,19 @@ export default function Footer() {
               <h3>{col.title}</h3>
               <ul>
                 {col.links.map((l) => (
-                  <li key={l.label}>{l.to ? <Link to={l.to}>{l.label}</Link> : <a href={l.href}>{l.label}</a>}</li>
+                  <li key={l.label}>
+                    {l.to.startsWith('/#') ? (
+                      <a href={l.to.slice(1)}>{l.label}</a>
+                    ) : (
+                      <Link to={l.to}>{l.label}</Link>
+                    )}
+                  </li>
                 ))}
               </ul>
             </div>
           ))}
           <p className="footer__legal">
-            © 2026 <strong>{brand.name} Labs.</strong> The statements made have not been evaluated by the FDA. This product
-            is not intended to diagnose, treat, cure, or prevent any disease.
+            © 2026 <strong>{brand.name} Labs</strong> (Entité légale : {brand.legalName}). Tous droits réservés. Vêtements ergonomiques de compression masculine conçus pour allier confort quotidien et maintien optimal.
           </p>
         </div>
 
@@ -77,18 +82,18 @@ export default function Footer() {
               <i className="flag-fr" /> France (EUR €) <Icon name="chevron" size={14} />
             </button>
             <button>
-              English <Icon name="chevron" size={14} />
+              Français <Icon name="chevron" size={14} />
             </button>
           </div>
         </div>
 
         <div className="container footer__bottom">
           <div>
-            <p>© 2026, {brand.name} LABS.</p>
+            <p>© 2026, {brand.name} Labs — Raison sociale : {brand.legalName}.</p>
             <ul>
               {policies.map((p) => (
-                <li key={p}>
-                  <a href="#">{p}</a>
+                <li key={p.label}>
+                  <Link to={p.to}>{p.label}</Link>
                 </li>
               ))}
             </ul>

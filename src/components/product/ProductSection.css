@@ -9,9 +9,91 @@
 
 .product__title {
   font-size: clamp(24px, 2.4vw, 30px);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.2;
   letter-spacing: -0.01em;
+}
+
+.product__tagline {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+}
+
+.product__model-selector {
+  margin-bottom: 18px;
+  padding: 16px;
+  background: var(--cream-2);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+}
+
+.product__model-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.product__model-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.product__model-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 8px;
+  border-radius: 10px;
+  background: var(--white);
+  border: 1.5px solid var(--line);
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.product__model-btn span {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.product__model-btn small {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--gold-dark);
+  margin-top: 4px;
+}
+
+.product__model-btn:hover {
+  border-color: var(--ink);
+}
+
+.product__model-btn.is-active {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.product__model-btn.is-active span {
+  color: var(--white);
+}
+
+.product__model-btn.is-active small {
+  color: var(--gold);
+}
+
+@media (max-width: 520px) {
+  .product__model-buttons {
+    grid-template-columns: 1fr;
+  }
 }
 
 .product__rating {
@@ -24,6 +106,133 @@
 
 .product__rating span {
   color: var(--muted);
+}
+
+/* Color picker with hover angle grouping */
+.product__color-picker {
+  margin-bottom: 20px;
+  padding: 16px;
+  background: var(--cream-2);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+}
+
+.product__color-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.product__color-label {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.product__color-label strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.product__color-preview-tag {
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gold-dark);
+  margin-left: 6px;
+}
+
+.product__color-angles-count {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--white);
+  padding: 3px 9px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+}
+
+.product__color-swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 8px;
+}
+
+.product__color-swatch-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: var(--white);
+  border: 1.5px solid var(--line);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.product__color-swatch-btn:hover {
+  border-color: var(--ink);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.product__color-swatch-btn.is-active {
+  border-color: var(--ink);
+  background: var(--white);
+  box-shadow: 0 0 0 1px var(--ink);
+}
+
+.product__color-swatch-btn.is-selected {
+  border-color: var(--ink);
+}
+
+.product__color-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--white);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
+
+.product__color-name {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink);
+  flex: 1;
+}
+
+.product__color-badge {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--cream-2);
+  padding: 2px 6px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.product__color-hint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  font-size: 11.5px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.product__color-hint svg {
+  flex-shrink: 0;
+  color: var(--gold-dark);
+}
+
+@media (max-width: 520px) {
+  .product__color-swatches {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .benefits {

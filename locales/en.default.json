@@ -1,0 +1,45 @@
+{
+  "general": {
+    "brand_name": "Vela Labs",
+    "legal_entity": "Vella",
+    "tagline": "Ergonomic compression shapewear for men",
+    "guarantee_badge": "30-Day Money-Back Guarantee",
+    "free_shipping": "Free tracked shipping over €55 or with 2+ shirts"
+  },
+  "products": {
+    "category": "Men's compression and shapewear garments",
+    "flagship": "Men's ergonomic compression shaping t-shirt",
+    "model_sans_manches": "Vela Sculpt™ — Sleeveless (Tank top)",
+    "model_demi_manches": "Vela Sculpt™ — Short Sleeve (Classic crewneck)",
+    "model_manches_longues": "Vela Sculpt™ — Long Sleeve",
+    "features": {
+      "shaping": "Shaping compression shirt for chest & abdominal smoothing",
+      "posture": "Active ergonomic postural support for back and shoulders",
+      "silhouette": "Athletic and natural silhouette under all clothing",
+      "knit": "Breathable 3D-knit moisture-wicking anti-odor fabric",
+      "stealth": "Second-skin stealth fabric, low neckline and flat invisible seams"
+    }
+  },
+  "offers": {
+    "offer_1": {
+      "title": "Sharper silhouette, without changing your wardrobe",
+      "hook": "Achieve a visually smoother silhouette under your t-shirts and shirts with a discreet compression t-shirt, designed to fit your everyday outfits without adding complicated layers or disrupting your habits.",
+      "guarantee": "Try it for 30 days. If you are not satisfied with the comfort or look, request a refund under the terms of the guarantee."
+    },
+    "offer_2": {
+      "title": "Comfort above all",
+      "hook": "Enjoy tailored support that fits easily into your day, at the office or on the go, with a compression t-shirt designed to stay discreet under your clothes and avoid having to choose between support and comfort.",
+      "guarantee": "Take 30 days to evaluate the comfort and fit of the product. If the experience does not suit you, you can request a refund according to the stated conditions."
+    },
+    "offer_3": {
+      "title": "Wear your clothes with more confidence",
+      "hook": "Wear your shirts and t-shirts with greater confidence thanks to a discreet shaping layer that helps visually smooth the silhouette, without having to renew your wardrobe or adopt a complicated routine.",
+      "guarantee": "You have 30 days to decide if the product meets your expectations. If not, you can request a refund under the return terms clearly communicated at purchase."
+    },
+    "offer_4": {
+      "title": "A simple solution for everyday life",
+      "hook": "Simplify your clothing routine with a single compression t-shirt designed to combine support, discretion, and ease of use, to enjoy a visually smoother silhouette under your clothes with no extra daily effort.",
+      "guarantee": "Benefit from a 30-day money-back guarantee with transparent conditions regarding returns, any fees, and refund procedures."
+    }
+  }
+}

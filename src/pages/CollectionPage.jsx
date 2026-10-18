@@ -10,7 +10,7 @@ import { filterAndSort, sortOptions } from '../lib/sortProducts.js';
 import './CollectionPage.css';
 
 const DEFAULT_VIEW = { sort: 'featured', inStockOnly: false };
-const plural = (n) => `${n} product${n === 1 ? '' : 's'}`;
+const plural = (n) => `${n} modèle${n > 1 ? 's' : ''}`;
 
 export default function CollectionPage() {
   const { handle } = useParams();
@@ -18,10 +18,9 @@ export default function CollectionPage() {
   const [view, setView] = useState(DEFAULT_VIEW);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-  // Reset filters when switching tabs.
   useEffect(() => {
     setView(DEFAULT_VIEW);
-    if (collection) document.title = `${collection.label} | ${brand.name} Labs`;
+    if (collection) document.title = `${collection.title} | ${brand.name} Labs`;
   }, [handle]);
 
   if (!collection) return <NotFound />;
@@ -31,17 +30,23 @@ export default function CollectionPage() {
 
   return (
     <section className="collection container">
-      <h1 className="collection__title">{collection.title}</h1>
+      <div className="collection__header">
+        <h1 className="collection__title">{collection.title}</h1>
+        {collection.description && <p className="collection__desc">{collection.description}</p>}
+        <div className="collection__guarantee-pill">
+          <Icon name="shield" size={16} /> Garantie Satisfait ou Remboursé de 30 jours sur toutes les commandes
+        </div>
+      </div>
 
       <div className="toolbar">
         <button className="toolbar__filter" onClick={() => setDrawerOpen(true)}>
           <Icon name="filter" size={18} />
-          <span className="hide-mobile">Filter</span>
-          <span className="hide-tablet-up">Filter and sort</span>
+          <span className="hide-mobile">Filtrer</span>
+          <span className="hide-tablet-up">Filtrer et trier</span>
         </button>
         <span className="toolbar__count">{plural(shown.length)}</span>
         <label className="toolbar__sort hide-mobile">
-          Sort by:
+          Trier par :
           <span className="select">
             <select value={view.sort} onChange={(e) => setView({ ...view, sort: e.target.value })}>
               {sortOptions.map((o) => (
@@ -55,14 +60,6 @@ export default function CollectionPage() {
         </label>
       </div>
 
-      {view.inStockOnly && (
-        <div className="chips">
-          <button onClick={() => setView({ ...view, inStockOnly: false })}>
-            In stock only <Icon name="close" size={14} />
-          </button>
-        </div>
-      )}
-
       {shown.length > 0 ? (
         <div className="collection__grid">
           {shown.map((p) => (
@@ -71,9 +68,9 @@ export default function CollectionPage() {
         </div>
       ) : (
         <div className="collection__empty">
-          <p>No products found. Try removing a filter.</p>
+          <p>Aucun produit ne correspond à vos critères.</p>
           <button className="btn btn--dark" onClick={() => setView(DEFAULT_VIEW)}>
-            Clear filters
+            Réinitialiser les filtres
           </button>
         </div>
       )}

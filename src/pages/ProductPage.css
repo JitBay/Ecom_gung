@@ -107,22 +107,127 @@
   color: var(--ink);
 }
 
-.pp__swatches {
+/* Color picker with hover angle grouping */
+.pp__color-picker {
+  margin-top: 18px;
+  padding: 14px 16px;
+  background: var(--cream-2);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+}
+
+.pp__color-header {
   display: flex;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
   gap: 10px;
+  margin-bottom: 12px;
 }
 
-.pp__swatches button {
-  width: 30px;
-  height: 30px;
+.pp__color-label {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.pp__color-label strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.pp__color-preview-tag {
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gold-dark);
+  margin-left: 6px;
+}
+
+.pp__color-angles-count {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--white);
+  padding: 3px 9px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+}
+
+.pp__swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 8px;
+}
+
+.pp__swatch-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: var(--white);
+  border: 1.5px solid var(--line);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.pp__swatch-btn:hover {
+  border-color: var(--ink);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.pp__swatch-btn.is-active {
+  border-color: var(--ink);
+  background: var(--white);
+  box-shadow: 0 0 0 1px var(--ink);
+}
+
+.pp__swatch-dot {
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
-  border: 3px solid var(--white);
-  box-shadow: 0 0 0 1px var(--line);
+  border: 2px solid var(--white);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
 }
 
-.pp__swatches button.is-active {
-  box-shadow: 0 0 0 2px var(--ink);
+.pp__swatch-name {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink);
+  flex: 1;
+}
+
+.pp__swatch-badge {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--cream-2);
+  padding: 2px 6px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.pp__color-hint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  font-size: 11.5px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.pp__color-hint svg {
+  flex-shrink: 0;
+  color: var(--gold-dark);
+}
+
+@media (max-width: 520px) {
+  .pp__swatches {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .pp__pills {

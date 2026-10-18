@@ -1,16 +1,26 @@
 import { useEffect } from 'react';
-import { BrowserRouter, Route, Routes, useLocation, useParams } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes, useLocation, useParams } from 'react-router-dom';
 import { CartProvider } from './context/CartContext.jsx';
 import Header from './components/layout/Header.jsx';
 import Footer from './components/layout/Footer.jsx';
 import CartDrawer from './components/layout/CartDrawer.jsx';
-import LeggingsPage from './pages/LeggingsPage.jsx';
+import HomePage from './pages/HomePage.jsx';
 import CollectionPage from './pages/CollectionPage.jsx';
 import ProductPage from './pages/ProductPage.jsx';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage.jsx';
+import GuaranteePage from './pages/GuaranteePage.jsx';
+import OffersPage from './pages/OffersPage.jsx';
+import TechnologyPage from './pages/TechnologyPage.jsx';
+import RefundPolicyPage from './pages/RefundPolicyPage.jsx';
+import TermsPage from './pages/TermsPage.jsx';
+import LegalNoticePage from './pages/LegalNoticePage.jsx';
+import ContactPage from './pages/ContactPage.jsx';
+import SizeGuidePage from './pages/SizeGuidePage.jsx';
+import TrackOrderPage from './pages/TrackOrderPage.jsx';
 import NotFound from './pages/NotFound.jsx';
-import { LEGGINGS } from './data/catalog.js';
+import { HERO_PRODUCT } from './data/catalog.js';
 
-// Jump to the top when the page changes (but not for #anchor links on the same page).
+// Jump to the top when the page changes
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => {
@@ -19,10 +29,25 @@ function ScrollToTop() {
   return null;
 }
 
-// The leggings use their long custom page; every other product uses the standard one.
+// Product route handler with legacy redirect handling
 function ProductRoute() {
   const { handle } = useParams();
-  return handle === LEGGINGS ? <LeggingsPage /> : <ProductPage />;
+  const legacyHandles = [
+    '3d-sculpting-anti-cellulite-leggings-instant-lift-smooth',
+    'sculpt-posture-bra',
+    'sculpt-3d-compression-tee',
+    '3d-sculpting-anti-cellulite-shorts',
+    'sculpt-lift-smooth-arm-sleeves',
+    'multi-collagen-powder-for-women',
+    'sculpt-cutout-lift-swimsuit',
+    'sculpt-smooth-lift-swimsuit',
+  ];
+
+  if (legacyHandles.includes(handle)) {
+    return <Navigate to={`/products/${HERO_PRODUCT}`} replace />;
+  }
+
+  return <ProductPage />;
 }
 
 export default function App() {
@@ -33,9 +58,35 @@ export default function App() {
         <Header />
         <main>
           <Routes>
-            <Route path="/" element={<LeggingsPage />} />
+            {/* Home */}
+            <Route path="/" element={<HomePage />} />
+
+            {/* Catalog & Products */}
             <Route path="/collections/:handle" element={<CollectionPage />} />
             <Route path="/products/:handle" element={<ProductRoute />} />
+
+            {/* Content & Offer Pages */}
+            <Route path="/pages/offres" element={<OffersPage />} />
+            <Route path="/pages/notre-technologie" element={<TechnologyPage />} />
+            <Route path="/pages/garantie" element={<GuaranteePage />} />
+            <Route path="/pages/guide-tailles" element={<SizeGuidePage />} />
+            <Route path="/pages/suivi-commande" element={<TrackOrderPage />} />
+            <Route path="/pages/contact" element={<ContactPage />} />
+
+            {/* Legal Pages */}
+            <Route path="/policies/privacy-policy" element={<PrivacyPolicyPage />} />
+            <Route path="/policies/terms-of-service" element={<TermsPage />} />
+            <Route path="/policies/refund-policy" element={<RefundPolicyPage />} />
+            <Route path="/policies/legal-notice" element={<LegalNoticePage />} />
+
+            {/* Legacy Collection 301-style Redirects */}
+            <Route path="/collections/frontpage" element={<Navigate to="/collections/all" replace />} />
+            <Route path="/collections/sculpt-collection" element={<Navigate to="/collections/all" replace />} />
+            <Route path="/collections/sculpt-swim" element={<Navigate to="/collections/all" replace />} />
+            <Route path="/collections/posture-support" element={<Navigate to="/collections/all" replace />} />
+            <Route path="/collections/wellness-supplements" element={<Navigate to="/collections/all" replace />} />
+
+            {/* Fallback 404 */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
