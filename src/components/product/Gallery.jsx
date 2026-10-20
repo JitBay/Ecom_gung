@@ -3,8 +3,6 @@ import Icon from '../ui/Icon.jsx';
 import { useLockScroll } from '../../lib/hooks.js';
 import './Gallery.css';
 
-const ANGLE_LABELS = ['Vue Face', 'Vue Profil', 'Vue Dos / Détail', 'Vue 4'];
-
 function Lightbox({ index, images, onClose, onMove, title }) {
   useLockScroll(index !== null);
   if (index === null || !images || images.length === 0) return null;
@@ -17,7 +15,10 @@ function Lightbox({ index, images, onClose, onMove, title }) {
       </button>
       <button
         className="lightbox__nav is-prev"
-        onClick={(e) => { e.stopPropagation(); onMove(-1); }}
+        onClick={(e) => {
+          e.stopPropagation();
+          onMove(-1);
+        }}
         aria-label="Image précédente"
       >
         <Icon name="arrow" size={22} />
@@ -27,13 +28,16 @@ function Lightbox({ index, images, onClose, onMove, title }) {
       </div>
       <button
         className="lightbox__nav"
-        onClick={(e) => { e.stopPropagation(); onMove(1); }}
+        onClick={(e) => {
+          e.stopPropagation();
+          onMove(1);
+        }}
         aria-label="Image suivante"
       >
         <Icon name="arrow" size={22} />
       </button>
       <p className="lightbox__count">
-        {index + 1} / {images.length} — {ANGLE_LABELS[index] || `Angle ${index + 1}`}
+        {index + 1} / {images.length}
       </p>
     </div>
   );
@@ -46,7 +50,7 @@ export default function Gallery({ images, title, activeColor }) {
 
   const list = images && images.length > 0 ? images : ['/images/products/demi-manches/4.jpg'];
 
-  // Reset to first angle whenever the color images change
+  // Reset to first slide whenever the color images change
   useEffect(() => {
     setActive(0);
     if (track.current) {
@@ -73,16 +77,18 @@ export default function Gallery({ images, title, activeColor }) {
     <div className="gallery">
       <div className="gallery__track" ref={track} onScroll={onScroll}>
         {list.map((src, i) => (
-          <button key={`${src}-${i}`} className="gallery__slide" onClick={() => setZoom(i)} aria-label={`Agrandir ${ANGLE_LABELS[i] || `angle ${i + 1}`}`}>
+          <button
+            key={`${src}-${i}`}
+            className="gallery__slide"
+            onClick={() => setZoom(i)}
+            aria-label={`Agrandir la photo ${i + 1}`}
+          >
             <img
               src={src}
-              alt={`${title || 'Vela Sculpt™'} - ${activeColor || ''} - ${ANGLE_LABELS[i] || `vue ${i + 1}`}`}
+              alt={`${title || 'Vela Sculpt™'} - ${activeColor || ''} - photo ${i + 1}`}
               className="gallery__photo"
               loading={i === 0 ? 'eager' : 'lazy'}
             />
-            <span className="gallery__angle-badge">
-              {ANGLE_LABELS[i] || `Angle ${i + 1}`}
-            </span>
             <span className="gallery__zoom">
               <Icon name="zoom" size={18} />
             </span>
@@ -90,20 +96,18 @@ export default function Gallery({ images, title, activeColor }) {
         ))}
       </div>
 
-      <div className="gallery__thumbs-bar">
-        {list.map((src, i) => (
-          <button
-            key={`${src}-${i}`}
-            className={`gallery__thumb-item ${i === active ? 'is-active' : ''}`}
-            onClick={() => goTo(i)}
-            onMouseEnter={() => goTo(i)}
-            aria-label={`Voir ${ANGLE_LABELS[i] || `angle ${i + 1}`}`}
-          >
-            <img src={src} alt="Miniature angle" />
-            <span className="gallery__thumb-caption">{ANGLE_LABELS[i] || `Angle ${i + 1}`}</span>
-          </button>
-        ))}
-      </div>
+      {list.length > 1 && (
+        <div className="gallery__dots">
+          {list.map((_, i) => (
+            <button
+              key={i}
+              className={`gallery__dot ${i === active ? 'is-active' : ''}`}
+              onClick={() => goTo(i)}
+              aria-label={`Photo ${i + 1}`}
+            />
+          ))}
+        </div>
+      )}
 
       <Lightbox index={zoom} images={list} onClose={() => setZoom(null)} onMove={move} title={title} />
     </div>

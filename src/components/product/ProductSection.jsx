@@ -64,7 +64,6 @@ export default function ProductSection({ initialModelHandle }) {
   const currentModel = products.find((p) => p.handle === selectedHandle) || products[0];
 
   const [selectedColor, setSelectedColor] = useState(currentModel.colors[0] || 'Noir');
-  const [hoverColor, setHoverColor] = useState(null);
 
   const [bundleId, setBundleId] = useState(2);
   const [variants, setVariants] = useState(startVariants);
@@ -75,11 +74,9 @@ export default function ProductSection({ initialModelHandle }) {
   // Reset selected color when switching product model
   useEffect(() => {
     setSelectedColor(currentModel.colors[0] || 'Noir');
-    setHoverColor(null);
   }, [currentModel.handle]);
 
-  const activeColor = hoverColor || selectedColor;
-  const currentImages = getColorImages(currentModel, activeColor);
+  const currentImages = getColorImages(currentModel, selectedColor);
 
   const bundle = bundles.find((b) => b.id === bundleId) || bundles[1];
   const chosen = variants.slice(0, bundle.qty);
@@ -114,7 +111,7 @@ export default function ProductSection({ initialModelHandle }) {
       title: `${currentModel.title} — Pack ${bundle.qty}`,
       detail,
       image: currentImages[0] || currentModel.images[0],
-      color: colorHex[activeColor] || '#1a1a1a',
+      color: colorHex[selectedColor] || '#1a1a1a',
       price: bundle.price,
       compareAt: bundle.compareAt,
       freeShipping: Boolean(bundle.freeShipping),
@@ -124,7 +121,7 @@ export default function ProductSection({ initialModelHandle }) {
   return (
     <section className="product container" id="product">
       <div className="product__media">
-        <Gallery images={currentImages} title={currentModel.title} activeColor={activeColor} />
+        <Gallery images={currentImages} title={currentModel.title} activeColor={selectedColor} />
       </div>
 
       <div className="product__info">
@@ -151,41 +148,28 @@ export default function ProductSection({ initialModelHandle }) {
 
         <p className="product__tagline">{currentModel.tagline}</p>
 
-        {/* Color swatches with hover angle preview */}
+        {/* Color swatches */}
         <div className="product__color-picker">
           <div className="product__color-header">
             <span className="product__color-label">
-              2. Couleur sélectionnée : <strong>{activeColor}</strong>
-              {hoverColor && <em className="product__color-preview-tag"> (Survol pour aperçu)</em>}
-            </span>
-            <span className="product__color-angles-count">
-              {currentImages.length} angles disponibles
+              2. Couleur sélectionnée : <strong>{selectedColor}</strong>
             </span>
           </div>
 
           <div className="product__color-swatches">
-            {currentModel.colors.map((c) => {
-              const angles = getColorImages(currentModel, c);
-              return (
-                <button
-                  key={c}
-                  type="button"
-                  className={`product__color-swatch-btn ${c === activeColor ? 'is-active' : ''} ${c === selectedColor ? 'is-selected' : ''}`}
-                  onClick={() => handleSelectColor(c)}
-                  onMouseEnter={() => setHoverColor(c)}
-                  onMouseLeave={() => setHoverColor(null)}
-                  title={`Voir ${c} (${angles.length} angles)`}
-                >
-                  <span className="product__color-dot" style={{ background: colorHex[c] || '#1a1a1a' }} />
-                  <span className="product__color-name">{c}</span>
-                  <span className="product__color-badge">{angles.length} angles</span>
-                </button>
-              );
-            })}
+            {currentModel.colors.map((c) => (
+              <button
+                key={c}
+                type="button"
+                className={`product__color-swatch-btn ${c === selectedColor ? 'is-active is-selected' : ''}`}
+                onClick={() => handleSelectColor(c)}
+                title={`Couleur ${c}`}
+              >
+                <span className="product__color-dot" style={{ background: colorHex[c] || '#1a1a1a' }} />
+                <span className="product__color-name">{c}</span>
+              </button>
+            ))}
           </div>
-          <p className="product__color-hint">
-            <Icon name="zoom" size={14} /> Survolez une couleur pour afficher instantanément tous ses angles de vue.
-          </p>
         </div>
 
         <Benefits />

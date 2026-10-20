@@ -18,7 +18,6 @@ export default function ProductPage({ handle: fixedHandle }) {
   const params = useParams();
   const product = getProduct(fixedHandle ?? params.handle);
   const [color, setColor] = useState(product?.colors?.[0] || 'Noir');
-  const [hoverColor, setHoverColor] = useState(null);
   const [size, setSize] = useState('L');
   const [qty, setQty] = useState(1);
   const [sizeOpen, setSizeOpen] = useState(false);
@@ -27,7 +26,6 @@ export default function ProductPage({ handle: fixedHandle }) {
   useEffect(() => {
     if (!product) return;
     setColor(product.colors?.[0] || 'Noir');
-    setHoverColor(null);
     setSize('L');
     setQty(1);
     document.title = `${product.title} | ${brand.name} Labs`;
@@ -35,8 +33,7 @@ export default function ProductPage({ handle: fixedHandle }) {
 
   if (!product) return <NotFound />;
 
-  const activeColor = hoverColor || color;
-  const currentImages = product ? getColorImages(product, activeColor) : [];
+  const currentImages = product ? getColorImages(product, color) : [];
   const save = product.compareAt ? Math.round((1 - product.price / product.compareAt) * 100) : 0;
 
   const addToCart = () => {
@@ -110,7 +107,7 @@ export default function ProductPage({ handle: fixedHandle }) {
         </nav>
 
         <div className="pp__gallery-col">
-          <Gallery images={currentImages} title={product.title} activeColor={activeColor} />
+          <Gallery images={currentImages} title={product.title} activeColor={color} />
         </div>
 
         <div className="pp__info">
@@ -138,36 +135,23 @@ export default function ProductPage({ handle: fixedHandle }) {
             <div className="pp__color-picker">
               <div className="pp__color-header">
                 <span className="pp__color-label">
-                  Couleur sélectionnée : <strong>{activeColor}</strong>
-                  {hoverColor && <em className="pp__color-preview-tag"> (Survol pour aperçu)</em>}
-                </span>
-                <span className="pp__color-angles-count">
-                  {currentImages.length} angles de vue
+                  Couleur sélectionnée : <strong>{color}</strong>
                 </span>
               </div>
               <div className="pp__swatches">
-                {product.colors.map((c) => {
-                  const angles = getColorImages(product, c);
-                  return (
-                    <button
-                      key={c}
-                      type="button"
-                      className={`pp__swatch-btn ${c === activeColor ? 'is-active' : ''} ${c === color ? 'is-selected' : ''}`}
-                      onClick={() => setColor(c)}
-                      onMouseEnter={() => setHoverColor(c)}
-                      onMouseLeave={() => setHoverColor(null)}
-                      title={`Voir ${c} (${angles.length} angles)`}
-                    >
-                      <span className="pp__swatch-dot" style={{ background: colorHex[c] || '#1a1a1a' }} />
-                      <span className="pp__swatch-name">{c}</span>
-                      <span className="pp__swatch-badge">{angles.length} angles</span>
-                    </button>
-                  );
-                })}
+                {product.colors.map((c) => (
+                  <button
+                    key={c}
+                    type="button"
+                    className={`pp__swatch-btn ${c === color ? 'is-active is-selected' : ''}`}
+                    onClick={() => setColor(c)}
+                    title={`Couleur ${c}`}
+                  >
+                    <span className="pp__swatch-dot" style={{ background: colorHex[c] || '#1a1a1a' }} />
+                    <span className="pp__swatch-name">{c}</span>
+                  </button>
+                ))}
               </div>
-              <p className="pp__color-hint">
-                <Icon name="zoom" size={13} /> Survolez une couleur pour visualiser instantanément tous ses angles de vue.
-              </p>
             </div>
           )}
 
