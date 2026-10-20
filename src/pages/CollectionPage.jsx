@@ -6,6 +6,7 @@ import Icon from '../components/ui/Icon.jsx';
 import NotFound from './NotFound.jsx';
 import { getCollection, getProduct } from '../data/catalog.js';
 import { brand } from '../data/site.js';
+import { useLanguage } from '../context/LanguageContext.jsx';
 import { filterAndSort, sortOptions } from '../lib/sortProducts.js';
 import './CollectionPage.css';
 
@@ -14,6 +15,7 @@ const plural = (n) => `${n} modèle${n > 1 ? 's' : ''}`;
 
 export default function CollectionPage() {
   const { handle } = useParams();
+  const { lang, t } = useLanguage();
   const collection = getCollection(handle);
   const [view, setView] = useState(DEFAULT_VIEW);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -34,24 +36,26 @@ export default function CollectionPage() {
         <h1 className="collection__title">{collection.title}</h1>
         {collection.description && <p className="collection__desc">{collection.description}</p>}
         <div className="collection__guarantee-pill">
-          <Icon name="shield" size={16} /> Garantie Satisfait ou Remboursé de 30 jours sur toutes les commandes
+          <Icon name="shield" size={16} /> {t('collection_page.guarantee_pill')}
         </div>
       </div>
 
       <div className="toolbar">
         <button className="toolbar__filter" onClick={() => setDrawerOpen(true)}>
           <Icon name="filter" size={18} />
-          <span className="hide-mobile">Filtrer</span>
-          <span className="hide-tablet-up">Filtrer et trier</span>
+          <span className="hide-mobile">{t('collection_page.filter_btn_desktop')}</span>
+          <span className="hide-tablet-up">{t('collection_page.filter_btn_mobile')}</span>
         </button>
-        <span className="toolbar__count">{plural(shown.length)}</span>
+        <span className="toolbar__count">
+          {t('collection_page.models_count', { count: shown.length, s: shown.length > 1 ? 's' : '' })}
+        </span>
         <label className="toolbar__sort hide-mobile">
-          Trier par :
+          {t('collection_page.sort_by')}
           <span className="select">
             <select value={view.sort} onChange={(e) => setView({ ...view, sort: e.target.value })}>
               {sortOptions.map((o) => (
                 <option key={o.id} value={o.id}>
-                  {o.label}
+                  {t('collection_page.sort_options.' + o.id, o.label)}
                 </option>
               ))}
             </select>

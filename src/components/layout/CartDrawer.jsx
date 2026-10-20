@@ -1,5 +1,6 @@
 import Icon from '../ui/Icon.jsx';
 import { useCart } from '../../context/CartContext.jsx';
+import { useLanguage } from '../../context/LanguageContext.jsx';
 import { useLockScroll } from '../../lib/hooks.js';
 import { price } from '../../lib/format.js';
 import './CartDrawer.css';
@@ -8,6 +9,7 @@ const FREE_SHIPPING = 55;
 
 export default function CartDrawer() {
   const { lines, open, setOpen, setQty, total, count } = useCart();
+  const { t, lang } = useLanguage();
   useLockScroll(open);
 
   const bundleShipsFree = lines.some((l) => l.freeShipping);
@@ -16,10 +18,12 @@ export default function CartDrawer() {
 
   return (
     <div className={`cart-backdrop ${open ? 'is-open' : ''}`} onClick={() => setOpen(false)}>
-      <aside className="cart" onClick={(e) => e.stopPropagation()} aria-label="Panier">
+      <aside className="cart" onClick={(e) => e.stopPropagation()} aria-label={t('cart.title')}>
         <header className="cart__head">
-          <h2>Votre panier ({count})</h2>
-          <button onClick={() => setOpen(false)} aria-label="Fermer le panier">
+          <h2>
+            {t('cart.title')} ({count})
+          </h2>
+          <button onClick={() => setOpen(false)} aria-label={t('cart.close')}>
             <Icon name="close" size={24} />
           </button>
         </header>
@@ -27,9 +31,9 @@ export default function CartDrawer() {
         <div className="cart__ship">
           <p>
             {left > 0 ? (
-              <>Plus que {price(left)} pour la livraison offerte</>
+              <>{t('cart.free_shipping_left', { amount: price(left) })}</>
             ) : (
-              <>🎉 Vous bénéficiez de la LIVRAISON OFFERTE</>
+              <>{t('cart.free_shipping_unlocked')}</>
             )}
           </p>
           <i>
@@ -40,9 +44,9 @@ export default function CartDrawer() {
         {lines.length === 0 ? (
           <div className="cart__empty">
             <Icon name="bag" size={40} strokeWidth={1.2} />
-            <p>Votre panier est vide</p>
+            <p>{t('cart.empty_title')}</p>
             <button className="btn btn--dark" onClick={() => setOpen(false)}>
-              Découvrir nos modèles
+              {t('cart.empty_btn')}
             </button>
           </div>
         ) : (
@@ -81,13 +85,17 @@ export default function CartDrawer() {
         {lines.length > 0 && (
           <footer className="cart__foot">
             <p>
-              <span>Sous-total</span>
+              <span>{t('cart.subtotal')}</span>
               <strong>{price(total)}</strong>
             </p>
             <button className="btn btn--dark btn--block">
-              <Icon name="lock" size={16} /> Passer la commande sécurisée
+              <Icon name="lock" size={16} /> {t('cart.checkout')}
             </button>
-            <small>Garantie Satisfait ou Remboursé de 30 jours · Paiement SSL sécurisé</small>
+            <small>
+              {lang === 'fr'
+                ? 'Garantie Satisfait ou Remboursé de 30 jours · Paiement SSL sécurisé'
+                : '30-Day Money-Back Guarantee · 256-bit SSL Secure Checkout'}
+            </small>
           </footer>
         )}
       </aside>

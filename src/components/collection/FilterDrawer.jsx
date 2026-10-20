@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react';
 import Icon from '../ui/Icon.jsx';
 import { filterAndSort, sortOptions } from '../../lib/sortProducts.js';
 import { useLockScroll } from '../../lib/hooks.js';
+import { useLanguage } from '../../context/LanguageContext.jsx';
 import './FilterDrawer.css';
 
 export default function FilterDrawer({ open, onClose, items, value, onApply }) {
   const [draft, setDraft] = useState(value);
+  const { lang, t } = useLanguage();
   useLockScroll(open);
 
   useEffect(() => {
@@ -18,15 +20,15 @@ export default function FilterDrawer({ open, onClose, items, value, onApply }) {
     <div className={`drawer-backdrop ${open ? 'is-open' : ''}`} onClick={onClose}>
       <aside className="filters" onClick={(e) => e.stopPropagation()} aria-label="Filtres et options de tri">
         <header className="filters__head">
-          <h2>Filtres & Tri</h2>
-          <button onClick={onClose} aria-label="Fermer les filtres">
+          <h2>{lang === 'fr' ? 'Filtres & Tri' : 'Filters & Sort'}</h2>
+          <button onClick={onClose} aria-label={lang === 'fr' ? 'Fermer les filtres' : 'Close filters'}>
             <Icon name="close" size={22} />
           </button>
         </header>
 
         <div className="filters__body">
           <fieldset>
-            <legend>Trier par</legend>
+            <legend>{t('collection_page.sort_by')}</legend>
             {sortOptions.map((o) => (
               <label key={o.id} className="filters__radio">
                 <input
@@ -36,15 +38,15 @@ export default function FilterDrawer({ open, onClose, items, value, onApply }) {
                   onChange={() => setDraft({ ...draft, sort: o.id })}
                 />
                 <span />
-                {o.label}
+                {t('collection_page.sort_options.' + o.id, o.label)}
               </label>
             ))}
           </fieldset>
 
           <fieldset>
-            <legend>Disponibilité</legend>
+            <legend>{lang === 'fr' ? 'Disponibilité' : 'Availability'}</legend>
             <label className="switch">
-              En stock uniquement
+              {t('collection_page.in_stock_only')}
               <input
                 type="checkbox"
                 checked={draft.inStockOnly}
@@ -60,10 +62,10 @@ export default function FilterDrawer({ open, onClose, items, value, onApply }) {
             className="filters__clear"
             onClick={() => setDraft({ sort: 'featured', inStockOnly: false })}
           >
-            Tout effacer
+            {t('collection_page.clear_all')}
           </button>
           <button className="btn btn--dark" onClick={() => onApply(draft)}>
-            Appliquer ({count})
+            {t('collection_page.apply')} ({count})
           </button>
         </footer>
       </aside>

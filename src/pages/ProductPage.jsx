@@ -11,6 +11,7 @@ import { colorHex, collectionUrl, getProduct, getColorImages } from '../data/cat
 import { brand } from '../data/site.js';
 import { fabric, shipping, sizeChart } from '../data/product.js';
 import { useCart } from '../context/CartContext.jsx';
+import { useLanguage } from '../context/LanguageContext.jsx';
 import { price } from '../lib/format.js';
 import './ProductPage.css';
 
@@ -22,6 +23,7 @@ export default function ProductPage({ handle: fixedHandle }) {
   const [qty, setQty] = useState(1);
   const [sizeOpen, setSizeOpen] = useState(false);
   const { add } = useCart();
+  const { lang, t } = useLanguage();
 
   useEffect(() => {
     if (!product) return;
@@ -103,7 +105,7 @@ export default function ProductPage({ handle: fixedHandle }) {
     <>
       <section className="pp container">
         <nav className="pp__crumbs" aria-label="Fil d'Ariane">
-          <Link to="/">Accueil</Link> / <Link to={collectionUrl('all')}>Tous nos modèles</Link> / <span>{product.title}</span>
+          <Link to="/">{t('product_page.crumbs_home')}</Link> / <Link to={collectionUrl('all')}>{t('product_page.crumbs_all')}</Link> / <span>{product.title}</span>
         </nav>
 
         <div className="pp__gallery-col">
@@ -114,7 +116,7 @@ export default function ProductPage({ handle: fixedHandle }) {
           {product.badge && <span className="card__badge" style={{ position: 'static', display: 'inline-block', marginBottom: 8 }}>{product.badge}</span>}
           <h1 className="pp__title">{product.title}</h1>
           <p className="pp__rating">
-            <Stars value={product.rating || 4.9} size={15} /> <strong>{product.rating || 4.9}</strong> / 5 ({product.reviewCount || 1400}+ avis)
+            <Stars value={product.rating || 4.9} size={15} /> <strong>{product.rating || 4.9}</strong> / 5 ({product.reviewCount || 1400}+ {t('product_page.reviews_count')})
           </p>
 
           <p className="pp__tagline" style={{ color: 'var(--muted)', fontSize: 15, marginBottom: 14 }}>
@@ -126,7 +128,7 @@ export default function ProductPage({ handle: fixedHandle }) {
             {save > 0 && (
               <>
                 <s>{price(product.compareAt)}</s>
-                <em>Économisez {save}%</em>
+                <em>{t('product_page.save')} {save}%</em>
               </>
             )}
           </p>
@@ -135,7 +137,7 @@ export default function ProductPage({ handle: fixedHandle }) {
             <div className="pp__color-picker">
               <div className="pp__color-header">
                 <span className="pp__color-label">
-                  Couleur sélectionnée : <strong>{color}</strong>
+                  {t('product_page.color_label')} <strong>{t('color_names.' + color, color)}</strong>
                 </span>
               </div>
               <div className="pp__swatches">
@@ -145,10 +147,10 @@ export default function ProductPage({ handle: fixedHandle }) {
                     type="button"
                     className={`pp__swatch-btn ${c === color ? 'is-active is-selected' : ''}`}
                     onClick={() => setColor(c)}
-                    title={`Couleur ${c}`}
+                    title={t('color_names.' + c, c)}
                   >
                     <span className="pp__swatch-dot" style={{ background: colorHex[c] || '#1a1a1a' }} />
-                    <span className="pp__swatch-name">{c}</span>
+                    <span className="pp__swatch-name">{t('color_names.' + c, c)}</span>
                   </button>
                 ))}
               </div>
@@ -159,14 +161,14 @@ export default function ProductPage({ handle: fixedHandle }) {
             <div className="pp__option">
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <p>
-                  Taille : <strong>{size}</strong>
+                  {t('product_page.size_label')} <strong>{size}</strong>
                 </p>
                 <button
                   type="button"
                   onClick={() => setSizeOpen(true)}
                   style={{ background: 'none', border: 'none', color: 'var(--gold-dark)', fontSize: 13, fontWeight: 600, textDecoration: 'underline', cursor: 'pointer' }}
                 >
-                  Guide des tailles
+                  {t('product_page.size_guide')}
                 </button>
               </div>
               <div className="pp__pills">
@@ -181,35 +183,35 @@ export default function ProductPage({ handle: fixedHandle }) {
 
           <div className="pp__buy">
             <div className="qty qty--lg">
-              <button onClick={() => setQty((q) => Math.max(1, q - 1))} aria-label="Diminuer la quantité">
+              <button onClick={() => setQty((q) => Math.max(1, q - 1))} aria-label={t('product_page.decrease_qty')}>
                 <Icon name="minus" size={14} />
               </button>
               <span>{qty}</span>
-              <button onClick={() => setQty((q) => q + 1)} aria-label="Augmenter la quantité">
+              <button onClick={() => setQty((q) => q + 1)} aria-label={t('product_page.increase_qty')}>
                 <Icon name="plus" size={14} />
               </button>
             </div>
             <button className="btn btn--dark atc" onClick={addToCart}>
-              Ajouter au panier
+              {t('product_page.add_to_cart')}
             </button>
           </div>
 
           <p className="product__micro">
             <span>
-              <Icon name="lock" size={14} /> Paiement 100% sécurisé
+              <Icon name="lock" size={14} /> {t('product_page.secure_payment')}
             </span>
             <span>
-              <Icon name="truck" size={14} /> Expédition sous 24/48h
+              <Icon name="truck" size={14} /> {t('product_page.fast_shipping')}
             </span>
             <span>
-              <Icon name="shield" size={14} /> Garantie 30 Jours
+              <Icon name="shield" size={14} /> {t('product_page.guarantee_title')}
             </span>
           </p>
 
           <div className="guarantee">
             <Icon name="shield" size={24} />
             <p>
-              <strong>Garantie Satisfait ou Remboursé de 30 jours.</strong> Portez votre t-shirt Vela Sculpt™ en conditions réelles. Si vous n'êtes pas entièrement satisfait du confort ou du maintien, demandez un remboursement intégral.
+              <strong>{t('product_page.guarantee_box_title')}</strong> {t('product_page.guarantee_box_desc')}
             </p>
           </div>
 

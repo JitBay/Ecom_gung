@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Navigate, Route, Routes, useLocation, useParams } from 'react-router-dom';
+import { LanguageProvider } from './context/LanguageContext.jsx';
 import { CartProvider } from './context/CartContext.jsx';
 import Header from './components/layout/Header.jsx';
 import Footer from './components/layout/Footer.jsx';
@@ -54,7 +55,8 @@ function ProductRoute() {
 export default function App() {
   return (
     <BrowserRouter>
-      <CartProvider>
+      <LanguageProvider>
+        <CartProvider>
         <ScrollToTop />
         <Header />
         <main>
@@ -95,6 +97,7 @@ export default function App() {
         <Footer />
         <CartDrawer />
       </CartProvider>
-    </BrowserRouter>
+    </LanguageProvider>
+  </BrowserRouter>
   );
 }

@@ -353,12 +353,19 @@
 .mobile-menu__foot {
   margin-top: auto;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px 20px;
   background: var(--cream);
   font-size: 14px;
   color: var(--muted);
+}
+
+.mobile-menu__foot-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .mobile-menu__foot a {

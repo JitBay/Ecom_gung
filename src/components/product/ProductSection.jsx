@@ -9,6 +9,7 @@ import Stars from '../ui/Stars.jsx';
 import { badges, benefits, bundles, colors, product, stats } from '../../data/product.js';
 import { colorHex, getColorImages, products } from '../../data/catalog.js';
 import { useCart } from '../../context/CartContext.jsx';
+import { useLanguage } from '../../context/LanguageContext.jsx';
 import { useScrolledPast } from '../../lib/hooks.js';
 import './ProductSection.css';
 
@@ -70,6 +71,7 @@ export default function ProductSection({ initialModelHandle }) {
   const [sizeOpen, setSizeOpen] = useState(false);
   const [atcRef, pastAtc] = useScrolledPast();
   const { add } = useCart();
+  const { lang, t } = useLanguage();
 
   // Reset selected color when switching product model
   useEffect(() => {
@@ -126,7 +128,9 @@ export default function ProductSection({ initialModelHandle }) {
 
       <div className="product__info">
         <div className="product__model-selector">
-          <label className="product__model-label">1. Choisissez votre coupe ergonomique :</label>
+          <label className="product__model-label">
+            {lang === 'fr' ? '1. Choisissez votre coupe ergonomique :' : '1. Choose your ergonomic fit:'}
+          </label>
           <div className="product__model-buttons">
             {products.map((p) => (
               <button
@@ -143,7 +147,7 @@ export default function ProductSection({ initialModelHandle }) {
 
         <h1 className="product__title">{currentModel.title}</h1>
         <a href="#reviews" className="product__rating">
-          <Stars value={5} size={16} /> <strong>4.9</strong> <span>/ 5 (1 420+ avis vérifiés)</span>
+          <Stars value={5} size={16} /> <strong>4.9</strong> <span>/ 5 ({lang === 'fr' ? '1 420+ avis vérifiés' : '1,420+ verified reviews'})</span>
         </a>
 
         <p className="product__tagline">{currentModel.tagline}</p>
@@ -152,7 +156,7 @@ export default function ProductSection({ initialModelHandle }) {
         <div className="product__color-picker">
           <div className="product__color-header">
             <span className="product__color-label">
-              2. Couleur sélectionnée : <strong>{selectedColor}</strong>
+              {lang === 'fr' ? '2. Couleur sélectionnée :' : '2. Selected color:'} <strong>{t('color_names.' + selectedColor, selectedColor)}</strong>
             </span>
           </div>
 
@@ -163,10 +167,10 @@ export default function ProductSection({ initialModelHandle }) {
                 type="button"
                 className={`product__color-swatch-btn ${c === selectedColor ? 'is-active is-selected' : ''}`}
                 onClick={() => handleSelectColor(c)}
-                title={`Couleur ${c}`}
+                title={t('color_names.' + c, c)}
               >
                 <span className="product__color-dot" style={{ background: colorHex[c] || '#1a1a1a' }} />
-                <span className="product__color-name">{c}</span>
+                <span className="product__color-name">{t('color_names.' + c, c)}</span>
               </button>
             ))}
           </div>
@@ -177,13 +181,13 @@ export default function ProductSection({ initialModelHandle }) {
 
         <p className="product__micro">
           <span>
-            <Icon name="lock" size={14} /> Paiement 100% sécurisé
+            <Icon name="lock" size={14} /> {lang === 'fr' ? 'Paiement 100% sécurisé' : '100% Secure Payment'}
           </span>
           <span>
-            <Icon name="truck" size={14} /> Livraison suivie offerte dès 55 €
+            <Icon name="truck" size={14} /> {lang === 'fr' ? 'Livraison suivie offerte dès 55 €' : 'Free tracked shipping over €55'}
           </span>
           <span>
-            <Icon name="shield" size={14} /> Garantie Satisfait ou Remboursé 30j
+            <Icon name="shield" size={14} /> {lang === 'fr' ? 'Garantie Satisfait ou Remboursé 30j' : '30-Day Money-Back Guarantee'}
           </span>
         </p>
 

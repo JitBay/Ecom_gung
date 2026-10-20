@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import Icon from '../ui/Icon.jsx';
-import { announcements, brand, nav } from '../../data/site.js';
+import LanguageSwitcher from '../ui/LanguageSwitcher.jsx';
+import { brand } from '../../data/site.js';
 import { useCart } from '../../context/CartContext.jsx';
+import { useLanguage } from '../../context/LanguageContext.jsx';
 import { useLockScroll } from '../../lib/hooks.js';
 import './Header.css';
 
@@ -16,14 +18,19 @@ export function Logo() {
 }
 
 function AnnouncementBar() {
+  const { dict } = useLanguage();
   const [index, setIndex] = useState(0);
+  const items = dict.announcements || [];
+
   useEffect(() => {
-    const t = setInterval(() => setIndex((i) => (i + 1) % announcements.length), 4000);
+    if (items.length === 0) return;
+    const t = setInterval(() => setIndex((i) => (i + 1) % items.length), 4000);
     return () => clearInterval(t);
-  }, []);
+  }, [items.length]);
+
   return (
     <div className="announcement">
-      <p key={index}>{announcements[index]}</p>
+      <p key={`${index}-${items[index]}`}>{items[index] || items[0]}</p>
     </div>
   );
 }
@@ -31,18 +38,36 @@ function AnnouncementBar() {
 function MobileMenu({ open, onClose }) {
   useLockScroll(open);
   const [modelsOpen, setModelsOpen] = useState(false);
+  const { t, dict } = useLanguage();
+
+  const navItems = [
+    { label: t('nav.home'), to: '/' },
+    {
+      label: t('nav.models'),
+      to: '/collections/all',
+      children: [
+        { label: t('nav.sans_manches'), to: '/products/vela-sculpt-sans-manches' },
+        { label: t('nav.demi_manches'), to: '/products/vela-sculpt-demi-manches' },
+        { label: t('nav.manches_longues'), to: '/products/vela-sculpt-manches-longues' },
+      ],
+    },
+    { label: t('nav.offers'), to: '/pages/offres' },
+    { label: t('nav.why_us'), to: '/pages/notre-technologie' },
+    { label: t('nav.guarantee'), to: '/pages/garantie' },
+    { label: t('nav.reviews'), to: '/#reviews' },
+  ];
 
   return (
     <div className={`drawer-backdrop ${open ? 'is-open' : ''}`} onClick={onClose}>
       <nav className="mobile-menu" onClick={(e) => e.stopPropagation()} aria-label="Menu principal mobile">
         <div className="mobile-menu__top">
           <Logo />
-          <button onClick={onClose} aria-label="Fermer le menu">
+          <button onClick={onClose} aria-label={t('header.menu_close')}>
             <Icon name="close" size={24} />
           </button>
         </div>
         <ul>
-          {nav.map((item) => {
+          {navItems.map((item) => {
             if (item.children) {
               return (
                 <li key={item.to} className="mobile-menu__has-children">
@@ -90,10 +115,16 @@ function MobileMenu({ open, onClose }) {
           })}
         </ul>
         <div className="mobile-menu__foot">
-          <Link to="/pages/garantie" onClick={onClose}>
-            <Icon name="shield" size={18} /> Garantie 30 Jours
-          </Link>
-          <span>France · EUR €</span>
+          <div className="mobile-menu__foot-row">
+            <Link to="/pages/garantie" onClick={onClose}>
+              <Icon name="shield" size={18} /> {t('nav.guarantee')}
+            </Link>
+            <span>{dict.currency_label}</span>
+          </div>
+          <div className="mobile-menu__foot-row" style={{ paddingTop: 6, borderTop: '1px solid rgba(0,0,0,0.06)' }}>
+            <span style={{ fontSize: 13, fontWeight: 600 }}>{t('header.switch_lang')} :</span>
+            <LanguageSwitcher variant="pill" />
+          </div>
         </div>
       </nav>
     </div>
@@ -105,6 +136,24 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { count, setOpen } = useCart();
+  const { t } = useLanguage();
+
+  const navItems = [
+    { label: t('nav.home'), to: '/' },
+    {
+      label: t('nav.models'),
+      to: '/collections/all',
+      children: [
+        { label: t('nav.sans_manches'), to: '/products/vela-sculpt-sans-manches' },
+        { label: t('nav.demi_manches'), to: '/products/vela-sculpt-demi-manches' },
+        { label: t('nav.manches_longues'), to: '/products/vela-sculpt-manches-longues' },
+      ],
+    },
+    { label: t('nav.offers'), to: '/pages/offres' },
+    { label: t('nav.why_us'), to: '/pages/notre-technologie' },
+    { label: t('nav.guarantee'), to: '/pages/garantie' },
+    { label: t('nav.reviews'), to: '/#reviews' },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -118,14 +167,14 @@ export default function Header() {
       <header className={`header ${scrolled ? 'is-scrolled' : ''}`} id="top">
         <div className="header__inner container">
           <div className="header__left">
-            <button className="icon-btn hide-desktop" onClick={() => setMenuOpen(true)} aria-label="Ouvrir le menu">
+            <button className="icon-btn hide-desktop" onClick={() => setMenuOpen(true)} aria-label={t('header.menu_open')}>
               <Icon name="menu" size={24} />
             </button>
             <Logo />
           </div>
 
           <nav className="header__nav" aria-label="Menu principal">
-            {nav.map((item) => {
+            {navItems.map((item) => {
               if (item.children) {
                 return (
                   <div
@@ -140,7 +189,7 @@ export default function Header() {
                     {dropdownOpen && (
                       <div className="nav-dropdown__menu">
                         <NavLink to="/collections/all" className="nav-dropdown__item nav-dropdown__item--all">
-                          Tous les modèles (Vue d'ensemble)
+                          {t('nav.models_all')}
                         </NavLink>
                         {item.children.map((sub) => (
                           <NavLink key={sub.to} to={sub.to} className="nav-dropdown__item">
@@ -168,10 +217,11 @@ export default function Header() {
           </nav>
 
           <div className="header__right">
+            <LanguageSwitcher variant="dropdown" className="hide-mobile" />
             <Link to="/pages/garantie" className="badge-guarantee-head hide-mobile">
-              <Icon name="shield" size={14} /> Garantie 30j
+              <Icon name="shield" size={14} /> {t('header.guarantee_pill')}
             </Link>
-            <button className="icon-btn cart-btn" onClick={() => setOpen(true)} aria-label={`Panier, ${count} articles`}>
+            <button className="icon-btn cart-btn" onClick={() => setOpen(true)} aria-label={`${t('header.cart_aria')}, ${count} articles`}>
               <Icon name="bag" size={22} />
               {count > 0 && <span className="cart-btn__count">{count}</span>}
             </button>
@@ -180,11 +230,11 @@ export default function Header() {
       </header>
       <div className="trust-strip hide-tablet-up">
         <span>
-          <Icon name="shield" size={14} strokeWidth={2.4} /> Garantie 30 Jours
+          <Icon name="shield" size={14} strokeWidth={2.4} /> {t('nav.guarantee')}
         </span>
         <i />
         <span>
-          <Icon name="check" size={14} strokeWidth={2.4} /> 45 000+ Hommes Conquis
+          <Icon name="check" size={14} strokeWidth={2.4} /> {t('home.eyebrow')}
         </span>
       </div>
       <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} />

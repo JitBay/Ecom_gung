@@ -28,19 +28,6 @@ export default function ProductCard({ product }) {
         <span className="card__img card__img--alt">
           <ProductThumb product={product} color={activeColor} alt />
         </span>
-
-        {/* Small floating angle indicators on hover */}
-        {colorAngles.length > 1 && (
-          <div className="card__angles-hint" onClick={(e) => e.preventDefault()}>
-            {colorAngles.map((_, idx) => (
-              <span
-                key={idx}
-                className={`card__angle-dot ${idx === (activeAngleIdx ?? 0) ? 'is-active' : ''}`}
-                title={`Angle ${idx + 1}`}
-              />
-            ))}
-          </div>
-        )}
       </Link>
 
       <Link to={url} className="card__title">
