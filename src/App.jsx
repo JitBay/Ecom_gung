@@ -5,6 +5,7 @@ import Header from './components/layout/Header.jsx';
 import Footer from './components/layout/Footer.jsx';
 import CartDrawer from './components/layout/CartDrawer.jsx';
 import HomePage from './pages/HomePage.jsx';
+import LandingPage from './pages/LandingPage.jsx';
 import CollectionPage from './pages/CollectionPage.jsx';
 import ProductPage from './pages/ProductPage.jsx';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage.jsx';
@@ -58,8 +59,9 @@ export default function App() {
         <Header />
         <main>
           <Routes>
-            {/* Home */}
+            {/* Home & Direct Sales Landing */}
             <Route path="/" element={<HomePage />} />
+            <Route path="/landing" element={<LandingPage />} />
 
             {/* Catalog & Products */}
             <Route path="/collections/:handle" element={<CollectionPage />} />
