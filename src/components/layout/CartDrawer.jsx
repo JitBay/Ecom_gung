@@ -64,11 +64,17 @@ export default function CartDrawer() {
                   <strong>{l.title}</strong>
                   <span>{l.detail}</span>
                   <div className="qty">
-                    <button onClick={() => setQty(l.id, l.qty - 1)} aria-label="Diminuer">
+                    <button
+                      onClick={() => setQty(l.id, l.qty - 1)}
+                      aria-label={lang === 'fr' ? 'Diminuer la quantité' : 'Decrease quantity'}
+                    >
                       <Icon name="minus" size={14} />
                     </button>
                     <span>{l.qty}</span>
-                    <button onClick={() => setQty(l.id, l.qty + 1)} aria-label="Augmenter">
+                    <button
+                      onClick={() => setQty(l.id, l.qty + 1)}
+                      aria-label={lang === 'fr' ? 'Augmenter la quantité' : 'Increase quantity'}
+                    >
                       <Icon name="plus" size={14} />
                     </button>
                   </div>

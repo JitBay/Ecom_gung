@@ -12,9 +12,10 @@ export const colors = [
   { id: 'noir', label: 'Noir', hex: '#1a1a1a' },
   { id: 'blanc', label: 'Blanc', hex: '#f8f8fa' },
   { id: 'gris', label: 'Gris Chiné', hex: '#63666f' },
+  { id: 'bleu-nuit', label: 'Bleu Nuit', hex: '#232c3a' },
 ];
 
-export const sizes = ['S', 'M', 'L', 'XL', '2XL', '3XL'];
+export const sizes = ['S', 'M', 'L', 'XL', '2XL'];
 
 // 4 value propositions / offer modules for marketing and A/B testing
 export const offerModules = [
@@ -64,6 +65,53 @@ export const offerModules = [
   },
 ];
 
+export const offerModulesEn = [
+  {
+    id: 1,
+    title: 'Cleaner Silhouette',
+    subtitle: 'Without changing your wardrobe',
+    tagline: 'Discreet, instant smoothing',
+    hook:
+      'Get a visually smoother physique under your shirts and tees with discreet compression wear designed to fit seamlessly into your daily wardrobe without uncomfortable extra layers.',
+    guaranteeBadge:
+      'Try it for 30 days. If you are not satisfied with the fit or comfort, simply request a full refund according to our guarantee terms.',
+    icon: 'sparkle',
+  },
+  {
+    id: 2,
+    title: 'Comfort Above All',
+    subtitle: 'Soft, breathable support',
+    tagline: 'Engineered for office & daily life',
+    hook:
+      'Enjoy tailored support that moves with your day—at the desk or on the move. Breathable compression designed to stay invisible so you never have to choose between support and comfort.',
+    guaranteeBadge:
+      'Benefit from 30 days to evaluate the comfort and fit. If the experience does not suit you, request a refund with ease.',
+    icon: 'heart',
+  },
+  {
+    id: 3,
+    title: 'More Confidence',
+    subtitle: 'Wear your clothes with pride',
+    tagline: 'Ideal under fitted shirts',
+    hook:
+      'Wear fitted dress shirts and tees with effortless confidence thanks to a discreet shaping layer that slims your midsection without needing an overhaul of your closet.',
+    guaranteeBadge:
+      'You have 30 days to decide whether the product meets your expectations. Full refund guaranteed if you are not convinced.',
+    icon: 'shield',
+  },
+  {
+    id: 4,
+    title: 'Simple Daily Solution',
+    subtitle: 'For your routine',
+    tagline: 'Put it on and forget it',
+    hook:
+      'Simplify your dressing routine with a single ergonomic base layer engineered for support, invisibility, and effortless wear every single day.',
+    guaranteeBadge:
+      'Backed by our 30-day money-back guarantee with straightforward return conditions and prompt refunds.',
+    icon: 'bolt',
+  },
+];
+
 export const benefits = [
   {
     icon: 'sparkle',
@@ -91,10 +139,43 @@ export const benefits = [
   },
 ];
 
+export const benefitsEn = [
+  {
+    icon: 'sparkle',
+    title: 'Instantly Smoothed Silhouette',
+    text: 'Gentle core compression that flattens the midsection and eliminates love handles under shirts or tees.',
+    tag: 'Instant Effect',
+  },
+  {
+    icon: 'pulse',
+    title: 'Ergonomic Posture Support',
+    text: 'Targeted dorsal band structure that naturally aligns your torso and relieves muscle tension.',
+    tag: 'All-Day Comfort',
+  },
+  {
+    icon: 'shield',
+    title: '100% Invisible Under Clothes',
+    text: 'Low-cut collar and ultra-flat bonded seams imperceptible even under a crisp white fitted shirt.',
+    tag: 'Second Skin',
+  },
+  {
+    icon: 'waves',
+    title: 'Micro-Breathable 3D Mesh',
+    text: 'Active moisture-wicking and anti-odor fibers keep you completely fresh and dry all day.',
+    tag: 'Thermo-Regulating',
+  },
+];
+
 export const stats = [
   { value: '30', unit: 'Jours', label: 'Garantie satisfait ou remboursé' },
   { value: '100', unit: '%', label: 'Discret sous vos vêtements' },
   { value: '45k', unit: '+', label: 'Hommes conquis au quotidien' },
+];
+
+export const statsEn = [
+  { value: '30', unit: 'Days', label: 'Money-back guarantee' },
+  { value: '100', unit: '%', label: 'Discreet under your clothes' },
+  { value: '45k', unit: '+', label: 'Satisfied men wearing daily' },
 ];
 
 export const bundles = [
@@ -138,14 +219,19 @@ export const badges = [
   { icon: 'truck', label: 'Expédition Suivie 24/48h' },
 ];
 
+export const badgesEn = [
+  { icon: 'shield', label: '30-Day Guarantee' },
+  { icon: 'lock', label: 'SSL Secure Checkout' },
+  { icon: 'truck', label: '24/48h Tracked Shipping' },
+];
+
 // Men's size chart: weight (kg) & height (cm)
 export const sizeChart = [
   { size: 'S', kg: [58, 68], cm: [160, 172], chest: '88–96 cm', waist: '74–82 cm' },
   { size: 'M', kg: [68, 78], cm: [168, 178], chest: '96–104 cm', waist: '82–90 cm' },
   { size: 'L', kg: [78, 88], cm: [174, 184], chest: '104–112 cm', waist: '90–98 cm' },
   { size: 'XL', kg: [88, 98], cm: [178, 188], chest: '112–120 cm', waist: '98–106 cm' },
-  { size: '2XL', kg: [98, 110], cm: [180, 192], chest: '120–128 cm', waist: '106–116 cm' },
-  { size: '3XL', kg: [110, 125], cm: [182, 195], chest: '128–138 cm', waist: '116–128 cm' },
+  { size: '2XL', kg: [98, 115], cm: [180, 195], chest: '120–128 cm', waist: '106–116 cm' },
 ];
 
 export const fabric = [
@@ -154,6 +240,14 @@ export const fabric = [
   ['Invisibilité', 'Encolure dégagée et coutures ergonomiques plates imperceptibles sous chemise'],
   ['Thermo-régulation', 'Tissu respirant avec canaux d’évacuation de la sueur et propriétés anti-odeur'],
   ['Entretien', 'Lavage délicat en machine à 30°C. Séchage rapide à l’air libre (pas de sèche-linge)'],
+];
+
+export const fabricEn = [
+  ['Composition', '88% High-grade technical polyamide, 12% ergonomic high-density elastane'],
+  ['Technology', 'Graduated 3D knit compression with targeted abdominal support'],
+  ['Invisibility', 'Deep neckline and flat ergonomic seams imperceptible under dress shirts'],
+  ['Thermal Control', 'Breathable knit with sweat channels and anti-odor properties'],
+  ['Care', 'Machine wash delicate at 30°C. Quick air dry (do not tumble dry)'],
 ];
 
 export const shipping = {
@@ -165,6 +259,17 @@ export const shipping = {
   ],
   returns:
     'Garantie Satisfait ou Remboursé de 30 jours. Vous bénéficiez de 30 jours à compter de la réception pour essayer votre t-shirt Vela Sculpt™. Si vous n’êtes pas entièrement convaincu du confort ou du maintien, notre service client organise votre retour et remboursement en toute simplicité.',
+};
+
+export const shippingEn = {
+  lines: [
+    'Order processing & dispatch: 24 to 48 business hours',
+    'Delivery across Europe: 3 to 5 business days',
+    'Live tracking number provided via email upon dispatch',
+    'Free shipping on orders over €55 or with 2+ shirt packs',
+  ],
+  returns:
+    '30-Day Money-Back Guarantee. Take 30 days from delivery to test your Vela Sculpt™ shirt. If you are not 100% satisfied with the comfort or support, our team handles your return and full refund.',
 };
 
 export const quickFaq = [
@@ -183,5 +288,24 @@ export const quickFaq = [
   {
     q: 'Comment fonctionne la Garantie 30 Jours ?',
     a: 'Vous avez 30 jours complets après réception pour essayer votre produit. Si vous n’êtes pas satisfait, écrivez-nous à support@velalabs.co pour déclencher votre retour et remboursement.',
+  },
+];
+
+export const quickFaqEn = [
+  {
+    q: 'Does the shirt show under a white dress shirt or polo?',
+    a: 'No, that was our #1 design priority. The low neckline stays hidden even with an open collar button, and ultra-flat seams disappear completely under your shirt fabric.',
+  },
+  {
+    q: 'What size should I choose?',
+    a: 'We recommend your usual shirt size. If between sizes and seeking firmer compression, size down; for relaxed everyday comfort, size up.',
+  },
+  {
+    q: 'Can I wear it all day at the office?',
+    a: 'Absolutely. The elastic 3D knit is engineered to move with you all day without restricting your breathing or movement.',
+  },
+  {
+    q: 'How does the 30-Day Guarantee work?',
+    a: 'You have a full 30 days after delivery to test it. If you are not completely satisfied, email us at support@velalabs.co to arrange your return and full refund.',
   },
 ];

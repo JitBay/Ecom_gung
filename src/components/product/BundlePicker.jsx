@@ -1,29 +1,36 @@
 import Icon from '../ui/Icon.jsx';
-import { bundles, colors, sizes } from '../../data/product.js';
+import { bundles as defaultBundles, colors as defaultColors, sizes } from '../../data/product.js';
+import { useLanguage } from '../../context/LanguageContext.jsx';
 import { price } from '../../lib/format.js';
 import './BundlePicker.css';
 
-const marquee = Array(12).fill('Offre Limitée').join(' • ');
+function VariantRows({ variants, onChange, productImage, availableColors, lang }) {
+  const colorList = availableColors && availableColors.length ? availableColors : defaultColors;
 
-function VariantRows({ variants, onChange, productImage }) {
   return (
     <div className="variants">
-      <p className="variants__label">Couleur & Taille par article :</p>
+      <p className="variants__label">
+        {lang === 'fr' ? 'Couleur & Taille par article :' : 'Color & Size per shirt:'}
+      </p>
       {variants.map((v, i) => {
-        const currentColor = colors.find((c) => c.id === v.color) || colors[0];
+        const currentColor = colorList.find((c) => c.id === v.color) || colorList[0];
         return (
           <div className="variant" key={i}>
             <div className="variant__thumb">
               <img
-                src={productImage || '/images/products/demi-manches/1.jpg'}
+                src={productImage || '/images/products/sans-manches/1.jpeg'}
                 alt="Miniature"
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
             </div>
             <label className="select">
-              <span className="select__dot" style={{ background: currentColor.hex }} />
-              <select value={v.color} onChange={(e) => onChange(i, { color: e.target.value })} aria-label={`Couleur article ${i + 1}`}>
-                {colors.map((c) => (
+              <span className="select__dot" style={{ background: currentColor?.hex || '#1a1a1a' }} />
+              <select
+                value={v.color}
+                onChange={(e) => onChange(i, { color: e.target.value })}
+                aria-label={`Couleur article ${i + 1}`}
+              >
+                {colorList.map((c) => (
                   <option key={c.id} value={c.id}>
                     {c.label}
                   </option>
@@ -32,7 +39,11 @@ function VariantRows({ variants, onChange, productImage }) {
               <Icon name="chevron" size={14} />
             </label>
             <label className="select">
-              <select value={v.size} onChange={(e) => onChange(i, { size: e.target.value })} aria-label={`Taille article ${i + 1}`}>
+              <select
+                value={v.size}
+                onChange={(e) => onChange(i, { size: e.target.value })}
+                aria-label={`Taille article ${i + 1}`}
+              >
                 {sizes.map((s) => (
                   <option key={s}>{s}</option>
                 ))}
@@ -46,7 +57,10 @@ function VariantRows({ variants, onChange, productImage }) {
   );
 }
 
-function BundleCard({ bundle, selected, onSelect, variants, onVariantChange, productImage }) {
+function BundleCard({ bundle, selected, onSelect, variants, onVariantChange, productImage, availableColors, lang }) {
+  const marqueeText = lang === 'fr' ? 'Offre Limitée' : 'Limited Offer';
+  const marquee = Array(12).fill(marqueeText).join(' • ');
+
   const card = (
     <div className={`bundle ${selected ? 'is-selected' : ''}`} onClick={onSelect}>
       <div className="bundle__head">
@@ -68,10 +82,17 @@ function BundleCard({ bundle, selected, onSelect, variants, onVariantChange, pro
         <div className="bundle__body" onClick={(e) => e.stopPropagation()}>
           {bundle.freeShipping && (
             <p className="bundle__ship">
-              <Icon name="check" size={16} strokeWidth={2.4} /> LIVRAISON OFFERTE
+              <Icon name="check" size={16} strokeWidth={2.4} />{' '}
+              {lang === 'fr' ? 'LIVRAISON OFFERTE' : 'FREE SHIPPING'}
             </p>
           )}
-          <VariantRows variants={variants} onChange={onVariantChange} productImage={productImage} />
+          <VariantRows
+            variants={variants}
+            onChange={onVariantChange}
+            productImage={productImage}
+            availableColors={availableColors}
+            lang={lang}
+          />
         </div>
       )}
 
@@ -99,14 +120,28 @@ function BundleCard({ bundle, selected, onSelect, variants, onVariantChange, pro
   );
 }
 
-export default function BundlePicker({ selectedId, onSelect, variants, onVariantChange, productImage }) {
+export default function BundlePicker({
+  selectedId,
+  onSelect,
+  variants,
+  onVariantChange,
+  productImage,
+  availableColors,
+  items,
+}) {
+  const { lang } = useLanguage();
+  const bundleList = items && items.length ? items : defaultBundles;
+
   return (
     <div className="bundles">
       <p className="bundles__heading">
-        <Icon name="shield" size={16} /> Essayez sans risque — Garantie Satisfait ou Remboursé de 30 jours
+        <Icon name="shield" size={16} />{' '}
+        {lang === 'fr'
+          ? 'Essayez sans risque — Garantie Satisfait ou Remboursé de 30 jours'
+          : 'Risk-free trial — 30-Day Money-Back Guarantee'}
       </p>
       <ul>
-        {bundles.map((b) => (
+        {bundleList.map((b) => (
           <BundleCard
             key={b.id}
             bundle={b}
@@ -115,6 +150,8 @@ export default function BundlePicker({ selectedId, onSelect, variants, onVariant
             variants={variants}
             onVariantChange={onVariantChange}
             productImage={productImage}
+            availableColors={availableColors}
+            lang={lang}
           />
         ))}
       </ul>

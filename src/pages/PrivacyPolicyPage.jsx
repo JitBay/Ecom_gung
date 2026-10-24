@@ -1,16 +1,22 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext.jsx';
 import './LegalPage.css';
 
 export default function PrivacyPolicyPage() {
+  const { lang, t } = useLanguage();
+
   useEffect(() => {
-    document.title = 'Politique de Confidentialité | Vella — Vela Labs';
-  }, []);
+    document.title =
+      lang === 'fr'
+        ? 'Politique de Confidentialité | Vella — Vela Labs'
+        : 'Privacy Policy | Vella — Vela Labs';
+  }, [lang]);
 
   return (
     <div className="legal-page container">
-      <nav className="pp__crumbs" aria-label="Fil d'Ariane">
-        <Link to="/">Accueil</Link> / <span>Politique de Confidentialité</span>
+      <nav className="pp__crumbs" aria-label={lang === 'fr' ? "Fil d'Ariane" : 'Breadcrumbs'}>
+        <Link to="/">{t('nav.home')}</Link> / <span>{t('footer.privacy_policy')}</span>
       </nav>
 
       <article className="legal-content">

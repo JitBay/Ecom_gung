@@ -1,49 +1,140 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 import Accordion from '../components/ui/Accordion.jsx';
 import Icon from '../components/ui/Icon.jsx';
 import Stars from '../components/ui/Stars.jsx';
 import Gallery from '../components/product/Gallery.jsx';
 import SizeFinder from '../components/product/SizeFinder.jsx';
+import Hero from '../components/sections/Hero.jsx';
+import CameraRolls from '../components/sections/CameraRolls.jsx';
+import ProductSection from '../components/product/ProductSection.jsx';
+import ProductVideoSection from '../components/product/ProductVideoSection.jsx';
 import RelatedProducts from '../components/sections/RelatedProducts.jsx';
+import VideoTestimonials from '../components/sections/VideoTestimonials.jsx';
+import QualitySection from '../components/sections/QualitySection.jsx';
+import Faq from '../components/sections/Faq.jsx';
+import CustomerReviews from '../components/sections/CustomerReviews.jsx';
 import NotFound from './NotFound.jsx';
-import { colorHex, collectionUrl, getProduct, getColorImages } from '../data/catalog.js';
+import { colorHex, collectionUrl, getProduct, getLocalizedProduct, getColorImages } from '../data/catalog.js';
 import { brand } from '../data/site.js';
-import { fabric, shipping, sizeChart } from '../data/product.js';
+import { fabric, shipping } from '../data/product.js';
 import { useCart } from '../context/CartContext.jsx';
 import { useLanguage } from '../context/LanguageContext.jsx';
 import { price } from '../lib/format.js';
 import './ProductPage.css';
 
-export default function ProductPage({ handle: fixedHandle }) {
-  const params = useParams();
-  const product = getProduct(fixedHandle ?? params.handle);
+/**
+ * Dedicated high-conversion sales landing for the Sleeveless cut (Vela Sculpt™ — Sans Manches)
+ */
+function SleevelessProductPage() {
+  const { t, dict } = useLanguage();
+  const trustItems = dict.home?.trust || [];
+
+  return (
+    <div className="product-page-wrap">
+      {/* 1. HERO BANNER FOCUSED ON SLEEVELESS */}
+      <Hero initialHandle="vela-sculpt-sans-manches" showModelSelector={false} />
+
+      {/* 2. CAMERA ROLLS / SOCIAL PROOF TICKER */}
+      <CameraRolls />
+
+      {/* 3. MAIN PRODUCT CONFIGURATOR & BUNDLE BUILDER */}
+      <ProductSection initialModelHandle="vela-sculpt-sans-manches" showModelSelector={false} />
+
+      {/* 4. REAL-WORLD PRODUCT VIDEO DEMO */}
+      <ProductVideoSection />
+
+      {/* 5. OTHER ERGONOMIC FITS */}
+      <RelatedProducts exclude="vela-sculpt-sans-manches" />
+
+      {/* 5. VIDEO TESTIMONIALS */}
+      <VideoTestimonials />
+
+      {/* 6. QUALITY & TECHNOLOGY BREAKDOWN */}
+      <QualitySection />
+
+      {/* 7. FAQ */}
+      <Faq />
+
+      {/* 8. VERIFIED CUSTOMER REVIEWS */}
+      <CustomerReviews />
+
+      {/* 9. TRUST BADGES STRIP */}
+      <section className="ionix-trust" aria-label={t('home.trust_title')}>
+        <div className="ionix-trust__inner">
+          <div className="ionix-trust__item">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2L3 7v5c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" />
+              <path d="M8.5 12.5l2.5 2.5 5-5" />
+            </svg>
+            <div className="ionix-trust__t">{trustItems[0]?.title}</div>
+            <p className="ionix-trust__d">{trustItems[0]?.desc}</p>
+          </div>
+
+          <div className="ionix-trust__item">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M3 12a9 9 0 1 0 2.6-6.4" />
+              <path d="M3 4v5h5" />
+            </svg>
+            <div className="ionix-trust__t">{trustItems[1]?.title}</div>
+            <p className="ionix-trust__d">{trustItems[1]?.desc}</p>
+          </div>
+
+          <div className="ionix-trust__item">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+            </svg>
+            <div className="ionix-trust__t">{trustItems[2]?.title}</div>
+            <p className="ionix-trust__d">{trustItems[2]?.desc}</p>
+          </div>
+
+          <div className="ionix-trust__item">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="1" y="3" width="15" height="13" />
+              <polygon points="16 8 20 8 23 11 23 16 16 16 8" />
+              <circle cx="5.5" cy="18.5" r="2.5" />
+              <circle cx="18.5" cy="18.5" r="2.5" />
+            </svg>
+            <div className="ionix-trust__t">{trustItems[3]?.title}</div>
+            <p className="ionix-trust__d">{trustItems[3]?.desc}</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+/**
+ * Standard product page layout for other cuts (Demi-Manches, Manches Longues, etc.)
+ */
+function ClassicProductPage({ product }) {
+  const { lang, t } = useLanguage();
+  const [searchParams] = useSearchParams();
+  const paramColor = searchParams.get('color');
+  const localized = getLocalizedProduct(product, lang);
   const [color, setColor] = useState(product?.colors?.[0] || 'Noir');
   const [size, setSize] = useState('L');
   const [qty, setQty] = useState(1);
   const [sizeOpen, setSizeOpen] = useState(false);
   const { add } = useCart();
-  const { lang, t } = useLanguage();
 
   useEffect(() => {
     if (!product) return;
-    setColor(product.colors?.[0] || 'Noir');
+    const validColor = paramColor && product.colors?.find((c) => c.toLowerCase() === paramColor.toLowerCase());
+    setColor(validColor || product.colors?.[0] || 'Noir');
     setSize('L');
     setQty(1);
-    document.title = `${product.title} | ${brand.name} Labs`;
-  }, [product?.handle]);
-
-  if (!product) return <NotFound />;
+  }, [product?.handle, paramColor]);
 
   const currentImages = product ? getColorImages(product, color) : [];
   const save = product.compareAt ? Math.round((1 - product.price / product.compareAt) * 100) : 0;
 
   const addToCart = () => {
-    const detail = `${color} / ${size}`;
+    const detail = `${t('color_names.' + color, color)} / ${size}`;
     for (let i = 0; i < qty; i++) {
       add({
         id: `${product.handle}-${color}-${size}`,
-        title: product.title,
+        title: localized.title,
         detail,
         image: currentImages[0] || product.images[0],
         color: colorHex[color] || '#1a1a1a',
@@ -56,13 +147,13 @@ export default function ProductPage({ handle: fixedHandle }) {
 
   const details = [
     {
-      title: 'Caractéristiques Techniques & Matière',
+      title: lang === 'fr' ? 'Caractéristiques Techniques & Matière' : 'Technical Specifications & Fabric',
       content: (
         <div className="details">
           <ul className="details__tech-list" style={{ paddingLeft: 18, lineHeight: 1.6, marginBottom: 16 }}>
-            {product.technicalDetails?.map((t) => (
-              <li key={t.label} style={{ marginBottom: 6 }}>
-                <strong>{t.label} :</strong> {t.desc}
+            {product.technicalDetails?.map((tItem) => (
+              <li key={tItem.label} style={{ marginBottom: 6 }}>
+                <strong>{tItem.label} :</strong> {tItem.desc}
               </li>
             ))}
           </ul>
@@ -78,16 +169,20 @@ export default function ProductPage({ handle: fixedHandle }) {
       ),
     },
     {
-      title: 'Usage & Profil Morphologique Recommandé',
+      title: lang === 'fr' ? 'Usage & Profil Morphologique Recommandé' : 'Usage & Target Profile',
       content: (
         <div className="details">
-          <p><strong>Usage optimal :</strong> {product.usage}</p>
-          <p style={{ marginTop: 8 }}><strong>Profil cible :</strong> {product.targetAvatar}</p>
+          <p>
+            <strong>{lang === 'fr' ? 'Usage optimal :' : 'Optimal usage:'}</strong> {product.usage}
+          </p>
+          <p style={{ marginTop: 8 }}>
+            <strong>{lang === 'fr' ? 'Profil cible :' : 'Target profile:'}</strong> {product.targetAvatar}
+          </p>
         </div>
       ),
     },
     {
-      title: 'Expédition & Garantie Satisfait ou Remboursé de 30 Jours',
+      title: lang === 'fr' ? 'Expédition & Garantie Satisfait ou Remboursé de 30 Jours' : 'Shipping & 30-Day Money-Back Guarantee',
       content: (
         <div className="details">
           <ul className="details__list">
@@ -104,23 +199,27 @@ export default function ProductPage({ handle: fixedHandle }) {
   return (
     <>
       <section className="pp container">
-        <nav className="pp__crumbs" aria-label="Fil d'Ariane">
-          <Link to="/">{t('product_page.crumbs_home')}</Link> / <Link to={collectionUrl('all')}>{t('product_page.crumbs_all')}</Link> / <span>{product.title}</span>
+        <nav className="pp__crumbs" aria-label={lang === 'fr' ? "Fil d'Ariane" : 'Breadcrumb'}>
+          <Link to="/">{t('product_page.crumbs_home')}</Link> / <Link to={collectionUrl('all')}>{t('product_page.crumbs_all')}</Link> / <span>{localized.title}</span>
         </nav>
 
         <div className="pp__gallery-col">
-          <Gallery images={currentImages} title={product.title} activeColor={color} />
+          <Gallery images={currentImages} title={localized.title} activeColor={color} />
         </div>
 
         <div className="pp__info">
-          {product.badge && <span className="card__badge" style={{ position: 'static', display: 'inline-block', marginBottom: 8 }}>{product.badge}</span>}
-          <h1 className="pp__title">{product.title}</h1>
+          {localized.badge && (
+            <span className="card__badge" style={{ position: 'static', display: 'inline-block', marginBottom: 8 }}>
+              {localized.badge}
+            </span>
+          )}
+          <h1 className="pp__title">{localized.title}</h1>
           <p className="pp__rating">
-            <Stars value={product.rating || 4.9} size={15} /> <strong>{product.rating || 4.9}</strong> / 5 ({product.reviewCount || 1400}+ {t('product_page.reviews_count')})
+            <Stars value={product.rating || 4.9} size={15} /> <strong>{product.rating || 4.9}</strong> / 5 ({product.reviewCount || 1420}+ {t('product_page.reviews_count')})
           </p>
 
           <p className="pp__tagline" style={{ color: 'var(--muted)', fontSize: 15, marginBottom: 14 }}>
-            {product.tagline}
+            {localized.tagline}
           </p>
 
           <p className="pp__price">
@@ -166,7 +265,15 @@ export default function ProductPage({ handle: fixedHandle }) {
                 <button
                   type="button"
                   onClick={() => setSizeOpen(true)}
-                  style={{ background: 'none', border: 'none', color: 'var(--gold-dark)', fontSize: 13, fontWeight: 600, textDecoration: 'underline', cursor: 'pointer' }}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: 'var(--gold-dark)',
+                    fontSize: 13,
+                    fontWeight: 600,
+                    textDecoration: 'underline',
+                    cursor: 'pointer',
+                  }}
                 >
                   {t('product_page.size_guide')}
                 </button>
@@ -223,4 +330,27 @@ export default function ProductPage({ handle: fixedHandle }) {
       <RelatedProducts exclude={product.handle} />
     </>
   );
+}
+
+export default function ProductPage({ handle: fixedHandle }) {
+  const params = useParams();
+  const { lang } = useLanguage();
+  const handle = fixedHandle ?? params.handle ?? 'vela-sculpt-sans-manches';
+  const rawProduct = getProduct(handle);
+  const product = getLocalizedProduct(rawProduct, lang);
+
+  useEffect(() => {
+    if (!product) return;
+    document.title = `${product.title} | ${brand.fullName}`;
+  }, [product?.handle, product?.title]);
+
+  if (!rawProduct) return <NotFound />;
+
+  // Only the Sleeveless cut uses the rich landing product page
+  if (rawProduct.handle === 'vela-sculpt-sans-manches') {
+    return <SleevelessProductPage />;
+  }
+
+  // All other cuts use the classic product page
+  return <ClassicProductPage product={rawProduct} />;
 }

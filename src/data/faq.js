@@ -36,3 +36,41 @@ export const faq = [
     a: 'Toutes les commandes sont préparées sous 24 à 48 heures ouvrées. La livraison en France et en Europe prend généralement 3 à 5 jours ouvrés. Vous recevez un numéro de suivi dès que le colis quitte nos entrepôts. La livraison est offerte dès 55 € ou avec les packs 2 et 3 t-shirts.',
   },
 ];
+
+export const faqEn = [
+  {
+    tag: 'Invisibility',
+    q: 'Is the Vela Sculpt™ shirt genuinely invisible under clothes?',
+    a: 'Yes, that is the cornerstone of our ergonomic design. Thanks to a low-cut neckline and ultra-flat thermo-bonded micro-seams, the shirt creates no visible lines or bulges—even under a fitted white dress shirt or lightweight tee.',
+  },
+  {
+    tag: 'Size & Fit',
+    q: 'What size should I order?',
+    a: 'Refer to our Size Guide based on your height and weight. In 95% of cases, your regular shirt size fits perfectly. If you are between sizes and prefer firm compression, size down; for relaxed all-day comfort, size up.',
+  },
+  {
+    tag: 'All-Day Comfort',
+    q: 'Can I comfortably wear it all day long?',
+    a: 'Yes. The fabric blends 88% micro-breathable polyamide with 12% memory-shape elastane. It effectively smooths the midsection without squeezing your ribs or restricting your breathing, while active wicking keeps you fresh.',
+  },
+  {
+    tag: 'Posture Support',
+    q: 'How does it support posture and back alignment?',
+    a: 'The upper back features crossed ergonomic compression bands that stimulate proprioceptive receptors. This naturally prompts your shoulders to roll back and your chest to open, relieving muscle tension during long hours seated or standing.',
+  },
+  {
+    tag: '30-Day Guarantee',
+    q: 'How does the 30-Day Money-Back Guarantee work?',
+    a: 'You have 30 days from delivery to test your Vela Sculpt™ shirt in your everyday life. If the comfort, fit, or look does not give you 100% satisfaction, simply email customer support for a hassle-free return and full refund.',
+  },
+  {
+    tag: 'Care',
+    q: 'How should I wash and care for my Vela Sculpt™ shirt?',
+    a: 'Machine wash at 30°C on a delicate cycle with like colors. Air dry (it dries very quickly). Avoid tumble drying or ironing to preserve the elasticity of the technical knit.',
+  },
+  {
+    tag: 'Shipping & Tracking',
+    q: 'What are the delivery times and shipping terms?',
+    a: 'All orders are packed and dispatched within 24 to 48 business hours. Delivery across Europe typically takes 3 to 5 business days. You receive live tracking upon dispatch. Free shipping applies over €55 or with 2+ shirt packs.',
+  },
+];

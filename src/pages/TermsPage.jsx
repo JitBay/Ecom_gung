@@ -1,16 +1,22 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext.jsx';
 import './LegalPage.css';
 
 export default function TermsPage() {
+  const { lang, t } = useLanguage();
+
   useEffect(() => {
-    document.title = 'Conditions Générales de Vente | Vella — Vela Labs';
-  }, []);
+    document.title =
+      lang === 'fr'
+        ? 'Conditions Générales de Vente | Vella — Vela Labs'
+        : 'Terms of Service | Vella — Vela Labs';
+  }, [lang]);
 
   return (
     <div className="legal-page container">
-      <nav className="pp__crumbs" aria-label="Fil d'Ariane">
-        <Link to="/">Accueil</Link> / <span>Conditions Générales de Vente</span>
+      <nav className="pp__crumbs" aria-label={lang === 'fr' ? "Fil d'Ariane" : 'Breadcrumbs'}>
+        <Link to="/">{t('nav.home')}</Link> / <span>{t('footer.terms')}</span>
       </nav>
 
       <article className="legal-content">

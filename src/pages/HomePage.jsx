@@ -1,102 +1,272 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import CustomerReviews from '../components/sections/CustomerReviews.jsx';
+import Stars from '../components/ui/Stars.jsx';
 import { brand } from '../data/site.js';
 import { price } from '../lib/format.js';
 import { useLanguage } from '../context/LanguageContext.jsx';
 import './HomePage.css';
 
-// Category circle strip images
-const categoryImages = [
-  '/images/home/cat-0.jpg',
-  '/images/home/cat-1.jpg',
-  '/images/home/cat-2.jpg',
-  '/images/home/cat-3.jpg',
-  '/images/home/cat-4.jpg',
-  '/images/home/cat-5.jpg',
-];
-
-// Best sellers cards base config
+// Best sellers cards: curated selection of 4 core model & colorway editions
 const bestSellersBase = [
   {
-    handle: 'vela-sculpt-demi-manches',
-    titleFr: 'Vela Sculpt™ — Demi-Manches',
-    titleEn: 'Vela Sculpt™ — Short Sleeves',
-    badgeFr: '#1 Best seller',
-    badgeEn: '#1 Best Seller',
-    price: 39.95,
-    compareAt: 59.95,
-    image: '/images/products/demi-manches/1.jpg',
-    colors: ['#000000', '#ffffff', '#808080'],
-    moreCount: 3,
-    url: '/products/vela-sculpt-demi-manches',
-  },
-  {
+    id: 'sans-manches-noir',
     handle: 'vela-sculpt-sans-manches',
-    titleFr: 'Vela Sculpt™ — Sans Manches',
-    titleEn: 'Vela Sculpt™ — Sleeveless',
-    badgeFr: 'Ultra Discret',
-    badgeEn: 'Ultra Discreet',
+    defaultColor: 'Noir',
+    titleFr: 'Vela Sculpt™ Sans Manches — Noir',
+    titleEn: 'Vela Sculpt™ Sleeveless — Black',
+    taglineFr: 'Invisibilité absolue sous chemises et t-shirts légers',
+    taglineEn: 'Discreet and breathable core support under shirts & tees',
+    badgeFr: '#1 Meilleure Vente',
+    badgeEn: '#1 Best Seller',
+    rating: 4.9,
+    reviewsCount: '1 420',
     price: 34.95,
     compareAt: 49.95,
-    image: '/images/products/sans-manches/1.jpeg',
-    colors: ['#000000', '#ffffff', '#808080', '#1f2e4d'],
-    moreCount: 4,
-    url: '/products/vela-sculpt-sans-manches',
+    urlBase: '/products/vela-sculpt-sans-manches',
+    colorData: {
+      Noir: {
+        hex: '#1a1a1a',
+        img: '/images/products/sans-manches/1.jpeg',
+        hoverImg: '/images/products/sans-manches/2.jpeg',
+      },
+      Blanc: {
+        hex: '#f4f4f6',
+        img: '/images/products/sans-manches/4.jpeg',
+        hoverImg: '/images/products/sans-manches/5.jpeg',
+      },
+      'Bleu Nuit': {
+        hex: '#232c3a',
+        img: '/images/products/sans-manches/7.jpeg',
+        hoverImg: '/images/products/sans-manches/8.jpeg',
+      },
+      Gris: {
+        hex: '#72757d',
+        img: '/images/products/sans-manches/10.jpeg',
+        hoverImg: '/images/products/sans-manches/11.jpeg',
+      },
+    },
   },
   {
+    id: 'demi-manches-blanc',
+    handle: 'vela-sculpt-demi-manches',
+    defaultColor: 'Blanc',
+    titleFr: 'Vela Sculpt™ Demi-Manches — Blanc',
+    titleEn: 'Vela Sculpt™ Short Sleeves — White',
+    taglineFr: '100% invisible sous chemises blanches habillées',
+    taglineEn: '100% invisible under crisp white dress shirts & polos',
+    badgeFr: 'Spécial Chemise Blanche',
+    badgeEn: 'White Shirt Essential',
+    rating: 4.9,
+    reviewsCount: '1 280',
+    price: 39.95,
+    compareAt: 59.95,
+    urlBase: '/products/vela-sculpt-demi-manches',
+    colorData: {
+      Blanc: {
+        hex: '#f4f4f6',
+        img: '/images/products/demi-manches/1.jpg',
+        hoverImg: '/images/products/demi-manches/2.jpg',
+      },
+      Noir: {
+        hex: '#1a1a1a',
+        img: '/images/products/demi-manches/4.jpg',
+        hoverImg: '/images/products/demi-manches/5.jpg',
+      },
+      Gris: {
+        hex: '#72757d',
+        img: '/images/products/demi-manches/7.jpg',
+        hoverImg: '/images/products/demi-manches/8.jpg',
+      },
+    },
+  },
+  {
+    id: 'sans-manches-bleu-nuit',
+    handle: 'vela-sculpt-sans-manches',
+    defaultColor: 'Bleu Nuit',
+    titleFr: 'Vela Sculpt™ Sans Manches — Bleu Nuit',
+    titleEn: 'Vela Sculpt™ Sleeveless — Midnight Blue',
+    taglineFr: 'Teinte élégante & liberté totale de mouvement des bras',
+    taglineEn: 'Refined hue with targeted core shaping & full arm freedom',
+    badgeFr: 'Édition Élégance',
+    badgeEn: 'Elegance Edition',
+    rating: 4.8,
+    reviewsCount: '890',
+    price: 34.95,
+    compareAt: 49.95,
+    urlBase: '/products/vela-sculpt-sans-manches',
+    colorData: {
+      'Bleu Nuit': {
+        hex: '#232c3a',
+        img: '/images/products/sans-manches/7.jpeg',
+        hoverImg: '/images/products/sans-manches/8.jpeg',
+      },
+      Noir: {
+        hex: '#1a1a1a',
+        img: '/images/products/sans-manches/1.jpeg',
+        hoverImg: '/images/products/sans-manches/2.jpeg',
+      },
+      Blanc: {
+        hex: '#f4f4f6',
+        img: '/images/products/sans-manches/4.jpeg',
+        hoverImg: '/images/products/sans-manches/5.jpeg',
+      },
+      Gris: {
+        hex: '#72757d',
+        img: '/images/products/sans-manches/10.jpeg',
+        hoverImg: '/images/products/sans-manches/11.jpeg',
+      },
+    },
+  },
+  {
+    id: 'manches-longues-gris-chine',
     handle: 'vela-sculpt-manches-longues',
-    titleFr: 'Vela Sculpt™ — Manches Longues',
-    titleEn: 'Vela Sculpt™ — Long Sleeves',
+    defaultColor: 'Gris chiné',
+    titleFr: 'Vela Sculpt™ Manches Longues — Gris Chiné',
+    titleEn: 'Vela Sculpt™ Long Sleeves — Heather Grey',
+    taglineFr: 'Gainage complet torse, dos et bras sous vestes et pulls',
+    taglineEn: 'Full upper-body sculpting & reinforced back support',
     badgeFr: 'Maintien Intégral',
-    badgeEn: 'Full Support',
+    badgeEn: 'Full Body Support',
+    rating: 4.9,
+    reviewsCount: '750',
     price: 44.95,
     compareAt: 64.95,
-    image: '/images/products/manches-longues/1.jpg',
-    colors: ['#000000', '#ffffff'],
-    moreCount: 2,
-    url: '/products/vela-sculpt-manches-longues',
-  },
-  {
-    handle: 'pack-duo-confort',
-    titleFr: 'Pack Duo Vela Sculpt™ (2 T-shirts)',
-    titleEn: 'Vela Sculpt™ Duo Pack (2 Shirts)',
-    badgeFr: 'Pack Découverte',
-    badgeEn: 'Duo Bundle',
-    price: 69.90,
-    compareAt: 89.90,
-    image: '/images/home/cat-bestsellers.jpg',
-    colors: ['#000000', '#ffffff'],
-    moreCount: 2,
-    url: '/pages/offres',
-  },
-  {
-    handle: 'pack-trio-serenite',
-    titleFr: 'Pack Trio Vela Sculpt™ (3 Couleurs)',
-    titleEn: 'Vela Sculpt™ Trio Pack (3 Colors)',
-    badgeFr: 'Meilleure Offre',
-    badgeEn: 'Best Value',
-    price: 99.90,
-    compareAt: 139.90,
-    image: '/images/home/cat-0.jpg',
-    colors: ['#000000', '#ffffff', '#808080'],
-    moreCount: 3,
-    url: '/pages/offres',
+    urlBase: '/products/vela-sculpt-manches-longues',
+    colorData: {
+      'Gris chiné': {
+        hex: '#5a5d66',
+        img: '/images/products/manches-longues/4.jpg',
+        hoverImg: '/images/products/manches-longues/5.jpg',
+      },
+      Noir: {
+        hex: '#1a1a1a',
+        img: '/images/products/manches-longues/1.jpg',
+        hoverImg: '/images/products/manches-longues/2.jpg',
+      },
+      Blanc: {
+        hex: '#f4f4f6',
+        img: '/images/products/manches-longues/7.jpg',
+        hoverImg: '/images/products/manches-longues/8.jpg',
+      },
+    },
   },
 ];
 
-const iconImages = [
-  '/images/home/icon-leggings.jpg',
-  '/images/home/icon-bra.jpg',
-  '/images/home/icon-sleeves.jpg',
-  '/images/home/icon-swim.jpg',
-];
+function BestSellerCard({ p, lang, t }) {
+  const [selectedColor, setSelectedColor] = useState(p.defaultColor);
+  const [hoverColor, setHoverColor] = useState(null);
 
-const iconUrls = [
-  '/products/vela-sculpt-sans-manches',
-  '/products/vela-sculpt-demi-manches',
-  '/products/vela-sculpt-manches-longues',
-  '/pages/offres',
+  const activeColorKey = hoverColor || selectedColor;
+  const colorInfo = p.colorData[activeColorKey] || p.colorData[p.defaultColor] || Object.values(p.colorData)[0];
+
+  const title = lang === 'fr' ? p.titleFr : p.titleEn;
+  const badge = lang === 'fr' ? p.badgeFr : p.badgeEn;
+  const tagline = lang === 'fr' ? p.taglineFr : p.taglineEn;
+  const activeColorName = t('color_names.' + activeColorKey, activeColorKey);
+
+  const discount = p.compareAt ? Math.round((1 - p.price / p.compareAt) * 100) : 0;
+  const targetUrl = `${p.urlBase}?color=${encodeURIComponent(activeColorKey)}`;
+
+  return (
+    <article className="ixh-card">
+      <Link to={targetUrl} className="ixh-card__media" aria-label={title}>
+        <img
+          src={colorInfo.img}
+          alt={title}
+          className="ixh-card__img ixh-card__img--main"
+          loading="lazy"
+        />
+        {colorInfo.hoverImg && (
+          <img
+            src={colorInfo.hoverImg}
+            alt={`${title} - alternative`}
+            className="ixh-card__img ixh-card__img--alt"
+            loading="lazy"
+            aria-hidden="true"
+          />
+        )}
+        {badge && <span className="ixh-card__badge">{badge}</span>}
+        {discount > 0 && <span className="ixh-card__save-badge">-{discount}%</span>}
+      </Link>
+
+      <div className="ixh-card__info">
+        <div className="ixh-card__rating">
+          <Stars value={p.rating} size={12} />
+          <strong>{p.rating}</strong>
+          <span className="ixh-card__reviews">({p.reviewsCount})</span>
+        </div>
+
+        <Link to={targetUrl} className="ixh-card__name">
+          {title}
+        </Link>
+
+        {tagline && <p className="ixh-card__tagline">{tagline}</p>}
+
+        <div className="ixh-card__price-row">
+          <span className="ixh-card__price">{price(p.price)}</span>
+          {p.compareAt && <span className="ixh-card__compare">{price(p.compareAt)}</span>}
+        </div>
+
+        <div className="ixh-card__sw-wrap">
+          <div className="ixh-card__sw" role="radiogroup" aria-label="Couleurs">
+            {Object.entries(p.colorData).map(([cName, cData]) => {
+              const isSelected = cName === activeColorKey;
+              const translatedName = t('color_names.' + cName, cName);
+              return (
+                <button
+                  type="button"
+                  key={cName}
+                  className={`ixh-card__dot ${isSelected ? 'is-active' : ''}`}
+                  style={{ background: cData.hex }}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setSelectedColor(cName);
+                  }}
+                  onMouseEnter={() => setHoverColor(cName)}
+                  onMouseLeave={() => setHoverColor(null)}
+                  title={translatedName}
+                  aria-label={translatedName}
+                />
+              );
+            })}
+          </div>
+          <span className="ixh-card__color-name">{activeColorName}</span>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+// Lifestyle real-world essentials
+const lifestyleItems = [
+  {
+    id: 'travail',
+    titleFr: 'Au Bureau & Sous Chemise',
+    titleEn: 'Office & Under Dress Shirts',
+    taglineFr: 'Discrétion 100% invisible sous vos vêtements de travail & maintien assis',
+    taglineEn: '100% invisible under office shirts with ergonomic seated posture',
+    img: '/images/home/lifestyle-travail.png',
+    to: '/products/vela-sculpt-sans-manches?color=Blanc',
+  },
+  {
+    id: 'sport',
+    titleFr: 'À la Salle de Sport',
+    titleEn: 'At the Gym & Training',
+    taglineFr: 'Gainage abdominal dynamique, liberté de mouvement & maintien musculaire',
+    taglineEn: 'Dynamic core support, unrestricted arm freedom & muscle alignment',
+    img: '/images/home/lifestyle-sport.png',
+    to: '/products/vela-sculpt-sans-manches?color=Noir',
+  },
+  {
+    id: 'piscine',
+    titleFr: 'Détente & Loisirs',
+    titleEn: 'Casual & Everyday Leisure',
+    taglineFr: 'Silhouette athlétique lissée & confiance en soi en toute circonstance',
+    taglineEn: 'Streamlined athletic silhouette & renewed daily self-confidence',
+    img: '/images/home/lifestyle-piscine.png',
+    to: '/products/vela-sculpt-sans-manches?color=Bleu+Nuit',
+  },
 ];
 
 export default function HomePage() {
@@ -104,6 +274,8 @@ export default function HomePage() {
   const railRef = useRef(null);
   const thumbRef = useRef(null);
   const [thumbStyle, setThumbStyle] = useState({ width: '30%', transform: 'translateX(0%)' });
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(true);
 
   useEffect(() => {
     document.title =
@@ -124,6 +296,8 @@ export default function HomePage() {
       width: `${w * 100}%`,
       transform: `translateX(${scrollRatio}%)`,
     });
+    setCanScrollPrev(rail.scrollLeft > 8);
+    setCanScrollNext(max > 0 && rail.scrollLeft < max - 8);
   };
 
   useEffect(() => {
@@ -135,13 +309,11 @@ export default function HomePage() {
   const handleScrollStep = (direction) => {
     if (!railRef.current) return;
     const card = railRef.current.querySelector('.ixh-card');
-    const step = card ? card.getBoundingClientRect().width + 14 : 260;
+    const step = card ? card.getBoundingClientRect().width + 16 : 280;
     railRef.current.scrollBy({ left: direction * step, behavior: 'smooth' });
   };
 
-  const categories = dict.home.categories || [];
   const stats = dict.home.stats || [];
-  const icons = dict.home.icons || [];
   const trustItems = dict.home.trust || [];
 
   return (
@@ -149,9 +321,9 @@ export default function HomePage() {
       {/* 1. HERO SECTION */}
       <section className="ixh-hero">
         <picture className="ixh-hero__media">
-          <source media="(max-width: 699px)" srcSet="/images/home/hero-mobile.jpg" />
+          <source media="(max-width: 699px)" srcSet="/images/home/banner-2.png" />
           <img
-            src="/images/home/hero-desktop.jpg"
+            src="/images/home/banner-2.png"
             alt="Vela Labs - Compression Wear"
             className="ixh-hero__img"
             loading="eager"
@@ -192,20 +364,6 @@ export default function HomePage() {
         </ul>
       </section>
 
-      {/* 3. CATEGORIES ROW */}
-      <section className="ixh-cats" aria-label={t('home.cats_aria')}>
-        <div className="ixh-cats__row">
-          {categories.map((c, i) => (
-            <Link key={c.label} className="ixh-cats__item" to={c.to}>
-              <span className="ixh-cats__media">
-                <img src={categoryImages[i] || categoryImages[0]} alt={c.label} className="ixh-cats__img" loading="lazy" />
-              </span>
-              <span className="ixh-cats__label">{c.label}</span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
       {/* 4. BEST SELLERS SHELF */}
       <section className="ixh-bs" id="bestsellers">
         <div className="ixh-bs__head">
@@ -216,29 +374,9 @@ export default function HomePage() {
         </div>
 
         <div className="ixh-bs__rail" ref={railRef} onScroll={updateScroll}>
-          {bestSellersBase.map((p) => {
-            const title = lang === 'fr' ? p.titleFr : p.titleEn;
-            const badge = lang === 'fr' ? p.badgeFr : p.badgeEn;
-            return (
-              <Link key={p.handle} className="ixh-card" to={p.url}>
-                <span className="ixh-card__media">
-                  <img src={p.image} alt={title} className="ixh-card__img" loading="lazy" />
-                  {badge && <span className="ixh-card__badge">{badge}</span>}
-                </span>
-                <span className="ixh-card__name">{title}</span>
-                <div className="ixh-card__price-row">
-                  <span className="ixh-card__price">{price(p.price)}</span>
-                  {p.compareAt && <span className="ixh-card__compare">{price(p.compareAt)}</span>}
-                </div>
-                <span className="ixh-card__sw" aria-hidden="true">
-                  {p.colors.map((hex, i) => (
-                    <span key={i} className="ixh-card__dot" style={{ background: hex }} />
-                  ))}
-                  {p.moreCount && <span className="ixh-card__more">+{p.moreCount}</span>}
-                </span>
-              </Link>
-            );
-          })}
+          {bestSellersBase.map((p) => (
+            <BestSellerCard key={p.id} p={p} lang={lang} t={t} />
+          ))}
         </div>
 
         <div className="ixh-bs__ctrl">
@@ -249,6 +387,7 @@ export default function HomePage() {
             type="button"
             className="ixh-bs__arrow"
             onClick={() => handleScrollStep(-1)}
+            disabled={!canScrollPrev}
             aria-label={lang === 'fr' ? 'Précédent' : 'Previous'}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
@@ -259,6 +398,7 @@ export default function HomePage() {
             type="button"
             className="ixh-bs__arrow"
             onClick={() => handleScrollStep(1)}
+            disabled={!canScrollNext}
             aria-label={lang === 'fr' ? 'Suivant' : 'Next'}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
@@ -297,23 +437,33 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 6. SHOP THE ICONS */}
+      {/* 6. LIFESTYLE ESSENTIALS / AU QUOTIDIEN */}
       <section className="ixh-icons">
         <div className="ixh-icons__wrap">
-          <h2 className="ixh-icons__title">
-            {t('home.icons_title_prefix')}
-            <span className="ixh-icons__accent">{t('home.icons_title_accent')}</span>
-          </h2>
+          <div className="ixh-icons__head" style={{ marginBottom: 20 }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#8c7d5e' }}>
+              ★ {lang === 'fr' ? 'Conçu pour votre quotidien' : 'Designed for your lifestyle'}
+            </span>
+            <h2 className="ixh-icons__title" style={{ marginTop: 6 }}>
+              {lang === 'fr' ? 'Vela Sculpt™ en action : ' : 'Vela Sculpt™ in real life: '}
+              <span className="ixh-icons__accent">{lang === 'fr' ? 'À chaque instant' : 'Every moment'}</span>
+            </h2>
+          </div>
           <div className="ixh-icons__grid">
-            {icons.map((tIcon, idx) => (
-              <Link key={tIcon.title} className="ixh-tile" to={iconUrls[idx] || '/collections/all'}>
-                <img src={iconImages[idx] || iconImages[0]} alt={tIcon.title} className="ixh-tile__img" loading="lazy" />
+            {lifestyleItems.map((item) => (
+              <Link key={item.id} className="ixh-tile" to={item.to}>
+                <img
+                  src={item.img}
+                  alt={lang === 'fr' ? item.titleFr : item.titleEn}
+                  className="ixh-tile__img"
+                  loading="lazy"
+                />
                 <span className="ixh-tile__shade" aria-hidden="true" />
                 <span className="ixh-tile__text">
-                  <span className="ixh-tile__line">{tIcon.tagline}</span>
-                  <span className="ixh-tile__name">{tIcon.title}</span>
+                  <span className="ixh-tile__line">{lang === 'fr' ? item.taglineFr : item.taglineEn}</span>
+                  <span className="ixh-tile__name">{lang === 'fr' ? item.titleFr : item.titleEn}</span>
                   <span className="ixh-tile__btn">
-                    {t('home.icons_cta')}{' '}
+                    {lang === 'fr' ? 'Découvrir' : 'Discover'}{' '}
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
                       <path d="M5 12h14M12 5l7 7-7 7" />
                     </svg>

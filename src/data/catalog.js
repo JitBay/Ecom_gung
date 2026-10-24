@@ -9,7 +9,7 @@ export const colorHex = {
   'Bleu Nuit': '#232c3a',
 };
 
-export const HERO_PRODUCT = 'vela-sculpt-demi-manches';
+export const HERO_PRODUCT = 'vela-sculpt-sans-manches';
 export const LEGGINGS = HERO_PRODUCT; // Backwards compatibility alias
 
 export const products = [
@@ -54,7 +54,7 @@ export const products = [
       '/images/products/demi-manches/8.jpg',
       '/images/products/demi-manches/9.jpg',
     ],
-    sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
+    sizes: ['S', 'M', 'L', 'XL', '2XL'],
     usage: 'Le basique indispensable sous les tenues de bureau, polos et chemises de tous les jours. Maintien pectoral et abdominal équilibré.',
     targetAvatar: 'Hommes de 40 à 60 ans privilégiant le soutien postural et le confort abdominal au quotidien, ainsi que les hommes souhaitant une silhouette lisse et structurée sous leurs vêtements.',
     technicalDetails: [
@@ -114,7 +114,7 @@ export const products = [
       '/images/products/sans-manches/8.jpeg',
       '/images/products/sans-manches/9.jpeg',
     ],
-    sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
+    sizes: ['S', 'M', 'L', 'XL', '2XL'],
     usage: 'Discrétion absolue sous les chemises légères, t-shirts d’été et séances de sport.',
     targetAvatar: 'Hommes de 25 à 40 ans cherchant à affiner et structurer leur silhouette en toute liberté de mouvement.',
     technicalDetails: [
@@ -166,7 +166,7 @@ export const products = [
       '/images/products/manches-longues/8.jpg',
       '/images/products/manches-longues/9.jpg',
     ],
-    sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
+    sizes: ['S', 'M', 'L', 'XL', '2XL'],
     usage: 'Soutien complet du haut du corps, maintien thermique sous les pulls ou vestes et maintien postural renforcé des bras et du dos.',
     targetAvatar: 'Hommes recherchant un soutien postural complet et une silhouette harmonieuse sous pulls, vestes ou tenues formelles.',
     technicalDetails: [
@@ -242,6 +242,71 @@ export const collections = [
 ];
 
 export const getCollection = (handle) => collections.find((c) => c.handle === handle) || collections[0];
+
+export const getLocalizedProduct = (product, lang = 'fr') => {
+  if (!product) return product;
+  if (lang === 'fr') return product;
+  const enOverrides = {
+    'vela-sculpt-sans-manches': {
+      title: 'Vela Sculpt™ — Sleeveless',
+      shortTitle: 'Sleeveless (Tank Top)',
+      subtitle: 'Discreet ergonomic compression & posture wear for men',
+      tagline: 'Total invisibility under lightweight shirts and tees, complete freedom of movement.',
+      badge: 'Ultra Discreet',
+      usage: 'Under fitted dress shirts, summer polos, and lightweight tees without visible lines.',
+      targetAvatar: 'Men looking for total torso smoothing with complete arm freedom.',
+    },
+    'vela-sculpt-demi-manches': {
+      title: 'Vela Sculpt™ — Short Sleeves',
+      shortTitle: 'Short Sleeves (Crew Neck)',
+      subtitle: 'Ergonomic shapewear compression t-shirt for men',
+      tagline: 'The essential base layer under office wear, polos, and everyday shirts.',
+      badge: 'Most Popular',
+      usage: 'Daily rotation under office shirts, casual tees, and suits.',
+      targetAvatar: 'Men wanting active shoulder posture support and abdominal slimming.',
+    },
+    'vela-sculpt-manches-longues': {
+      title: 'Vela Sculpt™ — Long Sleeves',
+      shortTitle: 'Long Sleeves',
+      subtitle: 'Full upper-body compression & ergonomic posture support',
+      tagline: 'Continuous compression from wrists to shoulders, reinforced posture support.',
+      badge: 'Full Support',
+      usage: 'Under sweaters, business shirts in cooler weather, or long sedentary work days.',
+      targetAvatar: 'Men seeking maximum lumbar alignment and full upper-body coverage.',
+    },
+  };
+  const override = enOverrides[product.handle];
+  return override ? { ...product, ...override } : product;
+};
+
+export const getLocalizedCollection = (collection, lang = 'fr') => {
+  if (!collection) return collection;
+  if (lang === 'fr') return collection;
+  const enOverrides = {
+    all: {
+      label: 'All Styles',
+      title: 'The Vela Sculpt™ Collection',
+      description: 'Discover our 3 ergonomic fits designed to streamline your physique and support posture every day.',
+    },
+    'sans-manches': {
+      label: 'Sleeveless (Tank Top)',
+      title: 'Vela Sculpt™ Sleeveless',
+      description: 'Total invisibility under lightweight shirts, polos, and tees.',
+    },
+    'demi-manches': {
+      label: 'Short Sleeves (Crew Neck)',
+      title: 'Vela Sculpt™ Short Sleeves',
+      description: 'Our classic crew neck fit, customer favorite for office and everyday wear.',
+    },
+    'manches-longues': {
+      label: 'Long Sleeves',
+      title: 'Vela Sculpt™ Long Sleeves',
+      description: 'Full upper-body compression and reinforced postural support for cooler seasons.',
+    },
+  };
+  const override = enOverrides[collection.handle];
+  return override ? { ...collection, ...override } : collection;
+};
 
 export const productUrl = (handle) => `/products/${handle}`;
 export const collectionUrl = (handle) => `/collections/${handle}`;

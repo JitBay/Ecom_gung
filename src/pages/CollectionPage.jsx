@@ -4,30 +4,30 @@ import ProductCard from '../components/collection/ProductCard.jsx';
 import FilterDrawer from '../components/collection/FilterDrawer.jsx';
 import Icon from '../components/ui/Icon.jsx';
 import NotFound from './NotFound.jsx';
-import { getCollection, getProduct } from '../data/catalog.js';
+import { getCollection, getLocalizedCollection, getProduct } from '../data/catalog.js';
 import { brand } from '../data/site.js';
 import { useLanguage } from '../context/LanguageContext.jsx';
 import { filterAndSort, sortOptions } from '../lib/sortProducts.js';
 import './CollectionPage.css';
 
 const DEFAULT_VIEW = { sort: 'featured', inStockOnly: false };
-const plural = (n) => `${n} modèle${n > 1 ? 's' : ''}`;
 
 export default function CollectionPage() {
   const { handle } = useParams();
   const { lang, t } = useLanguage();
-  const collection = getCollection(handle);
+  const rawCollection = getCollection(handle);
+  const collection = getLocalizedCollection(rawCollection, lang);
   const [view, setView] = useState(DEFAULT_VIEW);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   useEffect(() => {
     setView(DEFAULT_VIEW);
     if (collection) document.title = `${collection.title} | ${brand.name} Labs`;
-  }, [handle]);
+  }, [handle, collection?.title]);
 
-  if (!collection) return <NotFound />;
+  if (!rawCollection) return <NotFound />;
 
-  const items = collection.items.map(getProduct);
+  const items = rawCollection.items.map(getProduct);
   const shown = filterAndSort(items, view);
 
   return (
@@ -72,9 +72,9 @@ export default function CollectionPage() {
         </div>
       ) : (
         <div className="collection__empty">
-          <p>Aucun produit ne correspond à vos critères.</p>
+          <p>{lang === 'fr' ? 'Aucun produit ne correspond à vos critères.' : 'No products match your criteria.'}</p>
           <button className="btn btn--dark" onClick={() => setView(DEFAULT_VIEW)}>
-            Réinitialiser les filtres
+            {lang === 'fr' ? 'Réinitialiser les filtres' : 'Reset filters'}
           </button>
         </div>
       )}

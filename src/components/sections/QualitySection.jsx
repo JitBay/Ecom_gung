@@ -1,16 +1,56 @@
 import Icon from '../ui/Icon.jsx';
-import { stats } from '../../data/product.js';
+import { stats, statsEn } from '../../data/product.js';
 import { useReveal } from '../../lib/hooks.js';
+import { useLanguage } from '../../context/LanguageContext.jsx';
 import './QualitySection.css';
 
-const tiles = [
-  { title: 'Zones de Gainage 3D', sub: 'maintien abdominal ciblé', look: 'ribs' },
-  { title: 'Coutures Ultra-Plates', sub: 'invisible sous chemise & t-shirt', look: 'band' },
-  { title: 'Maintien Postural en X', sub: 'redressement doux du dos', look: 'lift' },
-  { title: 'Maille Micro-Respirante', sub: 'évacuation active de la sueur', look: 'knit' },
+const tilesFr = [
+  {
+    title: 'Design Sculpt Anatomique',
+    sub: 'Gainage 3D ciblé & soutien abdominal',
+    img: '/images/textile/anatomical-sculpt.png',
+  },
+  {
+    title: 'Coupe Athlétique',
+    sub: 'Maintien postural naturel & silhouette redressée',
+    img: '/images/textile/athletic-fit.png',
+  },
+  {
+    title: 'Performance Respirante',
+    sub: 'Maille micro-aérée & évacuation active de la sueur',
+    img: '/images/textile/breathable-performance.png',
+  },
+  {
+    title: 'Finition & Textile Premium',
+    sub: 'Coutures ultra-plates seconde peau invisibles',
+    img: '/images/textile/premium-fabric.png',
+  },
 ];
 
-const features = [
+const tilesEn = [
+  {
+    title: 'Anatomical Sculpt Design',
+    sub: 'Targeted 3D midsection & core shaping',
+    img: '/images/textile/anatomical-sculpt.png',
+  },
+  {
+    title: 'Athletic Fit',
+    sub: 'Ergonomic contouring & natural posture support',
+    img: '/images/textile/athletic-fit.png',
+  },
+  {
+    title: 'Breathable Performance',
+    sub: 'Micro-ventilated mesh & active thermal regulation',
+    img: '/images/textile/breathable-performance.png',
+  },
+  {
+    title: 'Premium Fabric & Finishing',
+    sub: 'Ultra-flat bonded seams & second-skin feel',
+    img: '/images/textile/premium-fabric.png',
+  },
+];
+
+const featuresFr = [
   {
     icon: 'sparkle',
     title: 'Lissage Visuel Immédiat',
@@ -33,41 +73,79 @@ const features = [
   },
 ];
 
+const featuresEn = [
+  {
+    icon: 'sparkle',
+    title: 'Instant Visual Smoothing',
+    text: 'Instantly smooths the midsection and removes awkward creases under fitted dress shirts and summer tees.',
+  },
+  {
+    icon: 'shield',
+    title: 'Zero Demarcation (Collar & Seams)',
+    text: 'Engineered neckline stays completely invisible even with top shirt buttons undone. No visible shoulder lines.',
+  },
+  {
+    icon: 'pulse',
+    title: 'Ergonomic Posture Support',
+    text: 'Targeted dorsal tension zones gently guide shoulders back and open the chest without feeling restrictive.',
+  },
+  {
+    icon: 'waves',
+    title: 'Breathable Second-Skin Fiber',
+    text: 'Engineered 88% technical polyamide and 12% elastane blend wicks away perspiration for all-day thermal comfort.',
+  },
+];
+
 export default function QualitySection() {
   const ref = useReveal();
+  const { lang } = useLanguage();
+  const tiles = lang === 'fr' ? tilesFr : tilesEn;
+  const features = lang === 'fr' ? featuresFr : featuresEn;
+  const statsList = lang === 'fr' ? stats : (statsEn || stats);
+
   return (
     <section className="quality" ref={ref} id="technologie">
       <div className="container quality__inner">
         <div className="quality__media reveal">
           <div className="quality__tiles">
             {tiles.map((t) => (
-              <div key={t.title} className={`tile tile--${t.look}`}>
-                <strong>{t.title}</strong>
-                <span>{t.sub}</span>
+              <div key={t.title} className="tile">
+                <img src={t.img} alt={t.title} className="tile__img" loading="lazy" />
+                <div className="tile__shade" aria-hidden="true" />
+                <div className="tile__text-wrap">
+                  <strong>{t.title}</strong>
+                  <span>{t.sub}</span>
+                </div>
               </div>
             ))}
           </div>
           <div className="quality__pills">
             <span>
-              <i className="dot" /> Conception Ergonomique Homme
+              <i className="dot" /> {lang === 'fr' ? 'Conception Ergonomique Homme' : 'Men’s Ergonomic Design'}
             </span>
             <span>
-              <i className="dot" /> Testé en Conditions Réelles
+              <i className="dot" /> {lang === 'fr' ? 'Testé en Conditions Réelles' : 'Tested in Daily Wear'}
             </span>
           </div>
         </div>
 
         <div className="quality__text reveal">
-          <span className="eyebrow">Pourquoi Vela Labs ?</span>
+          <span className="eyebrow">{lang === 'fr' ? 'Pourquoi Vela Labs ?' : 'Why Vela Labs?'}</span>
           <h2 className="title">
-            Chaque détail pensé pour <em>votre quotidien.</em>
+            {lang === 'fr' ? (
+              <>Chaque détail pensé pour <em>votre quotidien.</em></>
+            ) : (
+              <>Every detail, <em>engineered.</em></>
+            )}
           </h2>
           <p className="quality__lead">
-            La plupart des sous-vêtements gainants serrent trop ou tiennent chaud. Vela Sculpt™ a été pensé pour allier discrétion invisible sous vos vêtements, confort 24h et maintien postural naturel.
+            {lang === 'fr'
+              ? 'La plupart des sous-vêtements gainants serrent trop ou tiennent chaud. Vela Sculpt™ a été pensé pour allier discrétion invisible sous vos vêtements, confort 24h et maintien postural naturel.'
+              : 'Most shapewear feels restrictive or runs hot. Vela Sculpt™ is engineered for discreet invisibility under everyday clothes, 24-hour comfort, and natural posture support.'}
           </p>
 
           <div className="quality__stats">
-            {stats.map((s) => (
+            {statsList.map((s) => (
               <div key={s.label}>
                 <b>
                   {s.value}
@@ -91,9 +169,14 @@ export default function QualitySection() {
           </div>
 
           <a href="#product" className="btn btn--gold">
-            Essayer sans risque — Garantie 30 Jours <Icon name="arrow" size={18} />
+            {lang === 'fr' ? 'Essayer sans risque — Garantie 30 Jours' : 'Try Risk-Free — 30-Day Guarantee'}{' '}
+            <Icon name="arrow" size={18} />
           </a>
-          <p className="quality__note">30 jours pour tester chez vous. Satisfait ou remboursé selon nos conditions.</p>
+          <p className="quality__note">
+            {lang === 'fr'
+              ? '30 jours pour tester chez vous. Satisfait ou remboursé selon nos conditions.'
+              : '30 days to try it at home. Love it or get a full refund.'}
+          </p>
         </div>
       </div>
     </section>
