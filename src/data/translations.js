@@ -8,7 +8,7 @@ export const translations = {
     announcements: [
       'Garantie Satisfait ou Remboursé de 30 jours',
       'Livraison Suivie Offerte dès 55 € d’achat ou dès 2 t-shirts',
-      'Plus de 45 000 hommes portent Vela Sculpt™ au quotidien',
+      'Plus de 3 000 clients satisfaits portent Vela Sculpt™ au quotidien',
     ],
 
     nav: {
@@ -49,18 +49,18 @@ export const translations = {
     },
 
     home: {
-      eyebrow: 'Plébiscité par plus de 45 000 hommes',
-      hero_title_1: 'Every age.',
-      hero_title_2: 'Every body.',
+      eyebrow: 'Plébiscité par plus de 3 000 clients satisfaits',
+      hero_title_1: 'Every age',
+      hero_title_2: 'Every body',
       hero_text:
         'Des vêtements de compression discrets pensés pour affiner la silhouette, soutenir la posture et apporter un confort inégalé au quotidien.',
       cta_bestsellers: 'Découvrir les best-sellers',
       cta_all: 'Voir toute la collection',
 
       stats: [
-        { value: '45 000+', label: 'Clients satisfaits' },
-        { value: '120 000+', label: 'Pièces vendues' },
-        { value: '30+', label: 'Pays livrés' },
+        { value: '3 000+', label: 'Clients satisfaits' },
+        { value: '11 000+', label: 'Pièces vendues' },
+        { value: '17+', label: 'Pays livrés' },
         { value: '30 jours', label: 'Garantie Satisfait ou Remboursé' },
       ],
 
@@ -203,7 +203,7 @@ export const translations = {
       sort_helpful: 'Plus utiles',
       ai_title: 'Synthèse des retours clients',
       ai_badge: 'Synthèse IA certifiée',
-      ai_text: 'Plébiscité pour son invisibilité sous chemise blanche, son effet gainant immédiat sans couper le souffle et son maintien lombaire au bureau. Moins de 2% de retours constatés sur plus de 45 000 pièces expédiées.',
+      ai_text: 'Plébiscité pour son invisibilité sous chemise blanche, son effet gainant immédiat sans couper le souffle et son maintien lombaire au bureau. Moins de 2% de retours constatés sur plus de 11 000 pièces expédiées.',
       ai_tag_invisible: '100% Invisible sous chemise',
       ai_tag_posture: 'Maintien lombaire & dos',
       ai_tag_breathable: 'Maille respirante fraîche',
@@ -271,7 +271,7 @@ export const translations = {
     announcements: [
       '30-Day Money-Back Guarantee',
       'Free Tracked Shipping on orders over €55 or 2+ shirts',
-      'Over 45,000 men wear Vela Sculpt™ every day',
+      'Over 3,000 happy customers wear Vela Sculpt™ every day',
     ],
 
     nav: {
@@ -312,18 +312,18 @@ export const translations = {
     },
 
     home: {
-      eyebrow: 'Loved by 45,000+ customers',
-      hero_title_1: 'Every age.',
-      hero_title_2: 'Every body.',
+      eyebrow: 'Loved by 3,000+ happy customers',
+      hero_title_1: 'Every age',
+      hero_title_2: 'Every body',
       hero_text:
         'Discreet compression wear engineered to streamline your physique, support natural posture, and deliver all-day comfort.',
       cta_bestsellers: 'Shop best sellers',
       cta_all: 'Shop all collection',
 
       stats: [
-        { value: '45,000+', label: 'Happy customers' },
-        { value: '120,000+', label: 'Pieces sold' },
-        { value: '30+', label: 'Countries shipped' },
+        { value: '3,000+', label: 'Happy customers' },
+        { value: '11,000+', label: 'Pieces sold' },
+        { value: '17+', label: 'Countries shipped' },
         { value: '30 days', label: 'Money-back guarantee' },
       ],
 
@@ -466,7 +466,7 @@ export const translations = {
       sort_helpful: 'Most Helpful',
       ai_title: 'Customer Feedback Summary',
       ai_badge: 'Verified AI Summary',
-      ai_text: 'Praised for invisible discreetness under white dress shirts, immediate slimming effect without restricting breathing, and comfortable lumbar support. Less than 2% return rate across 45,000+ orders.',
+      ai_text: 'Praised for invisible discreetness under white dress shirts, immediate slimming effect without restricting breathing, and comfortable lumbar support. Less than 2% return rate across 11,000+ orders.',
       ai_tag_invisible: '100% Invisible under shirts',
       ai_tag_posture: 'Lumbar & posture support',
       ai_tag_breathable: 'All-day breathable knit',

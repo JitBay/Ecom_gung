@@ -170,13 +170,13 @@ export const benefitsEn = [
 export const stats = [
   { value: '30', unit: 'Jours', label: 'Garantie satisfait ou remboursé' },
   { value: '100', unit: '%', label: 'Discret sous vos vêtements' },
-  { value: '45k', unit: '+', label: 'Hommes conquis au quotidien' },
+  { value: '3k', unit: '+', label: 'Clients satisfaits au quotidien' },
 ];
 
 export const statsEn = [
   { value: '30', unit: 'Days', label: 'Money-back guarantee' },
   { value: '100', unit: '%', label: 'Discreet under your clothes' },
-  { value: '45k', unit: '+', label: 'Satisfied men wearing daily' },
+  { value: '3k', unit: '+', label: 'Satisfied customers wearing daily' },
 ];
 
 export const bundles = [

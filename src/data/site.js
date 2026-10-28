@@ -33,7 +33,7 @@ export const nav = [
 export const announcements = [
   'Garantie Satisfait ou Remboursé de 30 jours',
   'Livraison Suivie Offerte dès 55 € d’achat ou dès 2 t-shirts',
-  'Plus de 45 000 hommes portent Vela Sculpt™ au quotidien',
+  'Plus de 3 000 clients satisfaits portent Vela Sculpt™ au quotidien',
 ];
 
 export const footerColumns = [

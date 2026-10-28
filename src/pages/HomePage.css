@@ -51,7 +51,7 @@
 .ixh-hero__content {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 clamp(20px, 5vw, 80px) clamp(28px, 6vw, 104px);
+  padding: 0 clamp(20px, 4vw, 64px) clamp(28px, 6vw, 104px) clamp(16px, 2.5vw, 36px);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -82,10 +82,12 @@
 
 .ixh-hero__text {
   margin: 0;
-  max-width: 460px;
+  max-width: 480px;
   font-size: clamp(15px, 1.3vw, 17px);
-  line-height: 1.5;
-  color: #3d3a35;
+  line-height: 1.55;
+  color: #6e5520;
+  font-weight: 500;
+  text-align: left;
 }
 
 .ixh-hero__btns {
