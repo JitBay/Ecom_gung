@@ -31,7 +31,7 @@ function SleevelessProductPage() {
   const trustItems = dict.home?.trust || [];
 
   return (
-    <div className="product-page-wrap">
+    <div className="product-page-wrap sleeveless-product">
       {/* 1. HERO BANNER FOCUSED ON SLEEVELESS */}
       <Hero initialHandle="vela-sculpt-sans-manches" showModelSelector={false} />
 

@@ -26,13 +26,13 @@
   line-height: 1.5;
 }
 
-/* 3-Card Grid on Desktop, Horizontal Swipe on Mobile/Tablet */
+/* 5-Card Grid on Desktop, Horizontal Swipe on Mobile/Tablet */
 .ugc__row {
   display: grid;
-  grid-template-columns: repeat(3, minmax(280px, 360px));
+  grid-template-columns: repeat(5, minmax(180px, 1fr));
   justify-content: center;
-  gap: 24px;
-  margin-top: 44px;
+  gap: 16px;
+  margin-top: 40px;
 }
 
 /* Individual UGC Video Card */
@@ -40,7 +40,7 @@
   position: relative;
   aspect-ratio: 9 / 15.5;
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: 18px;
   text-align: left;
   color: var(--white, #fff);
   background: #111418;
@@ -57,12 +57,13 @@
   border-color: rgba(197, 160, 89, 0.5);
 }
 
+.ugc-card.is-unmuted,
 .ugc-card.is-playing {
   border-color: var(--gold, #c5a059);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55), 0 0 25px rgba(197, 160, 89, 0.2);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55), 0 0 25px rgba(197, 160, 89, 0.25);
 }
 
-/* HTML5 Video Inside Card */
+/* HTML5 Video Inside Card — runs continuously, no static poster image */
 .ugc-card__video {
   position: absolute;
   inset: 0;
@@ -92,9 +93,9 @@
 /* Top Bar: Verified Badge & Action Buttons */
 .ugc-card__top {
   position: absolute;
-  top: 14px;
-  left: 14px;
-  right: 14px;
+  top: 12px;
+  left: 12px;
+  right: 12px;
   z-index: 3;
   display: flex;
   align-items: center;
@@ -106,13 +107,13 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 5px 11px;
+  padding: 4px 9px;
   border-radius: 9999px;
   background: rgba(15, 23, 42, 0.82);
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.18);
   color: #fff;
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 700;
   letter-spacing: 0.02em;
 }
@@ -128,8 +129,8 @@
 }
 
 .ugc-card__btn-icon {
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   display: grid;
   place-items: center;
@@ -142,21 +143,22 @@
   padding: 0;
 }
 
-.ugc-card__btn-icon:hover {
+.ugc-card__btn-icon:hover,
+.ugc-card__btn-icon.is-active {
   background: var(--gold, #c5a059);
   border-color: var(--gold, #c5a059);
   color: #000;
   transform: scale(1.08);
 }
 
-/* Center Play / Pause Button */
+/* Center Play / Sound Wave Indicator */
 .ugc-card__play {
   position: absolute;
   top: 44%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 58px;
-  height: 58px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.65);
   backdrop-filter: blur(8px);
@@ -167,44 +169,70 @@
   z-index: 2;
   transition: all 0.25s ease;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+  opacity: 0;
   pointer-events: none;
 }
 
 .ugc-card:hover .ugc-card__play {
-  transform: translate(-50%, -50%) scale(1.1);
+  opacity: 0.9;
+  transform: translate(-50%, -50%) scale(1.06);
   background: var(--gold, #c5a059);
   border-color: var(--gold, #c5a059);
   color: #000;
 }
 
-.ugc-card.is-playing .ugc-card__play {
-  opacity: 0;
+.ugc-card.is-unmuted .ugc-card__play {
+  opacity: 0.85;
 }
 
-.ugc-card.is-playing:hover .ugc-card__play {
-  opacity: 0.85;
+.ugc-card:hover.is-unmuted .ugc-card__play {
+  opacity: 1;
+}
+
+.ugc-card__sound-wave {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 18px;
+}
+
+.ugc-card__sound-wave span {
+  display: block;
+  width: 3px;
+  background: currentColor;
+  border-radius: 2px;
+  animation: ugcSoundWave 0.8s ease-in-out infinite alternate;
+}
+
+.ugc-card__sound-wave span:nth-child(1) { height: 8px; animation-delay: 0.1s; }
+.ugc-card__sound-wave span:nth-child(2) { height: 18px; animation-delay: 0.3s; }
+.ugc-card__sound-wave span:nth-child(3) { height: 12px; animation-delay: 0.2s; }
+
+@keyframes ugcSoundWave {
+  0% { transform: scaleY(0.35); }
+  100% { transform: scaleY(1); }
 }
 
 /* Bottom Caption Info */
 .ugc-card__caption {
   position: absolute;
-  left: 16px;
-  right: 16px;
-  bottom: 16px;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
   z-index: 3;
   display: grid;
-  gap: 5px;
+  gap: 4px;
   pointer-events: none;
 }
 
 .ugc-card__stars-row {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
 }
 
 .ugc-card__rating-text {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   color: var(--gold, #c5a059);
 }
@@ -212,8 +240,8 @@
 .ugc-card__user {
   display: flex;
   align-items: baseline;
-  gap: 6px;
-  font-size: 14px;
+  gap: 5px;
+  font-size: 13px;
 }
 
 .ugc-card__user strong {
@@ -222,20 +250,20 @@
 }
 
 .ugc-card__user span {
-  font-size: 12px;
+  font-size: 11px;
   color: rgba(255, 255, 255, 0.65);
 }
 
 .ugc-card__tag-text {
-  font-size: 12px;
+  font-size: 11px;
   color: rgba(255, 255, 255, 0.82);
   font-weight: 500;
 }
 
 .ugc-card__quote {
   margin: 2px 0 0;
-  font-size: 12.5px;
-  line-height: 1.4;
+  font-size: 11.5px;
+  line-height: 1.35;
   color: #f1f0ec;
   font-style: italic;
   display: -webkit-box;
@@ -247,11 +275,11 @@
 .ugc-card__product-badge {
   display: inline-flex;
   width: max-content;
-  margin-top: 4px;
-  padding: 3px 8px;
+  margin-top: 2px;
+  padding: 2px 6px;
   border-radius: 4px;
   background: rgba(255, 255, 255, 0.12);
-  font-size: 11px;
+  font-size: 10px;
   color: var(--gold, #c5a059);
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -263,7 +291,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  height: 4px;
+  height: 3px;
   background: rgba(255, 255, 255, 0.2);
   z-index: 4;
 }
@@ -278,7 +306,7 @@
 .ugc__cta {
   display: flex;
   justify-content: center;
-  margin-top: 44px;
+  margin-top: 40px;
 }
 
 /* Lightbox Modal */
@@ -361,20 +389,36 @@
   pointer-events: none;
 }
 
-/* Tablet & Mobile Responsiveness */
-@media (max-width: 991px) {
+/* Tablet & Mobile Responsiveness: Smooth Horizontal Swipe */
+@media (max-width: 1199px) {
   .ugc__row {
     grid-template-columns: none;
     grid-auto-flow: column;
-    grid-auto-columns: min(78vw, 320px);
+    grid-auto-columns: min(72vw, 270px);
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    padding: 0 var(--gutter, 20px) 16px;
-    margin: 36px calc(var(--gutter, 20px) * -1) 0;
+    scroll-behavior: smooth;
+    padding: 10px var(--gutter, 20px) 24px;
+    margin: 32px calc(var(--gutter, 20px) * -1) 0;
     justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
   }
 
   .ugc-card {
     scroll-snap-align: center;
+  }
+
+  .ugc__row::-webkit-scrollbar {
+    height: 5px;
+  }
+
+  .ugc__row::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 999px;
+  }
+
+  .ugc__row::-webkit-scrollbar-thumb {
+    background: var(--gold, #c5a059);
+    border-radius: 999px;
   }
 }
