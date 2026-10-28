@@ -16,23 +16,23 @@ export default function ProductCard({ product }) {
   const [hoverColor, setHoverColor] = useState(null);
 
   const activeColor = hoverColor || selectedColor;
-  const url = productUrl(product.handle);
+  const targetUrl = `${productUrl(product.handle)}?color=${encodeURIComponent(activeColor)}`;
   const extra = (product.colors?.length || 0) - MAX_SWATCHES;
   const colorDisplay = t('color_names.' + activeColor, activeColor);
 
   return (
     <article className="card">
-      <Link to={url} className="card__media" aria-label={localized.title}>
+      <Link to={targetUrl} className="card__media" aria-label={localized.title}>
         {localized.badge && <span className="card__badge">{localized.badge}</span>}
         <span className="card__img">
-          <ProductThumb product={product} color={activeColor} />
+          <ProductThumb key={`${product.handle}-${activeColor}-main`} product={product} color={activeColor} />
         </span>
         <span className="card__img card__img--alt">
-          <ProductThumb product={product} color={activeColor} alt />
+          <ProductThumb key={`${product.handle}-${activeColor}-alt`} product={product} color={activeColor} alt />
         </span>
       </Link>
 
-      <Link to={url} className="card__title">
+      <Link to={targetUrl} className="card__title">
         {localized.title}
       </Link>
 
@@ -58,9 +58,14 @@ export default function ProductCard({ product }) {
               return (
                 <button
                   key={c}
+                  type="button"
                   className={`card__swatch ${c === activeColor ? 'is-active' : ''}`}
                   style={{ background: colorHex[c] || '#1a1a1a' }}
-                  onClick={() => setSelectedColor(c)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setSelectedColor(c);
+                  }}
                   onMouseEnter={() => setHoverColor(c)}
                   onMouseLeave={() => setHoverColor(null)}
                   aria-label={`${lang === 'fr' ? 'Couleur' : 'Color'} ${cName}`}
@@ -69,7 +74,7 @@ export default function ProductCard({ product }) {
               );
             })}
             {extra > 0 && (
-              <Link to={url} className="card__more">
+              <Link to={targetUrl} className="card__more">
                 +{extra}
               </Link>
             )}

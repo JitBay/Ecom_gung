@@ -6,7 +6,7 @@ import { useLanguage } from '../../context/LanguageContext.jsx';
 import { shortDate } from '../../lib/format.js';
 import './CustomerReviews.css';
 
-const PER_PAGE = 5;
+const INITIAL_VISIBLE = 4;
 const total = ratingBreakdown.reduce((n, r) => n + r.count, 0);
 
 const sorters = {
@@ -208,20 +208,32 @@ function Review({ r, lang, t, onHelpful, hasVoted, onPhotoClick }) {
 
       {photos.length > 0 && (
         <div className="review__photos">
-          {photos.map((src, i) => (
-            <button
-              type="button"
-              key={i}
-              className="review__photo-btn"
-              onClick={() => onPhotoClick({ src, name: r.name, title })}
-              title={t('reviews_section.photo_preview')}
-            >
-              <img src={src} alt={`${r.name} review photo ${i + 1}`} loading="lazy" />
-              <span className="review__photo-zoom" aria-hidden="true">
-                <Icon name="zoom" size={14} />
-              </span>
-            </button>
-          ))}
+          {photos.map((src, i) => {
+            const isVideo = src.endsWith('.mp4') || src.endsWith('.mov');
+            const thumbSrc = isVideo ? src.replace(/\.(mp4|mov)$/, '-poster.jpg') : src;
+            return (
+              <button
+                type="button"
+                key={i}
+                className={`review__photo-btn ${isVideo ? 'review__photo-btn--video' : ''}`}
+                onClick={() => onPhotoClick({ src, isVideo, name: r.name, title })}
+                title={isVideo ? (lang === 'fr' ? 'Voir la vidéo client' : 'Watch customer video') : t('reviews_section.photo_preview')}
+              >
+                <img src={thumbSrc} alt={`${r.name} review media ${i + 1}`} loading="lazy" />
+                {isVideo ? (
+                  <span className="review__photo-play" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                      <polygon points="5 3 19 12 5 21 5 3" />
+                    </svg>
+                  </span>
+                ) : (
+                  <span className="review__photo-zoom" aria-hidden="true">
+                    <Icon name="zoom" size={14} />
+                  </span>
+                )}
+              </button>
+            );
+          })}
         </div>
       )}
 
@@ -250,7 +262,7 @@ export default function CustomerReviews() {
   const [starFilter, setStarFilter] = useState(null);
   const [photosOnly, setPhotosOnly] = useState(false);
   const [search, setSearch] = useState('');
-  const [page, setPage] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE);
   const [writing, setWriting] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [votedMap, setVotedMap] = useState({});
@@ -295,8 +307,7 @@ export default function CustomerReviews() {
     return [...filtered].sort(sorters[sort] || sorters.recent);
   }, [filtered, sort]);
 
-  const pages = Math.ceil(sorted.length / PER_PAGE);
-  const visible = sorted.slice(page * PER_PAGE, page * PER_PAGE + PER_PAGE);
+  const visible = sorted.slice(0, visibleCount);
 
   const addReview = (r) => {
     setList((l) => [r, ...l]);
@@ -304,7 +315,7 @@ export default function CustomerReviews() {
     setStarFilter(null);
     setPhotosOnly(false);
     setSearch('');
-    setPage(0);
+    setVisibleCount((prev) => Math.max(prev, INITIAL_VISIBLE));
     setWriting(false);
     setSuccessMessage(t('reviews_section.form_success'));
     setTimeout(() => setSuccessMessage(''), 6000);
@@ -315,19 +326,11 @@ export default function CustomerReviews() {
     setVotedMap((prev) => ({ ...prev, [id]: true }));
   };
 
-  const changePage = (p) => {
-    setPage(p);
-    const el = document.getElementById('reviews');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
-
   const clearAllFilters = () => {
     setStarFilter(null);
     setPhotosOnly(false);
     setSearch('');
-    setPage(0);
+    setVisibleCount(INITIAL_VISIBLE);
   };
 
   return (
@@ -364,6 +367,12 @@ export default function CustomerReviews() {
                   onClick={() => {
                     setStarFilter((curr) => (curr === r.stars ? null : r.stars));
                     setPage(0);
+                    setTimeout(() => {
+                      const listEl = document.querySelector('.reviews__list') || document.querySelector('.reviews__toolbar');
+                      if (listEl) {
+                        listEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                      }
+                    }, 50);
                   }}
                   title={lang === 'fr' ? `Filtrer par ${r.stars} étoiles` : `Filter by ${r.stars} stars`}
                 >
@@ -390,7 +399,7 @@ export default function CustomerReviews() {
               value={sort}
               onChange={(e) => {
                 setSort(e.target.value);
-                setPage(0);
+                setVisibleCount(INITIAL_VISIBLE);
               }}
               aria-label={lang === 'fr' ? 'Trier les avis' : 'Sort reviews'}
             >
@@ -441,7 +450,7 @@ export default function CustomerReviews() {
             value={search}
             onChange={(e) => {
               setSearch(e.target.value);
-              setPage(0);
+              setVisibleCount(INITIAL_VISIBLE);
             }}
           />
           {search && (
@@ -469,7 +478,7 @@ export default function CustomerReviews() {
             className={`reviews__filter-btn ${photosOnly ? 'is-active' : ''}`}
             onClick={() => {
               setPhotosOnly((p) => !p);
-              setPage(0);
+              setVisibleCount(INITIAL_VISIBLE);
             }}
           >
             📷 {t('reviews_section.filter_photos')}
@@ -535,41 +544,25 @@ export default function CustomerReviews() {
         </div>
       )}
 
-      {/* Pagination */}
-      {pages > 1 && (
-        <nav className="pager" aria-label={t('reviews_section.page_label')}>
+      {/* Load More Reviews Button */}
+      {visibleCount < sorted.length && (
+        <div className="reviews__more-container">
           <button
             type="button"
-            className="pager__nav"
-            disabled={page === 0}
-            onClick={() => changePage(page - 1)}
-            aria-label="Précédent"
+            className="reviews__more-btn"
+            onClick={() => setVisibleCount((prev) => prev + 4)}
           >
-            ‹
+            <span>
+              {lang === 'fr'
+                ? `Afficher plus d'avis (${sorted.length - visibleCount} restants)`
+                : `More reviews (${sorted.length - visibleCount} remaining)`}
+            </span>
+            <Icon name="arrow" size={16} />
           </button>
-          {Array.from({ length: pages }, (_, i) => (
-            <button
-              key={i}
-              type="button"
-              className={i === page ? 'is-active' : ''}
-              onClick={() => changePage(i)}
-            >
-              {i + 1}
-            </button>
-          ))}
-          <button
-            type="button"
-            className="pager__nav"
-            disabled={page === pages - 1}
-            onClick={() => changePage(page + 1)}
-            aria-label="Suivant"
-          >
-            ›
-          </button>
-        </nav>
+        </div>
       )}
 
-      {/* Photo Lightbox Modal */}
+      {/* Photo / Video Lightbox Modal */}
       {activePhoto && (
         <div
           className="reviews__modal-overlay"
@@ -586,11 +579,21 @@ export default function CustomerReviews() {
             >
               <Icon name="close" size={18} />
             </button>
-            <img
-              src={activePhoto.src}
-              alt={activePhoto.title || activePhoto.name}
-              className="reviews__modal-img"
-            />
+            {activePhoto.isVideo || activePhoto.src?.endsWith('.mp4') || activePhoto.src?.endsWith('.mov') ? (
+              <video
+                src={activePhoto.src}
+                controls
+                autoPlay
+                playsInline
+                className="reviews__modal-video"
+              />
+            ) : (
+              <img
+                src={activePhoto.src}
+                alt={activePhoto.title || activePhoto.name}
+                className="reviews__modal-img"
+              />
+            )}
             <div className="reviews__modal-caption">
               <strong>{activePhoto.name}</strong>
               {activePhoto.title && <span> · {activePhoto.title}</span>}

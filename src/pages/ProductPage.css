@@ -63,6 +63,19 @@
   margin: 10px 0 14px;
   font-size: 14px;
   color: var(--muted);
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+  width: fit-content;
+}
+
+.pp__rating:hover {
+  opacity: 0.85;
+}
+
+.pp__rating:hover strong,
+.pp__rating:hover span {
+  text-decoration: underline;
 }
 
 .pp__rating strong {

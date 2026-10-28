@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Icon from '../ui/Icon.jsx';
 import Stars from '../ui/Stars.jsx';
 import { getLocalizedProduct, products } from '../../data/catalog.js';
@@ -22,6 +22,8 @@ export default function Hero({ initialHandle, onSelectModel, showModelSelector =
   const heroProducts = products.slice(0, 3);
   const foundIdx = initialHandle ? heroProducts.findIndex((p) => p.handle === initialHandle) : -1;
   const [selectedIdx, setSelectedIdx] = useState(foundIdx !== -1 ? foundIdx : 0);
+  const [isHeroPlaying, setIsHeroPlaying] = useState(true);
+  const videoRef = useRef(null);
 
   useEffect(() => {
     if (initialHandle) {
@@ -39,6 +41,43 @@ export default function Hero({ initialHandle, onSelectModel, showModelSelector =
 
   const currentProduct = heroProducts[selectedIdx] || heroProducts[0];
   const perks = lang === 'fr' ? perksFr : perksEn;
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.defaultMuted = true;
+    video.muted = true;
+    video.playsInline = true;
+
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => setIsHeroPlaying(true))
+        .catch(() => {
+          setIsHeroPlaying(false);
+          const onFirstTouch = () => {
+            video.play().then(() => setIsHeroPlaying(true)).catch(() => {});
+            window.removeEventListener('click', onFirstTouch);
+            window.removeEventListener('touchstart', onFirstTouch);
+          };
+          window.addEventListener('click', onFirstTouch, { once: true });
+          window.addEventListener('touchstart', onFirstTouch, { once: true });
+        });
+    }
+  }, [currentProduct.handle]);
+
+  const toggleHeroPlay = (e) => {
+    e.stopPropagation();
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play().then(() => setIsHeroPlaying(true)).catch(() => {});
+    } else {
+      video.pause();
+      setIsHeroPlaying(false);
+    }
+  };
 
   return (
     <section className="hero">
@@ -125,12 +164,45 @@ export default function Hero({ initialHandle, onSelectModel, showModelSelector =
       </div>
 
       <div className="hero__media">
-        <div className="hero__image-card">
-          <img
-            src={currentProduct.images[0]}
-            alt={currentProduct.title}
-            className="hero__main-photo"
-          />
+        <div className="hero__image-card" onClick={toggleHeroPlay}>
+          {currentProduct.handle === 'vela-sculpt-sans-manches' ? (
+            <>
+              <video
+                ref={videoRef}
+                className="hero__main-video"
+                src="/videos/sleevless.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="auto"
+                onPlay={() => setIsHeroPlaying(true)}
+                onPause={() => setIsHeroPlaying(false)}
+                aria-label={getLocalizedProduct(currentProduct, lang).title}
+              >
+                <source src="/videos/sleevless.mp4" type="video/mp4" />
+                <source src="/videos/video-banner.mp4" type="video/mp4" />
+              </video>
+              {!isHeroPlaying && (
+                <button
+                  type="button"
+                  className="hero__play-overlay"
+                  onClick={toggleHeroPlay}
+                  aria-label={lang === 'fr' ? 'Lire la vidéo' : 'Play video'}
+                >
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                  </svg>
+                </button>
+              )}
+            </>
+          ) : (
+            <img
+              src={currentProduct.images[0]}
+              alt={currentProduct.title}
+              className="hero__main-photo"
+            />
+          )}
           <div className="hero__badge-model">
             <strong>{getLocalizedProduct(currentProduct, lang).title}</strong>
             <span>{getLocalizedProduct(currentProduct, lang).tagline}</span>

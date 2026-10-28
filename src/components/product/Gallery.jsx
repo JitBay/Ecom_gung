@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Icon from '../ui/Icon.jsx';
 import { useLockScroll } from '../../lib/hooks.js';
+import { useLanguage } from '../../context/LanguageContext.jsx';
 import './Gallery.css';
 
 function Lightbox({ index, images, onClose, onMove, title }) {
@@ -44,6 +45,7 @@ function Lightbox({ index, images, onClose, onMove, title }) {
 }
 
 export default function Gallery({ images, title, activeColor, videoHref }) {
+  const { lang } = useLanguage();
   const [zoom, setZoom] = useState(null);
   const [active, setActive] = useState(0);
   const track = useRef(null);
@@ -54,20 +56,37 @@ export default function Gallery({ images, title, activeColor, videoHref }) {
   useEffect(() => {
     setActive(0);
     if (track.current) {
-      track.current.scrollTo({ left: 0, behavior: 'instant' });
+      if (typeof track.current.scrollTo === 'function') {
+        try {
+          track.current.scrollTo({ left: 0, behavior: 'instant' });
+        } catch {
+          track.current.scrollLeft = 0;
+        }
+      } else {
+        track.current.scrollLeft = 0;
+      }
     }
   }, [images]);
 
   const onScroll = () => {
     const el = track.current;
     if (!el) return;
-    setActive(Math.round(el.scrollLeft / el.clientWidth));
+    setActive(Math.round(el.scrollLeft / (el.clientWidth || 1)));
   };
 
   const goTo = (i) => {
     setActive(i);
     if (track.current) {
-      track.current.scrollTo({ left: i * track.current.clientWidth, behavior: 'smooth' });
+      const targetLeft = i * track.current.clientWidth;
+      if (typeof track.current.scrollTo === 'function') {
+        try {
+          track.current.scrollTo({ left: targetLeft, behavior: 'smooth' });
+        } catch {
+          track.current.scrollLeft = targetLeft;
+        }
+      } else {
+        track.current.scrollLeft = targetLeft;
+      }
     }
   };
 
@@ -77,10 +96,15 @@ export default function Gallery({ images, title, activeColor, videoHref }) {
     <div className="gallery">
       <div className="gallery__track" ref={track} onScroll={onScroll}>
         {list.map((src, i) => (
-          <button
+          <div
             key={`${src}-${i}`}
             className="gallery__slide"
             onClick={() => setZoom(i)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') setZoom(i);
+            }}
             aria-label={`Agrandir la photo ${i + 1}`}
           >
             <img
@@ -93,9 +117,8 @@ export default function Gallery({ images, title, activeColor, videoHref }) {
               <Icon name="zoom" size={18} />
             </span>
             {i === 0 && videoHref && (
-              <span
-                role="button"
-                tabIndex={0}
+              <button
+                type="button"
                 className="gallery__video-pill"
                 onClick={(e) => {
                   e.stopPropagation();
@@ -104,21 +127,15 @@ export default function Gallery({ images, title, activeColor, videoHref }) {
                     target.scrollIntoView({ behavior: 'smooth' });
                   }
                 }}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.stopPropagation();
-                    const target = document.querySelector(videoHref);
-                    if (target) target.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
+                aria-label={lang === 'fr' ? 'Voir la vidéo du produit' : 'Watch product video'}
               >
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
                   <polygon points="5 3 19 12 5 21 5 3" />
                 </svg>
-                <span>Vidéo produit</span>
-              </span>
+                <span>{lang === 'fr' ? 'Vidéo en action' : 'Video demo'}</span>
+              </button>
             )}
-          </button>
+          </div>
         ))}
       </div>
 

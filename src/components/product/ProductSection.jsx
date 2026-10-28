@@ -98,12 +98,16 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
   const [searchParams] = useSearchParams();
   const queryColor = searchParams.get('color');
 
-  // Reset selected color and synchronize variants when switching product model or color param
+  // Synchronize color and variants when switching model or when queryColor changes
   useEffect(() => {
-    const validColor = queryColor && currentModel.colors.find(
+    const validQuery = queryColor && currentModel.colors.find(
       (c) => c.toLowerCase() === queryColor.toLowerCase()
     );
-    const colorToUse = validColor || currentModel.colors[0] || 'Noir';
+    // Preserve currently selected color if available in the newly switched model
+    const currentValid = selectedColor && currentModel.colors.find(
+      (c) => c.toLowerCase() === selectedColor.toLowerCase()
+    );
+    const colorToUse = validQuery || currentValid || currentModel.colors[0] || 'Noir';
     setSelectedColor(colorToUse);
     const matchingAvail = availableColors.find(
       (c) => c.label.toLowerCase() === colorToUse.toLowerCase()
@@ -182,7 +186,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
           images={currentImages}
           title={localizedModel.title}
           activeColor={selectedColor}
-          videoHref={selectedModel.handle === 'vela-sculpt-sans-manches' ? '#video-demo' : undefined}
+          videoHref={currentModel.handle === 'vela-sculpt-sans-manches' ? '#video-demo' : undefined}
         />
       </div>
 
@@ -211,8 +215,20 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
         )}
 
         <h1 className="product__title">{localizedModel.title}</h1>
-        <a href="#reviews" className="product__rating">
-          <Stars value={5} size={16} /> <strong>4.9</strong> <span>/ 5 ({lang === 'fr' ? '1 420+ avis vérifiés' : '1,420+ verified reviews'})</span>
+        <a
+          href="#reviews"
+          className="product__rating"
+          onClick={(e) => {
+            e.preventDefault();
+            const el = document.getElementById('reviews');
+            if (el) {
+              el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              window.history.pushState(null, '', '#reviews');
+            }
+          }}
+          title={lang === 'fr' ? 'Consulter les avis clients vérifiés' : 'Read verified customer reviews'}
+        >
+          <Stars value={5} size={16} /> <strong>4.9</strong> <span>/ 5 ({lang === 'fr' ? '67 avis vérifiés' : '67 verified reviews'})</span>
         </a>
 
         <p className="product__tagline">{localizedModel.tagline}</p>

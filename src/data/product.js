@@ -5,14 +5,15 @@ export const product = {
   title: 'Vela Sculpt™ — T-Shirt Gainant Ergonomique',
   subtitle: 'Compression discrète & soutien postural pour homme',
   rating: 4.9,
-  reviewCount: 1420,
+  reviewCount: 67,
 };
 
 export const colors = [
   { id: 'noir', label: 'Noir', hex: '#1a1a1a' },
   { id: 'blanc', label: 'Blanc', hex: '#f8f8fa' },
   { id: 'gris', label: 'Gris Chiné', hex: '#63666f' },
-  { id: 'bleu-nuit', label: 'Bleu Nuit', hex: '#232c3a' },
+  { id: 'black-or', label: 'Black Or', hex: '#221e17' },
+  { id: 'bleu-nuit', label: 'Black Or', hex: '#221e17' },
 ];
 
 export const sizes = ['S', 'M', 'L', 'XL', '2XL'];

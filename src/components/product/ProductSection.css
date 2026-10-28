@@ -102,6 +102,18 @@
   gap: 8px;
   margin: 10px 0 18px;
   font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.15s ease;
+}
+
+.product__rating:hover {
+  opacity: 0.85;
+}
+
+.product__rating:hover span {
+  text-decoration: underline;
 }
 
 .product__rating span {

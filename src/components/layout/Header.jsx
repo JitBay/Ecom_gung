@@ -100,7 +100,19 @@ function MobileMenu({ open, onClose }) {
             return (
               <li key={item.to}>
                 {item.to.startsWith('/#') ? (
-                  <a href={item.to.slice(1)} onClick={onClose}>
+                  <a
+                    href={item.to}
+                    onClick={(e) => {
+                      onClose();
+                      const targetId = item.to.replace('/#', '');
+                      const el = document.getElementById(targetId);
+                      if (el) {
+                        e.preventDefault();
+                        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        window.history.pushState(null, '', `#${targetId}`);
+                      }
+                    }}
+                  >
                     {item.label}
                     <Icon name="arrow" size={18} />
                   </a>
@@ -202,8 +214,20 @@ export default function Header() {
                 );
               }
               if (item.to.startsWith('/#')) {
+                const targetId = item.to.replace('/#', '');
                 return (
-                  <a key={item.to} href={item.to.slice(1)}>
+                  <a
+                    key={item.to}
+                    href={item.to}
+                    onClick={(e) => {
+                      const el = document.getElementById(targetId);
+                      if (el) {
+                        e.preventDefault();
+                        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        window.history.pushState(null, '', `#${targetId}`);
+                      }
+                    }}
+                  >
                     {item.label}
                   </a>
                 );

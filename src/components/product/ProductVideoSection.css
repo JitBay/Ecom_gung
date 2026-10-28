@@ -139,6 +139,41 @@
   background: #000;
   aspect-ratio: 16 / 9;
   max-height: 520px;
+  cursor: pointer;
+}
+
+.product-video-section__big-play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 2;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.product-video-section__big-play-btn {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(196, 162, 101, 0.95);
+  color: #0f1012;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  transition: transform 0.15s ease, background-color 0.2s ease;
+}
+
+.product-video-section__big-play-btn svg {
+  margin-left: 3px;
+}
+
+.product-video-section__player-wrap:hover .product-video-section__big-play-btn {
+  transform: scale(1.08);
+  background: #e2c99b;
 }
 
 @media (max-width: 600px) {

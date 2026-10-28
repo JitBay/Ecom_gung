@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import VideoTestimonials from '../components/sections/VideoTestimonials.jsx';
 import CustomerReviews from '../components/sections/CustomerReviews.jsx';
 import Stars from '../components/ui/Stars.jsx';
+import HowItWorksModal from '../components/ui/HowItWorksModal.jsx';
 import { brand } from '../data/site.js';
 import { price } from '../lib/format.js';
 import { useLanguage } from '../context/LanguageContext.jsx';
@@ -20,7 +22,7 @@ const bestSellersBase = [
     badgeFr: '#1 Meilleure Vente',
     badgeEn: '#1 Best Seller',
     rating: 4.9,
-    reviewsCount: '1 420',
+    reviewsCount: '67',
     price: 34.95,
     compareAt: 49.95,
     urlBase: '/products/vela-sculpt-sans-manches',
@@ -35,8 +37,8 @@ const bestSellersBase = [
         img: '/images/products/sans-manches/4.jpeg',
         hoverImg: '/images/products/sans-manches/5.jpeg',
       },
-      'Bleu Nuit': {
-        hex: '#232c3a',
+      'Black Or': {
+        hex: '#241f17',
         img: '/images/products/sans-manches/7.jpeg',
         hoverImg: '/images/products/sans-manches/8.jpeg',
       },
@@ -81,23 +83,23 @@ const bestSellersBase = [
     },
   },
   {
-    id: 'sans-manches-bleu-nuit',
+    id: 'sans-manches-black-or',
     handle: 'vela-sculpt-sans-manches',
-    defaultColor: 'Bleu Nuit',
-    titleFr: 'Vela Sculpt™ Sans Manches — Bleu Nuit',
-    titleEn: 'Vela Sculpt™ Sleeveless — Midnight Blue',
-    taglineFr: 'Teinte élégante & liberté totale de mouvement des bras',
-    taglineEn: 'Refined hue with targeted core shaping & full arm freedom',
-    badgeFr: 'Édition Élégance',
-    badgeEn: 'Elegance Edition',
+    defaultColor: 'Black Or',
+    titleFr: 'Vela Sculpt™ Sans Manches — Black Or',
+    titleEn: 'Vela Sculpt™ Sleeveless — Black Or',
+    taglineFr: 'Édition Black Or : maintien ciblé & finitions premium',
+    taglineEn: 'Black Or Edition: targeted core shaping & premium finish',
+    badgeFr: 'Édition Prestige',
+    badgeEn: 'Prestige Edition',
     rating: 4.8,
     reviewsCount: '890',
     price: 34.95,
     compareAt: 49.95,
     urlBase: '/products/vela-sculpt-sans-manches',
     colorData: {
-      'Bleu Nuit': {
-        hex: '#232c3a',
+      'Black Or': {
+        hex: '#241f17',
         img: '/images/products/sans-manches/7.jpeg',
         hoverImg: '/images/products/sans-manches/8.jpeg',
       },
@@ -265,7 +267,7 @@ const lifestyleItems = [
     taglineFr: 'Silhouette athlétique lissée & confiance en soi en toute circonstance',
     taglineEn: 'Streamlined athletic silhouette & renewed daily self-confidence',
     img: '/images/home/lifestyle-piscine.png',
-    to: '/products/vela-sculpt-sans-manches?color=Bleu+Nuit',
+    to: '/products/vela-sculpt-sans-manches?color=Black+Or',
   },
 ];
 
@@ -276,6 +278,7 @@ export default function HomePage() {
   const [thumbStyle, setThumbStyle] = useState({ width: '30%', transform: 'translateX(0%)' });
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(true);
+  const [showHowItWorks, setShowHowItWorks] = useState(false);
 
   useEffect(() => {
     document.title =
@@ -408,32 +411,49 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 5. OUR PROMISE / 30-DAY GUARANTEE */}
+      {/* 5. 30-DAY TRIAL / VIDEO BANNER */}
       <section className="ixh-promise">
-        <picture className="ixh-promise__media">
-          <source media="(max-width: 699px)" srcSet="/images/home/promise-mobile.jpg" />
-          <img
-            src="/images/home/promise-desktop.jpg"
-            alt={t('home.promise_title')}
-            className="ixh-promise__img"
-            loading="lazy"
-          />
-        </picture>
-        <div className="ixh-promise__card">
-          <div className="ixh-promise__eyebrow">
-            <svg className="ixh-ring" width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
-              <circle cx="17" cy="17" r="15" fill="none" stroke="#C4A265" strokeWidth="1.5" />
-              <g className="ixh-ring__spark">
-                <circle cx="17" cy="2" r="2.2" fill="#C4A265" />
-              </g>
+        <div className="ixh-promise__media">
+          <video
+            className="ixh-promise__video"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            ref={(el) => {
+              if (el) el.muted = true;
+            }}
+            aria-label={t('home.promise_cta')}
+          >
+            <source src="/videos/video-2.mp4" type="video/mp4" />
+          </video>
+          <div className="ixh-promise__scrim" aria-hidden="true" />
+        </div>
+        <div className="ixh-promise__action">
+          <button
+            type="button"
+            className="ixh-promise__btn"
+            onClick={() => setShowHowItWorks(true)}
+            aria-haspopup="dialog"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 16v-4" />
+              <path d="M12 8h.01" />
             </svg>
-            <span>{t('home.promise_eyebrow')}</span>
-          </div>
-          <h2 className="ixh-promise__title">{t('home.promise_title')}</h2>
-          <p className="ixh-promise__text">{t('home.promise_text')}</p>
-          <Link to="/pages/garantie" className="ixh-btn ixh-btn--dark ixh-promise__btn">
-            {t('home.promise_cta')}
-          </Link>
+            <span>{t('home.promise_cta')}</span>
+          </button>
         </div>
       </section>
 
@@ -475,7 +495,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 7. CUSTOMER REVIEWS */}
+      {/* 7. LIVE VIDEO REVIEWS */}
+      <VideoTestimonials />
+
+      {/* 8. CUSTOMER REVIEWS */}
       <CustomerReviews />
 
       {/* 8. FAQ */}
@@ -564,6 +587,12 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* 30-DAY TRIAL HOW-IT-WORKS MODAL */}
+      <HowItWorksModal
+        open={showHowItWorks}
+        onClose={() => setShowHowItWorks(false)}
+      />
     </div>
   );
 }

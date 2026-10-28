@@ -17,32 +17,6 @@ function Highlight({ text, bold }) {
   );
 }
 
-const featuredReviewsEn = [
-  {
-    name: 'Thomas R.',
-    meta: '34 yrs · Size L · Verified',
-    text: 'I finally enjoy wearing fitted dress shirts to work again. The visual smoothing under a shirt is stunning and stays 100% invisible.',
-    bold: 'visual smoothing under a shirt is stunning',
-  },
-  {
-    name: 'Laurent M.',
-    meta: '48 yrs · Size XL · Verified',
-    text: '8 hours a day at my desk without back pain. The tension bands keep my shoulders naturally pulled back without feeling tight.',
-    bold: 'shoulders naturally pulled back',
-  },
-  {
-    name: 'Kevin D.',
-    meta: '27 yrs · Size M · Verified',
-    text: 'Worn under a white summer tee: zero collar show, zero seam lines. The fabric is light and breathes easily all day.',
-    bold: 'zero collar show, zero seam lines',
-  },
-  {
-    name: 'David B.',
-    meta: '41 yrs · Size L · Verified',
-    text: 'Gives me back total confidence in my everyday wardrobe. You put it on in the morning and forget about it completely.',
-    bold: 'total confidence in my everyday wardrobe',
-  },
-];
 
 export default function CameraRolls() {
   const ref = useReveal();
@@ -53,7 +27,7 @@ export default function CameraRolls() {
       <div className="container">
         <div className="section-head reveal">
           <span className="eyebrow">
-            {lang === 'fr' ? 'Témoignages vérifiés · 45 000+ hommes' : 'Real Men · Verified Reviews'}
+            {lang === 'fr' ? 'Témoignages vérifiés · 67 avis clients' : 'Real Men · 67 Verified Reviews'}
           </span>
           <p className="rolls__score">
             <Stars value={4.9} size={15} />{' '}
@@ -78,9 +52,17 @@ export default function CameraRolls() {
 
         <div className="rolls__grid scroller">
           {featuredReviews.map((r, i) => {
-            const reviewItem = lang === 'fr' ? r : { ...r, ...featuredReviewsEn[i] };
+            const reviewItem =
+              lang === 'fr'
+                ? r
+                : {
+                    ...r,
+                    meta: r.metaEn || r.meta,
+                    text: r.textEn || r.text,
+                    bold: r.boldEn || r.bold,
+                  };
             return (
-              <article className="roll-card reveal" key={r.name} style={{ transitionDelay: `${i * 80}ms` }}>
+              <article className="roll-card reveal" key={r.name + i} style={{ transitionDelay: `${i * 80}ms` }}>
                 <div className="roll-card__photo" style={{ '--tint': r.tint }}>
                   {r.photo ? (
                     <img
@@ -111,8 +93,19 @@ export default function CameraRolls() {
           })}
         </div>
 
-        <a href="#reviews" className="rolls__more">
-          {lang === 'fr' ? 'Consulter les 1 420 avis vérifiés' : 'Read all 1,420+ verified reviews'}{' '}
+        <a
+          href="#reviews"
+          className="rolls__more"
+          onClick={(e) => {
+            e.preventDefault();
+            const el = document.getElementById('reviews');
+            if (el) {
+              el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              window.history.pushState(null, '', '#reviews');
+            }
+          }}
+        >
+          {lang === 'fr' ? 'Consulter les 67 avis vérifiés' : 'Read all 67 verified reviews'}{' '}
           <Icon name="arrow" size={16} />
         </a>
       </div>

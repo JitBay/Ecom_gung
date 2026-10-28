@@ -22,12 +22,32 @@ import TrackOrderPage from './pages/TrackOrderPage.jsx';
 import NotFound from './pages/NotFound.jsx';
 import { HERO_PRODUCT } from './data/catalog.js';
 
-// Jump to the top when the page changes
+// Handle scroll restoration and anchor hash navigation
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
+
   useEffect(() => {
+    if (hash) {
+      const targetId = hash.replace('#', '');
+      const scrollToTarget = () => {
+        const el = document.getElementById(targetId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return true;
+        }
+        return false;
+      };
+
+      if (!scrollToTarget()) {
+        const timer = setTimeout(scrollToTarget, 100);
+        return () => clearTimeout(timer);
+      }
+      return;
+    }
+
     window.scrollTo({ top: 0, behavior: 'instant' });
-  }, [pathname]);
+  }, [pathname, hash]);
+
   return null;
 }
 

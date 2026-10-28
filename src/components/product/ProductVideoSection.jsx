@@ -8,18 +8,20 @@ export default function ProductVideoSection() {
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
 
-  const togglePlay = () => {
+  const togglePlay = (e) => {
+    if (e && e.stopPropagation) e.stopPropagation();
     if (!videoRef.current) return;
     if (isPlaying) {
       videoRef.current.pause();
       setIsPlaying(false);
     } else {
-      videoRef.current.play();
+      videoRef.current.play().catch(() => {});
       setIsPlaying(true);
     }
   };
 
-  const toggleMute = () => {
+  const toggleMute = (e) => {
+    if (e && e.stopPropagation) e.stopPropagation();
     if (!videoRef.current) return;
     videoRef.current.muted = !isMuted;
     setIsMuted(!isMuted);
@@ -100,7 +102,12 @@ export default function ProductVideoSection() {
           </div>
         </div>
 
-        <div className="product-video-section__player-wrap">
+        <div
+          className="product-video-section__player-wrap"
+          onClick={togglePlay}
+          role="region"
+          aria-label={lang === 'fr' ? 'Lecteur vidéo produit' : 'Product video player'}
+        >
           <span className="product-video-section__live-pill">
             <span className="product-video-section__live-dot" />
             {lang === 'fr' ? 'Vidéo Produit HD' : 'HD Product Video'}
@@ -113,15 +120,24 @@ export default function ProductVideoSection() {
             loop
             muted
             playsInline
-            preload="metadata"
-            poster="/images/products/sans-manches/1.jpeg"
+            preload="auto"
           >
             <source src="/videos/product-sleeveless.mp4" type="video/mp4" />
-            <source src="/videos/video-banner.mov" type="video/quicktime" />
+            <source src="/videos/video-banner.mp4" type="video/mp4" />
             Votre navigateur ne supporte pas la lecture vidéo.
           </video>
 
           <div className="product-video-section__overlay" aria-hidden="true" />
+
+          {!isPlaying && (
+            <div className="product-video-section__big-play" aria-hidden="true">
+              <div className="product-video-section__big-play-btn">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
+                  <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+              </div>
+            </div>
+          )}
 
           <div className="product-video-section__controls">
             <button

@@ -3,16 +3,92 @@
 
 export const colorHex = {
   Noir: '#1a1a1a',
+  noir: '#1a1a1a',
   Blanc: '#f4f4f6',
+  blanc: '#f4f4f6',
   Gris: '#72757d',
+  gris: '#72757d',
   'Gris chiné': '#5a5d66',
-  'Bleu Nuit': '#232c3a',
+  'Gris Chiné': '#5a5d66',
+  'gris-chine': '#5a5d66',
+  'gris chine': '#5a5d66',
+  'Black Or': '#241f17',
+  'black-or': '#241f17',
+  'black or': '#241f17',
+  'Bleu Nuit': '#241f17',
+  'bleu-nuit': '#241f17',
+  'bleu nuit': '#241f17',
 };
 
 export const HERO_PRODUCT = 'vela-sculpt-sans-manches';
 export const LEGGINGS = HERO_PRODUCT; // Backwards compatibility alias
 
 export const products = [
+  {
+    handle: 'vela-sculpt-sans-manches',
+    title: 'Vela Sculpt™ — Sans Manches',
+    shortTitle: 'Sans Manches (Débardeur)',
+    subtitle: 'Débardeur de compression discret haute respirabilité',
+    tagline: 'Discrétion absolue sous les chemises légères, t-shirts d’été et séances de sport.',
+    badge: 'Ultra Discret',
+    modelType: 'sans-manches',
+    price: 34.95,
+    compareAt: 49.95,
+    rating: 4.8,
+    reviewCount: 980,
+    colors: ['Noir', 'Blanc', 'Gris', 'Black Or'],
+    colorImages: {
+      Noir: [
+        '/images/products/sans-manches/1.jpeg',
+        '/images/products/sans-manches/2.jpeg',
+        '/images/products/sans-manches/3.jpeg',
+      ],
+      Blanc: [
+        '/images/products/sans-manches/4.jpeg',
+        '/images/products/sans-manches/5.jpeg',
+        '/images/products/sans-manches/6.jpeg',
+      ],
+      Gris: [
+        '/images/products/sans-manches/10.jpeg',
+        '/images/products/sans-manches/11.jpeg',
+        '/images/products/sans-manches/12.jpeg',
+      ],
+      'Black Or': [
+        '/images/products/sans-manches/7.jpeg',
+        '/images/products/sans-manches/8.jpeg',
+        '/images/products/sans-manches/9.jpeg',
+      ],
+      'Bleu Nuit': [
+        '/images/products/sans-manches/7.jpeg',
+        '/images/products/sans-manches/8.jpeg',
+        '/images/products/sans-manches/9.jpeg',
+      ],
+    },
+    images: [
+      '/images/products/sans-manches/1.jpeg',
+      '/images/products/sans-manches/2.jpeg',
+      '/images/products/sans-manches/3.jpeg',
+      '/images/products/sans-manches/4.jpeg',
+      '/images/products/sans-manches/5.jpeg',
+      '/images/products/sans-manches/6.jpeg',
+      '/images/products/sans-manches/10.jpeg',
+      '/images/products/sans-manches/11.jpeg',
+      '/images/products/sans-manches/12.jpeg',
+      '/images/products/sans-manches/7.jpeg',
+      '/images/products/sans-manches/8.jpeg',
+      '/images/products/sans-manches/9.jpeg',
+    ],
+    sizes: ['S', 'M', 'L', 'XL', '2XL'],
+    usage: 'Discrétion absolue sous les chemises légères, t-shirts d’été et séances de sport.',
+    targetAvatar: 'Hommes de 25 à 40 ans cherchant à affiner et structurer leur silhouette en toute liberté de mouvement.',
+    technicalDetails: [
+      { label: 'Maille 3D respirante', desc: 'Évacuation active de la transpiration et fraîcheur maximale pour l’été ou le sport.' },
+      { label: 'Tissu seconde peau ultra-discret', desc: 'Emmanchures ergonomiques invisibles même sous chemise ouverte ou t-shirt léger.' },
+      { label: 'Zones de maintien ciblé', desc: 'Compression ciblée sur la sangle abdominale et les pectoraux sans compression excessive.' },
+      { label: 'Entretien facile', desc: 'Lavage délicat à 30°C en machine, séchage rapide à l’air libre.' },
+    ],
+    text: 'Le débardeur de compression Vela Sculpt™ Sans Manches offre une invisibilité totale sous vos vêtements légers. Il sculpte le torse, aplatit le ventre et affine les côtés tout en libérant totalement les bras.',
+  },
   {
     handle: 'vela-sculpt-demi-manches',
     title: 'Vela Sculpt™ — Demi-Manches',
@@ -24,7 +100,7 @@ export const products = [
     price: 39.95,
     compareAt: 59.95,
     rating: 4.9,
-    reviewCount: 1420,
+    reviewCount: 67,
     colors: ['Noir', 'Blanc', 'Gris'],
     colorImages: {
       Noir: [
@@ -64,66 +140,6 @@ export const products = [
       { label: 'Entretien facile', desc: 'Lavage délicat à 30°C en machine, séchage rapide à l’air libre.' },
     ],
     text: 'Conçu spécifiquement pour les hommes, le t-shirt de compression ergonomique Vela Sculpt™ Demi-Manches lisse visuellement la silhouette sous les chemises, polos et t-shirts tout en assurant un maintien postural naturel et un confort optimal tout au long de la journée.',
-  },
-  {
-    handle: 'vela-sculpt-sans-manches',
-    title: 'Vela Sculpt™ — Sans Manches',
-    shortTitle: 'Sans Manches (Débardeur)',
-    subtitle: 'Débardeur de compression discret haute respirabilité',
-    tagline: 'Discrétion absolue sous les chemises légères, t-shirts d’été et séances de sport.',
-    badge: 'Ultra Discret',
-    modelType: 'sans-manches',
-    price: 34.95,
-    compareAt: 49.95,
-    rating: 4.8,
-    reviewCount: 980,
-    colors: ['Noir', 'Blanc', 'Gris', 'Bleu Nuit'],
-    colorImages: {
-      Noir: [
-        '/images/products/sans-manches/1.jpeg',
-        '/images/products/sans-manches/2.jpeg',
-        '/images/products/sans-manches/3.jpeg',
-      ],
-      Blanc: [
-        '/images/products/sans-manches/4.jpeg',
-        '/images/products/sans-manches/5.jpeg',
-        '/images/products/sans-manches/6.jpeg',
-      ],
-      Gris: [
-        '/images/products/sans-manches/10.jpeg',
-        '/images/products/sans-manches/11.jpeg',
-        '/images/products/sans-manches/12.jpeg',
-      ],
-      'Bleu Nuit': [
-        '/images/products/sans-manches/7.jpeg',
-        '/images/products/sans-manches/8.jpeg',
-        '/images/products/sans-manches/9.jpeg',
-      ],
-    },
-    images: [
-      '/images/products/sans-manches/1.jpeg',
-      '/images/products/sans-manches/2.jpeg',
-      '/images/products/sans-manches/3.jpeg',
-      '/images/products/sans-manches/4.jpeg',
-      '/images/products/sans-manches/5.jpeg',
-      '/images/products/sans-manches/6.jpeg',
-      '/images/products/sans-manches/10.jpeg',
-      '/images/products/sans-manches/11.jpeg',
-      '/images/products/sans-manches/12.jpeg',
-      '/images/products/sans-manches/7.jpeg',
-      '/images/products/sans-manches/8.jpeg',
-      '/images/products/sans-manches/9.jpeg',
-    ],
-    sizes: ['S', 'M', 'L', 'XL', '2XL'],
-    usage: 'Discrétion absolue sous les chemises légères, t-shirts d’été et séances de sport.',
-    targetAvatar: 'Hommes de 25 à 40 ans cherchant à affiner et structurer leur silhouette en toute liberté de mouvement.',
-    technicalDetails: [
-      { label: 'Maille 3D respirante', desc: 'Évacuation active de la transpiration et fraîcheur maximale pour l’été ou le sport.' },
-      { label: 'Tissu seconde peau ultra-discret', desc: 'Emmanchures ergonomiques invisibles même sous chemise ouverte ou t-shirt léger.' },
-      { label: 'Zones de maintien ciblé', desc: 'Compression ciblée sur la sangle abdominale et les pectoraux sans compression excessive.' },
-      { label: 'Entretien facile', desc: 'Lavage délicat à 30°C en machine, séchage rapide à l’air libre.' },
-    ],
-    text: 'Le débardeur de compression Vela Sculpt™ Sans Manches offre une invisibilité totale sous vos vêtements légers. Il sculpte le torse, aplatit le ventre et affine les côtés tout en libérant totalement les bras.',
   },
   {
     handle: 'vela-sculpt-manches-longues',
@@ -181,15 +197,43 @@ export const products = [
 
 export const getColorImages = (product, color) => {
   if (!product) return [];
-  if (product.colorImages && color && product.colorImages[color]) {
+  if (!product.colorImages) return product.images || [];
+  if (!color) {
+    const firstColor = Object.keys(product.colorImages)[0];
+    return product.colorImages[firstColor] || product.images || [];
+  }
+
+  // 1. Direct exact key match
+  if (product.colorImages[color]) {
     return product.colorImages[color];
   }
-  // Default to first color images or flat images
-  if (product.colorImages) {
-    const firstColor = Object.keys(product.colorImages)[0];
-    return product.colorImages[firstColor];
+
+  // 2. Normalized match (case, accents, whitespace, and hyphens insensitive)
+  const norm = (s) =>
+    String(s || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[-_\s]+/g, '');
+
+  const target = norm(color);
+  for (const [key, imgs] of Object.entries(product.colorImages)) {
+    if (norm(key) === target) {
+      return imgs;
+    }
   }
-  return product.images || [];
+
+  // 3. Substring match (e.g. 'gris' vs 'gris chine')
+  for (const [key, imgs] of Object.entries(product.colorImages)) {
+    const k = norm(key);
+    if (k.includes(target) || target.includes(k)) {
+      return imgs;
+    }
+  }
+
+  // 4. Default to first color images or flat images
+  const firstColor = Object.keys(product.colorImages)[0];
+  return product.colorImages[firstColor] || product.images || [];
 };
 
 export const getProduct = (handle) => {
@@ -216,7 +260,7 @@ export const collections = [
     label: 'Tous nos modèles',
     title: 'La Gamme Vela Sculpt™',
     description: 'Découvrez nos 3 coupes ergonomiques conçues pour lisser la silhouette et soutenir la posture masculine au quotidien.',
-    items: ['vela-sculpt-demi-manches', 'vela-sculpt-sans-manches', 'vela-sculpt-manches-longues'],
+    items: ['vela-sculpt-sans-manches', 'vela-sculpt-demi-manches', 'vela-sculpt-manches-longues'],
   },
   {
     handle: 'sans-manches',

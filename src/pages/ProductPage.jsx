@@ -47,19 +47,19 @@ function SleevelessProductPage() {
       {/* 5. OTHER ERGONOMIC FITS */}
       <RelatedProducts exclude="vela-sculpt-sans-manches" />
 
-      {/* 5. VIDEO TESTIMONIALS */}
+      {/* 6. VIDEO TESTIMONIALS */}
       <VideoTestimonials />
 
-      {/* 6. QUALITY & TECHNOLOGY BREAKDOWN */}
+      {/* 7. QUALITY & TECHNOLOGY BREAKDOWN (4 TEXTILE CARDS) */}
       <QualitySection />
 
-      {/* 7. FAQ */}
+      {/* 8. FAQ */}
       <Faq />
 
-      {/* 8. VERIFIED CUSTOMER REVIEWS */}
+      {/* 9. VERIFIED CUSTOMER REVIEWS */}
       <CustomerReviews />
 
-      {/* 9. TRUST BADGES STRIP */}
+      {/* 10. TRUST BADGES STRIP */}
       <section className="ionix-trust" aria-label={t('home.trust_title')}>
         <div className="ionix-trust__inner">
           <div className="ionix-trust__item">
@@ -214,9 +214,21 @@ function ClassicProductPage({ product }) {
             </span>
           )}
           <h1 className="pp__title">{localized.title}</h1>
-          <p className="pp__rating">
-            <Stars value={product.rating || 4.9} size={15} /> <strong>{product.rating || 4.9}</strong> / 5 ({product.reviewCount || 1420}+ {t('product_page.reviews_count')})
-          </p>
+          <a
+            href="#reviews"
+            className="pp__rating"
+            onClick={(e) => {
+              e.preventDefault();
+              const el = document.getElementById('reviews');
+              if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                window.history.pushState(null, '', '#reviews');
+              }
+            }}
+            title={lang === 'fr' ? 'Consulter les avis clients vérifiés' : 'Read verified customer reviews'}
+          >
+            <Stars value={product.rating || 4.9} size={15} /> <strong>{product.rating || 4.9}</strong> / 5 ({product.reviewCount || 67} {t('product_page.reviews_count')})
+          </a>
 
           <p className="pp__tagline" style={{ color: 'var(--muted)', fontSize: 15, marginBottom: 14 }}>
             {localized.tagline}
@@ -328,6 +340,7 @@ function ClassicProductPage({ product }) {
 
       <SizeFinder open={sizeOpen} onClose={() => setSizeOpen(false)} onApply={(s) => { setSize(s); setSizeOpen(false); }} />
       <RelatedProducts exclude={product.handle} />
+      <CustomerReviews />
     </>
   );
 }
