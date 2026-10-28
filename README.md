@@ -15,6 +15,7 @@ Boutique e-commerce moderne et haute performance développée en **React 18 + Vi
 4. [Pages & Routes Disponibles](#-pages--routes-disponibles)
 5. [Structure du Projet](#-structure-du-projet)
 6. [Commandes Utiles](#-commandes-utiles)
+7. [Intégration & Déploiement Continu (CI/CD GitHub Actions)](#-intégration--déploiement-continu-cicd-github-actions)
 
 ---
 
@@ -201,3 +202,21 @@ Le conteneur de production intègre une configuration Nginx sur mesure dans [`ng
 - **Streaming Vidéo HTTP 206** : gestion des requêtes partielles (`Accept-Ranges: bytes`) pour les fichiers `.mp4` et `.mov`, permettant un démarrage immédiat des vidéos sans bloquer le téléchargement.
 - **Compression Gzip** : activée sur tous les fichiers texte, CSS, JavaScript et JSON pour réduire la bande passante jusqu'à 70%.
 - **Cache-Control Immuable** : mise en cache à long terme (`1 an`) des assets avec hachage pour des temps de chargement ultra-rapides.
+
+---
+
+## 🚀 Intégration & Déploiement Continu (CI/CD GitHub Actions)
+
+Le projet intègre une suite de workflows automatisés dans `.github/workflows/` :
+
+| Workflow | Fichier | Déclenchement | Description |
+|---|---|---|---|
+| **CI Pipeline** | [`.github/workflows/ci.yml`](./.github/workflows/ci.yml) | Push & PR (`main`, `feature/**`) | Valide le build sur **Node.js 18 et 20**, met en cache les dépendances npm, et vérifie la génération du bundle statique (`dist/index.html`). |
+| **Docker CI/CD** | [`.github/workflows/docker-publish.yml`](./.github/workflows/docker-publish.yml) | Push `main` ou tags `v*.*.*` | Compile l'image de production avec **Docker Buildx + QEMU**, met en cache les couches via `type=gha`, et publie l'image sur **GitHub Container Registry (GHCR)** (`ghcr.io/jitbay/ecom_gung`). |
+| **CD Deployment** | [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml) | Après build Docker ou manuel (`workflow_dispatch`) | Déploie automatiquement l'image Docker sur un **VPS via SSH** (ou déclenche un **Webhook** PaaS tel que Coolify / Portainer). |
+
+### 🔑 Variables et Secrets GitHub Actions (Optionnel pour déploiement auto) :
+- `VPS_HOST` : Adresse IP de votre serveur VPS.
+- `VPS_USERNAME` : Utilisateur SSH (ex: `ubuntu` ou `debian`).
+- `VPS_SSH_KEY` : Clé privée SSH pour le déploiement sans mot de passe.
+- `DEPLOY_WEBHOOK_URL` : URL de webhook pour redéploiement instantané (Coolify / Portainer / Dokku).
