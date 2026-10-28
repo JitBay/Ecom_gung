@@ -1,0 +1,43 @@
+.shopify-badges {
+  margin: 12px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.shopify-badges__icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.shopify-badge {
+  display: inline-flex;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.shopify-badge:hover {
+  transform: translateY(-1px);
+}
+
+.shopify-badges__note {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  color: #666;
+  font-weight: 500;
+  margin: 0;
+  text-align: center;
+}
+
+.shopify-badges__note svg {
+  color: #16a34a; /* Trust green */
+  flex-shrink: 0;
+}

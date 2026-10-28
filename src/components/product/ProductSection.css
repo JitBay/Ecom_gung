@@ -444,6 +444,14 @@
   color: var(--gold-dark);
 }
 
+.product__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 6px;
+  margin-bottom: 8px;
+}
+
 .guarantee {
   display: flex;
   align-items: center;

@@ -5,6 +5,8 @@ import BundlePicker from './BundlePicker.jsx';
 import ProductDetails from './ProductDetails.jsx';
 import SizeFinder from './SizeFinder.jsx';
 import StickyCart from './StickyCart.jsx';
+import ShopifyBuyButton from '../shopify/ShopifyBuyButton.jsx';
+import ShopifyPaymentBadges from '../shopify/ShopifyPaymentBadges.jsx';
 import Icon from '../ui/Icon.jsx';
 import Stars from '../ui/Stars.jsx';
 import { badges, badgesEn, benefits, benefitsEn, colors, stats, statsEn } from '../../data/product.js';
@@ -170,6 +172,27 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
     });
   };
 
+  const currentLineItem = useMemo(() => {
+    const detail = chosen
+      .map((v) => {
+        const c = availableColors.find((col) => col.id === v.color) || availableColors[0];
+        const colorLabel = t('color_names.' + c.label, c.label);
+        return `${colorLabel} / ${v.size}`;
+      })
+      .join(', ');
+
+    return {
+      id: `${currentModel.handle}-${bundle.id}`,
+      title: `${localizedModel.title} — ${bundle.title}`,
+      detail,
+      image: currentImages[0] || currentModel.images[0],
+      price: bundle.price,
+      compareAt: bundle.compareAt,
+      qty: 1,
+      freeShipping: Boolean(bundle.freeShipping),
+    };
+  }, [chosen, currentModel.handle, bundle, localizedModel.title, currentImages, availableColors, t]);
+
   const shipDate = new Date(Date.now() + 2 * 864e5).toLocaleDateString(lang === 'fr' ? 'fr-FR' : 'en-US', {
     month: 'long',
     day: 'numeric',
@@ -315,11 +338,24 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
           <Icon name="ruler" size={18} /> {lang === 'fr' ? 'Guide interactif : Trouver ma taille' : 'Interactive Size Guide: Find my size'}
         </button>
 
-        <button ref={atcRef} className="btn btn--dark btn--block atc" onClick={addToCart}>
-          {lang === 'fr'
-            ? `Commander — ${bundle.title} (${t('color_names.' + selectedColor, selectedColor)})`
-            : `Order — ${bundle.title} (${t('color_names.' + selectedColor, selectedColor)})`}
-        </button>
+        <div className="product__actions">
+          <button ref={atcRef} className="btn btn--dark btn--block atc" onClick={addToCart}>
+            {lang === 'fr'
+              ? `Ajouter au panier — ${bundle.title}`
+              : `Add to Cart — ${bundle.title}`}
+          </button>
+
+          <ShopifyBuyButton
+            lineItem={currentLineItem}
+            label={
+              lang === 'fr'
+                ? `⚡ Acheter maintenant — Paiement Express`
+                : `⚡ Buy Now — Express Checkout`
+            }
+          />
+
+          <ShopifyPaymentBadges />
+        </div>
 
         <div className="product__ship">
           <span>

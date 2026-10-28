@@ -1,0 +1,57 @@
+.shopify-buy-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 15px 24px;
+  background-color: #2b6cb0; /* Distinct express checkout color */
+  background: linear-gradient(180deg, #1f6feb 0%, #1158c7 100%);
+  color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 6px rgba(31, 111, 235, 0.25);
+  user-select: none;
+}
+
+.shopify-buy-btn:hover:not(:disabled) {
+  background: linear-gradient(180deg, #1a62d6 0%, #0d4bb0 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(31, 111, 235, 0.35);
+}
+
+.shopify-buy-btn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(31, 111, 235, 0.2);
+}
+
+.shopify-buy-btn:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+.shopify-buy-btn__icon {
+  flex-shrink: 0;
+}
+
+.shopify-buy-btn__spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: shopify-spin 0.6s linear infinite;
+}
+
+@keyframes shopify-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

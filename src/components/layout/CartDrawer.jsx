@@ -1,4 +1,5 @@
 import Icon from '../ui/Icon.jsx';
+import ShopifyPaymentBadges from '../shopify/ShopifyPaymentBadges.jsx';
 import { useCart } from '../../context/CartContext.jsx';
 import { useLanguage } from '../../context/LanguageContext.jsx';
 import { useLockScroll } from '../../lib/hooks.js';
@@ -8,7 +9,7 @@ import './CartDrawer.css';
 const FREE_SHIPPING = 55;
 
 export default function CartDrawer() {
-  const { lines, open, setOpen, setQty, total, count } = useCart();
+  const { lines, open, setOpen, setQty, total, count, checkout, isCheckingOut } = useCart();
   const { t, lang } = useLanguage();
   useLockScroll(open);
 
@@ -94,13 +95,23 @@ export default function CartDrawer() {
               <span>{t('cart.subtotal')}</span>
               <strong>{price(total)}</strong>
             </p>
-            <button className="btn btn--dark btn--block">
-              <Icon name="lock" size={16} /> {t('cart.checkout')}
+            <button
+              className="btn btn--dark btn--block"
+              onClick={() => checkout()}
+              disabled={isCheckingOut}
+            >
+              <Icon name="lock" size={16} />{' '}
+              {isCheckingOut
+                ? lang === 'fr'
+                  ? 'Redirection vers Shopify...'
+                  : 'Redirecting to Shopify...'
+                : t('cart.checkout')}
             </button>
+            <ShopifyPaymentBadges />
             <small>
               {lang === 'fr'
-                ? 'Garantie Satisfait ou Remboursé de 30 jours · Paiement SSL sécurisé'
-                : '30-Day Money-Back Guarantee · 256-bit SSL Secure Checkout'}
+                ? 'Garantie Satisfait ou Remboursé de 30 jours · Paiement SSL sécurisé Shopify'
+                : '30-Day Money-Back Guarantee · 256-bit SSL Secure Shopify Checkout'}
             </small>
           </footer>
         )}
