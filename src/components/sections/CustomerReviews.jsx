@@ -210,7 +210,6 @@ function Review({ r, lang, t, onHelpful, hasVoted, onPhotoClick }) {
         <div className="review__photos">
           {photos.map((src, i) => {
             const isVideo = src.endsWith('.mp4') || src.endsWith('.mov');
-            const thumbSrc = isVideo ? src.replace(/\.(mp4|mov)$/, '-poster.jpg') : src;
             return (
               <button
                 type="button"
@@ -219,17 +218,28 @@ function Review({ r, lang, t, onHelpful, hasVoted, onPhotoClick }) {
                 onClick={() => onPhotoClick({ src, isVideo, name: r.name, title })}
                 title={isVideo ? (lang === 'fr' ? 'Voir la vidéo client' : 'Watch customer video') : t('reviews_section.photo_preview')}
               >
-                <img src={thumbSrc} alt={`${r.name} review media ${i + 1}`} loading="lazy" />
                 {isVideo ? (
-                  <span className="review__photo-play" aria-hidden="true">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                      <polygon points="5 3 19 12 5 21 5 3" />
-                    </svg>
-                  </span>
+                  <>
+                    <video
+                      src={`${src}#t=0.001`}
+                      preload="metadata"
+                      muted
+                      playsInline
+                      className="review__photo-thumb review__video-thumb"
+                    />
+                    <span className="review__photo-play" aria-hidden="true">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <polygon points="5 3 19 12 5 21 5 3" />
+                      </svg>
+                    </span>
+                  </>
                 ) : (
-                  <span className="review__photo-zoom" aria-hidden="true">
-                    <Icon name="zoom" size={14} />
-                  </span>
+                  <>
+                    <img src={src} alt={`${r.name} review media ${i + 1}`} loading="lazy" />
+                    <span className="review__photo-zoom" aria-hidden="true">
+                      <Icon name="zoom" size={14} />
+                    </span>
+                  </>
                 )}
               </button>
             );

@@ -13,47 +13,44 @@ function getVal(field, lang) {
 }
 
 export default function VideoTestimonials() {
-  const [playingId, setPlayingId] = useState(null);
-  const [isMuted, setIsMuted] = useState(false);
+  const [unmutedId, setUnmutedId] = useState(null);
   const [progressMap, setProgressMap] = useState({});
   const [modalItem, setModalItem] = useState(null);
   const videoRefs = useRef({});
   const ref = useReveal();
   const { lang } = useLanguage();
 
-  const togglePlay = (id) => {
-    const video = videoRefs.current[id];
-    if (!video) return;
+  // Autoplay all videos in muted loop mode immediately on mount
+  useEffect(() => {
+    Object.entries(videoRefs.current).forEach(([id, vid]) => {
+      if (vid) {
+        vid.muted = unmutedId !== id;
+        vid.play().catch(() => {});
+      }
+    });
+  }, [unmutedId]);
 
-    if (playingId === id) {
-      video.pause();
-      setPlayingId(null);
+  const toggleSound = (e, id) => {
+    if (e && e.stopPropagation) e.stopPropagation();
+    const vid = videoRefs.current[id];
+    if (!vid) return;
+
+    if (unmutedId === id) {
+      vid.muted = true;
+      setUnmutedId(null);
     } else {
-      // Pause all other video cards
+      // Mute all others
       Object.entries(videoRefs.current).forEach(([k, v]) => {
-        if (k !== id && v && !v.paused) {
-          v.pause();
-        }
+        if (v) v.muted = k !== id;
       });
-      video.muted = isMuted;
-      video.play().then(() => {
-        setPlayingId(id);
+      vid.muted = false;
+      vid.play().then(() => {
+        setUnmutedId(id);
       }).catch(() => {
-        // Fallback to muted playback if blocked
-        video.muted = true;
-        setIsMuted(true);
-        video.play().then(() => setPlayingId(id)).catch(() => {});
+        vid.muted = true;
+        setUnmutedId(null);
       });
     }
-  };
-
-  const toggleMute = (e) => {
-    e.stopPropagation();
-    const next = !isMuted;
-    setIsMuted(next);
-    Object.values(videoRefs.current).forEach((v) => {
-      if (v) v.muted = next;
-    });
   };
 
   const handleTimeUpdate = (id, e) => {
@@ -64,18 +61,12 @@ export default function VideoTestimonials() {
     }
   };
 
-  const handleEnded = (id) => {
-    if (playingId === id) {
-      setPlayingId(null);
-    }
-    setProgressMap((prev) => ({ ...prev, [id]: 0 }));
-  };
-
   const openModal = (e, item) => {
-    e.stopPropagation();
-    if (playingId && videoRefs.current[playingId]) {
-      videoRefs.current[playingId].pause();
-      setPlayingId(null);
+    if (e && e.stopPropagation) e.stopPropagation();
+    // Mute background card video when opening modal
+    if (unmutedId && videoRefs.current[unmutedId]) {
+      videoRefs.current[unmutedId].muted = true;
+      setUnmutedId(null);
     }
     setModalItem(item);
   };
@@ -116,14 +107,14 @@ export default function VideoTestimonials() {
           </h2>
           <p className="subtitle">
             {lang === 'fr'
-              ? 'Trois acheteurs vérifiés, filmés en direct avec leurs propres mots — résultat visible et maintien postural sous la chemise.'
-              : 'Real verified buyers, unscripted in their own words — visible shaping and postural support under shirts & tees.'}
+              ? 'Cinq acheteurs vérifiés, filmés en direct avec leurs propres mots — résultat visible et maintien postural sous la chemise.'
+              : 'Five verified buyers, unscripted in their own words — visible shaping and postural support under shirts & tees.'}
           </p>
         </div>
 
         <div className="ugc__row">
           {videoTestimonials.map((v) => {
-            const isCurrentPlaying = playingId === v.id;
+            const hasSound = unmutedId === v.id;
             const progress = progressMap[v.id] || 0;
             const tag = getVal(v.tag, lang);
             const quote = getVal(v.quote, lang);
@@ -132,31 +123,32 @@ export default function VideoTestimonials() {
             return (
               <div
                 key={v.id}
-                className={`ugc-card ${isCurrentPlaying ? 'is-playing' : ''}`}
+                className={`ugc-card ${hasSound ? 'is-playing is-unmuted' : ''}`}
                 style={{ '--a': v.tint[0], '--b': v.tint[1] }}
-                onClick={() => togglePlay(v.id)}
+                onClick={(e) => toggleSound(e, v.id)}
                 role="button"
                 tabIndex={0}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
-                    togglePlay(v.id);
+                    toggleSound(e, v.id);
                   }
                 }}
                 aria-label={`${lang === 'fr' ? 'Avis vidéo de' : 'Video review from'} ${v.name}`}
               >
-                {/* HTML5 Vertical Video */}
+                {/* HTML5 Vertical Video — plays continuously without static poster image */}
                 <video
                   ref={(el) => {
                     if (el) videoRefs.current[v.id] = el;
                   }}
                   src={v.video}
-                  poster={v.poster}
+                  autoPlay
+                  loop
+                  muted={!hasSound}
                   playsInline
-                  preload="metadata"
+                  preload="auto"
                   className="ugc-card__video"
                   onTimeUpdate={(e) => handleTimeUpdate(v.id, e)}
-                  onEnded={() => handleEnded(v.id)}
                 />
 
                 {/* Subtle vignette/scrim overlay for caption legibility */}
@@ -171,10 +163,10 @@ export default function VideoTestimonials() {
                   <div className="ugc-card__controls">
                     <button
                       type="button"
-                      className="ugc-card__btn-icon"
-                      onClick={toggleMute}
-                      title={isMuted ? (lang === 'fr' ? 'Activer le son' : 'Unmute') : (lang === 'fr' ? 'Couper le son' : 'Mute')}
-                      aria-label={isMuted ? 'Activer le son' : 'Couper le son'}
+                      className={`ugc-card__btn-icon ${hasSound ? 'is-active' : ''}`}
+                      onClick={(e) => toggleSound(e, v.id)}
+                      title={hasSound ? (lang === 'fr' ? 'Couper le son' : 'Mute') : (lang === 'fr' ? 'Activer le son' : 'Unmute')}
+                      aria-label={hasSound ? 'Couper le son' : 'Activer le son'}
                     >
                       <Icon name="sound" size={14} />
                     </button>
@@ -190,15 +182,16 @@ export default function VideoTestimonials() {
                   </div>
                 </div>
 
-                {/* Center Play Button Overlay */}
+                {/* Center Sound / Action Indicator */}
                 <div className="ugc-card__play" aria-hidden="true">
-                  {isCurrentPlaying ? (
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                      <rect x="6" y="4" width="4" height="16" rx="1" />
-                      <rect x="14" y="4" width="4" height="16" rx="1" />
-                    </svg>
+                  {hasSound ? (
+                    <div className="ugc-card__sound-wave">
+                      <span />
+                      <span />
+                      <span />
+                    </div>
                   ) : (
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
                       <polygon points="5 3 19 12 5 21 5 3" />
                     </svg>
                   )}
@@ -268,7 +261,6 @@ export default function VideoTestimonials() {
 
             <video
               src={modalItem.video}
-              poster={modalItem.poster}
               controls
               autoPlay
               playsInline

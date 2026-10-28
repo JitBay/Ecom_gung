@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import VideoTestimonials from '../components/sections/VideoTestimonials.jsx';
-import CustomerReviews from '../components/sections/CustomerReviews.jsx';
 import Stars from '../components/ui/Stars.jsx';
 import HowItWorksModal from '../components/ui/HowItWorksModal.jsx';
 import { brand } from '../data/site.js';
@@ -415,6 +413,7 @@ export default function HomePage() {
       <section className="ixh-promise">
         <div className="ixh-promise__media">
           <video
+            src="/videos/video-2.mp4"
             className="ixh-promise__video"
             autoPlay
             loop
@@ -422,7 +421,10 @@ export default function HomePage() {
             playsInline
             preload="auto"
             ref={(el) => {
-              if (el) el.muted = true;
+              if (el) {
+                el.muted = true;
+                el.play().catch(() => {});
+              }
             }}
             aria-label={t('home.promise_cta')}
           >
@@ -494,12 +496,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* 7. LIVE VIDEO REVIEWS */}
-      <VideoTestimonials />
-
-      {/* 8. CUSTOMER REVIEWS */}
-      <CustomerReviews />
 
       {/* 8. FAQ */}
       <section className="ixh-faq" id="faq">

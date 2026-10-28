@@ -618,8 +618,8 @@
 /* --- PROMISE SECTION --- */
 .ixh-promise {
   position: relative;
-  height: clamp(480px, 42vw, 660px);
-  min-height: 440px;
+  height: clamp(520px, 48vw, 720px);
+  min-height: 500px;
   overflow: hidden;
   background: #ede6db;
   font-family: var(--sans);
@@ -702,7 +702,7 @@
 
 @media (max-width: 699px) {
   .ixh-promise {
-    height: clamp(380px, 70vw, 460px);
+    height: clamp(380px, 75vw, 500px);
     min-height: 360px;
   }
 

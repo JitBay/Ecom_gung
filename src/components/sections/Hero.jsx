@@ -57,7 +57,7 @@ export default function Hero({ initialHandle, onSelectModel, showModelSelector =
         .catch(() => {
           setIsHeroPlaying(false);
           const onFirstTouch = () => {
-            video.play().then(() => setIsHeroPlaying(true)).catch(() => {});
+            video.play().then(() => setIsHeroPlaying(true)).catch(() => { });
             window.removeEventListener('click', onFirstTouch);
             window.removeEventListener('touchstart', onFirstTouch);
           };
@@ -72,7 +72,7 @@ export default function Hero({ initialHandle, onSelectModel, showModelSelector =
     const video = videoRef.current;
     if (!video) return;
     if (video.paused) {
-      video.play().then(() => setIsHeroPlaying(true)).catch(() => {});
+      video.play().then(() => setIsHeroPlaying(true)).catch(() => { });
     } else {
       video.pause();
       setIsHeroPlaying(false);
@@ -92,16 +92,14 @@ export default function Hero({ initialHandle, onSelectModel, showModelSelector =
         <h1 className="hero__title">
           {lang === 'fr' ? (
             <>
-              <span>Une silhouette plus nette.</span>
-              <span>Un maintien postural naturel.</span>
+              <span className="hero__title-line">Une silhouette plus nette. Un maintien postural naturel.</span>
               <span>
                 Dès que vous <u>l’enfilez</u>.
               </span>
             </>
           ) : (
             <>
-              <span>A cleaner silhouette.</span>
-              <span>Natural posture support.</span>
+              <span className="hero__title-line">A cleaner silhouette. Natural posture support.</span>
               <span>
                 The minute you <u>pull it on</u>.
               </span>
@@ -181,7 +179,8 @@ export default function Hero({ initialHandle, onSelectModel, showModelSelector =
                 aria-label={getLocalizedProduct(currentProduct, lang).title}
               >
                 <source src="/videos/sleevless.mp4" type="video/mp4" />
-                <source src="/videos/video-banner.mp4" type="video/mp4" />
+                <source src="/videos/product-sleeveless.mp4" type="video/mp4" />
+                <source src="/videos/video-2.mp4" type="video/mp4" />
               </video>
               {!isHeroPlaying && (
                 <button

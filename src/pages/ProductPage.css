@@ -307,11 +307,27 @@
 
 @media (max-width: 899px) {
   .product-page-wrap {
-  width: 100%;
-  min-height: 100vh;
-}
+    width: 100%;
+    min-height: 100vh;
+  }
 
-.pp {
+  .pp {
     grid-template-columns: minmax(0, 1fr);
   }
+}
+
+/* Apply only to the Sleeveless product video */
+.sleeveless-product .product-video-container {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.sleeveless-product .product-video-container video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
 }

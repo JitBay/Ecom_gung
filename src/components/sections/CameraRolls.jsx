@@ -65,12 +65,23 @@ export default function CameraRolls() {
               <article className="roll-card reveal" key={r.name + i} style={{ transitionDelay: `${i * 80}ms` }}>
                 <div className="roll-card__photo" style={{ '--tint': r.tint }}>
                   {r.photo ? (
-                    <img
-                      src={r.photo}
-                      alt={r.name}
-                      className="roll-card__img"
-                      loading="lazy"
-                    />
+                    r.photo.endsWith('.mp4') ? (
+                      <video
+                        src={r.photo}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        className="roll-card__img"
+                      />
+                    ) : (
+                      <img
+                        src={r.photo}
+                        alt={r.name}
+                        className="roll-card__img"
+                        loading="lazy"
+                      />
+                    )
                   ) : (
                     <span className="roll-card__initial">{r.name[0]}</span>
                   )}

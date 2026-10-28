@@ -483,46 +483,94 @@ export const reviews = [
     verified: true,
     helpful: 22,
   },
-];
-
-export const videoTestimonials = [
   {
-    id: 'ugc-1',
-    reviewId: 'rev-7',
-    name: 'Kevin L.',
-    age: 31,
+    id: 'rev-18',
+    name: 'Thomas B.',
+    date: '2026-09-21',
     rating: 5,
-    video: '/reviews/7.mp4',
-    poster: '/reviews/7-poster.jpg',
-    tag: {
-      fr: 'Gainage lombaire & pectoral · 31 ans',
-      en: 'Chest & lower back support · 31 yrs',
-    },
     title: {
-      fr: 'Vidéo test : maintien et silhouette au top',
-      en: 'Video test: great posture & sculpt',
+      fr: 'Retour vidéo : maintien du dos exceptionnel',
+      en: 'Video review: exceptional back support',
     },
-    quote: {
-      fr: 'Le gainage lombaire et pectoral est immédiat. Rien ne compresse trop fort, ça maintient juste parfaitement.',
-      en: 'Chest and lower back compression is immediate. Nothing pinches, it supports just right.',
+    text: {
+      fr: 'Le maintien au niveau des épaules et du dos est bluffant. On se tient droit naturellement sans effort toute la journée.',
+      en: 'The shoulder and back support is amazing. You stand straight naturally all day without effort.',
+    },
+    product: {
+      fr: 'Col Rond · Sans Manches · Noir / M',
+      en: 'Crew Neck · Sleeveless · Black / M',
+    },
+    fit: {
+      fr: 'Fidèle à la taille',
+      en: 'True to size',
+    },
+    photos: ['/reviews/18.mp4'],
+    verified: true,
+    helpful: 35,
+  },
+  {
+    id: 'rev-19',
+    name: 'Julien V.',
+    date: '2026-09-17',
+    rating: 5,
+    title: {
+      fr: 'Test en direct : silhouette nette sous chemise',
+      en: 'Live test: sharp silhouette under dress shirts',
+    },
+    text: {
+      fr: 'Sous une chemise cintrée au travail, le ventre est totalement aplati et aucune démarcation ne se voit. C’est devenu mon indispensable.',
+      en: 'Under a fitted dress shirt at work, the belly is completely flattened and zero seams show. It’s become my daily essential.',
+    },
+    product: {
+      fr: 'Col V · Sans Manches · Blanc / L',
+      en: 'V-Neck · Sleeveless · White / L',
+    },
+    fit: {
+      fr: 'Fidèle à la taille',
+      en: 'True to size',
+    },
+    photos: ['/reviews/19.mp4'],
+    verified: true,
+    helpful: 29,
+  },
+  {
+    id: 'rev-20',
+    name: 'Marc D.',
+    date: '2026-09-12',
+    rating: 5,
+    title: {
+      fr: 'Avis en salle : respirant et ultra résistant',
+      en: 'Gym review: breathable and super durable',
+    },
+    text: {
+      fr: 'Testé en musculation et cardio : gainage ferme sur la sangle abdominale sans restreindre la respiration. Ne remonte pas du tout à l’effort.',
+      en: 'Tested in the gym and cardio: firm core support without restricting breathing. Does not roll up at all during workouts.',
     },
     product: {
       fr: 'Col Rond · Sans Manches · Noir / L',
       en: 'Crew Neck · Sleeveless · Black / L',
     },
-    tint: ['#1e293b', '#0f172a'],
+    fit: {
+      fr: 'Fidèle à la taille',
+      en: 'True to size',
+    },
+    photos: ['/reviews/20.mp4'],
+    verified: true,
+    helpful: 42,
   },
+];
+
+export const videoTestimonials = [
   {
-    id: 'ugc-2',
+    id: 'ugc-8',
     reviewId: 'rev-8',
     name: 'Alex M.',
     age: 28,
     rating: 5,
     video: '/reviews/8.mp4',
-    poster: '/reviews/8-poster.jpg',
     tag: {
-      fr: 'Différence visuelle flagrante · 28 ans',
-      en: 'Striking visual difference · 28 yrs',
+      fr: 'Gainage instantané · 28 ans',
+      en: 'Instant shaping · 28 yrs',
     },
     title: {
       fr: 'Mon avis en direct : gainage instantané',
@@ -539,13 +587,12 @@ export const videoTestimonials = [
     tint: ['#283548', '#1a2230'],
   },
   {
-    id: 'ugc-3',
+    id: 'ugc-9',
     reviewId: 'rev-9',
     name: 'Marcus J.',
     age: 35,
     rating: 5,
     video: '/reviews/9.mp4',
-    poster: '/reviews/9-poster.jpg',
     tag: {
       fr: 'Invisible sous la chemise · 35 ans',
       en: 'Invisible under dress shirts · 35 yrs',
@@ -563,5 +610,80 @@ export const videoTestimonials = [
       en: 'Crew Neck · Sleeveless · Black / XL',
     },
     tint: ['#1f2937', '#111827'],
+  },
+  {
+    id: 'ugc-18',
+    reviewId: 'rev-18',
+    name: 'Thomas B.',
+    age: 32,
+    rating: 5,
+    video: '/reviews/18.mp4',
+    tag: {
+      fr: 'Maintien du dos · 32 ans',
+      en: 'Back support · 32 yrs',
+    },
+    title: {
+      fr: 'Retour vidéo : maintien du dos exceptionnel',
+      en: 'Video review: exceptional back support',
+    },
+    quote: {
+      fr: 'Le maintien au niveau des épaules et du dos est bluffant. On se tient droit naturellement sans effort toute la journée.',
+      en: 'The shoulder and back support is amazing. You stand straight naturally all day without effort.',
+    },
+    product: {
+      fr: 'Col Rond · Sans Manches · Noir / M',
+      en: 'Crew Neck · Sleeveless · Black / M',
+    },
+    tint: ['#1e293b', '#0f172a'],
+  },
+  {
+    id: 'ugc-19',
+    reviewId: 'rev-19',
+    name: 'Julien V.',
+    age: 36,
+    rating: 5,
+    video: '/reviews/19.mp4',
+    tag: {
+      fr: 'Ventre aplati instantanément · 36 ans',
+      en: 'Instantly flattened belly · 36 yrs',
+    },
+    title: {
+      fr: 'Test en direct : silhouette nette sous chemise',
+      en: 'Live test: sharp silhouette under dress shirts',
+    },
+    quote: {
+      fr: 'Sous une chemise cintrée au travail, le ventre est totalement aplati et aucune démarcation ne se voit.',
+      en: 'Under a fitted dress shirt at work, the belly is completely flattened and zero seams show.',
+    },
+    product: {
+      fr: 'Col V · Sans Manches · Blanc / L',
+      en: 'V-Neck · Sleeveless · White / L',
+    },
+    tint: ['#242c38', '#141a22'],
+  },
+  {
+    id: 'ugc-20',
+    reviewId: 'rev-20',
+    name: 'Marc D.',
+    age: 29,
+    rating: 5,
+    video: '/reviews/20.mp4',
+    tag: {
+      fr: 'Séances de sport & confort · 29 ans',
+      en: 'Workouts & all-day comfort · 29 yrs',
+    },
+    title: {
+      fr: 'Avis en salle : respirant et ultra résistant',
+      en: 'Gym review: breathable and super durable',
+    },
+    quote: {
+      fr: 'Testé en musculation : gainage ferme sur la sangle abdominale sans restreindre la respiration. Ne remonte pas du tout.',
+      en: 'Tested in the gym: firm core support without restricting breathing. Does not roll up at all.',
+    },
+    product: {
+      fr: 'Col Rond · Sans Manches · Noir / L',
+      en: 'Crew Neck · Sleeveless · Black / L',
+    },
+    tint: ['#1c2530', '#101720'],
   },
 ];

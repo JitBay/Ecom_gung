@@ -15,7 +15,7 @@ export default function ProductVideoSection() {
       videoRef.current.pause();
       setIsPlaying(false);
     } else {
-      videoRef.current.play().catch(() => {});
+      videoRef.current.play().catch(() => { });
       setIsPlaying(true);
     }
   };
@@ -103,7 +103,7 @@ export default function ProductVideoSection() {
         </div>
 
         <div
-          className="product-video-section__player-wrap"
+          className="product-video-section__player-wrap product-video-container"
           onClick={togglePlay}
           role="region"
           aria-label={lang === 'fr' ? 'Lecteur vidéo produit' : 'Product video player'}
@@ -115,6 +115,7 @@ export default function ProductVideoSection() {
 
           <video
             ref={videoRef}
+            src="/videos/sleevless.mp4"
             className="product-video-section__video"
             autoPlay
             loop
@@ -122,8 +123,9 @@ export default function ProductVideoSection() {
             playsInline
             preload="auto"
           >
+            <source src="/videos/sleevless.mp4" type="video/mp4" />
             <source src="/videos/product-sleeveless.mp4" type="video/mp4" />
-            <source src="/videos/video-banner.mp4" type="video/mp4" />
+            <source src="/videos/video-2.mp4" type="video/mp4" />
             Votre navigateur ne supporte pas la lecture vidéo.
           </video>
 
