@@ -214,8 +214,18 @@ Le projet intègre une suite de workflows automatisés dans `.github/workflows/`
 | **CI Pipeline** | [`.github/workflows/ci.yml`](./.github/workflows/ci.yml) | Push & PR (`main`, `feature/**`) | Valide le build sur **Node.js 18 et 20**, met en cache les dépendances npm, et vérifie la génération du bundle statique (`dist/index.html`). |
 | **Docker CI/CD** | [`.github/workflows/docker-publish.yml`](./.github/workflows/docker-publish.yml) | Push `main` ou tags `v*.*.*` | Compile l'image de production avec **Docker Buildx + QEMU**, met en cache les couches via `type=gha`, et publie l'image sur **GitHub Container Registry (GHCR)** (`ghcr.io/jitbay/ecom_gung`). |
 | **CD Deployment** | [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml) | Après build Docker ou manuel (`workflow_dispatch`) | Déploie automatiquement l'image Docker sur un **VPS via SSH** (ou déclenche un **Webhook** PaaS tel que Coolify / Portainer). |
+| **GitHub Pages** | [`.github/workflows/deploy-github-pages.yml`](./.github/workflows/deploy-github-pages.yml) | Push `main` / `feature/ionix-clone` ou manuel | Déploie automatiquement le site web en direct sur **GitHub Pages** sans aucun serveur externe. |
 
-### 🔑 Variables et Secrets GitHub Actions (Optionnel pour déploiement auto) :
+### 🌐 Déploiement 100% Gratuit sur GitHub Pages (Sans serveur)
+
+Pour voir votre boutique en ligne directement hébergée sur GitHub :
+1. Rendez-vous sur votre dépôt : `https://github.com/JitBay/Ecom_gung`
+2. Cliquez sur l'onglet **Settings** > menu de gauche **Pages**
+3. Dans la section **Build and deployment** > **Source**, sélectionnez **GitHub Actions**
+4. Dès le prochain push ou en cliquant sur **Run workflow** dans l'onglet **Actions**, votre site sera accessible en direct sur :  
+   👉 **`https://jitbay.github.io/Ecom_gung/`**
+
+### 🔑 Variables et Secrets GitHub Actions (Optionnel pour VPS / Webhooks) :
 - `VPS_HOST` : Adresse IP de votre serveur VPS.
 - `VPS_USERNAME` : Utilisateur SSH (ex: `ubuntu` ou `debian`).
 - `VPS_SSH_KEY` : Clé privée SSH pour le déploiement sans mot de passe.
