@@ -15,9 +15,6 @@ export const colorHex = {
   'Black Or': '#241f17',
   'black-or': '#241f17',
   'black or': '#241f17',
-  'Bleu Nuit': '#241f17',
-  'bleu-nuit': '#241f17',
-  'bleu nuit': '#241f17',
 };
 
 export const HERO_PRODUCT = 'vela-sculpt-sans-manches';
@@ -54,11 +51,6 @@ export const products = [
         '/images/products/sans-manches/12.jpeg',
       ],
       'Black Or': [
-        '/images/products/sans-manches/7.jpeg',
-        '/images/products/sans-manches/8.jpeg',
-        '/images/products/sans-manches/9.jpeg',
-      ],
-      'Bleu Nuit': [
         '/images/products/sans-manches/7.jpeg',
         '/images/products/sans-manches/8.jpeg',
         '/images/products/sans-manches/9.jpeg',

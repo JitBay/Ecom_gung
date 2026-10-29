@@ -5,6 +5,7 @@ import { price } from '../../lib/format.js';
 import './BundlePicker.css';
 
 function VariantRows({ variants, onChange, productImage, availableColors, lang }) {
+  const { t } = useLanguage();
   const colorList = availableColors && availableColors.length ? availableColors : defaultColors;
 
   return (
@@ -32,7 +33,7 @@ function VariantRows({ variants, onChange, productImage, availableColors, lang }
               >
                 {colorList.map((c) => (
                   <option key={c.id} value={c.id}>
-                    {c.label}
+                    {t('color_names.' + c.label, c.label)}
                   </option>
                 ))}
               </select>

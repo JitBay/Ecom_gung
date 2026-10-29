@@ -13,7 +13,6 @@ export const colors = [
   { id: 'blanc', label: 'Blanc', hex: '#f8f8fa' },
   { id: 'gris', label: 'Gris chiné', hex: '#63666f' },
   { id: 'black-or', label: 'Black Or', hex: '#221e17' },
-  { id: 'bleu-nuit', label: 'Black Or', hex: '#221e17' },
 ];
 
 export const sizes = ['S', 'M', 'L', 'XL', '2XL'];
