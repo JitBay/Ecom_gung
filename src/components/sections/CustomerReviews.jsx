@@ -6,7 +6,7 @@ import { useLanguage } from '../../context/LanguageContext.jsx';
 import { shortDate } from '../../lib/format.js';
 import './CustomerReviews.css';
 
-const INITIAL_VISIBLE = 4;
+const REVIEWS_PER_PAGE = 5;
 const total = ratingBreakdown.reduce((n, r) => n + r.count, 0);
 
 const sorters = {
@@ -272,7 +272,7 @@ export default function CustomerReviews() {
   const [starFilter, setStarFilter] = useState(null);
   const [photosOnly, setPhotosOnly] = useState(false);
   const [search, setSearch] = useState('');
-  const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE);
+  const [page, setPage] = useState(1);
   const [writing, setWriting] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [votedMap, setVotedMap] = useState({});
@@ -317,7 +317,33 @@ export default function CustomerReviews() {
     return [...filtered].sort(sorters[sort] || sorters.recent);
   }, [filtered, sort]);
 
-  const visible = sorted.slice(0, visibleCount);
+  const totalPages = Math.ceil(sorted.length / REVIEWS_PER_PAGE) || 1;
+  const safePage = Math.min(Math.max(1, page), totalPages);
+  const startIndex = (safePage - 1) * REVIEWS_PER_PAGE;
+  const endIndex = Math.min(startIndex + REVIEWS_PER_PAGE, sorted.length);
+  const visible = sorted.slice(startIndex, endIndex);
+
+  const handlePageChange = (newPage) => {
+    if (newPage < 1 || newPage > totalPages || newPage === safePage) return;
+    setPage(newPage);
+    const reviewsEl = document.getElementById('reviews');
+    if (reviewsEl) {
+      reviewsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  const getPageNumbers = () => {
+    if (totalPages <= 7) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
+    if (safePage <= 4) {
+      return [1, 2, 3, 4, 5, '...', totalPages];
+    }
+    if (safePage >= totalPages - 3) {
+      return [1, '...', totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
+    }
+    return [1, '...', safePage - 1, safePage, safePage + 1, '...', totalPages];
+  };
 
   const addReview = (r) => {
     setList((l) => [r, ...l]);
@@ -325,7 +351,7 @@ export default function CustomerReviews() {
     setStarFilter(null);
     setPhotosOnly(false);
     setSearch('');
-    setVisibleCount((prev) => Math.max(prev, INITIAL_VISIBLE));
+    setPage(1);
     setWriting(false);
     setSuccessMessage(t('reviews_section.form_success'));
     setTimeout(() => setSuccessMessage(''), 6000);
@@ -340,7 +366,7 @@ export default function CustomerReviews() {
     setStarFilter(null);
     setPhotosOnly(false);
     setSearch('');
-    setVisibleCount(INITIAL_VISIBLE);
+    setPage(1);
   };
 
   return (
@@ -376,7 +402,7 @@ export default function CustomerReviews() {
                   className={`reviews__bar-btn ${isSelected ? 'is-selected' : ''}`}
                   onClick={() => {
                     setStarFilter((curr) => (curr === r.stars ? null : r.stars));
-                    setPage(0);
+                    setPage(1);
                     setTimeout(() => {
                       const listEl = document.querySelector('.reviews__list') || document.querySelector('.reviews__toolbar');
                       if (listEl) {
@@ -409,7 +435,7 @@ export default function CustomerReviews() {
               value={sort}
               onChange={(e) => {
                 setSort(e.target.value);
-                setVisibleCount(INITIAL_VISIBLE);
+                setPage(1);
               }}
               aria-label={lang === 'fr' ? 'Trier les avis' : 'Sort reviews'}
             >
@@ -449,7 +475,6 @@ export default function CustomerReviews() {
           <span className="reviews__ai-tag">✓ {t('reviews_section.ai_tag_fit')}</span>
         </div>
       </div>
-
       {/* Toolbar: Search and Filter Chips */}
       <div className="reviews__toolbar">
         <div className="reviews__search">
@@ -460,7 +485,7 @@ export default function CustomerReviews() {
             value={search}
             onChange={(e) => {
               setSearch(e.target.value);
-              setVisibleCount(INITIAL_VISIBLE);
+              setPage(1);
             }}
           />
           {search && (
@@ -488,7 +513,7 @@ export default function CustomerReviews() {
             className={`reviews__filter-btn ${photosOnly ? 'is-active' : ''}`}
             onClick={() => {
               setPhotosOnly((p) => !p);
-              setVisibleCount(INITIAL_VISIBLE);
+              setPage(1);
             }}
           >
             📷 {t('reviews_section.filter_photos')}
@@ -503,7 +528,7 @@ export default function CustomerReviews() {
           {starFilter !== null && (
             <span className="reviews__chip">
               {starFilter}★ ({ratingBreakdown.find((b) => b.stars === starFilter)?.count || 0})
-              <button type="button" onClick={() => setStarFilter(null)} aria-label="Supprimer filtre">
+              <button type="button" onClick={() => { setStarFilter(null); setPage(1); }} aria-label="Supprimer filtre">
                 <Icon name="close" size={11} />
               </button>
             </span>
@@ -511,7 +536,7 @@ export default function CustomerReviews() {
           {photosOnly && (
             <span className="reviews__chip">
               {t('reviews_section.filter_photos')}
-              <button type="button" onClick={() => setPhotosOnly(false)} aria-label="Supprimer filtre">
+              <button type="button" onClick={() => { setPhotosOnly(false); setPage(1); }} aria-label="Supprimer filtre">
                 <Icon name="close" size={11} />
               </button>
             </span>
@@ -519,7 +544,7 @@ export default function CustomerReviews() {
           {search.trim() && (
             <span className="reviews__chip">
               « {search} »
-              <button type="button" onClick={() => setSearch('')} aria-label="Supprimer filtre">
+              <button type="button" onClick={() => { setSearch(''); setPage(1); }} aria-label="Supprimer filtre">
                 <Icon name="close" size={11} />
               </button>
             </span>
@@ -554,21 +579,64 @@ export default function CustomerReviews() {
         </div>
       )}
 
-      {/* Load More Reviews Button */}
-      {visibleCount < sorted.length && (
-        <div className="reviews__more-container">
-          <button
-            type="button"
-            className="reviews__more-btn"
-            onClick={() => setVisibleCount((prev) => prev + 4)}
-          >
-            <span>
-              {lang === 'fr'
-                ? `Afficher plus d'avis (${sorted.length - visibleCount} restants)`
-                : `More reviews (${sorted.length - visibleCount} remaining)`}
-            </span>
-            <Icon name="arrow" size={16} />
-          </button>
+      {/* Pagination Controls */}
+      {totalPages > 1 && (
+        <div className="reviews__pagination">
+          <p className="reviews__pagination-info">
+            {t('reviews_section.showing_count', {
+              from: startIndex + 1,
+              to: endIndex,
+              total: sorted.length,
+            })}
+          </p>
+          <nav className="pager" aria-label={t('reviews_section.page_label')}>
+            <button
+              type="button"
+              className="pager__nav pager__nav--prev"
+              onClick={() => handlePageChange(safePage - 1)}
+              disabled={safePage <= 1}
+              aria-label={t('reviews_section.page_prev')}
+              title={t('reviews_section.page_prev')}
+            >
+              <Icon name="chevronLeft" size={16} strokeWidth={2.2} />
+            </button>
+
+            <div className="pager__pages">
+              {getPageNumbers().map((p, idx) => {
+                if (p === '...') {
+                  return (
+                    <span key={`dots-${idx}`} className="pager__dots" aria-hidden="true">
+                      …
+                    </span>
+                  );
+                }
+                const isCurrent = p === safePage;
+                return (
+                  <button
+                    key={p}
+                    type="button"
+                    className={`pager__page ${isCurrent ? 'is-active' : ''}`}
+                    onClick={() => handlePageChange(p)}
+                    aria-current={isCurrent ? 'page' : undefined}
+                    aria-label={t('reviews_section.page_number', { n: p })}
+                  >
+                    {p}
+                  </button>
+                );
+              })}
+            </div>
+
+            <button
+              type="button"
+              className="pager__nav pager__nav--next"
+              onClick={() => handlePageChange(safePage + 1)}
+              disabled={safePage >= totalPages}
+              aria-label={t('reviews_section.page_next')}
+              title={t('reviews_section.page_next')}
+            >
+              <Icon name="chevronRight" size={16} strokeWidth={2.2} />
+            </button>
+          </nav>
         </div>
       )}
 
@@ -591,7 +659,12 @@ export default function CustomerReviews() {
             </button>
             {activePhoto.isVideo || activePhoto.src?.endsWith('.mp4') || activePhoto.src?.endsWith('.mov') ? (
               <video
+                ref={(el) => {
+                  if (el) el.muted = true;
+                }}
                 src={activePhoto.src}
+                muted
+                loop
                 controls
                 autoPlay
                 playsInline
