@@ -13,7 +13,7 @@ const bestSellersBase = [
     id: 'sans-manches-noir',
     handle: 'vela-sculpt-sans-manches',
     defaultColor: 'Noir',
-    titleFr: 'Vela Sculpt™ Sans Manches — Noir',
+    titleFr: 'Vela Sculpt™ sans manches — Noir',
     titleEn: 'Vela Sculpt™ Sleeveless — Black',
     taglineFr: 'Invisibilité absolue sous chemises et t-shirts légers',
     taglineEn: 'Discreet and breathable core support under shirts & tees',
@@ -51,11 +51,11 @@ const bestSellersBase = [
     id: 'demi-manches-blanc',
     handle: 'vela-sculpt-demi-manches',
     defaultColor: 'Blanc',
-    titleFr: 'Vela Sculpt™ Demi-Manches — Blanc',
+    titleFr: 'Vela Sculpt™ demi-manches — Blanc',
     titleEn: 'Vela Sculpt™ Short Sleeves — White',
     taglineFr: '100% invisible sous chemises blanches habillées',
     taglineEn: '100% invisible under crisp white dress shirts & polos',
-    badgeFr: 'Spécial Chemise Blanche',
+    badgeFr: 'Spécial chemise blanche',
     badgeEn: 'White Shirt Essential',
     rating: 4.9,
     reviewsCount: '1 280',
@@ -84,10 +84,10 @@ const bestSellersBase = [
     id: 'sans-manches-black-or',
     handle: 'vela-sculpt-sans-manches',
     defaultColor: 'Black Or',
-    titleFr: 'Vela Sculpt™ Sans Manches — Black Or',
-    titleEn: 'Vela Sculpt™ Sleeveless — Black Or',
-    taglineFr: 'Édition Black Or : maintien ciblé & finitions premium',
-    taglineEn: 'Black Or Edition: targeted core shaping & premium finish',
+    titleFr: 'Vela Sculpt™ sans manches — Noir doré',
+    titleEn: 'Vela Sculpt™ Sleeveless — Black & Gold',
+    taglineFr: 'Édition Noir doré : maintien ciblé & finitions premium',
+    taglineEn: 'Black & Gold Edition: targeted core shaping & premium finish',
     badgeFr: 'Édition Prestige',
     badgeEn: 'Prestige Edition',
     rating: 4.8,
@@ -122,11 +122,11 @@ const bestSellersBase = [
     id: 'manches-longues-gris-chine',
     handle: 'vela-sculpt-manches-longues',
     defaultColor: 'Gris chiné',
-    titleFr: 'Vela Sculpt™ Manches Longues — Gris Chiné',
+    titleFr: 'Vela Sculpt™ manches longues — Gris chiné',
     titleEn: 'Vela Sculpt™ Long Sleeves — Heather Grey',
     taglineFr: 'Gainage complet torse, dos et bras sous vestes et pulls',
     taglineEn: 'Full upper-body sculpting & reinforced back support',
-    badgeFr: 'Maintien Intégral',
+    badgeFr: 'Maintien intégral',
     badgeEn: 'Full Body Support',
     rating: 4.9,
     reviewsCount: '750',
@@ -251,7 +251,7 @@ const lifestyleItems = [
   },
   {
     id: 'sport',
-    titleFr: 'À la Salle de Sport',
+    titleFr: 'À la salle de sport',
     titleEn: 'At the Gym & Training',
     taglineFr: 'Gainage abdominal dynamique, liberté de mouvement & maintien musculaire',
     taglineEn: 'Dynamic core support, unrestricted arm freedom & muscle alignment',
@@ -260,7 +260,7 @@ const lifestyleItems = [
   },
   {
     id: 'piscine',
-    titleFr: 'Détente & Loisirs',
+    titleFr: 'Détente & loisirs',
     titleEn: 'Casual & Everyday Leisure',
     taglineFr: 'Silhouette athlétique lissée & confiance en soi en toute circonstance',
     taglineEn: 'Streamlined athletic silhouette & renewed daily self-confidence',
@@ -281,7 +281,7 @@ export default function HomePage() {
   useEffect(() => {
     document.title =
       lang === 'fr'
-        ? `${brand.fullName} | Compression Wear & Maintien Postural Homme`
+        ? `${brand.fullName} | Compression Wear & Maintien postural homme`
         : `${brand.fullName} | Science-Backed Compression & Posture Wear`;
   }, [lang]);
 

@@ -19,9 +19,9 @@ export const nav = [
     label: 'Nos Modèles',
     to: '/collections/all',
     children: [
-      { label: 'Sans Manches (Débardeur)', to: '/products/vela-sculpt-sans-manches' },
-      { label: 'Demi-Manches (Manches courtes)', to: '/products/vela-sculpt-demi-manches' },
-      { label: 'Manches Longues', to: '/products/vela-sculpt-manches-longues' },
+      { label: 'Sans manches (débardeur)', to: '/products/vela-sculpt-sans-manches' },
+      { label: 'Demi-manches (manches courtes)', to: '/products/vela-sculpt-demi-manches' },
+      { label: 'Manches longues', to: '/products/vela-sculpt-manches-longues' },
     ],
   },
   { label: 'Nos Packs & Offres', to: '/pages/offres' },
@@ -31,8 +31,8 @@ export const nav = [
 ];
 
 export const announcements = [
-  'Garantie Satisfait ou Remboursé de 30 jours',
-  'Livraison Suivie Offerte dès 55 € d’achat ou dès 2 t-shirts',
+  'Garantie satisfait ou remboursé de 30 jours',
+  'Livraison suivie offerte dès 55 € d’achat ou dès 2 t-shirts',
   'Plus de 3 000 clients satisfaits portent Vela Sculpt™ au quotidien',
 ];
 
@@ -58,21 +58,21 @@ export const footerColumns = [
     ],
   },
   {
-    title: 'Informations Légales',
+    title: 'Informations légales',
     links: [
-      { label: 'Politique de Confidentialité', to: '/policies/privacy-policy' },
-      { label: 'Conditions Générales de Vente (CGV)', to: '/policies/terms-of-service' },
-      { label: 'Politique de Retour & Remboursement (30j)', to: '/policies/refund-policy' },
-      { label: 'Mentions Légales', to: '/policies/legal-notice' },
+      { label: 'Politique de confidentialité', to: '/policies/privacy-policy' },
+      { label: 'Conditions générales de vente (CGV)', to: '/policies/terms-of-service' },
+      { label: 'Politique de retour & remboursement (30j)', to: '/policies/refund-policy' },
+      { label: 'Mentions légales', to: '/policies/legal-notice' },
     ],
   },
 ];
 
 export const policies = [
-  { label: 'Politique de Confidentialité', to: '/policies/privacy-policy' },
-  { label: 'Conditions Générales de Vente', to: '/policies/terms-of-service' },
+  { label: 'Politique de confidentialité', to: '/policies/privacy-policy' },
+  { label: 'Conditions générales de vente', to: '/policies/terms-of-service' },
   { label: 'Retours & Remboursements (30 jours)', to: '/policies/refund-policy' },
-  { label: 'Mentions Légales', to: '/policies/legal-notice' },
+  { label: 'Mentions légales', to: '/policies/legal-notice' },
 ];
 
 export const payments = ['Shop Pay', 'Apple Pay', 'Visa', 'Mastercard', 'American Express', 'PayPal', 'Klarna'];

@@ -158,7 +158,7 @@ export default function VideoTestimonials() {
                 <div className="ugc-card__top">
                   <span className="ugc-card__verified">
                     <Icon name="check" size={12} strokeWidth={3} />{' '}
-                    {lang === 'fr' ? 'Achat Vérifié' : 'Verified Buyer'}
+                    {lang === 'fr' ? 'Achat vérifié' : 'Verified Buyer'}
                   </span>
                   <div className="ugc-card__controls">
                     <button
@@ -235,7 +235,7 @@ export default function VideoTestimonials() {
         {/* Call to action */}
         <div className="ugc__cta reveal">
           <a href="#product" className="btn btn--gold">
-            {lang === 'fr' ? 'Essayer avec la Garantie 30 Jours' : 'Try with 30-Day Guarantee'}{' '}
+            {lang === 'fr' ? 'Essayer avec la garantie 30 jours' : 'Try with 30-Day Guarantee'}{' '}
             <Icon name="arrow" size={18} />
           </a>
         </div>

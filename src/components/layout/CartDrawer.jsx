@@ -110,7 +110,7 @@ export default function CartDrawer() {
             <ShopifyPaymentBadges />
             <small>
               {lang === 'fr'
-                ? 'Garantie Satisfait ou Remboursé de 30 jours · Paiement SSL sécurisé Shopify'
+                ? 'Garantie satisfait ou remboursé de 30 jours · Paiement SSL sécurisé Shopify'
                 : '30-Day Money-Back Guarantee · 256-bit SSL Secure Shopify Checkout'}
             </small>
           </footer>

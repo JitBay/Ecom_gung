@@ -72,7 +72,7 @@ export const reviews = [
       en: 'I took a before and after picture to see if it actually worked, and the results are just mind-blowing. The shirt instantly smooths out the stomach and tucks everything in. Beyond the physical changes, it really brings back your smile and gives a massive boost to your self-confidence! I highly recommend it.',
     },
     product: {
-      fr: 'Col V · Sans Manches · Blanc / L',
+      fr: 'Col V · Sans manches · Blanc / L',
       en: 'V-Neck · Sleeveless · White / L',
     },
     fit: {
@@ -97,7 +97,7 @@ export const reviews = [
       en: 'Tested it this morning at the gym and honestly, it’s approved. The tank top offers great compression on the sides and really helps you feel supported when lifting weights. The fabric breathes super well, so you don’t feel suffocated during the workout. Highly recommend!',
     },
     product: {
-      fr: 'Col Rond · Sans Manches · Noir / M',
+      fr: 'Col rond · Sans manches · Noir / M',
       en: 'Crew Neck · Sleeveless · Black / M',
     },
     fit: {
@@ -122,7 +122,7 @@ export const reviews = [
       en: 'I don’t spend my life at the gym; I was mainly looking for something to smooth out my stomach and love handles for everyday wear. The compression is super effective on the sides without restricting your breathing. I wear it all day long, even around the house, and it’s very comfortable.',
     },
     product: {
-      fr: 'Col V · Sans Manches · Noir / XL',
+      fr: 'Col V · Sans manches · Noir / XL',
       en: 'V-Neck · Sleeveless · Black / XL',
     },
     fit: {
@@ -147,7 +147,7 @@ export const reviews = [
       en: 'Flawless look! The silhouette is clean, the belly is well supported without any choking sensation. Invisible even under a light t-shirt. Fast shipping and neat packaging.',
     },
     product: {
-      fr: 'Col V · Sans Manches · Blanc / M',
+      fr: 'Col V · Sans manches · Blanc / M',
       en: 'V-Neck · Sleeveless · White / M',
     },
     fit: {
@@ -172,7 +172,7 @@ export const reviews = [
       en: 'Here is my video review: chest and lower back compression is immediate. Nothing pinches, it supports just right. I wear it every day at work and during workouts.',
     },
     product: {
-      fr: 'Col Rond · Sans Manches · Noir / L',
+      fr: 'Col rond · Sans manches · Noir / L',
       en: 'Crew Neck · Sleeveless · Black / L',
     },
     fit: {
@@ -197,7 +197,7 @@ export const reviews = [
       en: 'Sharing my video feedback: the fabric is ultra breathable and compression is firm where it counts. The visual difference under clothes is striking.',
     },
     product: {
-      fr: 'Col V · Sans Manches · Gris / M',
+      fr: 'Col V · Sans manches · Gris / M',
       en: 'V-Neck · Sleeveless · Grey / M',
     },
     fit: {
@@ -222,7 +222,7 @@ export const reviews = [
       en: 'Impressive textile quality. The support across the chest and back immediately gives a straighter and more confident posture. Very pleasant under a dress shirt.',
     },
     product: {
-      fr: 'Col Rond · Sans Manches · Noir / L',
+      fr: 'Col rond · Sans manches · Noir / L',
       en: 'Crew Neck · Sleeveless · Black / L',
     },
     fit: {
@@ -247,7 +247,7 @@ export const reviews = [
       en: 'Quick video glimpse to show the compression hold. Comfortable, invisible under dress shirts, and the back is well supported. Extremely happy with my purchase!',
     },
     product: {
-      fr: 'Col Rond · Sans Manches · Noir / XL',
+      fr: 'Col rond · Sans manches · Noir / XL',
       en: 'Crew Neck · Sleeveless · Black / XL',
     },
     fit: {
@@ -272,7 +272,7 @@ export const reviews = [
       en: 'I was a bit hesitant before ordering, but the results are definitely there. The tank top sculpts the chest perfectly and instantly smooths out love handles. The compression is firm but the material stays super comfortable, even when worn all day under a t-shirt. Highly recommend!',
     },
     product: {
-      fr: 'Col V · Sans Manches · Noir / L',
+      fr: 'Col V · Sans manches · Noir / L',
       en: 'V-Neck · Sleeveless · Black / L',
     },
     fit: {
@@ -297,7 +297,7 @@ export const reviews = [
       en: 'Received quickly. The material is soft and does not itch. Very successful shaping effect, I feel much more comfortable in fitted clothes.',
     },
     product: {
-      fr: 'Col V · Sans Manches · Noir / M',
+      fr: 'Col V · Sans manches · Noir / M',
       en: 'V-Neck · Sleeveless · Black / M',
     },
     fit: {
@@ -322,7 +322,7 @@ export const reviews = [
       en: 'Very happy with this purchase. Well balanced compression and the tank does not ride up during the day. Discreet and effective.',
     },
     product: {
-      fr: 'Col Rond · Sans Manches · Noir / M',
+      fr: 'Col rond · Sans manches · Noir / M',
       en: 'Crew Neck · Sleeveless · Black / M',
     },
     fit: {
@@ -347,7 +347,7 @@ export const reviews = [
       en: 'Super back support. Working seated all day, I feel a real difference in posture and much less fatigue at the end of the day.',
     },
     product: {
-      fr: 'Col Rond · Sans Manches · Noir / L',
+      fr: 'Col rond · Sans manches · Noir / L',
       en: 'Crew Neck · Sleeveless · Black / L',
     },
     fit: {
@@ -372,7 +372,7 @@ export const reviews = [
       en: 'Neat finish and high quality fabric. The cut emphasizes shoulders while slimming the waist. Ordering two more.',
     },
     product: {
-      fr: 'Col V · Sans Manches · Noir / S',
+      fr: 'Col V · Sans manches · Noir / S',
       en: 'V-Neck · Sleeveless · Black / S',
     },
     fit: {
@@ -397,7 +397,7 @@ export const reviews = [
       en: 'Very successful ergonomic cut. The fabric is lightweight and stays cool even on warm summer days. Great investment.',
     },
     product: {
-      fr: 'Col Rond · Sans Manches · Blanc / L',
+      fr: 'Col rond · Sans manches · Blanc / L',
       en: 'Crew Neck · Sleeveless · White / L',
     },
     fit: {
@@ -422,7 +422,7 @@ export const reviews = [
       en: 'The quality of the technical fabric is indisputable and very soft against the skin. However, if you are between two sizes, definitely size down to get a strong shaping effect on the midsection.',
     },
     product: {
-      fr: 'Col Rond · Demi-Manches · Noir / XL',
+      fr: 'Col rond · Demi-manches · Noir / XL',
       en: 'Crew Neck · Short Sleeves · Black / XL',
     },
     fit: {
@@ -447,7 +447,7 @@ export const reviews = [
       en: 'The support is very strong, a bit too snug for me under the arms on the short-sleeve cut. Customer service was spotless and exchanged it for the sleeveless cut within 48h free of charge.',
     },
     product: {
-      fr: 'Col Rond · Demi-Manches · Gris / M',
+      fr: 'Col rond · Demi-manches · Gris / M',
       en: 'Crew Neck · Short Sleeves · Grey / M',
     },
     fit: {
@@ -472,7 +472,7 @@ export const reviews = [
       en: 'I ordered size S instead of L, could not put it on comfortably. The 30-day guarantee is real: I received a full refund within 48h after contacting support.',
     },
     product: {
-      fr: 'Col V · Sans Manches · Noir / S',
+      fr: 'Col V · Sans manches · Noir / S',
       en: 'V-Neck · Sleeveless · Black / S',
     },
     fit: {
@@ -497,7 +497,7 @@ export const reviews = [
       en: 'The shoulder and back support is amazing. You stand straight naturally all day without effort.',
     },
     product: {
-      fr: 'Col Rond · Sans Manches · Noir / M',
+      fr: 'Col rond · Sans manches · Noir / M',
       en: 'Crew Neck · Sleeveless · Black / M',
     },
     fit: {
@@ -522,7 +522,7 @@ export const reviews = [
       en: 'Under a fitted dress shirt at work, the belly is completely flattened and zero seams show. It’s become my daily essential.',
     },
     product: {
-      fr: 'Col V · Sans Manches · Blanc / L',
+      fr: 'Col V · Sans manches · Blanc / L',
       en: 'V-Neck · Sleeveless · White / L',
     },
     fit: {
@@ -547,7 +547,7 @@ export const reviews = [
       en: 'Tested in the gym and cardio: firm core support without restricting breathing. Does not roll up at all during workouts.',
     },
     product: {
-      fr: 'Col Rond · Sans Manches · Noir / L',
+      fr: 'Col rond · Sans manches · Noir / L',
       en: 'Crew Neck · Sleeveless · Black / L',
     },
     fit: {
@@ -581,7 +581,7 @@ export const videoTestimonials = [
       en: 'The fabric is ultra breathable and compression is firm where it counts. The visual difference under clothes is striking.',
     },
     product: {
-      fr: 'Col V · Sans Manches · Gris / M',
+      fr: 'Col V · Sans manches · Gris / M',
       en: 'V-Neck · Sleeveless · Grey / M',
     },
     tint: ['#283548', '#1a2230'],
@@ -606,7 +606,7 @@ export const videoTestimonials = [
       en: 'Quick video overview to show the sculpting effect. Comfortable, invisible under a shirt, and the back is well supported.',
     },
     product: {
-      fr: 'Col Rond · Sans Manches · Noir / XL',
+      fr: 'Col rond · Sans manches · Noir / XL',
       en: 'Crew Neck · Sleeveless · Black / XL',
     },
     tint: ['#1f2937', '#111827'],
@@ -631,7 +631,7 @@ export const videoTestimonials = [
       en: 'The shoulder and back support is amazing. You stand straight naturally all day without effort.',
     },
     product: {
-      fr: 'Col Rond · Sans Manches · Noir / M',
+      fr: 'Col rond · Sans manches · Noir / M',
       en: 'Crew Neck · Sleeveless · Black / M',
     },
     tint: ['#1e293b', '#0f172a'],
@@ -656,7 +656,7 @@ export const videoTestimonials = [
       en: 'Under a fitted dress shirt at work, the belly is completely flattened and zero seams show.',
     },
     product: {
-      fr: 'Col V · Sans Manches · Blanc / L',
+      fr: 'Col V · Sans manches · Blanc / L',
       en: 'V-Neck · Sleeveless · White / L',
     },
     tint: ['#242c38', '#141a22'],
@@ -681,7 +681,7 @@ export const videoTestimonials = [
       en: 'Tested in the gym: firm core support without restricting breathing. Does not roll up at all.',
     },
     product: {
-      fr: 'Col Rond · Sans Manches · Noir / L',
+      fr: 'Col rond · Sans manches · Noir / L',
       en: 'Crew Neck · Sleeveless · Black / L',
     },
     tint: ['#1c2530', '#101720'],

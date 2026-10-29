@@ -46,7 +46,7 @@ export default function ContactPage() {
               {lang === 'fr' ? 'Garantie & Retours' : 'Guarantee & Returns'}
             </strong>
             <p style={{ margin: 0, fontSize: 14 }}>
-              {lang === 'fr' ? 'Garantie Satisfait ou Remboursé 30j' : '30-Day Money-Back Guarantee'}
+              {lang === 'fr' ? 'Garantie satisfait ou remboursé 30j' : '30-Day Money-Back Guarantee'}
             </p>
           </div>
           <div style={{ padding: 18, background: 'var(--cream-2)', borderRadius: 12 }}>

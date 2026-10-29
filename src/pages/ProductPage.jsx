@@ -147,7 +147,7 @@ function ClassicProductPage({ product }) {
 
   const details = [
     {
-      title: lang === 'fr' ? 'Caractéristiques Techniques & Matière' : 'Technical Specifications & Fabric',
+      title: lang === 'fr' ? 'Caractéristiques techniques & matière' : 'Technical Specifications & Fabric',
       content: (
         <div className="details">
           <ul className="details__tech-list" style={{ paddingLeft: 18, lineHeight: 1.6, marginBottom: 16 }}>
@@ -169,7 +169,7 @@ function ClassicProductPage({ product }) {
       ),
     },
     {
-      title: lang === 'fr' ? 'Usage & Profil Morphologique Recommandé' : 'Usage & Target Profile',
+      title: lang === 'fr' ? 'Usage & profil morphologique recommandé' : 'Usage & Target Profile',
       content: (
         <div className="details">
           <p>
@@ -182,7 +182,7 @@ function ClassicProductPage({ product }) {
       ),
     },
     {
-      title: lang === 'fr' ? 'Expédition & Garantie Satisfait ou Remboursé de 30 Jours' : 'Shipping & 30-Day Money-Back Guarantee',
+      title: lang === 'fr' ? 'Expédition & garantie satisfait ou remboursé de 30 jours' : 'Shipping & 30-Day Money-Back Guarantee',
       content: (
         <div className="details">
           <ul className="details__list">

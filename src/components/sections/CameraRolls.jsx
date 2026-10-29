@@ -86,7 +86,7 @@ export default function CameraRolls() {
                     <span className="roll-card__initial">{r.name[0]}</span>
                   )}
                   <span className="verified">
-                    <Icon name="check" size={11} strokeWidth={3} /> {lang === 'fr' ? 'Achat Vérifié' : 'Verified'}
+                    <Icon name="check" size={11} strokeWidth={3} /> {lang === 'fr' ? 'Achat vérifié' : 'Verified'}
                   </span>
                 </div>
                 <div className="roll-card__body">

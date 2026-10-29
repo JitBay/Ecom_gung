@@ -135,14 +135,14 @@ export default function Hero({ initialHandle, onSelectModel, showModelSelector =
 
         <div className="hero__cta-group">
           <a href="#product" className="btn btn--dark hero__cta">
-            {lang === 'fr' ? 'Commander avec la Garantie 30 Jours' : 'Order with 30-Day Guarantee'}{' '}
+            {lang === 'fr' ? 'Commander avec la garantie 30 jours' : 'Order with 30-Day Guarantee'}{' '}
             <Icon name="arrow" size={18} />
           </a>
         </div>
 
         <div className="hero__proof">
           <span>
-            <Icon name="shield" size={17} /> {lang === 'fr' ? 'Garantie Satisfait ou Remboursé de 30 jours' : '30-Day Money-Back Guarantee'}
+            <Icon name="shield" size={17} /> {lang === 'fr' ? 'Garantie satisfait ou remboursé de 30 jours' : '30-Day Money-Back Guarantee'}
           </span>
           <span>
             <i className="live-dot" /> {lang === 'fr' ? 'Expédié sous 24/48h avec suivi' : 'Ships in 24/48h with tracking'}
@@ -212,7 +212,7 @@ export default function Hero({ initialHandle, onSelectModel, showModelSelector =
           <b>30</b>
           <div>
             <strong>{lang === 'fr' ? 'Jours pour essayer' : 'Days to test'}</strong>
-            <span>{lang === 'fr' ? 'Garantie Satisfait ou Remboursé' : 'Money-Back Guarantee'}</span>
+            <span>{lang === 'fr' ? 'Garantie satisfait ou remboursé' : 'Money-Back Guarantee'}</span>
           </div>
           <p>
             <span className="tick">
