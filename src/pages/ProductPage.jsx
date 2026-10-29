@@ -54,8 +54,8 @@ function DedicatedProductPage({ product }) {
       {/* 2. MAIN PRODUCT CONFIGURATOR & BUNDLE BUILDER (PACK 1, 2, 3 WITH MULTI-COLOR CHOICES) */}
       <ProductSection initialModelHandle={handle} showModelSelector={false} />
 
-      {/* 3. REAL-WORLD PRODUCT VIDEO DEMO */}
-      <ProductVideoSection modelHandle={handle} />
+      {/* 3. REAL-WORLD PRODUCT VIDEO DEMO: ONLY FOR SLEEVELESS (REMOVED FROM SHORT & LONG) */}
+      {isSleeveless && <ProductVideoSection modelHandle={handle} />}
 
       {/* 4. OTHER ERGONOMIC FITS */}
       <RelatedProducts exclude={handle} />
