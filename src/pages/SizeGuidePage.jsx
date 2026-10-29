@@ -11,18 +11,18 @@ export default function SizeGuidePage() {
   useEffect(() => {
     document.title =
       lang === 'fr'
-        ? 'Guide des Tailles Homme | Vela Labs'
+        ? 'Guide des tailles homme | Vela Labs'
         : 'Men’s Size Guide | Vela Labs';
   }, [lang]);
 
   return (
     <div className="legal-page container">
       <nav className="pp__crumbs" aria-label={lang === 'fr' ? "Fil d'Ariane" : 'Breadcrumbs'}>
-        <Link to="/">{t('nav.home')}</Link> / <span>{lang === 'fr' ? 'Guide des Tailles' : 'Size Guide'}</span>
+        <Link to="/">{t('nav.home')}</Link> / <span>{lang === 'fr' ? 'Guide des tailles' : 'Size Guide'}</span>
       </nav>
 
       <article className="legal-content">
-        <h1>{lang === 'fr' ? 'Guide des Tailles — Homme' : 'Men’s Size Guide'}</h1>
+        <h1>{lang === 'fr' ? 'Guide des tailles — Homme' : 'Men’s Size Guide'}</h1>
         <p className="legal-meta">
           {lang === 'fr'
             ? 'Comment choisir votre taille de t-shirt de compression ergonomique Vela Sculpt™.'

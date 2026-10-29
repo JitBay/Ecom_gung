@@ -105,14 +105,14 @@ export default function ProductDetails({ model }) {
 
   const ShippingContent = (
     <div className="details">
-      <strong>{lang === 'fr' ? 'Expédition & Délais' : 'Shipping & Delivery'}</strong>
+      <strong>{lang === 'fr' ? 'Expédition & délais' : 'Shipping & Delivery'}</strong>
       <ul className="details__list">
         {currentShipping.lines.map((l) => (
           <li key={l}>{l}</li>
         ))}
       </ul>
       <strong style={{ marginTop: 12, display: 'block' }}>
-        {lang === 'fr' ? 'Garantie Satisfait ou Remboursé de 30 Jours' : '30-Day Money-Back Guarantee'}
+        {lang === 'fr' ? 'Garantie satisfait ou remboursé de 30 jours' : '30-Day Money-Back Guarantee'}
       </strong>
       <p style={{ marginTop: 4 }}>{currentShipping.returns}</p>
     </div>
@@ -131,11 +131,11 @@ export default function ProductDetails({ model }) {
 
   const items = [
     {
-      title: lang === 'fr' ? 'Caractéristiques Techniques & Matière' : 'Technical Specifications & Fabric',
+      title: lang === 'fr' ? 'Caractéristiques techniques & matière' : 'Technical Specifications & Fabric',
       content: FeaturesContent,
     },
     {
-      title: lang === 'fr' ? 'Guide des Tailles & Coupe Homme' : 'Size Guide & Fit',
+      title: lang === 'fr' ? 'Guide des tailles & coupe homme' : 'Size Guide & Fit',
       content: SizeFitContent,
     },
     {
@@ -143,7 +143,7 @@ export default function ProductDetails({ model }) {
       content: ShippingContent,
     },
     {
-      title: lang === 'fr' ? 'Questions Fréquentes' : 'Frequently Asked Questions',
+      title: lang === 'fr' ? 'Questions fréquentes' : 'Frequently Asked Questions',
       content: QuestionsContent,
     },
   ];

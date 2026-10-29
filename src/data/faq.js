@@ -8,21 +8,21 @@ export const faq = [
   {
     tag: 'Taille & Ajustement',
     q: 'Quelle taille dois-je commander ?',
-    a: 'Fiez-vous à notre Guide des Tailles basé sur votre poids et votre taille. Dans 95% des cas, votre taille de t-shirt habituelle convient parfaitement. Si vous êtes entre deux tailles et désirez un gainage ferme, optez pour la taille en-dessous ; pour un confort plus décontracté, prenez la taille au-dessus.',
+    a: 'Fiez-vous à notre Guide des tailles basé sur votre poids et votre taille. Dans 95% des cas, votre taille de t-shirt habituelle convient parfaitement. Si vous êtes entre deux tailles et désirez un gainage ferme, optez pour la taille en-dessous ; pour un confort plus décontracté, prenez la taille au-dessus.',
   },
   {
-    tag: 'Confort Quotidien',
+    tag: 'Confort quotidien',
     q: 'Peut-on le porter confortablement toute la journée ?',
     a: 'Oui. Le tissu combine 88% de polyamide micro-respirant et 12% d’élasthanne à mémoire de forme. Il gaine efficacement la sangle abdominale sans comprimer la cage thoracique ni gêner la respiration. La maille évacue activement la transpiration pour vous maintenir au frais.',
   },
   {
-    tag: 'Maintien Postural',
+    tag: 'Maintien postural',
     q: 'En quoi aide-t-il la posture et le dos ?',
     a: 'La conception intègre des bandes de compression croisées dans le haut du dos qui stimulent les récepteurs proprioceptifs. Cela invite naturellement vos épaules à s’ouvrir et votre torse à se redresser, réduisant les tensions musculaires lors des longues stations assises ou debout.',
   },
   {
     tag: 'Garantie 30 Jours',
-    q: 'Comment fonctionne la Garantie Satisfait ou Remboursé de 30 jours ?',
+    q: 'Comment fonctionne la Garantie satisfait ou remboursé de 30 jours ?',
     a: 'Vous disposez de 30 jours à compter de la réception de votre commande pour tester votre t-shirt Vela Sculpt™ dans votre quotidien. Si le confort, la taille ou le rendu ne vous apportent pas 100% de satisfaction, contactez simplement notre service client pour organiser votre retour et remboursement.',
   },
   {

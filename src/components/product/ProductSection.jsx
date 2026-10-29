@@ -51,11 +51,11 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
       {
         id: 1,
         qty: 1,
-        title: lang === 'fr' ? 'Pack Découverte — 1 T-Shirt' : 'Starter Pack — 1 Shirt',
+        title: lang === 'fr' ? 'Pack découverte — 1 t-shirt' : 'Starter Pack — 1 Shirt',
         subtitle: lang === 'fr' ? 'Idéal pour tester l’effet gainant et le confort au quotidien.' : 'Ideal for testing slimming support and all-day comfort.',
         price: p1,
         compareAt: c1,
-        badge: lang === 'fr' ? 'Offre Découverte' : 'Intro Offer',
+        badge: lang === 'fr' ? 'Offre découverte' : 'Intro Offer',
         freeShipping: false,
       },
       {
@@ -320,7 +320,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
             <Icon name="truck" size={14} /> {lang === 'fr' ? 'Livraison suivie offerte dès 55 €' : 'Free tracked shipping over €55'}
           </span>
           <span>
-            <Icon name="shield" size={14} /> {lang === 'fr' ? 'Garantie Satisfait ou Remboursé 30j' : '30-Day Money-Back Guarantee'}
+            <Icon name="shield" size={14} /> {lang === 'fr' ? 'Garantie satisfait ou remboursé 30j' : '30-Day Money-Back Guarantee'}
           </span>
         </p>
 
@@ -381,7 +381,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
         <div className="guarantee">
           <Icon name="shield" size={24} />
           <p>
-            <strong>{lang === 'fr' ? 'Garantie Satisfait ou Remboursé de 30 jours.' : '30-Day Money-Back Guarantee.'}</strong>{' '}
+            <strong>{lang === 'fr' ? 'Garantie satisfait ou remboursé de 30 jours.' : '30-Day Money-Back Guarantee.'}</strong>{' '}
             {lang === 'fr'
               ? 'Portez votre vêtement Vela Sculpt™ au travail ou en sortie. S’il ne vous apporte pas un confort absolu et un lissage impeccable, demandez un remboursement intégral sans justification.'
               : 'Wear your Vela Sculpt™ wear to work or casually. If it does not provide total comfort and confidence, ask for a full refund.'}

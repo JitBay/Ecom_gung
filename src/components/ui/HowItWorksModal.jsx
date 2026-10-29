@@ -41,7 +41,7 @@ export default function HowItWorksModal({ open, onClose }) {
         <div className="hiw-header">
           <span className="hiw-badge">
             <Icon name="shield" size={14} />
-            {lang === 'fr' ? 'Garantie Satisfait ou Remboursé 30 Jours' : '30-Day Risk-Free Guarantee'}
+            {lang === 'fr' ? 'Garantie satisfait ou remboursé 30 jours' : '30-Day Risk-Free Guarantee'}
           </span>
           <h3 id="hiw-modal-title" className="hiw-title">
             {lang === 'fr'

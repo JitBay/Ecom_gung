@@ -59,7 +59,7 @@ export default function OfferModules({ onSelectOffer, activeOfferId }) {
             <Icon name="shield" size={24} />
             <div>
               <strong>
-                {lang === 'fr' ? 'Garantie Sérénité 30 Jours' : '30-Day Money-Back Guarantee'}
+                {lang === 'fr' ? 'Garantie sérénité 30 jours' : '30-Day Money-Back Guarantee'}
               </strong>
               <p>{current.guaranteeBadge}</p>
             </div>

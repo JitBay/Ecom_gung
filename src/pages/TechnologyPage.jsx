@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import QualitySection from '../components/sections/QualitySection.jsx';
-import ProductSection from '../components/product/ProductSection.jsx';
 import { brand } from '../data/site.js';
 import { useLanguage } from '../context/LanguageContext.jsx';
 
@@ -11,7 +10,7 @@ export default function TechnologyPage() {
   useEffect(() => {
     document.title =
       lang === 'fr'
-        ? `Pourquoi Vela Labs ? | Notre Technologie Ergonomique`
+        ? `Pourquoi Vela Labs ? | Notre technologie ergonomique`
         : `Why Vela Labs? | Ergonomic Compression Technology`;
   }, [lang]);
 
@@ -24,7 +23,6 @@ export default function TechnologyPage() {
       </div>
 
       <QualitySection />
-      <ProductSection />
     </div>
   );
 }

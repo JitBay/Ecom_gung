@@ -54,7 +54,6 @@ function MobileMenu({ open, onClose }) {
     { label: t('nav.offers'), to: '/pages/offres' },
     { label: t('nav.why_us'), to: '/pages/notre-technologie' },
     { label: t('nav.guarantee'), to: '/pages/garantie' },
-    { label: t('nav.reviews'), to: '/#reviews' },
   ];
 
   return (
@@ -164,7 +163,6 @@ export default function Header() {
     { label: t('nav.offers'), to: '/pages/offres' },
     { label: t('nav.why_us'), to: '/pages/notre-technologie' },
     { label: t('nav.guarantee'), to: '/pages/garantie' },
-    { label: t('nav.reviews'), to: '/#reviews' },
   ];
 
   useEffect(() => {

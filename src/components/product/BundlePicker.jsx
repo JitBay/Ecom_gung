@@ -58,7 +58,7 @@ function VariantRows({ variants, onChange, productImage, availableColors, lang }
 }
 
 function BundleCard({ bundle, selected, onSelect, variants, onVariantChange, productImage, availableColors, lang }) {
-  const marqueeText = lang === 'fr' ? 'Offre Limitée' : 'Limited Offer';
+  const marqueeText = lang === 'fr' ? 'Offre limitée' : 'Limited Offer';
   const marquee = Array(12).fill(marqueeText).join(' • ');
 
   const card = (
@@ -137,7 +137,7 @@ export default function BundlePicker({
       <p className="bundles__heading">
         <Icon name="shield" size={16} />{' '}
         {lang === 'fr'
-          ? 'Essayez sans risque — Garantie Satisfait ou Remboursé de 30 jours'
+          ? 'Essayez sans risque — Garantie satisfait ou remboursé de 30 jours'
           : 'Risk-free trial — 30-Day Money-Back Guarantee'}
       </p>
       <ul>

@@ -6,22 +6,22 @@ import './QualitySection.css';
 
 const tilesFr = [
   {
-    title: 'Design Sculpt Anatomique',
+    title: 'Design sculpt anatomique',
     sub: 'Gainage 3D ciblé & soutien abdominal',
     img: '/images/textile/anatomical-sculpt.png',
   },
   {
-    title: 'Coupe Athlétique',
+    title: 'Coupe athlétique',
     sub: 'Maintien postural naturel & silhouette redressée',
     img: '/images/textile/athletic-fit.png',
   },
   {
-    title: 'Performance Respirante',
+    title: 'Performance respirante',
     sub: 'Maille micro-aérée & évacuation active de la sueur',
     img: '/images/textile/breathable-performance.png',
   },
   {
-    title: 'Finition & Textile Premium',
+    title: 'Finition & textile premium',
     sub: 'Coutures ultra-plates seconde peau invisibles',
     img: '/images/textile/premium-fabric.png',
   },
@@ -53,22 +53,22 @@ const tilesEn = [
 const featuresFr = [
   {
     icon: 'sparkle',
-    title: 'Lissage Visuel Immédiat',
+    title: 'Lissage visuel immédiat',
     text: 'Aplatit instantanément la zone abdominale et estompe les plis sous les chemises ajustées ou les t-shirts fins.',
   },
   {
     icon: 'shield',
-    title: 'Discrétion Absolue (Col & Coutures)',
+    title: 'Discrétion absolue (col & coutures)',
     text: 'L’encolure dégagée reste invisible même avec le premier bouton de chemise ouvert. Aucune démarcation aux épaules.',
   },
   {
     icon: 'pulse',
-    title: 'Maintien Postural Ergonomique',
+    title: 'Maintien postural ergonomique',
     text: 'Les bandes dorsales stimulent la proprioception pour encourager une posture droite sans comprimer la cage thoracique.',
   },
   {
     icon: 'waves',
-    title: 'Fibre Seconde Peau Thermo-Régulante',
+    title: 'Fibre seconde peau thermo-régulante',
     text: 'Composé de 88% polyamide et 12% élasthanne technique, il évacue l’humidité et neutralise les odeurs toute la journée.',
   },
 ];
@@ -124,7 +124,7 @@ export default function QualitySection() {
               <i className="dot" /> {lang === 'fr' ? 'Conception Ergonomique Homme' : 'Men’s Ergonomic Design'}
             </span>
             <span>
-              <i className="dot" /> {lang === 'fr' ? 'Testé en Conditions Réelles' : 'Tested in Daily Wear'}
+              <i className="dot" /> {lang === 'fr' ? 'Testé en conditions réelles' : 'Tested in Daily Wear'}
             </span>
           </div>
         </div>

@@ -9,7 +9,7 @@ export default function PrivacyPolicyPage() {
   useEffect(() => {
     document.title =
       lang === 'fr'
-        ? 'Politique de Confidentialité | Vella — Vela Labs'
+        ? 'Politique de confidentialité | Vella — Vela Labs'
         : 'Privacy Policy | Vella — Vela Labs';
   }, [lang]);
 

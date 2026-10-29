@@ -2,7 +2,7 @@
 import { products } from './catalog.js';
 
 export const product = {
-  title: 'Vela Sculpt™ — T-Shirt Gainant Ergonomique',
+  title: 'Vela Sculpt™ — T-shirt gainant ergonomique',
   subtitle: 'Compression discrète & soutien postural pour homme',
   rating: 4.9,
   reviewCount: 67,
@@ -11,7 +11,7 @@ export const product = {
 export const colors = [
   { id: 'noir', label: 'Noir', hex: '#1a1a1a' },
   { id: 'blanc', label: 'Blanc', hex: '#f8f8fa' },
-  { id: 'gris', label: 'Gris Chiné', hex: '#63666f' },
+  { id: 'gris', label: 'Gris chiné', hex: '#63666f' },
   { id: 'black-or', label: 'Black Or', hex: '#221e17' },
   { id: 'bleu-nuit', label: 'Black Or', hex: '#221e17' },
 ];
@@ -128,7 +128,7 @@ export const benefits = [
   },
   {
     icon: 'shield',
-    title: '100% Invisible sous les vêtements',
+    title: '100% invisible sous les vêtements',
     text: 'Encolure basse et coutures ultra-plates plates imperceptibles même sous une chemise blanche ajustée.',
     tag: 'Seconde Peau',
   },
@@ -183,11 +183,11 @@ export const bundles = [
   {
     id: 1,
     qty: 1,
-    title: 'Pack Découverte — 1 T-Shirt',
+    title: 'Pack découverte — 1 t-shirt',
     subtitle: 'Idéal pour tester l’effet gainant et le confort au quotidien.',
     price: 39.95,
     compareAt: 59.95,
-    badge: 'Offre Découverte',
+    badge: 'Offre découverte',
     freeShipping: false,
   },
   {
@@ -216,7 +216,7 @@ export const bundles = [
 
 export const badges = [
   { icon: 'shield', label: 'Garantie 30 Jours' },
-  { icon: 'lock', label: 'Paiement Sécurisé SSL' },
+  { icon: 'lock', label: 'Paiement sécurisé SSL' },
   { icon: 'truck', label: 'Expédition Suivie 24/48h' },
 ];
 
@@ -259,7 +259,7 @@ export const shipping = {
     'Livraison offerte dès 55 € d’achat (ou avec les packs 2 et 3 t-shirts)',
   ],
   returns:
-    'Garantie Satisfait ou Remboursé de 30 jours. Vous bénéficiez de 30 jours à compter de la réception pour essayer votre t-shirt Vela Sculpt™. Si vous n’êtes pas entièrement convaincu du confort ou du maintien, notre service client organise votre retour et remboursement en toute simplicité.',
+    'Garantie satisfait ou remboursé de 30 jours. Vous bénéficiez de 30 jours à compter de la réception pour essayer votre t-shirt Vela Sculpt™. Si vous n’êtes pas entièrement convaincu du confort ou du maintien, notre service client organise votre retour et remboursement en toute simplicité.',
 };
 
 export const shippingEn = {

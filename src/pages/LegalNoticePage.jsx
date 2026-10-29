@@ -9,7 +9,7 @@ export default function LegalNoticePage() {
   useEffect(() => {
     document.title =
       lang === 'fr'
-        ? 'Mentions Légales | Vella — Vela Labs'
+        ? 'Mentions légales | Vella — Vela Labs'
         : 'Legal Notice | Vella — Vela Labs';
   }, [lang]);
 
@@ -20,7 +20,7 @@ export default function LegalNoticePage() {
       </nav>
 
       <article className="legal-content">
-        <h1>Mentions Légales</h1>
+        <h1>Mentions légales</h1>
         <p className="legal-meta">Informations réglementaires concernant l'exploitant du site.</p>
 
         <h2>1. Éditeur de la plateforme</h2>
