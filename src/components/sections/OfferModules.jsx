@@ -71,7 +71,7 @@ export default function OfferModules({ onSelectOffer, activeOfferId }) {
         </blockquote>
 
         <div className="offer-active-card__cta-row">
-          <a href="#product" className="btn btn--dark">
+          <a href="#offres-cards" className="btn btn--dark">
             {lang === 'fr' ? 'Choisir mon pack avec cette offre' : 'Choose my pack with this offer'}{' '}
             <Icon name="arrow" size={16} />
           </a>
