@@ -13,45 +13,21 @@ function getVal(field, lang) {
 }
 
 export default function VideoTestimonials() {
-  const [unmutedId, setUnmutedId] = useState(null);
   const [progressMap, setProgressMap] = useState({});
   const [modalItem, setModalItem] = useState(null);
   const videoRefs = useRef({});
   const ref = useReveal();
   const { lang } = useLanguage();
 
-  // Autoplay all videos in muted loop mode immediately on mount
+  // Autoplay all preview videos in muted loop mode immediately on mount
   useEffect(() => {
-    Object.entries(videoRefs.current).forEach(([id, vid]) => {
+    Object.values(videoRefs.current).forEach((vid) => {
       if (vid) {
-        vid.muted = unmutedId !== id;
+        vid.muted = true;
         vid.play().catch(() => {});
       }
     });
-  }, [unmutedId]);
-
-  const toggleSound = (e, id) => {
-    if (e && e.stopPropagation) e.stopPropagation();
-    const vid = videoRefs.current[id];
-    if (!vid) return;
-
-    if (unmutedId === id) {
-      vid.muted = true;
-      setUnmutedId(null);
-    } else {
-      // Mute all others
-      Object.entries(videoRefs.current).forEach(([k, v]) => {
-        if (v) v.muted = k !== id;
-      });
-      vid.muted = false;
-      vid.play().then(() => {
-        setUnmutedId(id);
-      }).catch(() => {
-        vid.muted = true;
-        setUnmutedId(null);
-      });
-    }
-  };
+  }, []);
 
   const handleTimeUpdate = (id, e) => {
     const el = e.currentTarget;
@@ -61,13 +37,7 @@ export default function VideoTestimonials() {
     }
   };
 
-  const openModal = (e, item) => {
-    if (e && e.stopPropagation) e.stopPropagation();
-    // Mute background card video when opening modal
-    if (unmutedId && videoRefs.current[unmutedId]) {
-      videoRefs.current[unmutedId].muted = true;
-      setUnmutedId(null);
-    }
+  const openModal = (item) => {
     setModalItem(item);
   };
 
@@ -114,7 +84,6 @@ export default function VideoTestimonials() {
 
         <div className="ugc__row">
           {videoTestimonials.map((v) => {
-            const hasSound = unmutedId === v.id;
             const progress = progressMap[v.id] || 0;
             const tag = getVal(v.tag, lang);
             const quote = getVal(v.quote, lang);
@@ -123,20 +92,20 @@ export default function VideoTestimonials() {
             return (
               <div
                 key={v.id}
-                className={`ugc-card ${hasSound ? 'is-playing is-unmuted' : ''}`}
+                className="ugc-card"
                 style={{ '--a': v.tint[0], '--b': v.tint[1] }}
-                onClick={(e) => toggleSound(e, v.id)}
+                onClick={() => openModal(v)}
                 role="button"
                 tabIndex={0}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
-                    toggleSound(e, v.id);
+                    openModal(v);
                   }
                 }}
-                aria-label={`${lang === 'fr' ? 'Avis vidéo de' : 'Video review from'} ${v.name}`}
+                aria-label={`${lang === 'fr' ? 'Agrandir l’avis vidéo de' : 'Enlarge video review from'} ${v.name}`}
               >
-                {/* HTML5 Vertical Video — plays continuously without static poster image */}
+                {/* HTML5 Vertical Video — continuously playing preview in loop */}
                 <video
                   ref={(el) => {
                     if (el) videoRefs.current[v.id] = el;
@@ -144,7 +113,7 @@ export default function VideoTestimonials() {
                   src={v.video}
                   autoPlay
                   loop
-                  muted={!hasSound}
+                  muted
                   playsInline
                   preload="auto"
                   className="ugc-card__video"
@@ -154,7 +123,7 @@ export default function VideoTestimonials() {
                 {/* Subtle vignette/scrim overlay for caption legibility */}
                 <div className="ugc-card__overlay" aria-hidden="true" />
 
-                {/* Top Badge & Controls */}
+                {/* Top Badge & Enlarge Button */}
                 <div className="ugc-card__top">
                   <span className="ugc-card__verified">
                     <Icon name="check" size={12} strokeWidth={3} />{' '}
@@ -163,38 +132,24 @@ export default function VideoTestimonials() {
                   <div className="ugc-card__controls">
                     <button
                       type="button"
-                      className={`ugc-card__btn-icon ${hasSound ? 'is-active' : ''}`}
-                      onClick={(e) => toggleSound(e, v.id)}
-                      title={hasSound ? (lang === 'fr' ? 'Couper le son' : 'Mute') : (lang === 'fr' ? 'Activer le son' : 'Unmute')}
-                      aria-label={hasSound ? 'Couper le son' : 'Activer le son'}
-                    >
-                      <Icon name="sound" size={14} />
-                    </button>
-                    <button
-                      type="button"
                       className="ugc-card__btn-icon"
-                      onClick={(e) => openModal(e, v)}
-                      title={lang === 'fr' ? 'Plein écran' : 'Fullscreen'}
-                      aria-label="Plein écran"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openModal(v);
+                      }}
+                      title={lang === 'fr' ? 'Agrandir la vidéo' : 'Enlarge video'}
+                      aria-label={lang === 'fr' ? 'Agrandir la vidéo' : 'Enlarge video'}
                     >
-                      <Icon name="zoom" size={13} />
+                      <Icon name="zoom" size={14} />
                     </button>
                   </div>
                 </div>
 
-                {/* Center Sound / Action Indicator */}
+                {/* Center Play Indicator */}
                 <div className="ugc-card__play" aria-hidden="true">
-                  {hasSound ? (
-                    <div className="ugc-card__sound-wave">
-                      <span />
-                      <span />
-                      <span />
-                    </div>
-                  ) : (
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                      <polygon points="5 3 19 12 5 21 5 3" />
-                    </svg>
-                  )}
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                  </svg>
                 </div>
 
                 {/* Bottom Caption & Review Info */}
@@ -260,7 +215,12 @@ export default function VideoTestimonials() {
             </button>
 
             <video
+              ref={(el) => {
+                if (el) el.muted = true;
+              }}
               src={modalItem.video}
+              muted
+              loop
               controls
               autoPlay
               playsInline
