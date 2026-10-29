@@ -1,5 +1,6 @@
 .rolls {
-  padding: clamp(32px, 5vw, 64px) 0;
+  padding-top: clamp(14px, 2vw, 22px);
+  padding-bottom: clamp(24px, 4vw, 40px);
   background: var(--sand);
 }
 
@@ -13,8 +14,27 @@
   color: var(--muted);
 }
 
-.rolls__score strong {
-  color: var(--ink);
+
+
+.rolls .section-head {
+  gap: 6px;
+  margin-bottom: clamp(16px, 2.5vw, 22px);
+}
+
+.rolls .eyebrow {
+  margin-bottom: 2px;
+}
+
+.rolls .title {
+  margin: 2px 0 0;
+  line-height: 1.15;
+}
+
+.rolls .subtitle {
+  margin: 4px auto 0;
+  line-height: 1.45;
+  font-size: 14px;
+  max-width: 540px;
 }
 
 .rolls__grid {
