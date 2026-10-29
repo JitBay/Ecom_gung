@@ -62,7 +62,7 @@
 
 .logo strong {
   font-family: 'Montserrat', var(--sans);
-  font-size: 24px;
+  font-size: 21px;
   font-weight: 800;
 }
 
@@ -169,7 +169,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 12px;
+  padding: 4px 10px;
   border-radius: 20px;
   background: #f0fdf4;
   border: 1px solid #bbf7d0;
@@ -229,8 +229,8 @@
 .icon-btn {
   display: grid;
   place-items: center;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   transition: background 0.2s;
 }
