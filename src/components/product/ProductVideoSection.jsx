@@ -1,9 +1,12 @@
 import { useRef, useState } from 'react';
+import { getLocalizedProduct, products } from '../../data/catalog.js';
 import { useLanguage } from '../../context/LanguageContext.jsx';
 import './ProductVideoSection.css';
 
-export default function ProductVideoSection() {
+export default function ProductVideoSection({ modelHandle = 'vela-sculpt-sans-manches' }) {
   const { lang } = useLanguage();
+  const rawModel = products.find((p) => p.handle === modelHandle) || products[0];
+  const localized = getLocalizedProduct(rawModel, lang);
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
@@ -27,16 +30,36 @@ export default function ProductVideoSection() {
     setIsMuted(!isMuted);
   };
 
+  const getCutBenefitFr = () => {
+    if (modelHandle === 'vela-sculpt-demi-manches') {
+      return 'Découpe demi-manches : col rond discret invisible sous chemises de bureau, polos & t-shirts';
+    }
+    if (modelHandle === 'vela-sculpt-manches-longues') {
+      return 'Découpe manches longues : maintien intégral torse, dos et bras sous vestes et pulls';
+    }
+    return 'Découpe sans manches : invisibilité 100% totale sous chemises & t-shirts légers';
+  };
+
+  const getCutBenefitEn = () => {
+    if (modelHandle === 'vela-sculpt-demi-manches') {
+      return 'Short sleeves cut: discreet crew neck invisible under office shirts, polos & tees';
+    }
+    if (modelHandle === 'vela-sculpt-manches-longues') {
+      return 'Long sleeves cut: full upper-body coverage and posture support under sweaters & jackets';
+    }
+    return 'Sleeveless cut: 100% invisible under lightweight shirts & casual tees';
+  };
+
   const benefitsFr = [
     'Gainage 3D immédiat de la sangle abdominale sans sensation d’étouffement',
-    'Découpe sans manches : invisibilité 100% totale sous chemises & t-shirts légers',
+    getCutBenefitFr(),
     'Panneaux dorsaux de maintien pour encourager une posture droite et naturelle',
     'Tissu technique thermo-régulant respirant, lavable et indéformable',
   ];
 
   const benefitsEn = [
     'Immediate 3D core & midsection contouring without restrictive squeezing',
-    'Sleeveless cut: 100% invisible under lightweight shirts & casual tees',
+    getCutBenefitEn(),
     'Postural back tension bands to gently promote upright confidence',
     'Technical breathable thermal weave, machine washable & shape-retaining',
   ];
@@ -55,11 +78,11 @@ export default function ProductVideoSection() {
           <h2 className="product-video-section__title">
             {lang === 'fr' ? (
               <>
-                Vela Sculpt™ sans manches <em>en action.</em>
+                {localized.shortTitle || localized.title} <em>en action.</em>
               </>
             ) : (
               <>
-                Vela Sculpt™ Sleeveless <em>in motion.</em>
+                {localized.shortTitle || localized.title} <em>in motion.</em>
               </>
             )}
           </h2>

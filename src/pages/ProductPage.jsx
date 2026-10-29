@@ -24,28 +24,29 @@ import { price } from '../lib/format.js';
 import './ProductPage.css';
 
 /**
- * Dedicated high-conversion sales landing for the Sleeveless cut (Vela Sculpt™ — Sans Manches)
+ * Dedicated high-conversion sales landing for all cuts (Sans Manches, Demi-Manches, Manches Longues)
  */
-function SleevelessProductPage() {
+function DedicatedProductPage({ product }) {
   const { t, dict } = useLanguage();
   const trustItems = dict.home?.trust || [];
+  const handle = product?.handle || 'vela-sculpt-sans-manches';
 
   return (
-    <div className="product-page-wrap sleeveless-product">
-      {/* 1. HERO BANNER FOCUSED ON SLEEVELESS */}
-      <Hero initialHandle="vela-sculpt-sans-manches" showModelSelector={false} />
+    <div className={`product-page-wrap ${handle}-product`}>
+      {/* 1. HERO BANNER FOCUSED ON CURRENT FIT */}
+      <Hero initialHandle={handle} showModelSelector={false} />
 
       {/* 2. CAMERA ROLLS / SOCIAL PROOF TICKER */}
       <CameraRolls />
 
-      {/* 3. MAIN PRODUCT CONFIGURATOR & BUNDLE BUILDER */}
-      <ProductSection initialModelHandle="vela-sculpt-sans-manches" showModelSelector={false} />
+      {/* 3. MAIN PRODUCT CONFIGURATOR & BUNDLE BUILDER (PACK 1, 2, 3 WITH MULTI-COLOR CHOICES) */}
+      <ProductSection initialModelHandle={handle} showModelSelector={false} />
 
       {/* 4. REAL-WORLD PRODUCT VIDEO DEMO */}
-      <ProductVideoSection />
+      <ProductVideoSection modelHandle={handle} />
 
       {/* 5. OTHER ERGONOMIC FITS */}
-      <RelatedProducts exclude="vela-sculpt-sans-manches" />
+      <RelatedProducts exclude={handle} />
 
       {/* 6. VIDEO TESTIMONIALS */}
       <VideoTestimonials />
@@ -105,7 +106,7 @@ function SleevelessProductPage() {
 }
 
 /**
- * Standard product page layout for other cuts (Demi-Manches, Manches Longues, etc.)
+ * Standard product page layout (kept for fallback)
  */
 function ClassicProductPage({ product }) {
   const { lang, t } = useLanguage();
@@ -359,11 +360,6 @@ export default function ProductPage({ handle: fixedHandle }) {
 
   if (!rawProduct) return <NotFound />;
 
-  // Only the Sleeveless cut uses the rich landing product page
-  if (rawProduct.handle === 'vela-sculpt-sans-manches') {
-    return <SleevelessProductPage />;
-  }
-
-  // All other cuts use the classic product page
-  return <ClassicProductPage product={rawProduct} />;
+  // All cuts (Sans manches, Demi-manches, Manches longues) use the dedicated high-conversion layout
+  return <DedicatedProductPage product={rawProduct} />;
 }

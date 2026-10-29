@@ -42,10 +42,28 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
   const modelBundles = useMemo(() => {
     const p1 = currentModel.price;
     const c1 = currentModel.compareAt || Math.round(p1 * 1.5);
-    const p2 = Math.round(p1 * 2 * 0.86 * 100) / 100;
-    const c2 = Math.round(c1 * 2 * 100) / 100;
-    const p3 = Math.round(p1 * 3 * 0.76 * 100) / 100;
-    const c3 = Math.round(c1 * 3 * 100) / 100;
+    let p2, p3, c2, c3;
+    if (currentModel.handle === 'vela-sculpt-sans-manches') {
+      p2 = 59.90;
+      c2 = 99.90;
+      p3 = 79.85;
+      c3 = 149.85;
+    } else if (currentModel.handle === 'vela-sculpt-demi-manches') {
+      p2 = 69.90;
+      c2 = 119.90;
+      p3 = 89.85;
+      c3 = 179.85;
+    } else if (currentModel.handle === 'vela-sculpt-manches-longues') {
+      p2 = 79.90;
+      c2 = 129.90;
+      p3 = 99.85;
+      c3 = 194.85;
+    } else {
+      p2 = Math.round(p1 * 2 * 0.86 * 100) / 100;
+      c2 = Math.round(c1 * 2 * 100) / 100;
+      p3 = Math.round(p1 * 3 * 0.76 * 100) / 100;
+      c3 = Math.round(c1 * 3 * 100) / 100;
+    }
 
     return [
       {
@@ -81,7 +99,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
         gift: lang === 'fr' ? 'Guide Posture & Maintien Offert' : 'Free Posture & Fit Guide',
       },
     ];
-  }, [currentModel.price, currentModel.compareAt, lang]);
+  }, [currentModel.handle, currentModel.price, currentModel.compareAt, lang]);
 
   const [bundleId, setBundleId] = useState(2);
   const bundle = modelBundles.find((b) => b.id === bundleId) || modelBundles[1];
@@ -331,6 +349,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
           onVariantChange={updateVariant}
           productImage={currentImages[0]}
           availableColors={availableColors}
+          colorImages={currentModel.colorImages}
           items={modelBundles}
         />
 

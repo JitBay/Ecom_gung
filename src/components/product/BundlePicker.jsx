@@ -4,7 +4,7 @@ import { useLanguage } from '../../context/LanguageContext.jsx';
 import { price } from '../../lib/format.js';
 import './BundlePicker.css';
 
-function VariantRows({ variants, onChange, productImage, availableColors, lang }) {
+function VariantRows({ variants, onChange, productImage, availableColors, colorImages, lang }) {
   const { t } = useLanguage();
   const colorList = availableColors && availableColors.length ? availableColors : defaultColors;
 
@@ -15,12 +15,17 @@ function VariantRows({ variants, onChange, productImage, availableColors, lang }
       </p>
       {variants.map((v, i) => {
         const currentColor = colorList.find((c) => c.id === v.color) || colorList[0];
+        const colorImg =
+          (colorImages && (colorImages[currentColor?.label]?.[0] || colorImages[currentColor?.id]?.[0])) ||
+          productImage ||
+          '/images/products/sans-manches/1.jpeg';
+
         return (
           <div className="variant" key={i}>
             <div className="variant__thumb">
               <img
-                src={productImage || '/images/products/sans-manches/1.jpeg'}
-                alt="Miniature"
+                src={colorImg}
+                alt={currentColor?.label || 'Miniature'}
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
             </div>
@@ -58,7 +63,7 @@ function VariantRows({ variants, onChange, productImage, availableColors, lang }
   );
 }
 
-function BundleCard({ bundle, selected, onSelect, variants, onVariantChange, productImage, availableColors, lang }) {
+function BundleCard({ bundle, selected, onSelect, variants, onVariantChange, productImage, availableColors, colorImages, lang }) {
   const marqueeText = lang === 'fr' ? 'Offre limitée' : 'Limited Offer';
   const marquee = Array(12).fill(marqueeText).join(' • ');
 
@@ -92,6 +97,7 @@ function BundleCard({ bundle, selected, onSelect, variants, onVariantChange, pro
             onChange={onVariantChange}
             productImage={productImage}
             availableColors={availableColors}
+            colorImages={colorImages}
             lang={lang}
           />
         </div>
@@ -128,6 +134,7 @@ export default function BundlePicker({
   onVariantChange,
   productImage,
   availableColors,
+  colorImages,
   items,
 }) {
   const { lang } = useLanguage();
@@ -152,6 +159,7 @@ export default function BundlePicker({
             onVariantChange={onVariantChange}
             productImage={productImage}
             availableColors={availableColors}
+            colorImages={colorImages}
             lang={lang}
           />
         ))}
