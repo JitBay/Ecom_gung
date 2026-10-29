@@ -63,8 +63,8 @@ function DedicatedProductPage({ product }) {
       {/* 5. VIDEO TESTIMONIALS */}
       <VideoTestimonials />
 
-      {/* 6. QUALITY & TECHNOLOGY BREAKDOWN (4 TEXTILE CARDS) */}
-      <QualitySection />
+      {/* 6. QUALITY & TECHNOLOGY BREAKDOWN (4 TEXTILE CARDS): ONLY FOR SLEEVELESS (REMOVED FROM SHORT & LONG) */}
+      {isSleeveless && <QualitySection />}
 
       {/* 7. FAQ */}
       <Faq />
