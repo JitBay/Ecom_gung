@@ -54,7 +54,7 @@ function ReviewForm({ onSubmit, onCancel, lang, t }) {
     if (!text.trim()) return;
     onSubmit({
       id: `rev-${Date.now()}`,
-      name: name.trim() || (lang === 'fr' ? 'Client Vérifié' : 'Verified Customer'),
+      name: name.trim() || (lang === 'fr' ? 'Client vérifié' : 'Verified Customer'),
       rating,
       title: title.trim() || (lang === 'fr' ? 'Très satisfait' : 'Highly satisfied'),
       text: text.trim(),

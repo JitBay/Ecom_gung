@@ -49,13 +49,13 @@ export default function ProductVideoSection() {
         <div className="product-video-section__content">
           <span className="product-video-section__eyebrow">
             <span style={{ color: '#c4a265' }}>✦</span>{' '}
-            {lang === 'fr' ? 'Démonstration Produit en Conditions Réelles' : 'Real-World Product Demonstration'}
+            {lang === 'fr' ? 'Démonstration produit en conditions réelles' : 'Real-World Product Demonstration'}
           </span>
 
           <h2 className="product-video-section__title">
             {lang === 'fr' ? (
               <>
-                Vela Sculpt™ Sans Manches <em>en action.</em>
+                Vela Sculpt™ sans manches <em>en action.</em>
               </>
             ) : (
               <>
@@ -97,7 +97,7 @@ export default function ProductVideoSection() {
                 <path d="M12 2L3 7v5c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" />
                 <path d="M8.5 12.5l2.5 2.5 5-5" />
               </svg>
-              {lang === 'fr' ? 'Garantie Satisfait ou Remboursé 30j' : '30-Day Money-Back Guarantee'}
+              {lang === 'fr' ? 'Garantie satisfait ou remboursé 30j' : '30-Day Money-Back Guarantee'}
             </span>
           </div>
         </div>
@@ -110,7 +110,7 @@ export default function ProductVideoSection() {
         >
           <span className="product-video-section__live-pill">
             <span className="product-video-section__live-dot" />
-            {lang === 'fr' ? 'Vidéo Produit HD' : 'HD Product Video'}
+            {lang === 'fr' ? 'Vidéo produit HD' : 'HD Product Video'}
           </span>
 
           <video

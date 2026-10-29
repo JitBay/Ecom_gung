@@ -80,7 +80,7 @@ export default function Footer() {
       ],
     },
     {
-      title: lang === 'fr' ? 'Informations Légales' : 'Legal Information',
+      title: lang === 'fr' ? 'Informations légales' : 'Legal Information',
       links: [
         { label: t('footer.privacy_policy'), to: '/policies/privacy-policy' },
         { label: t('footer.terms'), to: '/policies/terms-of-service' },

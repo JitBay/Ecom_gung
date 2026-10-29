@@ -10,7 +10,7 @@ export default function GuaranteePage() {
   useEffect(() => {
     document.title =
       lang === 'fr'
-        ? 'Garantie Satisfait ou Remboursé de 30 Jours | Vela Labs'
+        ? 'Garantie satisfait ou remboursé de 30 jours | Vela Labs'
         : '30-Day Money-Back Guarantee | Vela Labs';
   }, [lang]);
 
@@ -23,7 +23,7 @@ export default function GuaranteePage() {
       <article className="legal-content">
         <h1>
           {lang === 'fr'
-            ? 'Garantie Satisfait ou Remboursé de 30 Jours'
+            ? 'Garantie satisfait ou remboursé de 30 jours'
             : '30-Day Money-Back Guarantee'}
         </h1>
         <p className="legal-meta">
@@ -38,7 +38,7 @@ export default function GuaranteePage() {
               Chez <strong>Vela Labs</strong> (exploité par l'entité légale <strong>Vella</strong>), nous sommes convaincus de l’efficacité et du confort supérieur de nos t-shirts de compression ergonomiques <strong>Vela Sculpt™</strong>.
             </p>
             <p>
-              C’est pourquoi chaque commande passée sur notre boutique est couverte par notre <strong>Garantie Satisfait ou Remboursé de 30 jours</strong>.
+              C’est pourquoi chaque commande passée sur notre boutique est couverte par notre <strong>Garantie satisfait ou remboursé de 30 jours</strong>.
             </p>
 
             <hr />

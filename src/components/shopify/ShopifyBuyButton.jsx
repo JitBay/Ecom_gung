@@ -39,7 +39,7 @@ export default function ShopifyBuyButton({
   };
 
   const defaultLabel =
-    lang === 'fr' ? 'Acheter maintenant — Paiement Sécurisé' : 'Buy Now — Secure Checkout';
+    lang === 'fr' ? 'Acheter maintenant — Paiement sécurisé' : 'Buy Now — Secure Checkout';
 
   return (
     <button
