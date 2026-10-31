@@ -1,12 +1,87 @@
 import Icon from '../ui/Icon.jsx';
-import { bundles as defaultBundles, colors as defaultColors, sizes } from '../../data/product.js';
+import { bundles as defaultBundles, colors as defaultColors, discoveryCategories, sizes } from '../../data/product.js';
 import { useLanguage } from '../../context/LanguageContext.jsx';
 import { price } from '../../lib/format.js';
 import './BundlePicker.css';
 
-function VariantRows({ variants, onChange, productImage, availableColors, colorImages, lang, isTwoPlusOne }) {
+function VariantRows({
+  variants,
+  onChange,
+  productImage,
+  availableColors,
+  colorImages,
+  lang,
+  isTwoPlusOne,
+  isDiscoveryPack,
+}) {
   const { t } = useLanguage();
   const colorList = availableColors && availableColors.length ? availableColors : defaultColors;
+
+  if (isDiscoveryPack) {
+    return (
+      <div className="discovery-variants">
+        <p className="variants__label">
+          {lang === 'fr'
+            ? 'Personnalisez vos 3 coupes (Couleur & Taille) :'
+            : 'Customize your 3 fits (Color & Size):'}
+        </p>
+        {variants.map((v, i) => {
+          const cat = discoveryCategories[i] || discoveryCategories[0];
+          const catColors = cat.colors;
+          const currentColor = catColors.find((c) => c.id === v.color) || catColors[0];
+          const colorImg = cat.colorImages[currentColor.label] || cat.colorImages['Noir'];
+          const catTitle = lang === 'fr' ? cat.titleFr : cat.titleEn;
+          const catBadge = lang === 'fr' ? cat.badgeFr : cat.badgeEn;
+
+          return (
+            <div className="discovery-variant-card" key={cat.handle || i}>
+              <div className="discovery-variant-card__header">
+                <span className="discovery-variant-card__number">{i + 1}</span>
+                <strong className="discovery-variant-card__title">{catTitle}</strong>
+                {catBadge && <span className="discovery-variant-card__badge">{catBadge}</span>}
+              </div>
+              <div className="variant">
+                <div className="variant__thumb">
+                  <img
+                    src={colorImg}
+                    alt={catTitle}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                </div>
+                <label className="select">
+                  <span className="select__dot" style={{ background: currentColor.hex }} />
+                  <select
+                    value={v.color}
+                    onChange={(e) => onChange(i, { color: e.target.value })}
+                    aria-label={`Couleur ${catTitle}`}
+                  >
+                    {catColors.map((c) => (
+                      <option key={c.id} value={c.id}>
+                        {t('color_names.' + c.label, c.label)}
+                      </option>
+                    ))}
+                  </select>
+                  <Icon name="chevron" size={14} />
+                </label>
+                <label className="select">
+                  <select
+                    value={v.size}
+                    onChange={(e) => onChange(i, { size: e.target.value })}
+                    aria-label={`Taille ${catTitle}`}
+                  >
+                    {sizes.map((s) => (
+                  <option key={s}>{s}</option>
+                ))}
+              </select>
+              <Icon name="chevron" size={14} />
+            </label>
+          </div>
+        </div>
+          );
+        })}
+      </div>
+    );
+  }
 
   return (
     <div className="variants">
@@ -106,6 +181,7 @@ function BundleCard({ bundle, selected, onSelect, variants, onVariantChange, pro
             colorImages={colorImages}
             lang={lang}
             isTwoPlusOne={bundle.isTwoPlusOne}
+            isDiscoveryPack={bundle.isDiscoveryPack}
           />
         </div>
       )}

@@ -185,6 +185,56 @@ export const products = [
     ],
     text: 'Le t-shirt manches longues Vela Sculpt™ combine gainage abdominal et soutien postural actif sur l’ensemble du dos et des bras. Idéal sous les pulls, costumes ou pour les journées fraîches.',
   },
+  {
+    handle: 'pack-decouverte',
+    title: 'Vela Sculpt™ — Pack Découverte (3 Coupes)',
+    shortTitle: 'Pack Découverte (3 Coupes)',
+    subtitle: '1 Débardeur + 1 Demi-manches + 1 Manches longues inclus',
+    tagline: 'Testez l’ensemble de nos 3 coupes ergonomiques en un seul pack à tarif avantageux.',
+    badge: 'Offre Découverte',
+    modelType: 'pack-decouverte',
+    price: 79.85,
+    compareAt: 149.85,
+    rating: 4.9,
+    reviewCount: 1540,
+    colors: ['Noir', 'Blanc', 'Gris'],
+    colorImages: {
+      Noir: [
+        '/images/products/image-decouverte.png',
+        '/images/products/sans-manches/1.jpeg',
+        '/images/products/demi-manches/4.jpg',
+        '/images/products/manches-longues/1.jpg',
+      ],
+      Blanc: [
+        '/images/products/image-decouverte.png',
+        '/images/products/sans-manches/4.jpeg',
+        '/images/products/demi-manches/1.jpg',
+        '/images/products/manches-longues/7.jpg',
+      ],
+      Gris: [
+        '/images/products/image-decouverte.png',
+        '/images/products/sans-manches/10.jpeg',
+        '/images/products/demi-manches/7.jpg',
+        '/images/products/manches-longues/4.jpg',
+      ],
+    },
+    images: [
+      '/images/products/image-decouverte.png',
+      '/images/products/sans-manches/1.jpeg',
+      '/images/products/demi-manches/4.jpg',
+      '/images/products/manches-longues/1.jpg',
+    ],
+    sizes: ['S', 'M', 'L', 'XL', '2XL'],
+    usage: '1 Débardeur sans manches + 1 T-shirt demi-manches + 1 T-shirt manches longues.',
+    targetAvatar: 'Hommes souhaitant découvrir nos 3 coupes pour adapter leur maintien à chaque saison et tenue.',
+    technicalDetails: [
+      { label: '3 coupes ergonomiques incluses', desc: '1 Débardeur ultra-discret, 1 T-shirt demi-manches polyvalent et 1 T-shirt manches longues maintien renforcé.' },
+      { label: 'Maille 3D respirante', desc: 'Évacuation active de la transpiration, thermo-régulation et technologie anti-odeur sur toutes les pièces.' },
+      { label: 'Maintien postural ciblé', desc: 'Gainage abdominal doux et soutien dorsal ergonomique adapté à chaque coupe.' },
+      { label: 'Entretien facile', desc: 'Lavage délicat à 30°C en machine, séchage rapide à l’air libre.' },
+    ],
+    text: 'Le Pack Découverte Vela Sculpt™ réunit nos 3 coupes ergonomiques phares en un seul pack : le débardeur sans manches pour l’été et les chemises légères, le demi-manches pour le quotidien au bureau, et le manches longues pour un maintien postural renforcé. Choisissez votre taille et votre couleur pour chaque coupe.',
+  },
 ];
 
 export const getColorImages = (product, color) => {
@@ -310,6 +360,15 @@ export const getLocalizedProduct = (product, lang = 'fr') => {
       usage: 'Under sweaters, business shirts in cooler weather, or long sedentary work days.',
       targetAvatar: 'Men seeking maximum lumbar alignment and full upper-body coverage.',
     },
+    'pack-decouverte': {
+      title: 'Vela Sculpt™ — Discovery Pack (3 Fits)',
+      shortTitle: 'Discovery Pack (3 Fits)',
+      subtitle: '1 Tank Top + 1 Short Sleeves + 1 Long Sleeves included',
+      tagline: 'Experience all 3 ergonomic fits in a single high-value pack.',
+      badge: 'Discovery Offer',
+      usage: '1 Sleeveless Tank + 1 Short-Sleeve Tee + 1 Long-Sleeve Tee.',
+      targetAvatar: 'Men looking to experience all 3 ergonomic fits across seasons and outfits.',
+    },
   };
   const override = enOverrides[product.handle];
   return override ? { ...product, ...override } : product;
@@ -338,6 +397,15 @@ export const getLocalizedCollection = (collection, lang = 'fr') => {
       label: 'Long Sleeves',
       title: 'Vela Sculpt™ Long Sleeves',
       description: 'Full upper-body compression and reinforced postural support for cooler seasons.',
+    },
+    'pack-decouverte': {
+      title: 'Vela Sculpt™ — Discovery Pack (3 Fits)',
+      shortTitle: 'Discovery Pack (3 Fits)',
+      subtitle: '1 Tank Top + 1 Short Sleeves + 1 Long Sleeves included',
+      tagline: 'Experience all 3 ergonomic fits in a single high-value pack.',
+      badge: 'Discovery Offer',
+      usage: '1 Sleeveless Tank + 1 Short-Sleeve Tee + 1 Long-Sleeve Tee.',
+      targetAvatar: 'Men looking to experience all 3 ergonomic fits across seasons and outfits.',
     },
   };
   const override = enOverrides[collection.handle];

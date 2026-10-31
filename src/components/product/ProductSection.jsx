@@ -9,16 +9,22 @@ import ShopifyBuyButton from '../shopify/ShopifyBuyButton.jsx';
 import ShopifyPaymentBadges from '../shopify/ShopifyPaymentBadges.jsx';
 import Icon from '../ui/Icon.jsx';
 import Stars from '../ui/Stars.jsx';
-import { badges, badgesEn, benefits, benefitsEn, colors, stats, statsEn } from '../../data/product.js';
+import { badges, badgesEn, benefits, benefitsEn, colors, discoveryCategories, stats, statsEn } from '../../data/product.js';
 import { colorHex, getColorImages, getLocalizedProduct, products } from '../../data/catalog.js';
 import { useCart } from '../../context/CartContext.jsx';
 import { useLanguage } from '../../context/LanguageContext.jsx';
 import { useScrolledPast } from '../../lib/hooks.js';
 import './ProductSection.css';
 
-export default function ProductSection({ initialModelHandle, onModelChange, showModelSelector = true }) {
+export default function ProductSection({ initialModelHandle, onModelChange, showModelSelector = true, isDiscoveryOffer = false }) {
   const { lang, t } = useLanguage();
-  const [selectedHandle, setSelectedHandle] = useState(initialModelHandle || products[0].handle);
+  const isDiscovery = isDiscoveryOffer || initialModelHandle === 'pack-decouverte';
+  const cutsList = useMemo(() => products.slice(0, 3), []);
+  const [selectedHandle, setSelectedHandle] = useState(
+    initialModelHandle && initialModelHandle !== 'pack-decouverte'
+      ? initialModelHandle
+      : cutsList[0].handle
+  );
 
   useEffect(() => {
     if (initialModelHandle) {
@@ -39,7 +45,29 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
     });
   }, [currentModel.colors]);
 
+
+
   const modelBundles = useMemo(() => {
+    if (isDiscovery) {
+      return [
+        {
+          id: 1,
+          qty: 3,
+          isDiscoveryPack: true,
+          title: lang === 'fr' ? 'Pack Découverte — 3 Coupes' : 'Discovery Pack — 3 Fits',
+          subtitle:
+            lang === 'fr'
+              ? '1 Débardeur + 1 Demi-manches + 1 Manches longues inclus'
+              : '1 Tank Top + 1 Short Sleeves + 1 Long Sleeves included',
+          price: 79.85,
+          compareAt: 149.85,
+          badge: lang === 'fr' ? 'Offre Spéciale — 3 Coupes' : 'Special Offer — 3 Fits',
+          freeShipping: true,
+          highlight: true,
+        },
+      ];
+    }
+
     const p1 = currentModel.price;
     const c1 = currentModel.compareAt || Math.round(p1 * 1.5);
     let p2, p3, c2, c3;
@@ -102,14 +130,19 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
     ];
   }, [currentModel.handle, currentModel.price, currentModel.compareAt, lang]);
 
-  const [bundleId, setBundleId] = useState(2);
-  const bundle = modelBundles.find((b) => b.id === bundleId) || modelBundles[1];
+  const [bundleId, setBundleId] = useState(initialModelHandle === 'pack-decouverte' ? 1 : 2);
+  const bundle = modelBundles.find((b) => b.id === bundleId) || modelBundles[0];
 
   const [variants, setVariants] = useState(() =>
-    Array.from({ length: 4 }, (_, i) => ({
-      color: availableColors[i % availableColors.length]?.id || 'noir',
-      size: 'L',
-    }))
+    initialModelHandle === 'pack-decouverte'
+      ? discoveryCategories.map((c) => ({
+          color: c.defaultColor || 'noir',
+          size: 'L',
+        }))
+      : Array.from({ length: 4 }, (_, i) => ({
+          color: availableColors[i % availableColors.length]?.id || 'noir',
+          size: 'L',
+        }))
   );
 
   const [sizeOpen, setSizeOpen] = useState(false);
@@ -121,6 +154,16 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
 
   // Synchronize color and variants when switching model or when queryColor changes
   useEffect(() => {
+    if (isDiscovery) {
+      setBundleId(1);
+      setVariants(
+        discoveryCategories.map((c) => ({
+          color: c.defaultColor || 'noir',
+          size: 'L',
+        }))
+      );
+      return;
+    }
     const validQuery = queryColor && currentModel.colors.find(
       (c) => c.toLowerCase() === queryColor.toLowerCase()
     );
@@ -140,13 +183,24 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
         color: colorId,
       }))
     );
-  }, [currentModel.handle, availableColors, queryColor]);
+  }, [currentModel.handle, availableColors, queryColor, isDiscovery]);
 
   const currentImages = getColorImages(currentModel, selectedColor);
   const chosen = variants.slice(0, bundle.qty);
 
-  const updateVariant = (i, patch) =>
+  const updateVariant = (i, patch) => {
     setVariants((vs) => vs.map((v, j) => (j === i ? { ...v, ...patch } : v)));
+    if (isDiscovery && patch.color) {
+      const cutIdx = cutsList.findIndex((p) => p.handle === selectedHandle);
+      if (cutIdx === i) {
+        const cat = discoveryCategories[i];
+        const cObj = cat?.colors.find((c) => c.id === patch.color);
+        if (cObj) {
+          setSelectedColor(cObj.label);
+        }
+      }
+    }
+  };
 
   const applySize = (size) => {
     setVariants((vs) => vs.map((v) => ({ ...v, size })));
@@ -158,32 +212,72 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
     const matched = availableColors.find(
       (c) => c.label.toLowerCase() === colorName.toLowerCase() || c.id === colorName.toLowerCase()
     );
-    if (matched) {
+    const colorId = matched?.id || colorName.toLowerCase().replace(/\s+/g, '-');
+    if (isDiscovery) {
+      const cutIdx = cutsList.findIndex((p) => p.handle === selectedHandle);
+      if (cutIdx !== -1) {
+        setVariants((vs) =>
+          vs.map((v, i) => (i === cutIdx ? { ...v, color: colorId } : v))
+        );
+      }
+    } else if (matched) {
       setVariants((vs) => vs.map((v) => ({ ...v, color: matched.id })));
     }
   };
 
   const handleSelectModel = (handle) => {
     setSelectedHandle(handle);
+    if (isDiscovery) {
+      const cutIdx = cutsList.findIndex((p) => p.handle === handle);
+      if (cutIdx !== -1 && variants[cutIdx]) {
+        const cat = discoveryCategories[cutIdx];
+        const currentColorId = variants[cutIdx].color;
+        const cObj = cat?.colors.find((c) => c.id === currentColorId);
+        if (cObj) {
+          setSelectedColor(cObj.label);
+        }
+      }
+    }
     if (onModelChange) {
       onModelChange(handle);
     }
   };
 
   const addToCart = () => {
-    const detail = chosen
-      .map((v) => {
-        const c = availableColors.find((col) => col.id === v.color) || availableColors[0];
-        const colorLabel = t('color_names.' + c.label, c.label);
-        return `${colorLabel} / ${v.size}`;
-      })
-      .join(', ');
+    let detail;
+    if (bundle.isDiscoveryPack) {
+      detail = chosen
+        .map((v, i) => {
+          const cat = discoveryCategories[i] || discoveryCategories[0];
+          const c = cat.colors.find((col) => col.id === v.color) || cat.colors[0];
+          const colorLabel = t('color_names.' + c.label, c.label);
+          const catName = lang === 'fr' ? cat.titleFr : cat.titleEn;
+          return `${catName} : ${colorLabel} / ${v.size}`;
+        })
+        .join(' · ');
+    } else {
+      detail = chosen
+        .map((v) => {
+          const c = availableColors.find((col) => col.id === v.color) || availableColors[0];
+          const colorLabel = t('color_names.' + c.label, c.label);
+          return `${colorLabel} / ${v.size}`;
+        })
+        .join(', ');
+    }
+
+    const itemTitle = bundle.isDiscoveryPack
+      ? (lang === 'fr' ? 'Pack Découverte — 3 Coupes' : 'Discovery Pack — 3 Fits')
+      : `${localizedModel.title} — ${bundle.title}`;
+
+    const itemImage = bundle.isDiscoveryPack
+      ? '/images/products/image-decouverte.png'
+      : (currentImages[0] || currentModel.images[0]);
 
     add({
       id: `${currentModel.handle}-${bundle.id}-${detail}`,
-      title: `${localizedModel.title} — ${bundle.title}`,
+      title: itemTitle,
       detail,
-      image: currentImages[0] || currentModel.images[0],
+      image: itemImage,
       color: colorHex[selectedColor] || '#1a1a1a',
       price: bundle.price,
       compareAt: bundle.compareAt,
@@ -192,25 +286,46 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
   };
 
   const currentLineItem = useMemo(() => {
-    const detail = chosen
-      .map((v) => {
-        const c = availableColors.find((col) => col.id === v.color) || availableColors[0];
-        const colorLabel = t('color_names.' + c.label, c.label);
-        return `${colorLabel} / ${v.size}`;
-      })
-      .join(', ');
+    let detail;
+    if (bundle.isDiscoveryPack) {
+      detail = chosen
+        .map((v, i) => {
+          const cat = discoveryCategories[i] || discoveryCategories[0];
+          const c = cat.colors.find((col) => col.id === v.color) || cat.colors[0];
+          const colorLabel = t('color_names.' + c.label, c.label);
+          const catName = lang === 'fr' ? cat.titleFr : cat.titleEn;
+          return `${catName} : ${colorLabel} / ${v.size}`;
+        })
+        .join(' · ');
+    } else {
+      detail = chosen
+        .map((v) => {
+          const c = availableColors.find((col) => col.id === v.color) || availableColors[0];
+          const colorLabel = t('color_names.' + c.label, c.label);
+          return `${colorLabel} / ${v.size}`;
+        })
+        .join(', ');
+    }
+
+    const itemTitle = bundle.isDiscoveryPack
+      ? (lang === 'fr' ? 'Pack Découverte — 3 Coupes' : 'Discovery Pack — 3 Fits')
+      : `${localizedModel.title} — ${bundle.title}`;
+
+    const itemImage = bundle.isDiscoveryPack
+      ? '/images/products/image-decouverte.png'
+      : (currentImages[0] || currentModel.images[0]);
 
     return {
       id: `${currentModel.handle}-${bundle.id}`,
-      title: `${localizedModel.title} — ${bundle.title}`,
+      title: itemTitle,
       detail,
-      image: currentImages[0] || currentModel.images[0],
+      image: itemImage,
       price: bundle.price,
       compareAt: bundle.compareAt,
       qty: 1,
       freeShipping: Boolean(bundle.freeShipping),
     };
-  }, [chosen, currentModel.handle, bundle, localizedModel.title, currentImages, availableColors, t]);
+  }, [chosen, currentModel.handle, bundle, localizedModel.title, currentImages, availableColors, t, lang]);
 
   const shipDate = new Date(Date.now() + 2 * 864e5).toLocaleDateString(lang === 'fr' ? 'fr-FR' : 'en-US', {
     month: 'long',
@@ -239,7 +354,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
               {lang === 'fr' ? '1. Choisissez votre coupe ergonomique :' : '1. Choose your ergonomic fit:'}
             </label>
             <div className="product__model-buttons">
-              {products.map((p) => {
+              {cutsList.map((p) => {
                 const locP = getLocalizedProduct(p, lang);
                 return (
                   <button
@@ -416,8 +531,12 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
         visible={pastAtc}
         bundle={bundle}
         onAdd={addToCart}
-        productImage={currentImages[0]}
-        title={`${localizedModel.title} (${t('color_names.' + selectedColor, selectedColor)})`}
+        productImage={bundle.isDiscoveryPack ? '/images/products/image-decouverte.png' : currentImages[0]}
+        title={
+          bundle.isDiscoveryPack
+            ? (lang === 'fr' ? 'Pack Découverte — 3 Coupes' : 'Discovery Pack — 3 Fits')
+            : `${localizedModel.title} (${t('color_names.' + selectedColor, selectedColor)})`
+        }
       />
     </section>
   );

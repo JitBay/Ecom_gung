@@ -15,6 +15,7 @@ import QualitySection from '../components/sections/QualitySection.jsx';
 import Faq from '../components/sections/Faq.jsx';
 import CustomerReviews from '../components/sections/CustomerReviews.jsx';
 import NotFound from './NotFound.jsx';
+import PackDecouverteLanding from './PackDecouverteLanding.jsx';
 import { colorHex, collectionUrl, getProduct, getLocalizedProduct, getColorImages } from '../data/catalog.js';
 import { brand } from '../data/site.js';
 import { fabric, shipping } from '../data/product.js';
@@ -359,6 +360,10 @@ export default function ProductPage({ handle: fixedHandle }) {
   }, [product?.handle, product?.title]);
 
   if (!rawProduct) return <NotFound />;
+
+  if (handle === 'pack-decouverte') {
+    return <PackDecouverteLanding />;
+  }
 
   // All cuts (Sans manches, Demi-manches, Manches longues) use the dedicated high-conversion layout
   return <DedicatedProductPage product={rawProduct} />;

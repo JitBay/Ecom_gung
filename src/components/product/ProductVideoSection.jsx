@@ -31,6 +31,9 @@ export default function ProductVideoSection({ modelHandle = 'vela-sculpt-sans-ma
   };
 
   const getCutBenefitFr = () => {
+    if (modelHandle === 'pack-decouverte') {
+      return '3 coupes complémentaires : 1 débardeur, 1 demi-manches et 1 manches longues inclus';
+    }
     if (modelHandle === 'vela-sculpt-demi-manches') {
       return 'Découpe demi-manches : col rond discret invisible sous chemises de bureau, polos & t-shirts';
     }
@@ -41,6 +44,9 @@ export default function ProductVideoSection({ modelHandle = 'vela-sculpt-sans-ma
   };
 
   const getCutBenefitEn = () => {
+    if (modelHandle === 'pack-decouverte') {
+      return '3 complementary fits: 1 tank top, 1 short-sleeve tee, and 1 long-sleeve tee included';
+    }
     if (modelHandle === 'vela-sculpt-demi-manches') {
       return 'Short sleeves cut: discreet crew neck invisible under office shirts, polos & tees';
     }

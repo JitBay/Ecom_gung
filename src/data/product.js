@@ -17,6 +17,65 @@ export const colors = [
 
 export const sizes = ['S', 'M', 'L', 'XL', '2XL'];
 
+export const discoveryCategories = [
+  {
+    handle: 'vela-sculpt-sans-manches',
+    titleFr: 'Sans manches (débardeur)',
+    titleEn: 'Sleeveless (Tank Top)',
+    badgeFr: 'Ultra discret',
+    badgeEn: 'Ultra Discreet',
+    defaultColor: 'noir',
+    colors: [
+      { id: 'noir', label: 'Noir', hex: '#1a1a1a' },
+      { id: 'blanc', label: 'Blanc', hex: '#f4f4f6' },
+      { id: 'gris', label: 'Gris', hex: '#72757d' },
+      { id: 'black-or', label: 'Black Or', hex: '#241f17' },
+    ],
+    colorImages: {
+      Noir: '/images/products/sans-manches/1.jpeg',
+      Blanc: '/images/products/sans-manches/4.jpeg',
+      Gris: '/images/products/sans-manches/10.jpeg',
+      'Black Or': '/images/products/sans-manches/7.jpeg',
+    },
+  },
+  {
+    handle: 'vela-sculpt-demi-manches',
+    titleFr: 'Demi-manches (manches courtes)',
+    titleEn: 'Short Sleeves (Crew Neck)',
+    badgeFr: 'Plus populaire',
+    badgeEn: 'Most Popular',
+    defaultColor: 'noir',
+    colors: [
+      { id: 'noir', label: 'Noir', hex: '#1a1a1a' },
+      { id: 'blanc', label: 'Blanc', hex: '#f4f4f6' },
+      { id: 'gris', label: 'Gris', hex: '#72757d' },
+    ],
+    colorImages: {
+      Noir: '/images/products/demi-manches/4.jpg',
+      Blanc: '/images/products/demi-manches/1.jpg',
+      Gris: '/images/products/demi-manches/7.jpg',
+    },
+  },
+  {
+    handle: 'vela-sculpt-manches-longues',
+    titleFr: 'Manches longues',
+    titleEn: 'Long Sleeves',
+    badgeFr: 'Maintien renforcé',
+    badgeEn: 'Reinforced Support',
+    defaultColor: 'noir',
+    colors: [
+      { id: 'noir', label: 'Noir', hex: '#1a1a1a' },
+      { id: 'gris-chine', label: 'Gris chiné', hex: '#5a5d66' },
+      { id: 'blanc', label: 'Blanc', hex: '#f4f4f6' },
+    ],
+    colorImages: {
+      Noir: '/images/products/manches-longues/1.jpg',
+      'Gris chiné': '/images/products/manches-longues/4.jpg',
+      Blanc: '/images/products/manches-longues/7.jpg',
+    },
+  },
+];
+
 // 4 value propositions / offer modules for marketing and A/B testing
 export const offerModules = [
   {

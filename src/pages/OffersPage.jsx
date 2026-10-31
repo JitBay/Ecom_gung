@@ -24,7 +24,29 @@ export default function OffersPage() {
       </div>
 
       <OfferModules />
-      <ProductSection />
+      <div className="container" style={{ margin: '20px auto 10px', textAlign: 'center' }}>
+        <Link
+          to="/products/pack-decouverte"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 8,
+            padding: '10px 20px',
+            borderRadius: 999,
+            background: 'rgba(184, 147, 86, 0.12)',
+            border: '1px solid rgba(184, 147, 86, 0.35)',
+            color: '#8c6827',
+            fontSize: 13,
+            fontWeight: 600,
+            textDecoration: 'none',
+          }}
+        >
+          {lang === 'fr'
+            ? '✨ Découvrir la présentation complète du Pack Découverte (3 Coupes) →'
+            : '✨ Explore the complete Discovery Pack (3 Fits) presentation page →'}
+        </Link>
+      </div>
+      <ProductSection isDiscoveryOffer={true} showModelSelector={true} />
     </div>
   );
 }

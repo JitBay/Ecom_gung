@@ -39,7 +39,7 @@ export default function Hero({ initialHandle, onSelectModel, showModelSelector =
     }
   };
 
-  const currentProduct = heroProducts[selectedIdx] || heroProducts[0];
+  const currentProduct = (initialHandle && products.find((p) => p.handle === initialHandle)) || heroProducts[selectedIdx] || heroProducts[0];
   const perks = lang === 'fr' ? perksFr : perksEn;
 
   useEffect(() => {

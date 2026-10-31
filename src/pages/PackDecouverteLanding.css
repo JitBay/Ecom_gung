@@ -1,0 +1,422 @@
+/* Pack Découverte Dedicated Sales Landing Page */
+
+.pdl {
+  padding-top: 10px;
+  background: var(--bg, #fbfaf8);
+}
+
+.pdl__crumbs-wrap {
+  padding-top: 16px;
+  margin-bottom: 20px;
+}
+
+/* 1. Hero Section */
+.pdl-hero {
+  position: relative;
+  padding: 40px 0 60px;
+  background: linear-gradient(180deg, #f7f3ec 0%, #ffffff 100%);
+  border-bottom: 1px solid #ebd9c2;
+}
+
+.pdl-hero__grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 40px;
+}
+
+.pdl-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(184, 147, 86, 0.14);
+  border: 1px solid rgba(184, 147, 86, 0.35);
+  color: #8c6827;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.pdl-hero__rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+
+.pdl-hero__rating strong {
+  font-weight: 700;
+}
+
+.pdl-hero__rating span {
+  color: var(--muted);
+}
+
+.pdl-hero__title {
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1.15;
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.pdl-hero__title u {
+  text-decoration-color: var(--gold);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
+}
+
+.pdl-hero__tagline {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.pdl-hero__perks {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pdl-hero__perks li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+.pdl-hero__perk-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  margin-top: 1px;
+}
+
+.pdl-hero__cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.pdl-hero__cta {
+  padding: 16px 32px;
+  font-size: 16px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pdl-hero__guarantee-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.pdl-hero__card {
+  position: relative;
+  background: var(--white);
+  border: 1.5px solid #e7dfd2;
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.pdl-hero__card-save {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: #c22d2d;
+  color: var(--white);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  box-shadow: 0 4px 12px rgba(194, 45, 45, 0.3);
+}
+
+.pdl-hero__card-img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.pdl-hero__card-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 8px 0;
+  border-top: 1px solid #f0e9df;
+}
+
+.pdl-hero__card-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  text-align: left;
+}
+
+.pdl-hero__card-sub {
+  font-size: 13px;
+  color: var(--muted);
+  text-align: left;
+}
+
+.pdl-hero__card-price strong {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.pdl-hero__card-price s {
+  font-size: 15px;
+  color: var(--muted-2, #8c8f99);
+  margin-left: 8px;
+}
+
+/* 2. 3 Cuts Breakdown Showcase */
+.pdl-showcase {
+  padding: 60px 0;
+}
+
+.pdl-showcase__head {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 40px;
+}
+
+.pdl-showcase__head .eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gold-dark);
+  margin-bottom: 8px;
+}
+
+.pdl-showcase__head h2 {
+  font-size: clamp(24px, 3.2vw, 34px);
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 12px;
+  line-height: 1.25;
+}
+
+.pdl-showcase__head p {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.pdl-cuts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.pdl-cut-card {
+  background: var(--white);
+  border: 1.5px solid #e7dfd2;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.pdl-cut-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--gold);
+  box-shadow: 0 14px 32px rgba(201, 169, 110, 0.16);
+}
+
+.pdl-cut-card__media {
+  position: relative;
+  height: 240px;
+  overflow: hidden;
+  background: #f0ebe2;
+}
+
+.pdl-cut-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.pdl-cut-card:hover .pdl-cut-card__media img {
+  transform: scale(1.04);
+}
+
+.pdl-cut-card__badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: var(--white);
+  color: var(--ink);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.pdl-cut-card__step {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.pdl-cut-card__body {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.pdl-cut-card__title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.pdl-cut-card__tagline {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+.pdl-cut-card__features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid #f2ede4;
+  padding-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pdl-cut-card__features li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--ink-soft, #444);
+}
+
+.pdl-cut-card__features li svg {
+  color: var(--gold-dark);
+  flex: none;
+}
+
+/* 3. Value Proposition Strip */
+.pdl-value-strip {
+  background: linear-gradient(135deg, #1f2228 0%, #111317 100%);
+  color: var(--white);
+  padding: 36px 0;
+  margin: 30px 0;
+  border-radius: 18px;
+}
+
+.pdl-value-strip__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.pdl-value-strip__content h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+
+.pdl-value-strip__content p {
+  font-size: 15px;
+  color: #cfd3dc;
+  line-height: 1.5;
+}
+
+.pdl-value-strip__action {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.pdl-value-strip__price {
+  text-align: right;
+}
+
+.pdl-value-strip__price strong {
+  display: block;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--gold);
+}
+
+.pdl-value-strip__price s {
+  font-size: 14px;
+  color: #8c8f99;
+}
+
+@media (max-width: 900px) {
+  .pdl-hero__grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .pdl-hero__card {
+    max-width: 440px;
+    margin: 0 auto;
+  }
+  .pdl-cuts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
