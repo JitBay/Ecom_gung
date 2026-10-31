@@ -15,6 +15,10 @@
   margin-bottom: 24px;
 }
 
+.quality__text {
+  padding-top: clamp(40px, 5.5vw, 84px);
+}
+
 /* Fabric close-ups drawn with CSS gradients */
 .quality__tiles {
   display: grid;
@@ -223,6 +227,9 @@
 @media (max-width: 899px) {
   .quality__inner {
     grid-template-columns: 1fr;
+  }
+  .quality__text {
+    padding-top: 0;
   }
 }
 
