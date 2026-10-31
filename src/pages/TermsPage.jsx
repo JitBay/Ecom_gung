@@ -36,7 +36,7 @@ export default function TermsPage() {
 
         <h2>Article 4 — Livraison</h2>
         <p>
-          Les commandes sont expédiées sous 24 à 48 heures ouvrées. Les délais moyens de livraison constatés en France métropolitaine et en Europe sont de 3 à 5 jours ouvrés.
+          Les commandes sont expédiées sous 24 à 48 heures ouvrées. Les délais moyens de livraison constatés en France métropolitaine et en Europe sont de 6 à 12 jours ouvrés avec un suivi complet en direct (Full Tracking). La livraison est 100% gratuite pour toutes les commandes.
         </p>
 
         <h2>Article 5 — Garantie commerciale de 30 jours</h2>

@@ -57,11 +57,11 @@ export default function TrackOrderPage() {
             <p style={{ margin: 0, fontSize: 14 }}>
               {lang === 'fr' ? (
                 <>
-                  Numéro recherché : <strong>{trackingNumber}</strong>. Votre colis est pris en charge par notre transporteur partenaire et est en cours d'acheminement vers votre adresse de livraison sous 3 à 5 jours ouvrés.
+                  Numéro recherché : <strong>{trackingNumber}</strong>. Votre colis est pris en charge par notre transporteur partenaire et est en cours d'acheminement vers votre adresse de livraison sous 6 à 12 jours ouvrés (suivi complet en direct).
                 </>
               ) : (
                 <>
-                  Searched number: <strong>{trackingNumber}</strong>. Your package is in transit with our logistics carrier and is on its way to your delivery address within 3 to 5 business days.
+                  Searched number: <strong>{trackingNumber}</strong>. Your package is in transit with our logistics carrier and is on its way to your delivery address within 6 to 12 working days (full tracking).
                 </>
               )}
             </p>

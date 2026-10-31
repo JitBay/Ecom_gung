@@ -102,7 +102,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
         price: p1,
         compareAt: c1,
         badge: lang === 'fr' ? 'Offre découverte' : 'Intro Offer',
-        freeShipping: false,
+        freeShipping: true,
       },
       {
         id: 2,
@@ -451,7 +451,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
             <Icon name="lock" size={14} /> {lang === 'fr' ? 'Paiement 100% sécurisé' : '100% Secure Payment'}
           </span>
           <span>
-            <Icon name="truck" size={14} /> {lang === 'fr' ? 'Livraison suivie offerte dès 55 €' : 'Free tracked shipping over €55'}
+            <Icon name="truck" size={14} /> {lang === 'fr' ? 'Livraison 100% gratuite · 6 à 12 jours ouvrés (suivi complet)' : 'Free shipping · 6 to 12 working days (full tracking)'}
           </span>
           <span>
             <Icon name="shield" size={14} /> {lang === 'fr' ? 'Garantie satisfait ou remboursé 30j' : '30-Day Money-Back Guarantee'}
@@ -497,7 +497,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
             <i className="live-dot" /> {lang === 'fr' ? 'Expédié avant le ' : 'Ships before '}<strong>{shipDate}</strong>
           </span>
           <span>
-            <i className="flag-fr" /> {lang === 'fr' ? 'Livraison suivie en France & Europe' : 'Tracked shipping across Europe'}
+            <i className="flag-fr" /> {lang === 'fr' ? 'Livraison gratuite 6-12 jours ouvrés (suivi complet)' : 'Free shipping 6-12 working days (full tracking)'}
           </span>
         </div>
         <p className="product__trend">

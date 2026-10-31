@@ -139,8 +139,8 @@ export default function PackDecouverteLanding() {
                 <span>
                   <strong>{lang === 'fr' ? 'Économisez 70 € (-47%) :' : 'Save €70 (-47%):'}</strong>{' '}
                   {lang === 'fr'
-                    ? 'tarif préférentiel exclusif sur le pack + Livraison suivie offerte.'
-                    : 'exclusive bundled rate + Free tracked shipping included.'}
+                    ? 'tarif préférentiel exclusif sur le pack + Livraison suivie 100% offerte (6 à 12 jours ouvrés).'
+                    : 'exclusive bundled rate + 100% Free tracked shipping included (6 to 12 working days).'}
                 </span>
               </li>
             </ul>
@@ -251,8 +251,8 @@ export default function PackDecouverteLanding() {
               </h3>
               <p>
                 {lang === 'fr'
-                  ? 'En commandant le Pack Découverte, vous bénéficiez du tarif privilégié de 79,85 € (économisez 70 €) avec la livraison suivie offerte.'
-                  : 'By ordering the Discovery Pack, you get the special bundled price of €79.85 (save €70) plus free tracked shipping.'}
+                  ? 'En commandant le Pack Découverte, vous bénéficiez du tarif privilégié de 79,85 € (économisez 70 €) avec la livraison suivie offerte (6 à 12 jours ouvrés avec suivi complet).'
+                  : 'By ordering the Discovery Pack, you get the special bundled price of €79.85 (save €70) plus free tracked shipping (6 to 12 working days with full tracking).'}
               </p>
             </div>
             <div className="pdl-value-strip__action">

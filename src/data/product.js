@@ -246,7 +246,7 @@ export const bundles = [
     price: 39.95,
     compareAt: 59.95,
     badge: 'Offre découverte',
-    freeShipping: false,
+    freeShipping: true,
   },
   {
     id: 2,
@@ -313,9 +313,9 @@ export const fabricEn = [
 export const shipping = {
   lines: [
     'Préparation & expédition : 24 à 48 heures ouvrées',
-    'Livraison en France & Europe : 3 à 5 jours ouvrés',
-    'Numéro de suivi fourni par email dès expédition',
-    'Livraison offerte dès 55 € d’achat (ou avec les packs 2 et 3 t-shirts)',
+    'Livraison en France & Europe : 6 à 12 jours ouvrés',
+    'Numéro de suivi complet en direct (Full Tracking) fourni par email dès expédition',
+    'Livraison 100% gratuite et suivie sur toutes les commandes',
   ],
   returns:
     'Garantie satisfait ou remboursé de 30 jours. Vous bénéficiez de 30 jours à compter de la réception pour essayer votre t-shirt Vela Sculpt™. Si vous n’êtes pas entièrement convaincu du confort ou du maintien, notre service client organise votre retour et remboursement en toute simplicité.',
@@ -324,9 +324,9 @@ export const shipping = {
 export const shippingEn = {
   lines: [
     'Order processing & dispatch: 24 to 48 business hours',
-    'Delivery across Europe: 3 to 5 business days',
-    'Live tracking number provided via email upon dispatch',
-    'Free shipping on orders over €55 or with 2+ shirt packs',
+    'Delivery across Europe: 6 to 12 working days',
+    'Full live tracking number provided via email upon dispatch',
+    '100% Free tracked shipping on all orders',
   ],
   returns:
     '30-Day Money-Back Guarantee. Take 30 days from delivery to test your Vela Sculpt™ shirt. If you are not 100% satisfied with the comfort or support, our team handles your return and full refund.',

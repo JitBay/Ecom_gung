@@ -33,7 +33,7 @@ export const faq = [
   {
     tag: 'Livraison & Suivi',
     q: 'Quels sont les délais et modalités d’expédition ?',
-    a: 'Toutes les commandes sont préparées sous 24 à 48 heures ouvrées. La livraison en France et en Europe prend généralement 3 à 5 jours ouvrés. Vous recevez un numéro de suivi dès que le colis quitte nos entrepôts. La livraison est offerte dès 55 € ou avec les packs 2 et 3 t-shirts.',
+    a: 'Toutes les commandes sont préparées sous 24 à 48 heures ouvrées. La livraison en France et en Europe prend entre 6 à 12 jours ouvrés avec un numéro de suivi complet en direct (Full Tracking). La livraison est 100% gratuite et offerte sur l’ensemble de vos commandes.',
   },
 ];
 
@@ -71,6 +71,6 @@ export const faqEn = [
   {
     tag: 'Shipping & Tracking',
     q: 'What are the delivery times and shipping terms?',
-    a: 'All orders are packed and dispatched within 24 to 48 business hours. Delivery across Europe typically takes 3 to 5 business days. You receive live tracking upon dispatch. Free shipping applies over €55 or with 2+ shirt packs.',
+    a: 'All orders are packed and dispatched within 24 to 48 business hours. Delivery across Europe takes between 6 to 12 working days with full end-to-end tracking. 100% Free tracked shipping is included on all orders.',
   },
 ];

@@ -142,7 +142,7 @@ function ClassicProductPage({ product }) {
         color: colorHex[color] || '#1a1a1a',
         price: product.price,
         compareAt: product.compareAt,
-        freeShipping: product.price * qty >= 55,
+        freeShipping: true,
       });
     }
   };

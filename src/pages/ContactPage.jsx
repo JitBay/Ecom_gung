@@ -51,7 +51,7 @@ export default function ContactPage() {
               {lang === 'fr' ? 'Délais de livraison' : 'Delivery Times'}
             </strong>
             <p style={{ margin: 0, fontSize: 14 }}>
-              {lang === 'fr' ? '3 à 5 jours ouvrés avec suivi' : '3 to 5 business days tracked'}
+              {lang === 'fr' ? '6 à 12 jours ouvrés (suivi complet)' : '6 to 12 working days (full tracking)'}
             </p>
           </div>
         </div>
