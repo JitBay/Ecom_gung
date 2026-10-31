@@ -107,6 +107,22 @@ export default function QualitySection() {
     <section className="quality" ref={ref} id="technologie">
       <div className="container quality__inner">
         <div className="quality__media reveal">
+          <div className="quality__header">
+            <span className="eyebrow">{lang === 'fr' ? 'Pourquoi Vela Labs ?' : 'Why Vela Labs?'}</span>
+            <h2 className="title">
+              {lang === 'fr' ? (
+                <>Chaque détail pensé pour <em>votre quotidien.</em></>
+              ) : (
+                <>Every detail, <em>engineered.</em></>
+              )}
+            </h2>
+            <p className="quality__lead">
+              {lang === 'fr'
+                ? 'La plupart des sous-vêtements gainants serrent trop ou tiennent chaud. Vela Sculpt™ a été pensé pour allier discrétion invisible sous vos vêtements, confort 24h et maintien postural naturel.'
+                : 'Most shapewear feels restrictive or runs hot. Vela Sculpt™ is engineered for discreet invisibility under everyday clothes, 24-hour comfort, and natural posture support.'}
+            </p>
+          </div>
+
           <div className="quality__tiles">
             {tiles.map((t) => (
               <div key={t.title} className="tile">
@@ -130,20 +146,6 @@ export default function QualitySection() {
         </div>
 
         <div className="quality__text reveal">
-          <span className="eyebrow">{lang === 'fr' ? 'Pourquoi Vela Labs ?' : 'Why Vela Labs?'}</span>
-          <h2 className="title">
-            {lang === 'fr' ? (
-              <>Chaque détail pensé pour <em>votre quotidien.</em></>
-            ) : (
-              <>Every detail, <em>engineered.</em></>
-            )}
-          </h2>
-          <p className="quality__lead">
-            {lang === 'fr'
-              ? 'La plupart des sous-vêtements gainants serrent trop ou tiennent chaud. Vela Sculpt™ a été pensé pour allier discrétion invisible sous vos vêtements, confort 24h et maintien postural naturel.'
-              : 'Most shapewear feels restrictive or runs hot. Vela Sculpt™ is engineered for discreet invisibility under everyday clothes, 24-hour comfort, and natural posture support.'}
-          </p>
-
           <div className="quality__stats">
             {statsList.map((s) => (
               <div key={s.label}>
