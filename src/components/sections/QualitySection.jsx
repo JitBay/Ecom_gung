@@ -108,7 +108,6 @@ export default function QualitySection() {
       <div className="container quality__inner">
         <div className="quality__media reveal">
           <div className="quality__header">
-            <span className="eyebrow">{lang === 'fr' ? 'Pourquoi Vela Labs ?' : 'Why Vela Labs?'}</span>
             <h2 className="title">
               {lang === 'fr' ? (
                 <>Chaque détail pensé pour <em>votre quotidien.</em></>

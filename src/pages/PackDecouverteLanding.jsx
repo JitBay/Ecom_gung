@@ -76,13 +76,6 @@ export default function PackDecouverteLanding() {
 
   return (
     <div className="pdl">
-      <div className="container pdl__crumbs-wrap">
-        <nav className="pp__crumbs" aria-label={lang === 'fr' ? "Fil d'Ariane" : 'Breadcrumbs'}>
-          <Link to="/">{t('nav.home')}</Link> / <Link to="/pages/offres">{t('nav.offers')}</Link> /{' '}
-          <span>{lang === 'fr' ? 'Pack Découverte (3 Coupes)' : 'Discovery Pack (3 Fits)'}</span>
-        </nav>
-      </div>
-
       {/* 1. HERO SECTION */}
       <section className="pdl-hero">
         <div className="container pdl-hero__grid">

@@ -17,12 +17,6 @@ export default function OffersPage() {
 
   return (
     <div style={{ paddingTop: 20 }}>
-      <div className="container" style={{ paddingTop: 16 }}>
-        <nav className="pp__crumbs" aria-label={lang === 'fr' ? "Fil d'Ariane" : 'Breadcrumbs'}>
-          <Link to="/">{t('nav.home')}</Link> / <span>{t('nav.offers')}</span>
-        </nav>
-      </div>
-
       <OfferModules />
       <div className="container" style={{ margin: '20px auto 10px', textAlign: 'center' }}>
         <Link
