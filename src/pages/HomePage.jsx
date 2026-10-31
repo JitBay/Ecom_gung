@@ -127,7 +127,7 @@ const bestSellersBase = [
     reviewsCount: '1 540',
     price: 79.85,
     compareAt: 149.85,
-    urlBase: '/products/vela-sculpt-sans-manches',
+    urlBase: '/pages/offres#product',
     colorData: {
       Noir: {
         hex: '#1a1a1a',
@@ -161,7 +161,7 @@ function BestSellerCard({ p, lang, t }) {
   const activeColorName = t('color_names.' + activeColorKey, activeColorKey);
 
   const discount = p.compareAt ? Math.round((1 - p.price / p.compareAt) * 100) : 0;
-  const targetUrl = `${p.urlBase}?color=${encodeURIComponent(activeColorKey)}`;
+  const targetUrl = p.urlBase.includes('#') ? p.urlBase : `${p.urlBase}?color=${encodeURIComponent(activeColorKey)}`;
 
   return (
     <article className="ixh-card">

@@ -65,6 +65,10 @@ function ProductRoute() {
     'sculpt-smooth-lift-swimsuit',
   ];
 
+  if (handle === 'pack-decouverte') {
+    return <Navigate to="/pages/offres#product" replace />;
+  }
+
   if (legacyHandles.includes(handle)) {
     return <Navigate to={`/products/${HERO_PRODUCT}`} replace />;
   }
