@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import Icon from '../components/ui/Icon.jsx';
 import { useLanguage } from '../context/LanguageContext.jsx';
 import './LegalPage.css';
@@ -18,9 +17,6 @@ export default function TrackOrderPage() {
 
   return (
     <div className="legal-page container">
-      <nav className="pp__crumbs" aria-label={lang === 'fr' ? "Fil d'Ariane" : 'Breadcrumbs'}>
-        <Link to="/">{t('nav.home')}</Link> / <span>{lang === 'fr' ? 'Suivi de commande' : 'Track Order'}</span>
-      </nav>
 
       <article className="legal-content">
         <h1>{lang === 'fr' ? 'Suivre Votre Colis Vela Labs' : 'Track Your Vela Labs Package'}</h1>

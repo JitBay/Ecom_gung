@@ -201,9 +201,6 @@ function ClassicProductPage({ product }) {
   return (
     <>
       <section className="pp container">
-        <nav className="pp__crumbs" aria-label={lang === 'fr' ? "Fil d'Ariane" : 'Breadcrumb'}>
-          <Link to="/">{t('product_page.crumbs_home')}</Link> / <Link to={collectionUrl('all')}>{t('product_page.crumbs_all')}</Link> / <span>{localized.title}</span>
-        </nav>
 
         <div className="pp__gallery-col">
           <Gallery images={currentImages} title={localized.title} activeColor={color} />

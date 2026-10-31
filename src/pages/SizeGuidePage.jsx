@@ -17,9 +17,6 @@ export default function SizeGuidePage() {
 
   return (
     <div className="legal-page container">
-      <nav className="pp__crumbs" aria-label={lang === 'fr' ? "Fil d'Ariane" : 'Breadcrumbs'}>
-        <Link to="/">{t('nav.home')}</Link> / <span>{lang === 'fr' ? 'Guide des tailles' : 'Size Guide'}</span>
-      </nav>
 
       <article className="legal-content">
         <h1>{lang === 'fr' ? 'Guide des tailles — Homme' : 'Men’s Size Guide'}</h1>

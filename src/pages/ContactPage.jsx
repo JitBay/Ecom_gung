@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import Icon from '../components/ui/Icon.jsx';
 import { brand } from '../data/site.js';
 import { useLanguage } from '../context/LanguageContext.jsx';
@@ -18,9 +17,6 @@ export default function ContactPage() {
 
   return (
     <div className="legal-page container">
-      <nav className="pp__crumbs" aria-label={lang === 'fr' ? "Fil d'Ariane" : 'Breadcrumbs'}>
-        <Link to="/">{t('nav.home')}</Link> / <span>Contact</span>
-      </nav>
 
       <article className="legal-content">
         <h1>{lang === 'fr' ? "Contactez l'Équipe Vela Labs" : 'Contact the Vela Labs Team'}</h1>

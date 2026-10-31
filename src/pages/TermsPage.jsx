@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext.jsx';
 import './LegalPage.css';
 
@@ -15,9 +14,6 @@ export default function TermsPage() {
 
   return (
     <div className="legal-page container">
-      <nav className="pp__crumbs" aria-label={lang === 'fr' ? "Fil d'Ariane" : 'Breadcrumbs'}>
-        <Link to="/">{t('nav.home')}</Link> / <span>{t('footer.terms')}</span>
-      </nav>
 
       <article className="legal-content">
         <h1>Conditions générales de vente (CGV)</h1>

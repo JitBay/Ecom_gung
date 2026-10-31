@@ -16,9 +16,6 @@ export default function GuaranteePage() {
 
   return (
     <div className="legal-page container">
-      <nav className="pp__crumbs" aria-label={lang === 'fr' ? "Fil d'Ariane" : 'Breadcrumbs'}>
-        <Link to="/">{t('nav.home')}</Link> / <span>{t('nav.guarantee')}</span>
-      </nav>
 
       <article className="legal-content">
         <h1>
