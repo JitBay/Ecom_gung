@@ -167,11 +167,19 @@ export default function PackDecouverteLanding() {
               <span className="pdl-hero__card-save">
                 {lang === 'fr' ? '-47% DE RÉDUCTION' : '-47% SAVINGS'}
               </span>
-              <img
-                src="/images/products/image-decouverte.png"
-                alt="Pack Découverte 3 Coupes"
-                className="pdl-hero__card-img"
-              />
+              <div className="pdl-hero__img-wrap">
+                <img
+                  src="/images/products/image-decouverte.png"
+                  alt={lang === 'fr' ? 'Pack Découverte — Vue avant' : 'Discovery Pack — Front view'}
+                  className="pdl-hero__card-img pdl-hero__card-img--main"
+                />
+                <img
+                  src="/images/products/decouverte-back.png"
+                  alt={lang === 'fr' ? 'Pack Découverte — Vue arrière' : 'Discovery Pack — Back view'}
+                  className="pdl-hero__card-img pdl-hero__card-img--alt"
+                  aria-hidden="true"
+                />
+              </div>
               <div className="pdl-hero__card-info">
                 <div>
                   <div className="pdl-hero__card-name">

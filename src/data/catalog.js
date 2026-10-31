@@ -201,18 +201,21 @@ export const products = [
     colorImages: {
       Noir: [
         '/images/products/image-decouverte.png',
+        '/images/products/decouverte-back.png',
         '/images/products/sans-manches/1.jpeg',
         '/images/products/demi-manches/4.jpg',
         '/images/products/manches-longues/1.jpg',
       ],
       Blanc: [
         '/images/products/image-decouverte.png',
+        '/images/products/decouverte-back.png',
         '/images/products/sans-manches/4.jpeg',
         '/images/products/demi-manches/1.jpg',
         '/images/products/manches-longues/7.jpg',
       ],
       Gris: [
         '/images/products/image-decouverte.png',
+        '/images/products/decouverte-back.png',
         '/images/products/sans-manches/10.jpeg',
         '/images/products/demi-manches/7.jpg',
         '/images/products/manches-longues/4.jpg',
@@ -220,6 +223,7 @@ export const products = [
     },
     images: [
       '/images/products/image-decouverte.png',
+      '/images/products/decouverte-back.png',
       '/images/products/sans-manches/1.jpeg',
       '/images/products/demi-manches/4.jpg',
       '/images/products/manches-longues/1.jpg',

@@ -132,17 +132,17 @@ const bestSellersBase = [
       Noir: {
         hex: '#1a1a1a',
         img: '/images/products/image-decouverte.png',
-        hoverImg: '/images/products/image-decouverte.png',
+        hoverImg: '/images/products/decouverte-back.png',
       },
       Blanc: {
         hex: '#f4f4f6',
         img: '/images/products/image-decouverte.png',
-        hoverImg: '/images/products/image-decouverte.png',
+        hoverImg: '/images/products/decouverte-back.png',
       },
       Gris: {
         hex: '#72757d',
         img: '/images/products/image-decouverte.png',
-        hoverImg: '/images/products/image-decouverte.png',
+        hoverImg: '/images/products/decouverte-back.png',
       },
     },
   },
