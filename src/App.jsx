@@ -84,6 +84,8 @@ export default function App() {
             {/* Home & Direct Sales Landing */}
             <Route path="/" element={<HomePage />} />
             <Route path="/landing" element={<LandingPage />} />
+            <Route path="/landing/pack-decouverte" element={<ProductPage handle="pack-decouverte" />} />
+            <Route path="/pages/pack-decouverte" element={<ProductPage handle="pack-decouverte" />} />
 
             {/* Catalog & Products */}
             <Route path="/collections/:handle" element={<CollectionPage />} />

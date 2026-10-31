@@ -15,6 +15,7 @@ import QualitySection from '../components/sections/QualitySection.jsx';
 import Faq from '../components/sections/Faq.jsx';
 import CustomerReviews from '../components/sections/CustomerReviews.jsx';
 import NotFound from './NotFound.jsx';
+import PackDecouverteLanding from './PackDecouverteLanding.jsx';
 import { colorHex, collectionUrl, getProduct, getLocalizedProduct, getColorImages } from '../data/catalog.js';
 import { brand } from '../data/site.js';
 import { fabric, shipping } from '../data/product.js';
@@ -43,13 +44,7 @@ function DedicatedProductPage({ product }) {
         </>
       )}
 
-      {!isSleeveless && (
-        <div className="container" style={{ paddingTop: 24, paddingBottom: 0 }}>
-          <nav className="pp__crumbs" aria-label={lang === 'fr' ? "Fil d'Ariane" : 'Breadcrumb'}>
-            <Link to="/">{t('product_page.crumbs_home')}</Link> / <Link to={collectionUrl('all')}>{t('product_page.crumbs_all')}</Link> / <span>{localized.title}</span>
-          </nav>
-        </div>
-      )}
+
 
       {/* 2. MAIN PRODUCT CONFIGURATOR & BUNDLE BUILDER (PACK 1, 2, 3 WITH MULTI-COLOR CHOICES) */}
       <ProductSection initialModelHandle={handle} showModelSelector={false} />
@@ -153,7 +148,7 @@ function ClassicProductPage({ product }) {
         color: colorHex[color] || '#1a1a1a',
         price: product.price,
         compareAt: product.compareAt,
-        freeShipping: product.price * qty >= 55,
+        freeShipping: true,
       });
     }
   };
@@ -212,9 +207,6 @@ function ClassicProductPage({ product }) {
   return (
     <>
       <section className="pp container">
-        <nav className="pp__crumbs" aria-label={lang === 'fr' ? "Fil d'Ariane" : 'Breadcrumb'}>
-          <Link to="/">{t('product_page.crumbs_home')}</Link> / <Link to={collectionUrl('all')}>{t('product_page.crumbs_all')}</Link> / <span>{localized.title}</span>
-        </nav>
 
         <div className="pp__gallery-col">
           <Gallery images={currentImages} title={localized.title} activeColor={color} />
@@ -371,6 +363,10 @@ export default function ProductPage({ handle: fixedHandle }) {
   }, [product?.handle, product?.title]);
 
   if (!rawProduct) return <NotFound />;
+
+  if (handle === 'pack-decouverte') {
+    return <PackDecouverteLanding />;
+  }
 
   // All cuts use the dedicated layout: Sans manches retains Hero & CameraRolls; Short and Long start directly with ProductSection
   return <DedicatedProductPage product={rawProduct} />;

@@ -81,44 +81,6 @@ const bestSellersBase = [
     },
   },
   {
-    id: 'sans-manches-black-or',
-    handle: 'vela-sculpt-sans-manches',
-    defaultColor: 'Black Or',
-    titleFr: 'Vela Sculpt™ sans manches — Noir doré',
-    titleEn: 'Vela Sculpt™ Sleeveless — Black & Gold',
-    taglineFr: 'Édition Noir doré : maintien ciblé & finitions premium',
-    taglineEn: 'Black & Gold Edition: targeted core shaping & premium finish',
-    badgeFr: 'Édition Prestige',
-    badgeEn: 'Prestige Edition',
-    rating: 4.8,
-    reviewsCount: '890',
-    price: 34.95,
-    compareAt: 49.95,
-    urlBase: '/products/vela-sculpt-sans-manches',
-    colorData: {
-      'Black Or': {
-        hex: '#241f17',
-        img: '/images/products/sans-manches/7.jpeg',
-        hoverImg: '/images/products/sans-manches/8.jpeg',
-      },
-      Noir: {
-        hex: '#1a1a1a',
-        img: '/images/products/sans-manches/1.jpeg',
-        hoverImg: '/images/products/sans-manches/2.jpeg',
-      },
-      Blanc: {
-        hex: '#f4f4f6',
-        img: '/images/products/sans-manches/4.jpeg',
-        hoverImg: '/images/products/sans-manches/5.jpeg',
-      },
-      Gris: {
-        hex: '#72757d',
-        img: '/images/products/sans-manches/10.jpeg',
-        hoverImg: '/images/products/sans-manches/11.jpeg',
-      },
-    },
-  },
-  {
     id: 'manches-longues-gris-chine',
     handle: 'vela-sculpt-manches-longues',
     defaultColor: 'Gris chiné',
@@ -151,6 +113,39 @@ const bestSellersBase = [
       },
     },
   },
+  {
+    id: 'pack-decouverte',
+    handle: 'pack-decouverte',
+    defaultColor: 'Noir',
+    titleFr: 'Pack Découverte — 3 Coupes',
+    titleEn: 'Discovery Pack — 3 Fits',
+    taglineFr: '1 Débardeur + 1 Demi-manches + 1 Manches longues inclus',
+    taglineEn: '1 Tank Top + 1 Short Sleeves + 1 Long Sleeves included',
+    badgeFr: 'Offre Découverte',
+    badgeEn: 'Discovery Offer',
+    rating: 4.9,
+    reviewsCount: '1 540',
+    price: 79.85,
+    compareAt: 149.85,
+    urlBase: '/pages/offres#product',
+    colorData: {
+      Noir: {
+        hex: '#1a1a1a',
+        img: '/images/products/image-decouverte.png',
+        hoverImg: '/images/products/decouverte-back.png',
+      },
+      Blanc: {
+        hex: '#f4f4f6',
+        img: '/images/products/image-decouverte.png',
+        hoverImg: '/images/products/decouverte-back.png',
+      },
+      Gris: {
+        hex: '#72757d',
+        img: '/images/products/image-decouverte.png',
+        hoverImg: '/images/products/decouverte-back.png',
+      },
+    },
+  },
 ];
 
 function BestSellerCard({ p, lang, t }) {
@@ -166,7 +161,7 @@ function BestSellerCard({ p, lang, t }) {
   const activeColorName = t('color_names.' + activeColorKey, activeColorKey);
 
   const discount = p.compareAt ? Math.round((1 - p.price / p.compareAt) * 100) : 0;
-  const targetUrl = `${p.urlBase}?color=${encodeURIComponent(activeColorKey)}`;
+  const targetUrl = p.urlBase.includes('#') ? p.urlBase : `${p.urlBase}?color=${encodeURIComponent(activeColorKey)}`;
 
   return (
     <article className="ixh-card">

@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext.jsx';
 import './LegalPage.css';
 
@@ -15,9 +14,6 @@ export default function TermsPage() {
 
   return (
     <div className="legal-page container">
-      <nav className="pp__crumbs" aria-label={lang === 'fr' ? "Fil d'Ariane" : 'Breadcrumbs'}>
-        <Link to="/">{t('nav.home')}</Link> / <span>{t('footer.terms')}</span>
-      </nav>
 
       <article className="legal-content">
         <h1>Conditions générales de vente (CGV)</h1>
@@ -40,7 +36,7 @@ export default function TermsPage() {
 
         <h2>Article 4 — Livraison</h2>
         <p>
-          Les commandes sont expédiées sous 24 à 48 heures ouvrées. Les délais moyens de livraison constatés en France métropolitaine et en Europe sont de 3 à 5 jours ouvrés.
+          Les commandes sont expédiées sous 24 à 48 heures ouvrées. Les délais moyens de livraison constatés en France métropolitaine et en Europe sont de 6 à 12 jours ouvrés avec un suivi complet en direct (Full Tracking). La livraison est 100% gratuite pour toutes les commandes.
         </p>
 
         <h2>Article 5 — Garantie commerciale de 30 jours</h2>

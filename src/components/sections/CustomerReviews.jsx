@@ -28,22 +28,7 @@ function ReviewForm({ onSubmit, onCancel, lang, t }) {
   const [hoverRating, setHoverRating] = useState(0);
   const [title, setTitle] = useState('');
   const [name, setName] = useState('');
-  const [product, setProduct] = useState('tank');
-  const [fit, setFit] = useState('true');
   const [text, setText] = useState('');
-
-  const productLabels = {
-    tank: t('reviews_section.form_product_options.tank'),
-    short: t('reviews_section.form_product_options.short'),
-    long: t('reviews_section.form_product_options.long'),
-    pack: t('reviews_section.form_product_options.pack'),
-  };
-
-  const fitLabels = {
-    true: t('reviews_section.form_fit_true'),
-    small: t('reviews_section.form_fit_small'),
-    large: t('reviews_section.form_fit_large'),
-  };
 
   const ratingLabels = t('reviews_section.form_rating_labels') || [];
   const activeRating = hoverRating || rating;
@@ -58,8 +43,6 @@ function ReviewForm({ onSubmit, onCancel, lang, t }) {
       rating,
       title: title.trim() || (lang === 'fr' ? 'Très satisfait' : 'Highly satisfied'),
       text: text.trim(),
-      product: productLabels[product] || '',
-      fit: fitLabels[fit] || '',
       date: new Date().toISOString().slice(0, 10),
       photos: [],
       verified: true,
@@ -121,26 +104,6 @@ function ReviewForm({ onSubmit, onCancel, lang, t }) {
         </div>
       </div>
 
-      <div className="review-form__grid">
-        <div className="review-form__field">
-          <label className="review-form__label">{t('reviews_section.form_product')}</label>
-          <select value={product} onChange={(e) => setProduct(e.target.value)}>
-            <option value="tank">{productLabels.tank}</option>
-            <option value="short">{productLabels.short}</option>
-            <option value="long">{productLabels.long}</option>
-            <option value="pack">{productLabels.pack}</option>
-          </select>
-        </div>
-        <div className="review-form__field">
-          <label className="review-form__label">{t('reviews_section.form_fit')}</label>
-          <select value={fit} onChange={(e) => setFit(e.target.value)}>
-            <option value="true">{fitLabels.true}</option>
-            <option value="small">{fitLabels.small}</option>
-            <option value="large">{fitLabels.large}</option>
-          </select>
-        </div>
-      </div>
-
       <div className="review-form__field">
         <label className="review-form__label">{t('reviews_section.form_text')}</label>
         <textarea
@@ -167,8 +130,6 @@ function ReviewForm({ onSubmit, onCancel, lang, t }) {
 function Review({ r, lang, t, onHelpful, hasVoted, onPhotoClick }) {
   const title = getVal(r.title, lang);
   const text = getVal(r.text, lang);
-  const product = getVal(r.product, lang);
-  const fit = getVal(r.fit, lang);
   const photos = Array.isArray(r.photos) ? r.photos : [];
 
   return (
@@ -196,13 +157,6 @@ function Review({ r, lang, t, onHelpful, hasVoted, onPhotoClick }) {
         <Stars value={r.rating} size={15} />
         {title && <h3 className="review__headline">{title}</h3>}
       </div>
-
-      {(product || fit) && (
-        <div className="review__tags">
-          {product && <span className="review__tag review__tag--product">{product}</span>}
-          {fit && <span className="review__tag review__tag--fit">{fit}</span>}
-        </div>
-      )}
 
       <p className="review__text">{text}</p>
 
@@ -304,8 +258,7 @@ export default function CustomerReviews() {
         const name = (r.name || '').toLowerCase();
         const title = getVal(r.title, lang).toLowerCase();
         const text = getVal(r.text, lang).toLowerCase();
-        const product = getVal(r.product, lang).toLowerCase();
-        if (!name.includes(q) && !title.includes(q) && !text.includes(q) && !product.includes(q)) {
+        if (!name.includes(q) && !title.includes(q) && !text.includes(q)) {
           return false;
         }
       }

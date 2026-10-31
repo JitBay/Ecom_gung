@@ -61,13 +61,13 @@ export default function HowItWorksModal({ open, onClose }) {
             <div className="hiw-step__content">
               <strong>
                 {lang === 'fr'
-                  ? 'Commandez et recevez sous 24/48h'
-                  : 'Order & receive in 24/48h'}
+                  ? 'Expédition sous 24/48h & livraison suivie'
+                  : 'Dispatched in 24/48h & tracked delivery'}
               </strong>
               <p>
                 {lang === 'fr'
-                  ? 'Livraison rapide avec numéro de suivi. Essayez votre t-shirt sous vos chemises, t-shirts légers ou tenues de sport habituelles.'
-                  : 'Fast tracked delivery. Try your compression shirt under regular shirts, lightweight tees, or workout apparel.'}
+                  ? 'Livraison suivie 100% offerte en 6 à 12 jours ouvrés avec numéro de suivi complet (Full Tracking). Essayez votre t-shirt sous vos chemises, t-shirts légers ou tenues de sport habituelles.'
+                  : '100% free tracked shipping within 6 to 12 working days with full live tracking. Try your compression shirt under regular shirts, lightweight tees, or workout apparel.'}
               </p>
             </div>
           </div>

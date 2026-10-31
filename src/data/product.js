@@ -17,6 +17,65 @@ export const colors = [
 
 export const sizes = ['S', 'M', 'L', 'XL', '2XL'];
 
+export const discoveryCategories = [
+  {
+    handle: 'vela-sculpt-sans-manches',
+    titleFr: 'Sans manches (débardeur)',
+    titleEn: 'Sleeveless (Tank Top)',
+    badgeFr: 'Ultra discret',
+    badgeEn: 'Ultra Discreet',
+    defaultColor: 'noir',
+    colors: [
+      { id: 'noir', label: 'Noir', hex: '#1a1a1a' },
+      { id: 'blanc', label: 'Blanc', hex: '#f4f4f6' },
+      { id: 'gris', label: 'Gris', hex: '#72757d' },
+      { id: 'black-or', label: 'Black Or', hex: '#241f17' },
+    ],
+    colorImages: {
+      Noir: '/images/products/sans-manches/1.jpeg',
+      Blanc: '/images/products/sans-manches/4.jpeg',
+      Gris: '/images/products/sans-manches/10.jpeg',
+      'Black Or': '/images/products/sans-manches/7.jpeg',
+    },
+  },
+  {
+    handle: 'vela-sculpt-demi-manches',
+    titleFr: 'Demi-manches (manches courtes)',
+    titleEn: 'Short Sleeves (Crew Neck)',
+    badgeFr: 'Plus populaire',
+    badgeEn: 'Most Popular',
+    defaultColor: 'noir',
+    colors: [
+      { id: 'noir', label: 'Noir', hex: '#1a1a1a' },
+      { id: 'blanc', label: 'Blanc', hex: '#f4f4f6' },
+      { id: 'gris', label: 'Gris', hex: '#72757d' },
+    ],
+    colorImages: {
+      Noir: '/images/products/demi-manches/4.jpg',
+      Blanc: '/images/products/demi-manches/1.jpg',
+      Gris: '/images/products/demi-manches/7.jpg',
+    },
+  },
+  {
+    handle: 'vela-sculpt-manches-longues',
+    titleFr: 'Manches longues',
+    titleEn: 'Long Sleeves',
+    badgeFr: 'Maintien renforcé',
+    badgeEn: 'Reinforced Support',
+    defaultColor: 'noir',
+    colors: [
+      { id: 'noir', label: 'Noir', hex: '#1a1a1a' },
+      { id: 'gris-chine', label: 'Gris chiné', hex: '#5a5d66' },
+      { id: 'blanc', label: 'Blanc', hex: '#f4f4f6' },
+    ],
+    colorImages: {
+      Noir: '/images/products/manches-longues/1.jpg',
+      'Gris chiné': '/images/products/manches-longues/4.jpg',
+      Blanc: '/images/products/manches-longues/7.jpg',
+    },
+  },
+];
+
 // 4 value propositions / offer modules for marketing and A/B testing
 export const offerModules = [
   {
@@ -187,16 +246,17 @@ export const bundles = [
     price: 39.95,
     compareAt: 59.95,
     badge: 'Offre découverte',
-    freeShipping: false,
+    freeShipping: true,
   },
   {
     id: 2,
-    qty: 2,
-    title: 'Pack Duo — 2 T-Shirts',
-    subtitle: 'Le basique de rotation pour alterner au bureau ou en déplacement.',
+    qty: 3,
+    isTwoPlusOne: true,
+    title: 'Pack 2 T-Shirts + 1 Offert',
+    subtitle: '2 t-shirts achetés + le 3ème t-shirt 100% offert.',
     price: 69.9,
-    compareAt: 119.9,
-    badge: 'Le Plus Choisi — Économisez 50 €',
+    compareAt: 179.85,
+    badge: 'Le Plus Choisi — 1 T-Shirt OFFERT',
     freeShipping: true,
     highlight: true,
   },
@@ -253,9 +313,9 @@ export const fabricEn = [
 export const shipping = {
   lines: [
     'Préparation & expédition : 24 à 48 heures ouvrées',
-    'Livraison en France & Europe : 3 à 5 jours ouvrés',
-    'Numéro de suivi fourni par email dès expédition',
-    'Livraison offerte dès 55 € d’achat (ou avec les packs 2 et 3 t-shirts)',
+    'Livraison en France & Europe : 6 à 12 jours ouvrés',
+    'Numéro de suivi complet en direct (Full Tracking) fourni par email dès expédition',
+    'Livraison 100% gratuite et suivie sur toutes les commandes',
   ],
   returns:
     'Garantie satisfait ou remboursé de 30 jours. Vous bénéficiez de 30 jours à compter de la réception pour essayer votre t-shirt Vela Sculpt™. Si vous n’êtes pas entièrement convaincu du confort ou du maintien, notre service client organise votre retour et remboursement en toute simplicité.',
@@ -264,9 +324,9 @@ export const shipping = {
 export const shippingEn = {
   lines: [
     'Order processing & dispatch: 24 to 48 business hours',
-    'Delivery across Europe: 3 to 5 business days',
-    'Live tracking number provided via email upon dispatch',
-    'Free shipping on orders over €55 or with 2+ shirt packs',
+    'Delivery across Europe: 6 to 12 working days',
+    'Full live tracking number provided via email upon dispatch',
+    '100% Free tracked shipping on all orders',
   ],
   returns:
     '30-Day Money-Back Guarantee. Take 30 days from delivery to test your Vela Sculpt™ shirt. If you are not 100% satisfied with the comfort or support, our team handles your return and full refund.',

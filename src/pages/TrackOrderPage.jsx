@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import Icon from '../components/ui/Icon.jsx';
 import { useLanguage } from '../context/LanguageContext.jsx';
 import './LegalPage.css';
@@ -18,9 +17,6 @@ export default function TrackOrderPage() {
 
   return (
     <div className="legal-page container">
-      <nav className="pp__crumbs" aria-label={lang === 'fr' ? "Fil d'Ariane" : 'Breadcrumbs'}>
-        <Link to="/">{t('nav.home')}</Link> / <span>{lang === 'fr' ? 'Suivi de commande' : 'Track Order'}</span>
-      </nav>
 
       <article className="legal-content">
         <h1>{lang === 'fr' ? 'Suivre Votre Colis Vela Labs' : 'Track Your Vela Labs Package'}</h1>
@@ -61,11 +57,11 @@ export default function TrackOrderPage() {
             <p style={{ margin: 0, fontSize: 14 }}>
               {lang === 'fr' ? (
                 <>
-                  Numéro recherché : <strong>{trackingNumber}</strong>. Votre colis est pris en charge par notre transporteur partenaire et est en cours d'acheminement vers votre adresse de livraison sous 3 à 5 jours ouvrés.
+                  Numéro recherché : <strong>{trackingNumber}</strong>. Votre colis est pris en charge par notre transporteur partenaire et est en cours d'acheminement vers votre adresse de livraison sous 6 à 12 jours ouvrés (suivi complet en direct).
                 </>
               ) : (
                 <>
-                  Searched number: <strong>{trackingNumber}</strong>. Your package is in transit with our logistics carrier and is on its way to your delivery address within 3 to 5 business days.
+                  Searched number: <strong>{trackingNumber}</strong>. Your package is in transit with our logistics carrier and is on its way to your delivery address within 6 to 12 working days (full tracking).
                 </>
               )}
             </p>

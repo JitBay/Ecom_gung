@@ -7,7 +7,7 @@ export const translations = {
 
     announcements: [
       'Garantie satisfait ou remboursé de 30 jours',
-      'Livraison suivie offerte dès 55 € d’achat ou dès 2 t-shirts',
+      'Livraison suivie 100% offerte (6 à 12 jours ouvrés) · Suivi complet en direct',
       'Plus de 3 000 clients satisfaits portent Vela Sculpt™ au quotidien',
     ],
 
@@ -35,7 +35,7 @@ export const translations = {
     cart: {
       title: 'Votre panier',
       close: 'Fermer le panier',
-      free_shipping_unlocked: '🎉 Vous bénéficiez de la LIVRAISON OFFERTE',
+      free_shipping_unlocked: '🎉 Vous bénéficiez de la LIVRAISON SUIVIE OFFERTE (6-12 jours ouvrés)',
       free_shipping_left: 'Plus que {amount} pour la livraison offerte',
       empty_title: 'Votre panier est vide',
       empty_btn: 'Découvrir nos modèles',
@@ -272,7 +272,7 @@ export const translations = {
 
     announcements: [
       '30-Day Money-Back Guarantee',
-      'Free Tracked Shipping on orders over €55 or 2+ shirts',
+      'Free Tracked Shipping (6-12 Working Days) · Full Live Tracking',
       'Over 3,000 happy customers wear Vela Sculpt™ every day',
     ],
 
@@ -300,7 +300,7 @@ export const translations = {
     cart: {
       title: 'Your cart',
       close: 'Close cart',
-      free_shipping_unlocked: '🎉 You unlocked FREE SHIPPING',
+      free_shipping_unlocked: '🎉 You unlocked FREE TRACKED SHIPPING (6-12 working days)',
       free_shipping_left: 'Add {amount} more for free shipping',
       empty_title: 'Your cart is empty',
       empty_btn: 'Discover our styles',

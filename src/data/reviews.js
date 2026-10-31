@@ -73,14 +73,6 @@ export const reviews = [
       fr: 'J’ai pris une photo avant/après pour vérifier si ça marchait vraiment, et les résultats sont tout simplement bluffants. Le t-shirt lisse instantanément le ventre et rentre tout en place. Au-delà du changement physique, ça redonne vraiment le sourire et un vrai coup de boost à la confiance en soi ! Je le recommande chaudement.',
       en: 'I took a before and after picture to see if it actually worked, and the results are just mind-blowing. The shirt instantly smooths out the stomach and tucks everything in. Beyond the physical changes, it really brings back your smile and gives a massive boost to your self-confidence! I highly recommend it.',
     },
-    product: {
-      fr: 'Col V · Sans manches · Blanc / L',
-      en: 'V-Neck · Sleeveless · White / L',
-    },
-    fit: {
-      fr: 'Fidèle à la taille',
-      en: 'True to size',
-    },
     photos: ['/reviews/4.jpg'],
     verified: true,
     helpful: 52,
@@ -97,14 +89,6 @@ export const reviews = [
     text: {
       fr: 'Le avant/après parle de lui-même. J’avais l’habitude de porter des vêtements amples parce que j’étais complexé par mon ventre. Ce haut de compression lisse tout instantanément et les bandes bleues m’aident réellement à me tenir plus droit. Il est assez confortable pour être porté tous les jours et le gain de confiance est réel : il suffit de regarder mon sourire ! Je recommande à 100%.',
       en: 'The "before and after" really says it all. I used to wear baggy shirts because I was self-conscious about my belly. This compression top instantly smooths everything out and the blue bands actually help me stand straighter. It’s comfortable enough for everyday wear and the confidence boost is real—just look at my smile! Highly recommend.',
-    },
-    product: {
-      fr: 'Col rond · Sans manches · Noir / L',
-      en: 'Crew Neck · Sleeveless · Black / L',
-    },
-    fit: {
-      fr: 'Fidèle à la taille',
-      en: 'True to size',
     },
     photos: ['/reviews/5.png'],
     verified: true,
@@ -123,14 +107,6 @@ export const reviews = [
       fr: 'La photo côte à côte parle d’elle-même. Ce débardeur aplatit totalement mon ventre et tire naturellement mes épaules vers l’arrière. J’ai l’impression d’être un nouvel homme en m’habillant le matin. Le maintien est ferme mais reste super confortable toute la journée.',
       en: 'The side-by-side picture speaks for itself. This tank top completely flattens my stomach and naturally pulls my shoulders back. I feel like a new man getting dressed in the morning. The support is firm but remains super comfortable all day.',
     },
-    product: {
-      fr: 'Col V · Sans manches · Noir / S',
-      en: 'V-Neck · Sleeveless · Black / S',
-    },
-    fit: {
-      fr: 'Fidèle à la taille',
-      en: 'True to size',
-    },
     photos: ['/reviews/6.png'],
     verified: true,
     helpful: 43,
@@ -147,14 +123,6 @@ export const reviews = [
     text: {
       fr: 'J’étais un peu hésitant avant de commander, mais les résultats sont vraiment là. Le débardeur sculpte parfaitement le torse et lisse immédiatement les poignées d’amour. La compression est ferme mais la matière reste super confortable, même portée toute la journée sous un t-shirt. Je recommande vivement !',
       en: 'I was a bit hesitant before ordering, but the results are definitely there. The tank top sculpts the chest perfectly and instantly smooths out love handles. The compression is firm but the material stays super comfortable, even when worn all day under a t-shirt. Highly recommend!',
-    },
-    product: {
-      fr: 'Col V · Sans manches · Noir / L',
-      en: 'V-Neck · Sleeveless · Black / L',
-    },
-    fit: {
-      fr: 'Fidèle à la taille',
-      en: 'True to size',
     },
     photos: ['/reviews/1.jpg'],
     verified: true,
@@ -173,14 +141,6 @@ export const reviews = [
       fr: 'Testé ce matin à la salle de sport et honnêtement, c’est approuvé. Le débardeur offre un excellent gainage sur les côtés et aide vraiment à se sentir soutenu lors des exercices de musculation. Le tissu respire super bien, on ne se sent pas étouffé pendant l’entraînement. Fortement recommandé !',
       en: 'Tested it this morning at the gym and honestly, it’s approved. The tank top offers great compression on the sides and really helps you feel supported when lifting weights. The fabric breathes super well, so you don’t feel suffocated during the workout. Highly recommend!',
     },
-    product: {
-      fr: 'Col rond · Sans manches · Noir / M',
-      en: 'Crew Neck · Sleeveless · Black / M',
-    },
-    fit: {
-      fr: 'Fidèle à la taille',
-      en: 'True to size',
-    },
     photos: ['/reviews/2.jpg'],
     verified: true,
     helpful: 35,
@@ -197,14 +157,6 @@ export const reviews = [
     text: {
       fr: 'Je ne passe pas ma vie à la salle de sport ; je cherchais surtout quelque chose pour lisser mon ventre et mes poignées d’amour au quotidien. La compression est super efficace sur les côtés sans restreindre la respiration. Je le porte toute la journée, même à la maison, et il est très confortable.',
       en: 'I don’t spend my life at the gym; I was mainly looking for something to smooth out my stomach and love handles for everyday wear. The compression is super effective on the sides without restricting your breathing. I wear it all day long, even around the house, and it’s very comfortable.',
-    },
-    product: {
-      fr: 'Col V · Sans manches · Noir / XL',
-      en: 'V-Neck · Sleeveless · Black / XL',
-    },
-    fit: {
-      fr: 'Fidèle à la taille',
-      en: 'True to size',
     },
     photos: ['/reviews/3.jpg'],
     verified: true,
@@ -223,15 +175,7 @@ export const reviews = [
       fr: 'J’adore le design de ce débardeur. Contrairement à d’autres t-shirts de compression qui ressemblent à des gaines médicales, celui-ci a un look génial sous une chemise ouverte. Il aplatit parfaitement le ventre, ne remonte pas du tout et apporte un vrai boost de confiance au quotidien. Je le porte tout le temps !',
       en: 'I love the design of this tank top. Unlike other compression shirts that look like medical garments, this one looks awesome under an open button-down shirt. It perfectly flattens the stomach, doesn’t roll up, and gives a real everyday confidence boost. I wear it all the time!',
     },
-    product: {
-      fr: 'Col rond · Sans manches · Noir / L',
-      en: 'Crew Neck · Sleeveless · Black / L',
-    },
-    fit: {
-      fr: 'Fidèle à la taille',
-      en: 'True to size',
-    },
-    photos: ['/reviews/7.mp4', '/reviews/7-poster.jpg'],
+    photos: ['/reviews/7-poster.jpg'],
     verified: true,
     helpful: 45,
   },
@@ -247,14 +191,6 @@ export const reviews = [
     text: {
       fr: 'J’ai opté pour le modèle gris à demi-manches et j’en suis ravi. Les bandes de compression sur les côtés font un travail remarquable pour soutenir mon ventre et le bas de mon dos. C’est devenu mon indispensable du matin dans la salle de bain : il donne une superbe silhouette et reste très confortable toute la journée.',
       en: 'I opted for the grey short-sleeve model and I’m thrilled with it. The compression bands on the sides do a great job of supporting my stomach and lower back. It’s become my morning essential in the bathroom; it gives a great silhouette and stays very comfortable all day long.',
-    },
-    product: {
-      fr: 'Col rond · Demi-manches · Gris / M',
-      en: 'Crew Neck · Short Sleeves · Grey / M',
-    },
-    fit: {
-      fr: 'Fidèle à la taille',
-      en: 'True to size',
     },
     photos: ['/reviews/23.mp4'],
     verified: true,
@@ -273,14 +209,6 @@ export const reviews = [
       fr: 'J’ai acheté la version demi-manches grise pour mes entraînements et je suis honnêtement impressionné. La compression ciblée offre un excellent soutien pendant les charges lourdes et la coupe met vraiment en valeur les pectoraux et les épaules. Il est super respirant et évacue parfaitement la transpiration. Il a fière allure et le ressenti est encore meilleur. Fortement recommandé pour le sport !',
       en: 'I bought the grey short-sleeve version for my workouts and I’m honestly impressed. The targeted compression provides great support while lifting, and the fit really highlights the chest and shoulders. It’s super breathable and wicks away sweat perfectly. Looks great and feels even better. Highly recommend for training!',
     },
-    product: {
-      fr: 'Col V · Demi-manches · Gris / M',
-      en: 'V-Neck · Short Sleeves · Grey / M',
-    },
-    fit: {
-      fr: 'Fidèle à la taille',
-      en: 'True to size',
-    },
     photos: ['/reviews/9.mp4'],
     verified: true,
     helpful: 40,
@@ -298,15 +226,7 @@ export const reviews = [
       fr: 'J’ai testé ce t-shirt de compression gris aujourd’hui à la salle et il reçoit un grand pouce levé de ma part. L’ajustement est incroyable : il met vraiment en valeur la poitrine et les épaules tout en maintenant parfaitement le buste. La matière est ultra respirante même pendant un entraînement intense. Visuel et sensation au top. Je recommande vivement !',
       en: 'Put this grey compression shirt to the test today at the gym and it gets a huge thumbs up from me. The fit is incredible—it really highlights your chest and shoulders while keeping your core perfectly supported. The material is super breathable even during an intense workout. Looks and feels amazing. Highly recommend!',
     },
-    product: {
-      fr: 'Col rond · Demi-manches · Gris / L',
-      en: 'Crew Neck · Short Sleeves · Grey / L',
-    },
-    fit: {
-      fr: 'Fidèle à la taille',
-      en: 'True to size',
-    },
-    photos: ['/reviews/10.jpg'],
+    photos: ['/reviews/13.png'],
     verified: true,
     helpful: 33,
   },
@@ -323,15 +243,7 @@ export const reviews = [
       fr: 'J’ai pris la version manches longues blanche pour mes séances de sport et mes activités en extérieur. Le look est vraiment moderne avec les motifs cyan ; ça ne ressemble pas du tout à une gaine classique. Le tissu épouse parfaitement le torse, souligne les épaules et procure un réel boost de confiance. Je le recommande à 100%.',
       en: 'I got the white long-sleeve version for my workouts and outdoor activities. The look is really modern with the cyan patterns; it doesn’t look like typical shapewear at all. The fabric perfectly hugs the chest, highlights the shoulders, and gives a real confidence boost. I recommend it 100%.',
     },
-    product: {
-      fr: 'Col rond · Manches longues · Blanc / M',
-      en: 'Crew Neck · Long Sleeves · White / M',
-    },
-    fit: {
-      fr: 'Fidèle à la taille',
-      en: 'True to size',
-    },
-    photos: ['/reviews/11.jpg'],
+    photos: ['/reviews/14.jpg'],
     verified: true,
     helpful: 29,
   },
@@ -348,15 +260,7 @@ export const reviews = [
       fr: 'Commandé sur un coup de tête et je suis sincèrement impressionné par le résultat. Il gaine fermement tout le tour de taille sans être trop oppressant. Super confortable, même simplement pour traîner à la maison, et les accents dorés lui donnent un style incroyable. Il réduit visiblement mon ventre. Un excellent achat !',
       en: 'Ordered this compression top on a whim and I’m genuinely impressed with the results. It tightly compress everything around the waist without being too restrictive. Super comfortable, even for just wears around the house, and the gold accents give it an awesome style. Definitely visually reduces my belly. A solid buy!',
     },
-    product: {
-      fr: 'Col V · Sans manches · Black Or / L',
-      en: 'V-Neck · Sleeveless · Black Gold / L',
-    },
-    fit: {
-      fr: 'Fidèle à la taille',
-      en: 'True to size',
-    },
-    photos: ['/reviews/12.jpg'],
+    photos: ['/reviews/15.jpg'],
     verified: true,
     helpful: 26,
   },
@@ -373,15 +277,7 @@ export const reviews = [
       fr: 'Je porte la version manches longues blanche pour mes séances de charges lourdes et c’est incroyable. Le soutien apporté au torse, aux épaules et au dos assis comme en mouvement est de premier ordre. Il reste parfaitement en place sans remonter, et la compression aide énormément pour la posture et la fatigue musculaire. De plus, le design blanc et cyan est super esthétique et athlétique. Très respirant et évacue facilement la transpiration. Hautement recommandé pour un vrai soutien à l’effort !',
       en: 'I’ve been wearing the white long-sleeve version for my heavy lifting sessions, and it’s incredible. The support it gives my chest, shoulders, and back while sitting or moving is top-notch. It stays perfectly in place, doesn’t ride up, and the compression really helps with my posture and muscle fatigue. Plus, the white and cyan design looks absolutely fantastic and athletic. It’s super breathable and handles sweat with ease. Highly recommend for anyone looking for serious workout support!',
     },
-    product: {
-      fr: 'Col rond · Manches longues · Blanc / L',
-      en: 'Crew Neck · Long Sleeves · White / L',
-    },
-    fit: {
-      fr: 'Fidèle à la taille',
-      en: 'True to size',
-    },
-    photos: ['/reviews/13.png'],
+    photos: ['/reviews/16.png'],
     verified: true,
     helpful: 37,
   },
@@ -398,15 +294,7 @@ export const reviews = [
       fr: 'J’ai testé ce modèle manches longues noir et cyan et je suis vraiment impressionné. La compression est parfaite : elle offre un excellent maintien lombaire, affine visiblement le tour de taille et donne une sensation immédiate de tonus sans jamais gêner la respiration. Le tissu est très respirant, agréable à porter pendant le sport ou la vie quotidienne, et les touches bleues lui confèrent un look dynamique. Un achat que je ne regrette absolument pas !',
       en: 'I tested this long-sleeve black and cyan model, and I’m really impressed. The compression is spot on: it provides great lower-back support, visibly slims the waistline, and gives an immediate sense of tone without ever restricting breathing. The fabric is very breathable, comfortable to wear during workouts or daily life, and the blue accents give it a truly dynamic look. A purchase I definitely don’t regret!',
     },
-    product: {
-      fr: 'Col rond · Manches longues · Noir / L',
-      en: 'Crew Neck · Long Sleeves · Black / L',
-    },
-    fit: {
-      fr: 'Fidèle à la taille',
-      en: 'True to size',
-    },
-    photos: ['/reviews/14.png', '/reviews/14.jpg'],
+    photos: ['/reviews/17.png'],
     verified: true,
     helpful: 34,
   },
@@ -422,14 +310,6 @@ export const reviews = [
     text: {
       fr: 'Le maintien au niveau des épaules et du dos est bluffant. On se tient droit naturellement sans effort toute la journée. Très agréable sous les chemises de bureau.',
       en: 'The shoulder and back support is amazing. You stand straight naturally all day without effort. Great under office shirts.',
-    },
-    product: {
-      fr: 'Col rond · Sans manches · Noir / M',
-      en: 'Crew Neck · Sleeveless · Black / M',
-    },
-    fit: {
-      fr: 'Fidèle à la taille',
-      en: 'True to size',
     },
     photos: ['/reviews/18.mp4'],
     verified: true,
@@ -448,14 +328,6 @@ export const reviews = [
       fr: 'Sous une chemise cintrée au travail, le ventre est totalement aplati et aucune démarcation ne se voit. C’est devenu mon indispensable de rotation.',
       en: 'Under a fitted dress shirt at work, the belly is completely flattened and zero seams show. It’s become my daily rotation essential.',
     },
-    product: {
-      fr: 'Col V · Sans manches · Blanc / L',
-      en: 'V-Neck · Sleeveless · White / L',
-    },
-    fit: {
-      fr: 'Fidèle à la taille',
-      en: 'True to size',
-    },
     photos: ['/reviews/19.mp4'],
     verified: true,
     helpful: 29,
@@ -472,14 +344,6 @@ export const reviews = [
     text: {
       fr: 'Testé en musculation et cardio : gainage ferme sur la sangle abdominale sans restreindre la respiration. Ne remonte pas du tout à l’effort.',
       en: 'Tested in the gym and cardio: firm core support without restricting breathing. Does not roll up at all during workouts.',
-    },
-    product: {
-      fr: 'Col rond · Sans manches · Noir / L',
-      en: 'Crew Neck · Sleeveless · Black / L',
-    },
-    fit: {
-      fr: 'Fidèle à la taille',
-      en: 'True to size',
     },
     photos: ['/reviews/20.mp4'],
     verified: true,
@@ -498,15 +362,7 @@ export const reviews = [
       fr: 'La qualité du tissu technique est indiscutable et très douce contre la peau. En revanche, si vous êtes entre deux tailles, prenez impérativement la taille en-dessous pour avoir un vrai effet gainant sur la sangle abdominale.',
       en: 'The quality of the technical fabric is indisputable and very soft against the skin. However, if you are between two sizes, definitely size down to get a strong shaping effect on the midsection.',
     },
-    product: {
-      fr: 'Col rond · Demi-manches · Noir / XL',
-      en: 'Crew Neck · Short Sleeves · Black / XL',
-    },
-    fit: {
-      fr: 'Taille un peu grand',
-      en: 'Runs slightly large',
-    },
-    photos: ['/reviews/15.jpg'],
+    photos: [],
     verified: true,
     helpful: 14,
   },
@@ -523,15 +379,7 @@ export const reviews = [
       fr: 'Le maintien est très fort, un peu trop pour moi au niveau des aisselles sur la version demi-manches. Le service client a été irréprochable et m’a échangé pour le modèle sans manches sous 48h sans aucun frais.',
       en: 'The support is very strong, a bit too snug for me under the arms on the short-sleeve cut. Customer service was spotless and exchanged it for the sleeveless cut within 48h free of charge.',
     },
-    product: {
-      fr: 'Col rond · Demi-manches · Gris / M',
-      en: 'Crew Neck · Short Sleeves · Grey / M',
-    },
-    fit: {
-      fr: 'Taille un peu petit',
-      en: 'Runs slightly small',
-    },
-    photos: ['/reviews/16.png'],
+    photos: [],
     verified: true,
     helpful: 16,
   },
@@ -548,15 +396,7 @@ export const reviews = [
       fr: 'J’ai commandé une taille S au lieu de L, impossible à enfiler confortablement. La garantie 30 jours fonctionne réellement : j’ai été remboursé intégralement en 48h après mon message.',
       en: 'I ordered size S instead of L, could not put it on comfortably. The 30-day guarantee is real: I received a full refund within 48h after contacting support.',
     },
-    product: {
-      fr: 'Col V · Sans manches · Noir / S',
-      en: 'V-Neck · Sleeveless · Black / S',
-    },
-    fit: {
-      fr: 'Taille petit',
-      en: 'Runs small',
-    },
-    photos: ['/reviews/17.png'],
+    photos: [],
     verified: true,
     helpful: 22,
   },
@@ -572,14 +412,6 @@ export const reviews = [
     text: {
       fr: 'Reçu cette semaine et testé immédiatement : la coupe manches longues noir et bleu est juste parfaite. Le gainage au niveau des abdominaux et des pectoraux est ferme sans compresser la respiration, et le motif ergonomique affine instantanément la taille. Idéal pour les séances intenses comme au quotidien sous un sweat. Très satisfait !',
       en: 'Received this week and tested immediately: the black and blue long sleeve cut is just perfect. Core and chest compression is firm without hindering breathing, and the ergonomic pattern instantly slims the waist. Great for heavy workouts or under casual wear. Very satisfied!',
-    },
-    product: {
-      fr: 'Col rond · Manches longues · Noir Cyan / L',
-      en: 'Crew Neck · Long Sleeves · Black Cyan / L',
-    },
-    fit: {
-      fr: 'Fidèle à la taille',
-      en: 'True to size',
     },
     photos: ['/reviews/21.png'],
     verified: true,
@@ -597,14 +429,6 @@ export const reviews = [
     text: {
       fr: 'À 48 ans, je cherchais un t-shirt technique capable de masquer le relâchement abdominal tout en soutenant mes lombaires. Le résultat en manches longues gris dépasse mes attentes : les épaules sont tirées vers l’arrière, le ventre est rentré sans aucune sensation d’oppression. Même après une longue journée, le confort reste optimal. Je recommande sans hésitation.',
       en: 'At 48, I was looking for a technical top capable of smoothing abdominal slack while supporting my lower back. The result in grey long sleeves exceeded my expectations: shoulders are pulled back, stomach is tucked with zero discomfort. Even after a long day, comfort remains optimal. Highly recommend without hesitation.',
-    },
-    product: {
-      fr: 'Col rond · Manches longues · Gris / XL',
-      en: 'Crew Neck · Long Sleeves · Grey / XL',
-    },
-    fit: {
-      fr: 'Fidèle à la taille',
-      en: 'True to size',
     },
     photos: ['/reviews/22.png'],
     verified: true,
@@ -642,13 +466,13 @@ export const videoTestimonials = [
     id: 'ugc-9',
     reviewId: 'rev-9',
     name: 'Alex M.',
-    age: 41,
+    age: 28,
     rating: 5,
     video: '/reviews/9.mp4',
     poster: '/reviews/9-poster.jpg',
     tag: {
-      fr: 'Musculation & épaules · 41 ans',
-      en: 'Lifting & shoulders · 41 yrs',
+      fr: 'Musculation & épaules · 28 ans',
+      en: 'Lifting & shoulders · 28 yrs',
     },
     title: {
       fr: 'Mon nouveau t-shirt incontournable pour la salle',
