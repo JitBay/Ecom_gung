@@ -151,6 +151,39 @@ const bestSellersBase = [
       },
     },
   },
+  {
+    id: 'pack-decouverte',
+    handle: 'pack-decouverte',
+    defaultColor: 'Noir',
+    titleFr: 'Pack Découverte — 3 Coupes',
+    titleEn: 'Discovery Pack — 3 Fits',
+    taglineFr: '1 Débardeur + 1 Demi-manches + 1 Manches longues inclus',
+    taglineEn: '1 Tank Top + 1 Short Sleeves + 1 Long Sleeves included',
+    badgeFr: 'Offre Découverte',
+    badgeEn: 'Discovery Offer',
+    rating: 4.9,
+    reviewsCount: '1 540',
+    price: 79.85,
+    compareAt: 149.85,
+    urlBase: '/products/vela-sculpt-sans-manches',
+    colorData: {
+      Noir: {
+        hex: '#1a1a1a',
+        img: '/images/products/image-decouverte.png',
+        hoverImg: '/images/products/image-decouverte.png',
+      },
+      Blanc: {
+        hex: '#f4f4f6',
+        img: '/images/products/image-decouverte.png',
+        hoverImg: '/images/products/image-decouverte.png',
+      },
+      Gris: {
+        hex: '#72757d',
+        img: '/images/products/image-decouverte.png',
+        hoverImg: '/images/products/image-decouverte.png',
+      },
+    },
+  },
 ];
 
 function BestSellerCard({ p, lang, t }) {
