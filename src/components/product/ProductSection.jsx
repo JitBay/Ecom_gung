@@ -47,22 +47,22 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
       p2 = 59.90;
       c2 = 149.85;
       p3 = 79.85;
-      c3 = 199.80;
+      c3 = 149.85;
     } else if (currentModel.handle === 'vela-sculpt-demi-manches') {
       p2 = 69.90;
       c2 = 179.85;
       p3 = 89.85;
-      c3 = 239.80;
+      c3 = 179.85;
     } else if (currentModel.handle === 'vela-sculpt-manches-longues') {
       p2 = 79.90;
       c2 = 194.85;
       p3 = 99.85;
-      c3 = 259.80;
+      c3 = 194.85;
     } else {
       p2 = Math.round(p1 * 2 * 0.86 * 100) / 100;
       c2 = Math.round(c1 * 3 * 100) / 100;
       p3 = Math.round(p1 * 3 * 0.76 * 100) / 100;
-      c3 = Math.round(c1 * 4 * 100) / 100;
+      c3 = Math.round(c1 * 3 * 100) / 100;
     }
 
     return [
@@ -90,9 +90,9 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
       },
       {
         id: 3,
-        qty: 4,
-        title: lang === 'fr' ? 'Pack Semaine — 4 T-Shirts' : 'Week Pack — 4 Shirts',
-        subtitle: lang === 'fr' ? 'La tranquillité toute la semaine : 3 t-shirts achetés + 1 offert.' : 'Full peace of mind: 3 shirts bought + 1 free.',
+        qty: 3,
+        title: lang === 'fr' ? 'Pack Semaine — 3 T-Shirts' : 'Week Pack — 3 Shirts',
+        subtitle: lang === 'fr' ? 'La tranquillité toute la semaine : 1 t-shirt propre toujours prêt.' : 'Full peace of mind: a clean shirt always ready.',
         badge: lang === 'fr' ? `Meilleure Valeur — Économisez ${Math.round(c3 - p3)} €` : `Best Value — Save €${Math.round(c3 - p3)}`,
         price: p3,
         compareAt: c3,
