@@ -4,7 +4,7 @@ import { useLanguage } from '../../context/LanguageContext.jsx';
 import { price } from '../../lib/format.js';
 import './BundlePicker.css';
 
-function VariantRows({ variants, onChange, productImage, availableColors, colorImages, lang }) {
+function VariantRows({ variants, onChange, productImage, availableColors, colorImages, lang, isTwoPlusOne }) {
   const { t } = useLanguage();
   const colorList = availableColors && availableColors.length ? availableColors : defaultColors;
 
@@ -20,8 +20,9 @@ function VariantRows({ variants, onChange, productImage, availableColors, colorI
           productImage ||
           '/images/products/sans-manches/1.jpeg';
 
+        const isFree = isTwoPlusOne && i === 2;
         return (
-          <div className="variant" key={i}>
+          <div className={`variant ${isFree ? 'variant--free' : ''}`} key={i}>
             <div className="variant__thumb">
               <img
                 src={colorImg}
@@ -56,6 +57,11 @@ function VariantRows({ variants, onChange, productImage, availableColors, colorI
               </select>
               <Icon name="chevron" size={14} />
             </label>
+            {isFree && (
+              <span className="variant__free-badge">
+                {lang === 'fr' ? '3ᵉ OFFERT' : '3rd FREE'}
+              </span>
+            )}
           </div>
         );
       })}
@@ -99,6 +105,7 @@ function BundleCard({ bundle, selected, onSelect, variants, onVariantChange, pro
             availableColors={availableColors}
             colorImages={colorImages}
             lang={lang}
+            isTwoPlusOne={bundle.isTwoPlusOne}
           />
         </div>
       )}
