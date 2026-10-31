@@ -77,43 +77,6 @@ const offersCardsData = [
     },
   },
   {
-    id: 'sans-manches-black-or',
-    handle: 'vela-sculpt-sans-manches',
-    defaultColor: 'Black Or',
-    titleFr: 'Vela Sculpt™ sans manches — Édition Prestige',
-    titleEn: 'Vela Sculpt™ Sleeveless — Prestige Edition',
-    taglineFr: 'Pack 3 débardeurs dorés (2 achetés + 1 offert) · Finition or',
-    taglineEn: 'Pack of 3 Gold Edition tank tops (Buy 2 Get 1 Free)',
-    badge: '2+1',
-    rating: 4.8,
-    reviewsCount: '890',
-    price: 79.85,
-    compareAt: 149.85,
-    urlBase: '/products/vela-sculpt-sans-manches',
-    colorData: {
-      'Black Or': {
-        hex: '#241f17',
-        img: '/images/products/sans-manches/7.jpeg',
-        hoverImg: '/images/products/sans-manches/8.jpeg',
-      },
-      Noir: {
-        hex: '#1a1a1a',
-        img: '/images/products/sans-manches/1.jpeg',
-        hoverImg: '/images/products/sans-manches/2.jpeg',
-      },
-      Blanc: {
-        hex: '#f4f4f6',
-        img: '/images/products/sans-manches/4.jpeg',
-        hoverImg: '/images/products/sans-manches/5.jpeg',
-      },
-      Gris: {
-        hex: '#72757d',
-        img: '/images/products/sans-manches/10.jpeg',
-        hoverImg: '/images/products/sans-manches/11.jpeg',
-      },
-    },
-  },
-  {
     id: 'manches-longues-gris-chine',
     handle: 'vela-sculpt-manches-longues',
     defaultColor: 'Gris chiné',
