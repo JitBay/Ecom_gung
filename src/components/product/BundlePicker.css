@@ -145,11 +145,19 @@
 }
 
 .variant__thumb {
-  width: 34px;
-  height: 40px;
+  width: 44px;
+  height: 52px;
   overflow: hidden;
   border-radius: 6px;
   flex: none;
+  background: #f4f3f0;
+}
+
+.variant__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
 }
 
 .select__dot {
