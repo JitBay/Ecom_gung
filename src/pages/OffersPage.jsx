@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import OfferModules from '../components/sections/OfferModules.jsx';
+import OffersProductShelf from '../components/sections/OffersProductShelf.jsx';
 import ProductSection from '../components/product/ProductSection.jsx';
 import { brand } from '../data/site.js';
 import { useLanguage } from '../context/LanguageContext.jsx';
 
 export default function OffersPage() {
-  const { lang, t } = useLanguage();
+  const { lang } = useLanguage();
 
   useEffect(() => {
     document.title =
@@ -17,7 +18,9 @@ export default function OffersPage() {
 
   return (
     <div style={{ paddingTop: 20 }}>
+      {/* 1. MODULES D'OFFRES / PROPOSITIONS DE VALEUR */}
       <OfferModules />
+
       <div className="container" style={{ margin: '20px auto 10px', textAlign: 'center' }}>
         <Link
           to="/products/pack-decouverte"
@@ -40,6 +43,11 @@ export default function OffersPage() {
             : '✨ Explore the complete Discovery Pack (3 Fits) presentation page →'}
         </Link>
       </div>
+
+      {/* 2. FENETRES DES PRODUITS ELIGIBLES AU PACK 2+1 (STYLE BEST-SELLERS) */}
+      <OffersProductShelf />
+
+      {/* 3. CONFIGURATEUR ET BUILDER DE PACK DIRECT */}
       <ProductSection isDiscoveryOffer={true} showModelSelector={true} />
     </div>
   );

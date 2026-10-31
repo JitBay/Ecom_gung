@@ -28,40 +28,46 @@ import './ProductPage.css';
  * Dedicated high-conversion sales landing for all cuts (Sans Manches, Demi-Manches, Manches Longues)
  */
 function DedicatedProductPage({ product }) {
-  const { t, dict } = useLanguage();
+  const { lang, t, dict } = useLanguage();
   const trustItems = dict.home?.trust || [];
   const handle = product?.handle || 'vela-sculpt-sans-manches';
+  const localized = getLocalizedProduct(product, lang);
+  const isSleeveless = handle === 'vela-sculpt-sans-manches';
 
   return (
     <div className={`product-page-wrap ${handle}-product`}>
-      {/* 1. HERO BANNER FOCUSED ON CURRENT FIT */}
-      <Hero initialHandle={handle} showModelSelector={false} />
+      {/* 1. HERO BANNER & CAMERA ROLLS: ONLY FOR SLEEVELESS (REMOVED FROM SHORT AND LONG AS REQUESTED) */}
+      {isSleeveless && (
+        <>
+          <Hero initialHandle={handle} showModelSelector={false} />
+          <CameraRolls />
+        </>
+      )}
 
-      {/* 2. CAMERA ROLLS / SOCIAL PROOF TICKER */}
-      <CameraRolls />
 
-      {/* 3. MAIN PRODUCT CONFIGURATOR & BUNDLE BUILDER (PACK 1, 2, 3 WITH MULTI-COLOR CHOICES) */}
+
+      {/* 2. MAIN PRODUCT CONFIGURATOR & BUNDLE BUILDER (PACK 1, 2, 3 WITH MULTI-COLOR CHOICES) */}
       <ProductSection initialModelHandle={handle} showModelSelector={false} />
 
-      {/* 4. REAL-WORLD PRODUCT VIDEO DEMO */}
-      <ProductVideoSection modelHandle={handle} />
+      {/* 3. REAL-WORLD PRODUCT VIDEO DEMO: ONLY FOR SLEEVELESS (REMOVED FROM SHORT & LONG) */}
+      {isSleeveless && <ProductVideoSection modelHandle={handle} />}
 
-      {/* 5. OTHER ERGONOMIC FITS */}
+      {/* 4. OTHER ERGONOMIC FITS */}
       <RelatedProducts exclude={handle} />
 
-      {/* 6. VIDEO TESTIMONIALS */}
+      {/* 5. VIDEO TESTIMONIALS */}
       <VideoTestimonials />
 
-      {/* 7. QUALITY & TECHNOLOGY BREAKDOWN (4 TEXTILE CARDS) */}
-      <QualitySection />
+      {/* 6. QUALITY & TECHNOLOGY BREAKDOWN (4 TEXTILE CARDS): ONLY FOR SLEEVELESS (REMOVED FROM SHORT & LONG) */}
+      {isSleeveless && <QualitySection />}
 
-      {/* 8. FAQ */}
+      {/* 7. FAQ */}
       <Faq />
 
-      {/* 9. VERIFIED CUSTOMER REVIEWS */}
+      {/* 8. VERIFIED CUSTOMER REVIEWS */}
       <CustomerReviews />
 
-      {/* 10. TRUST BADGES STRIP */}
+      {/* 9. TRUST BADGES STRIP */}
       <section className="ionix-trust" aria-label={t('home.trust_title')}>
         <div className="ionix-trust__inner">
           <div className="ionix-trust__item">
@@ -362,6 +368,6 @@ export default function ProductPage({ handle: fixedHandle }) {
     return <PackDecouverteLanding />;
   }
 
-  // All cuts (Sans manches, Demi-manches, Manches longues) use the dedicated high-conversion layout
+  // All cuts use the dedicated layout: Sans manches retains Hero & CameraRolls; Short and Long start directly with ProductSection
   return <DedicatedProductPage product={rawProduct} />;
 }
