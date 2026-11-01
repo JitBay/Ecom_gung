@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import Icon from '../ui/Icon.jsx';
 import LanguageSwitcher from '../ui/LanguageSwitcher.jsx';
 import { brand } from '../../data/site.js';
@@ -52,7 +52,7 @@ function MobileMenu({ open, onClose }) {
       ],
     },
     { label: t('nav.offers'), to: '/pages/offres' },
-    { label: t('nav.why_us'), to: '/pages/notre-technologie' },
+    { label: t('nav.why_us'), to: '/#why-vela-labs' },
     { label: t('nav.guarantee'), to: '/pages/garantie' },
   ];
 
@@ -116,7 +116,7 @@ function MobileMenu({ open, onClose }) {
                     <Icon name="arrow" size={18} />
                   </a>
                 ) : (
-                  <NavLink to={item.to} onClick={onClose}>
+                  <NavLink to={item.to} end={item.to === '/'} onClick={onClose}>
                     {item.label}
                     <Icon name="arrow" size={18} />
                   </NavLink>
@@ -148,6 +148,10 @@ export default function Header() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { count, setOpen } = useCart();
   const { t } = useLanguage();
+  const location = useLocation();
+
+  const isModelsActive =
+    location.pathname.startsWith('/collections') || location.pathname.startsWith('/products');
 
   const navItems = [
     { label: t('nav.home'), to: '/' },
@@ -161,7 +165,7 @@ export default function Header() {
       ],
     },
     { label: t('nav.offers'), to: '/pages/offres' },
-    { label: t('nav.why_us'), to: '/pages/notre-technologie' },
+    { label: t('nav.why_us'), to: '/#why-vela-labs' },
     { label: t('nav.guarantee'), to: '/pages/garantie' },
   ];
 
@@ -189,11 +193,11 @@ export default function Header() {
                 return (
                   <div
                     key={item.to}
-                    className="nav-dropdown"
+                    className={`nav-dropdown ${isModelsActive ? 'is-active' : ''}`}
                     onMouseEnter={() => setDropdownOpen(true)}
                     onMouseLeave={() => setDropdownOpen(false)}
                   >
-                    <NavLink to={item.to} className="nav-dropdown__link">
+                    <NavLink to={item.to} className={`nav-dropdown__link ${isModelsActive ? 'active' : ''}`}>
                       {item.label} <Icon name="chevron" size={12} />
                     </NavLink>
                     {dropdownOpen && (
@@ -213,10 +217,12 @@ export default function Header() {
               }
               if (item.to.startsWith('/#')) {
                 const targetId = item.to.replace('/#', '');
+                const isAnchorActive = location.hash === `#${targetId}`;
                 return (
                   <a
                     key={item.to}
                     href={item.to}
+                    className={isAnchorActive ? 'active' : ''}
                     onClick={(e) => {
                       const el = document.getElementById(targetId);
                       if (el) {
@@ -231,7 +237,7 @@ export default function Header() {
                 );
               }
               return (
-                <NavLink key={item.to} to={item.to}>
+                <NavLink key={item.to} to={item.to} end={item.to === '/'}>
                   {item.label}
                 </NavLink>
               );

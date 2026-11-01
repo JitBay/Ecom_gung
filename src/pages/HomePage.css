@@ -618,10 +618,12 @@
 /* --- PROMISE SECTION --- */
 .ixh-promise {
   position: relative;
-  height: clamp(520px, 48vw, 720px);
-  min-height: 500px;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  min-height: unset;
   overflow: hidden;
-  background: #ede6db;
+  background: #0b0e11;
   font-family: var(--sans);
   color: #1a1a18;
   -webkit-font-smoothing: antialiased;
@@ -659,7 +661,8 @@
 
 .ixh-promise__action {
   position: absolute;
-  left: clamp(20px, 5vw, 70px);
+  right: clamp(20px, 5vw, 70px);
+  left: auto;
   bottom: clamp(24px, 4vw, 52px);
   z-index: 2;
   display: flex;
@@ -702,23 +705,26 @@
 
 @media (max-width: 699px) {
   .ixh-promise {
-    height: clamp(380px, 75vw, 500px);
-    min-height: 360px;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    min-height: unset;
   }
 
   .ixh-promise__action {
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 22px;
+    right: 16px;
+    left: auto;
+    transform: none;
+    bottom: 14px;
     width: auto;
     max-width: calc(100% - 32px);
-    justify-content: center;
+    justify-content: flex-end;
   }
 
   .ixh-promise__btn {
     white-space: nowrap;
-    padding: 0 20px;
-    font-size: 13px;
+    padding: 0 18px;
+    min-height: 40px;
+    font-size: 12px;
   }
 }
 
