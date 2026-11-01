@@ -317,10 +317,10 @@ export default function HomePage() {
       {/* 1. HERO SECTION */}
       <section className="ixh-hero">
         <picture className="ixh-hero__media">
-          <source media="(max-width: 699px)" srcSet="/images/home/banner-2.png" />
+          <source media="(max-width: 699px)" srcSet="/images/home/banner-every-body.jpg" />
           <img
-            src="/images/home/banner-2.png"
-            alt="Vela Labs - Compression Wear"
+            src="/images/home/banner-every-body.jpg"
+            alt="Vela Labs — Every Age Every Body"
             className="ixh-hero__img"
             loading="eager"
           />
@@ -329,18 +329,34 @@ export default function HomePage() {
         <div className="ixh-hero__inner">
           <div className="ixh-hero__content">
             <span className="ixh-hero__eyebrow">
-              <span style={{ color: '#c4a265' }}>★★★★★</span> {t('home.eyebrow')}
+              <span className="ixh-hero__stars">★★★★★</span> {t('home.eyebrow')}
             </span>
             <h1 className="ixh-hero__title">
-              {t('home.hero_title_1')}<br />
-              {t('home.hero_title_2')}
+              <span className="ixh-hero__title-line">
+                <span className="ixh-hero__word--white">EVERY</span>{' '}
+                <span className="ixh-hero__word--gold">AGE</span>
+              </span>
+              <span className="ixh-hero__title-line">
+                <span className="ixh-hero__word--white">EVERY</span>{' '}
+                <span className="ixh-hero__word--gold">BODY</span>
+              </span>
             </h1>
             <p className="ixh-hero__text">{t('home.hero_text')}</p>
             <div className="ixh-hero__btns">
-              <Link to="/collections/all" className="ixh-btn ixh-btn--dark">
+              <a
+                href="#bestsellers"
+                className="ixh-btn ixh-btn--gold"
+                onClick={(e) => {
+                  const el = document.getElementById('bestsellers');
+                  if (el) {
+                    e.preventDefault();
+                    el.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+              >
                 {t('home.cta_bestsellers')}
-              </Link>
-              <Link to="/collections/all" className="ixh-btn ixh-btn--line">
+              </a>
+              <Link to="/collections/all" className="ixh-btn ixh-btn--outline-gold">
                 {t('home.cta_all')}
               </Link>
             </div>

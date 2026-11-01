@@ -3,12 +3,12 @@
 /* --- HERO --- */
 .ixh-hero {
   position: relative;
-  min-height: clamp(560px, 43vw, 720px);
-  height: clamp(560px, 43vw, 720px);
+  min-height: clamp(560px, 44vw, 740px);
+  height: clamp(560px, 44vw, 740px);
   overflow: hidden;
-  background: #efe6d8;
+  background: #0a0a0c;
   font-family: var(--sans);
-  color: #1a1a18;
+  color: #ffffff;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -25,7 +25,7 @@
 
 .ixh-hero__img {
   object-fit: cover;
-  object-position: 70% 40%;
+  object-position: 70% 30%;
   display: block;
   max-width: none;
 }
@@ -37,8 +37,9 @@
   bottom: 0;
   left: 0;
   pointer-events: none;
-  background: linear-gradient(to top, rgba(250, 246, 240, 0.9) 0%, rgba(250, 246, 240, 0) 38%),
-    linear-gradient(to right, rgba(250, 246, 240, 0.55) 0%, rgba(250, 246, 240, 0) 45%);
+  background: 
+    linear-gradient(to right, #0a0a0c 0%, #0a0a0c 30%, rgba(10, 10, 12, 0.92) 40%, rgba(10, 10, 12, 0.5) 54%, rgba(10, 10, 12, 0) 72%),
+    linear-gradient(to top, rgba(10, 10, 12, 0.55) 0%, rgba(10, 10, 12, 0) 25%);
 }
 
 .ixh-hero__inner {
@@ -51,46 +52,74 @@
 .ixh-hero__content {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 clamp(20px, 4vw, 64px) clamp(28px, 6vw, 104px) clamp(16px, 2.5vw, 36px);
+  padding: 0 clamp(20px, 4.5vw, 72px) clamp(36px, 6vw, 92px);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 14px;
+  gap: 16px;
 }
 
 .ixh-hero__eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 13px;
+  font-size: clamp(12px, 1.05vw, 13.5px);
   font-weight: 600;
-  color: #6e5520;
+  color: #f2f0eb;
   letter-spacing: 0.02em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.ixh-hero__stars {
+  color: #dfbe76;
+  font-size: 14px;
+  letter-spacing: 2px;
+  filter: drop-shadow(0 1px 4px rgba(223, 190, 118, 0.45));
 }
 
 .ixh-hero .ixh-hero__title {
   margin: 0;
   font-family: Montserrat, sans-serif;
-  font-weight: 800;
-  font-size: clamp(38px, 5.2vw, 78px);
+  font-weight: 900;
+  font-size: clamp(40px, 5.2vw, 76px);
   line-height: 0.98;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
   text-transform: uppercase;
   max-width: 760px;
-  color: #7a5d24;
-  background: linear-gradient(135deg, #6e5520 0%, #b89356 50%, #6e5520 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ixh-hero__title-line {
+  display: flex;
+  align-items: baseline;
+  gap: 0.32em;
+}
+
+.ixh-hero__word--white {
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.7);
+}
+
+.ixh-hero__word--gold {
+  color: #dfbe76;
+  background: linear-gradient(135deg, #dfbe76 0%, #fcedbb 34%, #c59849 70%, #d8b257 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 16px rgba(0, 0, 0, 0.6));
 }
 
 .ixh-hero__text {
   margin: 0;
   max-width: 480px;
-  font-size: clamp(15px, 1.3vw, 17px);
+  font-size: clamp(14.5px, 1.2vw, 16.5px);
   line-height: 1.55;
-  color: #111111;
-  font-weight: 500;
+  color: rgba(245, 245, 247, 0.92);
+  font-weight: 450;
   text-align: left;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
 }
 
 .ixh-hero__btns {
@@ -104,20 +133,51 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 50px;
-  padding: 0 28px;
+  min-height: 52px;
+  padding: 0 30px;
   border-radius: 999px;
   text-decoration: none;
   font-family: Montserrat, sans-serif;
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 700;
   letter-spacing: 0.04em;
-  transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.15s ease, box-shadow 0.25s ease, border-color 0.25s ease;
   cursor: pointer;
 }
 
 .ixh-btn:active {
   transform: scale(0.98);
+}
+
+.ixh-btn--gold {
+  background: linear-gradient(135deg, #c59849 0%, #dfbe76 50%, #b88a38 100%);
+  color: #16130b !important;
+  border: 1.5px solid #d4af37;
+  font-weight: 700;
+  box-shadow: 0 4px 18px rgba(196, 152, 73, 0.35);
+}
+
+.ixh-btn--gold:hover {
+  background: linear-gradient(135deg, #d2a655 0%, #e8c985 50%, #c49642 100%);
+  color: #0d0b06 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(196, 152, 73, 0.55);
+}
+
+.ixh-btn--outline-gold {
+  background: rgba(18, 18, 20, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(223, 190, 118, 0.65);
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+.ixh-btn--outline-gold:hover {
+  background: rgba(223, 190, 118, 0.16);
+  border-color: #dfbe76;
+  color: #ffffff !important;
+  transform: translateY(-1px);
 }
 
 .ixh-btn--dark {
@@ -145,16 +205,28 @@
 @media (max-width: 699px) {
   .ixh-hero {
     height: auto;
-    min-height: 520px;
+    min-height: 560px;
   }
   .ixh-hero__img {
-    object-position: 50% 30%;
+    object-position: 72% 18%;
   }
   .ixh-hero__scrim {
-    background: linear-gradient(to top, rgba(250, 246, 240, 0.96) 0%, rgba(250, 246, 240, 0.86) 45%, rgba(250, 246, 240, 0) 75%);
+    background: linear-gradient(to top, #0a0a0c 0%, rgba(10, 10, 12, 0.95) 50%, rgba(10, 10, 12, 0.45) 80%, rgba(10, 10, 12, 0.2) 100%);
   }
   .ixh-hero__content {
-    padding-bottom: 36px;
+    padding: 0 20px 36px;
+    gap: 14px;
+  }
+  .ixh-hero .ixh-hero__title {
+    font-size: clamp(34px, 9vw, 44px);
+  }
+  .ixh-hero__btns {
+    width: 100%;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .ixh-hero__btns .ixh-btn {
+    width: 100%;
   }
 }
 
