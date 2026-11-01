@@ -31,15 +31,7 @@
 }
 
 .ixh-hero__scrim {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  pointer-events: none;
-  background: 
-    linear-gradient(to right, #0a0a0c 0%, #0a0a0c 30%, rgba(10, 10, 12, 0.92) 40%, rgba(10, 10, 12, 0.5) 54%, rgba(10, 10, 12, 0) 72%),
-    linear-gradient(to top, rgba(10, 10, 12, 0.55) 0%, rgba(10, 10, 12, 0) 25%);
+  display: none;
 }
 
 .ixh-hero__inner {
@@ -210,8 +202,8 @@
   .ixh-hero__img {
     object-position: 72% 18%;
   }
-  .ixh-hero__scrim {
-    background: linear-gradient(to top, #0a0a0c 0%, rgba(10, 10, 12, 0.95) 50%, rgba(10, 10, 12, 0.45) 80%, rgba(10, 10, 12, 0.2) 100%);
+.ixh-hero__scrim {
+    display: none;
   }
   .ixh-hero__content {
     padding: 0 20px 36px;

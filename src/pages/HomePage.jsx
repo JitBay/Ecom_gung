@@ -317,15 +317,14 @@ export default function HomePage() {
       {/* 1. HERO SECTION */}
       <section className="ixh-hero">
         <picture className="ixh-hero__media">
-          <source media="(max-width: 699px)" srcSet="/images/home/banner-every-body.jpg" />
+          <source media="(max-width: 699px)" srcSet="/images/home/banner-2.png" />
           <img
-            src="/images/home/banner-every-body.jpg"
+            src="/images/home/banner-2.png"
             alt="Vela Labs — Every Age Every Body"
             className="ixh-hero__img"
             loading="eager"
           />
         </picture>
-        <div className="ixh-hero__scrim" aria-hidden="true" />
         <div className="ixh-hero__inner">
           <div className="ixh-hero__content">
             <span className="ixh-hero__eyebrow">
