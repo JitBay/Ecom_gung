@@ -354,7 +354,7 @@
 
 /* --- BEST SELLERS SHELF --- */
 .ixh-bs {
-  padding: clamp(40px, 5vw, 72px) 0 clamp(36px, 4vw, 56px);
+  padding: clamp(16px, 2vw, 26px) 0 clamp(36px, 4vw, 56px);
   font-family: var(--sans);
   color: #1a1a18;
   -webkit-font-smoothing: antialiased;
