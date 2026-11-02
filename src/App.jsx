@@ -94,6 +94,8 @@ export default function App() {
             {/* Content & Offer Pages */}
             <Route path="/pages/offres" element={<OffersPage />} />
             <Route path="/pages/notre-technologie" element={<TechnologyPage />} />
+            <Route path="/pages/why-vela-labs" element={<Navigate to="/pages/notre-technologie" replace />} />
+            <Route path="/why-vela-labs" element={<Navigate to="/pages/notre-technologie" replace />} />
             <Route path="/pages/garantie" element={<GuaranteePage />} />
             <Route path="/pages/guide-tailles" element={<SizeGuidePage />} />
             <Route path="/pages/suivi-commande" element={<TrackOrderPage />} />

@@ -104,16 +104,14 @@ export default function QualitySection() {
   const statsList = lang === 'fr' ? stats : (statsEn || stats);
 
   return (
-    <section className="quality" ref={ref} id="technologie">
+    <section className="quality" ref={ref} id="why-vela-labs">
+      <span id="technologie" style={{ position: 'relative', top: '-80px', display: 'block', visibility: 'hidden' }} />
       <div className="container quality__inner">
         <div className="quality__media reveal">
           <div className="quality__header">
+            <span className="eyebrow">{lang === 'fr' ? 'Pourquoi Vela Labs ?' : 'Why Vela Labs?'}</span>
             <h2 className="title">
-              {lang === 'fr' ? (
-                <>Chaque détail pensé pour <em>votre quotidien.</em></>
-              ) : (
-                <>Every detail, <em>engineered.</em></>
-              )}
+              Every detail, <em>engineered.</em>
             </h2>
             <p className="quality__lead">
               {lang === 'fr'

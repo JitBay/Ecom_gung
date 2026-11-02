@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import QualitySection from '../components/sections/QualitySection.jsx';
 import Stars from '../components/ui/Stars.jsx';
 import HowItWorksModal from '../components/ui/HowItWorksModal.jsx';
 import { brand } from '../data/site.js';
@@ -506,6 +507,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* 7. WHY VELA LABS? / TEXTILE & PERFORMANCE */}
+      <QualitySection />
 
       {/* 8. FAQ */}
       <section className="ixh-faq" id="faq">
