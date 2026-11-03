@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import Icon from '../ui/Icon.jsx';
 import LanguageSwitcher from '../ui/LanguageSwitcher.jsx';
 import { brand } from '../../data/site.js';
@@ -39,6 +39,25 @@ function MobileMenu({ open, onClose }) {
   useLockScroll(open);
   const [modelsOpen, setModelsOpen] = useState(false);
   const { t, dict } = useLanguage();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleAnchorClick = (e, to) => {
+    e.preventDefault();
+    onClose();
+    const targetId = to.replace('/#', '');
+    if (location.pathname === '/') {
+      const el = document.getElementById(targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (window.location.hash !== `#${targetId}`) {
+          window.history.pushState(null, '', `#${targetId}`);
+        }
+      }
+    } else {
+      navigate(`/#${targetId}`);
+    }
+  };
 
   const navItems = [
     { label: t('nav.home'), to: '/' },
@@ -99,22 +118,13 @@ function MobileMenu({ open, onClose }) {
             return (
               <li key={item.to}>
                 {item.to.startsWith('/#') ? (
-                  <a
-                    href={item.to}
-                    onClick={(e) => {
-                      onClose();
-                      const targetId = item.to.replace('/#', '');
-                      const el = document.getElementById(targetId);
-                      if (el) {
-                        e.preventDefault();
-                        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        window.history.pushState(null, '', `#${targetId}`);
-                      }
-                    }}
+                  <Link
+                    to={item.to}
+                    onClick={(e) => handleAnchorClick(e, item.to)}
                   >
                     {item.label}
                     <Icon name="arrow" size={18} />
-                  </a>
+                  </Link>
                 ) : (
                   <NavLink to={item.to} end={item.to === '/'} onClick={onClose}>
                     {item.label}
@@ -146,9 +156,56 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownTimeoutRef = useRef(null);
   const { count, setOpen } = useCart();
   const { t } = useLanguage();
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleMouseEnterDropdown = () => {
+    if (dropdownTimeoutRef.current) {
+      clearTimeout(dropdownTimeoutRef.current);
+    }
+    setDropdownOpen(true);
+  };
+
+  const handleMouseLeaveDropdown = () => {
+    dropdownTimeoutRef.current = setTimeout(() => {
+      setDropdownOpen(false);
+    }, 150);
+  };
+
+  const handleCloseDropdown = () => {
+    if (dropdownTimeoutRef.current) {
+      clearTimeout(dropdownTimeoutRef.current);
+    }
+    setDropdownOpen(false);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (dropdownTimeoutRef.current) {
+        clearTimeout(dropdownTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const handleAnchorClick = (e, to) => {
+    e.preventDefault();
+    handleCloseDropdown();
+    const targetId = to.replace('/#', '');
+    if (location.pathname === '/') {
+      const el = document.getElementById(targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (window.location.hash !== `#${targetId}`) {
+          window.history.pushState(null, '', `#${targetId}`);
+        }
+      }
+    } else {
+      navigate(`/#${targetId}`);
+    }
+  };
 
   const isModelsActive =
     location.pathname.startsWith('/collections') || location.pathname.startsWith('/products');
@@ -187,26 +244,35 @@ export default function Header() {
             <Logo />
           </div>
 
-          <nav className="header__nav" aria-label="Menu principal">
+          <nav className="header__nav" aria-label="Menu principal" onMouseLeave={handleCloseDropdown}>
             {navItems.map((item) => {
               if (item.children) {
                 return (
                   <div
                     key={item.to}
                     className={`nav-dropdown ${isModelsActive ? 'is-active' : ''}`}
-                    onMouseEnter={() => setDropdownOpen(true)}
-                    onMouseLeave={() => setDropdownOpen(false)}
+                    onMouseEnter={handleMouseEnterDropdown}
+                    onMouseLeave={handleMouseLeaveDropdown}
                   >
                     <NavLink to={item.to} className={`nav-dropdown__link ${isModelsActive ? 'active' : ''}`}>
                       {item.label} <Icon name="chevron" size={12} />
                     </NavLink>
                     {dropdownOpen && (
                       <div className="nav-dropdown__menu">
-                        <NavLink to="/collections/all" className="nav-dropdown__item nav-dropdown__item--all">
+                        <NavLink
+                          to="/collections/all"
+                          className="nav-dropdown__item nav-dropdown__item--all"
+                          onClick={handleCloseDropdown}
+                        >
                           {t('nav.models_all')}
                         </NavLink>
                         {item.children.map((sub) => (
-                          <NavLink key={sub.to} to={sub.to} className="nav-dropdown__item">
+                          <NavLink
+                            key={sub.to}
+                            to={sub.to}
+                            className="nav-dropdown__item"
+                            onClick={handleCloseDropdown}
+                          >
                             {sub.label}
                           </NavLink>
                         ))}
@@ -216,28 +282,24 @@ export default function Header() {
                 );
               }
               if (item.to.startsWith('/#')) {
-                const targetId = item.to.replace('/#', '');
-                const isAnchorActive = location.hash === `#${targetId}`;
                 return (
-                  <a
+                  <Link
                     key={item.to}
-                    href={item.to}
-                    className={isAnchorActive ? 'active' : ''}
-                    onClick={(e) => {
-                      const el = document.getElementById(targetId);
-                      if (el) {
-                        e.preventDefault();
-                        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        window.history.pushState(null, '', `#${targetId}`);
-                      }
-                    }}
+                    to={item.to}
+                    onMouseEnter={handleCloseDropdown}
+                    onClick={(e) => handleAnchorClick(e, item.to)}
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 );
               }
               return (
-                <NavLink key={item.to} to={item.to} end={item.to === '/'}>
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  end={item.to === '/'}
+                  onMouseEnter={handleCloseDropdown}
+                >
                   {item.label}
                 </NavLink>
               );

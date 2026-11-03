@@ -117,6 +117,12 @@
   font-weight: 600;
 }
 
+.nav-dropdown {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
 .nav-dropdown__menu {
   position: absolute;
   top: calc(100% + 4px);
@@ -134,6 +140,15 @@
   gap: 4px;
   z-index: 100;
   animation: fade-down 0.2s ease;
+}
+
+.nav-dropdown__menu::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  height: 10px;
 }
 
 @keyframes fade-down {

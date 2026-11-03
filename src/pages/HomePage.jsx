@@ -14,8 +14,8 @@ const bestSellersBase = [
     id: 'sans-manches-noir',
     handle: 'vela-sculpt-sans-manches',
     defaultColor: 'Noir',
-    titleFr: 'Vela Sculpt™ sans manches — Noir',
-    titleEn: 'Vela Sculpt™ Sleeveless — Black',
+    titleFr: 'Vela Sculpt™ sans manches',
+    titleEn: 'Vela Sculpt™ Sleeveless',
     taglineFr: 'Invisibilité absolue sous chemises et t-shirts légers',
     taglineEn: 'Discreet and breathable core support under shirts & tees',
     badgeFr: '#1 Meilleure Vente',
@@ -52,8 +52,8 @@ const bestSellersBase = [
     id: 'demi-manches-blanc',
     handle: 'vela-sculpt-demi-manches',
     defaultColor: 'Blanc',
-    titleFr: 'Vela Sculpt™ demi-manches — Blanc',
-    titleEn: 'Vela Sculpt™ Short Sleeves — White',
+    titleFr: 'Vela Sculpt™ demi-manches',
+    titleEn: 'Vela Sculpt™ Short Sleeves',
     taglineFr: '100% invisible sous chemises blanches habillées',
     taglineEn: '100% invisible under crisp white dress shirts & polos',
     badgeFr: 'Spécial chemise blanche',
@@ -85,8 +85,8 @@ const bestSellersBase = [
     id: 'manches-longues-gris-chine',
     handle: 'vela-sculpt-manches-longues',
     defaultColor: 'Gris chiné',
-    titleFr: 'Vela Sculpt™ manches longues — Gris chiné',
-    titleEn: 'Vela Sculpt™ Long Sleeves — Heather Grey',
+    titleFr: 'Vela Sculpt™ manches longues',
+    titleEn: 'Vela Sculpt™ Long Sleeves',
     taglineFr: 'Gainage complet torse, dos et bras sous vestes et pulls',
     taglineEn: 'Full upper-body sculpting & reinforced back support',
     badgeFr: 'Maintien intégral',
@@ -159,7 +159,6 @@ function BestSellerCard({ p, lang, t }) {
   const title = lang === 'fr' ? p.titleFr : p.titleEn;
   const badge = lang === 'fr' ? p.badgeFr : p.badgeEn;
   const tagline = lang === 'fr' ? p.taglineFr : p.taglineEn;
-  const activeColorName = t('color_names.' + activeColorKey, activeColorKey);
 
   const discount = p.compareAt ? Math.round((1 - p.price / p.compareAt) * 100) : 0;
   const targetUrl = p.urlBase.includes('#') ? p.urlBase : `${p.urlBase}?color=${encodeURIComponent(activeColorKey)}`;
@@ -227,7 +226,6 @@ function BestSellerCard({ p, lang, t }) {
               );
             })}
           </div>
-          <span className="ixh-card__color-name">{activeColorName}</span>
         </div>
       </div>
     </article>

@@ -1,6 +1,5 @@
 import Icon from '../ui/Icon.jsx';
 import { stats, statsEn } from '../../data/product.js';
-import { useReveal } from '../../lib/hooks.js';
 import { useLanguage } from '../../context/LanguageContext.jsx';
 import './QualitySection.css';
 
@@ -9,21 +8,25 @@ const tilesFr = [
     title: 'Design sculpt anatomique',
     sub: 'Gainage 3D ciblé & soutien abdominal',
     img: '/images/textile/anatomical-sculpt.png',
+    webp: '/images/textile/anatomical-sculpt.webp',
   },
   {
     title: 'Coupe athlétique',
     sub: 'Maintien postural naturel & silhouette redressée',
     img: '/images/textile/athletic-fit.png',
+    webp: '/images/textile/athletic-fit.webp',
   },
   {
     title: 'Performance respirante',
     sub: 'Maille micro-aérée & évacuation active de la sueur',
     img: '/images/textile/breathable-performance.png',
+    webp: '/images/textile/breathable-performance.webp',
   },
   {
     title: 'Finition & textile premium',
     sub: 'Coutures ultra-plates seconde peau invisibles',
     img: '/images/textile/premium-fabric.png',
+    webp: '/images/textile/premium-fabric.webp',
   },
 ];
 
@@ -32,21 +35,25 @@ const tilesEn = [
     title: 'Anatomical Sculpt Design',
     sub: 'Targeted 3D midsection & core shaping',
     img: '/images/textile/anatomical-sculpt.png',
+    webp: '/images/textile/anatomical-sculpt.webp',
   },
   {
     title: 'Athletic Fit',
     sub: 'Ergonomic contouring & natural posture support',
     img: '/images/textile/athletic-fit.png',
+    webp: '/images/textile/athletic-fit.webp',
   },
   {
     title: 'Breathable Performance',
     sub: 'Micro-ventilated mesh & active thermal regulation',
     img: '/images/textile/breathable-performance.png',
+    webp: '/images/textile/breathable-performance.webp',
   },
   {
     title: 'Premium Fabric & Finishing',
     sub: 'Ultra-flat bonded seams & second-skin feel',
     img: '/images/textile/premium-fabric.png',
+    webp: '/images/textile/premium-fabric.webp',
   },
 ];
 
@@ -97,17 +104,16 @@ const featuresEn = [
 ];
 
 export default function QualitySection() {
-  const ref = useReveal();
   const { lang } = useLanguage();
   const tiles = lang === 'fr' ? tilesFr : tilesEn;
   const features = lang === 'fr' ? featuresFr : featuresEn;
   const statsList = lang === 'fr' ? stats : (statsEn || stats);
 
   return (
-    <section className="quality" ref={ref} id="why-vela-labs">
+    <section className="quality" id="why-vela-labs">
       <span id="technologie" style={{ position: 'relative', top: '-80px', display: 'block', visibility: 'hidden' }} />
       <div className="container quality__inner">
-        <div className="quality__media reveal">
+        <div className="quality__media">
           <div className="quality__header">
             <span className="eyebrow">{lang === 'fr' ? 'Pourquoi Vela Labs ?' : 'Why Vela Labs?'}</span>
             <h2 className="title">
@@ -123,7 +129,16 @@ export default function QualitySection() {
           <div className="quality__tiles">
             {tiles.map((t) => (
               <div key={t.title} className="tile">
-                <img src={t.img} alt={t.title} className="tile__img" loading="lazy" />
+                <picture>
+                  <source type="image/webp" srcSet={t.webp} />
+                  <img
+                    src={t.img}
+                    alt={t.title}
+                    className="tile__img"
+                    loading="eager"
+                    decoding="async"
+                  />
+                </picture>
                 <div className="tile__shade" aria-hidden="true" />
                 <div className="tile__text-wrap">
                   <strong>{t.title}</strong>
@@ -142,7 +157,7 @@ export default function QualitySection() {
           </div>
         </div>
 
-        <div className="quality__text reveal">
+        <div className="quality__text">
           <div className="quality__stats">
             {statsList.map((s) => (
               <div key={s.label}>

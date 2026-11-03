@@ -39,8 +39,18 @@ function ScrollToTop() {
       };
 
       if (!scrollToTarget()) {
-        const timer = setTimeout(scrollToTarget, 100);
-        return () => clearTimeout(timer);
+        let frameId;
+        const check = () => {
+          if (!scrollToTarget()) {
+            frameId = requestAnimationFrame(check);
+          }
+        };
+        frameId = requestAnimationFrame(check);
+        const timer = setTimeout(() => cancelAnimationFrame(frameId), 500);
+        return () => {
+          cancelAnimationFrame(frameId);
+          clearTimeout(timer);
+        };
       }
       return;
     }

@@ -16,6 +16,13 @@
   margin-bottom: 24px;
 }
 
+.quality .quality__media,
+.quality .quality__text {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
 .quality__text {
   padding-top: clamp(48px, 4.8vw, 68px);
 }
