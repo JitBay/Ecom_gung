@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - feature/ionix-clone
   workflow_dispatch:
 
 concurrency:
@@ -27,10 +28,26 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Build production bundle
+        run: npm run build
+
+      - name: Check Vercel Secrets
+        id: check_secrets
+        run: |
+          if [ -n "${{ secrets.VERCEL_TOKEN }}" ] && [ -n "${{ secrets.VERCEL_ORG_ID }}" ] && [ -n "${{ secrets.VERCEL_PROJECT_ID }}" ]; then
+            echo "has_secrets=true" >> $GITHUB_OUTPUT
+            echo "✅ Secrets Vercel configurés."
+          else
+            echo "has_secrets=false" >> $GITHUB_OUTPUT
+            echo "ℹ️ Déploiement GitHub Action ignoré car les secrets VERCEL_TOKEN / VERCEL_ORG_ID / VERCEL_PROJECT_ID ne sont pas configurés dans GitHub Secrets."
+            echo "   (Le build de production a été validé avec succès ci-dessus. Si votre projet est connecté via l'intégration Git de vercel.com, le déploiement se fait automatiquement)."
+          fi
+
       - name: Deploy to Vercel
+        if: steps.check_secrets.outputs.has_secrets == 'true'
         uses: amondnet/vercel-action@v25
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          vercel-args: ${{ github.ref == 'refs/heads/main' && '--prod' || '' }}
+          vercel-args: ${{ (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/feature/ionix-clone') && '--prod' || '' }}
