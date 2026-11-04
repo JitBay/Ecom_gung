@@ -7,7 +7,7 @@
 
 // Configure your Shopify store domain here or via environment variable VITE_SHOPIFY_STORE_DOMAIN
 export const SHOPIFY_STORE_DOMAIN =
-  import.meta.env.VITE_SHOPIFY_STORE_DOMAIN || 'velalabs-officiel.myshopify.com';
+  import.meta.env.VITE_SHOPIFY_STORE_DOMAIN || 'www.zvar-shop.com';
 
 export const SHOPIFY_STOREFRONT_TOKEN =
   import.meta.env.VITE_SHOPIFY_STOREFRONT_TOKEN || '';
@@ -88,7 +88,7 @@ export async function redirectToShopifyCheckout(lines, options = {}) {
   console.log('[Shopify Checkout] Navigating to:', checkoutUrl);
 
   // If using default placeholder in dev, inform the developer/merchant
-  const isPlaceholder = SHOPIFY_STORE_DOMAIN.includes('velalabs-officiel.myshopify.com');
+  const isPlaceholder = !SHOPIFY_STORE_DOMAIN || SHOPIFY_STORE_DOMAIN.includes('votre-boutique.myshopify.com');
   if (isPlaceholder && typeof window !== 'undefined') {
     const proceed = window.confirm(
       `[Shopify Checkout]\n\nVous allez être redirigé vers la page de paiement sécurisée Shopify :\n${checkoutUrl}\n\n` +
