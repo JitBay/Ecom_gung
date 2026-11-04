@@ -7,10 +7,10 @@
 
 // Configure your Shopify store domain here or via environment variable VITE_SHOPIFY_STORE_DOMAIN
 export const SHOPIFY_STORE_DOMAIN =
-  import.meta.env.VITE_SHOPIFY_STORE_DOMAIN || 'www.zvar-shop.com';
+  import.meta.env.VITE_SHOPIFY_STORE_DOMAIN || 'zvar-shop.com';
 
 export const SHOPIFY_STOREFRONT_TOKEN =
-  import.meta.env.VITE_SHOPIFY_STOREFRONT_TOKEN || '';
+  import.meta.env.VITE_SHOPIFY_STOREFRONT_TOKEN || '06705ec8a9335df76b9e68a23ee31bf5';
 
 /**
  * Default fallback variant mapping if real Shopify numeric variant IDs are not provided yet.
