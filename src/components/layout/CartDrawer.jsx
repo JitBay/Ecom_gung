@@ -13,9 +13,9 @@ export default function CartDrawer() {
   const { t, lang } = useLanguage();
   useLockScroll(open);
 
-  const bundleShipsFree = lines.some((l) => l.freeShipping);
-  const left = bundleShipsFree ? 0 : Math.max(0, FREE_SHIPPING - total);
-  const progress = bundleShipsFree ? 100 : Math.min(100, (total / FREE_SHIPPING) * 100);
+  const bundleShipsFree = true;
+  const left = 0;
+  const progress = 100;
 
   return (
     <div className={`cart-backdrop ${open ? 'is-open' : ''}`} onClick={() => setOpen(false)}>
@@ -110,7 +110,7 @@ export default function CartDrawer() {
             <ShopifyPaymentBadges />
             <small>
               {lang === 'fr'
-                ? 'Garantie Satisfait ou Remboursé de 30 jours · Paiement SSL sécurisé Shopify'
+                ? 'Garantie satisfait ou remboursé de 30 jours · Paiement SSL sécurisé Shopify'
                 : '30-Day Money-Back Guarantee · 256-bit SSL Secure Shopify Checkout'}
             </small>
           </footer>

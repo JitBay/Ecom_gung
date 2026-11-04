@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext.jsx';
 import './LegalPage.css';
 
@@ -9,18 +8,15 @@ export default function LegalNoticePage() {
   useEffect(() => {
     document.title =
       lang === 'fr'
-        ? 'Mentions Légales | Vella — Vela Labs'
+        ? 'Mentions légales | Vella — Vela Labs'
         : 'Legal Notice | Vella — Vela Labs';
   }, [lang]);
 
   return (
     <div className="legal-page container">
-      <nav className="pp__crumbs" aria-label={lang === 'fr' ? "Fil d'Ariane" : 'Breadcrumbs'}>
-        <Link to="/">{t('nav.home')}</Link> / <span>{t('footer.legal_notice')}</span>
-      </nav>
 
       <article className="legal-content">
-        <h1>Mentions Légales</h1>
+        <h1>Mentions légales</h1>
         <p className="legal-meta">Informations réglementaires concernant l'exploitant du site.</p>
 
         <h2>1. Éditeur de la plateforme</h2>

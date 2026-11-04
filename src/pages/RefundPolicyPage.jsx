@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext.jsx';
 import './LegalPage.css';
 
@@ -9,18 +8,15 @@ export default function RefundPolicyPage() {
   useEffect(() => {
     document.title =
       lang === 'fr'
-        ? 'Politique de Retour & Remboursement (30 jours) | Vella — Vela Labs'
+        ? 'Politique de retour & remboursement (30 jours) | Vella — Vela Labs'
         : 'Refund & Returns Policy (30 Days) | Vella — Vela Labs';
   }, [lang]);
 
   return (
     <div className="legal-page container">
-      <nav className="pp__crumbs" aria-label={lang === 'fr' ? "Fil d'Ariane" : 'Breadcrumbs'}>
-        <Link to="/">{t('nav.home')}</Link> / <span>{t('footer.refunds')}</span>
-      </nav>
 
       <article className="legal-content">
-        <h1>{lang === 'fr' ? 'Politique de Retour & Remboursement (30 Jours)' : 'Refund & Returns Policy (30 Days)'}</h1>
+        <h1>{lang === 'fr' ? 'Politique de retour & remboursement (30 jours)' : 'Refund & Returns Policy (30 Days)'}</h1>
         <p className="legal-meta">{lang === 'fr' ? 'Dernière mise à jour : 14 octobre 2026' : 'Last updated: October 14, 2026'}</p>
 
         {lang === 'fr' ? (

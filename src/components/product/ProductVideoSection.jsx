@@ -1,9 +1,12 @@
 import { useRef, useState } from 'react';
+import { getLocalizedProduct, products } from '../../data/catalog.js';
 import { useLanguage } from '../../context/LanguageContext.jsx';
 import './ProductVideoSection.css';
 
-export default function ProductVideoSection() {
+export default function ProductVideoSection({ modelHandle = 'vela-sculpt-sans-manches' }) {
   const { lang } = useLanguage();
+  const rawModel = products.find((p) => p.handle === modelHandle) || products[0];
+  const localized = getLocalizedProduct(rawModel, lang);
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
@@ -27,16 +30,42 @@ export default function ProductVideoSection() {
     setIsMuted(!isMuted);
   };
 
+  const getCutBenefitFr = () => {
+    if (modelHandle === 'pack-decouverte') {
+      return '3 coupes complémentaires : 1 débardeur, 1 demi-manches et 1 manches longues inclus';
+    }
+    if (modelHandle === 'vela-sculpt-demi-manches') {
+      return 'Découpe demi-manches : col rond discret invisible sous chemises de bureau, polos & t-shirts';
+    }
+    if (modelHandle === 'vela-sculpt-manches-longues') {
+      return 'Découpe manches longues : maintien intégral torse, dos et bras sous vestes et pulls';
+    }
+    return 'Découpe sans manches : invisibilité 100% totale sous chemises & t-shirts légers';
+  };
+
+  const getCutBenefitEn = () => {
+    if (modelHandle === 'pack-decouverte') {
+      return '3 complementary fits: 1 tank top, 1 short-sleeve tee, and 1 long-sleeve tee included';
+    }
+    if (modelHandle === 'vela-sculpt-demi-manches') {
+      return 'Short sleeves cut: discreet crew neck invisible under office shirts, polos & tees';
+    }
+    if (modelHandle === 'vela-sculpt-manches-longues') {
+      return 'Long sleeves cut: full upper-body coverage and posture support under sweaters & jackets';
+    }
+    return 'Sleeveless cut: 100% invisible under lightweight shirts & casual tees';
+  };
+
   const benefitsFr = [
     'Gainage 3D immédiat de la sangle abdominale sans sensation d’étouffement',
-    'Découpe sans manches : invisibilité 100% totale sous chemises & t-shirts légers',
+    getCutBenefitFr(),
     'Panneaux dorsaux de maintien pour encourager une posture droite et naturelle',
     'Tissu technique thermo-régulant respirant, lavable et indéformable',
   ];
 
   const benefitsEn = [
     'Immediate 3D core & midsection contouring without restrictive squeezing',
-    'Sleeveless cut: 100% invisible under lightweight shirts & casual tees',
+    getCutBenefitEn(),
     'Postural back tension bands to gently promote upright confidence',
     'Technical breathable thermal weave, machine washable & shape-retaining',
   ];
@@ -49,17 +78,17 @@ export default function ProductVideoSection() {
         <div className="product-video-section__content">
           <span className="product-video-section__eyebrow">
             <span style={{ color: '#c4a265' }}>✦</span>{' '}
-            {lang === 'fr' ? 'Démonstration Produit en Conditions Réelles' : 'Real-World Product Demonstration'}
+            {lang === 'fr' ? 'Démonstration produit en conditions réelles' : 'Real-World Product Demonstration'}
           </span>
 
           <h2 className="product-video-section__title">
             {lang === 'fr' ? (
               <>
-                Vela Sculpt™ Sans Manches <em>en action.</em>
+                {localized.shortTitle || localized.title} <em>en action.</em>
               </>
             ) : (
               <>
-                Vela Sculpt™ Sleeveless <em>in motion.</em>
+                {localized.shortTitle || localized.title} <em>in motion.</em>
               </>
             )}
           </h2>
@@ -97,7 +126,7 @@ export default function ProductVideoSection() {
                 <path d="M12 2L3 7v5c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" />
                 <path d="M8.5 12.5l2.5 2.5 5-5" />
               </svg>
-              {lang === 'fr' ? 'Garantie Satisfait ou Remboursé 30j' : '30-Day Money-Back Guarantee'}
+              {lang === 'fr' ? 'Garantie satisfait ou remboursé 30j' : '30-Day Money-Back Guarantee'}
             </span>
           </div>
         </div>
@@ -110,7 +139,7 @@ export default function ProductVideoSection() {
         >
           <span className="product-video-section__live-pill">
             <span className="product-video-section__live-dot" />
-            {lang === 'fr' ? 'Vidéo Produit HD' : 'HD Product Video'}
+            {lang === 'fr' ? 'Vidéo produit HD' : 'HD Product Video'}
           </span>
 
           <video

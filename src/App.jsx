@@ -39,8 +39,18 @@ function ScrollToTop() {
       };
 
       if (!scrollToTarget()) {
-        const timer = setTimeout(scrollToTarget, 100);
-        return () => clearTimeout(timer);
+        let frameId;
+        const check = () => {
+          if (!scrollToTarget()) {
+            frameId = requestAnimationFrame(check);
+          }
+        };
+        frameId = requestAnimationFrame(check);
+        const timer = setTimeout(() => cancelAnimationFrame(frameId), 500);
+        return () => {
+          cancelAnimationFrame(frameId);
+          clearTimeout(timer);
+        };
       }
       return;
     }
@@ -84,6 +94,8 @@ export default function App() {
             {/* Home & Direct Sales Landing */}
             <Route path="/" element={<HomePage />} />
             <Route path="/landing" element={<LandingPage />} />
+            <Route path="/landing/pack-decouverte" element={<ProductPage handle="pack-decouverte" />} />
+            <Route path="/pages/pack-decouverte" element={<ProductPage handle="pack-decouverte" />} />
 
             {/* Catalog & Products */}
             <Route path="/collections/:handle" element={<CollectionPage />} />
@@ -92,6 +104,8 @@ export default function App() {
             {/* Content & Offer Pages */}
             <Route path="/pages/offres" element={<OffersPage />} />
             <Route path="/pages/notre-technologie" element={<TechnologyPage />} />
+            <Route path="/pages/why-vela-labs" element={<Navigate to="/pages/notre-technologie" replace />} />
+            <Route path="/why-vela-labs" element={<Navigate to="/pages/notre-technologie" replace />} />
             <Route path="/pages/garantie" element={<GuaranteePage />} />
             <Route path="/pages/guide-tailles" element={<SizeGuidePage />} />
             <Route path="/pages/suivi-commande" element={<TrackOrderPage />} />

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import QualitySection from '../components/sections/QualitySection.jsx';
 import Stars from '../components/ui/Stars.jsx';
 import HowItWorksModal from '../components/ui/HowItWorksModal.jsx';
 import { brand } from '../data/site.js';
@@ -13,8 +14,8 @@ const bestSellersBase = [
     id: 'sans-manches-noir',
     handle: 'vela-sculpt-sans-manches',
     defaultColor: 'Noir',
-    titleFr: 'Vela Sculpt™ Sans Manches — Noir',
-    titleEn: 'Vela Sculpt™ Sleeveless — Black',
+    titleFr: 'Vela Sculpt™ sans manches',
+    titleEn: 'Vela Sculpt™ Sleeveless',
     taglineFr: 'Invisibilité absolue sous chemises et t-shirts légers',
     taglineEn: 'Discreet and breathable core support under shirts & tees',
     badgeFr: '#1 Meilleure Vente',
@@ -51,11 +52,11 @@ const bestSellersBase = [
     id: 'demi-manches-blanc',
     handle: 'vela-sculpt-demi-manches',
     defaultColor: 'Blanc',
-    titleFr: 'Vela Sculpt™ Demi-Manches — Blanc',
-    titleEn: 'Vela Sculpt™ Short Sleeves — White',
+    titleFr: 'Vela Sculpt™ demi-manches',
+    titleEn: 'Vela Sculpt™ Short Sleeves',
     taglineFr: '100% invisible sous chemises blanches habillées',
     taglineEn: '100% invisible under crisp white dress shirts & polos',
-    badgeFr: 'Spécial Chemise Blanche',
+    badgeFr: 'Spécial chemise blanche',
     badgeEn: 'White Shirt Essential',
     rating: 4.9,
     reviewsCount: '1 280',
@@ -81,52 +82,14 @@ const bestSellersBase = [
     },
   },
   {
-    id: 'sans-manches-black-or',
-    handle: 'vela-sculpt-sans-manches',
-    defaultColor: 'Black Or',
-    titleFr: 'Vela Sculpt™ Sans Manches — Black Or',
-    titleEn: 'Vela Sculpt™ Sleeveless — Black Or',
-    taglineFr: 'Édition Black Or : maintien ciblé & finitions premium',
-    taglineEn: 'Black Or Edition: targeted core shaping & premium finish',
-    badgeFr: 'Édition Prestige',
-    badgeEn: 'Prestige Edition',
-    rating: 4.8,
-    reviewsCount: '890',
-    price: 34.95,
-    compareAt: 49.95,
-    urlBase: '/products/vela-sculpt-sans-manches',
-    colorData: {
-      'Black Or': {
-        hex: '#241f17',
-        img: '/images/products/sans-manches/7.jpeg',
-        hoverImg: '/images/products/sans-manches/8.jpeg',
-      },
-      Noir: {
-        hex: '#1a1a1a',
-        img: '/images/products/sans-manches/1.jpeg',
-        hoverImg: '/images/products/sans-manches/2.jpeg',
-      },
-      Blanc: {
-        hex: '#f4f4f6',
-        img: '/images/products/sans-manches/4.jpeg',
-        hoverImg: '/images/products/sans-manches/5.jpeg',
-      },
-      Gris: {
-        hex: '#72757d',
-        img: '/images/products/sans-manches/10.jpeg',
-        hoverImg: '/images/products/sans-manches/11.jpeg',
-      },
-    },
-  },
-  {
     id: 'manches-longues-gris-chine',
     handle: 'vela-sculpt-manches-longues',
     defaultColor: 'Gris chiné',
-    titleFr: 'Vela Sculpt™ Manches Longues — Gris Chiné',
-    titleEn: 'Vela Sculpt™ Long Sleeves — Heather Grey',
+    titleFr: 'Vela Sculpt™ manches longues',
+    titleEn: 'Vela Sculpt™ Long Sleeves',
     taglineFr: 'Gainage complet torse, dos et bras sous vestes et pulls',
     taglineEn: 'Full upper-body sculpting & reinforced back support',
-    badgeFr: 'Maintien Intégral',
+    badgeFr: 'Maintien intégral',
     badgeEn: 'Full Body Support',
     rating: 4.9,
     reviewsCount: '750',
@@ -151,6 +114,39 @@ const bestSellersBase = [
       },
     },
   },
+  {
+    id: 'pack-decouverte',
+    handle: 'pack-decouverte',
+    defaultColor: 'Noir',
+    titleFr: 'Pack Découverte — 3 Coupes',
+    titleEn: 'Discovery Pack — 3 Fits',
+    taglineFr: '1 Débardeur + 1 Demi-manches + 1 Manches longues inclus',
+    taglineEn: '1 Tank Top + 1 Short Sleeves + 1 Long Sleeves included',
+    badgeFr: 'Offre Découverte',
+    badgeEn: 'Discovery Offer',
+    rating: 4.9,
+    reviewsCount: '1 540',
+    price: 79.85,
+    compareAt: 149.85,
+    urlBase: '/pages/offres#product',
+    colorData: {
+      Noir: {
+        hex: '#1a1a1a',
+        img: '/images/products/image-decouverte.png',
+        hoverImg: '/images/products/decouverte-back.png',
+      },
+      Blanc: {
+        hex: '#f4f4f6',
+        img: '/images/products/image-decouverte.png',
+        hoverImg: '/images/products/decouverte-back.png',
+      },
+      Gris: {
+        hex: '#72757d',
+        img: '/images/products/image-decouverte.png',
+        hoverImg: '/images/products/decouverte-back.png',
+      },
+    },
+  },
 ];
 
 function BestSellerCard({ p, lang, t }) {
@@ -163,10 +159,9 @@ function BestSellerCard({ p, lang, t }) {
   const title = lang === 'fr' ? p.titleFr : p.titleEn;
   const badge = lang === 'fr' ? p.badgeFr : p.badgeEn;
   const tagline = lang === 'fr' ? p.taglineFr : p.taglineEn;
-  const activeColorName = t('color_names.' + activeColorKey, activeColorKey);
 
   const discount = p.compareAt ? Math.round((1 - p.price / p.compareAt) * 100) : 0;
-  const targetUrl = `${p.urlBase}?color=${encodeURIComponent(activeColorKey)}`;
+  const targetUrl = p.urlBase.includes('#') ? p.urlBase : `${p.urlBase}?color=${encodeURIComponent(activeColorKey)}`;
 
   return (
     <article className="ixh-card">
@@ -231,7 +226,6 @@ function BestSellerCard({ p, lang, t }) {
               );
             })}
           </div>
-          <span className="ixh-card__color-name">{activeColorName}</span>
         </div>
       </div>
     </article>
@@ -251,7 +245,7 @@ const lifestyleItems = [
   },
   {
     id: 'sport',
-    titleFr: 'À la Salle de Sport',
+    titleFr: 'À la salle de sport',
     titleEn: 'At the Gym & Training',
     taglineFr: 'Gainage abdominal dynamique, liberté de mouvement & maintien musculaire',
     taglineEn: 'Dynamic core support, unrestricted arm freedom & muscle alignment',
@@ -260,7 +254,7 @@ const lifestyleItems = [
   },
   {
     id: 'piscine',
-    titleFr: 'Détente & Loisirs',
+    titleFr: 'Détente & loisirs',
     titleEn: 'Casual & Everyday Leisure',
     taglineFr: 'Silhouette athlétique lissée & confiance en soi en toute circonstance',
     taglineEn: 'Streamlined athletic silhouette & renewed daily self-confidence',
@@ -281,7 +275,7 @@ export default function HomePage() {
   useEffect(() => {
     document.title =
       lang === 'fr'
-        ? `${brand.fullName} | Compression Wear & Maintien Postural Homme`
+        ? `${brand.fullName} | Compression Wear & Maintien postural homme`
         : `${brand.fullName} | Science-Backed Compression & Posture Wear`;
   }, [lang]);
 
@@ -325,27 +319,42 @@ export default function HomePage() {
           <source media="(max-width: 699px)" srcSet="/images/home/banner-2.png" />
           <img
             src="/images/home/banner-2.png"
-            alt="Vela Labs - Compression Wear"
+            alt="Vela Labs — Every Age Every Body"
             className="ixh-hero__img"
             loading="eager"
           />
         </picture>
-        <div className="ixh-hero__scrim" aria-hidden="true" />
         <div className="ixh-hero__inner">
           <div className="ixh-hero__content">
             <span className="ixh-hero__eyebrow">
-              <span style={{ color: '#c4a265' }}>★★★★★</span> {t('home.eyebrow')}
+              <span className="ixh-hero__stars">★★★★★</span> {t('home.eyebrow')}
             </span>
             <h1 className="ixh-hero__title">
-              {t('home.hero_title_1')}<br />
-              {t('home.hero_title_2')}
+              <span className="ixh-hero__title-line">
+                <span className="ixh-hero__word--white">EVERY</span>{' '}
+                <span className="ixh-hero__word--gold">AGE</span>
+              </span>
+              <span className="ixh-hero__title-line">
+                <span className="ixh-hero__word--white">EVERY</span>{' '}
+                <span className="ixh-hero__word--gold">BODY</span>
+              </span>
             </h1>
             <p className="ixh-hero__text">{t('home.hero_text')}</p>
             <div className="ixh-hero__btns">
-              <Link to="/collections/all" className="ixh-btn ixh-btn--dark">
+              <a
+                href="#bestsellers"
+                className="ixh-btn ixh-btn--gold"
+                onClick={(e) => {
+                  const el = document.getElementById('bestsellers');
+                  if (el) {
+                    e.preventDefault();
+                    el.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+              >
                 {t('home.cta_bestsellers')}
-              </Link>
-              <Link to="/collections/all" className="ixh-btn ixh-btn--line">
+              </a>
+              <Link to="/collections/all" className="ixh-btn ixh-btn--outline-gold">
                 {t('home.cta_all')}
               </Link>
             </div>
@@ -496,6 +505,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* 7. WHY VELA LABS? / TEXTILE & PERFORMANCE */}
+      <QualitySection />
 
       {/* 8. FAQ */}
       <section className="ixh-faq" id="faq">

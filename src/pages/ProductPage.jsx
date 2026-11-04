@@ -15,6 +15,7 @@ import QualitySection from '../components/sections/QualitySection.jsx';
 import Faq from '../components/sections/Faq.jsx';
 import CustomerReviews from '../components/sections/CustomerReviews.jsx';
 import NotFound from './NotFound.jsx';
+import PackDecouverteLanding from './PackDecouverteLanding.jsx';
 import { colorHex, collectionUrl, getProduct, getLocalizedProduct, getColorImages } from '../data/catalog.js';
 import { brand } from '../data/site.js';
 import { fabric, shipping } from '../data/product.js';
@@ -24,42 +25,49 @@ import { price } from '../lib/format.js';
 import './ProductPage.css';
 
 /**
- * Dedicated high-conversion sales landing for the Sleeveless cut (Vela Sculpt™ — Sans Manches)
+ * Dedicated high-conversion sales landing for all cuts (Sans Manches, Demi-Manches, Manches Longues)
  */
-function SleevelessProductPage() {
-  const { t, dict } = useLanguage();
+function DedicatedProductPage({ product }) {
+  const { lang, t, dict } = useLanguage();
   const trustItems = dict.home?.trust || [];
+  const handle = product?.handle || 'vela-sculpt-sans-manches';
+  const localized = getLocalizedProduct(product, lang);
+  const isSleeveless = handle === 'vela-sculpt-sans-manches';
 
   return (
-    <div className="product-page-wrap sleeveless-product">
-      {/* 1. HERO BANNER FOCUSED ON SLEEVELESS */}
-      <Hero initialHandle="vela-sculpt-sans-manches" showModelSelector={false} />
+    <div className={`product-page-wrap ${handle}-product`}>
+      {/* 1. HERO BANNER & CAMERA ROLLS: ONLY FOR SLEEVELESS (REMOVED FROM SHORT AND LONG AS REQUESTED) */}
+      {isSleeveless && (
+        <>
+          <Hero initialHandle={handle} showModelSelector={false} />
+          <CameraRolls />
+        </>
+      )}
 
-      {/* 2. CAMERA ROLLS / SOCIAL PROOF TICKER */}
-      <CameraRolls />
 
-      {/* 3. MAIN PRODUCT CONFIGURATOR & BUNDLE BUILDER */}
-      <ProductSection initialModelHandle="vela-sculpt-sans-manches" showModelSelector={false} />
 
-      {/* 4. REAL-WORLD PRODUCT VIDEO DEMO */}
-      <ProductVideoSection />
+      {/* 2. MAIN PRODUCT CONFIGURATOR & BUNDLE BUILDER (PACK 1, 2, 3 WITH MULTI-COLOR CHOICES) */}
+      <ProductSection initialModelHandle={handle} showModelSelector={false} />
 
-      {/* 5. OTHER ERGONOMIC FITS */}
-      <RelatedProducts exclude="vela-sculpt-sans-manches" />
+      {/* 3. REAL-WORLD PRODUCT VIDEO DEMO: ONLY FOR SLEEVELESS (REMOVED FROM SHORT & LONG) */}
+      {isSleeveless && <ProductVideoSection modelHandle={handle} />}
 
-      {/* 6. VIDEO TESTIMONIALS */}
+      {/* 4. OTHER ERGONOMIC FITS */}
+      <RelatedProducts exclude={handle} />
+
+      {/* 5. VIDEO TESTIMONIALS */}
       <VideoTestimonials />
 
-      {/* 7. QUALITY & TECHNOLOGY BREAKDOWN (4 TEXTILE CARDS) */}
-      <QualitySection />
+      {/* 6. QUALITY & TECHNOLOGY BREAKDOWN (4 TEXTILE CARDS): ONLY FOR SLEEVELESS (REMOVED FROM SHORT & LONG) */}
+      {isSleeveless && <QualitySection />}
 
-      {/* 8. FAQ */}
+      {/* 7. FAQ */}
       <Faq />
 
-      {/* 9. VERIFIED CUSTOMER REVIEWS */}
+      {/* 8. VERIFIED CUSTOMER REVIEWS */}
       <CustomerReviews />
 
-      {/* 10. TRUST BADGES STRIP */}
+      {/* 9. TRUST BADGES STRIP */}
       <section className="ionix-trust" aria-label={t('home.trust_title')}>
         <div className="ionix-trust__inner">
           <div className="ionix-trust__item">
@@ -105,7 +113,7 @@ function SleevelessProductPage() {
 }
 
 /**
- * Standard product page layout for other cuts (Demi-Manches, Manches Longues, etc.)
+ * Standard product page layout (kept for fallback)
  */
 function ClassicProductPage({ product }) {
   const { lang, t } = useLanguage();
@@ -140,14 +148,14 @@ function ClassicProductPage({ product }) {
         color: colorHex[color] || '#1a1a1a',
         price: product.price,
         compareAt: product.compareAt,
-        freeShipping: product.price * qty >= 55,
+        freeShipping: true,
       });
     }
   };
 
   const details = [
     {
-      title: lang === 'fr' ? 'Caractéristiques Techniques & Matière' : 'Technical Specifications & Fabric',
+      title: lang === 'fr' ? 'Caractéristiques techniques & matière' : 'Technical Specifications & Fabric',
       content: (
         <div className="details">
           <ul className="details__tech-list" style={{ paddingLeft: 18, lineHeight: 1.6, marginBottom: 16 }}>
@@ -169,7 +177,7 @@ function ClassicProductPage({ product }) {
       ),
     },
     {
-      title: lang === 'fr' ? 'Usage & Profil Morphologique Recommandé' : 'Usage & Target Profile',
+      title: lang === 'fr' ? 'Usage & profil morphologique recommandé' : 'Usage & Target Profile',
       content: (
         <div className="details">
           <p>
@@ -182,7 +190,7 @@ function ClassicProductPage({ product }) {
       ),
     },
     {
-      title: lang === 'fr' ? 'Expédition & Garantie Satisfait ou Remboursé de 30 Jours' : 'Shipping & 30-Day Money-Back Guarantee',
+      title: lang === 'fr' ? 'Expédition & garantie satisfait ou remboursé de 30 jours' : 'Shipping & 30-Day Money-Back Guarantee',
       content: (
         <div className="details">
           <ul className="details__list">
@@ -199,9 +207,6 @@ function ClassicProductPage({ product }) {
   return (
     <>
       <section className="pp container">
-        <nav className="pp__crumbs" aria-label={lang === 'fr' ? "Fil d'Ariane" : 'Breadcrumb'}>
-          <Link to="/">{t('product_page.crumbs_home')}</Link> / <Link to={collectionUrl('all')}>{t('product_page.crumbs_all')}</Link> / <span>{localized.title}</span>
-        </nav>
 
         <div className="pp__gallery-col">
           <Gallery images={currentImages} title={localized.title} activeColor={color} />
@@ -359,11 +364,10 @@ export default function ProductPage({ handle: fixedHandle }) {
 
   if (!rawProduct) return <NotFound />;
 
-  // Only the Sleeveless cut uses the rich landing product page
-  if (rawProduct.handle === 'vela-sculpt-sans-manches') {
-    return <SleevelessProductPage />;
+  if (handle === 'pack-decouverte') {
+    return <PackDecouverteLanding />;
   }
 
-  // All other cuts use the classic product page
-  return <ClassicProductPage product={rawProduct} />;
+  // All cuts use the dedicated layout: Sans manches retains Hero & CameraRolls; Short and Long start directly with ProductSection
+  return <DedicatedProductPage product={rawProduct} />;
 }

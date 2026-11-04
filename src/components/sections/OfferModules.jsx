@@ -59,7 +59,7 @@ export default function OfferModules({ onSelectOffer, activeOfferId }) {
             <Icon name="shield" size={24} />
             <div>
               <strong>
-                {lang === 'fr' ? 'Garantie Sérénité 30 Jours' : '30-Day Money-Back Guarantee'}
+                {lang === 'fr' ? 'Garantie sérénité 30 jours' : '30-Day Money-Back Guarantee'}
               </strong>
               <p>{current.guaranteeBadge}</p>
             </div>
@@ -71,7 +71,7 @@ export default function OfferModules({ onSelectOffer, activeOfferId }) {
         </blockquote>
 
         <div className="offer-active-card__cta-row">
-          <a href="#product" className="btn btn--dark">
+          <a href="#offres-cards" className="btn btn--dark">
             {lang === 'fr' ? 'Choisir mon pack avec cette offre' : 'Choose my pack with this offer'}{' '}
             <Icon name="arrow" size={16} />
           </a>

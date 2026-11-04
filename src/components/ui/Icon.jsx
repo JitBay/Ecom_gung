@@ -23,6 +23,8 @@ const paths = {
   arrow: <path d="M5 12h14m-6-6 6 6-6 6" />,
   check: <path d="m5 12.5 4.5 4.5L19 7.5" />,
   chevron: <path d="m6 9 6 6 6-6" />,
+  chevronLeft: <path d="m15 18-6-6 6-6" />,
+  chevronRight: <path d="m9 18 6-6-6-6" />,
   plus: <path d="M12 5v14M5 12h14" />,
   minus: <path d="M5 12h14" />,
   shield: (
@@ -82,6 +84,12 @@ const paths = {
     </>
   ),
   play: <path d="M8 5v14l11-7L8 5Z" fill="currentColor" />,
+  camera: (
+    <>
+      <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+      <circle cx="12" cy="13" r="4" />
+    </>
+  ),
   zoom: (
     <>
       <circle cx="11" cy="11" r="7" />
