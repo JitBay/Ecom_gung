@@ -59,8 +59,8 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
             lang === 'fr'
               ? '1 Débardeur + 1 Demi-manches + 1 Manches longues inclus'
               : '1 Tank Top + 1 Short Sleeves + 1 Long Sleeves included',
-          price: 79.85,
-          compareAt: 149.85,
+          price: 59.99,
+          compareAt: 104.97,
           badge: lang === 'fr' ? 'Offre Spéciale — 3 Coupes' : 'Special Offer — 3 Fits',
           freeShipping: true,
           highlight: true,
@@ -274,7 +274,10 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
       : (currentImages[0] || currentModel.images[0]);
 
     add({
-      id: `${currentModel.handle}-${bundle.id}-${detail}`,
+      id: bundle.isDiscoveryPack
+        ? `pack-decouverte-${detail}`
+        : `${currentModel.handle}-${bundle.id}-${detail}`,
+      handle: bundle.isDiscoveryPack ? 'pack-decouverte' : currentModel.handle,
       title: itemTitle,
       detail,
       image: itemImage,
@@ -316,7 +319,10 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
       : (currentImages[0] || currentModel.images[0]);
 
     return {
-      id: `${currentModel.handle}-${bundle.id}`,
+      id: bundle.isDiscoveryPack
+        ? `pack-decouverte-${bundle.id}`
+        : `${currentModel.handle}-${bundle.id}`,
+      handle: bundle.isDiscoveryPack ? 'pack-decouverte' : currentModel.handle,
       title: itemTitle,
       detail,
       image: itemImage,

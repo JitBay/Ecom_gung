@@ -153,7 +153,15 @@ export const SHOPIFY_VARIANTS_MAP = {
   "vela-sculpt-manches-longues:2XL:gris": "61545675522382",
   "vela-sculpt-manches-longues:2XL:gris-chine": "61545675522382",
   "vela-sculpt-manches-longues:2XL:white": "61545675555150",
-  "vela-sculpt-manches-longues:2XL:blanc": "61545675555150"
+  "vela-sculpt-manches-longues:2XL:blanc": "61545675555150",
+
+  // Vela Sculpt™ — Pack Découverte (3 Coupes) (Product ID: 16228308484430)
+  "pack-decouverte:S": "61546779443534",
+  "pack-decouverte:M": "61546779476302",
+  "pack-decouverte:L": "61546779509070",
+  "pack-decouverte:XL": "61546779541838",
+  "pack-decouverte:2XL": "61546779574606",
+  "pack-decouverte": "61546779476302"
 };
 
 /**
@@ -183,8 +191,18 @@ function normalizeSize(sizeStr = '') {
 /**
  * Normalizes model handle for lookup.
  */
-function normalizeModel(str = '') {
-  const s = String(str).toLowerCase();
+function normalizeModel(str = '', context = '') {
+  const s = `${str} ${context}`.toLowerCase();
+  if (
+    s.includes('pack-decouverte') ||
+    s.includes('pack decouverte') ||
+    s.includes('pack découverte') ||
+    s.includes('discovery') ||
+    s.includes('decouverte') ||
+    s.includes('découverte')
+  ) {
+    return 'pack-decouverte';
+  }
   if (s.includes('manches-longues') || s.includes('manches longues') || s.includes('long sleeves')) {
     return 'vela-sculpt-manches-longues';
   }
@@ -206,9 +224,18 @@ export function resolveShopifyVariantId(line = {}) {
   }
 
   const textToScan = `${line.id || ''} ${line.detail || ''} ${line.title || ''}`;
-  const model = normalizeModel(line.id || line.handle || line.title);
+  const model = normalizeModel(line.handle || line.id || line.title, textToScan);
   const size = normalizeSize(textToScan);
   const color = normalizeColor(line.color || textToScan);
+
+  // Pack Découverte resolution
+  if (model === 'pack-decouverte') {
+    const packSizeKey = `pack-decouverte:${size}`;
+    if (SHOPIFY_VARIANTS_MAP[packSizeKey]) {
+      return SHOPIFY_VARIANTS_MAP[packSizeKey];
+    }
+    return SHOPIFY_VARIANTS_MAP['pack-decouverte'] || '61546779476302';
+  }
 
   // Exact match model:size:color
   const exactKey = `${model}:${size}:${color}`;
