@@ -15,8 +15,8 @@ export const featuredReviews = [
   },
   {
     name: 'Jason M.',
-    meta: '36 ans · Taille L · Vérifié',
-    metaEn: '36 yrs · Size L · Verified',
+    meta: '46 ans · Taille L · Vérifié',
+    metaEn: '46 yrs · Size L · Verified',
     text: 'Le avant/après parle de lui-même : ce haut lisse tout instantanément et les bandes bleues m’aident réellement à me tenir plus droit.',
     textEn: 'The before and after really says it all: this compression top instantly smooths everything out and the blue bands actually help me stand straighter.',
     bold: 'lisse tout instantanément',
@@ -26,8 +26,8 @@ export const featuredReviews = [
   },
   {
     name: 'Chen Z.',
-    meta: '54 ans · Taille S · Vérifié',
-    metaEn: '54 yrs · Size S · Verified',
+    meta: '41 ans · Taille S · Vérifié',
+    metaEn: '41 yrs · Size S · Verified',
     text: 'La différence de profil est impressionnante : ce débardeur aplatit totalement mon ventre et tire naturellement mes épaules vers l’arrière.',
     textEn: 'The side profile difference is huge: this tank top completely flattens my stomach and naturally pulls my shoulders back.',
     bold: 'aplatit totalement mon ventre',
@@ -542,13 +542,13 @@ export const videoTestimonials = [
     id: 'ugc-8',
     reviewId: 'rev-8',
     name: 'Chen Z.',
-    age: 54,
+    age: 41,
     rating: 5,
     video: '/reviews/23.mp4',
     poster: '/reviews/8-poster.jpg',
     tag: {
-      fr: 'Quotidien & posture · 54 ans',
-      en: 'Everyday & posture · 54 yrs',
+      fr: 'Quotidien & posture · 41 ans',
+      en: 'Everyday & posture · 41 yrs',
     },
     title: {
       fr: 'Parfait pour une utilisation quotidienne',
