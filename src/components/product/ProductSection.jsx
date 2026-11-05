@@ -121,7 +121,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
         qty: 3,
         title: lang === 'fr' ? 'Pack Semaine — 3 T-Shirts' : 'Week Pack — 3 Shirts',
         subtitle: lang === 'fr' ? 'La tranquillité toute la semaine : 1 t-shirt propre toujours prêt.' : 'Full peace of mind: a clean shirt always ready.',
-        badge: lang === 'fr' ? `Meilleure Valeur — Économisez ${Math.round(c3 - p3)} €` : `Best Value — Save €${Math.round(c3 - p3)}`,
+        badge: lang === 'fr' ? `Meilleure Valeur — Économisez ${Math.round(c3 - p3)} $` : `Best Value — Save $${Math.round(c3 - p3)}`,
         price: p3,
         compareAt: c3,
         freeShipping: true,

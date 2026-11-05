@@ -137,7 +137,7 @@ export default function PackDecouverteLanding() {
                   <Icon name="check" size={14} strokeWidth={3} />
                 </span>
                 <span>
-                  <strong>{lang === 'fr' ? 'économisez 30 € (-33%) :' : 'save €30 (-33%):'}</strong>{' '}
+                  <strong>{lang === 'fr' ? 'économisez 30 $ (-33%) :' : 'save $30 (-33%):'}</strong>{' '}
                   {lang === 'fr'
                     ? 'tarif préférentiel exclusif sur le pack + Livraison suivie 100% offerte (6 à 12 jours ouvrés).'
                     : 'exclusive bundled rate + 100% Free tracked shipping included (6 to 12 working days).'}
@@ -147,7 +147,7 @@ export default function PackDecouverteLanding() {
 
             <div className="pdl-hero__cta-group">
               <a href="#product" className="btn btn--dark pdl-hero__cta">
-                {lang === 'fr' ? 'Configurer mon Pack Découverte (59,99 €)' : 'Customize My Discovery Pack (€59.99)'}{' '}
+                {lang === 'fr' ? 'Configurer mon Pack Découverte (59,99 $)' : 'Customize My Discovery Pack ($59.99)'}{' '}
                 <Icon name="arrow" size={16} />
               </a>
             </div>
@@ -190,8 +190,8 @@ export default function PackDecouverteLanding() {
                   </div>
                 </div>
                 <div className="pdl-hero__card-price">
-                  <strong>59,99 €</strong>
-                  <s>89,97 €</s>
+                  <strong>59,99 $</strong>
+                  <s>89,97 $</s>
                 </div>
               </div>
             </div>
@@ -246,19 +246,19 @@ export default function PackDecouverteLanding() {
             <div className="pdl-value-strip__content">
               <h3>
                 {lang === 'fr'
-                  ? 'Valeur totale si acheté séparément : 89,97 € (89,97 € prix régulier)'
-                  : 'Total value if bought separately: €89.97 (€89.97 regular)'}
+                  ? 'Valeur totale si acheté séparément : 89,97 $ (89,97 $ prix régulier)'
+                  : 'Total value if bought separately: $89.97 ($89.97 regular)'}
               </h3>
               <p>
                 {lang === 'fr'
-                  ? 'En commandant le Pack Découverte, vous bénéficiez du tarif privilégié de 59,99 € (économisez 30 €) avec la livraison suivie offerte (6 à 12 jours ouvrés avec suivi complet).'
-                  : 'By ordering the Discovery Pack, you get the special bundled price of €59.99 (save €30) plus free tracked shipping (6 to 12 working days with full tracking).'}
+                  ? 'En commandant le Pack Découverte, vous bénéficiez du tarif privilégié de 59,99 $ (économisez 30 $) avec la livraison suivie offerte (6 à 12 jours ouvrés avec suivi complet).'
+                  : 'By ordering the Discovery Pack, you get the special bundled price of $59.99 (save $30) plus free tracked shipping (6 to 12 working days with full tracking).'}
               </p>
             </div>
             <div className="pdl-value-strip__action">
               <div className="pdl-value-strip__price">
-                <strong>59,99 €</strong>
-                <s>89,97 €</s>
+                <strong>59,99 $</strong>
+                <s>89,97 $</s>
               </div>
               <a href="#product" className="btn btn--gold">
                 {lang === 'fr' ? 'Personnaliser mon pack' : 'Customize My Pack'}

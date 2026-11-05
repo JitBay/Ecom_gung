@@ -3,7 +3,7 @@ export const translations = {
   fr: {
     lang_name: 'Français',
     lang_short: 'FR',
-    currency_label: 'France · EUR €',
+    currency_label: 'États-Unis · USD $',
 
     announcements: [
       'Garantie satisfait ou remboursé de 30 jours',
@@ -268,7 +268,7 @@ export const translations = {
   en: {
     lang_name: 'English',
     lang_short: 'EN',
-    currency_label: 'Europe · EUR €',
+    currency_label: 'United States · USD $',
 
     announcements: [
       '30-Day Money-Back Guarantee',
