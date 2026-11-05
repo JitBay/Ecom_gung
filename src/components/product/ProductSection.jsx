@@ -74,22 +74,22 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
     if (currentModel.handle === 'vela-sculpt-sans-manches') {
       p2 = 39.98;
       c2 = 89.97;
-      p3 = 49.99;
+      p3 = 59.97;
       c3 = 89.97;
     } else if (currentModel.handle === 'vela-sculpt-demi-manches') {
       p2 = 59.98;
       c2 = 134.97;
-      p3 = 69.99;
+      p3 = 89.97;
       c3 = 134.97;
     } else if (currentModel.handle === 'vela-sculpt-manches-longues') {
       p2 = 79.98;
       c2 = 179.97;
-      p3 = 89.99;
+      p3 = 119.97;
       c3 = 179.97;
     } else {
-      p2 = Math.round(p1 * 2 * 0.86 * 100) / 100;
+      p2 = Math.round(p1 * 2 * 100) / 100;
       c2 = Math.round(c1 * 3 * 100) / 100;
-      p3 = Math.round(p1 * 3 * 0.76 * 100) / 100;
+      p3 = Math.round(p1 * 3 * 100) / 100;
       c3 = Math.round(c1 * 3 * 100) / 100;
     }
 
@@ -285,6 +285,15 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
       price: bundle.price,
       compareAt: bundle.compareAt,
       freeShipping: Boolean(bundle.freeShipping),
+      bundleId: bundle.id,
+      isTwoPlusOne: Boolean(bundle.isTwoPlusOne),
+      isDiscoveryPack: Boolean(bundle.isDiscoveryPack),
+      paidQty: bundle.isDiscoveryPack ? 1 : (bundle.isTwoPlusOne ? 2 : (bundle.id === 3 ? 3 : 1)),
+      chosenVariants: chosen.map((v) => ({
+        handle: currentModel.handle,
+        color: v.color,
+        size: v.size,
+      })),
     });
   };
 
@@ -330,6 +339,15 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
       compareAt: bundle.compareAt,
       qty: 1,
       freeShipping: Boolean(bundle.freeShipping),
+      bundleId: bundle.id,
+      isTwoPlusOne: Boolean(bundle.isTwoPlusOne),
+      isDiscoveryPack: Boolean(bundle.isDiscoveryPack),
+      paidQty: bundle.isDiscoveryPack ? 1 : (bundle.isTwoPlusOne ? 2 : (bundle.id === 3 ? 3 : 1)),
+      chosenVariants: chosen.map((v) => ({
+        handle: currentModel.handle,
+        color: v.color,
+        size: v.size,
+      })),
     };
   }, [chosen, currentModel.handle, bundle, localizedModel.title, currentImages, availableColors, t, lang]);
 

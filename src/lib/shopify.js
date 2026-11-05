@@ -280,12 +280,73 @@ export function buildShopifyCartPermalink(lines, options = {}) {
     cleanDomain = 'checkout.zvar-shop.com';
   }
 
-  // Format variant segments with resolved numeric IDs
-  const segments = lines.map((line) => {
-    const variantId = resolveShopifyVariantId(line);
-    const qty = Math.max(1, parseInt(line.qty, 10) || 1);
-    return `${encodeURIComponent(variantId)}:${qty}`;
+  // Variant ID -> quantity map to consolidate duplicate variants
+  const variantQuantities = new Map();
+
+  lines.forEach((line) => {
+    const lineQty = Math.max(1, parseInt(line.qty, 10) || 1);
+
+    // 1. Pack Découverte (Single dedicated Shopify product at 59.99 €)
+    if (line.handle === 'pack-decouverte' || line.isDiscoveryPack) {
+      const vId = resolveShopifyVariantId(line);
+      variantQuantities.set(vId, (variantQuantities.get(vId) || 0) + lineQty);
+      return;
+    }
+
+    // 2. Check if this is a 2+1 Offer bundle (2 paid shirts, 3rd free)
+    const isTwoPlusOne =
+      line.isTwoPlusOne ||
+      line.bundleId === 2 ||
+      (line.title &&
+        (line.title.includes('2+1') ||
+          line.title.includes('2 T-Shirts + 1 Offert') ||
+          line.title.includes('2 Shirts + 1 Free')));
+
+    // 3. Check if this is a 3-shirt pack (3 paid shirts)
+    const isPackThree =
+      line.bundleId === 3 ||
+      line.paidQty === 3 ||
+      (line.title &&
+        (line.title.includes('Pack Semaine') ||
+          line.title.includes('Week Pack')));
+
+    if (isTwoPlusOne) {
+      // 2 paid shirts matching the exact bundle price (39.98 € / 59.98 € / 79.98 €)
+      if (Array.isArray(line.chosenVariants) && line.chosenVariants.length >= 2) {
+        const v1 = resolveShopifyVariantId({ handle: line.handle, ...line.chosenVariants[0] });
+        const v2 = resolveShopifyVariantId({ handle: line.handle, ...line.chosenVariants[1] });
+        variantQuantities.set(v1, (variantQuantities.get(v1) || 0) + 1 * lineQty);
+        variantQuantities.set(v2, (variantQuantities.get(v2) || 0) + 1 * lineQty);
+      } else {
+        const vId = resolveShopifyVariantId(line);
+        variantQuantities.set(vId, (variantQuantities.get(vId) || 0) + 2 * lineQty);
+      }
+      return;
+    }
+
+    if (isPackThree) {
+      // 3 paid shirts matching the exact pack price (59.97 € / 89.97 € / 119.97 €)
+      if (Array.isArray(line.chosenVariants) && line.chosenVariants.length >= 3) {
+        for (let i = 0; i < 3; i++) {
+          const vId = resolveShopifyVariantId({ handle: line.handle, ...line.chosenVariants[i] });
+          variantQuantities.set(vId, (variantQuantities.get(vId) || 0) + 1 * lineQty);
+        }
+      } else {
+        const vId = resolveShopifyVariantId(line);
+        variantQuantities.set(vId, (variantQuantities.get(vId) || 0) + 3 * lineQty);
+      }
+      return;
+    }
+
+    // 4. Standard single item (Pack 1 t-shirt)
+    const vId = resolveShopifyVariantId(line);
+    const paidQty = (line.paidQty || 1) * lineQty;
+    variantQuantities.set(vId, (variantQuantities.get(vId) || 0) + paidQty);
   });
+
+  const segments = Array.from(variantQuantities.entries()).map(
+    ([vId, qty]) => `${encodeURIComponent(vId)}:${qty}`
+  );
 
   const cartPath = `/cart/${segments.join(',')}`;
   const searchParams = new URLSearchParams();
