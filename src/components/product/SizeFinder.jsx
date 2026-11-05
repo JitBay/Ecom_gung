@@ -131,32 +131,34 @@ export default function SizeFinder({ open, onClose, onApply }) {
           </p>
         )}
 
-        <table className="size-table">
-          <thead>
-            <tr>
-              <th>{lang === 'fr' ? 'Taille' : 'Size'}</th>
-              <th>{lang === 'fr' ? 'Poids' : 'Weight'}</th>
-              <th>{lang === 'fr' ? 'Taille' : 'Height'}</th>
-              <th>{lang === 'fr' ? 'Poitrine' : 'Chest'}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sizeChart.map((r) => (
-              <tr key={r.size} className={result?.sizes.includes(r.size) ? 'is-match' : ''}>
-                <td>
-                  <strong>{r.size}</strong>
-                </td>
-                <td>
-                  {r.kg[0]}–{r.kg[1]} kg
-                </td>
-                <td>
-                  {r.cm[0]}–{r.cm[1]} cm
-                </td>
-                <td>{r.chest}</td>
+        <div className="size-table-wrap">
+          <table className="size-table">
+            <thead>
+              <tr>
+                <th>{lang === 'fr' ? 'Taille' : 'Size'}</th>
+                <th>{lang === 'fr' ? 'Poids' : 'Weight'}</th>
+                <th>{lang === 'fr' ? 'Taille' : 'Height'}</th>
+                <th>{lang === 'fr' ? 'Poitrine' : 'Chest'}</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {sizeChart.map((r) => (
+                <tr key={r.size} className={result?.sizes.includes(r.size) ? 'is-match' : ''}>
+                  <td>
+                    <strong>{r.size}</strong>
+                  </td>
+                  <td>
+                    {r.kg[0]}–{r.kg[1]} kg
+                  </td>
+                  <td>
+                    {r.cm[0]}–{r.cm[1]} cm
+                  </td>
+                  <td>{r.chest}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

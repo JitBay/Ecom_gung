@@ -4,12 +4,13 @@
   justify-content: center;
   gap: 10px;
   width: 100%;
-  padding: 15px 24px;
+  min-height: 54px;
+  padding: 14px 24px;
   background-color: #2b6cb0; /* Distinct express checkout color */
   background: linear-gradient(180deg, #1f6feb 0%, #1158c7 100%);
   color: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 6px;
+  border-radius: 40px;
   font-family: inherit;
   font-size: 15px;
   font-weight: 700;

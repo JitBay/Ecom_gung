@@ -412,9 +412,11 @@
 
 @media (max-width: 749px) {
   .header__inner {
-    min-height: 60px;
+    height: auto;
+    min-height: 56px;
+    max-height: none;
   }
   .logo strong {
-    font-size: 21px;
+    font-size: 20px;
   }
 }

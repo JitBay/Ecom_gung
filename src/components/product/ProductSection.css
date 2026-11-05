@@ -489,4 +489,11 @@
     flex-direction: column;
     gap: 6px;
   }
+  .product__badges {
+    gap: 6px;
+  }
+  .product__badges li {
+    padding: 12px 4px;
+    font-size: 11px;
+  }
 }

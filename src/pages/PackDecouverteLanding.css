@@ -452,3 +452,28 @@
   }
 }
 
+@media (max-width: 600px) {
+  .pdl-value-strip {
+    padding: 24px 0;
+    border-radius: 14px;
+    margin: 20px 0;
+  }
+  .pdl-value-strip__inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    text-align: center;
+  }
+  .pdl-value-strip__action {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .pdl-value-strip__price {
+    text-align: center;
+  }
+  .pdl-value-strip__action .btn {
+    width: 100%;
+  }
+}
+

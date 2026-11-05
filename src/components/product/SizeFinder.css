@@ -111,8 +111,16 @@
   font-size: 14px;
 }
 
+.size-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 10px;
+}
+
 .size-table {
   width: 100%;
+  min-width: 290px;
   border-collapse: collapse;
   font-size: 13px;
 }
