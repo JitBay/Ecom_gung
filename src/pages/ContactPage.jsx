@@ -11,15 +11,15 @@ export default function ContactPage() {
   useEffect(() => {
     document.title =
       lang === 'fr'
-        ? 'Contactez-nous | Vela Labs Support'
-        : 'Contact Us | Vela Labs Support';
+        ? 'Contactez-nous | ZVAR Support'
+        : 'Contact Us | ZVAR Support';
   }, [lang]);
 
   return (
     <div className="legal-page container">
 
       <article className="legal-content">
-        <h1>{lang === 'fr' ? "Contactez l'Équipe Vela Labs" : 'Contact the Vela Labs Team'}</h1>
+        <h1>{lang === 'fr' ? "Contactez l'Équipe ZVAR" : 'Contact the ZVAR Team'}</h1>
         <p className="legal-meta">
           {lang === 'fr' ? 'Nous sommes à votre écoute 7 jours sur 7.' : 'Here to help 7 days a week.'}
         </p>

@@ -10,8 +10,8 @@ export default function GuaranteePage() {
   useEffect(() => {
     document.title =
       lang === 'fr'
-        ? 'Garantie satisfait ou remboursé de 30 jours | Vela Labs'
-        : '30-Day Money-Back Guarantee | Vela Labs';
+        ? 'Garantie satisfait ou remboursé de 30 jours | ZVAR'
+        : '30-Day Money-Back Guarantee | ZVAR';
   }, [lang]);
 
   return (
@@ -32,7 +32,7 @@ export default function GuaranteePage() {
         {lang === 'fr' ? (
           <>
             <p>
-              Chez <strong>Vela Labs</strong> (exploité par l'entité légale <strong>Vella</strong>), nous sommes convaincus de l’efficacité et du confort supérieur de nos t-shirts de compression ergonomiques <strong>Vela Sculpt™</strong>.
+              Chez <strong>ZVAR</strong>, nous sommes convaincus de l’efficacité et du confort supérieur de nos t-shirts de compression ergonomiques <strong>Vela Sculpt™</strong>.
             </p>
             <p>
               C’est pourquoi chaque commande passée sur notre boutique est couverte par notre <strong>Garantie satisfait ou remboursé de 30 jours</strong>.
@@ -49,7 +49,7 @@ export default function GuaranteePage() {
                 <strong>Pas de question piège :</strong> Si la coupe ne vous convient pas, si la taille n’est pas optimale ou si vous n’êtes pas 100% satisfait du rendu sous vos vêtements, vous pouvez demander un échange de taille gratuit ou un remboursement intégral.
               </li>
               <li>
-                <strong>Procédure de retour simple et rapide :</strong> Envoyez simplement un email à <code>support@velalabs.co</code> en mentionnant votre numéro de commande. Notre équipe vous transmettra l'adresse de retour et les instructions sous 24h.
+                <strong>Procédure de retour simple et rapide :</strong> Envoyez simplement un email à <code>support@zvar-shop.com</code> en mentionnant votre numéro de commande. Notre équipe vous transmettra l'adresse de retour et les instructions sous 24h.
               </li>
               <li>
                 <strong>Remboursement rapide :</strong> Dès réception et vérification de votre retour par notre centre logistique, votre remboursement est immédiatement émis sur votre mode de paiement initial (carte bancaire, Apple Pay ou PayPal).
@@ -66,7 +66,7 @@ export default function GuaranteePage() {
         ) : (
           <>
             <p>
-              At <strong>Vela Labs</strong> (operated by legal entity <strong>Vella</strong>), we stand firmly behind the performance, fit, and all-day comfort of our <strong>Vela Sculpt™</strong> ergonomic compression wear.
+              At <strong>ZVAR</strong>, we stand firmly behind the performance, fit, and all-day comfort of our <strong>Vela Sculpt™</strong> ergonomic compression wear.
             </p>
             <p>
               That’s why every order placed on our store is backed by our comprehensive <strong>30-Day Money-Back Guarantee</strong>.
@@ -83,7 +83,7 @@ export default function GuaranteePage() {
                 <strong>No catches, no friction:</strong> If the fit isn't right, the size isn't ideal, or you aren't completely thrilled with the results under your clothes, request a free size exchange or a full refund.
               </li>
               <li>
-                <strong>Simple return process:</strong> Just email <code>support@velalabs.co</code> with your order number. Our support team replies within 24 hours with return instructions.
+                <strong>Simple return process:</strong> Just email <code>support@zvar-shop.com</code> with your order number. Our support team replies within 24 hours with return instructions.
               </li>
               <li>
                 <strong>Prompt refunds:</strong> Once received and verified at our fulfillment center, your refund is credited straight to your original payment method (card, Apple Pay, PayPal).
@@ -100,8 +100,24 @@ export default function GuaranteePage() {
         )}
 
         <div style={{ marginTop: 32, textAlign: 'center' }}>
-          <Link to="/#product" className="btn btn--dark" style={{ display: 'inline-flex' }}>
-            {lang === 'fr' ? 'Découvrir nos modèles garantis 30 jours' : 'Explore 30-Day Guaranteed Styles'}{' '}
+          <Link
+            to="/#product"
+            className="btn btn--dark"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: '#111112',
+              color: '#ffffff',
+              padding: '14px 28px',
+              borderRadius: '999px',
+              fontWeight: 600,
+              textDecoration: 'none',
+            }}
+          >
+            <span style={{ color: '#ffffff' }}>
+              {lang === 'fr' ? 'Découvrir nos modèles garantis 30 jours' : 'Explore 30-Day Guaranteed Styles'}
+            </span>{' '}
             <Icon name="arrow" size={16} />
           </Link>
         </div>

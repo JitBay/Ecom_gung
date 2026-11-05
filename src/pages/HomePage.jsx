@@ -60,7 +60,7 @@ const bestSellersBase = [
     badgeFr: 'Spécial chemise blanche',
     badgeEn: 'White Shirt Essential',
     rating: 4.9,
-    reviewsCount: '1 280',
+    reviewsCount: '67',
     price: 29.99,
     compareAt: 49.99,
     urlBase: '/products/vela-sculpt-demi-manches',
@@ -94,7 +94,7 @@ const bestSellersBase = [
     badgeFr: 'Maintien intégral',
     badgeEn: 'Full Body Support',
     rating: 4.9,
-    reviewsCount: '750',
+    reviewsCount: '67',
     price: 39.99,
     compareAt: 59.99,
     urlBase: '/products/vela-sculpt-manches-longues',
@@ -128,7 +128,7 @@ const bestSellersBase = [
     badgeFr: 'Offre Découverte',
     badgeEn: 'Discovery Offer',
     rating: 4.9,
-    reviewsCount: '1 540',
+    reviewsCount: '70',
     price: 59.99,
     compareAt: 89.97,
     urlBase: '/pages/offres#product',
@@ -258,31 +258,31 @@ function BestSellerCard({ p, lang, t }) {
 // Lifestyle real-world essentials
 const lifestyleItems = [
   {
-    id: 'travail',
-    titleFr: 'Au Bureau & Sous Chemise',
-    titleEn: 'Office & Under Dress Shirts',
-    taglineFr: 'Discrétion 100% invisible sous vos vêtements de travail & maintien assis',
-    taglineEn: '100% invisible under office shirts with ergonomic seated posture',
-    img: '/images/home/lifestyle-travail.png',
-    to: '/products/vela-sculpt-sans-manches?color=Blanc',
-  },
-  {
-    id: 'sport',
-    titleFr: 'À la salle de sport',
-    titleEn: 'At the Gym & Training',
-    taglineFr: 'Gainage abdominal dynamique, liberté de mouvement & maintien musculaire',
-    taglineEn: 'Dynamic core support, unrestricted arm freedom & muscle alignment',
+    id: 'sans-manches',
+    titleFr: 'Sans Manches (Débardeur)',
+    titleEn: 'Sleeveless (Tank Top)',
+    taglineFr: 'Discrétion 100% invisible sous chemises & liberté totale',
+    taglineEn: '100% invisible under shirts with maximum arm freedom',
     img: '/images/home/lifestyle-sport.png',
-    to: '/products/vela-sculpt-sans-manches?color=Noir',
+    to: '/products/vela-sculpt-sans-manches',
   },
   {
-    id: 'piscine',
-    titleFr: 'Détente & loisirs',
-    titleEn: 'Casual & Everyday Leisure',
-    taglineFr: 'Silhouette athlétique lissée & confiance en soi en toute circonstance',
-    taglineEn: 'Streamlined athletic silhouette & renewed daily self-confidence',
+    id: 'demi-manches',
+    titleFr: 'Demi-Manches (Manches Courtes)',
+    titleEn: 'Short Sleeves',
+    taglineFr: 'Le basique quotidien sous polos et chemises de bureau',
+    taglineEn: 'Everyday posture and smoothing under polos and office wear',
+    img: '/images/home/lifestyle-travail.png',
+    to: '/products/vela-sculpt-demi-manches',
+  },
+  {
+    id: 'manches-longues',
+    titleFr: 'Manches Longues',
+    titleEn: 'Long Sleeves',
+    taglineFr: 'Gainage intégral haut du corps & maintien postural renforcé',
+    taglineEn: 'Full upper-body compression & reinforced postural support',
     img: '/images/home/lifestyle-piscine.png',
-    to: '/products/vela-sculpt-sans-manches?color=Black+Or',
+    to: '/products/vela-sculpt-manches-longues',
   },
 ];
 
@@ -342,7 +342,7 @@ export default function HomePage() {
           <source media="(max-width: 699px)" srcSet="/images/home/banner-2.png" />
           <img
             src="/images/home/banner-2.png"
-            alt="Vela Labs — Every Age Every Body"
+            alt="ZVAR — Every Age Every Body"
             className="ixh-hero__img"
             loading="eager"
           />

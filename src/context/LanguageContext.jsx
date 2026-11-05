@@ -6,7 +6,7 @@ const LanguageContext = createContext(null);
 export function LanguageProvider({ children }) {
   const [lang, setLangState] = useState(() => {
     try {
-      const saved = localStorage.getItem('velalabs_lang');
+      const saved = localStorage.getItem('zvar_lang') || localStorage.getItem('velalabs_lang');
       if (saved === 'fr' || saved === 'en') return saved;
       // If user's browser language is English, default to English, else French
       if (typeof navigator !== 'undefined' && navigator.language?.toLowerCase().startsWith('en')) {
@@ -22,7 +22,7 @@ export function LanguageProvider({ children }) {
     if (newLang !== 'fr' && newLang !== 'en') return;
     setLangState(newLang);
     try {
-      localStorage.setItem('velalabs_lang', newLang);
+      localStorage.setItem('zvar_lang', newLang);
       document.documentElement.lang = newLang;
     } catch {
       // ignore

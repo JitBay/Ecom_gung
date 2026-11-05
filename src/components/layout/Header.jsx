@@ -10,9 +10,12 @@ import './Header.css';
 
 export function Logo() {
   return (
-    <Link to="/" className="logo" aria-label={`${brand.name} ${brand.suffix} accueil`}>
-      <strong>{brand.name}</strong>
-      <span>{brand.suffix}</span>
+    <Link to="/" className="logo" aria-label="ZVAR accueil">
+      <img
+        src="/images/logo.png?v=2"
+        alt="ZVAR"
+        className="logo__img"
+      />
     </Link>
   );
 }

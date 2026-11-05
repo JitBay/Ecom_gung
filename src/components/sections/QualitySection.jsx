@@ -115,7 +115,7 @@ export default function QualitySection() {
       <div className="container quality__inner">
         <div className="quality__media">
           <div className="quality__header">
-            <span className="eyebrow">{lang === 'fr' ? 'Pourquoi Vela Labs ?' : 'Why Vela Labs?'}</span>
+            <span className="eyebrow">{lang === 'fr' ? 'Pourquoi ZVAR ?' : 'Why ZVAR?'}</span>
             <h2 className="title">
               Every detail, <em>engineered.</em>
             </h2>

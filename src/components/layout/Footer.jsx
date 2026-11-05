@@ -60,7 +60,7 @@ export default function Footer() {
 
   const columns = [
     {
-      title: 'Vela Labs',
+      title: 'ZVAR',
       links: [
         { label: t('nav.home'), to: '/' },
         { label: t('nav.models_all'), to: '/collections/all' },
@@ -116,7 +116,7 @@ export default function Footer() {
             </div>
           ))}
           <p className="footer__legal">
-            © 2026 <strong>{brand.name} Labs</strong> (Legal entity: {brand.legalName}). {t('footer.rights')}{' '}
+            © 2026 <strong>ZVAR</strong>. {t('footer.rights')}{' '}
             {lang === 'fr'
               ? 'Vêtements ergonomiques de compression masculine conçus pour allier confort quotidien et maintien optimal.'
               : 'Ergonomic compression wear engineered for daily posture support and confident masculine silhouettes.'}
@@ -141,7 +141,7 @@ export default function Footer() {
         <div className="container footer__bottom">
           <div>
             <p>
-              © 2026, {brand.name} Labs — {brand.legalName}.
+              © 2026, ZVAR.
             </p>
             <ul>
               {policyLinks.map((p) => (

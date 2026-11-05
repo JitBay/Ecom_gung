@@ -1,14 +1,18 @@
-// Brand identity, legal entity, navigation and footer links for Vela Labs (legal entity: Vella)
+// Brand identity, legal entity, navigation and footer links for ZVAR (Shop/Company: ZVAR, Products line: Vela / Vela Sculpt™)
 import { collectionUrl, collections } from './catalog.js';
 
 export const brand = {
-  name: 'Vela',
-  suffix: 'Labs',
-  fullName: 'Vela Labs',
-  legalName: 'Vella',
-  email: 'contact@velalabs.co',
-  supportEmail: 'support@velalabs.co',
-  privacyEmail: 'privacy@velalabs.co',
+  name: 'ZVAR',
+  suffix: '',
+  fullName: 'ZVAR',
+  companyName: 'ZVAR',
+  shopName: 'ZVAR',
+  productLine: 'Vela',
+  productFullName: 'Vela Sculpt™',
+  legalName: 'ZVAR',
+  email: 'contact@zvar-shop.com',
+  supportEmail: 'support@zvar-shop.com',
+  privacyEmail: 'privacy@zvar-shop.com',
   tagline: 'Compression discrète & maintien postural pour hommes',
 };
 
@@ -25,7 +29,7 @@ export const nav = [
     ],
   },
   { label: 'Nos Packs & Offres', to: '/pages/offres' },
-  { label: 'Pourquoi Vela Labs ?', to: '/pages/notre-technologie' },
+  { label: 'Pourquoi ZVAR ?', to: '/pages/notre-technologie' },
   { label: 'Garantie 30 Jours', to: '/pages/garantie' },
   { label: 'Avis Clients', to: '/#reviews' },
 ];
@@ -38,7 +42,7 @@ export const announcements = [
 
 export const footerColumns = [
   {
-    title: 'Vela Labs',
+    title: 'ZVAR',
     links: [
       { label: 'Accueil', to: '/' },
       { label: 'Tous nos modèles', to: '/collections/all' },

@@ -8,24 +8,24 @@ export default function PrivacyPolicyPage() {
   useEffect(() => {
     document.title =
       lang === 'fr'
-        ? 'Politique de confidentialité | Vella — Vela Labs'
-        : 'Privacy Policy | Vella — Vela Labs';
+        ? 'Politique de confidentialité | ZVAR'
+        : 'Privacy Policy | ZVAR';
   }, [lang]);
 
   return (
     <div className="legal-page container">
 
       <article className="legal-content">
-        <h1>VELLA — PRIVACY POLICY</h1>
+        <h1>ZVAR — PRIVACY POLICY</h1>
         <p className="legal-meta"><strong>Effective date:</strong> October 14, 2026</p>
         <p>
-          This Privacy Policy explains how Vella collects, uses, stores and protects personal information when you visit or make a purchase through [VELLA WEBSITE URL] (the “Site”).
+          This Privacy Policy explains how ZVAR collects, uses, stores and protects personal information when you visit or make a purchase through https://zvar-shop.com (the “Site”).
         </p>
         <p>
-          The Site is operated by [LEGAL BUSINESS NAME], trading as Vella, with its business address at [FULL BUSINESS ADDRESS].
+          The Site is operated by ZVAR, with its business address at [FULL BUSINESS ADDRESS].
         </p>
         <p>
-          For privacy-related questions, contact us at [PRIVACY CONTACT EMAIL].
+          For privacy-related questions, contact us at privacy@zvar-shop.com.
         </p>
 
         <hr />
@@ -159,7 +159,7 @@ export default function PrivacyPolicyPage() {
           Depending on the laws applicable to your state, you may have additional rights to know, access, correct or delete personal information, obtain a portable copy, or opt out of certain sales, sharing or targeted advertising.
         </p>
         <p>
-          If Vella is subject to a law requiring an opt-out mechanism, the relevant option will be provided through the Site or by contacting [PRIVACY CONTACT EMAIL].
+          If ZVAR is subject to a law requiring an opt-out mechanism, the relevant option will be provided through the Site or by contacting privacy@zvar-shop.com.
         </p>
         <p>
           Where applicable, we will honor recognized opt-out preference signals as required by law. We will not discriminate against consumers for exercising applicable privacy rights.
@@ -181,7 +181,7 @@ export default function PrivacyPolicyPage() {
 
         <h2>AUSTRALIAN PRIVACY RIGHTS</h2>
         <p>
-          If Australian privacy law applies to Vella's handling of your information, you may have rights to request access to or correction of personal information and to make a privacy complaint.
+          If Australian privacy law applies to ZVAR's handling of your information, you may have rights to request access to or correction of personal information and to make a privacy complaint.
         </p>
         <p>
           To raise a concern, contact [PRIVACY CONTACT EMAIL]. We will review and respond in accordance with applicable law.
@@ -214,14 +214,14 @@ export default function PrivacyPolicyPage() {
         <h2>CONTACT US</h2>
         <p>For privacy questions or requests, contact:</p>
         <p>
-          <strong>Vella — Privacy Team</strong><br />
-          Legal business name: [LEGAL BUSINESS NAME]<br />
+          <strong>ZVAR — Privacy Team</strong><br />
+          Legal business name: ZVAR<br />
           Business address: [FULL BUSINESS ADDRESS]<br />
-          Email: [PRIVACY CONTACT EMAIL]<br />
-          Website: [VELLA WEBSITE URL]
+          Email: privacy@zvar-shop.com<br />
+          Website: https://zvar-shop.com
         </p>
         <p style={{ marginTop: 20, fontStyle: 'italic', fontWeight: 600 }}>
-          Vella — Your Style. Your Comfort. Your Confidence.
+          ZVAR — Your Style. Your Comfort. Your Confidence.
         </p>
       </article>
     </div>

@@ -8,8 +8,8 @@ export default function LegalNoticePage() {
   useEffect(() => {
     document.title =
       lang === 'fr'
-        ? 'Mentions légales | Vella — Vela Labs'
-        : 'Legal Notice | Vella — Vela Labs';
+        ? 'Mentions légales | ZVAR'
+        : 'Legal Notice | ZVAR';
   }, [lang]);
 
   return (
@@ -21,11 +21,11 @@ export default function LegalNoticePage() {
 
         <h2>1. Éditeur de la plateforme</h2>
         <p>
-          <strong>Nom commercial :</strong> Vela Labs<br />
-          <strong>Raison sociale / Entité légale :</strong> Vella<br />
+          <strong>Nom commercial :</strong> ZVAR<br />
+          <strong>Raison sociale / Entité légale :</strong> ZVAR<br />
           <strong>Adresse de l'entité :</strong> [FULL BUSINESS ADDRESS]<br />
-          <strong>Email support :</strong> support@velalabs.co<br />
-          <strong>Email confidentialité :</strong> privacy@velalabs.co
+          <strong>Email support :</strong> support@zvar-shop.com<br />
+          <strong>Email confidentialité :</strong> privacy@zvar-shop.com
         </p>
 
         <h2>2. Hébergement</h2>
@@ -37,7 +37,7 @@ export default function LegalNoticePage() {
 
         <h2>3. Propriété intellectuelle</h2>
         <p>
-          L'ensemble des éléments visuels, textuels, photographiques et sonores composant le site, y compris la marque Vela Labs et le modèle Vela Sculpt™, sont protégés par le droit de la propriété intellectuelle. Toute reproduction non autorisée est strictement interdite.
+          L'ensemble des éléments visuels, textuels, photographiques et sonores composant le site, y compris la marque ZVAR et le modèle Vela Sculpt™, sont protégés par le droit de la propriété intellectuelle. Toute reproduction non autorisée est strictement interdite.
         </p>
       </article>
     </div>

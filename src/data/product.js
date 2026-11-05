@@ -347,7 +347,7 @@ export const quickFaq = [
   },
   {
     q: 'Comment fonctionne la Garantie 30 Jours ?',
-    a: 'Vous avez 30 jours complets après réception pour essayer votre produit. Si vous n’êtes pas satisfait, écrivez-nous à support@velalabs.co pour déclencher votre retour et remboursement.',
+    a: 'Vous avez 30 jours complets après réception pour essayer votre produit. Si vous n’êtes pas satisfait, écrivez-nous à support@zvar-shop.com pour déclencher votre retour et remboursement.',
   },
 ];
 
@@ -366,6 +366,6 @@ export const quickFaqEn = [
   },
   {
     q: 'How does the 30-Day Guarantee work?',
-    a: 'You have a full 30 days after delivery to test it. If you are not completely satisfied, email us at support@velalabs.co to arrange your return and full refund.',
+    a: 'You have a full 30 days after delivery to test it. If you are not completely satisfied, email us at support@zvar-shop.com to arrange your return and full refund.',
   },
 ];

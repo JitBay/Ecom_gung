@@ -88,7 +88,7 @@ export default function PackDecouverteLanding() {
             <div className="pdl-hero__rating">
               <Stars value={5} size={16} />
               <strong>4.9 / 5</strong>
-              <span>({lang === 'fr' ? '1 540 avis vérifiés' : '1,540 verified reviews'})</span>
+              <span>({lang === 'fr' ? '70 avis vérifiés' : '70 verified reviews'})</span>
             </div>
 
             <h1 className="pdl-hero__title">

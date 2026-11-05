@@ -9,8 +9,8 @@ export default function TechnologyPage() {
   useEffect(() => {
     document.title =
       lang === 'fr'
-        ? `Pourquoi Vela Labs ? | Notre technologie ergonomique`
-        : `Why Vela Labs? | Ergonomic Compression Technology`;
+        ? `Pourquoi ZVAR ? | Notre technologie ergonomique`
+        : `Why ZVAR? | Ergonomic Compression Technology`;
   }, [lang]);
 
   return <QualitySection />;

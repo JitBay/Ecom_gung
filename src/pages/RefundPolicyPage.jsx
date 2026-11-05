@@ -8,8 +8,8 @@ export default function RefundPolicyPage() {
   useEffect(() => {
     document.title =
       lang === 'fr'
-        ? 'Politique de retour & remboursement (30 jours) | Vella — Vela Labs'
-        : 'Refund & Returns Policy (30 Days) | Vella — Vela Labs';
+        ? 'Politique de retour & remboursement (30 jours) | ZVAR'
+        : 'Refund & Returns Policy (30 Days) | ZVAR';
   }, [lang]);
 
   return (
@@ -22,7 +22,7 @@ export default function RefundPolicyPage() {
         {lang === 'fr' ? (
           <>
             <p>
-              Chez <strong>Vela Labs</strong> (exploité par <strong>Vella</strong>), nous appliquons une <strong>garantie satisfait ou remboursé de 30 jours</strong>.
+              Chez <strong>ZVAR</strong>, nous appliquons une <strong>garantie satisfait ou remboursé de 30 jours</strong>.
             </p>
 
             <h2>1. Délai de rétractation et d’essai</h2>
@@ -42,13 +42,13 @@ export default function RefundPolicyPage() {
 
             <h2>4. Contact</h2>
             <p>
-              Pour initier un retour ou pour toute question : <code>support@velalabs.co</code>.
+              Pour initier un retour ou pour toute question : <code>support@zvar-shop.com</code>.
             </p>
           </>
         ) : (
           <>
             <p>
-              At <strong>Vela Labs</strong> (operated by <strong>Vella</strong>), we offer a straightforward <strong>30-day money-back guarantee</strong> on all orders.
+              At <strong>ZVAR</strong>, we offer a straightforward <strong>30-day money-back guarantee</strong> on all orders.
             </p>
 
             <h2>1. Trial Period and Returns Window</h2>
@@ -68,7 +68,7 @@ export default function RefundPolicyPage() {
 
             <h2>4. Contact Us</h2>
             <p>
-              To start a return or ask any question: <code>support@velalabs.co</code>.
+              To start a return or ask any question: <code>support@zvar-shop.com</code>.
             </p>
           </>
         )}

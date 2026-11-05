@@ -31,8 +31,8 @@ export const products = [
     modelType: 'sans-manches',
     price: 19.99,
     compareAt: 34.99,
-    rating: 4.8,
-    reviewCount: 980,
+    rating: 4.9,
+    reviewCount: 67,
     colors: ['Noir', 'Blanc', 'Gris', 'Black Or'],
     colorImages: {
       Noir: [
@@ -144,7 +144,7 @@ export const products = [
     price: 39.99,
     compareAt: 59.99,
     rating: 4.9,
-    reviewCount: 750,
+    reviewCount: 67,
     colors: ['Noir', 'Gris chiné', 'Blanc'],
     colorImages: {
       Noir: [
@@ -196,7 +196,7 @@ export const products = [
     price: 59.99,
     compareAt: 89.97,
     rating: 4.9,
-    reviewCount: 1540,
+    reviewCount: 70,
     colors: ['Noir', 'Blanc', 'Gris'],
     colorImages: {
       Noir: [

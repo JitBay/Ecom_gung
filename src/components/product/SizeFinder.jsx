@@ -126,8 +126,8 @@ export default function SizeFinder({ open, onClose, onApply }) {
         {outOfRange && (
           <p className="size-result is-empty">
             {lang === 'fr'
-              ? 'Hors grille standard — contactez notre support à support@velalabs.co pour un conseil personnalisé.'
-              : 'Outside standard range — contact support at support@velalabs.co for guidance.'}
+              ? 'Hors grille standard — contactez notre support à support@zvar-shop.com pour un conseil personnalisé.'
+              : 'Outside standard range — contact support at support@zvar-shop.com for guidance.'}
           </p>
         )}
 

@@ -65,9 +65,23 @@
 
 .logo {
   display: inline-flex;
-  align-items: baseline;
-  gap: 6px;
-  letter-spacing: 0.04em;
+  align-items: center;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.logo__img {
+  height: clamp(19px, 2.2vw, 24px);
+  width: auto;
+  max-width: 105px;
+  object-fit: contain;
+  display: block;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.logo:hover .logo__img {
+  opacity: 0.9;
+  transform: scale(1.02);
 }
 
 .logo strong {

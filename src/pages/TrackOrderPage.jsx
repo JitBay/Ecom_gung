@@ -11,15 +11,15 @@ export default function TrackOrderPage() {
   useEffect(() => {
     document.title =
       lang === 'fr'
-        ? 'Suivre ma Commande | Vela Labs'
-        : 'Track Your Order | Vela Labs';
+        ? 'Suivre ma Commande | ZVAR'
+        : 'Track Your Order | ZVAR';
   }, [lang]);
 
   return (
     <div className="legal-page container">
 
       <article className="legal-content">
-        <h1>{lang === 'fr' ? 'Suivre Votre Colis Vela Labs' : 'Track Your Vela Labs Package'}</h1>
+        <h1>{lang === 'fr' ? 'Suivre Votre Colis ZVAR' : 'Track Your ZVAR Package'}</h1>
         <p className="legal-meta">
           {lang === 'fr'
             ? 'Suivi en direct de votre expédition 24/48h.'
@@ -38,7 +38,7 @@ export default function TrackOrderPage() {
         >
           <input
             type="text"
-            placeholder={lang === 'fr' ? 'Ex : VELA-FR-49201' : 'e.g. VELA-EN-49201'}
+            placeholder={lang === 'fr' ? 'Ex : ZVAR-FR-49201' : 'e.g. ZVAR-EN-49201'}
             value={trackingNumber}
             onChange={(e) => setTrackingNumber(e.target.value)}
             required
@@ -72,11 +72,11 @@ export default function TrackOrderPage() {
           <p>
             {lang === 'fr' ? (
               <>
-                Vous n'avez pas reçu votre email de suivi ? Vérifiez vos spams ou contactez directement notre support client à <code>support@velalabs.co</code>.
+                Vous n'avez pas reçu votre email de suivi ? Vérifiez vos spams ou contactez directement notre support client à <code>support@zvar-shop.com</code>.
               </>
             ) : (
               <>
-                Can't find your tracking email? Check your spam folder or email our support team at <code>support@velalabs.co</code>.
+                Can't find your tracking email? Check your spam folder or email our support team at <code>support@zvar-shop.com</code>.
               </>
             )}
           </p>

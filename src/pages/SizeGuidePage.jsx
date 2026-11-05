@@ -11,8 +11,8 @@ export default function SizeGuidePage() {
   useEffect(() => {
     document.title =
       lang === 'fr'
-        ? 'Guide des tailles homme | Vela Labs'
-        : 'Men’s Size Guide | Vela Labs';
+        ? 'Guide des tailles homme | ZVAR'
+        : 'Men’s Size Guide | ZVAR';
   }, [lang]);
 
   return (

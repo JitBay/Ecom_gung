@@ -8,8 +8,8 @@ export default function TermsPage() {
   useEffect(() => {
     document.title =
       lang === 'fr'
-        ? 'Conditions générales de vente | Vella — Vela Labs'
-        : 'Terms of Service | Vella — Vela Labs';
+        ? 'Conditions générales de vente | ZVAR'
+        : 'Terms of Service | ZVAR';
   }, [lang]);
 
   return (
@@ -17,11 +17,11 @@ export default function TermsPage() {
 
       <article className="legal-content">
         <h1>Conditions générales de vente (CGV)</h1>
-        <p className="legal-meta">Entité légale : Vella | Marque commerciale : Vela Labs</p>
+        <p className="legal-meta">Entité légale : ZVAR | Marque commerciale : ZVAR</p>
 
         <h2>Article 1 — Objet & Champ d'application</h2>
         <p>
-          Les présentes Conditions générales de vente régissent l'ensemble des ventes conclues sur le site internet de Vela Labs, exploité par la société <strong>Vella</strong>, auprès de consommateurs finaux.
+          Les présentes Conditions générales de vente régissent l'ensemble des ventes conclues sur le site internet de ZVAR, auprès de consommateurs finaux.
         </p>
 
         <h2>Article 2 — Produits & disponibilité</h2>
