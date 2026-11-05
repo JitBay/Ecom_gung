@@ -5,8 +5,14 @@
  * Synchronized with real Shopify variants from zvar-shop.com.
  */
 
-export const SHOPIFY_STORE_DOMAIN =
+const configuredDomain =
   (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SHOPIFY_STORE_DOMAIN) || 'checkout.zvar-shop.com';
+
+// Always route checkout requests to checkout.zvar-shop.com (Shopify), never to the Vercel frontend (zvar-shop.com / www.zvar-shop.com)
+export const SHOPIFY_STORE_DOMAIN =
+  !configuredDomain || configuredDomain === 'zvar-shop.com' || configuredDomain === 'www.zvar-shop.com'
+    ? 'checkout.zvar-shop.com'
+    : configuredDomain;
 
 export const SHOPIFY_STOREFRONT_TOKEN =
   (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SHOPIFY_STOREFRONT_TOKEN) || '06705ec8a9335df76b9e68a23ee31bf5';
@@ -269,7 +275,10 @@ export function resolveShopifyVariantId(line = {}) {
 export function buildShopifyCartPermalink(lines, options = {}) {
   if (!lines || lines.length === 0) return '';
 
-  const cleanDomain = SHOPIFY_STORE_DOMAIN.replace(/^https?:\/\//, '').replace(/\/$/, '');
+  let cleanDomain = SHOPIFY_STORE_DOMAIN.replace(/^https?:\/\//, '').replace(/\/$/, '');
+  if (!cleanDomain || cleanDomain === 'zvar-shop.com' || cleanDomain === 'www.zvar-shop.com') {
+    cleanDomain = 'checkout.zvar-shop.com';
+  }
 
   // Format variant segments with resolved numeric IDs
   const segments = lines.map((line) => {
