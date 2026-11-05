@@ -175,10 +175,32 @@ export const SHOPIFY_VARIANTS_MAP = {
  */
 function normalizeColor(colorStr = '') {
   const c = String(colorStr).toLowerCase().trim();
-  if (c.includes('black or') || c.includes('black-or') || c.includes('yellow') || c.includes('or')) return 'yellow';
-  if (c.includes('noir') || c.includes('black')) return 'black';
-  if (c.includes('blanc') || c.includes('white')) return 'white';
-  if (c.includes('gris') || c.includes('gray')) return 'gray';
+  if (
+    c.includes('black-or') ||
+    c.includes('black or') ||
+    c.includes('yellow') ||
+    c === 'or' ||
+    c === '#241f17' ||
+    c === '#221e17'
+  ) {
+    return 'yellow';
+  }
+  if (c.includes('noir') || c.includes('black') || c === '#1a1a1a') {
+    return 'black';
+  }
+  if (c.includes('blanc') || c.includes('white') || c === '#f4f4f6' || c === '#f8f8fa') {
+    return 'white';
+  }
+  if (
+    c.includes('gris') ||
+    c.includes('gray') ||
+    c.includes('grey') ||
+    c === '#72757d' ||
+    c === '#63666f' ||
+    c === '#5a5d66'
+  ) {
+    return 'gray';
+  }
   return c;
 }
 
@@ -198,14 +220,31 @@ function normalizeSize(sizeStr = '') {
  * Normalizes model handle for lookup.
  */
 function normalizeModel(str = '', context = '') {
+  const direct = String(str).toLowerCase().trim();
+
+  // 1. Direct handle check has priority
+  if (direct.includes('manches-longues') || direct.includes('long-sleeves')) {
+    return 'vela-sculpt-manches-longues';
+  }
+  if (direct.includes('demi-manches') || direct.includes('short-sleeves')) {
+    return 'vela-sculpt-demi-manches';
+  }
+  if (direct.includes('sans-manches') || direct.includes('sleeveless') || direct.includes('tank-top')) {
+    return 'vela-sculpt-sans-manches';
+  }
+  if (direct === 'pack-decouverte' || direct.includes('pack-decouverte-3-coupes')) {
+    return 'pack-decouverte';
+  }
+
+  // 2. Scan combined context only when direct handle wasn't specific
   const s = `${str} ${context}`.toLowerCase();
   if (
-    s.includes('pack-decouverte') ||
-    s.includes('pack decouverte') ||
-    s.includes('pack découverte') ||
-    s.includes('discovery') ||
-    s.includes('decouverte') ||
-    s.includes('découverte')
+    s.includes('pack-decouverte-3-coupes') ||
+    s.includes('pack decouverte 3 coupes') ||
+    s.includes('pack découverte 3 coupes') ||
+    s.includes('discovery pack') ||
+    s.includes('3 coupes') ||
+    s.includes('3 fits')
   ) {
     return 'pack-decouverte';
   }
@@ -229,13 +268,23 @@ export function resolveShopifyVariantId(line = {}) {
     return String(line.variantId);
   }
 
-  const textToScan = `${line.id || ''} ${line.detail || ''} ${line.title || ''}`;
-  const model = normalizeModel(line.handle || line.id || line.title, textToScan);
-  const size = normalizeSize(textToScan);
-  const color = normalizeColor(line.color || textToScan);
+  // If chosenVariants has an item, use it for exact variant attributes
+  const firstChosen = Array.isArray(line.chosenVariants) && line.chosenVariants[0]
+    ? line.chosenVariants[0]
+    : null;
 
-  // Pack Découverte resolution
-  if (model === 'pack-decouverte') {
+  const targetHandle = firstChosen?.handle || line.handle || line.id || line.title || '';
+  const textToScan = `${line.id || ''} ${line.detail || ''} ${line.title || ''} ${firstChosen?.detail || ''}`;
+  const model = normalizeModel(targetHandle, textToScan);
+
+  // Extract size: prioritize firstChosen.size, then line.size, then textToScan
+  const size = normalizeSize(firstChosen?.size || line.size || textToScan);
+
+  // Extract color: prioritize firstChosen.color, then line.selectedColor, line.color, textToScan
+  const color = normalizeColor(firstChosen?.color || line.selectedColor || line.color || textToScan);
+
+  // Pack Découverte resolution (only genuine 3-cut pack discovery)
+  if (model === 'pack-decouverte' || line.isDiscoveryPack) {
     const packSizeKey = `pack-decouverte:${size}`;
     if (SHOPIFY_VARIANTS_MAP[packSizeKey]) {
       return SHOPIFY_VARIANTS_MAP[packSizeKey];
@@ -339,7 +388,15 @@ export function buildShopifyCartPermalink(lines, options = {}) {
     }
 
     // 4. Standard single item (Pack 1 t-shirt)
-    const vId = resolveShopifyVariantId(line);
+    let vId;
+    if (Array.isArray(line.chosenVariants) && line.chosenVariants.length > 0) {
+      vId = resolveShopifyVariantId({
+        handle: line.handle,
+        ...line.chosenVariants[0],
+      });
+    } else {
+      vId = resolveShopifyVariantId(line);
+    }
     const paidQty = (line.paidQty || 1) * lineQty;
     variantQuantities.set(vId, (variantQuantities.get(vId) || 0) + paidQty);
   });

@@ -97,11 +97,11 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
       {
         id: 1,
         qty: 1,
-        title: lang === 'fr' ? 'Pack découverte — 1 t-shirt' : 'Starter Pack — 1 Shirt',
+        title: lang === 'fr' ? 'Pack 1 T-Shirt' : 'Pack 1 Shirt',
         subtitle: lang === 'fr' ? 'Idéal pour tester l’effet gainant et le confort au quotidien.' : 'Ideal for testing slimming support and all-day comfort.',
         price: p1,
         compareAt: c1,
-        badge: lang === 'fr' ? 'Offre découverte' : 'Intro Offer',
+        badge: lang === 'fr' ? 'Offre Découverte — 1 T-Shirt' : 'Intro Offer — 1 Shirt',
         freeShipping: true,
       },
       {
