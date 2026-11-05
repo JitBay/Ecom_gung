@@ -6,7 +6,7 @@
  */
 
 export const SHOPIFY_STORE_DOMAIN =
-  (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SHOPIFY_STORE_DOMAIN) || 'zvar-shop.com';
+  (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SHOPIFY_STORE_DOMAIN) || 'checkout.zvar-shop.com';
 
 export const SHOPIFY_STOREFRONT_TOKEN =
   (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SHOPIFY_STOREFRONT_TOKEN) || '06705ec8a9335df76b9e68a23ee31bf5';
