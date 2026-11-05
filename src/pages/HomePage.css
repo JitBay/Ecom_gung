@@ -404,8 +404,8 @@
 
 .ixh-bs__rail {
   max-width: 1440px;
-  margin: 20px auto 0;
-  padding: 0 clamp(16px, 3vw, 40px) 4px;
+  margin: 8px auto 0;
+  padding: 14px clamp(16px, 3vw, 40px) 6px;
   display: flex;
   gap: 14px;
   overflow-x: auto;
@@ -426,6 +426,11 @@
   text-decoration: none;
   color: #1a1a18;
   scroll-snap-align: start;
+}
+
+.ixh-card__media-wrap {
+  position: relative;
+  display: block;
 }
 
 .ixh-card__media {
@@ -493,6 +498,66 @@
   padding: 4px 7px;
   border-radius: 4px;
   z-index: 1;
+}
+
+/* Circular Stamp Badge on Top Right — Sticking out from outside the product box */
+.ixh-card__stamp {
+  position: absolute;
+  top: -12px;
+  right: -10px;
+  width: clamp(56px, 5.5vw, 66px);
+  height: clamp(56px, 5.5vw, 66px);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ef4444 0%, #dc2626 60%, #b91c1c 100%);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4px;
+  box-sizing: border-box;
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.22),
+    0 2px 6px rgba(220, 38, 38, 0.45),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.35);
+  border: 1.5px dashed rgba(255, 255, 255, 0.75);
+  transform: rotate(10deg);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+  z-index: 10;
+  user-select: none;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.ixh-card:hover .ixh-card__stamp {
+  transform: rotate(0deg) scale(1.08);
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.28),
+    0 4px 12px rgba(220, 38, 38, 0.55),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.45);
+}
+
+.ixh-card__stamp-top {
+  font-family: Montserrat, sans-serif;
+  font-size: 7.5px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.ixh-card__stamp-main {
+  font-family: Montserrat, sans-serif;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
 }
 
 .ixh-card__info {
@@ -683,7 +748,8 @@
 .ixh-promise {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 20 / 9;
+  max-height: 580px;
   height: auto;
   min-height: unset;
   overflow: hidden;
@@ -769,7 +835,8 @@
 
 @media (max-width: 699px) {
   .ixh-promise {
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 18 / 9;
+    max-height: 320px;
     height: auto;
     min-height: unset;
   }

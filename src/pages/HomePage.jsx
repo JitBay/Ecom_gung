@@ -25,6 +25,7 @@ const bestSellersBase = [
     price: 19.99,
     compareAt: 34.99,
     urlBase: '/products/vela-sculpt-sans-manches',
+    offerBadge: true,
     colorData: {
       Noir: {
         hex: '#1a1a1a',
@@ -63,6 +64,7 @@ const bestSellersBase = [
     price: 29.99,
     compareAt: 49.99,
     urlBase: '/products/vela-sculpt-demi-manches',
+    offerBadge: true,
     colorData: {
       Blanc: {
         hex: '#f4f4f6',
@@ -96,6 +98,7 @@ const bestSellersBase = [
     price: 39.99,
     compareAt: 59.99,
     urlBase: '/products/vela-sculpt-manches-longues',
+    offerBadge: true,
     colorData: {
       'Gris chiné': {
         hex: '#5a5d66',
@@ -165,25 +168,45 @@ function BestSellerCard({ p, lang, t }) {
 
   return (
     <article className="ixh-card">
-      <Link to={targetUrl} className="ixh-card__media" aria-label={title}>
-        <img
-          src={colorInfo.img}
-          alt={title}
-          className="ixh-card__img ixh-card__img--main"
-          loading="lazy"
-        />
-        {colorInfo.hoverImg && (
+      <div className="ixh-card__media-wrap">
+        <Link to={targetUrl} className="ixh-card__media" aria-label={title}>
           <img
-            src={colorInfo.hoverImg}
-            alt={`${title} - alternative`}
-            className="ixh-card__img ixh-card__img--alt"
+            src={colorInfo.img}
+            alt={title}
+            className="ixh-card__img ixh-card__img--main"
             loading="lazy"
-            aria-hidden="true"
           />
+          {colorInfo.hoverImg && (
+            <img
+              src={colorInfo.hoverImg}
+              alt={`${title} - alternative`}
+              className="ixh-card__img ixh-card__img--alt"
+              loading="lazy"
+              aria-hidden="true"
+            />
+          )}
+          {badge && <span className="ixh-card__badge">{badge}</span>}
+          {discount > 0 && !p.offerBadge && (
+            <span className="ixh-card__save-badge">-{discount}%</span>
+          )}
+        </Link>
+        {p.offerBadge && (
+          <Link
+            to={targetUrl}
+            className="ixh-card__stamp"
+            title={lang === 'fr' ? 'Offre 2 achetés + le 3ème offert' : 'Buy 2, get 1 free offer'}
+            aria-label={lang === 'fr' ? 'Offre 2 achetés 1 offert' : 'Buy 2 get 1 free offer'}
+            tabIndex={-1}
+          >
+            <span className="ixh-card__stamp-top">
+              {lang === 'fr' ? '2 ACHETÉS' : 'BUY 2'}
+            </span>
+            <strong className="ixh-card__stamp-main">
+              {lang === 'fr' ? '1 OFFERT' : 'GET 1 FREE'}
+            </strong>
+          </Link>
         )}
-        {badge && <span className="ixh-card__badge">{badge}</span>}
-        {discount > 0 && <span className="ixh-card__save-badge">-{discount}%</span>}
-      </Link>
+      </div>
 
       <div className="ixh-card__info">
         <div className="ixh-card__rating">

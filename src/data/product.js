@@ -5,7 +5,7 @@ export const product = {
   title: 'Vela Sculpt™ — T-shirt gainant ergonomique',
   subtitle: 'Compression discrète & soutien postural pour homme',
   rating: 4.9,
-  reviewCount: 67,
+  reviewCount: 14,
 };
 
 export const colors = [
