@@ -281,7 +281,6 @@ export function buildShopifyCartPermalink(lines, options = {}) {
   const cartPath = `/cart/${segments.join(',')}`;
   const searchParams = new URLSearchParams();
 
-  searchParams.set('channel', 'headless_front');
   if (options.discount) {
     searchParams.set('discount', options.discount);
   }
@@ -293,7 +292,8 @@ export function buildShopifyCartPermalink(lines, options = {}) {
     searchParams.set('note', attributes);
   }
 
-  return `https://${cleanDomain}${cartPath}?${searchParams.toString()}`;
+  const query = searchParams.toString();
+  return `https://${cleanDomain}${cartPath}${query ? `?${query}` : ''}`;
 }
 
 /**
