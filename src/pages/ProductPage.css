@@ -1,6 +1,8 @@
 .product-page-wrap {
   width: 100%;
+  max-width: 100vw;
   min-height: 100vh;
+  overflow-x: clip;
 }
 
 .pp {
