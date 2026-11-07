@@ -1,7 +1,12 @@
-// Prices in euros, French style: €45,90
-const eur = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' });
+// Prices in US dollars: $29.99
+const usd = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
 
-export const price = (value) => eur.format(value).replace(/\s?€/, '').replace(/^/, '€');
+export const price = (value) => usd.format(value);
 
 export const shortDate = (iso, lang = 'fr') => {
   try {

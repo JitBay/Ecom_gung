@@ -757,6 +757,58 @@
   .ixh-bs__arrow {
     display: none;
   }
+
+  .ixh-bs__rail {
+    padding: 14px calc((100vw - clamp(270px, 82vw, 340px)) / 2) 12px;
+    gap: 16px;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 calc((100vw - clamp(270px, 82vw, 340px)) / 2);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ixh-card {
+    flex: 0 0 clamp(270px, 82vw, 340px);
+    width: clamp(270px, 82vw, 340px);
+    scroll-snap-align: center;
+    margin: 0 auto;
+  }
+
+  .ixh-card__media-wrap {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .ixh-card__media {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ixh-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .ixh-card__info {
+    text-align: center;
+    align-items: center;
+  }
+
+  .ixh-card__rating {
+    justify-content: center;
+  }
+
+  .ixh-card__price-row {
+    justify-content: center;
+  }
+
+  .ixh-card__sw-wrap {
+    justify-content: center;
+  }
 }
 
 @media (min-width: 1024px) {

@@ -3,26 +3,123 @@ import { translations } from '../data/translations.js';
 
 const LanguageContext = createContext(null);
 
-export function LanguageProvider({ children }) {
-  const [lang, setLangState] = useState(() => {
-    try {
-      const saved = localStorage.getItem('zvar_lang') || localStorage.getItem('velalabs_lang');
-      if (saved === 'fr' || saved === 'en') return saved;
-      // If user's browser language is English, default to English, else French
-      if (typeof navigator !== 'undefined' && navigator.language?.toLowerCase().startsWith('en')) {
+// Country codes where French is the primary or official language
+const FR_COUNTRIES = new Set([
+  'FR', 'BE', 'CH', 'LU', 'MC',
+  'DZ', 'MA', 'TN', 'SN', 'CI', 'MG', 'CM', 'BF', 'NE', 'ML', 'CD', 'CG', 'GA', 'TG', 'BJ', 'GN', 'HT'
+]);
+
+/**
+ * Returns 'fr' if country is French-speaking, otherwise 'en' (USA, UK, and rest of world)
+ */
+export function getLanguageFromCountry(countryCode) {
+  if (!countryCode) return 'fr';
+  const c = String(countryCode).toUpperCase().trim();
+  return FR_COUNTRIES.has(c) ? 'fr' : 'en';
+}
+
+/**
+ * Synchronous immediate detection before network response (0ms):
+ * 1. Checks localStorage if user already visited
+ * 2. Checks browser TimeZone (America/ = USA -> EN; Europe/Paris = France -> FR)
+ * 3. Checks navigator.language (en-US -> EN, fr-FR -> FR)
+ */
+function detectInitialLanguage() {
+  try {
+    const saved = localStorage.getItem('zvar_lang') || localStorage.getItem('velalabs_lang');
+    if (saved === 'fr' || saved === 'en') return saved;
+
+    // TimeZone instant detection (US timezones -> English)
+    if (typeof Intl !== 'undefined' && Intl.DateTimeFormat) {
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+      if (
+        tz.startsWith('America/') ||
+        tz.startsWith('US/') ||
+        tz.startsWith('Pacific/Honolulu')
+      ) {
         return 'en';
       }
-    } catch {
-      // fallback to fr if localStorage not accessible
+      if (
+        tz.includes('Paris') ||
+        tz.includes('Brussels') ||
+        tz.includes('Monaco') ||
+        tz.includes('Casablanca') ||
+        tz.includes('Algiers') ||
+        tz.includes('Tunis')
+      ) {
+        return 'fr';
+      }
     }
-    return 'fr';
-  });
 
-  const setLang = (newLang) => {
+    // Browser language
+    if (typeof navigator !== 'undefined') {
+      const browserLang = (navigator.language || navigator.languages?.[0] || '').toLowerCase();
+      if (browserLang.startsWith('en')) return 'en';
+      if (browserLang.startsWith('fr')) return 'fr';
+    }
+  } catch {
+    // fallback
+  }
+  return 'fr';
+}
+
+export function LanguageProvider({ children }) {
+  const [lang, setLangState] = useState(detectInitialLanguage);
+
+  // Background IP-based Geolocation Detection (refines country with zero impact on page load speed)
+  useEffect(() => {
+    try {
+      // If user has explicitly clicked the language switcher, respect their manual preference
+      const manual = localStorage.getItem('zvar_lang_manual');
+      if (manual === 'true') return;
+
+      const cachedCountry = sessionStorage.getItem('zvar_geo_country');
+      if (cachedCountry) {
+        const targetLang = getLanguageFromCountry(cachedCountry);
+        if (targetLang !== lang) {
+          setLangState(targetLang);
+          document.documentElement.lang = targetLang;
+        }
+        return;
+      }
+
+      // Fast, lightweight, free GeoIP API (CORS enabled, <100ms response)
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 3500);
+
+      fetch('https://api.country.is', { signal: controller.signal })
+        .then((res) => (res.ok ? res.json() : null))
+        .then((data) => {
+          clearTimeout(timeoutId);
+          if (data && data.country) {
+            const country = String(data.country).toUpperCase();
+            sessionStorage.setItem('zvar_geo_country', country);
+            const targetLang = getLanguageFromCountry(country);
+            if (targetLang !== lang) {
+              setLangState(targetLang);
+              document.documentElement.lang = targetLang;
+              localStorage.setItem('zvar_lang', targetLang);
+            }
+          }
+        })
+        .catch(() => {
+          // Ignore network errors or offline mode gracefully
+        });
+
+      return () => clearTimeout(timeoutId);
+    } catch {
+      // Ignore
+    }
+  }, [lang]);
+
+  const setLang = (newLang, isManual = true) => {
     if (newLang !== 'fr' && newLang !== 'en') return;
     setLangState(newLang);
     try {
       localStorage.setItem('zvar_lang', newLang);
+      if (isManual) {
+        localStorage.setItem('zvar_lang_manual', 'true');
+      }
       document.documentElement.lang = newLang;
     } catch {
       // ignore
@@ -30,7 +127,7 @@ export function LanguageProvider({ children }) {
   };
 
   const toggleLang = () => {
-    setLang(lang === 'fr' ? 'en' : 'fr');
+    setLang(lang === 'fr' ? 'en' : 'fr', true);
   };
 
   useEffect(() => {

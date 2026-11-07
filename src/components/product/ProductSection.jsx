@@ -81,7 +81,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
       p2 = 79.98;
       c2 = 179.97;
     } else {
-      p2 = Math.round(p1 * 2 * 0.86 * 100) / 100;
+      p2 = Math.round(p1 * 2 * 100) / 100;
       c2 = Math.round(c1 * 3 * 100) / 100;
     }
 
@@ -89,11 +89,11 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
       {
         id: 1,
         qty: 1,
-        title: lang === 'fr' ? 'Pack découverte — 1 t-shirt' : 'Starter Pack — 1 Shirt',
+        title: lang === 'fr' ? 'Pack 1 t-shirt' : 'Pack 1 Shirt',
         subtitle: lang === 'fr' ? 'Idéal pour tester l’effet gainant et le confort au quotidien.' : 'Ideal for testing slimming support and all-day comfort.',
         price: p1,
         compareAt: c1,
-        badge: lang === 'fr' ? 'Offre découverte' : 'Intro Offer',
+        badge: lang === 'fr' ? 'Offre découverte — 1 t-shirt' : 'Intro Offer — 1 Shirt',
         freeShipping: true,
       },
       {
@@ -266,6 +266,15 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
       price: bundle.price,
       compareAt: bundle.compareAt,
       freeShipping: Boolean(bundle.freeShipping),
+      bundleId: bundle.id,
+      isTwoPlusOne: Boolean(bundle.isTwoPlusOne),
+      isDiscoveryPack: Boolean(bundle.isDiscoveryPack),
+      paidQty: bundle.isDiscoveryPack ? 1 : (bundle.isTwoPlusOne ? 2 : (bundle.id === 3 ? 3 : 1)),
+      chosenVariants: chosen.map((v) => ({
+        handle: currentModel.handle,
+        color: v.color,
+        size: v.size,
+      })),
     });
   };
 
@@ -311,6 +320,15 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
       compareAt: bundle.compareAt,
       qty: 1,
       freeShipping: Boolean(bundle.freeShipping),
+      bundleId: bundle.id,
+      isTwoPlusOne: Boolean(bundle.isTwoPlusOne),
+      isDiscoveryPack: Boolean(bundle.isDiscoveryPack),
+      paidQty: bundle.isDiscoveryPack ? 1 : (bundle.isTwoPlusOne ? 2 : (bundle.id === 3 ? 3 : 1)),
+      chosenVariants: chosen.map((v) => ({
+        handle: currentModel.handle,
+        color: v.color,
+        size: v.size,
+      })),
     };
   }, [chosen, currentModel.handle, bundle, localizedModel.title, currentImages, availableColors, t, lang]);
 

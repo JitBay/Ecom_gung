@@ -241,11 +241,11 @@ export const bundles = [
   {
     id: 1,
     qty: 1,
-    title: 'Pack découverte — 1 t-shirt',
+    title: 'Pack 1 T-Shirt',
     subtitle: 'Idéal pour tester l’effet gainant et le confort au quotidien.',
     price: 29.99,
     compareAt: 49.99,
-    badge: 'Offre découverte',
+    badge: 'Offre Découverte — 1 T-Shirt',
     freeShipping: true,
   },
   {

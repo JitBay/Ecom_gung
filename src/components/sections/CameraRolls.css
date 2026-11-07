@@ -164,11 +164,25 @@
     margin: 0 calc(var(--gutter) * -1);
     padding: 0 var(--gutter) 6px;
     scroll-padding: 0 var(--gutter);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100vw;
+  }
+  .rolls__grid::-webkit-scrollbar {
+    display: none;
   }
 }
 
 @media (max-width: 520px) {
   .rolls__grid {
-    grid-auto-columns: 78%;
+    grid-auto-columns: clamp(260px, 80vw, 320px);
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 calc((100vw - clamp(260px, 80vw, 320px)) / 2);
+    padding: 0 calc((100vw - clamp(260px, 80vw, 320px)) / 2) 6px;
+  }
+  .rolls__grid > * {
+    scroll-snap-align: center;
   }
 }

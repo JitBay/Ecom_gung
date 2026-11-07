@@ -1,17 +1,28 @@
+.bundles {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
 .bundles__heading {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin: 26px 0 14px;
+  justify-content: center;
+  text-align: center;
+  gap: 10px;
+  margin: 24px 0 14px;
   font-weight: 700;
-  font-size: 15px;
-  white-space: nowrap;
+  font-size: 13.5px;
+  line-height: 1.35;
+  white-space: normal;
+  max-width: 100%;
 }
 
 .bundles__heading::before,
 .bundles__heading::after {
   content: '';
   flex: 1;
+  min-width: 14px;
   height: 1px;
   background: var(--gold);
   opacity: 0.6;

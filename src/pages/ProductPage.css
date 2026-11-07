@@ -1,6 +1,8 @@
 .product-page-wrap {
   width: 100%;
+  max-width: 100vw;
   min-height: 100vh;
+  overflow-x: clip;
 }
 
 .pp {
@@ -311,8 +313,30 @@
     min-height: 100vh;
   }
 
+  .pp.container {
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
   .pp {
     grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .pp__gallery-col {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .pp__info {
+    width: 100%;
+    max-width: 100%;
+    padding-left: var(--gutter);
+    padding-right: var(--gutter);
+    box-sizing: border-box;
   }
 }
 
