@@ -7,7 +7,7 @@ export const translations = {
 
     announcements: [
       'Garantie satisfait ou remboursé de 30 jours',
-      'Livraison suivie 100% offerte (6 à 12 jours ouvrés) · Suivi complet en direct',
+      'Livraison suivie 100% offerte (6 à 12 jours ouvrés) · Suivi complet en direct · club zvar',
       'Plus de 3 000 clients satisfaits portent Vela Sculpt™ au quotidien',
     ],
 
@@ -19,7 +19,7 @@ export const translations = {
       demi_manches: 'Demi-manches (manches courtes)',
       manches_longues: 'Manches longues',
       offers: 'Nos packs & offres',
-      why_us: 'Pourquoi ZVAR ?',
+      why_us: 'Pourquoi zvar ?',
       guarantee: 'Garantie 30 jours',
       reviews: 'Avis clients',
     },
@@ -118,7 +118,7 @@ export const translations = {
         item5_a: 'Vous disposez de 30 jours à compter de la réception de votre commande pour tester votre t-shirt Vela Sculpt™ dans votre quotidien. Si le confort, la taille ou le rendu ne vous apportent pas 100% de satisfaction, contactez simplement notre service client pour organiser votre retour et remboursement.',
       },
 
-      trust_title: 'Pourquoi choisir ZVAR',
+      trust_title: 'Pourquoi choisir zvar',
       trust: [
         {
           title: 'Garantie 30 jours',
@@ -178,7 +178,7 @@ export const translations = {
     },
 
     footer: {
-      club_title: 'Le Club ZVAR',
+      club_title: 'Le club zvar',
       club_text: 'Recevez nos conseils posture, offres privées et l’accès anticipé à nos nouvelles coupes techniques.',
       email_placeholder: 'Votre adresse e-mail',
       subscribe_aria: 'S’inscrire',
@@ -272,7 +272,7 @@ export const translations = {
 
     announcements: [
       '30-Day Money-Back Guarantee',
-      'Free Tracked Shipping (6-12 Working Days) · Full Live Tracking',
+      'Free Tracked Shipping (6-12 Working Days) · Full Live Tracking · zvar club',
       'Over 3,000 happy customers wear Vela Sculpt™ every day',
     ],
 
@@ -284,7 +284,7 @@ export const translations = {
       demi_manches: 'Short Sleeves (Crew Neck)',
       manches_longues: 'Long Sleeves',
       offers: 'Bundles & Offers',
-      why_us: 'Why ZVAR?',
+      why_us: 'Why zvar?',
       guarantee: '30-Day Guarantee',
       reviews: 'Reviews',
     },
@@ -383,7 +383,7 @@ export const translations = {
         item5_a: 'You have 30 days from delivery to test your Vela Sculpt™ shirt in your everyday life. If the comfort, fit, or look does not give you 100% satisfaction, simply email customer support for a hassle-free return and full refund.',
       },
 
-      trust_title: 'Why shop with ZVAR',
+      trust_title: 'Why shop with zvar',
       trust: [
         {
           title: '30-Day Guarantee',
@@ -443,7 +443,7 @@ export const translations = {
     },
 
     footer: {
-      club_title: 'The ZVAR Club',
+      club_title: 'The zvar club',
       club_text: 'Get posture tips, private offers, and early access to our new technical releases.',
       email_placeholder: 'Your email address',
       subscribe_aria: 'Subscribe',

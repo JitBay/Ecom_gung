@@ -9,8 +9,8 @@ export default function TechnologyPage() {
   useEffect(() => {
     document.title =
       lang === 'fr'
-        ? `Pourquoi ZVAR ? | Notre technologie ergonomique`
-        : `Why ZVAR? | Ergonomic Compression Technology`;
+        ? `Pourquoi zvar ? | Notre technologie ergonomique`
+        : `Why zvar? | Ergonomic Compression Technology`;
   }, [lang]);
 
   return <QualitySection />;

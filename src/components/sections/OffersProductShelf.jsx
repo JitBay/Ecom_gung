@@ -236,7 +236,7 @@ export default function OffersProductShelf() {
     <section className="offers-shelf ixh-bs" id="offres-cards">
       <div className="offers-shelf__head">
         <span className="offers-shelf__pill">
-          ★ {lang === 'fr' ? 'Offre Spéciale 2+1 (Pack Semaine)' : 'Special 2+1 Offer (Week Pack)'}
+          ★ {lang === 'fr' ? 'Offre Spéciale (2 achetés + 1 offert)' : 'Special Offer (Buy 2 Get 1 Free)'}
         </span>
         <h2 className="offers-shelf__title">
           {lang === 'fr' ? (

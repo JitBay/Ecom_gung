@@ -185,7 +185,6 @@ function BestSellerCard({ p, lang, t }) {
               aria-hidden="true"
             />
           )}
-          {badge && <span className="ixh-card__badge">{badge}</span>}
           {discount > 0 && !p.offerBadge && (
             <span className="ixh-card__save-badge">-{discount}%</span>
           )}
@@ -263,7 +262,7 @@ const lifestyleItems = [
     titleEn: 'Sleeveless (Tank Top)',
     taglineFr: 'Discrétion 100% invisible sous chemises & liberté totale',
     taglineEn: '100% invisible under shirts with maximum arm freedom',
-    img: '/images/home/lifestyle-sport.png',
+    img: '/images/home/lifestyle-piscine.png',
     to: '/products/vela-sculpt-sans-manches',
   },
   {
@@ -281,7 +280,7 @@ const lifestyleItems = [
     titleEn: 'Long Sleeves',
     taglineFr: 'Gainage intégral haut du corps & maintien postural renforcé',
     taglineEn: 'Full upper-body compression & reinforced postural support',
-    img: '/images/home/lifestyle-piscine.png',
+    img: '/images/home/lifestyle-sport.png',
     to: '/products/vela-sculpt-manches-longues',
   },
 ];
@@ -342,7 +341,7 @@ export default function HomePage() {
           <source media="(max-width: 699px)" srcSet="/images/home/banner-2.png" />
           <img
             src="/images/home/banner-2.png"
-            alt="ZVAR — Every Age Every Body"
+            alt="zvar. — Every Age Every Body"
             className="ixh-hero__img"
             loading="eager"
           />

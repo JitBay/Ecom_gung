@@ -70,62 +70,43 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
 
     const p1 = currentModel.price;
     const c1 = currentModel.compareAt || Math.round(p1 * 1.5);
-    let p2, p3, c2, c3;
+    let p2, c2;
     if (currentModel.handle === 'vela-sculpt-sans-manches') {
       p2 = 39.98;
       c2 = 89.97;
-      p3 = 59.97;
-      c3 = 89.97;
     } else if (currentModel.handle === 'vela-sculpt-demi-manches') {
       p2 = 59.98;
       c2 = 134.97;
-      p3 = 89.97;
-      c3 = 134.97;
     } else if (currentModel.handle === 'vela-sculpt-manches-longues') {
       p2 = 79.98;
       c2 = 179.97;
-      p3 = 119.97;
-      c3 = 179.97;
     } else {
       p2 = Math.round(p1 * 2 * 100) / 100;
       c2 = Math.round(c1 * 3 * 100) / 100;
-      p3 = Math.round(p1 * 3 * 100) / 100;
-      c3 = Math.round(c1 * 3 * 100) / 100;
     }
 
     return [
       {
         id: 1,
         qty: 1,
-        title: lang === 'fr' ? 'Pack 1 T-Shirt' : 'Pack 1 Shirt',
+        title: lang === 'fr' ? 'Pack 1 t-shirt' : 'Pack 1 Shirt',
         subtitle: lang === 'fr' ? 'Idéal pour tester l’effet gainant et le confort au quotidien.' : 'Ideal for testing slimming support and all-day comfort.',
         price: p1,
         compareAt: c1,
-        badge: lang === 'fr' ? 'Offre Découverte — 1 T-Shirt' : 'Intro Offer — 1 Shirt',
+        badge: lang === 'fr' ? 'Offre découverte — 1 t-shirt' : 'Intro Offer — 1 Shirt',
         freeShipping: true,
       },
       {
         id: 2,
         qty: 3,
         isTwoPlusOne: true,
-        title: lang === 'fr' ? 'Pack 2 T-Shirts + 1 Offert' : 'Pack 2 Shirts + 1 Free',
+        title: lang === 'fr' ? 'Pack 2 t-shirts + 1 offert' : 'Pack 2 Shirts + 1 Free',
         subtitle: lang === 'fr' ? '2 t-shirts achetés + le 3ème t-shirt 100% offert.' : 'Buy 2 shirts + get the 3rd shirt 100% free.',
         price: p2,
         compareAt: c2,
-        badge: lang === 'fr' ? 'Le Plus Choisi — 1 T-Shirt OFFERT' : 'Most Popular — 1 FREE Shirt',
+        badge: lang === 'fr' ? 'Le plus choisi — 1 t-shirt offert' : 'Most Popular — 1 FREE Shirt',
         freeShipping: true,
         highlight: true,
-      },
-      {
-        id: 3,
-        qty: 3,
-        title: lang === 'fr' ? 'Pack Semaine — 3 T-Shirts' : 'Week Pack — 3 Shirts',
-        subtitle: lang === 'fr' ? 'La tranquillité toute la semaine : 1 t-shirt propre toujours prêt.' : 'Full peace of mind: a clean shirt always ready.',
-        badge: lang === 'fr' ? `Meilleure Valeur — Économisez ${Math.round(c3 - p3)} $` : `Best Value — Save $${Math.round(c3 - p3)}`,
-        price: p3,
-        compareAt: c3,
-        freeShipping: true,
-        gift: lang === 'fr' ? 'Guide Posture & Maintien Offert' : 'Free Posture & Fit Guide',
       },
     ];
   }, [currentModel.handle, currentModel.price, currentModel.compareAt, lang]);

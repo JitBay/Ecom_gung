@@ -2,14 +2,14 @@
 import { collectionUrl, collections } from './catalog.js';
 
 export const brand = {
-  name: 'ZVAR',
+  name: 'zvar.',
   suffix: '',
-  fullName: 'ZVAR',
-  companyName: 'ZVAR',
-  shopName: 'ZVAR',
+  fullName: 'zvar.',
+  companyName: 'zvar.',
+  shopName: 'zvar.',
   productLine: 'Vela',
   productFullName: 'Vela Sculpt™',
-  legalName: 'ZVAR',
+  legalName: 'zvar.',
   email: 'contact@zvar-shop.com',
   supportEmail: 'support@zvar-shop.com',
   privacyEmail: 'privacy@zvar-shop.com',
@@ -29,14 +29,14 @@ export const nav = [
     ],
   },
   { label: 'Nos Packs & Offres', to: '/pages/offres' },
-  { label: 'Pourquoi ZVAR ?', to: '/pages/notre-technologie' },
+  { label: 'Pourquoi zvar ?', to: '/pages/notre-technologie' },
   { label: 'Garantie 30 Jours', to: '/pages/garantie' },
   { label: 'Avis Clients', to: '/#reviews' },
 ];
 
 export const announcements = [
   'Garantie satisfait ou remboursé de 30 jours',
-  'Livraison suivie 100% offerte (6 à 12 jours ouvrés) · Suivi complet en direct',
+  'Livraison suivie 100% offerte (6 à 12 jours ouvrés) · Suivi complet en direct · club zvar',
   'Plus de 3 000 clients satisfaits portent Vela Sculpt™ au quotidien',
 ];
 

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { getLocalizedProduct, products } from '../../data/catalog.js';
 import { useLanguage } from '../../context/LanguageContext.jsx';
 import './ProductVideoSection.css';
@@ -9,7 +9,13 @@ export default function ProductVideoSection({ modelHandle = 'vela-sculpt-sans-ma
   const localized = getLocalizedProduct(rawModel, lang);
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(true);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = true;
+      videoRef.current.volume = 0;
+    }
+  }, []);
 
   const togglePlay = (e) => {
     if (e && e.stopPropagation) e.stopPropagation();
@@ -21,13 +27,6 @@ export default function ProductVideoSection({ modelHandle = 'vela-sculpt-sans-ma
       videoRef.current.play().catch(() => { });
       setIsPlaying(true);
     }
-  };
-
-  const toggleMute = (e) => {
-    if (e && e.stopPropagation) e.stopPropagation();
-    if (!videoRef.current) return;
-    videoRef.current.muted = !isMuted;
-    setIsMuted(!isMuted);
   };
 
   const getCutBenefitFr = () => {
@@ -149,6 +148,7 @@ export default function ProductVideoSection({ modelHandle = 'vela-sculpt-sans-ma
             autoPlay
             loop
             muted
+            defaultMuted
             playsInline
             preload="auto"
           >
@@ -191,32 +191,6 @@ export default function ProductVideoSection({ modelHandle = 'vela-sculpt-sans-ma
                     <polygon points="5 3 19 12 5 21 5 3" />
                   </svg>
                   <span>{lang === 'fr' ? 'Lire' : 'Play'}</span>
-                </>
-              )}
-            </button>
-
-            <button
-              type="button"
-              className="product-video-section__ctrl-btn"
-              onClick={toggleMute}
-              aria-label={isMuted ? (lang === 'fr' ? 'Activer le son' : 'Unmute') : (lang === 'fr' ? 'Couper le son' : 'Mute')}
-            >
-              {isMuted ? (
-                <>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-                    <line x1="1" y1="1" x2="23" y2="23" />
-                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-                  </svg>
-                  <span>{lang === 'fr' ? 'Son coupé' : 'Muted'}</span>
-                </>
-              ) : (
-                <>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-                  </svg>
-                  <span>{lang === 'fr' ? 'Son actif' : 'Audio on'}</span>
                 </>
               )}
             </button>
