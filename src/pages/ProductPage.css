@@ -313,6 +313,19 @@
 
   .pp {
     grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+  }
+
+  .pp__gallery-col {
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  .pp__info {
+    width: 100%;
+    max-width: 580px;
+    margin: 0 auto;
   }
 }
 
