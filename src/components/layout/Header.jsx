@@ -10,10 +10,10 @@ import './Header.css';
 
 export function Logo() {
   return (
-    <Link to="/" className="logo" aria-label="ZVAR accueil">
+    <Link to="/" className="logo" aria-label="zvar. accueil">
       <img
         src="/images/logo.png?v=2"
-        alt="ZVAR"
+        alt="zvar."
         className="logo__img"
       />
     </Link>
