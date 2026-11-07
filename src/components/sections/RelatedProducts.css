@@ -27,6 +27,12 @@
 
 @media (max-width: 520px) {
   .related__grid {
-    grid-auto-columns: 64%;
+    grid-auto-columns: clamp(250px, 80vw, 320px);
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 calc((100vw - clamp(250px, 80vw, 320px)) / 2);
+    padding: 0 calc((100vw - clamp(250px, 80vw, 320px)) / 2) 6px;
+  }
+  .related__grid > * {
+    scroll-snap-align: center;
   }
 }
