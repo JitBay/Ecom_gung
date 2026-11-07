@@ -93,9 +93,9 @@
 
 @media (max-width: 899px) {
   .gallery {
-    margin: 0 auto;
+    margin: 0;
     width: 100%;
-    max-width: 440px;
+    max-width: 100%;
     position: relative;
   }
   .gallery__track {
@@ -106,7 +106,7 @@
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
     align-items: center;
-    border-radius: 16px;
+    border-radius: 0;
     width: 100%;
     background: #f5f5f7;
   }
@@ -120,7 +120,7 @@
     min-width: 100%;
     max-width: 100%;
     aspect-ratio: 4 / 5;
-    border-radius: 16px;
+    border-radius: 0;
     scroll-snap-align: center;
     display: flex;
     align-items: center;
