@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Gallery from './Gallery.jsx';
 import BundlePicker from './BundlePicker.jsx';
+import BlackFridayDeal from './BlackFridayDeal.jsx';
 import ProductDetails from './ProductDetails.jsx';
 import SizeFinder from './SizeFinder.jsx';
 import StickyCart from './StickyCart.jsx';
@@ -462,6 +463,8 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
             <Icon name="shield" size={14} /> {lang === 'fr' ? 'Garantie satisfait ou remboursé 30j' : '30-Day Money-Back Guarantee'}
           </span>
         </p>
+
+        <BlackFridayDeal />
 
         <BundlePicker
           selectedId={bundleId}

@@ -11,6 +11,55 @@ export const translations = {
       'Plus de 3 000 clients satisfaits portent Vela Sculpt™ au quotidien',
     ],
 
+    black_friday: {
+      bar_items: [
+        { text: "Black Friday : notre plus grande offre de l'année", highlight: true },
+        { text: "Jusqu'à -50% de réduction", highlight: false },
+        { text: "+100 000 t-shirts vendus", highlight: true },
+        { text: "2 t-shirts achetés = 1 offert", highlight: false },
+        { text: "Livraison 100% gratuite & suivie", highlight: false },
+        { text: "Garantie 30 jours satisfait ou remboursé", highlight: false },
+      ],
+      hero: {
+        eyebrow: "Black Friday · Plus grande offre de l'année",
+        kicker: "Jusqu'à",
+        discount: "-50%",
+        text: "Notre t-shirt compression n°1 des ventes. Plus de 100 000 hommes conquis. Le meilleur moment de l'année pour faire le plein.",
+        chips: [
+          "1 t-shirt 100% offert",
+          "+100 000 t-shirts vendus",
+          "Garantie 30 jours satisfait ou remboursé",
+        ],
+        cta: "Profiter de l'offre",
+      },
+      deal: {
+        sale_badge: "SALE",
+        tag: "Plus grande offre de l'année",
+        big: "Jusqu'à -50%",
+        row1_lead: "2 t-shirts achetés :",
+        row1_text: "votre 3ème t-shirt 100% OFFERT",
+        row2_lead: "Pack le plus choisi :",
+        row2_text: "seulement 19,99€ l'unité",
+        row3_lead: "Livraison Gratuite :",
+        row3_text: "suivie dès aujourd'hui (6-12 jours)",
+        foot: "Choisissez votre pack ci-dessous · 30 jours satisfait ou remboursé",
+      },
+      modal: {
+        eyebrow: "Événement Black Friday · Offre Limitée",
+        title_prefix: "Jusqu'à",
+        title_highlight: "-50%",
+        title_suffix: "& 1 T-Shirt OFFERT",
+        text: "Profitez en avant-première de notre plus grande offre de l'année sur l'ensemble de la gamme de maintien postural et compression Vela Sculpt™.",
+        perks: [
+          { title: "1 T-Shirt Offert", desc: "Pour 2 t-shirts achetés" },
+          { title: "Livraison Suivie 0€", desc: "Expédition prioritaire & tracking live" },
+          { title: "Essai 30 Jours", desc: "100% remboursé si non conquis" },
+        ],
+        cta: "Profiter du Black Friday",
+        dismiss: "Continuer sans l'offre",
+      },
+    },
+
     nav: {
       home: 'Accueil',
       models: 'Nos modèles',
@@ -275,6 +324,55 @@ export const translations = {
       'Free Tracked Shipping (6-12 Working Days) · Full Live Tracking · zvar club',
       'Over 3,000 happy customers wear Vela Sculpt™ every day',
     ],
+
+    black_friday: {
+      bar_items: [
+        { text: "Black Friday: our biggest offer of the year", highlight: true },
+        { text: "Up to 50% off", highlight: false },
+        { text: "100,000+ shirts sold", highlight: true },
+        { text: "Buy 2 shirts = 1 free", highlight: false },
+        { text: "Free tracked shipping", highlight: false },
+        { text: "30-day money-back guarantee", highlight: false },
+      ],
+      hero: {
+        eyebrow: "Black Friday · Biggest offer of the year",
+        kicker: "Up to",
+        discount: "50% off",
+        text: "Our #1 best-selling compression wear. 100,000+ shirts sold. The best moment of the year to stock up.",
+        chips: [
+          "1 shirt 100% free",
+          "100,000+ shirts sold",
+          "30-day money-back guarantee",
+        ],
+        cta: "Get the deal",
+      },
+      deal: {
+        sale_badge: "SALE",
+        tag: "Biggest offer of the year",
+        big: "Up to 50% off",
+        row1_lead: "2 shirts:",
+        row1_text: "your 3rd shirt 100% FREE",
+        row2_lead: "Most-chosen pack:",
+        row2_text: "only $19.99 each",
+        row3_lead: "Free shipping:",
+        row3_text: "full live tracking included",
+        foot: "Pick your deal below · 30 days to love them or your money back",
+      },
+      modal: {
+        eyebrow: "Black Friday Event · Limited Time",
+        title_prefix: "Up to",
+        title_highlight: "50% OFF",
+        title_suffix: "& 1 FREE Shirt",
+        text: "Unlock our biggest offer of the year on our science-backed ergonomic compression wear.",
+        perks: [
+          { title: "1 Free Shirt", desc: "Buy 2, get the 3rd 100% free" },
+          { title: "Free Tracked Shipping", desc: "Priority dispatch & live tracking" },
+          { title: "30-Day Risk-Free Trial", desc: "Full refund if not satisfied" },
+        ],
+        cta: "Claim Black Friday Deal",
+        dismiss: "Continue without offer",
+      },
+    },
 
     nav: {
       home: 'Home',

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import Icon from '../ui/Icon.jsx';
 import LanguageSwitcher from '../ui/LanguageSwitcher.jsx';
+import BlackFridayBar from './BlackFridayBar.jsx';
 import { brand } from '../../data/site.js';
 import { useCart } from '../../context/CartContext.jsx';
 import { useLanguage } from '../../context/LanguageContext.jsx';
@@ -238,7 +239,7 @@ export default function Header() {
   return (
     <>
       <div className="header-sticky-wrapper">
-        <AnnouncementBar />
+        <BlackFridayBar />
         <header className={`header ${scrolled ? 'is-scrolled' : ''}`} id="top">
           <div className="header__inner container">
             <div className="header__left">
