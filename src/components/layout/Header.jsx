@@ -237,90 +237,92 @@ export default function Header() {
 
   return (
     <>
-      <AnnouncementBar />
-      <header className={`header ${scrolled ? 'is-scrolled' : ''}`} id="top">
-        <div className="header__inner container">
-          <div className="header__left">
-            <button className="icon-btn hide-desktop" onClick={() => setMenuOpen(true)} aria-label={t('header.menu_open')}>
-              <Icon name="menu" size={24} />
-            </button>
-            <Logo />
-          </div>
+      <div className="header-sticky-wrapper">
+        <AnnouncementBar />
+        <header className={`header ${scrolled ? 'is-scrolled' : ''}`} id="top">
+          <div className="header__inner container">
+            <div className="header__left">
+              <button className="icon-btn hide-desktop" onClick={() => setMenuOpen(true)} aria-label={t('header.menu_open')}>
+                <Icon name="menu" size={24} />
+              </button>
+              <Logo />
+            </div>
 
-          <nav className="header__nav" aria-label="Menu principal" onMouseLeave={handleCloseDropdown}>
-            {navItems.map((item) => {
-              if (item.children) {
-                return (
-                  <div
-                    key={item.to}
-                    className={`nav-dropdown ${isModelsActive ? 'is-active' : ''}`}
-                    onMouseEnter={handleMouseEnterDropdown}
-                    onMouseLeave={handleMouseLeaveDropdown}
-                  >
-                    <NavLink to={item.to} className={`nav-dropdown__link ${isModelsActive ? 'active' : ''}`}>
-                      {item.label} <Icon name="chevron" size={12} />
-                    </NavLink>
-                    {dropdownOpen && (
-                      <div className="nav-dropdown__menu">
-                        <NavLink
-                          to="/collections/all"
-                          className="nav-dropdown__item nav-dropdown__item--all"
-                          onClick={handleCloseDropdown}
-                        >
-                          {t('nav.models_all')}
-                        </NavLink>
-                        {item.children.map((sub) => (
+            <nav className="header__nav" aria-label="Menu principal" onMouseLeave={handleCloseDropdown}>
+              {navItems.map((item) => {
+                if (item.children) {
+                  return (
+                    <div
+                      key={item.to}
+                      className={`nav-dropdown ${isModelsActive ? 'is-active' : ''}`}
+                      onMouseEnter={handleMouseEnterDropdown}
+                      onMouseLeave={handleMouseLeaveDropdown}
+                    >
+                      <NavLink to={item.to} className={`nav-dropdown__link ${isModelsActive ? 'active' : ''}`}>
+                        {item.label} <Icon name="chevron" size={12} />
+                      </NavLink>
+                      {dropdownOpen && (
+                        <div className="nav-dropdown__menu">
                           <NavLink
-                            key={sub.to}
-                            to={sub.to}
-                            className="nav-dropdown__item"
+                            to="/collections/all"
+                            className="nav-dropdown__item nav-dropdown__item--all"
                             onClick={handleCloseDropdown}
                           >
-                            {sub.label}
+                            {t('nav.models_all')}
                           </NavLink>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                );
-              }
-              if (item.to.startsWith('/#')) {
+                          {item.children.map((sub) => (
+                            <NavLink
+                              key={sub.to}
+                              to={sub.to}
+                              className="nav-dropdown__item"
+                              onClick={handleCloseDropdown}
+                            >
+                              {sub.label}
+                            </NavLink>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+                if (item.to.startsWith('/#')) {
+                  return (
+                    <Link
+                      key={item.to}
+                      to={item.to}
+                      onMouseEnter={handleCloseDropdown}
+                      onClick={(e) => handleAnchorClick(e, item.to)}
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                }
                 return (
-                  <Link
+                  <NavLink
                     key={item.to}
                     to={item.to}
+                    end={item.to === '/'}
                     onMouseEnter={handleCloseDropdown}
-                    onClick={(e) => handleAnchorClick(e, item.to)}
                   >
                     {item.label}
-                  </Link>
+                  </NavLink>
                 );
-              }
-              return (
-                <NavLink
-                  key={item.to}
-                  to={item.to}
-                  end={item.to === '/'}
-                  onMouseEnter={handleCloseDropdown}
-                >
-                  {item.label}
-                </NavLink>
-              );
-            })}
-          </nav>
+              })}
+            </nav>
 
-          <div className="header__right">
-            <LanguageSwitcher variant="dropdown" className="hide-mobile" />
-            <Link to="/pages/garantie" className="badge-guarantee-head hide-mobile">
-              <Icon name="shield" size={14} /> {t('header.guarantee_pill')}
-            </Link>
-            <button className="icon-btn cart-btn" onClick={() => setOpen(true)} aria-label={`${t('header.cart_aria')}, ${count} articles`}>
-              <Icon name="bag" size={22} />
-              {count > 0 && <span className="cart-btn__count">{count}</span>}
-            </button>
+            <div className="header__right">
+              <LanguageSwitcher variant="dropdown" className="hide-mobile" />
+              <Link to="/pages/garantie" className="badge-guarantee-head hide-mobile">
+                <Icon name="shield" size={14} /> {t('header.guarantee_pill')}
+              </Link>
+              <button className="icon-btn cart-btn" onClick={() => setOpen(true)} aria-label={`${t('header.cart_aria')}, ${count} articles`}>
+                <Icon name="bag" size={22} />
+                {count > 0 && <span className="cart-btn__count">{count}</span>}
+              </button>
+            </div>
           </div>
-        </div>
-      </header>
+        </header>
+      </div>
       <div className="trust-strip hide-tablet-up">
         <span>
           <Icon name="shield" size={14} strokeWidth={2.4} /> {t('nav.guarantee')}
