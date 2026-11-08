@@ -61,7 +61,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
               ? '1 Débardeur + 1 Demi-manches + 1 Manches longues inclus'
               : '1 Tank Top + 1 Short Sleeves + 1 Long Sleeves included',
           price: 59.99,
-          compareAt: 89.97,
+          compareAt: 74.97,
           badge: lang === 'fr' ? 'Offre Spéciale — 3 Coupes' : 'Special Offer — 3 Fits',
           freeShipping: true,
           highlight: true,
@@ -76,11 +76,11 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
       p2 = 39.98;
       c2 = 89.97;
     } else if (currentModel.handle === 'vela-sculpt-demi-manches') {
+      p2 = 49.98;
+      c2 = 114.97;
+    } else if (currentModel.handle === 'vela-sculpt-manches-longues') {
       p2 = 59.98;
       c2 = 134.97;
-    } else if (currentModel.handle === 'vela-sculpt-manches-longues') {
-      p2 = 79.98;
-      c2 = 179.97;
     } else {
       p2 = Math.round(p1 * 2 * 100) / 100;
       c2 = Math.round(c1 * 3 * 100) / 100;

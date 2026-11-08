@@ -62,8 +62,8 @@ const bestSellersBase = [
     badgeEn: 'White Shirt Essential',
     rating: 4.9,
     reviewsCount: '67',
-    price: 29.99,
-    compareAt: 49.99,
+    price: 24.99,
+    compareAt: 44.99,
     urlBase: '/products/vela-sculpt-demi-manches',
     offerBadge: true,
     colorData: {
@@ -96,8 +96,8 @@ const bestSellersBase = [
     badgeEn: 'Full Body Support',
     rating: 4.9,
     reviewsCount: '67',
-    price: 39.99,
-    compareAt: 59.99,
+    price: 29.99,
+    compareAt: 49.99,
     urlBase: '/products/vela-sculpt-manches-longues',
     offerBadge: true,
     colorData: {
@@ -131,7 +131,7 @@ const bestSellersBase = [
     rating: 4.9,
     reviewsCount: '70',
     price: 59.99,
-    compareAt: 89.97,
+    compareAt: 74.97,
     urlBase: '/pages/offres#product',
     colorData: {
       Noir: {
