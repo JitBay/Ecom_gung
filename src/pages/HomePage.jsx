@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import QualitySection from '../components/sections/QualitySection.jsx';
+import BlackFridayHero from '../components/sections/BlackFridayHero.jsx';
 import Stars from '../components/ui/Stars.jsx';
 import HowItWorksModal from '../components/ui/HowItWorksModal.jsx';
 import { brand } from '../data/site.js';
@@ -395,6 +396,9 @@ export default function HomePage() {
           ))}
         </ul>
       </section>
+
+      {/* 3. BLACK FRIDAY ANNOUNCEMENT BANNER */}
+      <BlackFridayHero targetId="bestsellers" />
 
       {/* 4. BEST SELLERS SHELF */}
       <section className="ixh-bs" id="bestsellers">

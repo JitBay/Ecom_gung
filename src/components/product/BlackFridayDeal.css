@@ -1,0 +1,126 @@
+.ixbm-deal {
+  scroll-margin-top: 140px;
+  position: relative;
+  box-sizing: border-box;
+  margin: 14px 0 22px;
+  padding: 18px 20px 16px;
+  border-radius: 14px;
+  background: radial-gradient(90% 120% at 0% 0%, rgba(201, 169, 110, 0.24), rgba(201, 169, 110, 0) 65%), #0B0B0B;
+  color: #ffffff;
+  border: 1.5px solid #C9A96E;
+  box-shadow: 0 0 0 4px rgba(201, 169, 110, 0.12), 0 14px 30px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.ixbm-deal::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(100deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0));
+  transform: skewX(-18deg);
+  animation: ixbmShine 3.6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes ixbmShine {
+  0%, 100% {
+    left: -60%;
+  }
+  50% {
+    left: 160%;
+  }
+}
+
+.ixbm-deal__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.ixbm-deal__sale {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: #E5322B;
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  line-height: 1.2;
+}
+
+.ixbm-deal__tag {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #C9A96E;
+}
+
+.ixbm-deal .ixbm-deal__big {
+  margin: 0 0 10px;
+  font-family: 'Anton', 'Montserrat', Impact, sans-serif;
+  font-size: clamp(34px, 4vw, 44px);
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  background: linear-gradient(180deg, #F3DFAE 0%, #C9A96E 60%, #9C7B3E 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.ixbm-deal__rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.ixbm-deal__rows li {
+  position: relative;
+  padding-left: 26px;
+  font-size: 14px;
+  line-height: 1.35;
+  color: #F2EEE6;
+}
+
+.ixbm-deal__rows li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1px;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: #C9A96E url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.3l2.6 2.5L12 5.4' fill='none' stroke='%230B0B0B' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/11px no-repeat;
+}
+
+.ixbm-deal__rows strong {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.ixbm-deal__foot {
+  margin: 12px 0 0;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(201, 169, 110, 0.35);
+  font-size: 12px;
+  color: #E9E4DA;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ixbm-deal__foot span {
+  color: #C9A96E;
+  font-weight: 800;
+}

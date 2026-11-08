@@ -37,7 +37,7 @@ export default function RefundPolicyPage() {
 
             <h2>3. Modalités de remboursement</h2>
             <p>
-              Une fois votre colis de retour inspecté par nos équipes sous 48 heures ouvrées, le remboursement est automatiquement émis sur le moyen de paiement utilisé lors de l'achat (carte bancaire, PayPal, Apple Pay, Shop Pay). Le crédit apparaît sur votre compte sous 2 à 5 jours ouvrés selon votre établissement bancaire.
+              Une fois votre colis de retour inspecté par nos équipes sous 48 heures ouvrées, le remboursement est automatiquement émis sur le moyen de paiement utilisé lors de l'achat (carte bancaire, Apple Pay, Shop Pay). Le crédit apparaît sur votre compte sous 2 à 5 jours ouvrés selon votre établissement bancaire.
             </p>
 
             <h2>4. Contact</h2>
@@ -63,7 +63,7 @@ export default function RefundPolicyPage() {
 
             <h2>3. Refund Processing</h2>
             <p>
-              Once your returned package is received and inspected by our warehouse within 48 business hours, your refund is automatically issued to your original payment method (card, PayPal, Apple Pay). Credits typically appear within 2 to 5 business days.
+              Once your returned package is received and inspected by our warehouse within 48 business hours, your refund is automatically issued to your original payment method (card, Apple Pay, Shop Pay). Credits typically appear within 2 to 5 business days.
             </p>
 
             <h2>4. Contact Us</h2>
