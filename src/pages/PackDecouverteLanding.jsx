@@ -147,7 +147,7 @@ export default function PackDecouverteLanding() {
 
             <div className="pdl-hero__cta-group">
               <a href="#product" className="btn btn--dark pdl-hero__cta">
-                {lang === 'fr' ? 'Configurer mon Pack Découverte (59,99 $)' : 'Customize My Discovery Pack ($59.99)'}{' '}
+                {lang === 'fr' ? 'Configurer mon Pack Découverte (49,98 $)' : 'Customize My Discovery Pack ($49.98)'}{' '}
                 <Icon name="arrow" size={16} />
               </a>
             </div>
@@ -190,7 +190,7 @@ export default function PackDecouverteLanding() {
                   </div>
                 </div>
                 <div className="pdl-hero__card-price">
-                  <strong>59,99 $</strong>
+                  <strong>49,98 $</strong>
                   <s>74,97 $</s>
                 </div>
               </div>
@@ -251,13 +251,13 @@ export default function PackDecouverteLanding() {
               </h3>
               <p>
                 {lang === 'fr'
-                  ? 'En commandant le Pack Découverte, vous bénéficiez du tarif privilégié de 59,99 $ (économisez 15 $) avec la livraison suivie offerte (6 à 12 jours ouvrés avec suivi complet).'
-                  : 'By ordering the Discovery Pack, you get the special bundled price of $59.99 (save $15) plus free tracked shipping (6 to 12 working days with full tracking).'}
+                  ? 'En commandant le Pack Découverte, vous bénéficiez du tarif privilégié de 49,98 $ (économisez 25 $) avec la livraison suivie offerte (6 à 12 jours ouvrés avec suivi complet).'
+                  : 'By ordering the Discovery Pack, you get the special bundled price of $49.98 (save $25) plus free tracked shipping (6 to 12 working days with full tracking).'}
               </p>
             </div>
             <div className="pdl-value-strip__action">
               <div className="pdl-value-strip__price">
-                <strong>59,99 $</strong>
+                <strong>49,98 $</strong>
                 <s>74,97 $</s>
               </div>
               <a href="#product" className="btn btn--gold">
