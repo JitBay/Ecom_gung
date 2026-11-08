@@ -191,7 +191,7 @@ export default function PackDecouverteLanding() {
                 </div>
                 <div className="pdl-hero__card-price">
                   <strong>59,99 $</strong>
-                  <s>89,97 $</s>
+                  <s>74,97 $</s>
                 </div>
               </div>
             </div>
@@ -246,19 +246,19 @@ export default function PackDecouverteLanding() {
             <div className="pdl-value-strip__content">
               <h3>
                 {lang === 'fr'
-                  ? 'Valeur totale si acheté séparément : 89,97 $ (89,97 $ prix régulier)'
-                  : 'Total value if bought separately: $89.97 ($89.97 regular)'}
+                  ? 'Valeur totale si acheté séparément : 74,97 $ (74,97 $ prix régulier)'
+                  : 'Total value if bought separately: $74.97 ($74.97 regular)'}
               </h3>
               <p>
                 {lang === 'fr'
-                  ? 'En commandant le Pack Découverte, vous bénéficiez du tarif privilégié de 59,99 $ (économisez 30 $) avec la livraison suivie offerte (6 à 12 jours ouvrés avec suivi complet).'
-                  : 'By ordering the Discovery Pack, you get the special bundled price of $59.99 (save $30) plus free tracked shipping (6 to 12 working days with full tracking).'}
+                  ? 'En commandant le Pack Découverte, vous bénéficiez du tarif privilégié de 59,99 $ (économisez 15 $) avec la livraison suivie offerte (6 à 12 jours ouvrés avec suivi complet).'
+                  : 'By ordering the Discovery Pack, you get the special bundled price of $59.99 (save $15) plus free tracked shipping (6 to 12 working days with full tracking).'}
               </p>
             </div>
             <div className="pdl-value-strip__action">
               <div className="pdl-value-strip__price">
                 <strong>59,99 $</strong>
-                <s>89,97 $</s>
+                <s>74,97 $</s>
               </div>
               <a href="#product" className="btn btn--gold">
                 {lang === 'fr' ? 'Personnaliser mon pack' : 'Customize My Pack'}
