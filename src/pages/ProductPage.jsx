@@ -5,7 +5,6 @@ import Icon from '../components/ui/Icon.jsx';
 import Stars from '../components/ui/Stars.jsx';
 import Gallery from '../components/product/Gallery.jsx';
 import SizeFinder from '../components/product/SizeFinder.jsx';
-import BlackFridayHero from '../components/sections/BlackFridayHero.jsx';
 import Hero from '../components/sections/Hero.jsx';
 import CameraRolls from '../components/sections/CameraRolls.jsx';
 import ProductSection from '../components/product/ProductSection.jsx';
@@ -37,9 +36,6 @@ function DedicatedProductPage({ product }) {
 
   return (
     <div className={`product-page-wrap ${handle}-product`}>
-      {/* 0. BLACK FRIDAY ANNOUNCEMENT BANNER */}
-      <BlackFridayHero targetId="bm-deal" />
-
       {/* 1. HERO BANNER & CAMERA ROLLS: ONLY FOR SLEEVELESS (REMOVED FROM SHORT AND LONG AS REQUESTED) */}
       {isSleeveless && (
         <>
