@@ -130,7 +130,7 @@ const bestSellersBase = [
     badgeEn: 'Discovery Offer',
     rating: 4.9,
     reviewsCount: '70',
-    price: 59.99,
+    price: 49.98,
     compareAt: 74.97,
     urlBase: '/pages/offres#product',
     colorData: {

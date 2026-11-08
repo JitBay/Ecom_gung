@@ -193,7 +193,7 @@ export const products = [
     tagline: 'Testez l’ensemble de nos 3 coupes ergonomiques en un seul pack à tarif avantageux.',
     badge: 'Offre Découverte',
     modelType: 'pack-decouverte',
-    price: 59.99,
+    price: 49.98,
     compareAt: 74.97,
     rating: 4.9,
     reviewCount: 70,
