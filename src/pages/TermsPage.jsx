@@ -31,7 +31,7 @@ export default function TermsPage() {
 
         <h2>Article 3 — Prix & paiement sécurisé</h2>
         <p>
-          Les prix sont indiqués en dollars américains ($ USD) toutes taxes comprises (TTC). Le règlement des achats s'effectue au comptant lors de la commande par carte bancaire (Visa, MasterCard, American Express), Shop Pay, Apple Pay ou PayPal. Les transactions bénéficient d'un protocole de chiffrement SSL 256 bits.
+          Les prix sont indiqués en dollars américains ($ USD) toutes taxes comprises (TTC). Le règlement des achats s'effectue au comptant lors de la commande par carte bancaire (Visa, MasterCard, American Express), Shop Pay ou Apple Pay. Les transactions bénéficient d'un protocole de chiffrement SSL 256 bits.
         </p>
 
         <h2>Article 4 — Livraison</h2>

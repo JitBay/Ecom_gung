@@ -52,7 +52,7 @@ export default function GuaranteePage() {
                 <strong>Procédure de retour simple et rapide :</strong> Envoyez simplement un email à <code>support@zvar-shop.com</code> en mentionnant votre numéro de commande. Notre équipe vous transmettra l'adresse de retour et les instructions sous 24h.
               </li>
               <li>
-                <strong>Remboursement rapide :</strong> Dès réception et vérification de votre retour par notre centre logistique, votre remboursement est immédiatement émis sur votre mode de paiement initial (carte bancaire, Apple Pay ou PayPal).
+                <strong>Remboursement rapide :</strong> Dès réception et vérification de votre retour par notre centre logistique, votre remboursement est immédiatement émis sur votre mode de paiement initial (carte bancaire ou Apple Pay).
               </li>
             </ol>
 
@@ -86,7 +86,7 @@ export default function GuaranteePage() {
                 <strong>Simple return process:</strong> Just email <code>support@zvar-shop.com</code> with your order number. Our support team replies within 24 hours with return instructions.
               </li>
               <li>
-                <strong>Prompt refunds:</strong> Once received and verified at our fulfillment center, your refund is credited straight to your original payment method (card, Apple Pay, PayPal).
+                <strong>Prompt refunds:</strong> Once received and verified at our fulfillment center, your refund is credited straight to your original payment method (card, Apple Pay).
               </li>
             </ol>
 
