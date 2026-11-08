@@ -60,7 +60,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
             lang === 'fr'
               ? '1 Débardeur + 1 Demi-manches + 1 Manches longues inclus'
               : '1 Tank Top + 1 Short Sleeves + 1 Long Sleeves included',
-          price: 49.98,
+          price: 49.99,
           compareAt: 74.97,
           badge: lang === 'fr' ? 'Offre Spéciale — 3 Coupes' : 'Special Offer — 3 Fits',
           freeShipping: true,
