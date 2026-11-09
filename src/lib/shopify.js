@@ -335,7 +335,7 @@ export function buildShopifyCartPermalink(lines, options = {}) {
   lines.forEach((line) => {
     const lineQty = Math.max(1, parseInt(line.qty, 10) || 1);
 
-    // 1. Pack Découverte (Single dedicated Shopify product at 59.99 €)
+    // 1. Pack Découverte (Single dedicated Shopify product at 44.99 €)
     if (line.handle === 'pack-decouverte' || line.isDiscoveryPack) {
       const vId = resolveShopifyVariantId(line);
       variantQuantities.set(vId, (variantQuantities.get(vId) || 0) + lineQty);
@@ -360,7 +360,7 @@ export function buildShopifyCartPermalink(lines, options = {}) {
           line.title.includes('Week Pack')));
 
     if (isTwoPlusOne) {
-      // 2 paid shirts matching the exact bundle price (39.98 € / 59.98 € / 79.98 €)
+      // 2 paid shirts matching the exact bundle price (39.98 € / 49.98 € / 59.98 €)
       if (Array.isArray(line.chosenVariants) && line.chosenVariants.length >= 2) {
         const v1 = resolveShopifyVariantId({ handle: line.handle, ...line.chosenVariants[0] });
         const v2 = resolveShopifyVariantId({ handle: line.handle, ...line.chosenVariants[1] });

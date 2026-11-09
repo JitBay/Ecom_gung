@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import QualitySection from '../components/sections/QualitySection.jsx';
 import BlackFridayHero from '../components/sections/BlackFridayHero.jsx';
+import BlackFridayStrip from '../components/sections/BlackFridayStrip.jsx';
 import Stars from '../components/ui/Stars.jsx';
 import HowItWorksModal from '../components/ui/HowItWorksModal.jsx';
 import { brand } from '../data/site.js';
@@ -12,6 +13,40 @@ import './HomePage.css';
 // Best sellers cards: curated selection of 4 core model & colorway editions
 const bestSellersBase = [
   {
+    id: 'pack-decouverte',
+    handle: 'pack-decouverte',
+    defaultColor: 'Noir',
+    titleFr: 'Pack Découverte — 3 coupes',
+    titleEn: 'Discovery Pack — 3 Fits',
+    taglineFr: '1 débardeur + 1 demi-manches + 1 manches longues inclus (économisez 30 $)',
+    taglineEn: '1 Tank Top + 1 Short Sleeves + 1 Long Sleeves included (Save $30)',
+    badgeFr: '⭐️ Offre star Black Friday',
+    badgeEn: '⭐️ Black Friday Star Deal',
+    rating: 4.9,
+    reviewsCount: '70',
+    price: 44.99,
+    compareAt: 74.97,
+    urlBase: '/products/pack-decouverte',
+    offerBadge: true,
+    colorData: {
+      Noir: {
+        hex: '#1a1a1a',
+        img: '/images/products/image-decouverte.png',
+        hoverImg: '/images/products/decouverte-back.png',
+      },
+      Blanc: {
+        hex: '#f4f4f6',
+        img: '/images/products/image-decouverte.png',
+        hoverImg: '/images/products/decouverte-back.png',
+      },
+      Gris: {
+        hex: '#72757d',
+        img: '/images/products/image-decouverte.png',
+        hoverImg: '/images/products/decouverte-back.png',
+      },
+    },
+  },
+  {
     id: 'sans-manches-noir',
     handle: 'vela-sculpt-sans-manches',
     defaultColor: 'Noir',
@@ -19,8 +54,8 @@ const bestSellersBase = [
     titleEn: 'Vela Sculpt™ Sleeveless',
     taglineFr: 'Invisibilité absolue sous chemises et t-shirts légers',
     taglineEn: 'Discreet and breathable core support under shirts & tees',
-    badgeFr: '#1 Meilleure Vente',
-    badgeEn: '#1 Best Seller',
+    badgeFr: 'Débardeur invisible',
+    badgeEn: 'Invisible Tank Top',
     rating: 4.9,
     reviewsCount: '67',
     price: 19.99,
@@ -62,8 +97,8 @@ const bestSellersBase = [
     badgeEn: 'White Shirt Essential',
     rating: 4.9,
     reviewsCount: '67',
-    price: 29.99,
-    compareAt: 49.99,
+    price: 24.99,
+    compareAt: 44.99,
     urlBase: '/products/vela-sculpt-demi-manches',
     offerBadge: true,
     colorData: {
@@ -96,8 +131,8 @@ const bestSellersBase = [
     badgeEn: 'Full Body Support',
     rating: 4.9,
     reviewsCount: '67',
-    price: 39.99,
-    compareAt: 59.99,
+    price: 29.99,
+    compareAt: 49.99,
     urlBase: '/products/vela-sculpt-manches-longues',
     offerBadge: true,
     colorData: {
@@ -115,39 +150,6 @@ const bestSellersBase = [
         hex: '#f4f4f6',
         img: '/images/products/manches-longues/7.jpg',
         hoverImg: '/images/products/manches-longues/8.jpg',
-      },
-    },
-  },
-  {
-    id: 'pack-decouverte',
-    handle: 'pack-decouverte',
-    defaultColor: 'Noir',
-    titleFr: 'Pack Découverte — 3 Coupes',
-    titleEn: 'Discovery Pack — 3 Fits',
-    taglineFr: '1 Débardeur + 1 Demi-manches + 1 Manches longues inclus',
-    taglineEn: '1 Tank Top + 1 Short Sleeves + 1 Long Sleeves included',
-    badgeFr: 'Offre Découverte',
-    badgeEn: 'Discovery Offer',
-    rating: 4.9,
-    reviewsCount: '70',
-    price: 59.99,
-    compareAt: 89.97,
-    urlBase: '/pages/offres#product',
-    colorData: {
-      Noir: {
-        hex: '#1a1a1a',
-        img: '/images/products/image-decouverte.png',
-        hoverImg: '/images/products/decouverte-back.png',
-      },
-      Blanc: {
-        hex: '#f4f4f6',
-        img: '/images/products/image-decouverte.png',
-        hoverImg: '/images/products/decouverte-back.png',
-      },
-      Gris: {
-        hex: '#72757d',
-        img: '/images/products/image-decouverte.png',
-        hoverImg: '/images/products/decouverte-back.png',
       },
     },
   },
@@ -194,15 +196,27 @@ function BestSellerCard({ p, lang, t }) {
           <Link
             to={targetUrl}
             className="ixh-card__stamp"
-            title={lang === 'fr' ? 'Offre 2 achetés + le 3ème offert' : 'Buy 2, get 1 free offer'}
-            aria-label={lang === 'fr' ? 'Offre 2 achetés 1 offert' : 'Buy 2 get 1 free offer'}
+            title={
+              p.handle === 'pack-decouverte'
+                ? (lang === 'fr' ? 'Offre Découverte Black Friday' : 'Black Friday Discovery Offer')
+                : (lang === 'fr' ? 'Offre 2 achetés + le 3ème offert' : 'Buy 2, get 1 free offer')
+            }
+            aria-label={
+              p.handle === 'pack-decouverte'
+                ? (lang === 'fr' ? 'Offre Découverte Black Friday' : 'Black Friday Discovery Offer')
+                : (lang === 'fr' ? 'Offre 2 achetés 1 offert' : 'Buy 2 get 1 free offer')
+            }
             tabIndex={-1}
           >
             <span className="ixh-card__stamp-top">
-              {lang === 'fr' ? '2 ACHETÉS' : 'BUY 2'}
+              {p.handle === 'pack-decouverte'
+                ? (lang === 'fr' ? '3 COUPES' : '3 FITS')
+                : (lang === 'fr' ? '2 ACHETÉS' : 'BUY 2')}
             </span>
             <strong className="ixh-card__stamp-main">
-              {lang === 'fr' ? '1 OFFERT' : 'GET 1 FREE'}
+              {p.handle === 'pack-decouverte'
+                ? (lang === 'fr' ? '44,99 $' : '$44.99')
+                : (lang === 'fr' ? '1 OFFERT' : 'GET 1 FREE')}
             </strong>
           </Link>
         )}
@@ -364,9 +378,12 @@ export default function HomePage() {
             </h1>
             <p className="ixh-hero__text">{t('home.hero_text')}</p>
             <div className="ixh-hero__btns">
+              <Link to="/products/pack-decouverte" className="ixh-btn ixh-btn--gold">
+                {lang === 'fr' ? '🔥 Pack Découverte (44,99 $)' : '🔥 Discovery Pack ($44.99)'}
+              </Link>
               <a
                 href="#bestsellers"
-                className="ixh-btn ixh-btn--gold"
+                className="ixh-btn ixh-btn--outline-gold"
                 onClick={(e) => {
                   const el = document.getElementById('bestsellers');
                   if (el) {
@@ -377,9 +394,6 @@ export default function HomePage() {
               >
                 {t('home.cta_bestsellers')}
               </a>
-              <Link to="/collections/all" className="ixh-btn ixh-btn--outline-gold">
-                {t('home.cta_all')}
-              </Link>
             </div>
           </div>
         </div>
@@ -399,6 +413,9 @@ export default function HomePage() {
 
       {/* 3. BLACK FRIDAY ANNOUNCEMENT BANNER */}
       <BlackFridayHero targetId="bestsellers" />
+
+      {/* DIAGONAL RUBAN / RIBBON OFFER */}
+      <BlackFridayStrip targetId="bestsellers" />
 
       {/* 4. BEST SELLERS SHELF */}
       <section className="ixh-bs" id="bestsellers">

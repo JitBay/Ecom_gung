@@ -50,13 +50,13 @@ const offersCardsData = [
     defaultColor: 'Blanc',
     titleFr: 'Vela Sculpt™ demi-manches',
     titleEn: 'Vela Sculpt™ Short Sleeves',
-    taglineFr: 'Pack 3 t-shirts (2 achetés + 1 offert) · Soit 19,99 $ / unité',
-    taglineEn: 'Pack of 3 t-shirts (Buy 2 Get 1 Free) · $19.99 each',
+    taglineFr: 'Pack 3 t-shirts (2 achetés + 1 offert) · Soit 16,66 $ / unité',
+    taglineEn: 'Pack of 3 t-shirts (Buy 2 Get 1 Free) · $16.66 each',
     badge: '2+1',
     rating: 4.9,
     reviewsCount: '67',
-    price: 59.98,
-    compareAt: 134.97,
+    price: 49.98,
+    compareAt: 74.97,
     urlBase: '/products/vela-sculpt-demi-manches',
     colorData: {
       Blanc: {
@@ -82,13 +82,13 @@ const offersCardsData = [
     defaultColor: 'Gris chiné',
     titleFr: 'Vela Sculpt™ manches longues',
     titleEn: 'Vela Sculpt™ Long Sleeves',
-    taglineFr: 'Pack 3 t-shirts (2 achetés + 1 offert) · Soit 26,66 $ / unité',
-    taglineEn: 'Pack of 3 long sleeves (Buy 2 Get 1 Free) · $26.66 each',
+    taglineFr: 'Pack 3 t-shirts (2 achetés + 1 offert) · Soit 19,99 $ / unité',
+    taglineEn: 'Pack of 3 long sleeves (Buy 2 Get 1 Free) · $19.99 each',
     badge: '2+1',
     rating: 4.9,
     reviewsCount: '67',
-    price: 79.98,
-    compareAt: 179.97,
+    price: 59.98,
+    compareAt: 89.97,
     urlBase: '/products/vela-sculpt-manches-longues',
     colorData: {
       'Gris chiné': {
@@ -236,12 +236,12 @@ export default function OffersProductShelf() {
     <section className="offers-shelf ixh-bs" id="offres-cards">
       <div className="offers-shelf__head">
         <span className="offers-shelf__pill">
-          ★ {lang === 'fr' ? 'Offre Spéciale (2 achetés + 1 offert)' : 'Special Offer (Buy 2 Get 1 Free)'}
+          ★ {lang === 'fr' ? 'Offre spéciale (2 achetés + 1 offert)' : 'Special Offer (Buy 2 Get 1 Free)'}
         </span>
         <h2 className="offers-shelf__title">
           {lang === 'fr' ? (
             <>
-              Nos modèles éligibles à l’offre <em>2+1 Offert.</em>
+              Nos modèles éligibles à l’offre <em>2+1 offert.</em>
             </>
           ) : (
             <>

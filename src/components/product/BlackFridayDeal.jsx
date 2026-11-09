@@ -1,38 +1,42 @@
 import { useLanguage } from '../../context/LanguageContext.jsx';
 import './BlackFridayDeal.css';
 
-export default function BlackFridayDeal() {
-  const { dict } = useLanguage();
-  const d = dict.black_friday?.deal || {
-    sale_badge: 'SALE',
-    tag: "Plus grande offre de l'année",
-    big: "Jusqu'à -50%",
-    row1_lead: '2 t-shirts achetés :',
-    row1_text: 'votre 3ème t-shirt 100% OFFERT',
-    row2_lead: 'Pack le plus choisi :',
-    row2_text: "seulement 19,99€ l'unité",
-    row3_lead: 'Livraison Gratuite :',
-    row3_text: "suivie dès aujourd'hui (6-12 jours)",
-    foot: 'Choisissez votre pack ci-dessous · 30 jours satisfait ou remboursé',
-  };
+export default function BlackFridayDeal({ model, isDiscovery = false }) {
+  const { dict, lang } = useLanguage();
+  const handle = isDiscovery ? 'pack-decouverte' : (model?.handle || 'vela-sculpt-sans-manches');
+  const dealsMap = dict.black_friday?.deals_by_handle || {};
+  const d = dealsMap[handle] || dealsMap['vela-sculpt-sans-manches'] || {};
+  const isPack = handle === 'pack-decouverte';
+  const saleBadge = lang === 'fr' ? (isPack ? 'Offre star' : 'Black Friday') : (isPack ? 'Star Deal' : 'Sale');
 
   return (
     <div className="ixbm-deal" id="bm-deal" role="note" aria-label="Offre Black Friday">
       <div className="ixbm-deal__head">
-        <span className="ixbm-deal__sale">{d.sale_badge}</span>
+        <span className="ixbm-deal__sale">{saleBadge}</span>
         <span className="ixbm-deal__tag">{d.tag}</span>
       </div>
-      <p className="ixbm-deal__big">{d.big}</p>
+      <div className="ixbm-deal__price-row">
+        <p className="ixbm-deal__big">{d.big}</p>
+        {d.compare && (
+          <span className="ixbm-deal__compare"><s>{d.compare}</s></span>
+        )}
+      </div>
       <ul className="ixbm-deal__rows">
-        <li>
-          <strong>{d.row1_lead}</strong> {d.row1_text}
-        </li>
-        <li>
-          <strong>{d.row2_lead}</strong> {d.row2_text}
-        </li>
-        <li>
-          <strong>{d.row3_lead}</strong> {d.row3_text}
-        </li>
+        {d.row1_lead && (
+          <li>
+            <strong>{d.row1_lead}</strong> {d.row1_text}
+          </li>
+        )}
+        {d.row2_lead && (
+          <li>
+            <strong>{d.row2_lead}</strong> {d.row2_text}
+          </li>
+        )}
+        {d.row3_lead && (
+          <li>
+            <strong>{d.row3_lead}</strong> {d.row3_text}
+          </li>
+        )}
       </ul>
       <p className="ixbm-deal__foot">
         <span aria-hidden="true">&darr;</span> {d.foot}

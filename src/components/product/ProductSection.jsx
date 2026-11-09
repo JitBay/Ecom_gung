@@ -60,9 +60,9 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
             lang === 'fr'
               ? '1 Débardeur + 1 Demi-manches + 1 Manches longues inclus'
               : '1 Tank Top + 1 Short Sleeves + 1 Long Sleeves included',
-          price: 59.99,
-          compareAt: 89.97,
-          badge: lang === 'fr' ? 'Offre Spéciale — 3 Coupes' : 'Special Offer — 3 Fits',
+          price: 44.99,
+          compareAt: 74.97,
+          badge: lang === 'fr' ? 'Offre Découverte Black Friday' : 'Black Friday Discovery Offer',
           freeShipping: true,
           highlight: true,
         },
@@ -74,16 +74,16 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
     let p2, c2;
     if (currentModel.handle === 'vela-sculpt-sans-manches') {
       p2 = 39.98;
-      c2 = 89.97;
+      c2 = 59.97;
     } else if (currentModel.handle === 'vela-sculpt-demi-manches') {
-      p2 = 59.98;
-      c2 = 134.97;
+      p2 = 49.98;
+      c2 = 74.97;
     } else if (currentModel.handle === 'vela-sculpt-manches-longues') {
-      p2 = 79.98;
-      c2 = 179.97;
+      p2 = 59.98;
+      c2 = 89.97;
     } else {
       p2 = Math.round(p1 * 2 * 100) / 100;
-      c2 = Math.round(c1 * 3 * 100) / 100;
+      c2 = Math.round(p1 * 3 * 100) / 100;
     }
 
     return [
@@ -464,7 +464,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
           </span>
         </p>
 
-        <BlackFridayDeal />
+        <BlackFridayDeal model={currentModel} isDiscovery={isDiscovery} />
 
         <BundlePicker
           selectedId={bundleId}

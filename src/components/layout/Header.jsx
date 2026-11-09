@@ -13,10 +13,16 @@ export function Logo() {
   return (
     <Link to="/" className="logo" aria-label="zvar. accueil">
       <img
-        src="/images/logo.png?v=2"
-        alt="zvar."
-        className="logo__img"
+        src="/favicon.svg"
+        alt=""
+        className="logo__emblem"
+        width="28"
+        height="28"
+        aria-hidden="true"
       />
+      <span className="logo__name">
+        zvar<span className="logo__dot">.</span>
+      </span>
     </Link>
   );
 }

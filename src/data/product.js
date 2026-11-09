@@ -176,7 +176,7 @@ export const benefits = [
     icon: 'sparkle',
     title: 'Silhouette lissée instantanément',
     text: 'Gainage abdominal doux qui aplatit le ventre et estompe les poignées d’amour sous chemise ou t-shirt.',
-    tag: 'Effet Immédiat',
+    tag: 'Effet immédiat',
   },
   {
     icon: 'pulse',
@@ -188,13 +188,13 @@ export const benefits = [
     icon: 'shield',
     title: '100% invisible sous les vêtements',
     text: 'Encolure basse et coutures ultra-plates plates imperceptibles même sous une chemise blanche ajustée.',
-    tag: 'Seconde Peau',
+    tag: 'Seconde peau',
   },
   {
     icon: 'waves',
     title: 'Maille 3D micro-respirante',
     text: 'Évacuation active de l’humidité et fibres anti-odeur pour rester parfaitement au frais toute la journée.',
-    tag: 'Thermo-régulant',
+    tag: 'Thermorégulant',
   },
 ];
 
@@ -241,11 +241,11 @@ export const bundles = [
   {
     id: 1,
     qty: 1,
-    title: 'Pack 1 T-Shirt',
+    title: 'Pack 1 t-shirt',
     subtitle: 'Idéal pour tester l’effet gainant et le confort au quotidien.',
-    price: 29.99,
-    compareAt: 49.99,
-    badge: 'Offre Découverte — 1 T-Shirt',
+    price: 24.99,
+    compareAt: 44.99,
+    badge: 'Offre découverte — 1 t-shirt',
     freeShipping: true,
   },
   {
@@ -254,8 +254,8 @@ export const bundles = [
     isTwoPlusOne: true,
     title: 'Pack 2 t-shirts + 1 offert',
     subtitle: '2 t-shirts achetés + le 3ème t-shirt 100% offert.',
-    price: 59.98,
-    compareAt: 89.97,
+    price: 49.98,
+    compareAt: 74.97,
     badge: 'Le plus choisi — 1 t-shirt offert',
     freeShipping: true,
     highlight: true,
@@ -263,9 +263,9 @@ export const bundles = [
 ];
 
 export const badges = [
-  { icon: 'shield', label: 'Garantie 30 Jours' },
+  { icon: 'shield', label: 'Garantie 30 jours' },
   { icon: 'lock', label: 'Paiement sécurisé SSL' },
-  { icon: 'truck', label: 'Expédition Suivie 24/48h' },
+  { icon: 'truck', label: 'Expédition suivie 24/48h' },
 ];
 
 export const badgesEn = [

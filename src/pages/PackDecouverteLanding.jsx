@@ -7,6 +7,8 @@ import ProductSection from '../components/product/ProductSection.jsx';
 import ProductVideoSection from '../components/product/ProductVideoSection.jsx';
 import VideoTestimonials from '../components/sections/VideoTestimonials.jsx';
 import QualitySection from '../components/sections/QualitySection.jsx';
+import BlackFridayHero from '../components/sections/BlackFridayHero.jsx';
+import BlackFridayStrip from '../components/sections/BlackFridayStrip.jsx';
 import Faq from '../components/sections/Faq.jsx';
 import CustomerReviews from '../components/sections/CustomerReviews.jsx';
 import { brand } from '../data/site.js';
@@ -76,13 +78,15 @@ export default function PackDecouverteLanding() {
 
   return (
     <div className="pdl">
+      <BlackFridayHero targetId="product" />
+
       {/* 1. HERO SECTION */}
       <section className="pdl-hero">
         <div className="container pdl-hero__grid">
           <div className="pdl-hero__content">
             <span className="pdl-hero__badge">
               <Icon name="sparkle" size={14} />{' '}
-              {lang === 'fr' ? 'Offre Spéciale Découverte · 3 Coupes en 1' : 'Special Discovery Offer · 3 Fits in 1'}
+              {lang === 'fr' ? 'Black Friday Sale · Offre star : 44,99 $ (3 coupes)' : 'Black Friday Sale · Star Deal: $44.99 (3 Fits)'}
             </span>
 
             <div className="pdl-hero__rating">
@@ -105,7 +109,7 @@ export default function PackDecouverteLanding() {
 
             <p className="pdl-hero__tagline">
               {lang === 'fr'
-                ? '1 Débardeur sans manches + 1 T-shirt demi-manches + 1 T-shirt manches longues. L’ensemble complet pour affiner votre torse, gainer votre ventre et redresser votre posture sous toutes vos tenues de l’année.'
+                ? '1 débardeur sans manches + 1 t-shirt demi-manches + 1 t-shirt manches longues. L’ensemble complet pour affiner votre torse, gainer votre ventre et redresser votre posture sous toutes vos tenues de l’année.'
                 : '1 Sleeveless Tank Top + 1 Short-Sleeve Tee + 1 Long-Sleeve Tee. The ultimate collection to smooth your silhouette and improve your posture in every outfit.'}
             </p>
 
@@ -115,7 +119,7 @@ export default function PackDecouverteLanding() {
                   <Icon name="check" size={14} strokeWidth={3} />
                 </span>
                 <span>
-                  <strong>{lang === 'fr' ? '3 Coupes complémentaires :' : '3 Complementary cuts:'}</strong>{' '}
+                  <strong>{lang === 'fr' ? '3 coupes complémentaires :' : '3 Complementary cuts:'}</strong>{' '}
                   {lang === 'fr'
                     ? 'sans manches pour l’été, demi-manches pour le bureau, manches longues pour le maintien renforcé.'
                     : 'sleeveless for summer, short sleeves for work, long sleeves for reinforced posture support.'}
@@ -137,7 +141,7 @@ export default function PackDecouverteLanding() {
                   <Icon name="check" size={14} strokeWidth={3} />
                 </span>
                 <span>
-                  <strong>{lang === 'fr' ? 'économisez 30 $ (-33%) :' : 'save $30 (-33%):'}</strong>{' '}
+                  <strong>{lang === 'fr' ? 'Économisez 30 $ (-40%) :' : 'save $30 (-40%):'}</strong>{' '}
                   {lang === 'fr'
                     ? 'tarif préférentiel exclusif sur le pack + Livraison suivie 100% offerte (6 à 12 jours ouvrés).'
                     : 'exclusive bundled rate + 100% Free tracked shipping included (6 to 12 working days).'}
@@ -147,7 +151,7 @@ export default function PackDecouverteLanding() {
 
             <div className="pdl-hero__cta-group">
               <a href="#product" className="btn btn--dark pdl-hero__cta">
-                {lang === 'fr' ? 'Configurer mon Pack Découverte (59,99 $)' : 'Customize My Discovery Pack ($59.99)'}{' '}
+                {lang === 'fr' ? 'Configurer mon Pack Découverte (44,99 $)' : 'Customize My Discovery Pack ($44.99)'}{' '}
                 <Icon name="arrow" size={16} />
               </a>
             </div>
@@ -165,7 +169,7 @@ export default function PackDecouverteLanding() {
           <div className="pdl-hero__visual">
             <div className="pdl-hero__card">
               <span className="pdl-hero__card-save">
-                {lang === 'fr' ? '-33% DE RÉDUCTION' : '-33% SAVINGS'}
+                {lang === 'fr' ? '-40% de réduction' : '-40% SAVINGS'}
               </span>
               <div className="pdl-hero__img-wrap">
                 <img
@@ -183,15 +187,15 @@ export default function PackDecouverteLanding() {
               <div className="pdl-hero__card-info">
                 <div>
                   <div className="pdl-hero__card-name">
-                    {lang === 'fr' ? 'Pack Découverte — 3 Coupes' : 'Discovery Pack — 3 Fits'}
+                    {lang === 'fr' ? 'Pack Découverte — 3 coupes' : 'Discovery Pack — 3 Fits'}
                   </div>
                   <div className="pdl-hero__card-sub">
-                    {lang === 'fr' ? '1 Débardeur + 1 Demi-manches + 1 Manches longues' : '1 Tank + 1 Short + 1 Long Sleeves'}
+                    {lang === 'fr' ? '1 débardeur + 1 demi-manches + 1 manches longues' : '1 Tank + 1 Short + 1 Long Sleeves'}
                   </div>
                 </div>
                 <div className="pdl-hero__card-price">
-                  <strong>59,99 $</strong>
-                  <s>89,97 $</s>
+                  <strong>44,99 $</strong>
+                  <s>74,97 $</s>
                 </div>
               </div>
             </div>
@@ -203,7 +207,7 @@ export default function PackDecouverteLanding() {
       <section className="pdl-showcase container">
         <div className="pdl-showcase__head">
           <span className="eyebrow">
-            {lang === 'fr' ? 'Composition du Pack' : 'Bundle Breakdown'}
+            {lang === 'fr' ? 'Composition du pack' : 'Bundle Breakdown'}
           </span>
           <h2>
             {lang === 'fr'
@@ -246,19 +250,19 @@ export default function PackDecouverteLanding() {
             <div className="pdl-value-strip__content">
               <h3>
                 {lang === 'fr'
-                  ? 'Valeur totale si acheté séparément : 89,97 $ (89,97 $ prix régulier)'
-                  : 'Total value if bought separately: $89.97 ($89.97 regular)'}
+                  ? 'Valeur totale si acheté séparément : 74,97 $ (74,97 $ prix régulier)'
+                  : 'Total value if bought separately: $74.97 ($74.97 regular)'}
               </h3>
               <p>
                 {lang === 'fr'
-                  ? 'En commandant le Pack Découverte, vous bénéficiez du tarif privilégié de 59,99 $ (économisez 30 $) avec la livraison suivie offerte (6 à 12 jours ouvrés avec suivi complet).'
-                  : 'By ordering the Discovery Pack, you get the special bundled price of $59.99 (save $30) plus free tracked shipping (6 to 12 working days with full tracking).'}
+                  ? 'En commandant le Pack Découverte, vous bénéficiez du tarif privilégié de 44,99 $ (économisez 30 $) avec la livraison suivie offerte (6 à 12 jours ouvrés avec suivi complet).'
+                  : 'By ordering the Discovery Pack, you get the special bundled price of $44.99 (save $30) plus free tracked shipping (6 to 12 working days with full tracking).'}
               </p>
             </div>
             <div className="pdl-value-strip__action">
               <div className="pdl-value-strip__price">
-                <strong>59,99 $</strong>
-                <s>89,97 $</s>
+                <strong>44,99 $</strong>
+                <s>74,97 $</s>
               </div>
               <a href="#product" className="btn btn--gold">
                 {lang === 'fr' ? 'Personnaliser mon pack' : 'Customize My Pack'}
@@ -276,6 +280,9 @@ export default function PackDecouverteLanding() {
 
       {/* 5. VIDEO DEMO */}
       <ProductVideoSection modelHandle="pack-decouverte" />
+
+      {/* DIAGONAL RUBAN / RIBBON OFFER */}
+      <BlackFridayStrip targetId="product" reversed={true} />
 
       {/* 6. QUALITY & TECHNOLOGY */}
       <QualitySection />

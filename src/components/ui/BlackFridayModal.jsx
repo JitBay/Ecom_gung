@@ -40,12 +40,14 @@ export default function BlackFridayModal() {
     e.preventDefault();
     handleClose();
 
-    // Check if current page has target deal
-    const dealEl = document.getElementById('bm-deal') || document.getElementById('product') || document.getElementById('bestsellers');
+    const dealEl =
+      document.getElementById('bm-deal') ||
+      document.getElementById('bestsellers') ||
+      document.getElementById('product');
     if (dealEl) {
       dealEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {
-      navigate('/products/vela-sculpt-sans-manches#product');
+      navigate('/#bestsellers');
     }
   };
 
@@ -53,12 +55,12 @@ export default function BlackFridayModal() {
 
   const m = dict.black_friday?.modal || {
     eyebrow: 'Événement Black Friday · Offre Limitée',
-    title_prefix: "Jusqu'à",
-    title_highlight: '-50%',
-    title_suffix: '& 1 T-Shirt OFFERT',
+    title_prefix: "Offre Black Friday :",
+    title_highlight: "Jusqu'à -50%",
+    title_suffix: '',
     text: "Profitez en avant-première de notre offre exclusive Black Friday sur toute la collection de maintien postural et compression Vela Sculpt™.",
     perks: [
-      { title: '1 T-Shirt Offert', desc: 'Pour 2 t-shirts achetés' },
+      { title: '2 Achetés = 1 Offert', desc: 'Le 3ème t-shirt 100% offert sur tous nos modèles' },
       { title: 'Livraison Suivie 0€', desc: 'Expédition prioritaire & tracking live' },
       { title: 'Essai 30 Jours', desc: '100% remboursé si non conquis' },
     ],
@@ -85,8 +87,8 @@ export default function BlackFridayModal() {
 
         <h2 className="bf-modal-title" id="bf-title">
           <span>{m.title_prefix}</span>{' '}
-          <strong className="bf-modal-gold">{m.title_highlight}</strong>{' '}
-          <span>{m.title_suffix}</span>
+          <strong className="bf-modal-gold">{m.title_highlight}</strong>
+          {m.title_suffix ? <span> {m.title_suffix}</span> : null}
         </h2>
 
         <p className="bf-modal-desc">{m.text}</p>
