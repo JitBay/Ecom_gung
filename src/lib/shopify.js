@@ -335,7 +335,7 @@ export function buildShopifyCartPermalink(lines, options = {}) {
   lines.forEach((line) => {
     const lineQty = Math.max(1, parseInt(line.qty, 10) || 1);
 
-    // 1. Pack Découverte (Single dedicated Shopify product at 44.99 €)
+    // 1. Pack Découverte (Single dedicated Shopify product at 44.99 € / 44.99 $)
     if (line.handle === 'pack-decouverte' || line.isDiscoveryPack) {
       const vId = resolveShopifyVariantId(line);
       variantQuantities.set(vId, (variantQuantities.get(vId) || 0) + lineQty);

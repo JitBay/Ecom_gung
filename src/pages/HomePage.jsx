@@ -153,6 +153,7 @@ const bestSellersBase = [
       },
     },
   },
+
 ];
 
 function BestSellerCard({ p, lang, t }) {
