@@ -12,9 +12,9 @@ export default function BlackFridayStrip({
 
   const items = dict.black_friday?.strip_items || [
     lang === 'fr' ? "Plus grande offre de l'année" : "Biggest offer of the year",
-    lang === 'fr' ? "+2 800 T-shirts vendus" : "+2,800 T-shirts sold",
+    lang === 'fr' ? "+9 500 T-shirts vendus" : "+9,500 T-shirts sold",
     lang === 'fr' ? "Jusqu'à -50% de réduction" : "Up to 50% off",
-    lang === 'fr' ? "500+ clients satisfaits" : "500+ happy customers",
+    lang === 'fr' ? "1 200+ clients satisfaits" : "1,200+ happy customers",
     lang === 'fr' ? "2 T-shirts achetés = 1 offert" : "Buy 2 get 1 free",
     lang === 'fr' ? "pack découverte à 44,99 $" : "discovery pack at $44.99",
     lang === 'fr' ? "Livraison 100% gratuite & suivie" : "Free tracked shipping",

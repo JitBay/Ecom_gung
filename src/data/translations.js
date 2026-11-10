@@ -8,15 +8,15 @@ export const translations = {
     announcements: [
       'Garantie satisfait ou remboursé de 30 jours',
       'Livraison suivie 100% offerte en 6 à 12 jours ouvrés · Suivi complet en direct · club zvar',
-      'Plus de 500 clients satisfaits portent Vela Sculpt™ au quotidien',
+      'Plus de 1 200 clients satisfaits portent Vela Sculpt™ au quotidien',
     ],
 
     black_friday: {
       bar_items: [
         { text: "Black Friday Sale : notre plus grande offre de l'année", highlight: true },
         { text: "Jusqu'à -50% sur toute la collection", highlight: false },
-        { text: "+2 800 T-shirts vendus", highlight: true },
-        { text: "500+ clients satisfaits", highlight: false },
+        { text: "+9 500 T-shirts vendus", highlight: true },
+        { text: "1 200+ clients satisfaits", highlight: false },
         { text: "2 T-shirts achetés = 1 offert sur tous les modèles", highlight: true },
         { text: "Offre Pack Découverte 3 coupes à 44,99 $", highlight: false },
         { text: "Livraison 100% gratuite & suivie", highlight: false },
@@ -24,9 +24,9 @@ export const translations = {
       ],
       strip_items: [
         "Plus grande offre de l'année",
-        "+2 800 T-shirts vendus",
+        "+9 500 T-shirts vendus",
         "Jusqu'à -50% de réduction",
-        "500+ clients satisfaits",
+        "1 200+ clients satisfaits",
         "2 T-shirts achetés = 1 offert",
         "pack découverte à 44,99 $",
         "Livraison 100% gratuite & suivie",
@@ -41,8 +41,8 @@ export const translations = {
         chips: [
           "2 achetés = 1 offert sur tout",
           "pack découverte à 44,99 $",
-          "500+ clients satisfaits",
-          "+2 800 T-shirts vendus",
+          "1 200+ clients satisfaits",
+          "+9 500 T-shirts vendus",
           "Livraison 100% gratuite & suivie",
         ],
         cta: "Découvrir les offres Black Friday",
@@ -154,7 +154,7 @@ export const translations = {
     },
 
     home: {
-      eyebrow: 'Plébiscité par plus de 500 clients satisfaits',
+      eyebrow: 'Plébiscité par plus de 1 200 clients satisfaits',
       hero_title_1: 'Every age',
       hero_title_2: 'Every body',
       hero_text:
@@ -163,8 +163,8 @@ export const translations = {
       cta_all: 'Voir toute la collection',
 
       stats: [
-        { value: '500+', label: 'Clients satisfaits' },
-        { value: '2 800+', label: 'Pièces vendues' },
+        { value: '1 200+', label: 'Clients satisfaits' },
+        { value: '9 500+', label: 'Pièces vendues' },
         { value: '7+', label: 'Pays livrés' },
         { value: '30 jours', label: 'Garantie satisfait ou remboursé' },
       ],
@@ -308,7 +308,7 @@ export const translations = {
       sort_helpful: 'Plus utiles',
       ai_title: 'Synthèse des retours clients',
       ai_badge: 'Synthèse IA certifiée',
-      ai_text: 'Plébiscité pour son invisibilité sous chemise blanche, son effet gainant immédiat sans couper le souffle et son maintien lombaire au bureau. Moins de 2% de retours constatés sur plus de 2 800 pièces expédiées.',
+      ai_text: 'Plébiscité pour son invisibilité sous chemise blanche, son effet gainant immédiat sans couper le souffle et son maintien lombaire au bureau. Moins de 2% de retours constatés sur plus de 9 500 pièces expédiées.',
       ai_tag_invisible: '100% invisible sous chemise',
       ai_tag_posture: 'Maintien lombaire & dos',
       ai_tag_breathable: 'Maille respirante fraîche',
@@ -379,15 +379,15 @@ export const translations = {
       'Black Friday Sale',
       '30-Day Money-Back Guarantee',
       'Free Tracked Shipping in 6 to 12 working days · Full Live Tracking · zvar club',
-      'Over 500 happy customers wear Vela Sculpt™ every day',
+      'Over 1,200 happy customers wear Vela Sculpt™ every day',
     ],
 
     black_friday: {
       bar_items: [
         { text: "Black Friday Sale: our biggest offer of the year", highlight: true },
         { text: "Up to 50% off storewide", highlight: false },
-        { text: "+2,800 T-shirts sold", highlight: true },
-        { text: "500+ happy customers", highlight: false },
+        { text: "+9,500 T-shirts sold", highlight: true },
+        { text: "1,200+ happy customers", highlight: false },
         { text: "Buy 2, get 1 free on all styles", highlight: true },
         { text: "3-Fits Discovery Pack special at $44.99", highlight: false },
         { text: "Free tracked shipping included", highlight: false },
@@ -395,9 +395,9 @@ export const translations = {
       ],
       strip_items: [
         "Biggest offer of the year",
-        "+2,800 T-shirts sold",
+        "+9,500 T-shirts sold",
         "Up to 50% off",
-        "500+ happy customers",
+        "1,200+ happy customers",
         "Buy 2 get 1 free on all styles",
         "Discovery Pack at $44.99",
         "Free tracked shipping",
@@ -412,8 +412,8 @@ export const translations = {
         chips: [
           "Buy 2, get 1 free storewide",
           "Discovery Pack at $44.99",
-          "500+ happy customers",
-          "+2,800 T-shirts sold",
+          "1,200+ happy customers",
+          "+9,500 T-shirts sold",
           "Free tracked shipping",
         ],
         cta: "Explore Black Friday Deals",
@@ -525,7 +525,7 @@ export const translations = {
     },
 
     home: {
-      eyebrow: 'Loved by 500+ happy customers',
+      eyebrow: 'Loved by 1,200+ happy customers',
       hero_title_1: 'Every age',
       hero_title_2: 'Every body',
       hero_text:
@@ -534,8 +534,8 @@ export const translations = {
       cta_all: 'Shop all collection',
 
       stats: [
-        { value: '500+', label: 'Happy customers' },
-        { value: '2,800+', label: 'Pieces sold' },
+        { value: '1,200+', label: 'Happy customers' },
+        { value: '9,500+', label: 'Pieces sold' },
         { value: '7+', label: 'Countries shipped' },
         { value: '30 days', label: 'Money-back guarantee' },
       ],
@@ -679,7 +679,7 @@ export const translations = {
       sort_helpful: 'Most Helpful',
       ai_title: 'Customer Feedback Summary',
       ai_badge: 'Verified AI Summary',
-      ai_text: 'Praised for invisible discreetness under white dress shirts, immediate slimming effect without restricting breathing, and comfortable lumbar support. Less than 2% return rate across 2,800+ orders.',
+      ai_text: 'Praised for invisible discreetness under white dress shirts, immediate slimming effect without restricting breathing, and comfortable lumbar support. Less than 2% return rate across 9,500+ orders.',
       ai_tag_invisible: '100% Invisible under shirts',
       ai_tag_posture: 'Lumbar & posture support',
       ai_tag_breathable: 'All-day breathable knit',

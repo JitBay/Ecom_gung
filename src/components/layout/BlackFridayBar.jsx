@@ -10,8 +10,8 @@ export default function BlackFridayBar() {
   const items = dict.black_friday?.bar_items || [
     { text: "Black Friday : notre plus grande offre de l'année", highlight: true },
     { text: "Jusqu'à -50% de réduction", highlight: false },
-    { text: "+2 800 T-shirts vendus", highlight: true },
-    { text: "500+ clients satisfaits", highlight: false },
+    { text: "+9 500 T-shirts vendus", highlight: true },
+    { text: "1 200+ clients satisfaits", highlight: false },
     { text: "2 T-shirts achetés = 1 offert", highlight: false },
     { text: "Livraison 100% gratuite & suivie", highlight: false },
     { text: "Garantie 30 jours satisfait ou remboursé", highlight: false },
