@@ -571,6 +571,8 @@ export async function createShopifyCheckoutUrl(lines, options = {}) {
         parsedUrl.searchParams.set('locale', locale);
         parsedUrl.searchParams.delete('note');
         parsedUrl.searchParams.delete('cart_link_id');
+        parsedUrl.searchParams.delete('_s');
+        parsedUrl.searchParams.delete('_y');
         return parsedUrl.toString();
       }
     }
