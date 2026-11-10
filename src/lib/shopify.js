@@ -316,31 +316,78 @@ export function resolveShopifyVariantId(line = {}) {
 }
 
 /**
- * Builds a direct Shopify Cart Checkout Permalink URL.
- * Format: https://zvar-shop.com/cart/{variant_id}:{quantity}?channel=headless_front
- * 
- * @param {Array} lines - Cart items
- * @param {Object} options - Optional discount code or custom attributes
- * @returns {string} Fully qualified Shopify Checkout URL
+ * Returns the canonical Shopify checkout hostname, never the Vercel storefront domain.
  */
-export function buildShopifyCartPermalink(lines, options = {}) {
-  if (!lines || lines.length === 0) return '';
-
+function getCleanShopifyDomain() {
   let cleanDomain = SHOPIFY_STORE_DOMAIN.replace(/^https?:\/\//, '').replace(/\/$/, '');
   if (!cleanDomain || cleanDomain === 'zvar-shop.com' || cleanDomain === 'www.zvar-shop.com') {
-    cleanDomain = 'checkout.zvar-shop.com';
+    return 'checkout.zvar-shop.com';
+  }
+  return cleanDomain;
+}
+
+/**
+ * Resolves active storefront locale ('fr' | 'en') for Shopify Checkout.
+ */
+function getCheckoutLocale(options = {}) {
+  const candidate = String(
+    options.locale ||
+      (typeof document !== 'undefined' ? document.documentElement?.lang : '') ||
+      (typeof localStorage !== 'undefined'
+        ? localStorage.getItem('zvar_lang') || localStorage.getItem('velalabs_lang')
+        : '') ||
+      'fr'
+  )
+    .toLowerCase()
+    .trim();
+
+  return candidate.startsWith('en') ? 'en' : 'fr';
+}
+
+/**
+ * Resolves buyer country code aligned with Shopify Markets ('FR' or 'US').
+ */
+function getCheckoutCountryCode(options = {}, locale = 'fr') {
+  const explicit = String(options.countryCode || '').toUpperCase().trim();
+  if (/^[A-Z]{2}$/.test(explicit)) return explicit;
+
+  try {
+    const geo = String(
+      (typeof sessionStorage !== 'undefined' ? sessionStorage.getItem('zvar_geo_country') : '') || ''
+    )
+      .toUpperCase()
+      .trim();
+    if (geo === 'FR' || geo === 'US') return geo;
+  } catch {
+    // Session storage unavailable
   }
 
-  // Variant ID -> quantity map to consolidate duplicate variants
-  const variantQuantities = new Map();
+  return locale === 'fr' ? 'FR' : 'US';
+}
+
+/**
+ * Consolidates cart lines into Shopify variant quantities, optional line selection details,
+ * and a clean server-side order summary note.
+ */
+function resolveCartVariantEntries(lines = []) {
+  const variantMap = new Map();
+
+  const addEntry = (variantId, qty, detail = '') => {
+    const existing = variantMap.get(variantId) || { qty: 0, details: new Set() };
+    existing.qty += qty;
+    if (detail) {
+      existing.details.add(detail);
+    }
+    variantMap.set(variantId, existing);
+  };
 
   lines.forEach((line) => {
     const lineQty = Math.max(1, parseInt(line.qty, 10) || 1);
+    const detailText = typeof line.detail === 'string' ? line.detail.trim() : '';
 
     // 1. Pack Découverte (Single dedicated Shopify product at 49.99 € / 49.99 $)
     if (line.handle === 'pack-decouverte' || line.isDiscoveryPack) {
-      const vId = resolveShopifyVariantId(line);
-      variantQuantities.set(vId, (variantQuantities.get(vId) || 0) + lineQty);
+      addEntry(resolveShopifyVariantId(line), lineQty, detailText);
       return;
     }
 
@@ -366,25 +413,22 @@ export function buildShopifyCartPermalink(lines, options = {}) {
       if (Array.isArray(line.chosenVariants) && line.chosenVariants.length >= 2) {
         const v1 = resolveShopifyVariantId({ handle: line.handle, ...line.chosenVariants[0] });
         const v2 = resolveShopifyVariantId({ handle: line.handle, ...line.chosenVariants[1] });
-        variantQuantities.set(v1, (variantQuantities.get(v1) || 0) + 1 * lineQty);
-        variantQuantities.set(v2, (variantQuantities.get(v2) || 0) + 1 * lineQty);
+        addEntry(v1, 1 * lineQty, detailText);
+        addEntry(v2, 1 * lineQty);
       } else {
-        const vId = resolveShopifyVariantId(line);
-        variantQuantities.set(vId, (variantQuantities.get(vId) || 0) + 2 * lineQty);
+        addEntry(resolveShopifyVariantId(line), 2 * lineQty, detailText);
       }
       return;
     }
 
     if (isPackThree) {
-      // 3 paid shirts matching the exact pack price (59.97 € / 89.97 € / 119.97 €)
       if (Array.isArray(line.chosenVariants) && line.chosenVariants.length >= 3) {
         for (let i = 0; i < 3; i++) {
           const vId = resolveShopifyVariantId({ handle: line.handle, ...line.chosenVariants[i] });
-          variantQuantities.set(vId, (variantQuantities.get(vId) || 0) + 1 * lineQty);
+          addEntry(vId, 1 * lineQty, i === 0 ? detailText : '');
         }
       } else {
-        const vId = resolveShopifyVariantId(line);
-        variantQuantities.set(vId, (variantQuantities.get(vId) || 0) + 3 * lineQty);
+        addEntry(resolveShopifyVariantId(line), 3 * lineQty, detailText);
       }
       return;
     }
@@ -400,25 +444,44 @@ export function buildShopifyCartPermalink(lines, options = {}) {
       vId = resolveShopifyVariantId(line);
     }
     const paidQty = (line.paidQty || 1) * lineQty;
-    variantQuantities.set(vId, (variantQuantities.get(vId) || 0) + paidQty);
+    addEntry(vId, paidQty, detailText);
   });
 
-  const segments = Array.from(variantQuantities.entries()).map(
-    ([vId, qty]) => `${encodeURIComponent(vId)}:${qty}`
+  const orderNote = lines
+    .map((l) => `${l.title} (${l.detail || 'Standard'}) x${l.qty || 1}`)
+    .join(' | ');
+
+  return { variantMap, orderNote };
+}
+
+/**
+ * Builds a fallback direct Shopify Cart Checkout Permalink URL.
+ *
+ * @param {Array} lines - Cart items
+ * @param {Object} options - Optional discount code or locale
+ * @returns {string} Fully qualified Shopify Checkout URL
+ */
+export function buildShopifyCartPermalink(lines, options = {}) {
+  if (!lines || lines.length === 0) return '';
+
+  const cleanDomain = getCleanShopifyDomain();
+  const locale = getCheckoutLocale(options);
+  const { variantMap, orderNote } = resolveCartVariantEntries(lines);
+
+  const segments = Array.from(variantMap.entries()).map(
+    ([vId, entry]) => `${encodeURIComponent(vId)}:${entry.qty}`
   );
 
   const cartPath = `/cart/${segments.join(',')}`;
   const searchParams = new URLSearchParams();
+  searchParams.set('locale', locale);
 
   if (options.discount) {
     searchParams.set('discount', options.discount);
   }
 
-  const attributes = lines
-    .map((l) => `${l.title} (${l.detail || 'Standard'}) x${l.qty || 1}`)
-    .join(' | ');
-  if (attributes) {
-    searchParams.set('note', attributes);
+  if (orderNote) {
+    searchParams.set('note', orderNote);
   }
 
   const query = searchParams.toString();
@@ -426,8 +489,104 @@ export function buildShopifyCartPermalink(lines, options = {}) {
 }
 
 /**
+ * Creates a clean Shopify Checkout session via Storefront API `cartCreate`.
+ * Keeps bundle selections as structured line-item attributes and stores order notes
+ * server-side instead of exposing long `?note=` strings in the checkout URL.
+ * Falls back transparently to the cart permalink if Storefront API fails.
+ */
+export async function createShopifyCheckoutUrl(lines, options = {}) {
+  if (!lines || lines.length === 0) return '';
+
+  const cleanDomain = getCleanShopifyDomain();
+  const locale = getCheckoutLocale(options);
+  const countryCode = getCheckoutCountryCode(options, locale);
+  const { variantMap, orderNote } = resolveCartVariantEntries(lines);
+  const attrKey = locale === 'fr' ? 'Sélection' : 'Selection';
+
+  const cartLines = Array.from(variantMap.entries()).map(([variantId, entry]) => {
+    const item = {
+      merchandiseId: `gid://shopify/ProductVariant/${variantId}`,
+      quantity: entry.qty,
+    };
+    const combinedDetail = Array.from(entry.details).join(' | ').trim();
+    if (combinedDetail) {
+      item.attributes = [{ key: attrKey, value: combinedDetail.slice(0, 255) }];
+    }
+    return item;
+  });
+
+  const input = {
+    lines: cartLines,
+    buyerIdentity: { countryCode },
+  };
+
+  if (orderNote) {
+    input.note = orderNote;
+  }
+  if (options.discount) {
+    input.discountCodes = [options.discount];
+  }
+
+  const mutation = `
+    mutation CartCreateCheckout($input: CartInput!) {
+      cartCreate(input: $input) {
+        cart {
+          id
+          checkoutUrl
+        }
+        userErrors {
+          field
+          message
+        }
+      }
+    }
+  `;
+
+  const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+  const timeoutId = controller ? setTimeout(() => controller.abort(), 3500) : null;
+
+  try {
+    const res = await fetch(`https://${cleanDomain}/api/2024-01/graphql.json`, {
+      method: 'POST',
+      signal: controller ? controller.signal : undefined,
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_TOKEN,
+      },
+      body: JSON.stringify({
+        query: mutation,
+        variables: { input },
+      }),
+    });
+
+    if (res.ok) {
+      const json = await res.json();
+      const payload = json?.data?.cartCreate;
+      const rawUrl = payload?.cart?.checkoutUrl;
+
+      if (rawUrl && (!payload.userErrors || payload.userErrors.length === 0)) {
+        const parsedUrl = new URL(rawUrl);
+        if (parsedUrl.hostname === 'zvar-shop.com' || parsedUrl.hostname === 'www.zvar-shop.com') {
+          parsedUrl.hostname = cleanDomain;
+        }
+        parsedUrl.searchParams.set('locale', locale);
+        parsedUrl.searchParams.delete('note');
+        parsedUrl.searchParams.delete('cart_link_id');
+        return parsedUrl.toString();
+      }
+    }
+  } catch (err) {
+    console.warn('[Shopify] Storefront cartCreate fallback to permalink:', err?.message || err);
+  } finally {
+    if (timeoutId) clearTimeout(timeoutId);
+  }
+
+  return buildShopifyCartPermalink(lines, { ...options, locale });
+}
+
+/**
  * Redirects the user directly to Shopify's secure checkout page.
- * 
+ *
  * @param {Array} lines - Array of cart lines
  * @param {Object} options - Additional checkout options
  */
@@ -437,15 +596,19 @@ export async function redirectToShopifyCheckout(lines, options = {}) {
     return false;
   }
 
-  const checkoutUrl = buildShopifyCartPermalink(lines, options);
-  console.log('[Shopify Checkout] Navigating to:', checkoutUrl);
-
   const total = lines.reduce((sum, l) => sum + (Number(l.price) || 0) * (Number(l.qty) || 1), 0);
+  const startedAt = Date.now();
   trackInitiateCheckout({ items: lines, total });
 
-  if (typeof window !== 'undefined') {
+  const checkoutUrl = await createShopifyCheckoutUrl(lines, options);
+  console.log('[Shopify Checkout] Navigating to:', checkoutUrl);
+
+  if (typeof window !== 'undefined' && checkoutUrl) {
     if (hasActivePixels()) {
-      await new Promise((resolve) => setTimeout(resolve, 120));
+      const elapsed = Date.now() - startedAt;
+      if (elapsed < 120) {
+        await new Promise((resolve) => setTimeout(resolve, 120 - elapsed));
+      }
     }
     window.location.href = checkoutUrl;
   }
@@ -477,10 +640,7 @@ export async function subscribeToShopifyNewsletter(rawEmail) {
     return { ok: false, error: 'INVALID_EMAIL' };
   }
 
-  let cleanDomain = SHOPIFY_STORE_DOMAIN.replace(/^https?:\/\//, '').replace(/\/$/, '');
-  if (!cleanDomain || cleanDomain === 'zvar-shop.com' || cleanDomain === 'www.zvar-shop.com') {
-    cleanDomain = 'checkout.zvar-shop.com';
-  }
+  const cleanDomain = getCleanShopifyDomain();
 
   const mutation = `
     mutation NewsletterSubscribe($input: CustomerCreateInput!) {

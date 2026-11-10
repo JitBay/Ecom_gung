@@ -1,12 +1,15 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { redirectToShopifyCheckout } from '../lib/shopify.js';
 import { trackAddToCart } from '../lib/analytics.js';
+import { useLanguage } from './LanguageContext.jsx';
 
 const CartContext = createContext(null);
 const CART_STORAGE_KEY = 'vela_labs_cart_v1';
 
 // Cart lines: { id, variantId, title, detail, price, compareAt, qty, image, freeShipping }
 export function CartProvider({ children }) {
+  const languageCtx = useLanguage();
+  const activeLang = languageCtx?.lang;
   const [lines, setLines] = useState(() => {
     if (typeof window === 'undefined') return [];
     try {
@@ -69,7 +72,7 @@ export function CartProvider({ children }) {
       if (lines.length === 0 || isCheckingOut) return;
       setIsCheckingOut(true);
       try {
-        await redirectToShopifyCheckout(lines, options);
+        await redirectToShopifyCheckout(lines, { locale: activeLang, ...options });
       } finally {
         setIsCheckingOut(false);
       }
@@ -90,7 +93,7 @@ export function CartProvider({ children }) {
       count,
       total,
     };
-  }, [lines, open, isCheckingOut]);
+  }, [lines, open, isCheckingOut, activeLang]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
