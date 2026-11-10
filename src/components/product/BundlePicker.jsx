@@ -96,13 +96,13 @@ function VariantRows({
           '/images/products/sans-manches/1.jpeg';
 
         const isFree = isTwoPlusOne && i === 2;
-        return (
-          <div className="variant" key={i}>
+        const row = (
+          <div className="variant" key={!isFree ? i : undefined}>
             <div className="variant__thumb">
               <img
                 src={colorImg}
                 alt={currentColor?.label || 'Miniature'}
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}
               />
             </div>
             <label className="select">
@@ -132,13 +132,22 @@ function VariantRows({
               </select>
               <Icon name="chevron" size={14} />
             </label>
-            {isFree && (
-              <span className="variant__free-badge">
-                {lang === 'fr' ? '3ᵉ offert' : '3rd FREE'}
-              </span>
-            )}
           </div>
         );
+
+        if (isFree) {
+          return (
+            <div className="variant-free-box" key={i}>
+              <div className="variant-free-banner">
+                <Icon name="gift" size={14} />
+                <span>{lang === 'fr' ? '3ᵉ produit 100% offert' : '3rd item 100% FREE'}</span>
+              </div>
+              {row}
+            </div>
+          );
+        }
+
+        return row;
       })}
     </div>
   );
