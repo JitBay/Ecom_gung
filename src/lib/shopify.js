@@ -409,7 +409,6 @@ function resolveCartVariantEntries(lines = []) {
           line.title.includes('Week Pack')));
 
     if (isTwoPlusOne) {
-      // 2 paid shirts matching the exact bundle price (39.98 € / 49.98 € / 59.98 €)
       if (Array.isArray(line.chosenVariants) && line.chosenVariants.length >= 2) {
         const v1 = resolveShopifyVariantId({ handle: line.handle, ...line.chosenVariants[0] });
         const v2 = resolveShopifyVariantId({ handle: line.handle, ...line.chosenVariants[1] });
