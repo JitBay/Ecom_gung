@@ -43,7 +43,7 @@ export default function CameraRolls() {
           </h2>
           <p className="subtitle">
             {lang === 'fr' ? (
-              <>Aucun script, aucun acteur rémunéré : des <strong>acheteurs vérifiés</strong> qui portent Vela Sculpt™ sous leurs chemises et t-shirts.</>
+              <>Aucun script, aucun acteur rémunéré : des <strong>acheteurs vérifiés</strong> qui portent Vela Sculpt™ sous leurs chemises et T-shirts.</>
             ) : (
               <>No scripts, no paid actors — just <strong>verified buyers</strong> in their own photos and their own words.</>
             )}

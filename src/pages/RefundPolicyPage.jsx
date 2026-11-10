@@ -8,15 +8,15 @@ export default function RefundPolicyPage() {
   useEffect(() => {
     document.title =
       lang === 'fr'
-        ? 'Politique de retour & remboursement (30 jours) | ZVAR'
-        : 'Refund & Returns Policy (30 Days) | ZVAR';
+        ? 'Politique de retour & remboursement · 30 jours | ZVAR'
+        : 'Refund & Returns Policy · 30 Days | ZVAR';
   }, [lang]);
 
   return (
     <div className="legal-page container">
 
       <article className="legal-content">
-        <h1>{lang === 'fr' ? 'Politique de retour & remboursement (30 jours)' : 'Refund & Returns Policy (30 Days)'}</h1>
+        <h1>{lang === 'fr' ? 'Politique de retour & remboursement · 30 jours' : 'Refund & Returns Policy · 30 Days'}</h1>
         <p className="legal-meta">{lang === 'fr' ? 'Dernière mise à jour : 14 octobre 2026' : 'Last updated: October 14, 2026'}</p>
 
         {lang === 'fr' ? (

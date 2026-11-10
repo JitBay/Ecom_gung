@@ -239,7 +239,7 @@ function ClassicProductPage({ product }) {
             }}
             title={lang === 'fr' ? 'Consulter les avis clients vérifiés' : 'Read verified customer reviews'}
           >
-            <Stars value={product.rating || 4.9} size={15} /> <strong>{product.rating || 4.9}</strong> / 5 ({product.reviewCount || 67} {t('product_page.reviews_count')})
+            <Stars value={product.rating || 4.9} size={15} /> <strong>{product.rating || 4.9}</strong> / 5 · {product.reviewCount || 67} {t('product_page.reviews_count')}
           </a>
 
           <p className="pp__tagline" style={{ color: 'var(--muted)', fontSize: 15, marginBottom: 14 }}>

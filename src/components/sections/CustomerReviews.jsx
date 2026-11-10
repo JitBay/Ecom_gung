@@ -140,7 +140,15 @@ function Review({ r, lang, t, onHelpful, hasVoted, onPhotoClick }) {
             {r.name ? r.name.charAt(0).toUpperCase() : 'V'}
           </span>
           <div className="review__author-info">
-            <strong className="review__author-name">{r.name}</strong>
+            <div className="review__author-row">
+              <strong className="review__author-name">{r.name}</strong>
+              {r.flag && (
+                <span className="review__flag-pill" title={r.countryName?.[lang] || r.country}>
+                  <span className="review__flag-icon" aria-hidden="true">{r.flag}</span>
+                  <span className="review__flag-text">{r.countryName?.[lang] || r.country}</span>
+                </span>
+              )}
+            </div>
             {r.verified !== false && (
               <span className="review__verified-badge">
                 <Icon name="check" size={11} strokeWidth={3} /> {t('reviews_section.verified_buyer')}

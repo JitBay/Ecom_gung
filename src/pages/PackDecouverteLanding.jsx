@@ -36,7 +36,7 @@ export default function PackDecouverteLanding() {
       img: '/images/products/sans-manches/1.jpeg',
       tagline:
         lang === 'fr'
-          ? 'Discrétion 100% totale sous chemises légères, t-shirts d’été et séances de sport.'
+          ? 'Discrétion 100% totale sous chemises légères, T-shirts d’été et séances de sport.'
           : 'Total invisibility under lightweight shirts, summer tees and gym sessions.',
       features: [
         lang === 'fr' ? 'Liberté de mouvement totale des bras' : 'Unrestricted arm freedom',
@@ -86,13 +86,13 @@ export default function PackDecouverteLanding() {
           <div className="pdl-hero__content">
             <span className="pdl-hero__badge">
               <Icon name="sparkle" size={14} />{' '}
-              {lang === 'fr' ? 'Black Friday Sale · Offre star : 44,99 $ (3 coupes)' : 'Black Friday Sale · Star Deal: $44.99 (3 Fits)'}
+              {lang === 'fr' ? 'Black Friday Sale · Offre star : 44,99 $ · 3 coupes' : 'Black Friday Sale · Star Deal: $44.99 · 3 Fits'}
             </span>
 
             <div className="pdl-hero__rating">
               <Stars value={5} size={16} />
               <strong>4.9 / 5</strong>
-              <span>({lang === 'fr' ? '70 avis vérifiés' : '70 verified reviews'})</span>
+              <span>· {lang === 'fr' ? '70 avis vérifiés' : '70 verified reviews'}</span>
             </div>
 
             <h1 className="pdl-hero__title">
@@ -109,7 +109,7 @@ export default function PackDecouverteLanding() {
 
             <p className="pdl-hero__tagline">
               {lang === 'fr'
-                ? '1 débardeur sans manches + 1 t-shirt demi-manches + 1 t-shirt manches longues. L’ensemble complet pour affiner votre torse, gainer votre ventre et redresser votre posture sous toutes vos tenues de l’année.'
+                ? '1 débardeur sans manches + 1 T-shirt demi-manches + 1 T-shirt manches longues. L’ensemble complet pour affiner votre torse, gainer votre ventre et redresser votre posture sous toutes vos tenues de l’année.'
                 : '1 Sleeveless Tank Top + 1 Short-Sleeve Tee + 1 Long-Sleeve Tee. The ultimate collection to smooth your silhouette and improve your posture in every outfit.'}
             </p>
 
@@ -141,17 +141,17 @@ export default function PackDecouverteLanding() {
                   <Icon name="check" size={14} strokeWidth={3} />
                 </span>
                 <span>
-                  <strong>{lang === 'fr' ? 'Économisez 30 $ (-40%) :' : 'save $30 (-40%):'}</strong>{' '}
+                  <strong>{lang === 'fr' ? 'Économisez 30 $ · -40% :' : 'Save $30 · 40% OFF:'}</strong>{' '}
                   {lang === 'fr'
-                    ? 'tarif préférentiel exclusif sur le pack + Livraison suivie 100% offerte (6 à 12 jours ouvrés).'
-                    : 'exclusive bundled rate + 100% Free tracked shipping included (6 to 12 working days).'}
+                    ? 'tarif préférentiel exclusif sur le pack + Livraison suivie 100% offerte en 6 à 12 jours ouvrés.'
+                    : 'exclusive bundled rate + 100% Free tracked shipping included in 6 to 12 working days.'}
                 </span>
               </li>
             </ul>
 
             <div className="pdl-hero__cta-group">
               <a href="#product" className="btn btn--dark pdl-hero__cta">
-                {lang === 'fr' ? 'Configurer mon Pack Découverte (44,99 $)' : 'Customize My Discovery Pack ($44.99)'}{' '}
+                {lang === 'fr' ? 'Offre Pack Découverte 3 coupes à 44,99 $' : 'Discovery Pack Offer 3 Fits at $44.99'}{' '}
                 <Icon name="arrow" size={16} />
               </a>
             </div>
@@ -250,13 +250,13 @@ export default function PackDecouverteLanding() {
             <div className="pdl-value-strip__content">
               <h3>
                 {lang === 'fr'
-                  ? 'Valeur totale si acheté séparément : 74,97 $ (74,97 $ prix régulier)'
-                  : 'Total value if bought separately: $74.97 ($74.97 regular)'}
+                  ? 'Valeur totale si acheté séparément : 74,97 $ au lieu de 74,97 $ prix régulier'
+                  : 'Total value if bought separately: $74.97 instead of $74.97 regular'}
               </h3>
               <p>
                 {lang === 'fr'
-                  ? 'En commandant le Pack Découverte, vous bénéficiez du tarif privilégié de 44,99 $ (économisez 30 $) avec la livraison suivie offerte (6 à 12 jours ouvrés avec suivi complet).'
-                  : 'By ordering the Discovery Pack, you get the special bundled price of $44.99 (save $30) plus free tracked shipping (6 to 12 working days with full tracking).'}
+                  ? 'En commandant le Pack Découverte, vous bénéficiez du tarif privilégié de 44,99 $ · 30 $ d\'économie avec la livraison suivie offerte en 6 à 12 jours ouvrés avec suivi complet.'
+                  : 'By ordering the Discovery Pack, you get the special bundled price of $44.99 · save $30 plus free tracked shipping in 6 to 12 working days with full tracking.'}
               </p>
             </div>
             <div className="pdl-value-strip__action">

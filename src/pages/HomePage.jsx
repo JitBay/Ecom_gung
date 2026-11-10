@@ -18,8 +18,8 @@ const bestSellersBase = [
     defaultColor: 'Noir',
     titleFr: 'Pack Découverte — 3 coupes',
     titleEn: 'Discovery Pack — 3 Fits',
-    taglineFr: '1 débardeur + 1 demi-manches + 1 manches longues inclus (économisez 30 $)',
-    taglineEn: '1 Tank Top + 1 Short Sleeves + 1 Long Sleeves included (Save $30)',
+    taglineFr: '1 débardeur + 1 demi-manches + 1 manches longues inclus · 30 $ d\'économie',
+    taglineEn: '1 Tank Top + 1 Short Sleeves + 1 Long Sleeves included · Save $30',
     badgeFr: '⭐️ Offre star Black Friday',
     badgeEn: '⭐️ Black Friday Star Deal',
     rating: 4.9,
@@ -52,7 +52,7 @@ const bestSellersBase = [
     defaultColor: 'Noir',
     titleFr: 'Vela Sculpt™ sans manches',
     titleEn: 'Vela Sculpt™ Sleeveless',
-    taglineFr: 'Invisibilité absolue sous chemises et t-shirts légers',
+    taglineFr: 'Invisibilité absolue sous chemises et T-shirts légers',
     taglineEn: 'Discreet and breathable core support under shirts & tees',
     badgeFr: 'Débardeur invisible',
     badgeEn: 'Invisible Tank Top',
@@ -227,7 +227,7 @@ function BestSellerCard({ p, lang, t }) {
         <div className="ixh-card__rating">
           <Stars value={p.rating} size={12} />
           <strong>{p.rating}</strong>
-          <span className="ixh-card__reviews">({p.reviewsCount})</span>
+          <span className="ixh-card__reviews">· {p.reviewsCount}</span>
         </div>
 
         <Link to={targetUrl} className="ixh-card__name">
@@ -274,8 +274,8 @@ function BestSellerCard({ p, lang, t }) {
 const lifestyleItems = [
   {
     id: 'sans-manches',
-    titleFr: 'Sans Manches (Débardeur)',
-    titleEn: 'Sleeveless (Tank Top)',
+    titleFr: 'Sans Manches · Débardeur',
+    titleEn: 'Sleeveless · Tank Top',
     taglineFr: 'Discrétion 100% invisible sous chemises & liberté totale',
     taglineEn: '100% invisible under shirts with maximum arm freedom',
     img: '/images/home/lifestyle-piscine.png',
@@ -283,7 +283,7 @@ const lifestyleItems = [
   },
   {
     id: 'demi-manches',
-    titleFr: 'Demi-Manches (Manches Courtes)',
+    titleFr: 'Demi-Manches · Manches Courtes',
     titleEn: 'Short Sleeves',
     taglineFr: 'Le basique quotidien sous polos et chemises de bureau',
     taglineEn: 'Everyday posture and smoothing under polos and office wear',
@@ -380,7 +380,7 @@ export default function HomePage() {
             <p className="ixh-hero__text">{t('home.hero_text')}</p>
             <div className="ixh-hero__btns">
               <Link to="/products/pack-decouverte" className="ixh-btn ixh-btn--gold">
-                {lang === 'fr' ? '🔥 Pack Découverte (44,99 $)' : '🔥 Discovery Pack ($44.99)'}
+                {lang === 'fr' ? 'Offre Pack Découverte 3 coupes à 44,99 $' : 'Discovery Pack Offer 3 Fits at $44.99'}
               </Link>
               <a
                 href="#bestsellers"

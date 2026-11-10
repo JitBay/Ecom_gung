@@ -2,13 +2,13 @@
 export const faq = [
   {
     tag: 'Discrétion',
-    q: 'Le t-shirt Vela Sculpt™ est-il réellement invisible sous les vêtements ?',
-    a: 'Oui, c’est le cœur de notre conception technique. Grâce à une découpe d’encolure ergonomique et des micro-coutures ultra-plates thermosoudées, le t-shirt ne crée aucun bourrelet ni démarcation visible, même sous une chemise de travail blanche ou un t-shirt ajusté.',
+    q: 'Le T-shirt Vela Sculpt™ est-il réellement invisible sous les vêtements ?',
+    a: 'Oui, c’est le cœur de notre conception technique. Grâce à une découpe d’encolure ergonomique et des micro-coutures ultra-plates thermosoudées, le T-shirt ne crée aucun bourrelet ni démarcation visible, même sous une chemise de travail blanche ou un T-shirt ajusté.',
   },
   {
     tag: 'Taille & Ajustement',
     q: 'Quelle taille dois-je commander ?',
-    a: 'Fiez-vous à notre Guide des tailles basé sur votre poids et votre taille. Dans 95% des cas, votre taille de t-shirt habituelle convient parfaitement. Si vous êtes entre deux tailles et désirez un gainage ferme, optez pour la taille en-dessous ; pour un confort plus décontracté, prenez la taille au-dessus.',
+    a: 'Fiez-vous à notre Guide des tailles basé sur votre poids et votre taille. Dans 95% des cas, votre taille de T-shirt habituelle convient parfaitement. Si vous êtes entre deux tailles et désirez un gainage ferme, optez pour la taille en-dessous ; pour un confort plus décontracté, prenez la taille au-dessus.',
   },
   {
     tag: 'Confort quotidien',
@@ -23,17 +23,17 @@ export const faq = [
   {
     tag: 'Garantie 30 Jours',
     q: 'Comment fonctionne la Garantie satisfait ou remboursé de 30 jours ?',
-    a: 'Vous disposez de 30 jours à compter de la réception de votre commande pour tester votre t-shirt Vela Sculpt™ dans votre quotidien. Si le confort, la taille ou le rendu ne vous apportent pas 100% de satisfaction, contactez simplement notre service client pour organiser votre retour et remboursement.',
+    a: 'Vous disposez de 30 jours à compter de la réception de votre commande pour tester votre T-shirt Vela Sculpt™ dans votre quotidien. Si le confort, la taille ou le rendu ne vous apportent pas 100% de satisfaction, contactez simplement notre service client pour organiser votre retour et remboursement.',
   },
   {
     tag: 'Entretien',
-    q: 'Comment laver et entretenir mon t-shirt Vela Sculpt™ ?',
-    a: 'Lavez-le en machine à 30°C sur cycle délicat, avec des couleurs similaires. Laissez-le sécher à l’air libre (il sèche très rapidement). Évitez le sèche-linge et le repassage pour préserver l’élasticité de la maille technique dans le temps.',
+    q: 'Comment laver et entretenir mon T-shirt Vela Sculpt™ ?',
+    a: 'Lavez-le en machine à 30°C sur cycle délicat, avec des couleurs similaires. Laissez-le sécher à l’air libre — il sèche très rapidement. Évitez le sèche-linge et le repassage pour préserver l’élasticité de la maille technique dans le temps.',
   },
   {
     tag: 'Livraison & Suivi',
     q: 'Quels sont les délais et modalités d’expédition ?',
-    a: 'Toutes les commandes sont préparées sous 24 à 48 heures ouvrées. La livraison en France et en Europe prend entre 6 à 12 jours ouvrés avec un numéro de suivi complet en direct (Full Tracking). La livraison est 100% gratuite et offerte sur l’ensemble de vos commandes.',
+    a: 'Toutes les commandes sont préparées sous 24 à 48 heures ouvrées. La livraison en France et en Europe prend entre 6 à 12 jours ouvrés avec un numéro de suivi complet en direct avec suivi en direct. La livraison est 100% gratuite et offerte sur l’ensemble de vos commandes.',
   },
 ];
 
@@ -66,7 +66,7 @@ export const faqEn = [
   {
     tag: 'Care',
     q: 'How should I wash and care for my Vela Sculpt™ shirt?',
-    a: 'Machine wash at 30°C on a delicate cycle with like colors. Air dry (it dries very quickly). Avoid tumble drying or ironing to preserve the elasticity of the technical knit.',
+    a: 'Machine wash at 30°C on a delicate cycle with like colors. Air dry — it dries very quickly. Avoid tumble drying or ironing to preserve the elasticity of the technical knit.',
   },
   {
     tag: 'Shipping & Tracking',

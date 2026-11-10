@@ -22,13 +22,13 @@ export default function SizeGuidePage() {
         <h1>{lang === 'fr' ? 'Guide des tailles — Homme' : 'Men’s Size Guide'}</h1>
         <p className="legal-meta">
           {lang === 'fr'
-            ? 'Comment choisir votre taille de t-shirt de compression ergonomique Vela Sculpt™.'
+            ? 'Comment choisir votre taille de T-shirt de compression ergonomique Vela Sculpt™.'
             : 'How to choose your ideal Vela Sculpt™ ergonomic compression fit.'}
         </p>
 
         <p>
           {lang === 'fr'
-            ? 'Nos t-shirts sont conçus pour épouser la morphologie masculine tout en assurant un lissage uniforme du torse et un maintien lombaire stable.'
+            ? 'Nos T-shirts sont conçus pour épouser la morphologie masculine tout en assurant un lissage uniforme du torse et un maintien lombaire stable.'
             : 'Our shirts are engineered to fit masculine body types while providing uniform torso smoothing and reliable lumbar support.'}
         </p>
 
@@ -38,7 +38,7 @@ export default function SizeGuidePage() {
               <tr>
                 <th>{lang === 'fr' ? 'Taille' : 'Size'}</th>
                 <th>{lang === 'fr' ? 'Poids conseillé' : 'Recommended Weight'}</th>
-                <th>{lang === 'fr' ? 'Taille (stature)' : 'Height'}</th>
+                <th>{lang === 'fr' ? 'Stature' : 'Height'}</th>
                 <th>{lang === 'fr' ? 'Tour de poitrine' : 'Chest'}</th>
                 <th>{lang === 'fr' ? 'Tour de taille' : 'Waist'}</th>
               </tr>
@@ -97,7 +97,7 @@ export default function SizeGuidePage() {
           </strong>
           <p style={{ margin: '6px 0 0', color: '#15803d', fontSize: 14 }}>
             {lang === 'fr'
-              ? 'Grâce à notre Garantie 30 Jours, si votre taille ne convient pas parfaitement, nous vous échangeons gratuitement votre t-shirt sans aucun frais supplémentaire.'
+              ? 'Grâce à notre Garantie 30 Jours, si votre taille ne convient pas parfaitement, nous vous échangeons gratuitement votre T-shirt sans aucun frais supplémentaire.'
               : 'Backed by our 30-Day Guarantee: if your size isn’t a flawless fit, we exchange it for free with zero extra costs.'}
           </p>
         </div>

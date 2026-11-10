@@ -66,7 +66,7 @@ export default function HowItWorksModal({ open, onClose }) {
               </strong>
               <p>
                 {lang === 'fr'
-                  ? 'Livraison suivie 100% offerte en 6 à 12 jours ouvrés avec numéro de suivi complet (Full Tracking). Essayez votre t-shirt sous vos chemises, t-shirts légers ou tenues de sport habituelles.'
+                  ? 'Livraison suivie 100% offerte en 6 à 12 jours ouvrés avec numéro de suivi complet en direct. Essayez votre T-shirt sous vos chemises, T-shirts légers ou tenues de sport habituelles.'
                   : '100% free tracked shipping within 6 to 12 working days with full live tracking. Try your compression shirt under regular shirts, lightweight tees, or workout apparel.'}
               </p>
             </div>

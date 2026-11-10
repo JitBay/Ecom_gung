@@ -13,8 +13,8 @@ const offersCardsData = [
     defaultColor: 'Noir',
     titleFr: 'Vela Sculpt™ sans manches',
     titleEn: 'Vela Sculpt™ Sleeveless',
-    taglineFr: 'Pack 3 débardeurs (2 achetés + 1 offert) · Soit 13,33 $ / unité',
-    taglineEn: 'Pack of 3 tank tops (Buy 2 Get 1 Free) · $13.33 each',
+    taglineFr: 'Pack 3 débardeurs · 2 achetés + 1 offert · Soit 13,33 $ / unité',
+    taglineEn: 'Pack of 3 tank tops · Buy 2 Get 1 Free · $13.33 each',
     badge: '2+1',
     rating: 4.9,
     reviewsCount: '67',
@@ -50,8 +50,8 @@ const offersCardsData = [
     defaultColor: 'Blanc',
     titleFr: 'Vela Sculpt™ demi-manches',
     titleEn: 'Vela Sculpt™ Short Sleeves',
-    taglineFr: 'Pack 3 t-shirts (2 achetés + 1 offert) · Soit 16,66 $ / unité',
-    taglineEn: 'Pack of 3 t-shirts (Buy 2 Get 1 Free) · $16.66 each',
+    taglineFr: 'Pack 3 T-shirts · 2 achetés + 1 offert · Soit 16,66 $ / unité',
+    taglineEn: 'Pack of 3 T-shirts · Buy 2 Get 1 Free · $16.66 each',
     badge: '2+1',
     rating: 4.9,
     reviewsCount: '67',
@@ -82,8 +82,8 @@ const offersCardsData = [
     defaultColor: 'Gris chiné',
     titleFr: 'Vela Sculpt™ manches longues',
     titleEn: 'Vela Sculpt™ Long Sleeves',
-    taglineFr: 'Pack 3 t-shirts (2 achetés + 1 offert) · Soit 19,99 $ / unité',
-    taglineEn: 'Pack of 3 long sleeves (Buy 2 Get 1 Free) · $19.99 each',
+    taglineFr: 'Pack 3 T-shirts · 2 achetés + 1 offert · Soit 19,99 $ / unité',
+    taglineEn: 'Pack of 3 long sleeves · Buy 2 Get 1 Free · $19.99 each',
     badge: '2+1',
     rating: 4.9,
     reviewsCount: '67',
@@ -151,7 +151,7 @@ function OfferProductCard({ p, lang, t }) {
         <div className="ixh-card__rating">
           <Stars value={p.rating} size={12} />
           <strong>{p.rating}</strong>
-          <span className="ixh-card__reviews">({p.reviewsCount})</span>
+          <span className="ixh-card__reviews">· {p.reviewsCount}</span>
         </div>
 
         <Link to={targetUrl} className="ixh-card__name">
@@ -236,7 +236,7 @@ export default function OffersProductShelf() {
     <section className="offers-shelf ixh-bs" id="offres-cards">
       <div className="offers-shelf__head">
         <span className="offers-shelf__pill">
-          ★ {lang === 'fr' ? 'Offre spéciale (2 achetés + 1 offert)' : 'Special Offer (Buy 2 Get 1 Free)'}
+          ★ {lang === 'fr' ? 'Offre spéciale · 2 achetés + 1 offert' : 'Special Offer · Buy 2 Get 1 Free'}
         </span>
         <h2 className="offers-shelf__title">
           {lang === 'fr' ? (
@@ -251,7 +251,7 @@ export default function OffersProductShelf() {
         </h2>
         <p className="offers-shelf__subtitle">
           {lang === 'fr'
-            ? 'Commandez 2 t-shirts et recevez le 3ème offert. Choisissez votre modèle ci-dessous pour configurer vos tailles et couleurs.'
+            ? 'Commandez 2 T-shirts et recevez le 3ème offert. Choisissez votre modèle ci-dessous pour configurer vos tailles et couleurs.'
             : 'Buy 2 shirts and get the 3rd one free. Select your style below to customize your sizes and colors.'}
         </p>
       </div>

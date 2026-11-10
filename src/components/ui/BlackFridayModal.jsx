@@ -87,7 +87,7 @@ export default function BlackFridayModal() {
     title_suffix: '',
     text: "Profitez en avant-première de notre offre exclusive Black Friday sur toute la collection de maintien postural et compression Vela Sculpt™.",
     perks: [
-      { title: '2 Achetés = 1 Offert', desc: 'Le 3ème t-shirt 100% offert sur tous nos modèles' },
+      { title: '2 Achetés = 1 Offert', desc: 'Le 3ème T-shirt 100% offert sur tous nos modèles' },
       { title: 'Livraison Suivie Gratuite', desc: 'Expédition prioritaire & tracking live' },
       { title: 'Essai 30 Jours', desc: '100% remboursé si non conquis' },
     ],

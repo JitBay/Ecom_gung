@@ -99,22 +99,22 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
       {
         id: 1,
         qty: 1,
-        title: lang === 'fr' ? 'Pack 1 t-shirt' : 'Pack 1 Shirt',
+        title: lang === 'fr' ? 'Pack 1 T-shirt' : 'Pack 1 Shirt',
         subtitle: lang === 'fr' ? 'Idéal pour tester l’effet gainant et le confort au quotidien.' : 'Ideal for testing slimming support and all-day comfort.',
         price: p1,
         compareAt: c1,
-        badge: lang === 'fr' ? 'Offre découverte — 1 t-shirt' : 'Intro Offer — 1 Shirt',
+        badge: lang === 'fr' ? 'Offre découverte — 1 T-shirt' : 'Intro Offer — 1 Shirt',
         freeShipping: true,
       },
       {
         id: 2,
         qty: 3,
         isTwoPlusOne: true,
-        title: lang === 'fr' ? 'Pack 2 t-shirts + 1 offert' : 'Pack 2 Shirts + 1 Free',
-        subtitle: lang === 'fr' ? '2 t-shirts achetés + le 3ème t-shirt 100% offert.' : 'Buy 2 shirts + get the 3rd shirt 100% free.',
+        title: lang === 'fr' ? 'Pack 2 T-shirts + 1 offert' : 'Pack 2 Shirts + 1 Free',
+        subtitle: lang === 'fr' ? '2 T-shirts achetés + le 3ème T-shirt 100% offert.' : 'Buy 2 shirts + get the 3rd shirt 100% free.',
         price: p2,
         compareAt: c2,
-        badge: lang === 'fr' ? 'Le plus choisi — 1 t-shirt offert' : 'Most Popular — 1 FREE Shirt',
+        badge: lang === 'fr' ? 'Le plus choisi — 1 T-shirt offert' : 'Most Popular — 1 FREE Shirt',
         freeShipping: true,
         highlight: true,
       },
@@ -400,7 +400,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
           }}
           title={lang === 'fr' ? 'Consulter les avis clients vérifiés' : 'Read verified customer reviews'}
         >
-          <Stars value={5} size={16} /> <strong>4.9</strong> <span>/ 5 ({lang === 'fr' ? '67 avis vérifiés' : '67 verified reviews'})</span>
+          <Stars value={5} size={16} /> <strong>4.9</strong> <span>/ 5 · {lang === 'fr' ? '67 avis vérifiés' : '67 verified reviews'}</span>
         </a>
 
         <p className="product__tagline">{localizedModel.tagline}</p>
@@ -466,7 +466,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
             <Icon name="lock" size={14} /> {lang === 'fr' ? 'Paiement 100% sécurisé' : '100% Secure Payment'}
           </span>
           <span>
-            <Icon name="truck" size={14} /> {lang === 'fr' ? 'Livraison 100% gratuite · 6 à 12 jours ouvrés (suivi complet)' : 'Free shipping · 6 to 12 working days (full tracking)'}
+            <Icon name="truck" size={14} /> {lang === 'fr' ? 'Livraison 100% gratuite · 6 à 12 jours ouvrés · suivi complet' : 'Free shipping · 6 to 12 working days · full tracking'}
           </span>
           <span>
             <Icon name="shield" size={14} /> {lang === 'fr' ? 'Garantie satisfait ou remboursé 30j' : '30-Day Money-Back Guarantee'}
@@ -514,11 +514,11 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
             <i className="live-dot" /> {lang === 'fr' ? 'Expédié avant le ' : 'Ships before '}<strong>{shipDate}</strong>
           </span>
           <span>
-            <i className="flag-fr" /> {lang === 'fr' ? 'Livraison gratuite 6-12 jours ouvrés (suivi complet)' : 'Free shipping 6-12 working days (full tracking)'}
+            <i className="flag-fr" /> {lang === 'fr' ? 'Livraison gratuite 6-12 jours ouvrés · suivi complet' : 'Free shipping 6-12 working days · full tracking'}
           </span>
         </div>
         <p className="product__trend">
-          <Icon name="trend" size={16} /> {lang === 'fr' ? 'Plus de 2 450 t-shirts commandés cette semaine' : 'Over 2,450 shirts ordered this week'}
+          <Icon name="trend" size={16} /> {lang === 'fr' ? 'Plus de 2 450 T-shirts commandés cette semaine' : 'Over 2,450 T-shirts ordered this week'}
         </p>
 
         <ul className="product__badges">

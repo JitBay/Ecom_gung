@@ -34,12 +34,12 @@ export default function ProductVideoSection({ modelHandle = 'vela-sculpt-sans-ma
       return '3 coupes complémentaires : 1 débardeur, 1 demi-manches et 1 manches longues inclus';
     }
     if (modelHandle === 'vela-sculpt-demi-manches') {
-      return 'Découpe demi-manches : col rond discret invisible sous chemises de bureau, polos & t-shirts';
+      return 'Découpe demi-manches : col rond discret invisible sous chemises de bureau, polos & T-shirts';
     }
     if (modelHandle === 'vela-sculpt-manches-longues') {
       return 'Découpe manches longues : maintien intégral torse, dos et bras sous vestes et pulls';
     }
-    return 'Découpe sans manches : invisibilité 100% totale sous chemises & t-shirts légers';
+    return 'Découpe sans manches : invisibilité 100% totale sous chemises & T-shirts légers';
   };
 
   const getCutBenefitEn = () => {

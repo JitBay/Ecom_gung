@@ -32,7 +32,7 @@ export default function GuaranteePage() {
         {lang === 'fr' ? (
           <>
             <p>
-              Chez <strong>ZVAR</strong>, nous sommes convaincus de l’efficacité et du confort supérieur de nos t-shirts de compression ergonomiques <strong>Vela Sculpt™</strong>.
+              Chez <strong>ZVAR</strong>, nous sommes convaincus de l’efficacité et du confort supérieur de nos T-shirts de compression ergonomiques <strong>Vela Sculpt™</strong>.
             </p>
             <p>
               C’est pourquoi chaque commande passée sur notre boutique est couverte par notre <strong>Garantie satisfait ou remboursé de 30 jours</strong>.
@@ -43,7 +43,7 @@ export default function GuaranteePage() {
             <h2>Comment fonctionne notre garantie de 30 jours ?</h2>
             <ol style={{ paddingLeft: 22, lineHeight: 1.8 }}>
               <li>
-                <strong>30 jours d’essai dans votre quotidien :</strong> À compter du jour où vous recevez votre colis, vous disposez de 30 jours pour enfiler votre t-shirt, le porter au travail sous vos chemises, au sport ou en sortie, et évaluer le confort, l'effet gainant et le maintien postural.
+                <strong>30 jours d’essai dans votre quotidien :</strong> À compter du jour où vous recevez votre colis, vous disposez de 30 jours pour enfiler votre T-shirt, le porter au travail sous vos chemises, au sport ou en sortie, et évaluer le confort, l'effet gainant et le maintien postural.
               </li>
               <li>
                 <strong>Pas de question piège :</strong> Si la coupe ne vous convient pas, si la taille n’est pas optimale ou si vous n’êtes pas 100% satisfait du rendu sous vos vêtements, vous pouvez demander un échange de taille gratuit ou un remboursement intégral.
@@ -52,7 +52,7 @@ export default function GuaranteePage() {
                 <strong>Procédure de retour simple et rapide :</strong> Envoyez simplement un email à <code>support@zvar-shop.com</code> en mentionnant votre numéro de commande. Notre équipe vous transmettra l'adresse de retour et les instructions sous 24h.
               </li>
               <li>
-                <strong>Remboursement rapide :</strong> Dès réception et vérification de votre retour par notre centre logistique, votre remboursement est immédiatement émis sur votre mode de paiement initial (carte bancaire ou Apple Pay).
+                <strong>Remboursement rapide :</strong> Dès réception et vérification de votre retour par notre centre logistique, votre remboursement est immédiatement émis sur votre mode de paiement initial : carte bancaire ou Apple Pay.
               </li>
             </ol>
 

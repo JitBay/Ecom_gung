@@ -108,7 +108,7 @@ export default function ContactPage() {
               {lang === 'fr' ? 'Délais de livraison' : 'Delivery Times'}
             </strong>
             <p style={{ margin: 0, fontSize: 14 }}>
-              {lang === 'fr' ? '6 à 12 jours ouvrés (suivi complet)' : '6 to 12 working days (full tracking)'}
+              {lang === 'fr' ? '6 à 12 jours ouvrés · suivi complet' : '6 to 12 working days · full tracking'}
             </p>
           </div>
         </div>
@@ -164,7 +164,7 @@ export default function ContactPage() {
               name="orderNumber"
               value={form.orderNumber}
               onChange={(e) => setForm((f) => ({ ...f, orderNumber: e.target.value }))}
-              placeholder={lang === 'fr' ? 'Numéro de commande (facultatif)' : 'Order number (optional)'}
+              placeholder={lang === 'fr' ? 'Numéro de commande facultatif' : 'Order number optional'}
               disabled={sending}
               style={{ padding: '12px 16px', borderRadius: 8, border: '1px solid var(--line)' }}
             />
