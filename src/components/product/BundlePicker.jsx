@@ -97,7 +97,7 @@ function VariantRows({
 
         const isFree = isTwoPlusOne && i === 2;
         return (
-          <div className={`variant ${isFree ? 'variant--free' : ''}`} key={i}>
+          <div className="variant" key={i}>
             <div className="variant__thumb">
               <img
                 src={colorImg}
