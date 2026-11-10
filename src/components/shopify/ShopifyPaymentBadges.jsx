@@ -46,6 +46,22 @@ export default function ShopifyPaymentBadges({ className = '', showSecurityNote 
         </span>
 
 
+        {/* PayPal */}
+        <span className="shopify-badge" title="PayPal">
+          <svg viewBox="0 0 38 24" width="38" height="24" fill="none">
+            <rect width="38" height="24" rx="4" fill="#003087" />
+            <path
+              d="M15.4 6.5H19.4C21.2 6.5 22.3 7.3 22.1 9C21.8 10.9 20.4 12.1 18.4 12.1H16.8L16 17H13.8L15.4 6.5Z"
+              fill="#FFFFFF"
+            />
+            <path
+              d="M17.8 9.2H21C22.4 9.2 23.3 9.9 23.1 11.4C22.9 12.9 21.7 13.8 20.1 13.8H18.7L18 18H16.2L17.8 9.2Z"
+              fill="#38BDF8"
+              fillOpacity="0.92"
+            />
+          </svg>
+        </span>
+
         {/* American Express */}
         <span className="shopify-badge" title="American Express">
           <svg viewBox="0 0 38 24" width="38" height="24" fill="none">

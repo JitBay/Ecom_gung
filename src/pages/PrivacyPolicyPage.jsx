@@ -35,7 +35,7 @@ export default function PrivacyPolicyPage() {
             <ul>
               <li><strong>Coordonnées :</strong> nom, prénom, adresse email, adresse de facturation et de livraison, numéro de téléphone lorsque nécessaire pour la livraison.</li>
               <li><strong>Informations de commande :</strong> articles commandés, tailles, coloris, historique de commandes, retours et remboursements.</li>
-              <li><strong>Paiement :</strong> les paiements sont traités de façon chiffrée par les prestataires sécurisés de Shopify Checkout (Visa, Mastercard, American Express, Cartes Bancaires, Shop Pay, Apple Pay). Ne transmettez jamais vos numéros complets de carte par email ou messagerie.</li>
+              <li><strong>Paiement :</strong> les paiements sont traités de façon chiffrée par les prestataires sécurisés de Shopify Checkout (Visa, Mastercard, American Express, Cartes Bancaires, Shop Pay, Apple Pay, PayPal). Ne transmettez jamais vos numéros complets de carte par email ou messagerie.</li>
               <li><strong>Données techniques :</strong> type de navigateur, appareil, langue/pays détecté pour l'affichage du site et préférences panier.</li>
             </ul>
 
@@ -91,7 +91,7 @@ export default function PrivacyPolicyPage() {
             <ul>
               <li><strong>Contact information:</strong> name, email address, billing address, shipping address and telephone number where needed.</li>
               <li><strong>Order information:</strong> products purchased, selected sizes and colors, quantities, order history, delivery details, returns, refunds and customer service records.</li>
-              <li><strong>Payment information:</strong> payments are processed securely through Shopify Checkout payment providers (Visa, Mastercard, American Express, Shop Pay, Apple Pay). Please do not send full payment card details to us by email or messaging.</li>
+              <li><strong>Payment information:</strong> payments are processed securely through Shopify Checkout payment providers (Visa, Mastercard, American Express, Shop Pay, Apple Pay, PayPal). Please do not send full payment card details to us by email or messaging.</li>
               <li><strong>Technical and browsing information:</strong> browser type, device information, country/language preference, cart activity and related technical data.</li>
               <li><strong>Communications and preferences:</strong> messages you send to our support team, product reviews you submit, and your newsletter preferences.</li>
             </ul>
