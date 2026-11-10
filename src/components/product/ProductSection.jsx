@@ -7,7 +7,6 @@ import ProductDetails from './ProductDetails.jsx';
 import SizeFinder from './SizeFinder.jsx';
 import StickyCart from './StickyCart.jsx';
 import ShopifyBuyButton from '../shopify/ShopifyBuyButton.jsx';
-import ApplePayButton from '../shopify/ApplePayButton.jsx';
 import ShopifyPaymentBadges from '../shopify/ShopifyPaymentBadges.jsx';
 import Icon from '../ui/Icon.jsx';
 import Stars from '../ui/Stars.jsx';
@@ -506,8 +505,6 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
                 : `⚡ Buy Now — Express Checkout`
             }
           />
-
-          <ApplePayButton lineItem={currentLineItem} />
 
           <ShopifyPaymentBadges />
         </div>

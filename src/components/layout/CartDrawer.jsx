@@ -1,5 +1,4 @@
 import Icon from '../ui/Icon.jsx';
-import ApplePayButton from '../shopify/ApplePayButton.jsx';
 import ShopifyPaymentBadges from '../shopify/ShopifyPaymentBadges.jsx';
 import { useCart } from '../../context/CartContext.jsx';
 import { useLanguage } from '../../context/LanguageContext.jsx';
@@ -108,13 +107,6 @@ export default function CartDrawer() {
                   : 'Redirecting to Shopify...'
                 : t('cart.checkout')}
             </button>
-            <div className="cart__express-divider">
-              <span>{lang === 'fr' ? 'ou paiement express' : 'or express pay'}</span>
-            </div>
-            <ApplePayButton
-              onClick={() => checkout()}
-              loading={isCheckingOut}
-            />
             <ShopifyPaymentBadges />
             <small>
               {lang === 'fr'
