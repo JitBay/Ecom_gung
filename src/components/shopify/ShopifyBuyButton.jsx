@@ -30,7 +30,7 @@ export default function ShopifyBuyButton({
     setLoading(true);
     try {
       const items = Array.isArray(lineItem) ? lineItem : [lineItem];
-      await redirectToShopifyCheckout(items, { discount: discountCode });
+      await redirectToShopifyCheckout(items, { discount: discountCode, locale: lang });
     } catch (err) {
       console.error('[ShopifyBuyButton] Redirection error:', err);
     } finally {
