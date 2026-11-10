@@ -1,6 +1,7 @@
 import { useMemo, useState, useEffect } from 'react';
 import Icon from '../ui/Icon.jsx';
 import Stars from '../ui/Stars.jsx';
+import CountryFlag from '../ui/CountryFlag.jsx';
 import { ratingBreakdown, reviews as seedReviews } from '../../data/reviews.js';
 import { useLanguage } from '../../context/LanguageContext.jsx';
 import { shortDate } from '../../lib/format.js';
@@ -142,9 +143,9 @@ function Review({ r, lang, t, onHelpful, hasVoted, onPhotoClick }) {
           <div className="review__author-info">
             <div className="review__author-row">
               <strong className="review__author-name">{r.name}</strong>
-              {r.flag && (
+              {(r.country || r.flag) && (
                 <span className="review__flag-pill" title={r.countryName?.[lang] || r.country}>
-                  <span className="review__flag-icon" aria-hidden="true">{r.flag}</span>
+                  <CountryFlag code={r.country || 'FR'} size="sm" />
                   <span className="review__flag-text">{r.countryName?.[lang] || r.country}</span>
                 </span>
               )}

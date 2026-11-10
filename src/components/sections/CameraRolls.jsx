@@ -1,5 +1,6 @@
 import Icon from '../ui/Icon.jsx';
 import Stars from '../ui/Stars.jsx';
+import CountryFlag from '../ui/CountryFlag.jsx';
 import { featuredReviews } from '../../data/reviews.js';
 import { useReveal } from '../../lib/hooks.js';
 import { useLanguage } from '../../context/LanguageContext.jsx';
@@ -95,7 +96,10 @@ export default function CameraRolls() {
                     <Highlight text={reviewItem.text} bold={reviewItem.bold} />
                   </p>
                   <footer>
-                    <strong>{reviewItem.name}</strong>
+                    <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                      <strong>{reviewItem.name}</strong>
+                      {reviewItem.country && <CountryFlag code={reviewItem.country} size="sm" />}
+                    </div>
                     <span>{reviewItem.meta}</span>
                   </footer>
                 </div>
