@@ -61,12 +61,12 @@
   letter-spacing: 0;
 }
 
-/* Mobile: full-width bar pinned to the bottom */
+/* Mobile: full-width bar pinned to the bottom with iOS safe-area support */
 @media (max-width: 749px) {
   .sticky-cart {
     left: 12px;
     right: 12px;
-    bottom: 12px;
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
     width: auto;
     padding: 0;
     background: none;

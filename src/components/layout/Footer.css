@@ -219,6 +219,6 @@
     gap: 32px;
   }
   .footer {
-    padding-bottom: 90px;
+    padding-bottom: calc(90px + env(safe-area-inset-bottom, 0px));
   }
 }

@@ -1,6 +1,9 @@
 .ixbm-bar {
   position: relative;
   overflow: hidden;
+  width: 100%;
+  max-width: 100vw;
+  contain: paint;
   background: var(--ixbm-bg, #0B0B0B);
   color: var(--ixbm-fg, #ffffff);
   border-bottom: 2px solid var(--ixbm-acc, #C9A96E);

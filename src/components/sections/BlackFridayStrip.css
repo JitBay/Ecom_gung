@@ -4,6 +4,8 @@
   padding: clamp(28px, 4vw, 42px) 0;
   background: transparent;
   width: 100%;
+  max-width: 100vw;
+  contain: paint;
 }
 
 .ixbm-strip__link {

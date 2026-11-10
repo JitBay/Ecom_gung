@@ -21,6 +21,9 @@
   display: flex;
   flex-direction: column;
   width: min(420px, 100vw);
+  height: 100%;
+  height: 100dvh;
+  max-height: 100dvh;
   background: var(--white);
   transform: translateX(100%);
   transition: transform 0.35s cubic-bezier(0.3, 0.7, 0.2, 1);
@@ -35,6 +38,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px 22px;
+  padding-top: calc(20px + env(safe-area-inset-top, 0px));
   border-bottom: 1px solid var(--line);
 }
 
@@ -77,6 +81,7 @@
 .cart__lines {
   flex: 1;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   padding: 0 22px;
 }
 
@@ -147,7 +152,7 @@
 .cart__foot {
   display: grid;
   gap: 12px;
-  padding: 18px 22px 22px;
+  padding: 18px 22px calc(22px + env(safe-area-inset-bottom, 0px));
   border-top: 1px solid var(--line);
   text-align: center;
 }

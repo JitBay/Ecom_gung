@@ -181,7 +181,7 @@
   align-items: center;
   justify-content: center;
   gap: 16px;
-  padding: 24px;
+  padding: calc(24px + env(safe-area-inset-top, 0px)) calc(24px + env(safe-area-inset-right, 0px)) calc(24px + env(safe-area-inset-bottom, 0px)) calc(24px + env(safe-area-inset-left, 0px));
   background: rgba(11, 14, 17, 0.94);
   animation: fade 0.25s ease;
 }
@@ -210,12 +210,13 @@
 
 .lightbox__close {
   position: absolute;
-  top: 18px;
-  right: 18px;
+  top: calc(18px + env(safe-area-inset-top, 0px));
+  right: calc(18px + env(safe-area-inset-right, 0px));
   color: var(--white);
   background: none;
   border: none;
   cursor: pointer;
+  z-index: 10;
 }
 
 .lightbox__nav {

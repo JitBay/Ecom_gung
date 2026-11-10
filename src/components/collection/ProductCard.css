@@ -105,6 +105,7 @@
 }
 
 .card__swatch {
+  position: relative;
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -112,6 +113,16 @@
   box-shadow: 0 0 0 1px var(--line);
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.card__swatch::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  bottom: -6px;
+  left: -6px;
 }
 
 .card__swatch:hover {

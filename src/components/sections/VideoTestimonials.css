@@ -287,7 +287,7 @@
   backdrop-filter: blur(10px);
   display: grid;
   place-items: center;
-  padding: 20px;
+  padding: calc(20px + env(safe-area-inset-top, 0px)) calc(20px + env(safe-area-inset-right, 0px)) calc(20px + env(safe-area-inset-bottom, 0px)) calc(20px + env(safe-area-inset-left, 0px));
   animation: ugcModalFade 0.2s ease;
 }
 
@@ -304,7 +304,7 @@
   position: relative;
   width: 100%;
   max-width: 440px;
-  max-height: 88vh;
+  max-height: min(88vh, calc(100dvh - 40px));
   aspect-ratio: 9 / 16;
   border-radius: 20px;
   overflow: hidden;
@@ -351,7 +351,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 20px;
+  padding: calc(20px + env(safe-area-inset-top, 0px)) calc(20px + env(safe-area-inset-right, 0px)) calc(20px + env(safe-area-inset-bottom, 0px)) calc(20px + env(safe-area-inset-left, 0px));
   background: linear-gradient(transparent, rgba(0, 0, 0, 0.95));
   color: #fff;
   z-index: 5;
