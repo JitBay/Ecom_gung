@@ -161,3 +161,26 @@
 .cart__foot small {
   color: var(--muted);
 }
+
+.cart__foot .shopify-buy-btn {
+  min-height: 48px;
+}
+
+.cart__express-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.cart__express-divider::before,
+.cart__express-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
