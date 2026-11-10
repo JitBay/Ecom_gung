@@ -6,13 +6,13 @@ import { useLanguage } from '../../context/LanguageContext.jsx';
 import './Hero.css';
 
 const perksFr = [
-  'Silhouette lissée sous t-shirt et chemise',
+  'Silhouette lissée sous T-shirt et chemise',
   'Maintien postural actif pour le dos et les épaules',
   'Maille 3D respirante, invisible & seconde peau',
 ];
 
 const perksEn = [
-  'Streamlined silhouette under shirts and t-shirts',
+  'Streamlined silhouette under shirts and T-shirts',
   'Active posture support for back and shoulders',
   'Breathable 3D mesh, discreet & second-skin fit',
 ];
@@ -85,7 +85,7 @@ export default function Hero({ initialHandle, onSelectModel, showModelSelector =
         <div className="hero__rating">
           <Stars value={5} size={17} />
           <span>
-            <strong>4.9</strong>/5 <i>|</i> <strong>3 000+</strong> {lang === 'fr' ? 'clients satisfaits' : 'happy customers'}
+            <strong>4.9</strong>/5 <i>|</i> <strong>1 200+</strong> {lang === 'fr' ? 'clients satisfaits' : 'happy customers'}
           </span>
         </div>
 
@@ -110,7 +110,7 @@ export default function Hero({ initialHandle, onSelectModel, showModelSelector =
         <p className="hero__lead">
           {lang === 'fr' ? (
             <>
-              Le t-shirt de compression ergonomique pour homme conçu pour <strong>lisser visuellement la silhouette sous vos vêtements</strong> et soutenir vos lombaires tout au long de la journée. Discret, respirant et sans coutures gênantes.
+              Le T-shirt de compression ergonomique pour homme conçu pour <strong>lisser visuellement la silhouette sous vos vêtements</strong> et soutenir vos lombaires tout au long de la journée. Discret, respirant et sans coutures gênantes.
             </>
           ) : (
             <>
@@ -218,7 +218,7 @@ export default function Hero({ initialHandle, onSelectModel, showModelSelector =
             <span className="tick">
               <Icon name="check" size={12} strokeWidth={2.6} />
             </span>
-            {lang === 'fr' ? 'Adopté par plus de 3 000 clients satisfaits au quotidien' : 'Worn daily by 3,000+ happy customers'}
+            {lang === 'fr' ? 'Adopté par plus de 1 200 clients satisfaits au quotidien' : 'Worn daily by 1,200+ happy customers'}
           </p>
         </div>
       </div>

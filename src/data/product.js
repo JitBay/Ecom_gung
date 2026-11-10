@@ -20,8 +20,8 @@ export const sizes = ['S', 'M', 'L', 'XL', '2XL'];
 export const discoveryCategories = [
   {
     handle: 'vela-sculpt-sans-manches',
-    titleFr: 'Sans manches (débardeur)',
-    titleEn: 'Sleeveless (Tank Top)',
+    titleFr: 'Sans manches · Débardeur',
+    titleEn: 'Sleeveless · Tank Top',
     badgeFr: 'Ultra discret',
     badgeEn: 'Ultra Discreet',
     defaultColor: 'noir',
@@ -40,8 +40,8 @@ export const discoveryCategories = [
   },
   {
     handle: 'vela-sculpt-demi-manches',
-    titleFr: 'Demi-manches (manches courtes)',
-    titleEn: 'Short Sleeves (Crew Neck)',
+    titleFr: 'Demi-manches · Manches courtes',
+    titleEn: 'Short Sleeves',
     badgeFr: 'Plus populaire',
     badgeEn: 'Most Popular',
     defaultColor: 'noir',
@@ -84,7 +84,7 @@ export const offerModules = [
     subtitle: 'Sans changer ta garde-robe',
     tagline: 'Lissage discret et immédiat',
     hook:
-      'Obtiens une silhouette visuellement plus lisse sous tes tee-shirts et chemises grâce à un t-shirt de compression discret, conçu pour accompagner tes tenues quotidiennes sans ajouter de couches compliquées ni bouleverser tes habitudes.',
+      'Obtiens une silhouette visuellement plus lisse sous tes T-shirts et chemises grâce à un T-shirt de compression discret, conçu pour accompagner tes tenues quotidiennes sans ajouter de couches compliquées ni bouleverser tes habitudes.',
     guaranteeBadge:
       'Essaie-le pendant 30 jours. Si tu n’es pas satisfait du confort ou du rendu, demande un remboursement conformément aux conditions de la garantie.',
     icon: 'sparkle',
@@ -95,7 +95,7 @@ export const offerModules = [
     subtitle: 'Maintien doux et respirant',
     tagline: 'Conçu pour le bureau & les sorties',
     hook:
-      'Profite d’un maintien ajusté qui s’intègre facilement à ta journée, au bureau comme en sortie, avec un t-shirt de compression pensé pour rester discret sous tes vêtements et t’éviter de choisir entre maintien et confort.',
+      'Profite d’un maintien ajusté qui s’intègre facilement à ta journée, au bureau comme en sortie, avec un T-shirt de compression pensé pour rester discret sous tes vêtements et t’éviter de choisir entre maintien et confort.',
     guaranteeBadge:
       'Bénéficie de 30 jours pour évaluer le confort et l’ajustement du produit. Si l’expérience ne te convient pas, tu peux demander un remboursement selon les conditions annoncées.',
     icon: 'heart',
@@ -106,7 +106,7 @@ export const offerModules = [
     subtitle: 'Porte tes vêtements avec assurance',
     tagline: 'Idéal sous chemises ajustées',
     hook:
-      'Porte tes chemises et tes tee-shirts avec davantage d’assurance grâce à une couche gainante discrète qui aide à lisser visuellement la silhouette, sans devoir renouveler ta garde-robe ni adopter une routine compliquée.',
+      'Porte tes chemises et tes T-shirts avec davantage d’assurance grâce à une couche gainante discrète qui aide à lisser visuellement la silhouette, sans devoir renouveler ta garde-robe ni adopter une routine compliquée.',
     guaranteeBadge:
       'Tu disposes de 30 jours pour décider si le produit répond à tes attentes. Si ce n’est pas le cas, tu peux demander un remboursement selon les modalités de retour clairement communiquées lors de l’achat.',
     icon: 'shield',
@@ -117,7 +117,7 @@ export const offerModules = [
     subtitle: 'Pour ton quotidien',
     tagline: 'Enfile-le et oublie-le',
     hook:
-      'Simplifie ta routine vestimentaire avec un seul t-shirt de compression conçu pour associer maintien, discrétion et facilité d’utilisation, afin de profiter d’une silhouette visuellement plus lisse sous tes vêtements, sans effort supplémentaire au quotidien.',
+      'Simplifie ta routine vestimentaire avec un seul T-shirt de compression conçu pour associer maintien, discrétion et facilité d’utilisation, afin de profiter d’une silhouette visuellement plus lisse sous tes vêtements, sans effort supplémentaire au quotidien.',
     guaranteeBadge:
       'Profite d’une garantie satisfait ou remboursé de 30 jours, avec des conditions transparentes concernant les retours, les frais éventuels et les modalités de remboursement.',
     icon: 'bolt',
@@ -175,8 +175,8 @@ export const benefits = [
   {
     icon: 'sparkle',
     title: 'Silhouette lissée instantanément',
-    text: 'Gainage abdominal doux qui aplatit le ventre et estompe les poignées d’amour sous chemise ou t-shirt.',
-    tag: 'Effet Immédiat',
+    text: 'Gainage abdominal doux qui aplatit le ventre et estompe les poignées d’amour sous chemise ou T-shirt.',
+    tag: 'Effet immédiat',
   },
   {
     icon: 'pulse',
@@ -188,13 +188,13 @@ export const benefits = [
     icon: 'shield',
     title: '100% invisible sous les vêtements',
     text: 'Encolure basse et coutures ultra-plates plates imperceptibles même sous une chemise blanche ajustée.',
-    tag: 'Seconde Peau',
+    tag: 'Seconde peau',
   },
   {
     icon: 'waves',
     title: 'Maille 3D micro-respirante',
     text: 'Évacuation active de l’humidité et fibres anti-odeur pour rester parfaitement au frais toute la journée.',
-    tag: 'Thermo-régulant',
+    tag: 'Thermorégulant',
   },
 ];
 
@@ -241,31 +241,31 @@ export const bundles = [
   {
     id: 1,
     qty: 1,
-    title: 'Pack 1 T-Shirt',
+    title: 'Pack 1 T-shirt',
     subtitle: 'Idéal pour tester l’effet gainant et le confort au quotidien.',
     price: 24.99,
     compareAt: 44.99,
-    badge: 'Offre Découverte — 1 T-Shirt',
+    badge: 'Offre découverte — 1 T-shirt',
     freeShipping: true,
   },
   {
     id: 2,
     qty: 3,
     isTwoPlusOne: true,
-    title: 'Pack 2 t-shirts + 1 offert',
-    subtitle: '2 t-shirts achetés + le 3ème t-shirt 100% offert.',
+    title: 'Pack 2 T-shirts + 1 offert',
+    subtitle: '2 T-shirts achetés + le 3ème T-shirt 100% offert.',
     price: 49.98,
     compareAt: 74.97,
-    badge: 'Le plus choisi — 1 t-shirt offert',
+    badge: 'Le plus choisi — 1 T-shirt offert',
     freeShipping: true,
     highlight: true,
   },
 ];
 
 export const badges = [
-  { icon: 'shield', label: 'Garantie 30 Jours' },
+  { icon: 'shield', label: 'Garantie 30 jours' },
   { icon: 'lock', label: 'Paiement sécurisé SSL' },
-  { icon: 'truck', label: 'Expédition Suivie 24/48h' },
+  { icon: 'truck', label: 'Expédition suivie 24/48h' },
 ];
 
 export const badgesEn = [
@@ -288,7 +288,7 @@ export const fabric = [
   ['Technologie', 'Maille tridimensionnelle à compression graduée et maintien abdominal ciblé'],
   ['Invisibilité', 'Encolure dégagée et coutures ergonomiques plates imperceptibles sous chemise'],
   ['Thermo-régulation', 'Tissu respirant avec canaux d’évacuation de la sueur et propriétés anti-odeur'],
-  ['Entretien', 'Lavage délicat en machine à 30°C. Séchage rapide à l’air libre (pas de sèche-linge)'],
+  ['Entretien', 'Lavage délicat en machine à 30°C. Séchage rapide à l’air libre — sans sèche-linge'],
 ];
 
 export const fabricEn = [
@@ -296,18 +296,18 @@ export const fabricEn = [
   ['Technology', 'Graduated 3D knit compression with targeted abdominal support'],
   ['Invisibility', 'Deep neckline and flat ergonomic seams imperceptible under dress shirts'],
   ['Thermal Control', 'Breathable knit with sweat channels and anti-odor properties'],
-  ['Care', 'Machine wash delicate at 30°C. Quick air dry (do not tumble dry)'],
+  ['Care', 'Machine wash delicate at 30°C. Quick air dry — do not tumble dry'],
 ];
 
 export const shipping = {
   lines: [
     'Préparation & expédition : 24 à 48 heures ouvrées',
     'Livraison en France & Europe : 6 à 12 jours ouvrés',
-    'Numéro de suivi complet en direct (Full Tracking) fourni par email dès expédition',
+    'Numéro de suivi complet en direct avec suivi en direct fourni par email dès expédition',
     'Livraison 100% gratuite et suivie sur toutes les commandes',
   ],
   returns:
-    'Garantie satisfait ou remboursé de 30 jours. Vous bénéficiez de 30 jours à compter de la réception pour essayer votre t-shirt Vela Sculpt™. Si vous n’êtes pas entièrement convaincu du confort ou du maintien, notre service client organise votre retour et remboursement en toute simplicité.',
+    'Garantie satisfait ou remboursé de 30 jours. Vous bénéficiez de 30 jours à compter de la réception pour essayer votre T-shirt Vela Sculpt™. Si vous n’êtes pas entièrement convaincu du confort ou du maintien, notre service client organise votre retour et remboursement en toute simplicité.',
 };
 
 export const shippingEn = {
@@ -323,12 +323,12 @@ export const shippingEn = {
 
 export const quickFaq = [
   {
-    q: 'Le t-shirt se voit-il sous une chemise blanche ou un polo ?',
-    a: 'Non, c’est notre priorité numéro 1. L’encolure basse ne dépasse pas sous un premier bouton ouvert, et les coutures plates disparaissent totalement sous le tissu de vos chemises ou t-shirts.',
+    q: 'Le T-shirt se voit-il sous une chemise blanche ou un polo ?',
+    a: 'Non, c’est notre priorité numéro 1. L’encolure basse ne dépasse pas sous un premier bouton ouvert, et les coutures plates disparaissent totalement sous le tissu de vos chemises ou T-shirts.',
   },
   {
     q: 'Quelle taille dois-je choisir ?',
-    a: 'Nous vous conseillons de prendre votre taille habituelle de t-shirt. Si vous êtes entre deux tailles et souhaitez une compression plus ferme, prenez la taille inférieure ; pour un confort plus décontracté, optez pour la taille supérieure.',
+    a: 'Nous vous conseillons de prendre votre taille habituelle de T-shirt. Si vous êtes entre deux tailles et souhaitez une compression plus ferme, prenez la taille inférieure ; pour un confort plus décontracté, optez pour la taille supérieure.',
   },
   {
     q: 'Puis-je le porter toute la journée au travail ?',

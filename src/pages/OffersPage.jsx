@@ -39,8 +39,8 @@ export default function OffersPage() {
           }}
         >
           {lang === 'fr'
-            ? '✨ Découvrir la présentation complète du Pack Découverte (3 Coupes) →'
-            : '✨ Explore the complete Discovery Pack (3 Fits) presentation page →'}
+            ? '✨ Découvrir l\'offre Pack Découverte 3 coupes à 44,99 $ →'
+            : '✨ Explore the Discovery Pack 3 Fits at $44.99 offer →'}
         </Link>
       </div>
 

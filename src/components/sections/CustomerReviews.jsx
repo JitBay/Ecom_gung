@@ -1,6 +1,7 @@
 import { useMemo, useState, useEffect } from 'react';
 import Icon from '../ui/Icon.jsx';
 import Stars from '../ui/Stars.jsx';
+import CountryFlag from '../ui/CountryFlag.jsx';
 import { ratingBreakdown, reviews as seedReviews } from '../../data/reviews.js';
 import { useLanguage } from '../../context/LanguageContext.jsx';
 import { shortDate } from '../../lib/format.js';
@@ -140,7 +141,15 @@ function Review({ r, lang, t, onHelpful, hasVoted, onPhotoClick }) {
             {r.name ? r.name.charAt(0).toUpperCase() : 'V'}
           </span>
           <div className="review__author-info">
-            <strong className="review__author-name">{r.name}</strong>
+            <div className="review__author-row">
+              <strong className="review__author-name">{r.name}</strong>
+              {(r.country || r.flag) && (
+                <span className="review__flag-pill" title={r.countryName?.[lang] || r.country}>
+                  <CountryFlag code={r.country || 'FR'} size="sm" />
+                  <span className="review__flag-text">{r.countryName?.[lang] || r.country}</span>
+                </span>
+              )}
+            </div>
             {r.verified !== false && (
               <span className="review__verified-badge">
                 <Icon name="check" size={11} strokeWidth={3} /> {t('reviews_section.verified_buyer')}

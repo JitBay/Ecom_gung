@@ -5,6 +5,8 @@ import Icon from '../components/ui/Icon.jsx';
 import Stars from '../components/ui/Stars.jsx';
 import Gallery from '../components/product/Gallery.jsx';
 import SizeFinder from '../components/product/SizeFinder.jsx';
+import BlackFridayHero from '../components/sections/BlackFridayHero.jsx';
+import BlackFridayStrip from '../components/sections/BlackFridayStrip.jsx';
 import Hero from '../components/sections/Hero.jsx';
 import CameraRolls from '../components/sections/CameraRolls.jsx';
 import ProductSection from '../components/product/ProductSection.jsx';
@@ -36,6 +38,8 @@ function DedicatedProductPage({ product }) {
 
   return (
     <div className={`product-page-wrap ${handle}-product`}>
+      {/* 0. BLACK FRIDAY ANNOUNCEMENT BANNER */}
+      <BlackFridayHero targetId="bm-deal" slim={true} />
       {/* 1. HERO BANNER & CAMERA ROLLS: ONLY FOR SLEEVELESS (REMOVED FROM SHORT AND LONG AS REQUESTED) */}
       {isSleeveless && (
         <>
@@ -51,6 +55,9 @@ function DedicatedProductPage({ product }) {
 
       {/* 3. REAL-WORLD PRODUCT VIDEO DEMO: ONLY FOR SLEEVELESS (REMOVED FROM SHORT & LONG) */}
       {isSleeveless && <ProductVideoSection modelHandle={handle} />}
+
+      {/* DIAGONAL RUBAN / RIBBON OFFER */}
+      <BlackFridayStrip targetId="bm-deal" reversed={true} />
 
       {/* 4. OTHER ERGONOMIC FITS */}
       <RelatedProducts exclude={handle} />
@@ -232,7 +239,7 @@ function ClassicProductPage({ product }) {
             }}
             title={lang === 'fr' ? 'Consulter les avis clients vérifiés' : 'Read verified customer reviews'}
           >
-            <Stars value={product.rating || 4.9} size={15} /> <strong>{product.rating || 4.9}</strong> / 5 ({product.reviewCount || 67} {t('product_page.reviews_count')})
+            <Stars value={product.rating || 4.9} size={15} /> <strong>{product.rating || 4.9}</strong> / 5 · {product.reviewCount || 67} {t('product_page.reviews_count')}
           </a>
 
           <p className="pp__tagline" style={{ color: 'var(--muted)', fontSize: 15, marginBottom: 14 }}>

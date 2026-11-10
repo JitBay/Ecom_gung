@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import QualitySection from '../components/sections/QualitySection.jsx';
 import BlackFridayHero from '../components/sections/BlackFridayHero.jsx';
+import BlackFridayStrip from '../components/sections/BlackFridayStrip.jsx';
+import CustomerReviews from '../components/sections/CustomerReviews.jsx';
 import Stars from '../components/ui/Stars.jsx';
 import HowItWorksModal from '../components/ui/HowItWorksModal.jsx';
 import { brand } from '../data/site.js';
@@ -12,15 +14,49 @@ import './HomePage.css';
 // Best sellers cards: curated selection of 4 core model & colorway editions
 const bestSellersBase = [
   {
+    id: 'pack-decouverte',
+    handle: 'pack-decouverte',
+    defaultColor: 'Noir',
+    titleFr: 'Pack Découverte — 3 coupes',
+    titleEn: 'Discovery Pack — 3 Fits',
+    taglineFr: '1 débardeur + 1 demi-manches + 1 manches longues inclus · 30 $ d\'économie',
+    taglineEn: '1 Tank Top + 1 Short Sleeves + 1 Long Sleeves included · Save $30',
+    badgeFr: '⭐️ Offre star Black Friday',
+    badgeEn: '⭐️ Black Friday Star Deal',
+    rating: 4.9,
+    reviewsCount: '70',
+    price: 44.99,
+    compareAt: 74.97,
+    urlBase: '/products/pack-decouverte',
+    offerBadge: true,
+    colorData: {
+      Noir: {
+        hex: '#1a1a1a',
+        img: '/images/products/image-decouverte.png',
+        hoverImg: '/images/products/decouverte-back.png',
+      },
+      Blanc: {
+        hex: '#f4f4f6',
+        img: '/images/products/image-decouverte.png',
+        hoverImg: '/images/products/decouverte-back.png',
+      },
+      Gris: {
+        hex: '#72757d',
+        img: '/images/products/image-decouverte.png',
+        hoverImg: '/images/products/decouverte-back.png',
+      },
+    },
+  },
+  {
     id: 'sans-manches-noir',
     handle: 'vela-sculpt-sans-manches',
     defaultColor: 'Noir',
     titleFr: 'Vela Sculpt™ sans manches',
     titleEn: 'Vela Sculpt™ Sleeveless',
-    taglineFr: 'Invisibilité absolue sous chemises et t-shirts légers',
+    taglineFr: 'Invisibilité absolue sous chemises et T-shirts légers',
     taglineEn: 'Discreet and breathable core support under shirts & tees',
-    badgeFr: '#1 Meilleure Vente',
-    badgeEn: '#1 Best Seller',
+    badgeFr: 'Débardeur invisible',
+    badgeEn: 'Invisible Tank Top',
     rating: 4.9,
     reviewsCount: '67',
     price: 19.99,
@@ -118,39 +154,7 @@ const bestSellersBase = [
       },
     },
   },
-  {
-    id: 'pack-decouverte',
-    handle: 'pack-decouverte',
-    defaultColor: 'Noir',
-    titleFr: 'Pack Découverte — 3 Coupes',
-    titleEn: 'Discovery Pack — 3 Fits',
-    taglineFr: '1 Débardeur + 1 Demi-manches + 1 Manches longues inclus',
-    taglineEn: '1 Tank Top + 1 Short Sleeves + 1 Long Sleeves included',
-    badgeFr: 'Offre Découverte',
-    badgeEn: 'Discovery Offer',
-    rating: 4.9,
-    reviewsCount: '70',
-    price: 49.99,
-    compareAt: 74.97,
-    urlBase: '/pages/offres#product',
-    colorData: {
-      Noir: {
-        hex: '#1a1a1a',
-        img: '/images/products/image-decouverte.png',
-        hoverImg: '/images/products/decouverte-back.png',
-      },
-      Blanc: {
-        hex: '#f4f4f6',
-        img: '/images/products/image-decouverte.png',
-        hoverImg: '/images/products/decouverte-back.png',
-      },
-      Gris: {
-        hex: '#72757d',
-        img: '/images/products/image-decouverte.png',
-        hoverImg: '/images/products/decouverte-back.png',
-      },
-    },
-  },
+
 ];
 
 function BestSellerCard({ p, lang, t }) {
@@ -194,15 +198,27 @@ function BestSellerCard({ p, lang, t }) {
           <Link
             to={targetUrl}
             className="ixh-card__stamp"
-            title={lang === 'fr' ? 'Offre 2 achetés + le 3ème offert' : 'Buy 2, get 1 free offer'}
-            aria-label={lang === 'fr' ? 'Offre 2 achetés 1 offert' : 'Buy 2 get 1 free offer'}
+            title={
+              p.handle === 'pack-decouverte'
+                ? (lang === 'fr' ? 'Offre Découverte Black Friday' : 'Black Friday Discovery Offer')
+                : (lang === 'fr' ? 'Offre 2 achetés + le 3ème offert' : 'Buy 2, get 1 free offer')
+            }
+            aria-label={
+              p.handle === 'pack-decouverte'
+                ? (lang === 'fr' ? 'Offre Découverte Black Friday' : 'Black Friday Discovery Offer')
+                : (lang === 'fr' ? 'Offre 2 achetés 1 offert' : 'Buy 2 get 1 free offer')
+            }
             tabIndex={-1}
           >
             <span className="ixh-card__stamp-top">
-              {lang === 'fr' ? '2 ACHETÉS' : 'BUY 2'}
+              {p.handle === 'pack-decouverte'
+                ? (lang === 'fr' ? '3 COUPES' : '3 FITS')
+                : (lang === 'fr' ? '2 ACHETÉS' : 'BUY 2')}
             </span>
             <strong className="ixh-card__stamp-main">
-              {lang === 'fr' ? '1 OFFERT' : 'GET 1 FREE'}
+              {p.handle === 'pack-decouverte'
+                ? (lang === 'fr' ? '44,99 $' : '$44.99')
+                : (lang === 'fr' ? '1 OFFERT' : 'GET 1 FREE')}
             </strong>
           </Link>
         )}
@@ -212,7 +228,7 @@ function BestSellerCard({ p, lang, t }) {
         <div className="ixh-card__rating">
           <Stars value={p.rating} size={12} />
           <strong>{p.rating}</strong>
-          <span className="ixh-card__reviews">({p.reviewsCount})</span>
+          <span className="ixh-card__reviews">· {p.reviewsCount}</span>
         </div>
 
         <Link to={targetUrl} className="ixh-card__name">
@@ -259,8 +275,8 @@ function BestSellerCard({ p, lang, t }) {
 const lifestyleItems = [
   {
     id: 'sans-manches',
-    titleFr: 'Sans Manches (Débardeur)',
-    titleEn: 'Sleeveless (Tank Top)',
+    titleFr: 'Sans Manches · Débardeur',
+    titleEn: 'Sleeveless · Tank Top',
     taglineFr: 'Discrétion 100% invisible sous chemises & liberté totale',
     taglineEn: '100% invisible under shirts with maximum arm freedom',
     img: '/images/home/lifestyle-piscine.png',
@@ -268,7 +284,7 @@ const lifestyleItems = [
   },
   {
     id: 'demi-manches',
-    titleFr: 'Demi-Manches (Manches Courtes)',
+    titleFr: 'Demi-Manches · Manches Courtes',
     titleEn: 'Short Sleeves',
     taglineFr: 'Le basique quotidien sous polos et chemises de bureau',
     taglineEn: 'Everyday posture and smoothing under polos and office wear',
@@ -364,9 +380,12 @@ export default function HomePage() {
             </h1>
             <p className="ixh-hero__text">{t('home.hero_text')}</p>
             <div className="ixh-hero__btns">
+              <Link to="/products/pack-decouverte" className="ixh-btn ixh-btn--gold">
+                {lang === 'fr' ? 'Offre Pack Découverte 3 coupes à 44,99 $' : 'Discovery Pack Offer 3 Fits at $44.99'}
+              </Link>
               <a
                 href="#bestsellers"
-                className="ixh-btn ixh-btn--gold"
+                className="ixh-btn ixh-btn--outline-gold"
                 onClick={(e) => {
                   const el = document.getElementById('bestsellers');
                   if (el) {
@@ -377,9 +396,6 @@ export default function HomePage() {
               >
                 {t('home.cta_bestsellers')}
               </a>
-              <Link to="/collections/all" className="ixh-btn ixh-btn--outline-gold">
-                {t('home.cta_all')}
-              </Link>
             </div>
           </div>
         </div>
@@ -399,6 +415,9 @@ export default function HomePage() {
 
       {/* 3. BLACK FRIDAY ANNOUNCEMENT BANNER */}
       <BlackFridayHero targetId="bestsellers" />
+
+      {/* DIAGONAL RUBAN / RIBBON OFFER */}
+      <BlackFridayStrip targetId="bestsellers" />
 
       {/* 4. BEST SELLERS SHELF */}
       <section className="ixh-bs" id="bestsellers">
@@ -580,7 +599,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 9. TRUST STRIP */}
+      {/* 9. AVIS CLIENTS / REVIEWS */}
+      <CustomerReviews />
+
+      {/* 10. TRUST STRIP */}
       <section className="ionix-trust" aria-label={t('home.trust_title')}>
         <div className="ionix-trust__inner">
           <div className="ionix-trust__item">

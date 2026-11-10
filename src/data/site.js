@@ -25,21 +25,21 @@ export const nav = [
     label: 'Nos Modèles',
     to: '/collections/all',
     children: [
-      { label: 'Sans manches (débardeur)', to: '/products/vela-sculpt-sans-manches' },
-      { label: 'Demi-manches (manches courtes)', to: '/products/vela-sculpt-demi-manches' },
+      { label: 'Sans manches · Débardeur', to: '/products/vela-sculpt-sans-manches' },
+      { label: 'Demi-manches · Manches courtes', to: '/products/vela-sculpt-demi-manches' },
       { label: 'Manches longues', to: '/products/vela-sculpt-manches-longues' },
     ],
   },
   { label: 'Nos Packs & Offres', to: '/pages/offres' },
-  { label: 'Pourquoi zvar ?', to: '/pages/notre-technologie' },
+  { label: 'Pourquoi Zvar ?', to: '/pages/notre-technologie' },
   { label: 'Garantie 30 Jours', to: '/pages/garantie' },
   { label: 'Avis Clients', to: '/#reviews' },
 ];
 
 export const announcements = [
   'Garantie satisfait ou remboursé de 30 jours',
-  'Livraison suivie 100% offerte (6 à 12 jours ouvrés) · Suivi complet en direct · club zvar',
-  'Plus de 3 000 clients satisfaits portent Vela Sculpt™ au quotidien',
+  'Livraison suivie 100% offerte en 6 à 12 jours ouvrés · Suivi complet en direct · club zvar',
+  'Plus de 1 200 clients satisfaits portent Vela Sculpt™ au quotidien',
 ];
 
 export const footerColumns = [
@@ -59,7 +59,7 @@ export const footerColumns = [
     links: [
       { label: 'Suivi de commande', to: '/pages/suivi-commande' },
       { label: 'Guide des tailles', to: '/pages/guide-tailles' },
-      { label: 'Foire Aux Questions (FAQ)', to: '/#faq' },
+      { label: 'Foire Aux Questions FAQ', to: '/#faq' },
       { label: 'Contactez-nous', to: '/pages/contact' },
     ],
   },
@@ -67,8 +67,8 @@ export const footerColumns = [
     title: 'Informations légales',
     links: [
       { label: 'Politique de confidentialité', to: '/policies/privacy-policy' },
-      { label: 'Conditions générales de vente (CGV)', to: '/policies/terms-of-service' },
-      { label: 'Politique de retour & remboursement (30j)', to: '/policies/refund-policy' },
+      { label: 'Conditions Générales de Vente CGV', to: '/policies/terms-of-service' },
+      { label: 'Politique de retour & remboursement · 30 jours', to: '/policies/refund-policy' },
       { label: 'Mentions légales', to: '/policies/legal-notice' },
     ],
   },
@@ -76,12 +76,12 @@ export const footerColumns = [
 
 export const policies = [
   { label: 'Politique de confidentialité', to: '/policies/privacy-policy' },
-  { label: 'Conditions générales de vente', to: '/policies/terms-of-service' },
-  { label: 'Retours & Remboursements (30 jours)', to: '/policies/refund-policy' },
+  { label: 'Conditions Générales de Vente CGV', to: '/policies/terms-of-service' },
+  { label: 'Retours & Remboursements · 30 jours', to: '/policies/refund-policy' },
   { label: 'Mentions légales', to: '/policies/legal-notice' },
 ];
 
-export const payments = ['Apple Pay', 'Shop Pay', 'Visa', 'Mastercard', 'American Express', 'Cartes Bancaires'];
+export const payments = ['Visa', 'Mastercard', 'Apple Pay', 'American Express'];
 
 export const trustItems = [
   {
@@ -97,7 +97,7 @@ export const trustItems = [
   {
     icon: 'lock',
     title: 'Paiement 100% Sécurisé',
-    text: 'Transactions chiffrées SSL 256 bits via Apple Pay, Shop Pay et Cartes Bancaires (Visa, Mastercard, Amex).',
+    text: 'Transactions chiffrées SSL 256 bits via Apple Pay et Cartes Bancaires : Visa, Mastercard, Amex.',
   },
   {
     icon: 'chat',

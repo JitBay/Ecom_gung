@@ -65,7 +65,7 @@ export default function FilterDrawer({ open, onClose, items, value, onApply }) {
             {t('collection_page.clear_all')}
           </button>
           <button className="btn btn--dark" onClick={() => onApply(draft)}>
-            {t('collection_page.apply')} ({count})
+            {t('collection_page.apply')} · {count}
           </button>
         </footer>
       </aside>

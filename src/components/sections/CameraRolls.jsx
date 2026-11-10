@@ -1,5 +1,6 @@
 import Icon from '../ui/Icon.jsx';
 import Stars from '../ui/Stars.jsx';
+import CountryFlag from '../ui/CountryFlag.jsx';
 import { featuredReviews } from '../../data/reviews.js';
 import { useReveal } from '../../lib/hooks.js';
 import { useLanguage } from '../../context/LanguageContext.jsx';
@@ -43,7 +44,7 @@ export default function CameraRolls() {
           </h2>
           <p className="subtitle">
             {lang === 'fr' ? (
-              <>Aucun script, aucun acteur rémunéré : des <strong>acheteurs vérifiés</strong> qui portent Vela Sculpt™ sous leurs chemises et t-shirts.</>
+              <>Aucun script, aucun acteur rémunéré : des <strong>acheteurs vérifiés</strong> qui portent Vela Sculpt™ sous leurs chemises et T-shirts.</>
             ) : (
               <>No scripts, no paid actors — just <strong>verified buyers</strong> in their own photos and their own words.</>
             )}
@@ -95,7 +96,10 @@ export default function CameraRolls() {
                     <Highlight text={reviewItem.text} bold={reviewItem.bold} />
                   </p>
                   <footer>
-                    <strong>{reviewItem.name}</strong>
+                    <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                      <strong>{reviewItem.name}</strong>
+                      {reviewItem.country && <CountryFlag code={reviewItem.country} size="sm" />}
+                    </div>
                     <span>{reviewItem.meta}</span>
                   </footer>
                 </div>

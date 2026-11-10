@@ -62,8 +62,8 @@ export default function TrackOrderPage() {
 
         <p>
           {lang === 'fr'
-            ? "Entrez votre numéro de suivi transporteur (reçu par email dès l'expédition) ou votre numéro de commande (ex. #1001) :"
-            : 'Enter your carrier tracking number (from your shipping confirmation email) or your order number (e.g. #1001):'}
+            ? "Entrez votre numéro de suivi transporteur reçu par email dès l'expédition ou votre numéro de commande :"
+            : 'Enter your carrier tracking number from your shipping confirmation email or your order number :'}
         </p>
 
         <form

@@ -67,7 +67,7 @@ export default function ProductDetails({ model }) {
     <div className="details">
       <p>
         {lang === 'fr'
-          ? 'Choisissez votre taille habituelle de t-shirt. En cas d’hésitation entre deux tailles : optez pour la plus petite pour une compression sportive prononcée, ou la plus grande pour un confort souple de bureau.'
+          ? 'Choisissez votre taille habituelle de T-shirt. En cas d’hésitation entre deux tailles : optez pour la plus petite pour une compression sportive prononcée, ou la plus grande pour un confort souple de bureau.'
           : 'Choose your regular shirt size. If between sizes: choose the smaller size for firmer athletic compression, or the larger size for relaxed everyday comfort.'}
       </p>
       <div className="details__table">
@@ -75,8 +75,8 @@ export default function ProductDetails({ model }) {
           <thead>
             <tr>
               <th>{lang === 'fr' ? 'Taille' : 'Size'}</th>
-              <th>{lang === 'fr' ? 'Poids (kg)' : 'Weight (kg)'}</th>
-              <th>{lang === 'fr' ? 'Taille (cm)' : 'Height (cm)'}</th>
+              <th>{lang === 'fr' ? 'Poids en kg' : 'Weight in kg'}</th>
+              <th>{lang === 'fr' ? 'Stature en cm' : 'Height in cm'}</th>
               <th>{lang === 'fr' ? 'Poitrine' : 'Chest'}</th>
               <th>{lang === 'fr' ? 'Taille' : 'Waist'}</th>
             </tr>

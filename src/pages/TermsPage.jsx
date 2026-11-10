@@ -9,8 +9,8 @@ export default function TermsPage() {
   useEffect(() => {
     document.title =
       lang === 'fr'
-        ? 'Conditions générales de vente | ZVAR'
-        : 'Terms of Service | ZVAR';
+        ? `Conditions Générales de Vente | ${brand.fullName}`
+        : `Terms of Service | ${brand.fullName}`;
   }, [lang]);
 
   return (
@@ -18,27 +18,27 @@ export default function TermsPage() {
       <article className="legal-content">
         {lang === 'fr' ? (
           <>
-            <h1>Conditions générales de vente (CGV)</h1>
+            <h1>Conditions Générales de Vente CGV</h1>
             <p className="legal-meta">Entité légale : ZVAR | Marque commerciale : ZVAR</p>
 
             <h2>Article 1 — Objet & Champ d'application</h2>
             <p>
-              Les présentes Conditions générales de vente régissent l'ensemble des ventes conclues sur le site internet de ZVAR (https://www.zvar-shop.com), auprès de consommateurs finaux.
+              Les présentes Conditions générales de vente régissent l'ensemble des ventes conclues sur le site internet de ZVAR https://www.zvar-shop.com, auprès de consommateurs finaux.
             </p>
 
             <h2>Article 2 — Produits & disponibilité</h2>
             <p>
-              Les produits proposés sont des sous-vêtements ergonomiques de compression pour hommes (gamme Vela Sculpt™). Les photographies et descriptifs sont présentés avec la plus grande exactitude possible.
+              Les produits proposés sont des sous-vêtements ergonomiques de compression pour hommes : gamme Vela Sculpt™. Les photographies et descriptifs sont présentés avec la plus grande exactitude possible.
             </p>
 
             <h2>Article 3 — Prix & paiement sécurisé</h2>
             <p>
-              Les prix sont indiqués en dollars américains ($ USD). Le règlement des achats s'effectue au comptant lors de la commande par carte bancaire (Visa, MasterCard, American Express, Cartes Bancaires), Apple Pay ou Shop Pay. Les transactions bénéficient d'un chiffrement SSL 256 bits via Shopify Payments.
+              Les prix sont indiqués en dollars américains $ USD toutes taxes comprises TTC. Le règlement des achats s'effectue au comptant lors de la commande par carte bancaire : Visa, MasterCard, American Express ou Apple Pay. Les transactions bénéficient d'un chiffrement SSL 256 bits via Shopify Payments.
             </p>
 
             <h2>Article 4 — Livraison</h2>
             <p>
-              Les commandes sont préparées et expédiées sous 24 à 48 heures ouvrées. Les délais moyens de livraison constatés sont de 6 à 12 jours ouvrés avec un suivi complet en direct (Full Tracking). La livraison est 100% gratuite pour toutes les commandes.
+              Les commandes sont préparées et expédiées sous 24 à 48 heures ouvrées. Les délais moyens de livraison constatés sont de 6 à 12 jours ouvrés avec un suivi complet en direct. La livraison est 100% gratuite pour toutes les commandes.
             </p>
 
             <h2>Article 5 — Garantie commerciale de 30 jours</h2>
@@ -53,17 +53,17 @@ export default function TermsPage() {
 
             <h2>1. Scope of Application</h2>
             <p>
-              These Terms of Service govern all purchases placed through the ZVAR online store (https://www.zvar-shop.com) by retail customers.
+              These Terms of Service govern all purchases placed through the ZVAR online store https://www.zvar-shop.com by retail customers.
             </p>
 
             <h2>2. Products & Availability</h2>
             <p>
-              Our catalog features ergonomic compression shapewear for men (Vela Sculpt™ collection). Product photographs, sizing charts, and technical specifications are presented as accurately as possible.
+              Our catalog features ergonomic compression shapewear for men: Vela Sculpt™ collection. Product photographs, sizing charts, and technical specifications are presented as accurately as possible.
             </p>
 
             <h2>3. Pricing & Secure Checkout</h2>
             <p>
-              Prices are listed in US Dollars ($ USD) unless otherwise displayed at checkout. Payment is collected at the time of order via Credit/Debit Card (Visa, Mastercard, American Express), Apple Pay, or Shop Pay. All transactions are encrypted with 256-bit SSL via Shopify Payments.
+              Prices are listed in US Dollars $ USD unless otherwise displayed at checkout. Payment is collected at the time of order via Credit or Debit Card : Visa, Mastercard, American Express, or Apple Pay. All transactions are encrypted with 256-bit SSL via Shopify Payments.
             </p>
 
             <h2>4. Shipping & Delivery</h2>

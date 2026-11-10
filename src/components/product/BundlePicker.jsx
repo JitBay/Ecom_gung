@@ -22,7 +22,7 @@ function VariantRows({
       <div className="discovery-variants">
         <p className="variants__label">
           {lang === 'fr'
-            ? 'Personnalisez vos 3 coupes (Couleur & Taille) :'
+            ? 'Personnalisez vos 3 coupes (couleur & taille) :'
             : 'Customize your 3 fits (Color & Size):'}
         </p>
         {variants.map((v, i) => {
@@ -86,7 +86,7 @@ function VariantRows({
   return (
     <div className="variants">
       <p className="variants__label">
-        {lang === 'fr' ? 'Couleur & Taille par article :' : 'Color & Size per shirt:'}
+        {lang === 'fr' ? 'Couleur & taille par article :' : 'Color & Size per shirt:'}
       </p>
       {variants.map((v, i) => {
         const currentColor = colorList.find((c) => c.id === v.color) || colorList[0];
@@ -179,7 +179,7 @@ function BundleCard({ bundle, selected, onSelect, variants, onVariantChange, pro
           {bundle.freeShipping && (
             <p className="bundle__ship">
               <Icon name="check" size={16} strokeWidth={2.4} />{' '}
-              {lang === 'fr' ? 'LIVRAISON OFFERTE' : 'FREE SHIPPING'}
+              {lang === 'fr' ? 'Livraison offerte' : 'FREE SHIPPING'}
             </p>
           )}
           <VariantRows

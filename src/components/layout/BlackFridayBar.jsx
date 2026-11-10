@@ -3,26 +3,30 @@ import { useLanguage } from '../../context/LanguageContext.jsx';
 import './BlackFridayBar.css';
 
 export default function BlackFridayBar() {
-  const { dict } = useLanguage();
+  const { dict, lang } = useLanguage();
   const navigate = useNavigate();
   const location = useLocation();
 
   const items = dict.black_friday?.bar_items || [
     { text: "Black Friday : notre plus grande offre de l'année", highlight: true },
     { text: "Jusqu'à -50% de réduction", highlight: false },
-    { text: "+100 000 t-shirts vendus", highlight: true },
-    { text: "2 t-shirts achetés = 1 offert", highlight: false },
+    { text: "+3 100 T-shirts vendus", highlight: true },
+    { text: "1 200+ clients satisfaits", highlight: false },
+    { text: "2 T-shirts achetés = 1 offert", highlight: false },
     { text: "Livraison 100% gratuite & suivie", highlight: false },
     { text: "Garantie 30 jours satisfait ou remboursé", highlight: false },
   ];
 
   const handleClick = (e) => {
     e.preventDefault();
-    const dealEl = document.getElementById('bm-deal') || document.getElementById('product') || document.getElementById('bestsellers');
+    const dealEl =
+      document.getElementById('bm-deal') ||
+      document.getElementById('bestsellers') ||
+      document.getElementById('product');
     if (dealEl) {
       dealEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {
-      navigate('/products/vela-sculpt-sans-manches#product');
+      navigate('/#bestsellers');
     }
   };
 
@@ -35,13 +39,13 @@ export default function BlackFridayBar() {
         '--ixbm-fg': '#FFFFFF',
         '--ixbm-acc': '#C9A96E',
       }}
-      aria-label="Bannière Black Friday"
+      aria-label={lang === 'fr' ? 'Bannière Black Friday' : 'Black Friday Sale Banner'}
     >
       <a
         href="#product"
         className="ixbm-bar__link"
         onClick={handleClick}
-        aria-label="Black Friday : notre plus grande offre de l'année"
+        aria-label={lang === 'fr' ? "Black Friday : notre plus grande offre de l'année" : "Black Friday Sale"}
       />
       <div className="ixbm-bar__track" aria-hidden="true">
         <div className="ixbm-bar__run">

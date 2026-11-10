@@ -4,9 +4,12 @@
 export const featuredReviews = [
   {
     name: 'Fabrice C.',
-    meta: '42 ans · Taille L · Vérifié',
-    metaEn: '42 yrs · Size L · Verified',
-    text: 'La photo avant/après parle d’elle-même : le t-shirt lisse instantanément le ventre et rentre tout en place. Un vrai coup de boost à la confiance en soi !',
+    country: 'FR',
+    flag: '🇫🇷',
+    countryName: { fr: 'France', en: 'France' },
+    meta: '🇫🇷 France · 42 ans · Taille L · Vérifié',
+    metaEn: '🇫🇷 France · 42 yrs · Size L · Verified',
+    text: 'La photo avant/après parle d’elle-même : le T-shirt lisse instantanément le ventre et rentre tout en place. Un vrai coup de boost à la confiance en soi !',
     textEn: 'The picture speaks for itself: the shirt instantly smooths out the stomach and tucks everything in. A massive boost to self-confidence!',
     bold: 'coup de boost à la confiance en soi',
     boldEn: 'massive boost to self-confidence',
@@ -15,8 +18,11 @@ export const featuredReviews = [
   },
   {
     name: 'Jason M.',
-    meta: '46 ans · Taille L · Vérifié',
-    metaEn: '46 yrs · Size L · Verified',
+    country: 'US',
+    flag: '🇺🇸',
+    countryName: { fr: 'États-Unis', en: 'United States' },
+    meta: '🇺🇸 USA · 46 ans · Taille L · Vérifié',
+    metaEn: '🇺🇸 USA · 46 yrs · Size L · Verified',
     text: 'Le avant/après parle de lui-même : ce haut lisse tout instantanément et les bandes bleues m’aident réellement à me tenir plus droit.',
     textEn: 'The before and after really says it all: this compression top instantly smooths everything out and the blue bands actually help me stand straighter.',
     bold: 'lisse tout instantanément',
@@ -26,8 +32,11 @@ export const featuredReviews = [
   },
   {
     name: 'Chen Z.',
-    meta: '41 ans · Taille S · Vérifié',
-    metaEn: '41 yrs · Size S · Verified',
+    country: 'CA',
+    flag: '🇨🇦',
+    countryName: { fr: 'Canada', en: 'Canada' },
+    meta: '🇨🇦 Canada · 41 ans · Taille S · Vérifié',
+    metaEn: '🇨🇦 Canada · 41 yrs · Size S · Verified',
     text: 'La différence de profil est impressionnante : ce débardeur aplatit totalement mon ventre et tire naturellement mes épaules vers l’arrière.',
     textEn: 'The side profile difference is huge: this tank top completely flattens my stomach and naturally pulls my shoulders back.',
     bold: 'aplatit totalement mon ventre',
@@ -37,8 +46,11 @@ export const featuredReviews = [
   },
   {
     name: 'Laurent P.',
-    meta: '38 ans · Taille L · Vérifié',
-    metaEn: '38 yrs · Size L · Verified',
+    country: 'FR',
+    flag: '🇫🇷',
+    countryName: { fr: 'France', en: 'France' },
+    meta: '🇫🇷 France · 38 ans · Taille L · Vérifié',
+    metaEn: '🇫🇷 France · 38 yrs · Size L · Verified',
     text: 'Le débardeur sculpte parfaitement le torse et lisse immédiatement les poignées d’amour, tout en restant super confortable toute la journée.',
     textEn: 'The tank top sculpts the chest perfectly and instantly smooths out love handles, while staying super comfortable all day.',
     bold: 'sculpte parfaitement le torse',
@@ -63,6 +75,9 @@ export const reviews = [
   {
     id: 'rev-4',
     name: 'Fabrice C.',
+    country: 'FR',
+    flag: '🇫🇷',
+    countryName: { fr: 'France', en: 'France' },
     date: '2026-10-28',
     rating: 5,
     title: {
@@ -70,7 +85,7 @@ export const reviews = [
       en: 'The picture speaks for itself!',
     },
     text: {
-      fr: 'J’ai pris une photo avant/après pour vérifier si ça marchait vraiment, et les résultats sont tout simplement bluffants. Le t-shirt lisse instantanément le ventre et rentre tout en place. Au-delà du changement physique, ça redonne vraiment le sourire et un vrai coup de boost à la confiance en soi ! Je le recommande chaudement.',
+      fr: 'J’ai pris une photo avant/après pour vérifier si ça marchait vraiment, et les résultats sont tout simplement bluffants. Le T-shirt lisse instantanément le ventre et rentre tout en place. Au-delà du changement physique, ça redonne vraiment le sourire et un vrai coup de boost à la confiance en soi ! Je le recommande chaudement.',
       en: 'I took a before and after picture to see if it actually worked, and the results are just mind-blowing. The shirt instantly smooths out the stomach and tucks everything in. Beyond the physical changes, it really brings back your smile and gives a massive boost to your self-confidence! I highly recommend it.',
     },
     photos: ['/reviews/4.jpg'],
@@ -80,6 +95,9 @@ export const reviews = [
   {
     id: 'rev-5',
     name: 'Jason M.',
+    country: 'US',
+    flag: '🇺🇸',
+    countryName: { fr: 'États-Unis', en: 'United States' },
     date: '2026-10-27',
     rating: 5,
     title: {
@@ -97,6 +115,9 @@ export const reviews = [
   {
     id: 'rev-6',
     name: 'Chen Z.',
+    country: 'CA',
+    flag: '🇨🇦',
+    countryName: { fr: 'Canada', en: 'Canada' },
     date: '2026-10-27',
     rating: 5,
     title: {
@@ -114,6 +135,9 @@ export const reviews = [
   {
     id: 'rev-1',
     name: 'Laurent P.',
+    country: 'FR',
+    flag: '🇫🇷',
+    countryName: { fr: 'France', en: 'France' },
     date: '2026-10-26',
     rating: 5,
     title: {
@@ -121,8 +145,8 @@ export const reviews = [
       en: 'Does the job! Very satisfied',
     },
     text: {
-      fr: 'J’étais un peu hésitant avant de commander, mais les résultats sont vraiment là. Le débardeur sculpte parfaitement le torse et lisse immédiatement les poignées d’amour. La compression est ferme mais la matière reste super confortable, même portée toute la journée sous un t-shirt. Je recommande vivement !',
-      en: 'I was a bit hesitant before ordering, but the results are definitely there. The tank top sculpts the chest perfectly and instantly smooths out love handles. The compression is firm but the material stays super comfortable, even when worn all day under a t-shirt. Highly recommend!',
+      fr: 'J’étais un peu hésitant avant de commander, mais les résultats sont vraiment là. Le débardeur sculpte parfaitement le torse et lisse immédiatement les poignées d’amour. La compression est ferme mais la matière reste super confortable, même portée toute la journée sous un T-shirt. Je recommande vivement !',
+      en: 'I was a bit hesitant before ordering, but the results are definitely there. The tank top sculpts the chest perfectly and instantly smooths out love handles. The compression is firm but the material stays super comfortable, even when worn all day under a T-shirt. Highly recommend!',
     },
     photos: ['/reviews/1.jpg'],
     verified: true,
@@ -131,6 +155,9 @@ export const reviews = [
   {
     id: 'rev-2',
     name: 'Maxime T.',
+    country: 'FR',
+    flag: '🇫🇷',
+    countryName: { fr: 'France', en: 'France' },
     date: '2026-10-26',
     rating: 5,
     title: {
@@ -148,6 +175,9 @@ export const reviews = [
   {
     id: 'rev-3',
     name: 'Stéphane R.',
+    country: 'CA',
+    flag: '🇨🇦',
+    countryName: { fr: 'Canada', en: 'Canada' },
     date: '2026-10-25',
     rating: 5,
     title: {
@@ -165,6 +195,9 @@ export const reviews = [
   {
     id: 'rev-7',
     name: 'Kevin L.',
+    country: 'GB',
+    flag: '🇬🇧',
+    countryName: { fr: 'Angleterre', en: 'United Kingdom' },
     date: '2026-10-24',
     rating: 5,
     title: {
@@ -172,7 +205,7 @@ export const reviews = [
       en: 'Looks great under a shirt!',
     },
     text: {
-      fr: 'J’adore le design de ce débardeur. Contrairement à d’autres t-shirts de compression qui ressemblent à des gaines médicales, celui-ci a un look génial sous une chemise ouverte. Il aplatit parfaitement le ventre, ne remonte pas du tout et apporte un vrai boost de confiance au quotidien. Je le porte tout le temps !',
+      fr: 'J’adore le design de ce débardeur. Contrairement à d’autres T-shirts de compression qui ressemblent à des gaines médicales, celui-ci a un look génial sous une chemise ouverte. Il aplatit parfaitement le ventre, ne remonte pas du tout et apporte un vrai boost de confiance au quotidien. Je le porte tout le temps !',
       en: 'I love the design of this tank top. Unlike other compression shirts that look like medical garments, this one looks awesome under an open button-down shirt. It perfectly flattens the stomach, doesn’t roll up, and gives a real everyday confidence boost. I wear it all the time!',
     },
     photos: ['/reviews/7-poster.jpg'],
@@ -182,6 +215,9 @@ export const reviews = [
   {
     id: 'rev-8',
     name: 'Chen Z.',
+    country: 'CA',
+    flag: '🇨🇦',
+    countryName: { fr: 'Canada', en: 'Canada' },
     date: '2026-10-23',
     rating: 5,
     title: {
@@ -199,10 +235,13 @@ export const reviews = [
   {
     id: 'rev-9',
     name: 'Alex M.',
+    country: 'US',
+    flag: '🇺🇸',
+    countryName: { fr: 'États-Unis', en: 'United States' },
     date: '2026-10-22',
     rating: 5,
     title: {
-      fr: 'Mon nouveau t-shirt incontournable pour la salle',
+      fr: 'Mon nouveau T-shirt incontournable pour la salle',
       en: 'My new go-to gym shirt',
     },
     text: {
@@ -216,6 +255,9 @@ export const reviews = [
   {
     id: 'rev-10',
     name: 'Marcus J.',
+    country: 'GB',
+    flag: '🇬🇧',
+    countryName: { fr: 'Angleterre', en: 'United Kingdom' },
     date: '2026-10-21',
     rating: 5,
     title: {
@@ -223,7 +265,7 @@ export const reviews = [
       en: '100% gym approved!',
     },
     text: {
-      fr: 'J’ai testé ce t-shirt de compression gris aujourd’hui à la salle et il reçoit un grand pouce levé de ma part. L’ajustement est incroyable : il met vraiment en valeur la poitrine et les épaules tout en maintenant parfaitement le buste. La matière est ultra respirante même pendant un entraînement intense. Visuel et sensation au top. Je recommande vivement !',
+      fr: 'J’ai testé ce T-shirt de compression gris aujourd’hui à la salle et il reçoit un grand pouce levé de ma part. L’ajustement est incroyable : il met vraiment en valeur la poitrine et les épaules tout en maintenant parfaitement le buste. La matière est ultra respirante même pendant un entraînement intense. Visuel et sensation au top. Je recommande vivement !',
       en: 'Put this grey compression shirt to the test today at the gym and it gets a huge thumbs up from me. The fit is incredible—it really highlights your chest and shoulders while keeping your core perfectly supported. The material is super breathable even during an intense workout. Looks and feels amazing. Highly recommend!',
     },
     photos: ['/reviews/13.png'],
@@ -233,6 +275,9 @@ export const reviews = [
   {
     id: 'rev-11',
     name: 'Yanis M.',
+    country: 'FR',
+    flag: '🇫🇷',
+    countryName: { fr: 'France', en: 'France' },
     date: '2026-10-20',
     rating: 5,
     title: {
@@ -250,6 +295,9 @@ export const reviews = [
   {
     id: 'rev-12',
     name: 'Carlos M.',
+    country: 'IT',
+    flag: '🇮🇹',
+    countryName: { fr: 'Italie', en: 'Italy' },
     date: '2026-10-19',
     rating: 5,
     title: {
@@ -267,10 +315,13 @@ export const reviews = [
   {
     id: 'rev-13',
     name: 'Jake M.',
+    country: 'US',
+    flag: '🇺🇸',
+    countryName: { fr: 'États-Unis', en: 'United States' },
     date: '2026-10-18',
     rating: 5,
     title: {
-      fr: 'Sans hésiter le meilleur t-shirt de compression que je possède !',
+      fr: 'Sans hésiter le meilleur T-shirt de compression que je possède !',
       en: 'Hands down the best gym compression shirt I own!',
     },
     text: {
@@ -284,6 +335,9 @@ export const reviews = [
   {
     id: 'rev-14',
     name: 'Marc D.',
+    country: 'FR',
+    flag: '🇫🇷',
+    countryName: { fr: 'France', en: 'France' },
     date: '2026-10-17',
     rating: 5,
     title: {
@@ -301,6 +355,9 @@ export const reviews = [
   {
     id: 'rev-18',
     name: 'Thomas B.',
+    country: 'FR',
+    flag: '🇫🇷',
+    countryName: { fr: 'France', en: 'France' },
     date: '2026-10-15',
     rating: 5,
     title: {
@@ -318,6 +375,9 @@ export const reviews = [
   {
     id: 'rev-19',
     name: 'Julien V.',
+    country: 'FR',
+    flag: '🇫🇷',
+    countryName: { fr: 'France', en: 'France' },
     date: '2026-10-12',
     rating: 5,
     title: {
@@ -335,6 +395,9 @@ export const reviews = [
   {
     id: 'rev-20',
     name: 'Marc D.',
+    country: 'IT',
+    flag: '🇮🇹',
+    countryName: { fr: 'Italie', en: 'Italy' },
     date: '2026-10-10',
     rating: 5,
     title: {
@@ -352,6 +415,9 @@ export const reviews = [
   {
     id: 'rev-15',
     name: 'Thierry M.',
+    country: 'FR',
+    flag: '🇫🇷',
+    countryName: { fr: 'France', en: 'France' },
     date: '2026-10-08',
     rating: 3,
     title: {
@@ -369,6 +435,9 @@ export const reviews = [
   {
     id: 'rev-16',
     name: 'Christophe D.',
+    country: 'FR',
+    flag: '🇫🇷',
+    countryName: { fr: 'France', en: 'France' },
     date: '2026-10-02',
     rating: 2,
     title: {
@@ -386,6 +455,9 @@ export const reviews = [
   {
     id: 'rev-17',
     name: 'Pierre-Yves B.',
+    country: 'CA',
+    flag: '🇨🇦',
+    countryName: { fr: 'Canada', en: 'Canada' },
     date: '2026-09-25',
     rating: 1,
     title: {
@@ -403,6 +475,9 @@ export const reviews = [
   {
     id: 'rev-21',
     name: 'Romain G.',
+    country: 'FR',
+    flag: '🇫🇷',
+    countryName: { fr: 'France', en: 'France' },
     date: '2026-10-29',
     rating: 5,
     title: {
@@ -420,6 +495,9 @@ export const reviews = [
   {
     id: 'rev-22',
     name: 'David K.',
+    country: 'GB',
+    flag: '🇬🇧',
+    countryName: { fr: 'Angleterre', en: 'United Kingdom' },
     date: '2026-10-29',
     rating: 5,
     title: {
@@ -427,7 +505,7 @@ export const reviews = [
       en: 'Immediate sculpting effect and remarkable back support',
     },
     text: {
-      fr: 'À 48 ans, je cherchais un t-shirt technique capable de masquer le relâchement abdominal tout en soutenant mes lombaires. Le résultat en manches longues gris dépasse mes attentes : les épaules sont tirées vers l’arrière, le ventre est rentré sans aucune sensation d’oppression. Même après une longue journée, le confort reste optimal. Je recommande sans hésitation.',
+      fr: 'À 48 ans, je cherchais un T-shirt technique capable de masquer le relâchement abdominal tout en soutenant mes lombaires. Le résultat en manches longues gris dépasse mes attentes : les épaules sont tirées vers l’arrière, le ventre est rentré sans aucune sensation d’oppression. Même après une longue journée, le confort reste optimal. Je recommande sans hésitation.',
       en: 'At 48, I was looking for a technical top capable of smoothing abdominal slack while supporting my lower back. The result in grey long sleeves exceeded my expectations: shoulders are pulled back, stomach is tucked with zero discomfort. Even after a long day, comfort remains optimal. Highly recommend without hesitation.',
     },
     photos: ['/reviews/22.png'],
@@ -475,7 +553,7 @@ export const videoTestimonials = [
       en: 'Lifting & shoulders · 28 yrs',
     },
     title: {
-      fr: 'Mon nouveau t-shirt incontournable pour la salle',
+      fr: 'Mon nouveau T-shirt incontournable pour la salle',
       en: 'My new go-to gym shirt',
     },
     quote: {

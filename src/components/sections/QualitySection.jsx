@@ -61,11 +61,11 @@ const featuresFr = [
   {
     icon: 'sparkle',
     title: 'Lissage visuel immédiat',
-    text: 'Aplatit instantanément la zone abdominale et estompe les plis sous les chemises ajustées ou les t-shirts fins.',
+    text: 'Aplatit instantanément la zone abdominale et estompe les plis sous les chemises ajustées ou les T-shirts fins.',
   },
   {
     icon: 'shield',
-    title: 'Discrétion absolue (col & coutures)',
+    title: 'Discrétion absolue : col & coutures',
     text: 'L’encolure dégagée reste invisible même avec le premier bouton de chemise ouvert. Aucune démarcation aux épaules.',
   },
   {
@@ -88,7 +88,7 @@ const featuresEn = [
   },
   {
     icon: 'shield',
-    title: 'Zero Demarcation (Collar & Seams)',
+    title: 'Zero Demarcation: Collar & Seams',
     text: 'Engineered neckline stays completely invisible even with top shirt buttons undone. No visible shoulder lines.',
   },
   {
@@ -115,7 +115,7 @@ export default function QualitySection() {
       <div className="container quality__inner">
         <div className="quality__media">
           <div className="quality__header">
-            <span className="eyebrow">{lang === 'fr' ? 'Pourquoi zvar ?' : 'Why zvar?'}</span>
+            <span className="eyebrow">{lang === 'fr' ? 'Pourquoi Zvar ?' : 'Why Zvar?'}</span>
             <h2 className="title">
               Every detail, <em>engineered.</em>
             </h2>

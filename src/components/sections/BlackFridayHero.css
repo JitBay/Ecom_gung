@@ -132,6 +132,27 @@
   color: transparent;
 }
 
+.ixbm-hero__price-lockup {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.ixbm-hero__subprice {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(14px, 1.4vw, 18px);
+  font-weight: 700;
+  color: #D8B87A;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 4px 12px;
+  background: rgba(201, 169, 110, 0.12);
+  border: 1px solid rgba(201, 169, 110, 0.28);
+  border-radius: 999px;
+}
+
 .ixbm-hero__text {
   margin: 0;
   max-width: 520px;
@@ -213,5 +234,44 @@
   }
   .ixbm-btn {
     width: 100%;
+  }
+}
+
+/* Slim modifier: for product pages to keep hero announcement compact */
+.ixbm-hero--slim .ixbm-hero__content {
+  padding-top: clamp(14px, 2vw, 20px);
+  padding-bottom: clamp(14px, 2vw, 20px);
+  gap: 10px;
+}
+
+.ixbm-hero--slim .ixbm-hero__eyebrow {
+  padding: 4px 12px;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+}
+
+.ixbm-hero--slim .ixbm-hero__kicker {
+  font-size: clamp(15px, 2vw, 22px);
+}
+
+.ixbm-hero--slim .ixbm-hero__big {
+  font-size: clamp(38px, 6vw, 64px);
+}
+
+.ixbm-hero--slim .ixbm-hero__bgword span {
+  font-size: clamp(35px, 5vw, 65px);
+}
+
+.ixbm-hero--slim .ixbm-btn {
+  min-height: 40px;
+  padding: 0 20px;
+  font-size: 11px;
+}
+
+@media (max-width: 699px) {
+  .ixbm-hero--slim .ixbm-hero__content {
+    padding-top: 14px;
+    padding-bottom: 14px;
+    gap: 8px;
   }
 }

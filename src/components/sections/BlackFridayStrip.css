@@ -1,0 +1,125 @@
+.ixbm-strip {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(28px, 4vw, 42px) 0;
+  background: transparent;
+  width: 100%;
+}
+
+.ixbm-strip__link {
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.ixbm-strip__band {
+  position: relative;
+  background: #0B0B0B;
+  transform: rotate(-2deg);
+  margin: 0 -4%;
+  border-top: 2px solid #C9A96E;
+  border-bottom: 2px solid #C9A96E;
+  z-index: 1;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ixbm-strip__band--back {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 48px;
+  margin-top: -24px;
+  background: #C9A96E;
+  transform: rotate(2deg);
+  z-index: 0;
+  border: 0;
+  box-shadow: 0 4px 18px rgba(201, 169, 110, 0.45);
+  transition: transform 0.3s ease;
+}
+
+.ixbm-strip:hover .ixbm-strip__band {
+  box-shadow: 0 12px 36px rgba(201, 169, 110, 0.25);
+}
+
+.ixbm-strip--rev .ixbm-strip__band {
+  transform: rotate(2deg);
+}
+
+.ixbm-strip--rev .ixbm-strip__band--back {
+  transform: rotate(-2deg);
+}
+
+.ixbm-strip__track {
+  display: flex;
+  width: max-content;
+  animation: ixbmStripScroll 30s linear infinite;
+  will-change: transform;
+}
+
+.ixbm-strip--rev .ixbm-strip__track {
+  animation-direction: reverse;
+}
+
+.ixbm-strip__run {
+  display: flex;
+  align-items: center;
+  flex: none;
+}
+
+.ixbm-strip__item {
+  font-family: 'Anton', 'Montserrat', Impact, sans-serif;
+  font-size: clamp(22px, 2.8vw, 38px);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #FFFFFF;
+  padding: 13px 0;
+  white-space: nowrap;
+}
+
+.ixbm-strip__item:nth-of-type(2n) {
+  color: #C9A96E;
+}
+
+.ixbm-strip__star {
+  color: #C9A96E;
+  font-size: clamp(16px, 2vw, 24px);
+  padding: 0 22px;
+  user-select: none;
+}
+
+@keyframes ixbmStripScroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (max-width: 699px) {
+  .ixbm-strip {
+    padding: 22px 0;
+  }
+  .ixbm-strip__band--back {
+    height: 40px;
+    margin-top: -20px;
+  }
+  .ixbm-strip__item {
+    font-size: clamp(18px, 4.5vw, 24px);
+    padding: 10px 0;
+  }
+  .ixbm-strip__star {
+    padding: 0 14px;
+    font-size: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ixbm-strip__track {
+    animation: none;
+  }
+}
