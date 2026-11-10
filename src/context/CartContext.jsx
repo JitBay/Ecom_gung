@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { redirectToShopifyCheckout } from '../lib/shopify.js';
+import { trackAddToCart } from '../lib/analytics.js';
 
 const CartContext = createContext(null);
 const CART_STORAGE_KEY = 'vela_labs_cart_v1';
@@ -47,6 +48,12 @@ export function CartProvider({ children }) {
         const found = prev.find((l) => l.id === line.id);
         if (found) return prev.map((l) => (l.id === line.id ? { ...l, qty: l.qty + (line.qty || 1) } : l));
         return [...prev, { ...line, qty: line.qty || 1 }];
+      });
+      trackAddToCart({
+        id: line.handle || line.id,
+        title: line.title,
+        price: line.price,
+        qty: line.qty || 1,
       });
       setOpen(true);
     };
