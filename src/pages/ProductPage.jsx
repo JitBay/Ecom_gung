@@ -3,6 +3,7 @@ import { Link, useParams, useSearchParams } from 'react-router-dom';
 import Accordion from '../components/ui/Accordion.jsx';
 import Icon from '../components/ui/Icon.jsx';
 import Stars from '../components/ui/Stars.jsx';
+import ReservationTimer from '../components/ui/ReservationTimer.jsx';
 import Gallery from '../components/product/Gallery.jsx';
 import SizeFinder from '../components/product/SizeFinder.jsx';
 import BlackFridayHero from '../components/sections/BlackFridayHero.jsx';
@@ -311,6 +312,8 @@ function ClassicProductPage({ product }) {
               </div>
             </div>
           )}
+
+          <ReservationTimer variant="product" />
 
           <div className="pp__buy">
             <div className="qty qty--lg">

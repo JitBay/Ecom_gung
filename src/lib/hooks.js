@@ -46,3 +46,58 @@ export function useLockScroll(locked) {
     };
   }, [locked]);
 }
+
+// 10-Minute Cart & Checkout Reservation Timer (persisted in sessionStorage)
+export function useReservationTimer(defaultMinutes = 10) {
+  const STORAGE_KEY = 'zvar_reservation_expires_at';
+
+  const getInitialSeconds = () => {
+    try {
+      const stored = typeof window !== 'undefined' ? sessionStorage.getItem(STORAGE_KEY) : null;
+      if (stored) {
+        const remaining = Math.max(0, Math.floor((parseInt(stored, 10) - Date.now()) / 1000));
+        if (remaining > 0) return remaining;
+      }
+      const expiresAt = Date.now() + defaultMinutes * 60 * 1000;
+      if (typeof window !== 'undefined') {
+        sessionStorage.setItem(STORAGE_KEY, expiresAt.toString());
+      }
+      return defaultMinutes * 60;
+    } catch {
+      return defaultMinutes * 60;
+    }
+  };
+
+  const [secondsLeft, setSecondsLeft] = useState(getInitialSeconds);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      try {
+        const stored = sessionStorage.getItem(STORAGE_KEY);
+        if (stored) {
+          const remaining = Math.max(0, Math.floor((parseInt(stored, 10) - Date.now()) / 1000));
+          setSecondsLeft(remaining);
+          if (remaining <= 0) {
+            const nextExpires = Date.now() + defaultMinutes * 60 * 1000;
+            sessionStorage.setItem(STORAGE_KEY, nextExpires.toString());
+            setSecondsLeft(defaultMinutes * 60);
+          }
+        } else {
+          const nextExpires = Date.now() + defaultMinutes * 60 * 1000;
+          sessionStorage.setItem(STORAGE_KEY, nextExpires.toString());
+          setSecondsLeft(defaultMinutes * 60);
+        }
+      } catch {
+        setSecondsLeft((prev) => (prev > 1 ? prev - 1 : defaultMinutes * 60));
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [defaultMinutes]);
+
+  const mins = Math.floor(secondsLeft / 60);
+  const secs = secondsLeft % 60;
+  const formattedTime = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+  return { secondsLeft, formattedTime, mins, secs };
+}

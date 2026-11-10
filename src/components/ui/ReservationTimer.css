@@ -1,0 +1,112 @@
+.res-timer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(201, 169, 110, 0.08);
+  border: 1px solid rgba(201, 169, 110, 0.35);
+  border-radius: 10px;
+  padding: 9px 12px;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.res-timer--cart {
+  margin: 10px 0 2px;
+  background: #fbf8f2;
+  border-color: #e4d3b6;
+}
+
+.res-timer--product {
+  margin: 14px 0 10px;
+  width: 100%;
+}
+
+.res-timer__icon-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a47e3b;
+  flex-shrink: 0;
+}
+
+.res-timer__icon-wrap svg {
+  display: block;
+}
+
+.res-timer__pulse-dot {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #c9a96e;
+  box-shadow: 0 0 0 0 rgba(201, 169, 110, 0.7);
+  animation: resTimerPulse 1.8s infinite;
+}
+
+@keyframes resTimerPulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(201, 169, 110, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 6px rgba(201, 169, 110, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(201, 169, 110, 0);
+  }
+}
+
+.res-timer__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+  min-width: 0;
+  font-size: 12.5px;
+  line-height: 1.35;
+  color: #4a453e;
+}
+
+.res-timer__headline {
+  font-weight: 600;
+  color: #1a1a18;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.res-timer__digits {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, monospace;
+  font-weight: 800;
+  color: #b08945;
+  background: rgba(201, 169, 110, 0.16);
+  padding: 1px 6px;
+  border-radius: 5px;
+  letter-spacing: 0.04em;
+}
+
+.res-timer__sub {
+  font-size: 11px;
+  color: #7a7368;
+}
+
+@media (max-width: 480px) {
+  .res-timer {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+  .res-timer__headline {
+    font-size: 12px;
+  }
+  .res-timer__sub {
+    font-size: 10.5px;
+  }
+}
