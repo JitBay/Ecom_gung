@@ -65,7 +65,12 @@
   padding: 14px 16px;
   border: 0;
   background: none;
+  color: var(--white);
   outline: none;
+}
+
+.footer__news input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .footer__news button {
@@ -76,6 +81,18 @@
   margin: auto 10px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.15);
+  color: var(--white);
+}
+
+.footer__news button:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+.footer__error {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #fca5a5 !important;
 }
 
 .footer__thanks {
