@@ -6,7 +6,38 @@ export default function ShopifyPaymentBadges({ className = '', showSecurityNote 
 
   return (
     <div className={`shopify-badges ${className}`}>
-      <div className="shopify-badges__icons" aria-label="Moyens de paiement acceptés">
+      <div className="shopify-badges__icons" aria-label={lang === 'fr' ? 'Moyens de paiement acceptés' : 'Accepted payment methods'}>
+        {/* Apple Pay */}
+        <span className="shopify-badge" title="Apple Pay">
+          <svg viewBox="0 0 38 24" width="38" height="24" fill="none">
+            <rect width="38" height="24" rx="4" fill="#000000" />
+            <path
+              d="M12.9 11.2C12.9 9.9 13.6 9.1 14.4 8.5C13.8 7.6 12.8 7.4 12.3 7.4C11.1 7.2 9.8 8.1 9.2 8.1C8.6 8.1 7.6 7.4 6.7 7.4C5.4 7.4 4.2 8.1 3.5 9.3C2.1 11.7 3.2 15.2 4.6 17.1C5.2 18.1 6 19.2 7 19.1C8 19.1 8.4 18.5 9.6 18.5C10.7 18.5 11.1 19.1 12.1 19.1C13.2 19.1 13.9 18.1 14.5 17.1C15.3 16 15.6 15 15.6 14.9C15.6 14.8 12.9 13.8 12.9 11.2Z"
+              fill="#FFFFFF"
+            />
+            <path
+              d="M11.6 6.3C12.1 5.7 12.4 4.8 12.3 4C11.6 4 10.6 4.5 10.1 5.1C9.7 5.6 9.3 6.5 9.4 7.3C10.2 7.4 11.1 6.9 11.6 6.3Z"
+              fill="#FFFFFF"
+            />
+            <text x="17.5" y="15" fill="#FFFFFF" fontSize="8.5" fontWeight="600" fontFamily="sans-serif">
+              Pay
+            </text>
+          </svg>
+        </span>
+
+        {/* Shop Pay */}
+        <span className="shopify-badge" title="Shop Pay">
+          <svg viewBox="0 0 38 24" width="38" height="24" fill="none">
+            <rect width="38" height="24" rx="4" fill="#5A31F4" />
+            <text x="5" y="14.5" fill="#FFFFFF" fontSize="8.5" fontWeight="800" fontFamily="sans-serif">
+              shop
+            </text>
+            <text x="27" y="14.5" fill="#FFFFFF" fontSize="6.5" fontWeight="600" fontFamily="sans-serif" opacity="0.9">
+              Pay
+            </text>
+          </svg>
+        </span>
+
         {/* Visa */}
         <span className="shopify-badge" title="Visa">
           <svg viewBox="0 0 38 24" width="38" height="24" fill="none">
@@ -27,41 +58,6 @@ export default function ShopifyPaymentBadges({ className = '', showSecurityNote 
           </svg>
         </span>
 
-        {/* Apple Pay */}
-        <span className="shopify-badge" title="Apple Pay">
-          <svg viewBox="0 0 38 24" width="38" height="24" fill="none">
-            <rect width="38" height="24" rx="4" fill="#000000" />
-            <path
-              d="M12.9 11.2C12.9 9.9 13.6 9.1 14.4 8.5C13.8 7.6 12.8 7.4 12.3 7.4C11.1 7.2 9.8 8.1 9.2 8.1C8.6 8.1 7.6 7.4 6.7 7.4C5.4 7.4 4.2 8.1 3.5 9.3C2.1 11.7 3.2 15.2 4.6 17.1C5.2 18.1 6 19.2 7 19.1C8 19.1 8.4 18.5 9.6 18.5C10.7 18.5 11.1 19.1 12.1 19.1C13.2 19.1 13.9 18.1 14.5 17.1C15.3 16 15.6 15 15.6 14.9C15.6 14.8 12.9 13.8 12.9 11.2Z"
-              fill="#FFFFFF"
-            />
-            <path
-              d="M11.6 6.3C12.1 5.7 12.4 4.8 12.3 4C11.6 4 10.6 4.5 10.1 5.1C9.7 5.6 9.3 6.5 9.4 7.3C10.2 7.4 11.1 6.9 11.6 6.3Z"
-              fill="#FFFFFF"
-            />
-            <text x="17.5" y="15" fill="#FFFFFF" fontSize="8.5" fontWeight="600" fontFamily="sans-serif">
-              Pay
-            </text>
-          </svg>
-        </span>
-
-
-        {/* PayPal */}
-        <span className="shopify-badge" title="PayPal">
-          <svg viewBox="0 0 38 24" width="38" height="24" fill="none">
-            <rect width="38" height="24" rx="4" fill="#003087" />
-            <path
-              d="M15.4 6.5H19.4C21.2 6.5 22.3 7.3 22.1 9C21.8 10.9 20.4 12.1 18.4 12.1H16.8L16 17H13.8L15.4 6.5Z"
-              fill="#FFFFFF"
-            />
-            <path
-              d="M17.8 9.2H21C22.4 9.2 23.3 9.9 23.1 11.4C22.9 12.9 21.7 13.8 20.1 13.8H18.7L18 18H16.2L17.8 9.2Z"
-              fill="#38BDF8"
-              fillOpacity="0.92"
-            />
-          </svg>
-        </span>
-
         {/* American Express */}
         <span className="shopify-badge" title="American Express">
           <svg viewBox="0 0 38 24" width="38" height="24" fill="none">
@@ -79,8 +75,8 @@ export default function ShopifyPaymentBadges({ className = '', showSecurityNote 
             <path d="M12 2C9.243 2 7 4.243 7 7v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7c0-2.757-2.243-5-5-5zm-3 5c0-1.654 1.346-3 3-3s3 1.346 3 3v3H9V7zm3 9a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" />
           </svg>
           {lang === 'fr'
-            ? 'Paiement 100% sécurisé géré par Shopify — Chiffrement SSL 256 bits'
-            : '100% Secure Checkout powered by Shopify — 256-bit SSL encryption'}
+            ? 'Paiement 100% sécurisé via Apple Pay, Shop Pay & Cartes (SSL 256 bits)'
+            : '100% Secure Checkout via Apple Pay, Shop Pay & Cards (256-bit SSL)'}
         </p>
       )}
     </div>

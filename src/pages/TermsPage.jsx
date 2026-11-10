@@ -33,7 +33,7 @@ export default function TermsPage() {
 
             <h2>Article 3 — Prix & paiement sécurisé</h2>
             <p>
-              Les prix sont indiqués en dollars américains ($ USD). Le règlement des achats s'effectue au comptant lors de la commande par carte bancaire (Visa, MasterCard, American Express, Cartes Bancaires), Shop Pay, Apple Pay ou PayPal. Les transactions bénéficient d'un chiffrement SSL 256 bits via Shopify Payments et PayPal.
+              Les prix sont indiqués en dollars américains ($ USD). Le règlement des achats s'effectue au comptant lors de la commande par carte bancaire (Visa, MasterCard, American Express, Cartes Bancaires), Apple Pay ou Shop Pay. Les transactions bénéficient d'un chiffrement SSL 256 bits via Shopify Payments.
             </p>
 
             <h2>Article 4 — Livraison</h2>
@@ -63,7 +63,7 @@ export default function TermsPage() {
 
             <h2>3. Pricing & Secure Checkout</h2>
             <p>
-              Prices are listed in US Dollars ($ USD) unless otherwise displayed at checkout. Payment is collected at the time of order via Credit/Debit Card (Visa, Mastercard, American Express), Shop Pay, Apple Pay, or PayPal. All transactions are encrypted with 256-bit SSL via Shopify Payments and PayPal.
+              Prices are listed in US Dollars ($ USD) unless otherwise displayed at checkout. Payment is collected at the time of order via Credit/Debit Card (Visa, Mastercard, American Express), Apple Pay, or Shop Pay. All transactions are encrypted with 256-bit SSL via Shopify Payments.
             </p>
 
             <h2>4. Shipping & Delivery</h2>
