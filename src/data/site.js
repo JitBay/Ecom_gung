@@ -81,7 +81,7 @@ export const policies = [
   { label: 'Mentions légales', to: '/policies/legal-notice' },
 ];
 
-export const payments = ['Shop Pay', 'Apple Pay', 'PayPal', 'Visa', 'Mastercard', 'American Express', 'Cartes Bancaires'];
+export const payments = ['Apple Pay', 'Shop Pay', 'Visa', 'Mastercard', 'American Express', 'Cartes Bancaires'];
 
 export const trustItems = [
   {
@@ -97,7 +97,7 @@ export const trustItems = [
   {
     icon: 'lock',
     title: 'Paiement 100% Sécurisé',
-    text: 'Transactions chiffrées SSL 256 bits via Shop Pay, Apple Pay, PayPal et Cartes Bancaires (Visa, Mastercard, Amex).',
+    text: 'Transactions chiffrées SSL 256 bits via Apple Pay, Shop Pay et Cartes Bancaires (Visa, Mastercard, Amex).',
   },
   {
     icon: 'chat',
