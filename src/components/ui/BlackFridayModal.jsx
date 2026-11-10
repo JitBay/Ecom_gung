@@ -14,15 +14,42 @@ export default function BlackFridayModal() {
   useLockScroll(isOpen);
 
   useEffect(() => {
-    // Check if dismissed in this session
-    const seen = sessionStorage.getItem('zvar_bf_modal_seen');
-    if (!seen) {
-      const timer = setTimeout(() => {
-        setIsOpen(true);
-      }, 700);
-      return () => clearTimeout(timer);
+    // Skip auto-popup on support/legal/tracking routes so shoppers aren't interrupted
+    if (
+      location.pathname.startsWith('/policies') ||
+      location.pathname === '/pages/contact' ||
+      location.pathname === '/pages/suivi-commande'
+    ) {
+      return;
     }
-  }, []);
+
+    // Open after 4.5s or once user scrolls 35% of the page, once per session
+    if (sessionStorage.getItem('zvar_bf_modal_seen')) return;
+
+    let triggered = false;
+    const triggerModal = () => {
+      if (triggered) return;
+      triggered = true;
+      sessionStorage.setItem('zvar_bf_modal_seen', '1');
+      setIsOpen(true);
+      window.removeEventListener('scroll', onScroll);
+      clearTimeout(timer);
+    };
+
+    const onScroll = () => {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      if (scrollable > 0 && window.scrollY / scrollable >= 0.35) {
+        triggerModal();
+      }
+    };
+
+    const timer = setTimeout(triggerModal, 4500);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, [location.pathname]);
 
   useEffect(() => {
     // Listen for manual trigger to reopen
@@ -61,7 +88,7 @@ export default function BlackFridayModal() {
     text: "Profitez en avant-première de notre offre exclusive Black Friday sur toute la collection de maintien postural et compression Vela Sculpt™.",
     perks: [
       { title: '2 Achetés = 1 Offert', desc: 'Le 3ème t-shirt 100% offert sur tous nos modèles' },
-      { title: 'Livraison Suivie 0€', desc: 'Expédition prioritaire & tracking live' },
+      { title: 'Livraison Suivie Gratuite', desc: 'Expédition prioritaire & tracking live' },
       { title: 'Essai 30 Jours', desc: '100% remboursé si non conquis' },
     ],
     cta: "Profiter de l'offre Black Friday",

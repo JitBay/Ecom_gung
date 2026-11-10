@@ -22,10 +22,15 @@ import SizeGuidePage from './pages/SizeGuidePage.jsx';
 import TrackOrderPage from './pages/TrackOrderPage.jsx';
 import NotFound from './pages/NotFound.jsx';
 import { HERO_PRODUCT } from './data/catalog.js';
+import { initAnalytics, trackPageView } from './lib/analytics.js';
 
-// Handle scroll restoration and anchor hash navigation
+// Handle scroll restoration, anchor hash navigation, and analytics pageviews
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
+
+  useEffect(() => {
+    trackPageView(`${pathname}${hash}`);
+  }, [pathname, hash]);
 
   useEffect(() => {
     if (hash) {
@@ -84,6 +89,10 @@ function ProductRoute() {
 }
 
 export default function App() {
+  useEffect(() => {
+    initAnalytics();
+  }, []);
+
   return (
     <BrowserRouter basename={import.meta.env.BASE_URL}>
       <LanguageProvider>

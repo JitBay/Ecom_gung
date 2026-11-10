@@ -15,6 +15,7 @@ import { colorHex, getColorImages, getLocalizedProduct, products } from '../../d
 import { useCart } from '../../context/CartContext.jsx';
 import { useLanguage } from '../../context/LanguageContext.jsx';
 import { useScrolledPast } from '../../lib/hooks.js';
+import { trackViewContent } from '../../lib/analytics.js';
 import './ProductSection.css';
 
 export default function ProductSection({ initialModelHandle, onModelChange, showModelSelector = true, isDiscoveryOffer = false }) {
@@ -36,6 +37,14 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
   const currentModel = products.find((p) => p.handle === selectedHandle) || products[0];
   const localizedModel = getLocalizedProduct(currentModel, lang);
   const [selectedColor, setSelectedColor] = useState(currentModel.colors[0] || 'Noir');
+
+  useEffect(() => {
+    trackViewContent({
+      id: currentModel.handle,
+      title: localizedModel.title,
+      price: currentModel.price,
+    });
+  }, [currentModel.handle, currentModel.price, localizedModel.title]);
 
   const availableColors = useMemo(() => {
     return currentModel.colors.map((c) => {

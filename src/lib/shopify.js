@@ -5,6 +5,8 @@
  * Synchronized with real Shopify variants from zvar-shop.com.
  */
 
+import { hasActivePixels, trackInitiateCheckout } from './analytics.js';
+
 const configuredDomain =
   (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SHOPIFY_STORE_DOMAIN) || 'checkout.zvar-shop.com';
 
@@ -438,7 +440,13 @@ export async function redirectToShopifyCheckout(lines, options = {}) {
   const checkoutUrl = buildShopifyCartPermalink(lines, options);
   console.log('[Shopify Checkout] Navigating to:', checkoutUrl);
 
+  const total = lines.reduce((sum, l) => sum + (Number(l.price) || 0) * (Number(l.qty) || 1), 0);
+  trackInitiateCheckout({ items: lines, total });
+
   if (typeof window !== 'undefined') {
+    if (hasActivePixels()) {
+      await new Promise((resolve) => setTimeout(resolve, 120));
+    }
     window.location.href = checkoutUrl;
   }
   return true;
