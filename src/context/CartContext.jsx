@@ -19,6 +19,19 @@ export function CartProvider({ children }) {
   const [open, setOpen] = useState(false);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
 
+  // Open CartDrawer automatically when redirected back from Shopify Checkout cart icon (?cart=open)
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('cart') === 'open') {
+      setOpen(true);
+      params.delete('cart');
+      const nextSearch = params.toString();
+      const nextUrl = `${window.location.pathname}${nextSearch ? `?${nextSearch}` : ''}${window.location.hash}`;
+      window.history.replaceState({}, '', nextUrl);
+    }
+  }, []);
+
   // Sync to localStorage
   useEffect(() => {
     try {
