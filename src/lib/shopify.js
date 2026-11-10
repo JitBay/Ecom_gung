@@ -443,3 +443,91 @@ export async function redirectToShopifyCheckout(lines, options = {}) {
   }
   return true;
 }
+
+/**
+ * Generates a random temporary password for Storefront API newsletter customer registration.
+ */
+function generateTempPassword() {
+  if (typeof crypto !== 'undefined' && typeof crypto.getRandomValues === 'function') {
+    const bytes = new Uint8Array(12);
+    crypto.getRandomValues(bytes);
+    return Array.from(bytes, (b) => b.toString(16).padStart(2, '0')).join('');
+  }
+  return `${Date.now().toString(36)}${Math.random().toString(36).slice(2)}zVar!9`;
+}
+
+/**
+ * Subscribes a visitor email directly to Shopify Customer Marketing via Storefront API.
+ * If the email is already registered in Shopify, it resolves cleanly as subscribed.
+ *
+ * @param {string} rawEmail
+ * @returns {Promise<{ ok: boolean, alreadySubscribed?: boolean, error?: string }>}
+ */
+export async function subscribeToShopifyNewsletter(rawEmail) {
+  const email = (rawEmail || '').trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return { ok: false, error: 'INVALID_EMAIL' };
+  }
+
+  let cleanDomain = SHOPIFY_STORE_DOMAIN.replace(/^https?:\/\//, '').replace(/\/$/, '');
+  if (!cleanDomain || cleanDomain === 'zvar-shop.com' || cleanDomain === 'www.zvar-shop.com') {
+    cleanDomain = 'checkout.zvar-shop.com';
+  }
+
+  const mutation = `
+    mutation NewsletterSubscribe($input: CustomerCreateInput!) {
+      customerCreate(input: $input) {
+        customer {
+          id
+          acceptsMarketing
+        }
+        customerUserErrors {
+          code
+          message
+        }
+      }
+    }
+  `;
+
+  try {
+    const res = await fetch(`https://${cleanDomain}/api/2024-01/graphql.json`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_TOKEN,
+      },
+      body: JSON.stringify({
+        query: mutation,
+        variables: {
+          input: {
+            email,
+            password: generateTempPassword(),
+            acceptsMarketing: true,
+          },
+        },
+      }),
+    });
+
+    if (!res.ok) {
+      return { ok: false, error: `HTTP_${res.status}` };
+    }
+
+    const json = await res.json();
+    const payload = json?.data?.customerCreate;
+    const userErrors = payload?.customerUserErrors || [];
+
+    if (payload?.customer?.id) {
+      return { ok: true, alreadySubscribed: false };
+    }
+
+    const taken = userErrors.some((e) => e.code === 'TAKEN');
+    if (taken) {
+      return { ok: true, alreadySubscribed: true };
+    }
+
+    const firstMsg = userErrors[0]?.message || json?.errors?.[0]?.message || 'UNKNOWN_ERROR';
+    return { ok: false, error: firstMsg };
+  } catch (err) {
+    return { ok: false, error: err?.message || 'NETWORK_ERROR' };
+  }
+}

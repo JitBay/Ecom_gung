@@ -4,6 +4,7 @@ import Icon from '../ui/Icon.jsx';
 import LanguageSwitcher from '../ui/LanguageSwitcher.jsx';
 import { brand, payments, trustItems } from '../../data/site.js';
 import { useLanguage } from '../../context/LanguageContext.jsx';
+import { subscribeToShopifyNewsletter } from '../../lib/shopify.js';
 import './Footer.css';
 
 function TrustBar() {
@@ -22,8 +23,37 @@ function TrustBar() {
 }
 
 function Newsletter() {
+  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
-  const { t } = useLanguage();
+  const [error, setError] = useState('');
+  const { t, lang } = useLanguage();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (loading || !email.trim()) return;
+    setError('');
+    setLoading(true);
+    try {
+      const result = await subscribeToShopifyNewsletter(email);
+      if (result.ok) {
+        setDone(true);
+        setEmail('');
+      } else {
+        setError(
+          result.error === 'INVALID_EMAIL'
+            ? lang === 'fr'
+              ? 'Veuillez entrer une adresse e-mail valide.'
+              : 'Please enter a valid email address.'
+            : lang === 'fr'
+              ? 'Inscription impossible pour le moment. Réessayez plus tard.'
+              : 'Could not subscribe right now. Please try again shortly.'
+        );
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="footer__news">
@@ -34,22 +64,23 @@ function Newsletter() {
           <Icon name="check" size={16} /> {t('footer.subscribed_thanks')}
         </p>
       ) : (
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            setDone(true);
-          }}
-        >
-          <input
-            type="email"
-            placeholder={t('footer.email_placeholder')}
-            required
-            aria-label={t('footer.email_placeholder')}
-          />
-          <button aria-label={t('footer.subscribe_aria')}>
-            <Icon name="arrow" size={16} />
-          </button>
-        </form>
+        <>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder={t('footer.email_placeholder')}
+              required
+              disabled={loading}
+              aria-label={t('footer.email_placeholder')}
+            />
+            <button type="submit" disabled={loading} aria-label={t('footer.subscribe_aria')}>
+              <Icon name="arrow" size={16} />
+            </button>
+          </form>
+          {error && <p className="footer__error">{error}</p>}
+        </>
       )}
     </div>
   );
@@ -109,7 +140,7 @@ export default function Footer() {
               <ul>
                 {col.links.map((l) => (
                   <li key={l.label}>
-                    {l.to.startsWith('/#') ? <a href={l.to.slice(1)}>{l.label}</a> : <Link to={l.to}>{l.label}</Link>}
+                    <Link to={l.to}>{l.label}</Link>
                   </li>
                 ))}
               </ul>
