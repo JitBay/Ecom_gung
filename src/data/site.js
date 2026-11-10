@@ -13,6 +13,8 @@ export const brand = {
   email: 'contact@zvar-shop.com',
   supportEmail: 'support@zvar-shop.com',
   privacyEmail: 'privacy@zvar-shop.com',
+  instagramUrl: '',
+  tiktokUrl: '',
   tagline: 'Compression discrète & maintien postural pour hommes',
 };
 
@@ -79,7 +81,7 @@ export const policies = [
   { label: 'Mentions légales', to: '/policies/legal-notice' },
 ];
 
-export const payments = ['Shop Pay', 'Apple Pay', 'Visa', 'Mastercard', 'American Express', 'Klarna'];
+export const payments = ['Shop Pay', 'Apple Pay', 'Visa', 'Mastercard', 'American Express', 'Cartes Bancaires'];
 
 export const trustItems = [
   {
