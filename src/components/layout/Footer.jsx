@@ -156,12 +156,20 @@ export default function Footer() {
 
         <div className="container footer__mid">
           <div className="footer__social">
-            <a href="#" aria-label="Instagram">
-              <Icon name="instagram" size={20} />
-            </a>
-            <a href="#" aria-label="TikTok">
-              <Icon name="tiktok" size={20} />
-            </a>
+            {brand.instagramUrl && (
+              <a href={brand.instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <Icon name="instagram" size={20} />
+              </a>
+            )}
+            {brand.tiktokUrl && (
+              <a href={brand.tiktokUrl} target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                <Icon name="tiktok" size={20} />
+              </a>
+            )}
+            <Link to="/pages/contact" aria-label={lang === 'fr' ? 'Contacter le support ZVAR' : 'Contact ZVAR support'} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 13 }}>
+              <Icon name="chat" size={18} />
+              <span>{brand.supportEmail}</span>
+            </Link>
           </div>
           <div className="footer__locale">
             <span style={{ fontSize: 13, color: 'var(--muted)', fontWeight: 600 }}>{dict.currency_label}</span>
