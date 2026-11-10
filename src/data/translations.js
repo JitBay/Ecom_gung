@@ -56,7 +56,7 @@ export const translations = {
         perks: [
           { title: "2 achetés = 1 offert", desc: "Le 3ème t-shirt 100% offert sur tous nos modèles" },
           { title: "Pack Découverte à 44,99 $", desc: "1 débardeur + 1 demi-manches + 1 manches longues (économisez 30 $)" },
-          { title: "Livraison suivie 0 €", desc: "Expédition express prioritaire & garantie 30 jours" },
+          { title: "Livraison suivie gratuite", desc: "Expédition express prioritaire & garantie 30 jours" },
         ],
         cta: "Profiter des offres Black Friday",
         dismiss: "Continuer sans l'offre",
