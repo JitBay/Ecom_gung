@@ -520,7 +520,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
           </span>
         </div>
         <p className="product__trend">
-          <Icon name="trend" size={16} /> {lang === 'fr' ? 'Plus de 2 450 T-shirts commandés cette semaine' : 'Over 2,450 T-shirts ordered this week'}
+          <Icon name="trend" size={16} /> {lang === 'fr' ? 'Plus de 280 T-shirts commandés cette semaine' : 'Over 280 T-shirts ordered this week'}
         </p>
 
         <ul className="product__badges">
