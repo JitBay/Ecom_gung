@@ -4,6 +4,8 @@
   color: #f7f6f2;
   position: relative;
   overflow: hidden;
+  max-width: 100%;
+  width: 100%;
 }
 
 .product-video-section__inner {
@@ -16,10 +18,19 @@
 }
 
 @media (max-width: 900px) {
+  .product-video-section {
+    padding: 32px 0 44px;
+  }
   .product-video-section__inner {
     grid-template-columns: 1fr;
-    gap: 32px;
-    justify-items: center;
+    gap: 28px;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 var(--gutter);
+  }
+  .product-video-section__content {
+    width: 100%;
+    max-width: 100%;
   }
 }
 
@@ -199,18 +210,22 @@
 
 @media (max-width: 900px) {
   .product-video-section__player-wrap,
-  .sleeveless-product .product-video-container {
-    max-width: 350px;
+  .sleeveless-product .product-video-container,
+  .vela-sculpt-sans-manches-product .product-video-container {
+    max-width: min(380px, 100%);
     aspect-ratio: 3 / 4;
+    margin: 8px auto 0;
   }
 }
 
 @media (max-width: 600px) {
   .product-video-section__player-wrap,
-  .sleeveless-product .product-video-container {
+  .sleeveless-product .product-video-container,
+  .vela-sculpt-sans-manches-product .product-video-container {
     max-width: 100%;
     aspect-ratio: 3 / 4;
     border-radius: 14px;
+    margin: 8px auto 0;
   }
 }
 

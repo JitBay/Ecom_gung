@@ -3,6 +3,9 @@
   background: var(--night);
   color: var(--white);
   scroll-margin-top: calc(var(--header-h) + 10px);
+  overflow: hidden;
+  max-width: 100%;
+  width: 100%;
 }
 
 .quality__inner {

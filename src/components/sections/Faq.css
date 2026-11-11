@@ -1,6 +1,9 @@
 .faq {
   padding: clamp(64px, 9vw, 110px) var(--gutter);
   background: var(--cream);
+  overflow: hidden;
+  max-width: 100%;
+  width: 100%;
 }
 
 .faq__inner {

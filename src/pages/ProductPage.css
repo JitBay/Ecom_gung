@@ -1,8 +1,9 @@
 .product-page-wrap {
   width: 100%;
-  max-width: 100vw;
+  max-width: 100%;
   min-height: 100vh;
-  overflow-x: clip;
+  overflow-x: hidden;
+  position: relative;
 }
 
 .pp {
@@ -310,7 +311,9 @@
 @media (max-width: 899px) {
   .product-page-wrap {
     width: 100%;
+    max-width: 100%;
     min-height: 100vh;
+    overflow-x: hidden;
   }
 
   .pp.container {
@@ -318,11 +321,15 @@
     padding-right: 0;
     width: 100%;
     max-width: 100%;
+    overflow: hidden;
   }
 
   .pp {
     grid-template-columns: minmax(0, 1fr);
     gap: 20px;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
   }
 
   .pp__gallery-col {
@@ -340,18 +347,127 @@
   }
 }
 
-/* Apply only to the Sleeveless product video */
-.sleeveless-product .product-video-container {
+/* Apply to the Sleeveless product video demo */
+.sleeveless-product .product-video-container,
+.vela-sculpt-sans-manches-product .product-video-container {
   width: 100%;
+  max-width: 420px;
   aspect-ratio: 3 / 4;
   overflow: hidden;
   border-radius: 16px;
+  margin: 0 auto;
 }
 
-.sleeveless-product .product-video-container video {
+.sleeveless-product .product-video-container video,
+.vela-sculpt-sans-manches-product .product-video-container video {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
   object-position: center;
+}
+
+/* Trust Badges Strip (shared with HomePage) */
+.ionix-trust {
+  --gold: #6e5520;
+  --muted: #5a5248;
+  --hair: rgba(26, 26, 24, 0.1);
+
+  position: relative;
+  background: transparent;
+  padding: 40px 0;
+  overflow: hidden;
+  max-width: 100%;
+  width: 100%;
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  text-align: left;
+}
+
+.ionix-trust::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(46%, 520px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.28;
+}
+
+.ionix-trust__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-inline: clamp(16px, 3vw, 40px);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px 20px;
+}
+
+.ionix-trust__item {
+  position: relative;
+  text-align: center;
+}
+
+.ionix-trust__item svg {
+  width: 22px;
+  height: 22px;
+  margin: 0 auto 10px;
+  display: block;
+  stroke: var(--gold);
+  stroke-width: 1.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ionix-trust__t {
+  font-family: Montserrat, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a1a18;
+  letter-spacing: -0.005em;
+  margin-bottom: 4px;
+}
+
+.ionix-trust__d {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+@media (min-width: 900px) {
+  .ionix-trust {
+    padding: 52px 0;
+  }
+  .ionix-trust__inner {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+
+  .ionix-trust__item + .ionix-trust__item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 6px;
+    bottom: 6px;
+    width: 1px;
+    background: var(--hair);
+  }
+  .ionix-trust__item {
+    padding-inline: clamp(16px, 2.4vw, 32px);
+  }
+  .ionix-trust__item svg {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 14px;
+  }
+  .ionix-trust__t {
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+  .ionix-trust__d {
+    font-size: 13px;
+  }
 }

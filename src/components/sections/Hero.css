@@ -298,7 +298,7 @@
 .hero__badge {
   position: absolute;
   top: 24px;
-  right: -28px;
+  right: 14px;
   z-index: 6;
   display: grid;
   grid-template-columns: auto 1fr;
@@ -369,16 +369,20 @@
     grid-template-columns: 1fr;
     min-height: 0;
     gap: 0;
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
   }
   .hero__media {
     order: -1;
-    aspect-ratio: 16 / 11;
+    aspect-ratio: 4 / 3;
     border-radius: 0;
     overflow: hidden;
-    margin: 0 auto 8px auto;
+    margin: 0 0 16px 0;
     justify-self: center;
     max-width: 100%;
     width: 100%;
+    position: relative;
   }
 
   .hero__image-card {
@@ -387,6 +391,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    overflow: hidden;
   }
 
   .hero__main-photo,
@@ -395,12 +401,31 @@
     height: 100%;
     object-fit: cover;
     object-position: center top;
+    display: block;
   }
+
+  .hero__badge-model {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    bottom: auto;
+    right: auto;
+    max-width: calc(100% - 24px);
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 5px 10px;
+    border-radius: 7px;
+    z-index: 5;
+  }
+
   .hero__text {
     margin: 0 auto;
-    margin-right: auto;
-    padding: 10px var(--gutter) 16px;
+    width: 100%;
+    max-width: 100%;
+    padding: 10px var(--gutter) 24px;
     text-align: center;
+    box-sizing: border-box;
   }
   .hero__rating {
     justify-content: center;
@@ -413,26 +438,45 @@
     justify-items: center;
   }
   .hero__badge {
+    position: relative;
     top: auto;
     right: auto;
-    left: var(--gutter);
-    bottom: -18px;
-    width: auto;
-    grid-template-columns: auto auto;
+    left: auto;
+    bottom: auto;
+    margin: 14px auto 0;
+    display: inline-flex;
     align-items: center;
-    padding: 10px 16px;
+    justify-content: center;
+    gap: 10px;
+    width: auto;
+    max-width: 90%;
+    padding: 8px 18px;
+    border-radius: 999px;
     background: var(--ink);
     color: var(--white);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
   }
   .hero__badge b {
     grid-column: auto;
-    font-size: 30px;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--gold);
   }
   .hero__badge div {
     grid-column: auto;
+    text-align: left;
   }
-  .hero__badge span {
-    color: rgba(255, 255, 255, 0.7);
+  .hero__badge div strong {
+    font-size: 11px;
+    color: #fff;
+    display: block;
+    line-height: 1.2;
+  }
+  .hero__badge div span {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.75);
+    display: block;
+    line-height: 1.2;
   }
   .hero__badge p {
     display: none;
@@ -441,7 +485,7 @@
 
 @media (max-width: 480px) {
   .hero__media {
-    aspect-ratio: 16 / 12;
+    aspect-ratio: 4 / 3;
   }
   .hero__title {
     font-size: 23px;

@@ -2,6 +2,9 @@
   padding-top: clamp(14px, 2vw, 22px);
   padding-bottom: clamp(24px, 4vw, 40px);
   background: var(--sand);
+  overflow: hidden;
+  max-width: 100%;
+  width: 100%;
 }
 
 .rolls__score {
@@ -160,7 +163,7 @@
   .rolls__grid {
     grid-template-columns: none;
     grid-auto-flow: column;
-    grid-auto-columns: 62%;
+    grid-auto-columns: clamp(240px, 75vw, 300px);
     margin: 0 calc(var(--gutter) * -1);
     padding: 0 var(--gutter) 6px;
     scroll-padding: 0 var(--gutter);
@@ -168,7 +171,7 @@
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
-    max-width: 100vw;
+    max-width: 100%;
   }
   .rolls__grid::-webkit-scrollbar {
     display: none;
@@ -177,10 +180,9 @@
 
 @media (max-width: 520px) {
   .rolls__grid {
-    grid-auto-columns: clamp(260px, 80vw, 320px);
-    scroll-snap-type: x mandatory;
-    scroll-padding: 0 calc((100vw - clamp(260px, 80vw, 320px)) / 2);
-    padding: 0 calc((100vw - clamp(260px, 80vw, 320px)) / 2) 6px;
+    grid-auto-columns: clamp(240px, 78vw, 300px);
+    scroll-padding: 0 var(--gutter);
+    padding: 0 var(--gutter) 6px;
   }
   .rolls__grid > * {
     scroll-snap-align: center;

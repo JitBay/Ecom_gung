@@ -38,7 +38,7 @@ function DedicatedProductPage({ product }) {
   const isSleeveless = handle === 'vela-sculpt-sans-manches';
 
   return (
-    <div className={`product-page-wrap ${handle}-product`}>
+    <div className={`product-page-wrap ${handle}-product ${isSleeveless ? 'sleeveless-product' : ''}`}>
       {/* 0. BLACK FRIDAY ANNOUNCEMENT BANNER */}
       <BlackFridayHero targetId="bm-deal" slim={true} />
       {/* 1. HERO BANNER & CAMERA ROLLS: ONLY FOR SLEEVELESS (REMOVED FROM SHORT AND LONG AS REQUESTED) */}
