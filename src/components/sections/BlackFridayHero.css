@@ -1,6 +1,10 @@
 .ixbm-hero {
   position: relative;
   overflow: hidden;
+  clip-path: inset(0);
+  contain: paint;
+  max-width: 100%;
+  width: 100%;
   background: #0B0B0B;
   color: #ffffff;
   font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -225,6 +229,9 @@
 }
 
 @media (max-width: 699px) {
+  .ixbm-hero__bgword {
+    display: none !important;
+  }
   .ixbm-hero__content {
     padding-top: 24px;
     padding-bottom: 24px;
