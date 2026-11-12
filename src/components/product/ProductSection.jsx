@@ -8,7 +8,6 @@ import SizeFinder from './SizeFinder.jsx';
 import StickyCart from './StickyCart.jsx';
 import ShopifyBuyButton from '../shopify/ShopifyBuyButton.jsx';
 import ShopifyPaymentBadges from '../shopify/ShopifyPaymentBadges.jsx';
-import ReservationTimer from '../ui/ReservationTimer.jsx';
 import Icon from '../ui/Icon.jsx';
 import Stars from '../ui/Stars.jsx';
 import { badges, badgesEn, benefits, benefitsEn, colors, discoveryCategories, stats, statsEn } from '../../data/product.js';
@@ -492,7 +491,6 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
         </button>
 
         <div className="product__actions">
-          <ReservationTimer variant="product" />
           <button ref={atcRef} className="btn btn--dark btn--block atc" onClick={addToCart}>
             {lang === 'fr'
               ? `Ajouter au panier — ${bundle.title}`
