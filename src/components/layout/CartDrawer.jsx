@@ -56,7 +56,7 @@ export default function CartDrawer() {
               <li key={l.id}>
                 <div className="cart__thumb">
                   <img
-                    src={l.image || '/images/products/demi-manches/1.jpg'}
+                    src={l.image || '/images/image page produit/demi-manche/1.png'}
                     alt={l.title}
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />

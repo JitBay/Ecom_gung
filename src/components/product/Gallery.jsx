@@ -50,7 +50,7 @@ export default function Gallery({ images, title, activeColor, videoHref }) {
   const [active, setActive] = useState(0);
   const track = useRef(null);
 
-  const list = images && images.length > 0 ? images : ['/images/products/demi-manches/4.jpg'];
+  const list = images && images.length > 0 ? images : ['/images/image page produit/demi-manche/1.png'];
 
   // Reset to first slide whenever the color images change
   useEffect(() => {

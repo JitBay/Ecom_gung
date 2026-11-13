@@ -9,7 +9,7 @@ export default function StickyCart({ visible, bundle, onAdd, productImage, title
     <div className={`sticky-cart ${visible ? 'is-visible' : ''}`} aria-hidden={!visible}>
       <div className="sticky-cart__thumb">
         <img
-          src={productImage || '/images/products/demi-manches/1.jpg'}
+          src={productImage || '/images/image page produit/demi-manche/1.png'}
           alt="Miniature"
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
         />

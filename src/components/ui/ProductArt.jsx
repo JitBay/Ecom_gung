@@ -2,7 +2,7 @@
 import './ProductArt.css';
 
 export default function ProductArt({
-  image = '/images/products/demi-manches/1.jpg',
+  image = '/images/image page produit/demi-manche/1.png',
   color = '#1d1d1f',
   pose = 'front',
   className = '',
@@ -17,7 +17,7 @@ export default function ProductArt({
         loading="lazy"
         onError={(e) => {
           e.target.onerror = null;
-          e.target.src = '/images/products/demi-manches/1.jpg';
+          e.target.src = '/images/image page produit/demi-manche/1.png';
         }}
       />
     </div>

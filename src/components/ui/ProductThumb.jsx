@@ -8,7 +8,7 @@ export default function ProductThumb({ product, color, alt = false, className = 
   const colorList = getColorImages(product, color);
   const primaryIndex = 0;
   const altIndex = colorList.length > 1 ? 1 : 0;
-  const src = alt ? (colorList[altIndex] || colorList[0]) : (colorList[primaryIndex] || '/images/products/demi-manches/4.jpg');
+  const src = alt ? (colorList[altIndex] || colorList[0]) : (colorList[primaryIndex] || '/images/image page produit/demi-manche/1.png');
 
   return (
     <div className={`thumb-wrapper ${alt ? 'thumb--alt' : ''} ${className}`}>
@@ -19,7 +19,7 @@ export default function ProductThumb({ product, color, alt = false, className = 
         loading="lazy"
         onError={(e) => {
           e.target.onerror = null;
-          e.target.src = '/images/products/demi-manches/4.jpg';
+          e.target.src = '/images/image page produit/demi-manche/1.png';
         }}
       />
     </div>
