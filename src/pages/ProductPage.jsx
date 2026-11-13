@@ -8,6 +8,7 @@ import SizeFinder from '../components/product/SizeFinder.jsx';
 import BlackFridayHero from '../components/sections/BlackFridayHero.jsx';
 import BlackFridayStrip from '../components/sections/BlackFridayStrip.jsx';
 import Hero from '../components/sections/Hero.jsx';
+import CameraRolls from '../components/sections/CameraRolls.jsx';
 import ProductSection from '../components/product/ProductSection.jsx';
 import ProductVideoSection from '../components/product/ProductVideoSection.jsx';
 import RelatedProducts from '../components/sections/RelatedProducts.jsx';
@@ -39,8 +40,13 @@ function DedicatedProductPage({ product }) {
     <div className={`product-page-wrap ${handle}-product ${isSleeveless ? 'sleeveless-product' : ''}`}>
       {/* 0. BLACK FRIDAY ANNOUNCEMENT BANNER */}
       <BlackFridayHero targetId="bm-deal" slim={true} />
-      {/* 1. HERO BANNER: ONLY FOR SLEEVELESS (REMOVED FROM SHORT AND LONG AS REQUESTED) */}
-      {isSleeveless && <Hero initialHandle={handle} showModelSelector={false} />}
+      {/* 1. HERO BANNER & CAMERA ROLLS (5 REVIEWS): ONLY FOR SLEEVELESS (REMOVED FROM SHORT AND LONG AS REQUESTED) */}
+      {isSleeveless && (
+        <>
+          <Hero initialHandle={handle} showModelSelector={false} />
+          <CameraRolls limit={5} />
+        </>
+      )}
 
 
 

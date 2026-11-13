@@ -3,6 +3,7 @@ import Hero from '../components/sections/Hero.jsx';
 import OfferModules from '../components/sections/OfferModules.jsx';
 import ProductSection from '../components/product/ProductSection.jsx';
 import QualitySection from '../components/sections/QualitySection.jsx';
+import CameraRolls from '../components/sections/CameraRolls.jsx';
 import VideoTestimonials from '../components/sections/VideoTestimonials.jsx';
 import Faq from '../components/sections/Faq.jsx';
 import CustomerReviews from '../components/sections/CustomerReviews.jsx';
@@ -19,6 +20,7 @@ export default function LandingPage() {
       <OfferModules />
       <ProductSection />
       <QualitySection />
+      <CameraRolls limit={5} />
       <VideoTestimonials />
       <Faq />
       <CustomerReviews />

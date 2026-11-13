@@ -19,9 +19,10 @@ function Highlight({ text, bold }) {
 }
 
 
-export default function CameraRolls() {
+export default function CameraRolls({ limit = 5 }) {
   const ref = useReveal();
   const { lang } = useLanguage();
+  const displayedReviews = limit ? featuredReviews.slice(0, limit) : featuredReviews;
 
   return (
     <section className="rolls" ref={ref}>
@@ -52,7 +53,7 @@ export default function CameraRolls() {
         </div>
 
         <div className="rolls__grid scroller">
-          {featuredReviews.map((r, i) => {
+          {displayedReviews.map((r, i) => {
             const reviewItem =
               lang === 'fr'
                 ? r

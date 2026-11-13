@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Icon from '../components/ui/Icon.jsx';
 import Stars from '../components/ui/Stars.jsx';
+import CameraRolls from '../components/sections/CameraRolls.jsx';
 import ProductSection from '../components/product/ProductSection.jsx';
 import ProductVideoSection from '../components/product/ProductVideoSection.jsx';
 import VideoTestimonials from '../components/sections/VideoTestimonials.jsx';
@@ -270,6 +271,9 @@ export default function PackDecouverteLanding() {
           </div>
         </div>
       </section>
+
+      {/* 3. SOCIAL PROOF PHOTO TICKER (5 REVIEWS) */}
+      <CameraRolls limit={5} />
 
       {/* 4. MAIN PRODUCT SECTION & CONFIGURATOR */}
       <ProductSection isDiscoveryOffer={true} showModelSelector={true} />
