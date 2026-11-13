@@ -1,6 +1,5 @@
 import Icon from '../ui/Icon.jsx';
 import ShopifyPaymentBadges from '../shopify/ShopifyPaymentBadges.jsx';
-import ReservationTimer from '../ui/ReservationTimer.jsx';
 import { useCart } from '../../context/CartContext.jsx';
 import { useLanguage } from '../../context/LanguageContext.jsx';
 import { useLockScroll } from '../../lib/hooks.js';
@@ -96,7 +95,6 @@ export default function CartDrawer() {
               <span>{t('cart.subtotal')}</span>
               <strong>{price(total)}</strong>
             </p>
-            <ReservationTimer variant="cart" />
             <button
               className="btn btn--dark btn--block"
               onClick={() => checkout()}

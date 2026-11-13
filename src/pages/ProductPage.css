@@ -2,8 +2,10 @@
   width: 100%;
   max-width: 100%;
   min-height: 100vh;
+  min-height: 100dvh;
   overflow-x: hidden;
   position: relative;
+  overscroll-behavior-x: none;
 }
 
 .pp {
@@ -308,7 +310,7 @@
   margin: 16px 0;
 }
 
-@media (max-width: 899px) {
+@media (max-width: 960px) {
   .product-page-wrap {
     width: 100%;
     max-width: 100%;

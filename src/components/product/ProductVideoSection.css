@@ -15,9 +15,11 @@
   align-items: center;
   max-width: 1140px;
   margin: 0 auto;
+  min-width: 0;
+  overflow: hidden;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 960px) {
   .product-video-section {
     padding: 32px 0 44px;
   }
@@ -31,6 +33,7 @@
   .product-video-section__content {
     width: 100%;
     max-width: 100%;
+    min-width: 0;
   }
 }
 
@@ -208,7 +211,7 @@
   background: #e2c99b;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 960px) {
   .product-video-section__player-wrap,
   .sleeveless-product .product-video-container,
   .vela-sculpt-sans-manches-product .product-video-container {

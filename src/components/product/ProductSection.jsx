@@ -8,7 +8,6 @@ import SizeFinder from './SizeFinder.jsx';
 import StickyCart from './StickyCart.jsx';
 import ShopifyBuyButton from '../shopify/ShopifyBuyButton.jsx';
 import ShopifyPaymentBadges from '../shopify/ShopifyPaymentBadges.jsx';
-import ReservationTimer from '../ui/ReservationTimer.jsx';
 import Icon from '../ui/Icon.jsx';
 import Stars from '../ui/Stars.jsx';
 import { badges, badgesEn, benefits, benefitsEn, colors, discoveryCategories, stats, statsEn } from '../../data/product.js';
@@ -492,7 +491,6 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
         </button>
 
         <div className="product__actions">
-          <ReservationTimer variant="product" />
           <button ref={atcRef} className="btn btn--dark btn--block atc" onClick={addToCart}>
             {lang === 'fr'
               ? `Ajouter au panier — ${bundle.title}`
@@ -520,7 +518,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
           </span>
         </div>
         <p className="product__trend">
-          <Icon name="trend" size={16} /> {lang === 'fr' ? 'Plus de 2 450 T-shirts commandés cette semaine' : 'Over 2,450 T-shirts ordered this week'}
+          <Icon name="trend" size={16} /> {lang === 'fr' ? 'Plus de 280 T-shirts commandés cette semaine' : 'Over 280 T-shirts ordered this week'}
         </p>
 
         <ul className="product__badges">
