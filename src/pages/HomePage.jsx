@@ -66,23 +66,23 @@ const bestSellersBase = [
     colorData: {
       Noir: {
         hex: '#1a1a1a',
-        img: '/images/products/sans-manches/1.jpeg',
-        hoverImg: '/images/products/sans-manches/2.jpeg',
+        img: '/images/image page produit/sans-manche/1.png',
+        hoverImg: '/images/image page produit/sans-manche/2.png',
       },
       Blanc: {
         hex: '#f4f4f6',
-        img: '/images/products/sans-manches/4.jpeg',
-        hoverImg: '/images/products/sans-manches/5.jpeg',
+        img: '/images/image page produit/sans-manche/7.png',
+        hoverImg: '/images/image page produit/sans-manche/8.png',
       },
       'Black Or': {
         hex: '#241f17',
-        img: '/images/products/sans-manches/7.jpeg',
-        hoverImg: '/images/products/sans-manches/8.jpeg',
+        img: '/images/image page produit/sans-manche/13.png',
+        hoverImg: '/images/image page produit/sans-manche/14.png',
       },
       Gris: {
         hex: '#72757d',
-        img: '/images/products/sans-manches/10.jpeg',
-        hoverImg: '/images/products/sans-manches/11.jpeg',
+        img: '/images/image page produit/sans-manche/19.png',
+        hoverImg: '/images/image page produit/sans-manche/20.png',
       },
     },
   },
@@ -105,18 +105,18 @@ const bestSellersBase = [
     colorData: {
       Blanc: {
         hex: '#f4f4f6',
-        img: '/images/products/demi-manches/1.jpg',
-        hoverImg: '/images/products/demi-manches/2.jpg',
+        img: '/images/image page produit/demi-manche/7.png',
+        hoverImg: '/images/image page produit/demi-manche/8.png',
       },
       Noir: {
         hex: '#1a1a1a',
-        img: '/images/products/demi-manches/4.jpg',
-        hoverImg: '/images/products/demi-manches/5.jpg',
+        img: '/images/image page produit/demi-manche/1.png',
+        hoverImg: '/images/image page produit/demi-manche/2.png',
       },
       Gris: {
         hex: '#72757d',
-        img: '/images/products/demi-manches/7.jpg',
-        hoverImg: '/images/products/demi-manches/8.jpg',
+        img: '/images/image page produit/demi-manche/13.png',
+        hoverImg: '/images/image page produit/demi-manche/14.png',
       },
     },
   },
@@ -139,18 +139,18 @@ const bestSellersBase = [
     colorData: {
       'Gris chiné': {
         hex: '#5a5d66',
-        img: '/images/products/manches-longues/4.jpg',
-        hoverImg: '/images/products/manches-longues/5.jpg',
+        img: '/images/image page produit/longues-manches/7.png',
+        hoverImg: '/images/image page produit/longues-manches/8.png',
       },
       Noir: {
         hex: '#1a1a1a',
-        img: '/images/products/manches-longues/1.jpg',
-        hoverImg: '/images/products/manches-longues/2.jpg',
+        img: '/images/image page produit/longues-manches/1.png',
+        hoverImg: '/images/image page produit/longues-manches/2.png',
       },
       Blanc: {
         hex: '#f4f4f6',
-        img: '/images/products/manches-longues/7.jpg',
-        hoverImg: '/images/products/manches-longues/8.jpg',
+        img: '/images/image page produit/longues-manches/13.png',
+        hoverImg: '/images/image page produit/longues-manches/14.png',
       },
     },
   },
