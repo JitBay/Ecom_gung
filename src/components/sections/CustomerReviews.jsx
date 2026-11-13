@@ -132,13 +132,33 @@ function Review({ r, lang, t, onHelpful, hasVoted, onPhotoClick }) {
   const title = getVal(r.title, lang);
   const text = getVal(r.text, lang);
   const photos = Array.isArray(r.photos) ? r.photos : [];
+  const avatarSrc =
+    r.avatar ||
+    photos.find((p) => !p.endsWith('.mp4') && !p.endsWith('.mov')) ||
+    r.poster ||
+    null;
 
   return (
     <article className="review">
       <header className="review__header">
         <div className="review__author">
           <span className="review__avatar" aria-hidden="true">
-            {r.name ? r.name.charAt(0).toUpperCase() : 'V'}
+            {avatarSrc ? (
+              <img
+                src={avatarSrc}
+                alt={r.name}
+                className="review__avatar-img"
+                loading="lazy"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                  if (e.target.parentElement) {
+                    e.target.parentElement.textContent = r.name ? r.name.charAt(0).toUpperCase() : 'V';
+                  }
+                }}
+              />
+            ) : (
+              r.name ? r.name.charAt(0).toUpperCase() : 'V'
+            )}
           </span>
           <div className="review__author-info">
             <div className="review__author-row">
