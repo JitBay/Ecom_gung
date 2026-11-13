@@ -51,7 +51,11 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
       const found = colors.find(
         (col) => col.label.toLowerCase() === c.toLowerCase() || col.id === c.toLowerCase().replace(/\s+/g, '-')
       );
-      return found || { id: c.toLowerCase().replace(/\s+/g, '-'), label: c, hex: colorHex[c] || '#1a1a1a' };
+      return {
+        id: found?.id || c.toLowerCase().replace(/\s+/g, '-'),
+        label: c,
+        hex: found?.hex || colorHex[c] || '#1a1a1a',
+      };
     });
   }, [currentModel.colors]);
 
@@ -181,13 +185,19 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
 
   const updateVariant = (i, patch) => {
     setVariants((vs) => vs.map((v, j) => (j === i ? { ...v, ...patch } : v)));
-    if (isDiscovery && patch.color) {
-      const cutIdx = cutsList.findIndex((p) => p.handle === selectedHandle);
-      if (cutIdx === i) {
+    if (patch.color) {
+      if (isDiscovery) {
         const cat = discoveryCategories[i];
         const cObj = cat?.colors.find((c) => c.id === patch.color);
         if (cObj) {
           setSelectedColor(cObj.label);
+        }
+      } else {
+        const matched = availableColors.find(
+          (c) => c.id === patch.color || c.label.toLowerCase() === patch.color.toLowerCase()
+        );
+        if (matched) {
+          setSelectedColor(matched.label);
         }
       }
     }
@@ -483,6 +493,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
           productImage={currentImages[0]}
           availableColors={availableColors}
           colorImages={currentModel.colorImages}
+          model={currentModel}
           items={modelBundles}
         />
 

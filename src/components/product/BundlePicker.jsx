@@ -1,5 +1,6 @@
 import Icon from '../ui/Icon.jsx';
 import { bundles as defaultBundles, colors as defaultColors, discoveryCategories, sizes } from '../../data/product.js';
+import { getColorImages, products } from '../../data/catalog.js';
 import { useLanguage } from '../../context/LanguageContext.jsx';
 import { price } from '../../lib/format.js';
 import './BundlePicker.css';
@@ -10,6 +11,7 @@ function VariantRows({
   productImage,
   availableColors,
   colorImages,
+  model,
   lang,
   isTwoPlusOne,
   isDiscoveryPack,
@@ -29,7 +31,12 @@ function VariantRows({
           const cat = discoveryCategories[i] || discoveryCategories[0];
           const catColors = cat.colors;
           const currentColor = catColors.find((c) => c.id === v.color) || catColors[0];
-          const colorImg = cat.colorImages[currentColor.label] || cat.colorImages['Noir'];
+          const matchingCut = products.find((p) => p.handle === cat.handle) || products[i];
+          const imgs = matchingCut ? getColorImages(matchingCut, v.color || currentColor?.label) : null;
+          const colorImg =
+            (imgs && imgs[0]) ||
+            cat.colorImages[currentColor.label] ||
+            cat.colorImages['Noir'];
           const catTitle = lang === 'fr' ? cat.titleFr : cat.titleEn;
           const catBadge = lang === 'fr' ? cat.badgeFr : cat.badgeEn;
 
@@ -90,7 +97,9 @@ function VariantRows({
       </p>
       {variants.map((v, i) => {
         const currentColor = colorList.find((c) => c.id === v.color) || colorList[0];
+        const imgs = model ? getColorImages(model, v.color || currentColor?.label || currentColor?.id) : null;
         const colorImg =
+          (imgs && imgs[0]) ||
           (colorImages && (colorImages[currentColor?.label]?.[0] || colorImages[currentColor?.id]?.[0])) ||
           productImage ||
           '/images/image page produit/sans-manche/1.png';
@@ -153,7 +162,7 @@ function VariantRows({
   );
 }
 
-function BundleCard({ bundle, selected, onSelect, variants, onVariantChange, productImage, availableColors, colorImages, lang }) {
+function BundleCard({ bundle, selected, onSelect, variants, onVariantChange, productImage, availableColors, colorImages, model, lang }) {
   const marqueeText = lang === 'fr' ? 'Offre limitée' : 'Limited Offer';
   const marquee = Array(12).fill(marqueeText).join(' • ');
 
@@ -188,6 +197,7 @@ function BundleCard({ bundle, selected, onSelect, variants, onVariantChange, pro
             productImage={productImage}
             availableColors={availableColors}
             colorImages={colorImages}
+            model={model}
             lang={lang}
             isTwoPlusOne={bundle.isTwoPlusOne}
             isDiscoveryPack={bundle.isDiscoveryPack}
@@ -227,6 +237,7 @@ export default function BundlePicker({
   productImage,
   availableColors,
   colorImages,
+  model,
   items,
 }) {
   const { lang } = useLanguage();
@@ -252,6 +263,7 @@ export default function BundlePicker({
             productImage={productImage}
             availableColors={availableColors}
             colorImages={colorImages}
+            model={model}
             lang={lang}
           />
         ))}
