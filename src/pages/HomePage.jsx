@@ -279,7 +279,7 @@ const lifestyleItems = [
     titleEn: 'Sleeveless · Tank Top',
     taglineFr: 'Discrétion 100% invisible sous chemises & liberté totale',
     taglineEn: '100% invisible under shirts with maximum arm freedom',
-    img: '/images/home/lifestyle-piscine.png',
+    img: '/images/home/1.png',
     to: '/products/vela-sculpt-sans-manches',
   },
   {
@@ -288,7 +288,7 @@ const lifestyleItems = [
     titleEn: 'Short Sleeves',
     taglineFr: 'Le basique quotidien sous polos et chemises de bureau',
     taglineEn: 'Everyday posture and smoothing under polos and office wear',
-    img: '/images/home/lifestyle-travail.png',
+    img: '/images/home/2.png',
     to: '/products/vela-sculpt-demi-manches',
   },
   {
@@ -297,7 +297,7 @@ const lifestyleItems = [
     titleEn: 'Long Sleeves',
     taglineFr: 'Gainage intégral haut du corps & maintien postural renforcé',
     taglineEn: 'Full upper-body compression & reinforced postural support',
-    img: '/images/home/lifestyle-sport.png',
+    img: '/images/home/3.png',
     to: '/products/vela-sculpt-manches-longues',
   },
 ];
