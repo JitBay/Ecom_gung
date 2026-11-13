@@ -48,7 +48,7 @@ const bestSellersBase = [
     },
   },
   {
-    id: 'sans-manches-noir',
+    id: 'sans-manches',
     handle: 'vela-sculpt-sans-manches',
     defaultColor: 'Noir',
     titleFr: 'Vela Sculpt™ sans manches',
@@ -74,28 +74,28 @@ const bestSellersBase = [
         img: '/images/image page produit/sans-manche/7.png',
         hoverImg: '/images/image page produit/sans-manche/8.png',
       },
-      'Black Or': {
-        hex: '#241f17',
-        img: '/images/image page produit/sans-manche/13.png',
-        hoverImg: '/images/image page produit/sans-manche/14.png',
-      },
       Gris: {
         hex: '#72757d',
         img: '/images/image page produit/sans-manche/19.png',
         hoverImg: '/images/image page produit/sans-manche/20.png',
       },
+      'Black Or': {
+        hex: '#241f17',
+        img: '/images/image page produit/sans-manche/13.png',
+        hoverImg: '/images/image page produit/sans-manche/14.png',
+      },
     },
   },
   {
-    id: 'demi-manches-blanc',
+    id: 'demi-manches',
     handle: 'vela-sculpt-demi-manches',
-    defaultColor: 'Blanc',
+    defaultColor: 'Noir',
     titleFr: 'Vela Sculpt™ demi-manches',
     titleEn: 'Vela Sculpt™ Short Sleeves',
-    taglineFr: '100% invisible sous chemises blanches habillées',
-    taglineEn: '100% invisible under crisp white dress shirts & polos',
-    badgeFr: 'Spécial chemise blanche',
-    badgeEn: 'White Shirt Essential',
+    taglineFr: '100% invisible sous chemises de bureau et polos',
+    taglineEn: '100% invisible under office shirts & polos',
+    badgeFr: 'Plus populaire',
+    badgeEn: 'Most Popular',
     rating: 4.9,
     reviewsCount: '67',
     price: 24.99,
@@ -103,15 +103,15 @@ const bestSellersBase = [
     urlBase: '/products/vela-sculpt-demi-manches',
     offerBadge: true,
     colorData: {
-      Blanc: {
-        hex: '#f4f4f6',
-        img: '/images/image page produit/demi-manche/7.png',
-        hoverImg: '/images/image page produit/demi-manche/8.png',
-      },
       Noir: {
         hex: '#1a1a1a',
         img: '/images/image page produit/demi-manche/1.png',
         hoverImg: '/images/image page produit/demi-manche/2.png',
+      },
+      Blanc: {
+        hex: '#f4f4f6',
+        img: '/images/image page produit/demi-manche/7.png',
+        hoverImg: '/images/image page produit/demi-manche/8.png',
       },
       Gris: {
         hex: '#72757d',
@@ -121,9 +121,9 @@ const bestSellersBase = [
     },
   },
   {
-    id: 'manches-longues-gris-chine',
+    id: 'manches-longues',
     handle: 'vela-sculpt-manches-longues',
-    defaultColor: 'Gris chiné',
+    defaultColor: 'Noir',
     titleFr: 'Vela Sculpt™ manches longues',
     titleEn: 'Vela Sculpt™ Long Sleeves',
     taglineFr: 'Gainage complet torse, dos et bras sous vestes et pulls',
@@ -137,11 +137,6 @@ const bestSellersBase = [
     urlBase: '/products/vela-sculpt-manches-longues',
     offerBadge: true,
     colorData: {
-      'Gris chiné': {
-        hex: '#5a5d66',
-        img: '/images/image page produit/longues-manches/7.png',
-        hoverImg: '/images/image page produit/longues-manches/8.png',
-      },
       Noir: {
         hex: '#1a1a1a',
         img: '/images/image page produit/longues-manches/1.png',
@@ -151,6 +146,11 @@ const bestSellersBase = [
         hex: '#f4f4f6',
         img: '/images/image page produit/longues-manches/13.png',
         hoverImg: '/images/image page produit/longues-manches/14.png',
+      },
+      'Gris chiné': {
+        hex: '#5a5d66',
+        img: '/images/image page produit/longues-manches/7.png',
+        hoverImg: '/images/image page produit/longues-manches/8.png',
       },
     },
   },
