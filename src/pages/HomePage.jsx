@@ -355,9 +355,9 @@ export default function HomePage() {
       {/* 1. HERO SECTION */}
       <section className="ixh-hero">
         <picture className="ixh-hero__media">
-          <source media="(max-width: 699px)" srcSet="/images/home/banner-2.png" />
+          <source media="(max-width: 699px)" srcSet="/images/home/banner-3.png" />
           <img
-            src="/images/home/banner-2.png"
+            src="/images/home/banner-1.png"
             alt="zvar. — Every Age Every Body"
             className="ixh-hero__img"
             loading="eager"

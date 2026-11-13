@@ -23,9 +23,20 @@
   height: 100%;
 }
 
+.ixh-hero__media::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(90deg, rgba(10, 10, 12, 0.72) 0%, rgba(10, 10, 12, 0.42) 36%, rgba(10, 10, 12, 0.08) 60%, transparent 100%);
+  pointer-events: none;
+}
+
 .ixh-hero__img {
   object-fit: cover;
-  object-position: 70% 30%;
+  object-position: 70% 25%;
   display: block;
   max-width: none;
 }
@@ -200,7 +211,7 @@
     min-height: clamp(520px, 76vh, 590px);
   }
   .ixh-hero__img {
-    object-position: 62% 14%;
+    object-position: center 10%;
   }
   .ixh-hero__scrim {
     display: none;
