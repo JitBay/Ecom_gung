@@ -1,0 +1,25 @@
+# Robots.txt for https://www.zvar-shop.com
+
+User-agent: *
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+Allow: /favicon.ico
+Allow: /favicon.png
+Allow: /favicon-48x48.png
+Allow: /favicon-96x96.png
+Allow: /favicon-192x192.png
+Allow: /favicon.svg
+
+User-agent: Googlebot-Image
+Allow: /
+Allow: /favicon.ico
+Allow: /favicon.png
+Allow: /favicon-48x48.png
+Allow: /favicon-96x96.png
+Allow: /favicon-192x192.png
+Allow: /favicon.svg
+Allow: /images/
+
+Sitemap: https://www.zvar-shop.com/sitemap.xml
