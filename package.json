@@ -1,5 +1,6 @@
 {
-  "name": "ionix-clone",
+  "name": "zvar-storefront",
+  "description": "ZVAR — Vela Sculpt™ | Storefront e-commerce headless haute conversion (React 18, Vite 5, Shopify Checkout, Bilingue FR/EN)",
   "private": true,
   "version": "1.0.0",
   "type": "module",
