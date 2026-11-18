@@ -5,7 +5,7 @@
  */
 
 const META_PIXEL_ID =
-  (typeof import.meta !== 'undefined' && import.meta.env?.VITE_META_PIXEL_ID) || '';
+  (typeof import.meta !== 'undefined' && import.meta.env?.VITE_META_PIXEL_ID) || '1141534605538068';
 const TIKTOK_PIXEL_ID =
   (typeof import.meta !== 'undefined' && import.meta.env?.VITE_TIKTOK_PIXEL_ID) || '';
 const GA4_ID =
@@ -149,7 +149,10 @@ export function initAnalytics() {
   if (TIKTOK_PIXEL_ID) injectTikTokPixel(TIKTOK_PIXEL_ID);
   if (GA4_ID) injectGA4(GA4_ID);
   if (CLARITY_ID) injectClarity(CLARITY_ID);
+  checkPurchaseConfirmation();
 }
+
+let isInitialPageView = true;
 
 /**
  * Tracks a virtual SPA page view on route changes.
@@ -157,8 +160,14 @@ export function initAnalytics() {
 export function trackPageView(path) {
   if (typeof window === 'undefined') return;
   if (typeof window.fbq === 'function') {
-    window.fbq('track', 'PageView');
+    if (isInitialPageView && window.__fbq_initial_pageview_fired) {
+      // Initial PageView was already triggered by the base Meta Pixel tag in index.html
+    } else {
+      window.fbq('track', 'PageView');
+    }
   }
+  isInitialPageView = false;
+
   if (window.ttq && typeof window.ttq.page === 'function') {
     window.ttq.page();
   }
@@ -170,13 +179,13 @@ export function trackPageView(path) {
 /**
  * Tracks a product detail impression.
  */
-export function trackViewContent({ id, title, price, currency = 'USD' }) {
+export function trackViewContent({ id, title, price, currency = 'EUR' }) {
   if (typeof window === 'undefined' || !id) return;
   const value = Number(price) || 0;
 
   if (typeof window.fbq === 'function') {
     window.fbq('track', 'ViewContent', {
-      content_ids: [id],
+      content_ids: [String(id)],
       content_name: title,
       content_type: 'product',
       value,
@@ -204,13 +213,13 @@ export function trackViewContent({ id, title, price, currency = 'USD' }) {
 /**
  * Tracks when a shopper adds an item or bundle to their cart.
  */
-export function trackAddToCart({ id, title, price, qty = 1, currency = 'USD' }) {
+export function trackAddToCart({ id, title, price, qty = 1, currency = 'EUR' }) {
   if (typeof window === 'undefined' || !id) return;
   const value = (Number(price) || 0) * (Number(qty) || 1);
 
   if (typeof window.fbq === 'function') {
     window.fbq('track', 'AddToCart', {
-      content_ids: [id],
+      content_ids: [String(id)],
       content_name: title,
       content_type: 'product',
       value,
@@ -239,15 +248,26 @@ export function trackAddToCart({ id, title, price, qty = 1, currency = 'USD' }) 
 /**
  * Tracks when a shopper initiates redirect to Shopify Checkout.
  */
-export function trackInitiateCheckout({ items = [], total = 0, currency = 'USD' }) {
+export function trackInitiateCheckout({ items = [], total = 0, currency = 'EUR' }) {
   if (typeof window === 'undefined') return;
   const value = Number(total) || 0;
+
+  try {
+    sessionStorage.setItem('zvar_pending_checkout', JSON.stringify({
+      items,
+      total: value,
+      currency,
+      startedAt: Date.now(),
+    }));
+  } catch {
+    // Session storage unavailable; tracking can continue normally.
+  }
   const ids = items.map((l) => l.handle || l.id).filter(Boolean);
   const numItems = items.reduce((sum, l) => sum + (Number(l.qty) || 1), 0);
 
   if (typeof window.fbq === 'function') {
     window.fbq('track', 'InitiateCheckout', {
-      content_ids: ids,
+      content_ids: ids.map(String),
       content_type: 'product',
       num_items: numItems,
       value,
@@ -277,5 +297,81 @@ export function trackInitiateCheckout({ items = [], total = 0, currency = 'USD' 
         quantity: Number(l.qty) || 1,
       })),
     });
+  }
+}
+
+/**
+ * Tracks a completed Shopify purchase. Call only after an order confirmation.
+ */
+export function trackPurchase({ orderId, items = [], total = 0, currency = 'EUR' }) {
+  if (typeof window === 'undefined') return;
+  const value = Number(total) || 0;
+  const ids = items.map((l) => l.handle || l.id).filter(Boolean);
+  const numItems = items.reduce((sum, l) => sum + (Number(l.qty) || 1), 0);
+
+  if (typeof window.fbq === 'function') {
+    window.fbq('track', 'Purchase', {
+      content_ids: ids.map(String),
+      content_type: 'product',
+      num_items: numItems,
+      value,
+      currency,
+      order_id: orderId || undefined,
+    });
+  }
+  if (window.ttq && typeof window.ttq.track === 'function') {
+    window.ttq.track('CompletePayment', {
+      contents: items.map((l) => ({
+        content_id: l.handle || l.id,
+        content_name: l.title,
+        quantity: Number(l.qty) || 1,
+        price: Number(l.price) || 0,
+      })),
+      value,
+      currency,
+    });
+  }
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', 'purchase', {
+      transaction_id: orderId || undefined,
+      currency,
+      value,
+      items: items.map((l) => ({
+        item_id: l.handle || l.id,
+        item_name: l.title,
+        price: Number(l.price) || 0,
+        quantity: Number(l.qty) || 1,
+      })),
+    });
+  }
+}
+
+export function checkPurchaseConfirmation() {
+  if (typeof window === 'undefined') return;
+
+  const params = new URLSearchParams(window.location.search);
+  const orderId = params.get('order_id') || params.get('order') || params.get('checkout_id');
+  const isConfirmation = params.get('thank_you') === '1' || params.has('order_id') || params.has('order');
+  if (!isConfirmation) return;
+
+  try {
+    const raw = sessionStorage.getItem('zvar_pending_checkout');
+    if (!raw) return;
+    const pending = JSON.parse(raw);
+    if (!pending?.items?.length) return;
+
+    const confirmationKey = `zvar_purchase_${orderId || 'confirmed'}`;
+    if (sessionStorage.getItem(confirmationKey)) return;
+
+    trackPurchase({
+      orderId,
+      items: pending.items,
+      total: pending.total,
+      currency: pending.currency || 'EUR',
+    });
+    sessionStorage.setItem(confirmationKey, '1');
+    sessionStorage.removeItem('zvar_pending_checkout');
+  } catch {
+    // Invalid or unavailable session data.
   }
 }

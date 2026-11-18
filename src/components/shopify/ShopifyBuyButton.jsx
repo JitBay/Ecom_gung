@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { redirectToShopifyCheckout } from '../../lib/shopify.js';
+import { trackAddToCart } from '../../lib/analytics.js';
 import { useLanguage } from '../../context/LanguageContext.jsx';
 import './ShopifyBuyButton.css';
 
@@ -30,6 +31,16 @@ export default function ShopifyBuyButton({
     setLoading(true);
     try {
       const items = Array.isArray(lineItem) ? lineItem : [lineItem];
+      items.forEach((item) => {
+        if (item) {
+          trackAddToCart({
+            id: item.handle || item.id,
+            title: item.title,
+            price: item.price,
+            qty: item.qty || 1,
+          });
+        }
+      });
       await redirectToShopifyCheckout(items, { discount: discountCode, locale: lang });
     } catch (err) {
       console.error('[ShopifyBuyButton] Redirection error:', err);
