@@ -179,7 +179,7 @@ export function trackPageView(path) {
 /**
  * Tracks a product detail impression.
  */
-export function trackViewContent({ id, title, price, currency = 'EUR' }) {
+export function trackViewContent({ id, title, price, currency = 'USD' }) {
   if (typeof window === 'undefined' || !id) return;
   const value = Number(price) || 0;
 
@@ -213,7 +213,7 @@ export function trackViewContent({ id, title, price, currency = 'EUR' }) {
 /**
  * Tracks when a shopper adds an item or bundle to their cart.
  */
-export function trackAddToCart({ id, title, price, qty = 1, currency = 'EUR' }) {
+export function trackAddToCart({ id, title, price, qty = 1, currency = 'USD' }) {
   if (typeof window === 'undefined' || !id) return;
   const value = (Number(price) || 0) * (Number(qty) || 1);
 
@@ -248,7 +248,7 @@ export function trackAddToCart({ id, title, price, qty = 1, currency = 'EUR' }) 
 /**
  * Tracks when a shopper initiates redirect to Shopify Checkout.
  */
-export function trackInitiateCheckout({ items = [], total = 0, currency = 'EUR' }) {
+export function trackInitiateCheckout({ items = [], total = 0, currency = 'USD' }) {
   if (typeof window === 'undefined') return;
   const value = Number(total) || 0;
 
@@ -303,7 +303,7 @@ export function trackInitiateCheckout({ items = [], total = 0, currency = 'EUR' 
 /**
  * Tracks a completed Shopify purchase. Call only after an order confirmation.
  */
-export function trackPurchase({ orderId, items = [], total = 0, currency = 'EUR' }) {
+export function trackPurchase({ orderId, items = [], total = 0, currency = 'USD' }) {
   if (typeof window === 'undefined') return;
   const value = Number(total) || 0;
   const ids = items.map((l) => l.handle || l.id).filter(Boolean);
@@ -367,7 +367,7 @@ export function checkPurchaseConfirmation() {
       orderId,
       items: pending.items,
       total: pending.total,
-      currency: pending.currency || 'EUR',
+      currency: pending.currency || 'USD',
     });
     sessionStorage.setItem(confirmationKey, '1');
     sessionStorage.removeItem('zvar_pending_checkout');
