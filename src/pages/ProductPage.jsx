@@ -143,15 +143,19 @@ function ClassicProductPage({ product }) {
     setSize('L');
     setQty(1);
 
-    trackShopifyProductView({
-      handle: product.handle,
-      productGid: SHOPIFY_PRODUCT_GIDS[product.handle] || SHOPIFY_PRODUCT_GIDS['vela-sculpt-sans-manches'],
-      variantGid: resolveShopifyVariantId({ handle: product.handle, color: finalColor, size: 'L' }),
-      name: localized.title || product.title,
-      variantName: finalColor,
-      price: String(product.price || '19.99'),
-      quantity: 1,
+    // FIX #4 — Wait one frame so <title> is updated before reading document.title
+    const raf = requestAnimationFrame(() => {
+      trackShopifyProductView({
+        handle: product.handle,
+        productGid: SHOPIFY_PRODUCT_GIDS[product.handle] || SHOPIFY_PRODUCT_GIDS['vela-sculpt-sans-manches'],
+        variantGid: resolveShopifyVariantId({ handle: product.handle, color: finalColor, size: 'L' }),
+        name: localized.title || product.title,
+        variantName: finalColor,
+        price: String(product.price || '19.99'),
+        quantity: 1,
+      });
     });
+    return () => cancelAnimationFrame(raf);
   }, [product?.handle, paramColor]);
 
   const currentImages = product ? getColorImages(product, color) : [];

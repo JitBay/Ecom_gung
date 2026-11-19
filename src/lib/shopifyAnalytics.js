@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import {
   sendShopifyAnalytics,
   getClientBrowserParameters,
@@ -27,6 +27,34 @@ export const SHOPIFY_PRODUCT_GIDS = {
   'vela-sculpt-manches-longues': 'gid://shopify/Product/16228245340494',
   'pack-decouverte': 'gid://shopify/Product/16228308484430',
 };
+
+// ──────────────────────────────────────────────────────────────
+// FIX #2 — Capture the initial referrer at module load time.
+// In an SPA, document.referrer is only correct on the very first page load.
+// After internal navigation React Router updates the URL but document.referrer
+// stays the same (or becomes empty).  We capture it once here.
+// ──────────────────────────────────────────────────────────────
+const _initialReferrer =
+  typeof document !== 'undefined' ? document.referrer : '';
+
+// ──────────────────────────────────────────────────────────────
+// FIX #5 — Dedup guard: prevent sending the same page view twice
+//   within a 500ms window (React StrictMode double-mount or
+//   two components both firing for the same page).
+// ──────────────────────────────────────────────────────────────
+let _lastPageViewKey = '';
+let _lastPageViewTime = 0;
+const DEDUP_WINDOW_MS = 500;
+
+function isDuplicatePageView(key) {
+  const now = Date.now();
+  if (key === _lastPageViewKey && now - _lastPageViewTime < DEDUP_WINDOW_MS) {
+    return true;
+  }
+  _lastPageViewKey = key;
+  _lastPageViewTime = now;
+  return false;
+}
 
 /**
  * Loads and initializes the official Shopify Customer Privacy API.
@@ -137,8 +165,35 @@ function getConsentValues() {
   };
 }
 
+// ──────────────────────────────────────────────────────────────
+// FIX #1 & #2 — Build the base payload.
+//   getClientBrowserParameters() reads location.search, document.referrer, etc.
+//   We override referrer with the captured _initialReferrer when
+//   document.referrer is empty (SPA internal navigation).
+//   We also force url/search/path from window.location at call time
+//   so that the values are always up to date.
+// FIX #4 — Read document.title at call time (via getClientBrowserParameters).
+//   The caller is responsible for calling this AFTER the title has updated
+//   (e.g. via requestAnimationFrame or setTimeout).
+// ──────────────────────────────────────────────────────────────
 function base(hasUserConsent = true) {
   const consent = getConsentValues();
+  const browser = getClientBrowserParameters();
+
+  // Force correct browser values from window.location
+  // (getClientBrowserParameters reads them, but let's be explicit)
+  if (typeof window !== 'undefined') {
+    browser.url = window.location.href;
+    browser.path = window.location.pathname;
+    browser.search = window.location.search;
+    browser.title = document.title;
+    // Use initial referrer if document.referrer is empty
+    // (happens after SPA navigation — initial referrer is the external source)
+    if (!browser.referrer && _initialReferrer) {
+      browser.referrer = _initialReferrer;
+    }
+  }
+
   return {
     shopId: SHOPIFY_SHOP_ID,
     currency: SHOPIFY_CURRENCY,
@@ -150,16 +205,23 @@ function base(hasUserConsent = true) {
     hydrogenSubchannelId: SHOPIFY_STOREFRONT_ID || '0',
     acceptedLanguage:
       typeof navigator !== 'undefined' && navigator.language?.startsWith('fr') ? 'FR' : 'EN',
-    ...getClientBrowserParameters(),
+    ...browser,
   };
 }
 
 /**
- * Page view: call on every route change.
- * @param {string} pageType - AnalyticsPageType (home, collection, product, page)
+ * Page view: call on every route change for NON-PRODUCT pages.
+ * For product pages, use trackShopifyProductView() instead (fix #3 & #5).
+ *
+ * @param {string} pageType - AnalyticsPageType (home, collection, page)
  * @param {boolean} hasUserConsent
  */
 export function trackShopifyPageView(pageType = AnalyticsPageType.page, hasUserConsent = true) {
+  // FIX #5 — dedup: skip if we already sent for this key within DEDUP_WINDOW_MS
+  const key = `pv:${typeof window !== 'undefined' ? window.location.pathname + window.location.search : ''}`;
+  if (isDuplicatePageView(key)) {
+    return;
+  }
   try {
     sendShopifyAnalytics({
       eventName: AnalyticsEventName.PAGE_VIEW,
@@ -172,10 +234,18 @@ export function trackShopifyPageView(pageType = AnalyticsPageType.page, hasUserC
 
 /**
  * Product view: call on the product page.
- * @param {Object} product - { productGid, variantGid, name, variantName, brand, price, quantity }
+ * This sends PAGE_VIEW with pageType=product AND products[] filled (fix #3).
+ * ScrollToTop must NOT also send a generic pageView for product pages (fix #5).
+ *
+ * @param {Object} product - { productGid, variantGid, name, variantName, brand, price, quantity, handle }
  * @param {boolean} hasUserConsent
  */
 export function trackShopifyProductView(product, hasUserConsent = true) {
+  // FIX #5 — dedup
+  const key = `pv:${typeof window !== 'undefined' ? window.location.pathname + window.location.search : ''}`;
+  if (isDuplicatePageView(key)) {
+    return;
+  }
   try {
     const handle = product.handle || 'vela-sculpt-sans-manches';
     const productGid = product.productGid || SHOPIFY_PRODUCT_GIDS[handle] || SHOPIFY_PRODUCT_GIDS['vela-sculpt-sans-manches'];
@@ -184,23 +254,24 @@ export function trackShopifyProductView(product, hasUserConsent = true) {
       ? String(rawVariant)
       : `gid://shopify/ProductVariant/${rawVariant}`;
 
+    const productData = {
+      productGid,
+      variantGid,
+      name: product.name || product.title || 'Vela Sculpt™',
+      variantName: product.variantName || product.variantTitle || 'Standard',
+      brand: product.brand ?? 'ZVAR',
+      price: String(product.price || '19.99'),
+      quantity: product.quantity ?? 1,
+    };
+
     sendShopifyAnalytics({
       eventName: AnalyticsEventName.PAGE_VIEW,
       payload: {
         ...base(hasUserConsent),
         pageType: AnalyticsPageType.product,
         resourceId: productGid,
-        products: [
-          {
-            productGid,
-            variantGid,
-            name: product.name || product.title || 'Vela Sculpt™',
-            variantName: product.variantName || product.variantTitle || 'Standard',
-            brand: product.brand ?? 'ZVAR',
-            price: String(product.price || '19.99'),
-            quantity: product.quantity ?? 1,
-          },
-        ],
+        totalValue: parseFloat(productData.price),
+        products: [productData],
       },
     });
   } catch (err) {
@@ -216,11 +287,17 @@ export function trackShopifyProductView(product, hasUserConsent = true) {
  */
 export function trackShopifyAddToCart(cartId, products = [], hasUserConsent = true) {
   try {
+    const totalValue = (Array.isArray(products) ? products : [products]).reduce(
+      (sum, p) => sum + parseFloat(p.price || '0') * (p.quantity || 1),
+      0
+    );
+
     sendShopifyAnalytics({
       eventName: AnalyticsEventName.ADD_TO_CART,
       payload: {
         ...base(hasUserConsent),
         cartId: cartId || '',
+        totalValue,
         products: (Array.isArray(products) ? products : [products]).map((p) => {
           const handle = p.handle || 'vela-sculpt-sans-manches';
           const productGid = p.productGid || SHOPIFY_PRODUCT_GIDS[handle] || SHOPIFY_PRODUCT_GIDS['vela-sculpt-sans-manches'];

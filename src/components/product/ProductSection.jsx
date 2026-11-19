@@ -46,19 +46,23 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
       title: localizedModel.title,
       price: currentModel.price,
     });
-    trackShopifyProductView({
-      handle: isDiscovery ? 'pack-decouverte' : currentModel.handle,
-      productGid: SHOPIFY_PRODUCT_GIDS[isDiscovery ? 'pack-decouverte' : currentModel.handle] || SHOPIFY_PRODUCT_GIDS['vela-sculpt-sans-manches'],
-      variantGid: resolveShopifyVariantId({
+    // FIX #4 — Wait one frame so <title> is updated before reading document.title
+    const raf = requestAnimationFrame(() => {
+      trackShopifyProductView({
         handle: isDiscovery ? 'pack-decouverte' : currentModel.handle,
-        color: selectedColor,
-        size: 'M',
-      }),
-      name: localizedModel.title || currentModel.title,
-      variantName: selectedColor || 'Standard',
-      price: String(currentModel.price || '19.99'),
-      quantity: 1,
+        productGid: SHOPIFY_PRODUCT_GIDS[isDiscovery ? 'pack-decouverte' : currentModel.handle] || SHOPIFY_PRODUCT_GIDS['vela-sculpt-sans-manches'],
+        variantGid: resolveShopifyVariantId({
+          handle: isDiscovery ? 'pack-decouverte' : currentModel.handle,
+          color: selectedColor,
+          size: 'M',
+        }),
+        name: localizedModel.title || currentModel.title,
+        variantName: selectedColor || 'Standard',
+        price: String(currentModel.price || '19.99'),
+        quantity: 1,
+      });
     });
+    return () => cancelAnimationFrame(raf);
   }, [currentModel.handle, currentModel.price, localizedModel.title, selectedColor, isDiscovery]);
 
   const availableColors = useMemo(() => {

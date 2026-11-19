@@ -34,12 +34,27 @@ function getShopifyPageType(pathname = '') {
 
 // Handle scroll restoration, anchor hash navigation, and analytics pageviews
 function ScrollToTop() {
-  const { pathname, hash } = useLocation();
+  const { pathname, hash, search } = useLocation();
 
   useEffect(() => {
     trackPageView(`${pathname}${hash}`);
-    trackShopifyPageView(getShopifyPageType(pathname));
-  }, [pathname, hash]);
+
+    // FIX #3 & #5 — Do NOT send a generic Shopify page view for product pages.
+    // Product pages send their own event (with products[] filled) from
+    // ProductSection / ProductPage, so sending one here too would create
+    // a duplicate AND an event with an empty products array.
+    const pageType = getShopifyPageType(pathname);
+    if (pageType === AnalyticsPageType.product) {
+      return; // let the product component handle it
+    }
+
+    // FIX #4 — Wait one frame so <title> is updated by the page component
+    // before we read document.title in getClientBrowserParameters().
+    const raf = requestAnimationFrame(() => {
+      trackShopifyPageView(pageType);
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [pathname, hash, search]);
 
   useEffect(() => {
     if (hash) {
