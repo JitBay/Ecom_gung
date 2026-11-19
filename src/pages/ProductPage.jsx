@@ -158,6 +158,19 @@ function ClassicProductPage({ product }) {
     return () => cancelAnimationFrame(raf);
   }, [product?.handle, paramColor]);
 
+  const handleSelectColor = (c) => {
+    setColor(c);
+    if (typeof window !== 'undefined') {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        params.set('color', c);
+        const nextSearch = params.toString();
+        const nextUrl = `${window.location.pathname}${nextSearch ? `?${nextSearch}` : ''}${window.location.hash}`;
+        window.history.replaceState({}, '', nextUrl);
+      } catch (err) {}
+    }
+  };
+
   const currentImages = product ? getColorImages(product, color) : [];
   const save = product.compareAt ? Math.round((1 - product.price / product.compareAt) * 100) : 0;
 
@@ -286,7 +299,7 @@ function ClassicProductPage({ product }) {
                     key={c}
                     type="button"
                     className={`pp__swatch-btn ${c === color ? 'is-active is-selected' : ''}`}
-                    onClick={() => setColor(c)}
+                    onClick={() => handleSelectColor(c)}
                     title={t('color_names.' + c, c)}
                   >
                     <span className="pp__swatch-dot" style={{ background: colorHex[c] || '#1a1a1a' }} />

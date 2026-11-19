@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import QualitySection from '../components/sections/QualitySection.jsx';
 import BlackFridayHero from '../components/sections/BlackFridayHero.jsx';
 import BlackFridayStrip from '../components/sections/BlackFridayStrip.jsx';
@@ -7,6 +7,7 @@ import CustomerReviews from '../components/sections/CustomerReviews.jsx';
 import Stars from '../components/ui/Stars.jsx';
 import HowItWorksModal from '../components/ui/HowItWorksModal.jsx';
 import { brand } from '../data/site.js';
+import { productUrl } from '../data/catalog.js';
 import { price } from '../lib/format.js';
 import { useLanguage } from '../context/LanguageContext.jsx';
 import './HomePage.css';
@@ -158,6 +159,7 @@ const bestSellersBase = [
 ];
 
 function BestSellerCard({ p, lang, t }) {
+  const { search } = useLocation();
   const [selectedColor, setSelectedColor] = useState(p.defaultColor);
   const [hoverColor, setHoverColor] = useState(null);
 
@@ -169,7 +171,9 @@ function BestSellerCard({ p, lang, t }) {
   const tagline = lang === 'fr' ? p.taglineFr : p.taglineEn;
 
   const discount = p.compareAt ? Math.round((1 - p.price / p.compareAt) * 100) : 0;
-  const targetUrl = p.urlBase.includes('#') ? p.urlBase : `${p.urlBase}?color=${encodeURIComponent(activeColorKey)}`;
+  const targetUrl = p.urlBase.includes('#')
+    ? productUrl(p.urlBase, null, search)
+    : productUrl(p.urlBase, activeColorKey, search);
 
   return (
     <article className="ixh-card">
@@ -304,6 +308,7 @@ const lifestyleItems = [
 
 export default function HomePage() {
   const { lang, t, dict } = useLanguage();
+  const { search } = useLocation();
   const railRef = useRef(null);
   const thumbRef = useRef(null);
   const [thumbStyle, setThumbStyle] = useState({ width: '30%', transform: 'translateX(0%)' });
@@ -380,7 +385,7 @@ export default function HomePage() {
             </h1>
             <p className="ixh-hero__text">{t('home.hero_text')}</p>
             <div className="ixh-hero__btns">
-              <Link to="/products/pack-decouverte" className="ixh-btn ixh-btn--gold">
+              <Link to={productUrl('/products/pack-decouverte', null, search)} className="ixh-btn ixh-btn--gold">
                 {lang === 'fr' ? 'Offre Pack Découverte 3 coupes à 44,99 $' : 'Discovery Pack Offer 3 Fits at $44.99'}
               </Link>
               <a
@@ -527,7 +532,7 @@ export default function HomePage() {
           </div>
           <div className="ixh-icons__grid">
             {lifestyleItems.map((item) => (
-              <Link key={item.id} className="ixh-tile" to={item.to}>
+              <Link key={item.id} className="ixh-tile" to={productUrl(item.to, null, search)}>
                 <img
                   src={item.img}
                   alt={lang === 'fr' ? item.titleFr : item.titleEn}

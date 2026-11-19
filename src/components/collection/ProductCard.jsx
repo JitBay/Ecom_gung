@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import ProductThumb from '../ui/ProductThumb.jsx';
 import { colorHex, getColorImages, getLocalizedProduct, productUrl } from '../../data/catalog.js';
 import { useLanguage } from '../../context/LanguageContext.jsx';
@@ -11,12 +11,13 @@ const MAX_SWATCHES = 5;
 export default function ProductCard({ product }) {
   if (!product) return null;
   const { lang, t } = useLanguage();
+  const { search } = useLocation();
   const localized = getLocalizedProduct(product, lang);
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [hoverColor, setHoverColor] = useState(null);
 
   const activeColor = hoverColor || selectedColor;
-  const targetUrl = `${productUrl(product.handle)}?color=${encodeURIComponent(activeColor)}`;
+  const targetUrl = productUrl(product.handle, activeColor, search);
   const extra = (product.colors?.length || 0) - MAX_SWATCHES;
   const colorDisplay = t('color_names.' + activeColor, activeColor);
 

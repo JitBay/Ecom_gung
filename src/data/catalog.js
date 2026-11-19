@@ -476,5 +476,39 @@ export const getLocalizedCollection = (collection, lang = 'fr') => {
   return override ? { ...collection, ...override } : collection;
 };
 
-export const productUrl = (handle) => `/products/${handle}`;
+export const productUrl = (handle, color, currentSearch) => {
+  let path = handle.startsWith('/') ? handle : `/products/${handle}`;
+  let hash = '';
+  if (path.includes('#')) {
+    const parts = path.split('#');
+    path = parts[0];
+    hash = `#${parts[1]}`;
+  }
+
+  // Preserve existing search parameters (UTMs, etc.)
+  const searchStr =
+    currentSearch !== undefined
+      ? currentSearch
+      : typeof window !== 'undefined'
+      ? window.location.search
+      : '';
+
+  const params = new URLSearchParams(searchStr);
+
+  // If path already contained query params, merge them
+  if (path.includes('?')) {
+    const [cleanPath, existingQuery] = path.split('?');
+    path = cleanPath;
+    const existingParams = new URLSearchParams(existingQuery);
+    existingParams.forEach((val, key) => params.set(key, val));
+  }
+
+  // Add or update color if specified
+  if (color) {
+    params.set('color', color);
+  }
+
+  const qs = params.toString();
+  return `${path}${qs ? `?${qs}` : ''}${hash}`;
+};
 export const collectionUrl = (handle) => `/collections/${handle}`;

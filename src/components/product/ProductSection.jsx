@@ -229,6 +229,18 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
 
   const handleSelectColor = (colorName) => {
     setSelectedColor(colorName);
+    // Update ?color= in the browser URL while preserving all existing parameters (UTMs, etc.)
+    if (typeof window !== 'undefined') {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        params.set('color', colorName);
+        const nextSearch = params.toString();
+        const nextUrl = `${window.location.pathname}${nextSearch ? `?${nextSearch}` : ''}${window.location.hash}`;
+        window.history.replaceState({}, '', nextUrl);
+      } catch (err) {
+        // ignore
+      }
+    }
     const matched = availableColors.find(
       (c) => c.label.toLowerCase() === colorName.toLowerCase() || c.id === colorName.toLowerCase()
     );
