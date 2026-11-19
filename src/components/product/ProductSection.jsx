@@ -290,8 +290,10 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
       isTwoPlusOne: Boolean(bundle.isTwoPlusOne),
       isDiscoveryPack: Boolean(bundle.isDiscoveryPack),
       paidQty: bundle.isDiscoveryPack ? 1 : (bundle.isTwoPlusOne ? 2 : (bundle.id === 3 ? 3 : 1)),
-      chosenVariants: chosen.map((v) => ({
-        handle: currentModel.handle,
+      chosenVariants: chosen.map((v, i) => ({
+        handle: bundle.isDiscoveryPack
+          ? (discoveryCategories[i]?.handle || 'pack-decouverte')
+          : currentModel.handle,
         color: v.color,
         size: v.size,
       })),
@@ -344,8 +346,10 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
       isTwoPlusOne: Boolean(bundle.isTwoPlusOne),
       isDiscoveryPack: Boolean(bundle.isDiscoveryPack),
       paidQty: bundle.isDiscoveryPack ? 1 : (bundle.isTwoPlusOne ? 2 : (bundle.id === 3 ? 3 : 1)),
-      chosenVariants: chosen.map((v) => ({
-        handle: currentModel.handle,
+      chosenVariants: chosen.map((v, i) => ({
+        handle: bundle.isDiscoveryPack
+          ? (discoveryCategories[i]?.handle || 'pack-decouverte')
+          : currentModel.handle,
         color: v.color,
         size: v.size,
       })),

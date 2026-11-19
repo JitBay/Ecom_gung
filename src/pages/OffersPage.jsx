@@ -48,7 +48,7 @@ export default function OffersPage() {
       <OffersProductShelf />
 
       {/* 3. CONFIGURATEUR ET BUILDER DE PACK DIRECT */}
-      <ProductSection isDiscoveryOffer={true} showModelSelector={true} />
+      <ProductSection isDiscoveryOffer={true} showModelSelector={false} />
     </div>
   );
 }

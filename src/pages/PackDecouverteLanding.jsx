@@ -250,8 +250,8 @@ export default function PackDecouverteLanding() {
             <div className="pdl-value-strip__content">
               <h3>
                 {lang === 'fr'
-                  ? 'Valeur totale si acheté séparément : 74,97 $ au lieu de 74,97 $ prix régulier'
-                  : 'Total value if bought separately: $74.97 instead of $74.97 regular'}
+                  ? 'Valeur totale si acheté séparément : 74,97 $ · Offre spéciale pack à 44,99 $'
+                  : 'Total value if bought separately: $74.97 · Special bundle price $44.99'}
               </h3>
               <p>
                 {lang === 'fr'
@@ -276,7 +276,7 @@ export default function PackDecouverteLanding() {
       <CameraRolls limit={5} />
 
       {/* 4. MAIN PRODUCT SECTION & CONFIGURATOR */}
-      <ProductSection isDiscoveryOffer={true} showModelSelector={true} />
+      <ProductSection isDiscoveryOffer={true} showModelSelector={false} />
 
       {/* 5. VIDEO DEMO */}
       <ProductVideoSection modelHandle="pack-decouverte" />

@@ -225,6 +225,9 @@ function normalizeModel(str = '', context = '') {
   const direct = String(str).toLowerCase().trim();
 
   // 1. Direct handle check has priority
+  if (direct === 'pack-decouverte' || direct.includes('pack-decouverte')) {
+    return 'pack-decouverte';
+  }
   if (direct.includes('manches-longues') || direct.includes('long-sleeves')) {
     return 'vela-sculpt-manches-longues';
   }
@@ -234,16 +237,13 @@ function normalizeModel(str = '', context = '') {
   if (direct.includes('sans-manches') || direct.includes('sleeveless') || direct.includes('tank-top')) {
     return 'vela-sculpt-sans-manches';
   }
-  if (direct === 'pack-decouverte' || direct.includes('pack-decouverte-3-coupes')) {
-    return 'pack-decouverte';
-  }
 
   // 2. Scan combined context only when direct handle wasn't specific
   const s = `${str} ${context}`.toLowerCase();
   if (
     s.includes('pack-decouverte-3-coupes') ||
-    s.includes('pack decouverte 3 coupes') ||
-    s.includes('pack découverte 3 coupes') ||
+    s.includes('pack decouverte') ||
+    s.includes('pack découverte') ||
     s.includes('discovery pack') ||
     s.includes('3 coupes') ||
     s.includes('3 fits')
@@ -270,23 +270,35 @@ export function resolveShopifyVariantId(line = {}) {
     return String(line.variantId);
   }
 
+  const isDiscovery =
+    line.handle === 'pack-decouverte' ||
+    Boolean(line.isDiscoveryPack) ||
+    (typeof line.id === 'string' && line.id.includes('pack-decouverte')) ||
+    (typeof line.title === 'string' && /pack.*d[eé]couverte|discovery/i.test(line.title));
+
   // If chosenVariants has an item, use it for exact variant attributes
   const firstChosen = Array.isArray(line.chosenVariants) && line.chosenVariants[0]
     ? line.chosenVariants[0]
     : null;
 
-  const targetHandle = firstChosen?.handle || line.handle || line.id || line.title || '';
+  // Prioritize line.handle when present so pack-decouverte or specific models aren't overwritten
+  const targetHandle = isDiscovery
+    ? 'pack-decouverte'
+    : (line.handle && line.handle !== ''
+        ? line.handle
+        : (firstChosen?.handle || line.id || line.title || ''));
+
   const textToScan = `${line.id || ''} ${line.detail || ''} ${line.title || ''} ${firstChosen?.detail || ''}`;
-  const model = normalizeModel(targetHandle, textToScan);
+  const model = isDiscovery ? 'pack-decouverte' : normalizeModel(targetHandle, textToScan);
 
-  // Extract size: prioritize firstChosen.size, then line.size, then textToScan
-  const size = normalizeSize(firstChosen?.size || line.size || textToScan);
+  // Extract size: prioritize line.size, then firstChosen.size, then textToScan
+  const size = normalizeSize(line.size || firstChosen?.size || textToScan);
 
-  // Extract color: prioritize firstChosen.color, then line.selectedColor, line.color, textToScan
-  const color = normalizeColor(firstChosen?.color || line.selectedColor || line.color || textToScan);
+  // Extract color: prioritize line.selectedColor, line.color, firstChosen.color, textToScan
+  const color = normalizeColor(line.selectedColor || line.color || firstChosen?.color || textToScan);
 
   // Pack Découverte resolution (only genuine 3-cut pack discovery)
-  if (model === 'pack-decouverte' || line.isDiscoveryPack) {
+  if (model === 'pack-decouverte' || isDiscovery) {
     const packSizeKey = `pack-decouverte:${size}`;
     if (SHOPIFY_VARIANTS_MAP[packSizeKey]) {
       return SHOPIFY_VARIANTS_MAP[packSizeKey];
@@ -385,28 +397,35 @@ function resolveCartVariantEntries(lines = []) {
     const lineQty = Math.max(1, parseInt(line.qty, 10) || 1);
     const detailText = typeof line.detail === 'string' ? line.detail.trim() : '';
 
-    // 1. Pack Découverte (Single dedicated Shopify product at 44.99 € / 44.99 $)
-    if (line.handle === 'pack-decouverte' || line.isDiscoveryPack) {
-      addEntry(resolveShopifyVariantId(line), lineQty, detailText);
+    // 1. Pack Découverte (Single dedicated Shopify product at 44.99 $ USD)
+    const isDiscovery =
+      line.handle === 'pack-decouverte' ||
+      Boolean(line.isDiscoveryPack) ||
+      (typeof line.id === 'string' && line.id.includes('pack-decouverte')) ||
+      (typeof line.title === 'string' && /pack.*d[eé]couverte|discovery/i.test(line.title)) ||
+      (Number(line.price) === 44.99 && line.bundleId !== 1);
+
+    if (isDiscovery) {
+      addEntry(resolveShopifyVariantId({ ...line, handle: 'pack-decouverte', isDiscoveryPack: true }), lineQty, detailText);
       return;
     }
 
     // 2. Check if this is a 2+1 Offer bundle (2 paid shirts, 3rd free)
     const isTwoPlusOne =
-      line.isTwoPlusOne ||
+      Boolean(line.isTwoPlusOne) ||
       line.bundleId === 2 ||
-      (line.title &&
-        (line.title.includes('2+1') ||
-          line.title.includes('2 T-Shirts + 1 Offert') ||
-          line.title.includes('2 Shirts + 1 Free')));
+      String(line.bundleId) === '2' ||
+      line.paidQty === 2 ||
+      (typeof line.id === 'string' && line.id.includes('-2-')) ||
+      (typeof line.title === 'string' && /2\s*(t-shirts?|shirts?)\s*\+\s*1\s*(offert|free)|2\+1/i.test(line.title)) ||
+      (line.price && (Math.abs(line.price - 39.98) < 0.05 || Math.abs(line.price - 49.98) < 0.05 || Math.abs(line.price - 59.98) < 0.05));
 
     // 3. Check if this is a 3-shirt pack (3 paid shirts)
     const isPackThree =
       line.bundleId === 3 ||
+      String(line.bundleId) === '3' ||
       line.paidQty === 3 ||
-      (line.title &&
-        (line.title.includes('Pack Semaine') ||
-          line.title.includes('Week Pack')));
+      (typeof line.title === 'string' && /(pack semaine|week pack)/i.test(line.title));
 
     if (isTwoPlusOne) {
       if (Array.isArray(line.chosenVariants) && line.chosenVariants.length >= 2) {
