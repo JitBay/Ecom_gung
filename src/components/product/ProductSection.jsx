@@ -16,6 +16,8 @@ import { useCart } from '../../context/CartContext.jsx';
 import { useLanguage } from '../../context/LanguageContext.jsx';
 import { useScrolledPast } from '../../lib/hooks.js';
 import { trackViewContent } from '../../lib/analytics.js';
+import { resolveShopifyVariantId } from '../../lib/shopify.js';
+import { SHOPIFY_PRODUCT_GIDS, trackShopifyProductView } from '../../lib/shopifyAnalytics.js';
 import './ProductSection.css';
 
 export default function ProductSection({ initialModelHandle, onModelChange, showModelSelector = true, isDiscoveryOffer = false }) {
@@ -44,7 +46,20 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
       title: localizedModel.title,
       price: currentModel.price,
     });
-  }, [currentModel.handle, currentModel.price, localizedModel.title]);
+    trackShopifyProductView({
+      handle: isDiscovery ? 'pack-decouverte' : currentModel.handle,
+      productGid: SHOPIFY_PRODUCT_GIDS[isDiscovery ? 'pack-decouverte' : currentModel.handle] || SHOPIFY_PRODUCT_GIDS['vela-sculpt-sans-manches'],
+      variantGid: resolveShopifyVariantId({
+        handle: isDiscovery ? 'pack-decouverte' : currentModel.handle,
+        color: selectedColor,
+        size: 'M',
+      }),
+      name: localizedModel.title || currentModel.title,
+      variantName: selectedColor || 'Standard',
+      price: String(currentModel.price || '19.99'),
+      quantity: 1,
+    });
+  }, [currentModel.handle, currentModel.price, localizedModel.title, selectedColor, isDiscovery]);
 
   const availableColors = useMemo(() => {
     return currentModel.colors.map((c) => {

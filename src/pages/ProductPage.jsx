@@ -24,6 +24,8 @@ import { fabric, shipping } from '../data/product.js';
 import { useCart } from '../context/CartContext.jsx';
 import { useLanguage } from '../context/LanguageContext.jsx';
 import { price } from '../lib/format.js';
+import { SHOPIFY_PRODUCT_GIDS, trackShopifyProductView } from '../lib/shopifyAnalytics.js';
+import { resolveShopifyVariantId } from '../lib/shopify.js';
 import './ProductPage.css';
 
 /**
@@ -136,9 +138,20 @@ function ClassicProductPage({ product }) {
   useEffect(() => {
     if (!product) return;
     const validColor = paramColor && product.colors?.find((c) => c.toLowerCase() === paramColor.toLowerCase());
-    setColor(validColor || product.colors?.[0] || 'Noir');
+    const finalColor = validColor || product.colors?.[0] || 'Noir';
+    setColor(finalColor);
     setSize('L');
     setQty(1);
+
+    trackShopifyProductView({
+      handle: product.handle,
+      productGid: SHOPIFY_PRODUCT_GIDS[product.handle] || SHOPIFY_PRODUCT_GIDS['vela-sculpt-sans-manches'],
+      variantGid: resolveShopifyVariantId({ handle: product.handle, color: finalColor, size: 'L' }),
+      name: localized.title || product.title,
+      variantName: finalColor,
+      price: String(product.price || '19.99'),
+      quantity: 1,
+    });
   }, [product?.handle, paramColor]);
 
   const currentImages = product ? getColorImages(product, color) : [];

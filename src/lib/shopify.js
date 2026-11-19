@@ -428,13 +428,19 @@ function resolveCartVariantEntries(lines = []) {
       (typeof line.title === 'string' && /(pack semaine|week pack)/i.test(line.title));
 
     if (isTwoPlusOne) {
-      if (Array.isArray(line.chosenVariants) && line.chosenVariants.length >= 2) {
+      if (Array.isArray(line.chosenVariants) && line.chosenVariants.length >= 3) {
+        for (let i = 0; i < 3; i++) {
+          const vId = resolveShopifyVariantId({ handle: line.handle, ...line.chosenVariants[i] });
+          addEntry(vId, 1 * lineQty, i === 0 ? detailText : '');
+        }
+      } else if (Array.isArray(line.chosenVariants) && line.chosenVariants.length === 2) {
         const v1 = resolveShopifyVariantId({ handle: line.handle, ...line.chosenVariants[0] });
         const v2 = resolveShopifyVariantId({ handle: line.handle, ...line.chosenVariants[1] });
         addEntry(v1, 1 * lineQty, detailText);
         addEntry(v2, 1 * lineQty);
+        addEntry(v1, 1 * lineQty);
       } else {
-        addEntry(resolveShopifyVariantId(line), 2 * lineQty, detailText);
+        addEntry(resolveShopifyVariantId(line), 3 * lineQty, detailText);
       }
       return;
     }
@@ -507,13 +513,15 @@ export function buildShopifyCartPermalink(lines, options = {}) {
 }
 
 /**
- * Creates a clean Shopify Checkout session via Storefront API `cartCreate`.
- * Keeps bundle selections as structured line-item attributes and stores order notes
- * server-side instead of exposing long `?note=` strings in the checkout URL.
- * Falls back transparently to the cart permalink if Storefront API fails.
+ * Synchronizes the cart with Shopify Storefront API.
+ * Returns the exact server-side cost (subtotalAmount, totalAmount) and the verified cart ID / checkout URL.
+ *
+ * @param {Array} lines - Cart items
+ * @param {Object} options - Checkout / sync options (countryCode, discount, locale)
+ * @returns {Promise<{ cartId: string, checkoutUrl: string, subtotal: number, total: number, currency: string } | null>}
  */
-export async function createShopifyCheckoutUrl(lines, options = {}) {
-  if (!lines || lines.length === 0) return '';
+export async function syncShopifyCart(lines, options = {}) {
+  if (!lines || lines.length === 0) return null;
 
   const cleanDomain = getCleanShopifyDomain();
   const locale = getCheckoutLocale(options);
@@ -546,11 +554,21 @@ export async function createShopifyCheckoutUrl(lines, options = {}) {
   }
 
   const mutation = `
-    mutation CartCreateCheckout($input: CartInput!) {
+    mutation CartSync($input: CartInput!) {
       cartCreate(input: $input) {
         cart {
           id
           checkoutUrl
+          cost {
+            subtotalAmount {
+              amount
+              currencyCode
+            }
+            totalAmount {
+              amount
+              currencyCode
+            }
+          }
         }
         userErrors {
           field
@@ -561,7 +579,7 @@ export async function createShopifyCheckoutUrl(lines, options = {}) {
   `;
 
   const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
-  const timeoutId = controller ? setTimeout(() => controller.abort(), 3500) : null;
+  const timeoutId = controller ? setTimeout(() => controller.abort(), 4000) : null;
 
   try {
     const res = await fetch(`https://${cleanDomain}/api/2024-01/graphql.json`, {
@@ -580,27 +598,63 @@ export async function createShopifyCheckoutUrl(lines, options = {}) {
     if (res.ok) {
       const json = await res.json();
       const payload = json?.data?.cartCreate;
-      const rawUrl = payload?.cart?.checkoutUrl;
+      const cart = payload?.cart;
+      const rawUrl = cart?.checkoutUrl;
 
       if (rawUrl && (!payload.userErrors || payload.userErrors.length === 0)) {
-        const parsedUrl = new URL(rawUrl);
-        if (parsedUrl.hostname === 'zvar-shop.com' || parsedUrl.hostname === 'www.zvar-shop.com') {
-          parsedUrl.hostname = cleanDomain;
+        let checkoutUrl = rawUrl;
+        try {
+          const parsedUrl = new URL(rawUrl);
+          if (parsedUrl.hostname === 'zvar-shop.com' || parsedUrl.hostname === 'www.zvar-shop.com') {
+            parsedUrl.hostname = cleanDomain;
+          }
+          parsedUrl.searchParams.set('locale', locale);
+          parsedUrl.searchParams.delete('note');
+          parsedUrl.searchParams.delete('cart_link_id');
+          parsedUrl.searchParams.delete('_s');
+          parsedUrl.searchParams.delete('_y');
+          checkoutUrl = parsedUrl.toString();
+        } catch {
+          // Keep rawUrl if parsing fails
         }
-        parsedUrl.searchParams.set('locale', locale);
-        parsedUrl.searchParams.delete('note');
-        parsedUrl.searchParams.delete('cart_link_id');
-        parsedUrl.searchParams.delete('_s');
-        parsedUrl.searchParams.delete('_y');
-        return parsedUrl.toString();
+
+        const subtotal = Number(cart?.cost?.subtotalAmount?.amount) || 0;
+        const total = Number(cart?.cost?.totalAmount?.amount) || 0;
+        const currency = cart?.cost?.totalAmount?.currencyCode || 'USD';
+
+        return {
+          cartId: cart.id,
+          checkoutUrl,
+          subtotal,
+          total,
+          currency,
+        };
       }
     }
   } catch (err) {
-    console.warn('[Shopify] Storefront cartCreate fallback to permalink:', err?.message || err);
+    console.warn('[Shopify] Cart sync fallback:', err?.message || err);
   } finally {
     if (timeoutId) clearTimeout(timeoutId);
   }
 
+  return null;
+}
+
+/**
+ * Creates a clean Shopify Checkout session via Storefront API `cartCreate`.
+ * Keeps bundle selections as structured line-item attributes and stores order notes
+ * server-side instead of exposing long `?note=` strings in the checkout URL.
+ * Falls back transparently to the cart permalink if Storefront API fails.
+ */
+export async function createShopifyCheckoutUrl(lines, options = {}) {
+  if (!lines || lines.length === 0) return '';
+
+  const synced = await syncShopifyCart(lines, options);
+  if (synced?.checkoutUrl) {
+    return synced.checkoutUrl;
+  }
+
+  const locale = getCheckoutLocale(options);
   return buildShopifyCartPermalink(lines, { ...options, locale });
 }
 

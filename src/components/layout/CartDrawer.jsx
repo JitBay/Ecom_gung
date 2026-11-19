@@ -9,7 +9,7 @@ import './CartDrawer.css';
 const FREE_SHIPPING = 55;
 
 export default function CartDrawer() {
-  const { lines, open, setOpen, setQty, total, count, checkout, isCheckingOut } = useCart();
+  const { lines, open, setOpen, setQty, total, displayTotal, count, checkout, isCheckingOut } = useCart();
   const { t, lang } = useLanguage();
   useLockScroll(open);
 
@@ -93,7 +93,7 @@ export default function CartDrawer() {
           <footer className="cart__foot">
             <p>
               <span>{t('cart.subtotal')}</span>
-              <strong>{price(total)}</strong>
+              <strong>{price(displayTotal ?? total)}</strong>
             </p>
             <button
               className="btn btn--dark btn--block"

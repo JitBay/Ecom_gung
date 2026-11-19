@@ -23,6 +23,14 @@ import TrackOrderPage from './pages/TrackOrderPage.jsx';
 import NotFound from './pages/NotFound.jsx';
 import { HERO_PRODUCT } from './data/catalog.js';
 import { initAnalytics, trackPageView } from './lib/analytics.js';
+import { AnalyticsPageType, trackShopifyPageView, useZvarShopifyCookies } from './lib/shopifyAnalytics.js';
+
+function getShopifyPageType(pathname = '') {
+  if (pathname === '/' || pathname === '/landing') return AnalyticsPageType.home;
+  if (pathname.startsWith('/collections')) return AnalyticsPageType.collection;
+  if (pathname.startsWith('/products') || pathname.includes('pack-decouverte')) return AnalyticsPageType.product;
+  return AnalyticsPageType.page;
+}
 
 // Handle scroll restoration, anchor hash navigation, and analytics pageviews
 function ScrollToTop() {
@@ -30,6 +38,7 @@ function ScrollToTop() {
 
   useEffect(() => {
     trackPageView(`${pathname}${hash}`);
+    trackShopifyPageView(getShopifyPageType(pathname));
   }, [pathname, hash]);
 
   useEffect(() => {
@@ -89,6 +98,8 @@ function ProductRoute() {
 }
 
 export default function App() {
+  useZvarShopifyCookies();
+
   useEffect(() => {
     initAnalytics();
   }, []);

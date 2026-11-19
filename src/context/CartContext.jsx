@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
-import { redirectToShopifyCheckout } from '../lib/shopify.js';
+import { redirectToShopifyCheckout, resolveShopifyVariantId, syncShopifyCart } from '../lib/shopify.js';
 import { trackAddToCart } from '../lib/analytics.js';
+import { SHOPIFY_PRODUCT_GIDS, trackShopifyAddToCart } from '../lib/shopifyAnalytics.js';
 import { useLanguage } from './LanguageContext.jsx';
 
 const CartContext = createContext(null);
@@ -22,6 +23,7 @@ export function CartProvider({ children }) {
 
   const [open, setOpen] = useState(false);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const [shopifyCart, setShopifyCart] = useState(null);
 
   // Open CartDrawer automatically when redirected back from Shopify Checkout cart icon (?cart=open)
   useEffect(() => {
@@ -45,19 +47,58 @@ export function CartProvider({ children }) {
     }
   }, [lines]);
 
+  // Synchronize cart with Shopify Storefront API to retrieve verified cost and checkout URL
+  useEffect(() => {
+    if (lines.length === 0) {
+      setShopifyCart(null);
+      return;
+    }
+    let cancelled = false;
+    syncShopifyCart(lines, { locale: activeLang }).then((result) => {
+      if (!cancelled && result) {
+        setShopifyCart(result);
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [lines, activeLang]);
+
   const value = useMemo(() => {
     const add = (line) => {
+      const lineQty = line.qty || 1;
       setLines((prev) => {
         const found = prev.find((l) => l.id === line.id);
-        if (found) return prev.map((l) => (l.id === line.id ? { ...l, qty: l.qty + (line.qty || 1) } : l));
-        return [...prev, { ...line, qty: line.qty || 1 }];
+        if (found) return prev.map((l) => (l.id === line.id ? { ...l, qty: l.qty + lineQty } : l));
+        return [...prev, { ...line, qty: lineQty }];
       });
+
+      // Meta Pixel tracking (keep intact)
       trackAddToCart({
         id: line.handle || line.id,
         title: line.title,
         price: line.price,
-        qty: line.qty || 1,
+        qty: lineQty,
       });
+
+      // Shopify Analytics tracking
+      try {
+        const vId = resolveShopifyVariantId(line);
+        trackShopifyAddToCart(shopifyCart?.cartId || '', [
+          {
+            handle: line.handle,
+            productGid: SHOPIFY_PRODUCT_GIDS[line.handle] || SHOPIFY_PRODUCT_GIDS['vela-sculpt-sans-manches'],
+            variantGid: `gid://shopify/ProductVariant/${vId}`,
+            name: line.title || 'Vela Sculpt™',
+            variantName: line.detail || 'Standard',
+            price: String(line.price || '19.99'),
+            quantity: lineQty,
+          },
+        ]);
+      } catch (err) {
+        console.warn('[Shopify Analytics] Add to cart track error:', err);
+      }
+
       setOpen(true);
     };
 
@@ -66,7 +107,10 @@ export function CartProvider({ children }) {
         qty <= 0 ? prev.filter((l) => l.id !== id) : prev.map((l) => (l.id === id ? { ...l, qty } : l))
       );
 
-    const clearCart = () => setLines([]);
+    const clearCart = () => {
+      setLines([]);
+      setShopifyCart(null);
+    };
 
     const checkout = async (options = {}) => {
       if (lines.length === 0 || isCheckingOut) return;
@@ -79,7 +123,11 @@ export function CartProvider({ children }) {
     };
 
     const count = lines.reduce((n, l) => n + l.qty, 0);
-    const total = lines.reduce((n, l) => n + l.qty * l.price, 0);
+    const localTotal = lines.reduce((n, l) => n + l.qty * l.price, 0);
+    const displayTotal =
+      shopifyCart && typeof shopifyCart.subtotal === 'number' && shopifyCart.subtotal > 0
+        ? shopifyCart.subtotal
+        : localTotal;
 
     return {
       lines,
@@ -91,9 +139,12 @@ export function CartProvider({ children }) {
       checkout,
       isCheckingOut,
       count,
-      total,
+      total: localTotal,
+      displayTotal,
+      shopifyCart,
+      shopifySubtotal: shopifyCart?.subtotal ?? null,
     };
-  }, [lines, open, isCheckingOut, activeLang]);
+  }, [lines, open, isCheckingOut, activeLang, shopifyCart]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
