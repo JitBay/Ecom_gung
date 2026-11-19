@@ -14,7 +14,7 @@ export const SHOPIFY_STOREFRONT_TOKEN =
   (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SHOPIFY_STOREFRONT_TOKEN) ||
   '06705ec8a9335df76b9e68a23ee31bf5';
 export const SHOPIFY_STOREFRONT_ID =
-  (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SHOPIFY_STOREFRONT_ID) || '';
+  (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SHOPIFY_STOREFRONT_ID) || '44204366';
 export const SHOPIFY_CURRENCY = 'USD';
 export const SHOPIFY_COOKIE_DOMAIN =
   typeof window !== 'undefined' && window.location.hostname.includes('zvar-shop.com')
