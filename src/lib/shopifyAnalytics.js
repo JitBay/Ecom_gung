@@ -10,6 +10,11 @@ import {
 export const SHOPIFY_SHOP_ID = 'gid://shopify/Shop/109890175310';
 export const SHOPIFY_STORE_DOMAIN = 'msxkej-wu.myshopify.com';
 export const SHOPIFY_CHECKOUT_DOMAIN = 'checkout.zvar-shop.com';
+export const SHOPIFY_STOREFRONT_TOKEN =
+  (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SHOPIFY_STOREFRONT_TOKEN) ||
+  '06705ec8a9335df76b9e68a23ee31bf5';
+export const SHOPIFY_STOREFRONT_ID =
+  (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SHOPIFY_STOREFRONT_ID) || '';
 export const SHOPIFY_CURRENCY = 'USD';
 export const SHOPIFY_COOKIE_DOMAIN =
   typeof window !== 'undefined' && window.location.hostname.includes('zvar-shop.com')
@@ -24,56 +29,125 @@ export const SHOPIFY_PRODUCT_GIDS = {
 };
 
 /**
- * Ensures _shopify_y and _shopify_s cookies are created on the shared cookie domain
- * (.zvar-shop.com) so visitor sessions carry over seamlessly to checkout.zvar-shop.com.
+ * Loads and initializes the official Shopify Customer Privacy API.
+ * For US visitors (no banner required), tracking consent is granted by default.
  */
-export function ensureShopifyCookies() {
-  if (typeof document === 'undefined') return;
-  const domain = SHOPIFY_COOKIE_DOMAIN;
-  const domainAttr = domain ? `; domain=${domain}` : '';
-  const now = Date.now();
+export function useCustomerPrivacy({
+  checkoutDomain = SHOPIFY_CHECKOUT_DOMAIN,
+  storefrontAccessToken = SHOPIFY_STOREFRONT_TOKEN,
+  onVisitorConsentCollected,
+  onReady,
+} = {}) {
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
 
-  const generateToken = () => {
-    const hex = (now >>> 0).toString(16).padStart(8, '0');
-    const rand = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-      const r = (Math.random() * 16) | 0;
-      const v = c === 'x' ? r : (r & 0x3) | 0x8;
-      return v.toString(16);
-    });
-    return `${hex}-${rand}`;
-  };
+    const grantConsent = () => {
+      try {
+        const privacy = window.Shopify?.customerPrivacy;
+        if (privacy && typeof privacy.setTrackingConsent === 'function') {
+          privacy.setTrackingConsent(
+            {
+              analytics: true,
+              marketing: true,
+              preferences: true,
+              sale_of_data: true,
+              headlessStorefront: true,
+              rootDomain: SHOPIFY_COOKIE_DOMAIN || 'zvar-shop.com',
+            },
+            (err) => {
+              if (err) console.warn('[Shopify Customer Privacy] Consent error:', err);
+            }
+          );
+          if (onReady) onReady();
+        }
+      } catch (err) {
+        console.warn('[Shopify Customer Privacy] Init error:', err);
+      }
+    };
 
-  if (!/(^|;)\s*_shopify_y=/.test(document.cookie)) {
-    document.cookie = `_shopify_y=${generateToken()}; path=/; max-age=31536000; SameSite=Lax${domainAttr}`;
-  }
+    if (onVisitorConsentCollected && typeof document !== 'undefined') {
+      document.addEventListener('visitorConsentCollected', onVisitorConsentCollected);
+    }
 
-  if (!/(^|;)\s*_shopify_s=/.test(document.cookie)) {
-    document.cookie = `_shopify_s=${generateToken()}; path=/; max-age=1800; SameSite=Lax${domainAttr}`;
-  }
+    if (window.Shopify?.customerPrivacy?.setTrackingConsent) {
+      grantConsent();
+    } else {
+      let script = document.querySelector('script[src*="consent-tracking-api.js"]');
+      if (!script) {
+        script = document.createElement('script');
+        script.src = 'https://cdn.shopify.com/shopifycloud/consent-tracking-api/v0.1/consent-tracking-api.js';
+        script.async = true;
+        document.head.appendChild(script);
+      }
+      const handleLoad = () => grantConsent();
+      script.addEventListener('load', handleLoad);
+      return () => {
+        script.removeEventListener('load', handleLoad);
+        if (onVisitorConsentCollected && typeof document !== 'undefined') {
+          document.removeEventListener('visitorConsentCollected', onVisitorConsentCollected);
+        }
+      };
+    }
+
+    return () => {
+      if (onVisitorConsentCollected && typeof document !== 'undefined') {
+        document.removeEventListener('visitorConsentCollected', onVisitorConsentCollected);
+      }
+    };
+  }, [checkoutDomain, storefrontAccessToken]);
 }
 
 /**
- * Call ONCE at the root of the app (App.jsx) to set and sync the _shopify_y / _shopify_s cookies.
- * Setting domain to 'zvar-shop.com' ensures cookies are shared between www and checkout.
+ * Root cookies hook:
+ * 1. Loads Customer Privacy API and grants consent.
+ * 2. Uses official useShopifyCookies with fetchTrackingValues enabled to synchronize backend tokens.
  */
 export function useZvarShopifyCookies(hasUserConsent = true) {
-  useEffect(() => {
-    ensureShopifyCookies();
-  }, []);
+  useCustomerPrivacy({
+    checkoutDomain: SHOPIFY_CHECKOUT_DOMAIN,
+    storefrontAccessToken: SHOPIFY_STOREFRONT_TOKEN,
+  });
 
   useShopifyCookies({
+    hasUserConsent,
+    domain: SHOPIFY_COOKIE_DOMAIN,
     checkoutDomain: SHOPIFY_CHECKOUT_DOMAIN,
-    storefrontAccessToken: '06705ec8a9335df76b9e68a23ee31bf5',
-    fetchTrackingValues: false,
+    storefrontAccessToken: SHOPIFY_STOREFRONT_TOKEN,
+    fetchTrackingValues: true,
   });
 }
 
+function getConsentValues() {
+  const privacy = typeof window !== 'undefined' ? window.Shopify?.customerPrivacy : null;
+  const isAnalyticsAllowed = privacy?.analyticsProcessingAllowed
+    ? privacy.analyticsProcessingAllowed()
+    : true;
+  const isMarketingAllowed = privacy?.marketingAllowed
+    ? privacy.marketingAllowed()
+    : true;
+  const isSaleOfDataAllowed = privacy?.saleOfDataAllowed
+    ? privacy.saleOfDataAllowed()
+    : true;
+
+  return {
+    hasUserConsent: isAnalyticsAllowed,
+    analyticsAllowed: isAnalyticsAllowed,
+    marketingAllowed: isMarketingAllowed,
+    saleOfDataAllowed: isSaleOfDataAllowed,
+  };
+}
+
 function base(hasUserConsent = true) {
-  ensureShopifyCookies();
+  const consent = getConsentValues();
   return {
     shopId: SHOPIFY_SHOP_ID,
     currency: SHOPIFY_CURRENCY,
-    hasUserConsent,
+    hasUserConsent: consent.hasUserConsent && hasUserConsent,
+    analyticsAllowed: consent.analyticsAllowed && hasUserConsent,
+    marketingAllowed: consent.marketingAllowed && hasUserConsent,
+    saleOfDataAllowed: consent.saleOfDataAllowed && hasUserConsent,
+    storefrontId: SHOPIFY_STOREFRONT_ID || '0',
+    hydrogenSubchannelId: SHOPIFY_STOREFRONT_ID || '0',
     acceptedLanguage:
       typeof navigator !== 'undefined' && navigator.language?.startsWith('fr') ? 'FR' : 'EN',
     ...getClientBrowserParameters(),
