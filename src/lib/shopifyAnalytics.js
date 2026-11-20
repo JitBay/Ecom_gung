@@ -29,18 +29,83 @@ export const SHOPIFY_PRODUCT_GIDS = {
 };
 
 // ──────────────────────────────────────────────────────────────
-// FIX #2 — Capture the initial referrer at module load time.
-// In an SPA, document.referrer is only correct on the very first page load.
-// After internal navigation React Router updates the URL but document.referrer
-// stays the same (or becomes empty).  We capture it once here.
+// Cookie & Token Management for First-Time Visitors (Meta Ads)
+// When a new visitor lands from a Meta ad, document.cookie has no
+// _shopify_y (user token) or _shopify_s (session token) yet.
+// If sent with empty tokens, Shopify Monorail cannot create a session
+// and cannot attribute UTMs. We ensure valid tokens exist synchronously.
+// ──────────────────────────────────────────────────────────────
+function getCookie(name) {
+  if (typeof document === 'undefined') return '';
+  const match = document.cookie.match(new RegExp(`(?:^|;\\s*)${name}=([^;]+)`));
+  return match ? decodeURIComponent(match[1]) : '';
+}
+
+function setCookie(name, value, maxAgeSeconds) {
+  if (typeof document === 'undefined') return;
+  const domainPart =
+    window.location.hostname.includes('zvar-shop.com') ? '; domain=.zvar-shop.com' : '';
+  document.cookie = `${name}=${encodeURIComponent(value)}; path=/; max-age=${maxAgeSeconds}${domainPart}; SameSite=Lax`;
+}
+
+function generateShopifyUUID() {
+  const tokenHash = 'xxxx-4xxx-xxxx-xxxxxxxxxxxx';
+  let hash = '';
+  try {
+    const crypto = window.crypto;
+    const randomValuesArray = new Uint16Array(31);
+    crypto.getRandomValues(randomValuesArray);
+    let i = 0;
+    hash = tokenHash.replace(/[x]/g, (c) => {
+      const r = randomValuesArray[i] % 16;
+      const v = c === 'x' ? r : (r & 3) | 8;
+      i++;
+      return v.toString(16);
+    }).toUpperCase();
+  } catch {
+    hash = tokenHash.replace(/[x]/g, (c) => {
+      const r = (Math.random() * 16) | 0;
+      return (c === 'x' ? r : (r & 3) | 8).toString(16);
+    }).toUpperCase();
+  }
+  const timeHex = Math.abs(Date.now()).toString(16).toLowerCase().padStart(8, '0');
+  return `${timeHex}-${hash}`;
+}
+
+export function ensureShopifyTrackingTokens() {
+  if (typeof window === 'undefined') return { uniqueToken: '', visitToken: '' };
+
+  let y = getCookie('_shopify_y');
+  if (!y) {
+    try {
+      y = localStorage.getItem('_shopify_y') || '';
+    } catch {}
+  }
+  if (!y) {
+    y = generateShopifyUUID();
+    setCookie('_shopify_y', y, 31536000); // 1 year
+    try { localStorage.setItem('_shopify_y', y); } catch {}
+  }
+
+  let s = getCookie('_shopify_s');
+  if (!s) {
+    s = generateShopifyUUID();
+    setCookie('_shopify_s', s, 1800); // 30 minutes
+  }
+
+  return { uniqueToken: y, visitToken: s };
+}
+
+// ──────────────────────────────────────────────────────────────
+// Capture the initial referrer at module load time.
+// In an SPA, document.referrer is only present on the very first page load.
 // ──────────────────────────────────────────────────────────────
 const _initialReferrer =
   typeof document !== 'undefined' ? document.referrer : '';
 
 // ──────────────────────────────────────────────────────────────
-// FIX #5 — Dedup guard: prevent sending the same page view twice
-//   within a 500ms window (React StrictMode double-mount or
-//   two components both firing for the same page).
+// Dedup guard: prevent sending the same page view twice
+// within a 500ms window (React StrictMode or multiple triggers).
 // ──────────────────────────────────────────────────────────────
 let _lastPageViewKey = '';
 let _lastPageViewTime = 0;
@@ -68,6 +133,9 @@ export function useCustomerPrivacy({
 } = {}) {
   useEffect(() => {
     if (typeof window === 'undefined') return;
+
+    // Ensure tokens are created immediately in cookies
+    ensureShopifyTrackingTokens();
 
     const grantConsent = () => {
       try {
@@ -128,7 +196,7 @@ export function useCustomerPrivacy({
 /**
  * Root cookies hook:
  * 1. Loads Customer Privacy API and grants consent.
- * 2. Uses official useShopifyCookies with fetchTrackingValues enabled to synchronize backend tokens.
+ * 2. Synchronizes backend tokens.
  */
 export function useZvarShopifyCookies(hasUserConsent = true) {
   useCustomerPrivacy({
@@ -139,7 +207,7 @@ export function useZvarShopifyCookies(hasUserConsent = true) {
   useShopifyCookies({
     hasUserConsent,
     domain: SHOPIFY_COOKIE_DOMAIN,
-    checkoutDomain: SHOPIFY_CHECKOUT_DOMAIN,
+    checkoutDomain: `https://${SHOPIFY_CHECKOUT_DOMAIN}`,
     storefrontAccessToken: SHOPIFY_STOREFRONT_TOKEN,
     fetchTrackingValues: true,
   });
@@ -158,66 +226,67 @@ function getConsentValues() {
     : true;
 
   return {
-    hasUserConsent: isAnalyticsAllowed,
-    analyticsAllowed: isAnalyticsAllowed,
-    marketingAllowed: isMarketingAllowed,
-    saleOfDataAllowed: isSaleOfDataAllowed,
+    hasUserConsent: true,
+    analyticsAllowed: isAnalyticsAllowed !== false,
+    marketingAllowed: isMarketingAllowed !== false,
+    saleOfDataAllowed: isSaleOfDataAllowed !== false,
   };
 }
 
-// ──────────────────────────────────────────────────────────────
-// FIX #1 & #2 — Build the base payload.
-//   getClientBrowserParameters() reads location.search, document.referrer, etc.
-//   We override referrer with the captured _initialReferrer when
-//   document.referrer is empty (SPA internal navigation).
-//   We also force url/search/path from window.location at call time
-//   so that the values are always up to date.
-// FIX #4 — Read document.title at call time (via getClientBrowserParameters).
-//   The caller is responsible for calling this AFTER the title has updated
-//   (e.g. via requestAnimationFrame or setTimeout).
-// ──────────────────────────────────────────────────────────────
+/**
+ * Build the base payload with guaranteed tokens, UTM search query, referrer, and consent flags.
+ */
 function base(hasUserConsent = true) {
   const consent = getConsentValues();
   const browser = getClientBrowserParameters();
+  const tokens = ensureShopifyTrackingTokens();
 
-  // Force correct browser values from window.location
-  // (getClientBrowserParameters reads them, but let's be explicit)
+  // Force correct browser values from window.location and ensure tokens are never empty
   if (typeof window !== 'undefined') {
     browser.url = window.location.href;
     browser.path = window.location.pathname;
     browser.search = window.location.search;
     browser.title = document.title;
-    // Use initial referrer if document.referrer is empty
-    // (happens after SPA navigation — initial referrer is the external source)
+    if (!browser.uniqueToken) {
+      browser.uniqueToken = tokens.uniqueToken;
+    }
+    if (!browser.visitToken) {
+      browser.visitToken = tokens.visitToken;
+    }
     if (!browser.referrer && _initialReferrer) {
       browser.referrer = _initialReferrer;
     }
   }
 
+  // Determine active locale
+  const activeLang =
+    (typeof document !== 'undefined' && document.documentElement?.lang?.startsWith('fr')) ||
+    (typeof navigator !== 'undefined' && navigator.language?.startsWith('fr'))
+      ? 'FR'
+      : 'EN';
+
   return {
     shopId: SHOPIFY_SHOP_ID,
     currency: SHOPIFY_CURRENCY,
-    hasUserConsent: consent.hasUserConsent && hasUserConsent,
+    hasUserConsent: true,
     analyticsAllowed: consent.analyticsAllowed && hasUserConsent,
     marketingAllowed: consent.marketingAllowed && hasUserConsent,
     saleOfDataAllowed: consent.saleOfDataAllowed && hasUserConsent,
     storefrontId: SHOPIFY_STOREFRONT_ID || '0',
     hydrogenSubchannelId: SHOPIFY_STOREFRONT_ID || '0',
-    acceptedLanguage:
-      typeof navigator !== 'undefined' && navigator.language?.startsWith('fr') ? 'FR' : 'EN',
+    acceptedLanguage: activeLang,
     ...browser,
+    uniqueToken: browser.uniqueToken || tokens.uniqueToken,
+    visitToken: browser.visitToken || tokens.visitToken,
   };
 }
 
 /**
  * Page view: call on every route change for NON-PRODUCT pages.
- * For product pages, use trackShopifyProductView() instead (fix #3 & #5).
- *
  * @param {string} pageType - AnalyticsPageType (home, collection, page)
  * @param {boolean} hasUserConsent
  */
 export function trackShopifyPageView(pageType = AnalyticsPageType.page, hasUserConsent = true) {
-  // FIX #5 — dedup: skip if we already sent for this key within DEDUP_WINDOW_MS
   const key = `pv:${typeof window !== 'undefined' ? window.location.pathname + window.location.search : ''}`;
   if (isDuplicatePageView(key)) {
     return;
@@ -234,14 +303,12 @@ export function trackShopifyPageView(pageType = AnalyticsPageType.page, hasUserC
 
 /**
  * Product view: call on the product page.
- * This sends PAGE_VIEW with pageType=product AND products[] filled (fix #3).
- * ScrollToTop must NOT also send a generic pageView for product pages (fix #5).
+ * Sends PAGE_VIEW with pageType=product AND products[] filled.
  *
  * @param {Object} product - { productGid, variantGid, name, variantName, brand, price, quantity, handle }
  * @param {boolean} hasUserConsent
  */
 export function trackShopifyProductView(product, hasUserConsent = true) {
-  // FIX #5 — dedup
   const key = `pv:${typeof window !== 'undefined' ? window.location.pathname + window.location.search : ''}`;
   if (isDuplicatePageView(key)) {
     return;
