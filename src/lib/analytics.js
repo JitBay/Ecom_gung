@@ -11,7 +11,7 @@ const TIKTOK_PIXEL_ID =
 const GA4_ID =
   (typeof import.meta !== 'undefined' && import.meta.env?.VITE_GA4_ID) || '';
 const CLARITY_ID =
-  (typeof import.meta !== 'undefined' && import.meta.env?.VITE_CLARITY_ID) || '';
+  (typeof import.meta !== 'undefined' && import.meta.env?.VITE_CLARITY_ID) || 'zgp7k9bahj';
 
 let analyticsInitialized = false;
 
@@ -149,6 +149,26 @@ export function initAnalytics() {
   if (TIKTOK_PIXEL_ID) injectTikTokPixel(TIKTOK_PIXEL_ID);
   if (GA4_ID) injectGA4(GA4_ID);
   if (CLARITY_ID) injectClarity(CLARITY_ID);
+
+  const utmContent = new URLSearchParams(window.location.search).get('utm_content');
+  if (utmContent && typeof window.clarity === 'function') {
+    window.clarity('set', 'utm_content', utmContent);
+  }
+
+  document.addEventListener('visitorConsentCollected', () => {
+    const privacy = window.Shopify?.customerPrivacy;
+    const analyticsAllowed = privacy?.analyticsProcessingAllowed
+      ? privacy.analyticsProcessingAllowed()
+      : true;
+
+    if (typeof window.clarity === 'function') {
+      window.clarity('consentv2', {
+        ad_Storage: analyticsAllowed ? 'granted' : 'denied',
+        analytics_Storage: analyticsAllowed ? 'granted' : 'denied',
+      });
+    }
+  });
+
   checkPurchaseConfirmation();
 }
 
