@@ -560,7 +560,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
             <i className="live-dot" /> {lang === 'fr' ? 'Expédié avant le ' : 'Ships before '}<strong>{shipDate}</strong>
           </span>
           <span>
-            <i className="flag-fr" /> {lang === 'fr' ? 'Livraison gratuite 6-12 jours ouvrés · suivi complet' : 'Free shipping 6-12 working days · full tracking'}
+            {lang === 'fr' ? 'Livraison gratuite 6-12 jours ouvrés · suivi complet' : 'Free shipping 6-12 working days · full tracking'}
           </span>
         </div>
         <p className="product__trend">
