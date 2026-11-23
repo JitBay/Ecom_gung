@@ -180,11 +180,7 @@ export default function Hero({ initialHandle, onSelectModel, showModelSelector =
                 onPlay={() => setIsHeroPlaying(true)}
                 onPause={() => setIsHeroPlaying(false)}
                 aria-label={getLocalizedProduct(currentProduct, lang).title}
-              >
-                <source src="/videos/sleevless.mp4" type="video/mp4" />
-                <source src="/videos/product-sleeveless.mp4" type="video/mp4" />
-                <source src="/videos/video-2.mp4" type="video/mp4" />
-              </video>
+              />
               {!isHeroPlaying && (
                 <button
                   type="button"

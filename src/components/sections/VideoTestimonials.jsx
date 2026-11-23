@@ -126,6 +126,7 @@ export default function VideoTestimonials() {
                     if (el) videoRefs.current[v.id] = el;
                   }}
                   src={v.video}
+                  poster={v.poster}
                   loop
                   playsInline
                   preload="metadata"
@@ -248,6 +249,7 @@ export default function VideoTestimonials() {
                 if (el) el.muted = true;
               }}
               src={modalItem.video}
+              poster={modalItem.poster}
               muted
               loop
               controls
