@@ -26,6 +26,15 @@ export default function BlackFridayModal() {
     // Never show if cart is open or cart has items
     if (isCartOpen || lines.length > 0) return;
 
+    // Never show on product pages for visitors coming from Meta ads
+    const searchParams = new URLSearchParams(location.search);
+    if (
+      location.pathname.startsWith('/products') &&
+      (searchParams.get('utm_source') === 'meta' || searchParams.has('fbclid'))
+    ) {
+      return;
+    }
+
     // Skip auto-popup on support/legal/tracking routes so shoppers aren't interrupted
     if (
       location.pathname.startsWith('/policies') ||

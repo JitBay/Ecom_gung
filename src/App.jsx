@@ -94,6 +94,7 @@ function ScrollToTop() {
 // Product route handler with legacy redirect handling
 function ProductRoute() {
   const { handle } = useParams();
+  const location = useLocation();
   const legacyHandles = [
     '3d-sculpting-anti-cellulite-leggings-instant-lift-smooth',
     'sculpt-posture-bra',
@@ -106,7 +107,7 @@ function ProductRoute() {
   ];
 
   if (legacyHandles.includes(handle)) {
-    return <Navigate to={`/products/${HERO_PRODUCT}`} replace />;
+    return <Navigate to={`/products/${HERO_PRODUCT}${location.search || ''}`} replace />;
   }
 
   return <ProductPage />;

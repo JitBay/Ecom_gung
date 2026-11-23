@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import Accordion from '../components/ui/Accordion.jsx';
 import Icon from '../components/ui/Icon.jsx';
@@ -10,12 +10,6 @@ import BlackFridayStrip from '../components/sections/BlackFridayStrip.jsx';
 import Hero from '../components/sections/Hero.jsx';
 import CameraRolls from '../components/sections/CameraRolls.jsx';
 import ProductSection from '../components/product/ProductSection.jsx';
-import ProductVideoSection from '../components/product/ProductVideoSection.jsx';
-import RelatedProducts from '../components/sections/RelatedProducts.jsx';
-import VideoTestimonials from '../components/sections/VideoTestimonials.jsx';
-import QualitySection from '../components/sections/QualitySection.jsx';
-import Faq from '../components/sections/Faq.jsx';
-import CustomerReviews from '../components/sections/CustomerReviews.jsx';
 import NotFound from './NotFound.jsx';
 import PackDecouverteLanding from './PackDecouverteLanding.jsx';
 import { colorHex, collectionUrl, getProduct, getLocalizedProduct, getColorImages } from '../data/catalog.js';
@@ -27,6 +21,14 @@ import { price } from '../lib/format.js';
 import { SHOPIFY_PRODUCT_GIDS, trackShopifyProductView } from '../lib/shopifyAnalytics.js';
 import { resolveShopifyVariantId } from '../lib/shopify.js';
 import './ProductPage.css';
+
+// Lazy load below-the-fold heavy sections to optimize initial mobile LCP & INP
+const ProductVideoSection = lazy(() => import('../components/product/ProductVideoSection.jsx'));
+const RelatedProducts = lazy(() => import('../components/sections/RelatedProducts.jsx'));
+const VideoTestimonials = lazy(() => import('../components/sections/VideoTestimonials.jsx'));
+const QualitySection = lazy(() => import('../components/sections/QualitySection.jsx'));
+const Faq = lazy(() => import('../components/sections/Faq.jsx'));
+const CustomerReviews = lazy(() => import('../components/sections/CustomerReviews.jsx'));
 
 /**
  * Dedicated high-conversion sales landing for all cuts (Sans Manches, Demi-Manches, Manches Longues)
@@ -55,26 +57,28 @@ function DedicatedProductPage({ product }) {
       {/* 2. MAIN PRODUCT CONFIGURATOR & BUNDLE BUILDER (PACK 1, 2, 3 WITH MULTI-COLOR CHOICES) */}
       <ProductSection initialModelHandle={handle} showModelSelector={false} />
 
-      {/* 3. REAL-WORLD PRODUCT VIDEO DEMO: ONLY FOR SLEEVELESS (REMOVED FROM SHORT & LONG) */}
-      {isSleeveless && <ProductVideoSection modelHandle={handle} />}
+      <Suspense fallback={<div style={{ minHeight: '120px' }} />}>
+        {/* 3. REAL-WORLD PRODUCT VIDEO DEMO: ONLY FOR SLEEVELESS (REMOVED FROM SHORT & LONG) */}
+        {isSleeveless && <ProductVideoSection modelHandle={handle} />}
 
-      {/* DIAGONAL RUBAN / RIBBON OFFER */}
-      <BlackFridayStrip targetId="bm-deal" reversed={true} />
+        {/* DIAGONAL RUBAN / RIBBON OFFER */}
+        <BlackFridayStrip targetId="bm-deal" reversed={true} />
 
-      {/* 4. OTHER ERGONOMIC FITS */}
-      <RelatedProducts exclude={handle} />
+        {/* 4. OTHER ERGONOMIC FITS */}
+        <RelatedProducts exclude={handle} />
 
-      {/* 5. VIDEO TESTIMONIALS */}
-      <VideoTestimonials />
+        {/* 5. VIDEO TESTIMONIALS */}
+        <VideoTestimonials />
 
-      {/* 6. QUALITY & TECHNOLOGY BREAKDOWN (4 TEXTILE CARDS): ONLY FOR SLEEVELESS (REMOVED FROM SHORT & LONG) */}
-      {isSleeveless && <QualitySection />}
+        {/* 6. QUALITY & TECHNOLOGY BREAKDOWN (4 TEXTILE CARDS): ONLY FOR SLEEVELESS (REMOVED FROM SHORT & LONG) */}
+        {isSleeveless && <QualitySection />}
 
-      {/* 7. FAQ */}
-      <Faq />
+        {/* 7. FAQ */}
+        <Faq />
 
-      {/* 8. VERIFIED CUSTOMER REVIEWS */}
-      <CustomerReviews />
+        {/* 8. VERIFIED CUSTOMER REVIEWS */}
+        <CustomerReviews />
+      </Suspense>
 
       {/* 9. TRUST BADGES STRIP */}
       <section className="ionix-trust" aria-label={t('home.trust_title')}>

@@ -15,6 +15,11 @@ export default function BlackFridayDeal({ model, isDiscovery = false }) {
         <span className="ixbm-deal__sale">{saleBadge}</span>
         <span className="ixbm-deal__tag">{d.tag}</span>
       </div>
+      {lang === 'en' && (
+        <div className="ixbm-deal__urgency-banner">
+          🔥 <strong>Black Friday: Buy 2, Get 1 FREE — ends Nov 30</strong> · 🔒 Secure checkout · 🛡️ 30-day money-back guarantee
+        </div>
+      )}
       <div className="ixbm-deal__price-row">
         <p className="ixbm-deal__big">{d.big}</p>
         {d.compare && (

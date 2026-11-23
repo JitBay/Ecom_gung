@@ -115,7 +115,9 @@ export default function VideoTestimonials() {
                   loop
                   muted
                   playsInline
-                  preload="auto"
+                  preload="none"
+                  width="220"
+                  height="378"
                   className="ugc-card__video"
                   onTimeUpdate={(e) => handleTimeUpdate(v.id, e)}
                 />

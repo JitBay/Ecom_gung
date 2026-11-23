@@ -173,7 +173,10 @@ export default function Hero({ initialHandle, onSelectModel, showModelSelector =
                 loop
                 muted
                 playsInline
-                preload="auto"
+                preload="metadata"
+                poster="/images/image page produit/sans-manche/1.webp"
+                width="600"
+                height="450"
                 onPlay={() => setIsHeroPlaying(true)}
                 onPause={() => setIsHeroPlaying(false)}
                 aria-label={getLocalizedProduct(currentProduct, lang).title}

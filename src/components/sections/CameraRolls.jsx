@@ -74,6 +74,9 @@ export default function CameraRolls({ limit = 5 }) {
                         muted
                         loop
                         playsInline
+                        preload="none"
+                        width="300"
+                        height="330"
                         className="roll-card__img"
                       />
                     ) : (
@@ -82,6 +85,9 @@ export default function CameraRolls({ limit = 5 }) {
                         alt={r.name}
                         className="roll-card__img"
                         loading="lazy"
+                        decoding="async"
+                        width="300"
+                        height="330"
                       />
                     )
                   ) : (
