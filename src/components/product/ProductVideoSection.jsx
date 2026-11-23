@@ -10,19 +10,26 @@ export default function ProductVideoSection({ modelHandle = 'vela-sculpt-sans-ma
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const [isLoaded, setIsLoaded] = useState(false);
-
   const togglePlay = (e) => {
     if (e && e.stopPropagation) e.stopPropagation();
-    if (!videoRef.current) return;
-    if (isPlaying) {
-      videoRef.current.pause();
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (!video.paused && isPlaying) {
+      video.pause();
       setIsPlaying(false);
     } else {
-      if (!isLoaded) {
-        setIsLoaded(true);
+      if (!video.src || video.src === '') {
+        video.src = '/videos/sleevless.mp4';
       }
-      videoRef.current.play().then(() => setIsPlaying(true)).catch(() => { });
+      video.muted = true;
+      video
+        .play()
+        .then(() => setIsPlaying(true))
+        .catch(() => {
+          video.muted = true;
+          video.play().then(() => setIsPlaying(true)).catch(() => {});
+        });
     }
   };
 
@@ -140,8 +147,7 @@ export default function ProductVideoSection({ modelHandle = 'vela-sculpt-sans-ma
 
           <video
             ref={videoRef}
-            src={isLoaded ? "/videos/sleevless.mp4" : undefined}
-            data-src="/videos/sleevless.mp4"
+            src="/videos/sleevless.mp4"
             className="product-video-section__video"
             loop
             muted
@@ -151,6 +157,8 @@ export default function ProductVideoSection({ modelHandle = 'vela-sculpt-sans-ma
             poster="/images/image page produit/sans-manche/1.webp"
             width="400"
             height="533"
+            onPlay={() => setIsPlaying(true)}
+            onPause={() => setIsPlaying(false)}
           >
             Votre navigateur ne supporte pas la lecture vidéo.
           </video>
@@ -158,7 +166,13 @@ export default function ProductVideoSection({ modelHandle = 'vela-sculpt-sans-ma
           <div className="product-video-section__overlay" aria-hidden="true" />
 
           {!isPlaying && (
-            <div className="product-video-section__big-play" aria-hidden="true">
+            <div
+              className="product-video-section__big-play"
+              onClick={togglePlay}
+              role="button"
+              tabIndex={0}
+              aria-label={lang === 'fr' ? 'Lancer la vidéo' : 'Play video'}
+            >
               <div className="product-video-section__big-play-btn">
                 <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
                   <polygon points="5 3 19 12 5 21 5 3" />
