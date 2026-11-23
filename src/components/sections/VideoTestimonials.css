@@ -182,35 +182,7 @@
   transform: scale(1.08);
 }
 
-/* Center Play Indicator */
-.ugc-card__play {
-  position: absolute;
-  top: 44%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.65);
-  backdrop-filter: blur(8px);
-  border: 2px solid rgba(255, 255, 255, 0.4);
-  color: #fff;
-  display: grid;
-  place-items: center;
-  z-index: 2;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
-  opacity: 0;
-  pointer-events: none;
-}
 
-.ugc-card:hover .ugc-card__play {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1.1);
-  background: var(--gold, #c5a059);
-  border-color: var(--gold, #c5a059);
-  color: #000;
-}
 
 /* Bottom Caption Info */
 .ugc-card__caption {

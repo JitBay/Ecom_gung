@@ -175,13 +175,6 @@ export default function VideoTestimonials() {
                   </div>
                 </div>
 
-                {/* Center Play Indicator */}
-                <div className="ugc-card__play" aria-hidden="true">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <polygon points="5 3 19 12 5 21 5 3" />
-                  </svg>
-                </div>
-
                 {/* Bottom Caption & Review Info */}
                 <div className="ugc-card__caption">
                   <div className="ugc-card__stars-row">
