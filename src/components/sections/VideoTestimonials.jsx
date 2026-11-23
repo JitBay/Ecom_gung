@@ -13,39 +13,36 @@ function getVal(field, lang) {
 }
 
 export default function VideoTestimonials() {
+  const [playingId, setPlayingId] = useState(null);
   const [progressMap, setProgressMap] = useState({});
   const [modalItem, setModalItem] = useState(null);
   const videoRefs = useRef({});
   const ref = useReveal();
   const { lang } = useLanguage();
 
-  // Autoplay visible video with IntersectionObserver (muted, loop)
-  useEffect(() => {
-    const observer = typeof IntersectionObserver !== 'undefined'
-      ? new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              const video = entry.target;
-              if (entry.isIntersecting) {
-                video.muted = true;
-                video.play().catch(() => {});
-              } else {
-                video.pause();
-              }
-            });
-          },
-          { threshold: 0.3 }
-        )
-      : null;
+  const handlePlayToggle = (id, e) => {
+    if (e && e.stopPropagation) e.stopPropagation();
+    const vid = videoRefs.current[id];
+    if (!vid) return;
 
-    Object.values(videoRefs.current).forEach((vid) => {
-      if (vid && observer) observer.observe(vid);
-    });
-
-    return () => {
-      observer?.disconnect();
-    };
-  }, []);
+    if (playingId === id) {
+      vid.pause();
+      setPlayingId(null);
+    } else {
+      // Pause all other videos
+      Object.entries(videoRefs.current).forEach(([k, v]) => {
+        if (v && k !== id) {
+          v.pause();
+        }
+      });
+      vid.muted = false;
+      vid.play().then(() => setPlayingId(id)).catch(() => {
+        // Fallback with muted if browser audio policy blocks sound
+        vid.muted = true;
+        vid.play().then(() => setPlayingId(id)).catch(() => {});
+      });
+    }
+  };
 
   const handleTimeUpdate = (id, e) => {
     const el = e.currentTarget;
@@ -110,29 +107,26 @@ export default function VideoTestimonials() {
             return (
               <div
                 key={v.id}
-                className="ugc-card"
+                className={`ugc-card ${playingId === v.id ? 'is-playing' : ''}`}
                 style={{ '--a': v.tint[0], '--b': v.tint[1] }}
-                onClick={() => openModal(v)}
+                onClick={(e) => handlePlayToggle(v.id, e)}
                 role="button"
                 tabIndex={0}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
-                    openModal(v);
+                    handlePlayToggle(v.id, e);
                   }
                 }}
-                aria-label={`${lang === 'fr' ? 'Agrandir l’avis vidéo de' : 'Enlarge video review from'} ${v.name}`}
+                aria-label={`${lang === 'fr' ? 'Lancer la vidéo de' : 'Play video review from'} ${v.name}`}
               >
-                {/* HTML5 Vertical Video — continuously playing preview in loop */}
+                {/* Video — lecture déclenchée uniquement au clic */}
                 <video
                   ref={(el) => {
                     if (el) videoRefs.current[v.id] = el;
                   }}
                   src={v.video}
-                  autoPlay
                   loop
-                  muted
-                  defaultMuted
                   playsInline
                   preload="metadata"
                   width="220"
@@ -140,6 +134,20 @@ export default function VideoTestimonials() {
                   className="ugc-card__video"
                   onTimeUpdate={(e) => handleTimeUpdate(v.id, e)}
                 />
+
+                {/* Center play icon button (visible quand la vidéo est en pause) */}
+                {playingId !== v.id && (
+                  <button
+                    type="button"
+                    className="ugc-card__play-btn"
+                    onClick={(e) => handlePlayToggle(v.id, e)}
+                    aria-label={lang === 'fr' ? 'Lancer la vidéo' : 'Play video'}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                      <polygon points="5 3 19 12 5 21 5 3" />
+                    </svg>
+                  </button>
+                )}
 
                 {/* Subtle vignette/scrim overlay for caption legibility */}
                 <div className="ugc-card__overlay" aria-hidden="true" />
@@ -158,8 +166,8 @@ export default function VideoTestimonials() {
                         e.stopPropagation();
                         openModal(v);
                       }}
-                      title={lang === 'fr' ? 'Agrandir la vidéo' : 'Enlarge video'}
-                      aria-label={lang === 'fr' ? 'Agrandir la vidéo' : 'Enlarge video'}
+                      title={lang === 'fr' ? 'Agrandir en plein écran' : 'Enlarge video'}
+                      aria-label={lang === 'fr' ? 'Agrandir en plein écran' : 'Enlarge video'}
                     >
                       <Icon name="zoom" size={14} />
                     </button>
