@@ -15,27 +15,37 @@ function getVal(field, lang) {
 export default function VideoTestimonials() {
   const [progressMap, setProgressMap] = useState({});
   const [modalItem, setModalItem] = useState(null);
-  const [activeVideoId, setActiveVideoId] = useState(null);
   const videoRefs = useRef({});
   const ref = useReveal();
   const { lang } = useLanguage();
 
-  const toggleInlinePlay = (id, e) => {
-    if (e && e.stopPropagation) e.stopPropagation();
-    const vid = videoRefs.current[id];
-    if (!vid) return;
+  // Autoplay visible video with IntersectionObserver (muted, loop)
+  useEffect(() => {
+    const observer = typeof IntersectionObserver !== 'undefined'
+      ? new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              const video = entry.target;
+              if (entry.isIntersecting) {
+                video.muted = true;
+                video.play().catch(() => {});
+              } else {
+                video.pause();
+              }
+            });
+          },
+          { threshold: 0.3 }
+        )
+      : null;
 
-    if (activeVideoId === id) {
-      vid.pause();
-      setActiveVideoId(null);
-    } else {
-      // Pause any other playing video
-      Object.entries(videoRefs.current).forEach(([k, v]) => {
-        if (v && k !== id) v.pause();
-      });
-      vid.play().then(() => setActiveVideoId(id)).catch(() => {});
-    }
-  };
+    Object.values(videoRefs.current).forEach((vid) => {
+      if (vid && observer) observer.observe(vid);
+    });
+
+    return () => {
+      observer?.disconnect();
+    };
+  }, []);
 
   const handleTimeUpdate = (id, e) => {
     const el = e.currentTarget;
@@ -113,17 +123,18 @@ export default function VideoTestimonials() {
                 }}
                 aria-label={`${lang === 'fr' ? 'Agrandir l’avis vidéo de' : 'Enlarge video review from'} ${v.name}`}
               >
-                {/* HTML5 Vertical Video — user tap to play */}
+                {/* HTML5 Vertical Video — continuously playing preview in loop */}
                 <video
                   ref={(el) => {
                     if (el) videoRefs.current[v.id] = el;
                   }}
                   src={v.video}
+                  autoPlay
                   loop
                   muted
+                  defaultMuted
                   playsInline
-                  preload="none"
-                  poster={v.poster || '/images/image page produit/sans-manche/1.webp'}
+                  preload="metadata"
                   width="220"
                   height="378"
                   className="ugc-card__video"
@@ -132,20 +143,6 @@ export default function VideoTestimonials() {
 
                 {/* Subtle vignette/scrim overlay for caption legibility */}
                 <div className="ugc-card__overlay" aria-hidden="true" />
-
-                {/* Center play icon when paused */}
-                {activeVideoId !== v.id && (
-                  <button
-                    type="button"
-                    className="ugc-card__play-btn"
-                    onClick={(e) => toggleInlinePlay(v.id, e)}
-                    aria-label={lang === 'fr' ? 'Lire la vidéo' : 'Play video'}
-                  >
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                      <polygon points="5 3 19 12 5 21 5 3" />
-                    </svg>
-                  </button>
-                )}
 
                 {/* Top Badge & Enlarge Button */}
                 <div className="ugc-card__top">
