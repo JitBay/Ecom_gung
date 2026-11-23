@@ -16,7 +16,10 @@ export default function ProductThumb({ product, color, alt = false, className = 
         src={src}
         alt={`${product.title} - ${color || ''}`}
         className="thumb-photo"
+        width="400"
+        height="500"
         loading="lazy"
+        decoding="async"
         onError={(e) => {
           e.target.onerror = null;
           e.target.src = '/images/image page produit/demi-manche/1.webp';

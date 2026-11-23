@@ -14,7 +14,10 @@ export default function ProductArt({
         src={image}
         alt={alt}
         className="art-img"
+        width="600"
+        height="750"
         loading="lazy"
+        decoding="async"
         onError={(e) => {
           e.target.onerror = null;
           e.target.src = '/images/image page produit/demi-manche/1.webp';

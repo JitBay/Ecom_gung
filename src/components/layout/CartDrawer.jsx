@@ -62,6 +62,10 @@ export default function CartDrawer() {
                   <img
                     src={l.image || '/images/image page produit/demi-manche/1.webp'}
                     alt={l.title}
+                    width="68"
+                    height="68"
+                    loading="lazy"
+                    decoding="async"
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />
                 </div>
@@ -101,7 +105,11 @@ export default function CartDrawer() {
             </p>
             <button
               className="btn btn--dark btn--block"
-              onClick={() => checkout()}
+              onClick={(e) => {
+                e.preventDefault();
+                if (isCheckingOut) return;
+                checkout();
+              }}
               disabled={isCheckingOut}
             >
               <Icon name="lock" size={16} />{' '}

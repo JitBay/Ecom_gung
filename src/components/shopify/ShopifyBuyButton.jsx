@@ -20,15 +20,15 @@ export default function ShopifyBuyButton({
   const { lang } = useLanguage();
   const [loading, setLoading] = useState(false);
 
-  const handleClick = async (e) => {
+  const handleClick = (e) => {
     e.preventDefault();
-    if (loading) return;
+    if (loading || !lineItem) return;
+    setLoading(true);
 
     if (onBeforeRedirect) {
       onBeforeRedirect();
     }
 
-    setLoading(true);
     try {
       const items = Array.isArray(lineItem) ? lineItem : [lineItem];
       items.forEach((item) => {

@@ -11,6 +11,10 @@ export default function StickyCart({ visible, bundle, onAdd, productImage, title
         <img
           src={productImage || '/images/image page produit/demi-manche/1.webp'}
           alt="Miniature"
+          width="48"
+          height="48"
+          loading="lazy"
+          decoding="async"
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
         />
       </div>

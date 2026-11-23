@@ -29,7 +29,7 @@ function detectInitialLanguage() {
     const saved = localStorage.getItem('zvar_lang') || localStorage.getItem('velalabs_lang');
     if (saved === 'fr' || saved === 'en') return saved;
 
-    // TimeZone instant detection (US timezones -> English)
+    // TimeZone instant detection (US/Americas timezones -> English)
     if (typeof Intl !== 'undefined' && Intl.DateTimeFormat) {
       const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
       if (
@@ -60,7 +60,7 @@ function detectInitialLanguage() {
   } catch {
     // fallback
   }
-  return 'fr';
+  return 'en';
 }
 
 export function LanguageProvider({ children }) {

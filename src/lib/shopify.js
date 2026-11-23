@@ -676,9 +676,12 @@ export function getInstantCheckoutUrl(lines, options = {}) {
   return buildShopifyCartPermalink(lines, { ...options, locale });
 }
 
+let isRedirecting = false;
+
 /**
  * Redirects the user directly to Shopify's secure checkout page.
  * Synchronous and in-app browser safe (WebKit/Instagram/Facebook).
+ * Prevents multiple clicks immediately with a synchronous guard.
  *
  * @param {Array} lines - Array of cart lines
  * @param {Object} options - Additional checkout options
@@ -688,6 +691,14 @@ export function redirectToShopifyCheckout(lines, options = {}) {
     console.warn('[Shopify] Cart is empty, cannot proceed to checkout.');
     return false;
   }
+  if (isRedirecting) {
+    console.warn('[Shopify Checkout] Redirection already in progress, ignoring extra click.');
+    return false;
+  }
+  isRedirecting = true;
+  setTimeout(() => {
+    isRedirecting = false;
+  }, 4000);
 
   const total = lines.reduce((sum, l) => sum + (Number(l.price) || 0) * (Number(l.qty) || 1), 0);
   try {

@@ -52,6 +52,10 @@ function VariantRows({
                   <img
                     src={colorImg}
                     alt={catTitle}
+                    width="60"
+                    height="60"
+                    loading="lazy"
+                    decoding="async"
                     style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}
                   />
                 </div>
@@ -111,6 +115,10 @@ function VariantRows({
               <img
                 src={colorImg}
                 alt={currentColor?.label || 'Miniature'}
+                width="60"
+                height="60"
+                loading="lazy"
+                decoding="async"
                 style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}
               />
             </div>
