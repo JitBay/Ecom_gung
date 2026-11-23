@@ -10,32 +10,7 @@ export default function ProductVideoSection({ modelHandle = 'vela-sculpt-sans-ma
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return undefined;
-
-    video.muted = true;
-    video.volume = 0;
-
-    const observer = typeof IntersectionObserver !== 'undefined'
-      ? new IntersectionObserver(([entry]) => {
-          if (entry.isIntersecting) {
-            video.load();
-            video.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
-          } else {
-            video.pause();
-            setIsPlaying(false);
-          }
-        }, { rootMargin: '200px 0px', threshold: 0.25 })
-      : null;
-
-    if (observer) observer.observe(video);
-
-    return () => {
-      observer?.disconnect();
-      video.pause();
-    };
-  }, []);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const togglePlay = (e) => {
     if (e && e.stopPropagation) e.stopPropagation();
@@ -44,8 +19,10 @@ export default function ProductVideoSection({ modelHandle = 'vela-sculpt-sans-ma
       videoRef.current.pause();
       setIsPlaying(false);
     } else {
-      videoRef.current.play().catch(() => { });
-      setIsPlaying(true);
+      if (!isLoaded) {
+        setIsLoaded(true);
+      }
+      videoRef.current.play().then(() => setIsPlaying(true)).catch(() => { });
     }
   };
 
@@ -163,7 +140,8 @@ export default function ProductVideoSection({ modelHandle = 'vela-sculpt-sans-ma
 
           <video
             ref={videoRef}
-            src="/videos/sleevless.mp4"
+            src={isLoaded ? "/videos/sleevless.mp4" : undefined}
+            data-src="/videos/sleevless.mp4"
             className="product-video-section__video"
             loop
             muted

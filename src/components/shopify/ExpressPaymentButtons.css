@@ -1,0 +1,94 @@
+.express-checkout {
+  width: 100%;
+  margin: 12px 0 6px;
+}
+
+.express-checkout__divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 10px 0 12px;
+  color: rgba(26, 26, 26, 0.5);
+  font-size: 11.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.express-checkout__divider::before,
+.express-checkout__divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.express-checkout__divider span {
+  padding: 0 12px;
+}
+
+.express-checkout__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.express-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+  user-select: none;
+  padding: 0;
+}
+
+.express-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.express-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.express-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.express-btn--shoppay {
+  background: #5a31f4;
+}
+
+.express-btn--applepay {
+  background: #000000;
+}
+
+.express-btn--googlepay {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+}
+
+.express-btn__spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: express-spin 0.6s linear infinite;
+}
+
+.express-btn__spinner--dark {
+  border-color: rgba(0, 0, 0, 0.2);
+  border-top-color: #1a1a1a;
+}
+
+@keyframes express-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

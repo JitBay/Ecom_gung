@@ -38,6 +38,32 @@ export default function ShopifyPaymentBadges({ className = '', showSecurityNote 
           </svg>
         </span>
 
+        {/* Google Pay */}
+        <span className="shopify-badge" title="Google Pay">
+          <svg viewBox="0 0 38 24" width="38" height="24" fill="none">
+            <rect width="38" height="24" rx="4" fill="#FFFFFF" stroke="#E5E7EB" strokeWidth="1" />
+            <path
+              d="M14.5 12.1c0-.3 0-.6-.1-.8H10v1.6h2.5c-.1.5-.4 1-.9 1.3v1.1h1.4c.8-.8 1.5-2 1.5-3.2z"
+              fill="#4285F4"
+            />
+            <path
+              d="M10 16.7c1.3 0 2.4-.4 3.2-1.2l-1.4-1.1c-.4.3-1 .5-1.8.5-1.4 0-2.5-1-2.9-2.2H5.6v1.1c.8 1.7 2.6 2.9 4.4 2.9z"
+              fill="#34A853"
+            />
+            <path
+              d="M7.1 12.7c-.1-.3-.2-.7-.2-1s.1-.7.2-1V9.6H5.6c-.4.8-.6 1.7-.6 2.1s.2 1.3.6 2.1l1.5-1.1z"
+              fill="#FBBC05"
+            />
+            <path
+              d="M10 8.7c.7 0 1.4.3 1.9.7l1.4-1.4C12.4 7.2 11.3 6.7 10 6.7 8.2 6.7 6.4 7.9 5.6 9.6l1.5 1.1c.4-1.2 1.5-2 2.9-2z"
+              fill="#EA4335"
+            />
+            <text x="17" y="15" fill="#3C4043" fontSize="8.5" fontWeight="600" fontFamily="sans-serif">
+              Pay
+            </text>
+          </svg>
+        </span>
+
         {/* Visa */}
         <span className="shopify-badge" title="Visa">
           <svg viewBox="0 0 38 24" width="38" height="24" fill="none">

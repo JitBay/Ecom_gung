@@ -1,9 +1,11 @@
 import { useLanguage } from '../../context/LanguageContext.jsx';
+import { useCart } from '../../context/CartContext.jsx';
 import { price } from '../../lib/format.js';
 import './StickyCart.css';
 
 export default function StickyCart({ visible, bundle, onAdd, productImage, title }) {
   const { lang } = useLanguage();
+  const { isCheckingOut } = useCart();
 
   return (
     <div className={`sticky-cart ${visible ? 'is-visible' : ''}`} aria-hidden={!visible}>
@@ -24,8 +26,19 @@ export default function StickyCart({ visible, bundle, onAdd, productImage, title
           {price(bundle.price)} <s>{price(bundle.compareAt)}</s>
         </span>
       </div>
-      <button className="btn btn--dark" onClick={onAdd} tabIndex={visible ? 0 : -1}>
-        {lang === 'fr' ? 'Ajouter au panier' : 'Add to cart'}
+      <button
+        className="btn btn--dark"
+        onClick={onAdd}
+        disabled={isCheckingOut}
+        tabIndex={visible ? 0 : -1}
+      >
+        {isCheckingOut
+          ? lang === 'fr'
+            ? 'Chargement...'
+            : 'Loading...'
+          : lang === 'fr'
+          ? 'Ajouter au panier'
+          : 'Add to cart'}
       </button>
     </div>
   );

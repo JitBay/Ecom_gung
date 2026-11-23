@@ -6,6 +6,7 @@ import { useLanguage } from './LanguageContext.jsx';
 
 const CartContext = createContext(null);
 const CART_STORAGE_KEY = 'vela_labs_cart_v1';
+const CART_SESSION_KEY = 'vela_cart_session_v1';
 
 // Cart lines: { id, variantId, title, detail, price, compareAt, qty, image, freeShipping }
 export function CartProvider({ children }) {
@@ -14,6 +15,14 @@ export function CartProvider({ children }) {
   const [lines, setLines] = useState(() => {
     if (typeof window === 'undefined') return [];
     try {
+      // Vérifier si la session courante est active dans sessionStorage
+      const isSessionActive = sessionStorage.getItem(CART_SESSION_KEY);
+      if (!isSessionActive) {
+        // Nouvelle visite / nouvel onglet : on repart d'un panier propre
+        localStorage.removeItem(CART_STORAGE_KEY);
+        sessionStorage.setItem(CART_SESSION_KEY, '1');
+        return [];
+      }
       const stored = localStorage.getItem(CART_STORAGE_KEY);
       return stored ? JSON.parse(stored) : [];
     } catch {
@@ -65,9 +74,16 @@ export function CartProvider({ children }) {
   }, [lines, activeLang]);
 
   const value = useMemo(() => {
-    const add = (line) => {
+    const add = (line, options = {}) => {
       const lineQty = line.qty || 1;
+      const shouldReplace = options.replace ?? true;
+
       setLines((prev) => {
+        // Remplacer la configuration existante du même produit (évite d'accumuler 3 + 3 + 3 = 12 articles)
+        if (shouldReplace && line.handle) {
+          const others = prev.filter((l) => l.handle !== line.handle);
+          return [...others, { ...line, qty: lineQty }];
+        }
         const found = prev.find((l) => l.id === line.id);
         if (found) return prev.map((l) => (l.id === line.id ? { ...l, qty: l.qty + lineQty } : l));
         return [...prev, { ...line, qty: lineQty }];

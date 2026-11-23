@@ -1,5 +1,6 @@
 import Icon from '../ui/Icon.jsx';
 import ShopifyPaymentBadges from '../shopify/ShopifyPaymentBadges.jsx';
+import ExpressPaymentButtons from '../shopify/ExpressPaymentButtons.jsx';
 import { useCart } from '../../context/CartContext.jsx';
 import { useLanguage } from '../../context/LanguageContext.jsx';
 import { useLockScroll } from '../../lib/hooks.js';
@@ -104,7 +105,7 @@ export default function CartDrawer() {
               <strong>{price(displayTotal ?? total)}</strong>
             </p>
             <button
-              className="btn btn--dark btn--block"
+              className={`btn btn--dark btn--block ${isCheckingOut ? 'is-loading' : ''}`}
               onClick={(e) => {
                 e.preventDefault();
                 if (isCheckingOut) return;
@@ -119,6 +120,7 @@ export default function CartDrawer() {
                   : 'Redirecting to Shopify...'
                 : t('cart.checkout')}
             </button>
+            <ExpressPaymentButtons />
             {(isInApp || isCheckingOut) && instantCheckoutUrl && (
               <a
                 href={instantCheckoutUrl}

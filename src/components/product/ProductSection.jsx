@@ -8,6 +8,9 @@ import SizeFinder from './SizeFinder.jsx';
 import StickyCart from './StickyCart.jsx';
 import ShopifyBuyButton from '../shopify/ShopifyBuyButton.jsx';
 import ShopifyPaymentBadges from '../shopify/ShopifyPaymentBadges.jsx';
+import ExpressPaymentButtons from '../shopify/ExpressPaymentButtons.jsx';
+import ProductTrustBlock from './ProductTrustBlock.jsx';
+import InlineSizeGuide from './InlineSizeGuide.jsx';
 import Icon from '../ui/Icon.jsx';
 import Stars from '../ui/Stars.jsx';
 import { badges, badgesEn, benefits, benefitsEn, colors, discoveryCategories, stats, statsEn } from '../../data/product.js';
@@ -161,7 +164,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
 
   const [sizeOpen, setSizeOpen] = useState(false);
   const [atcRef, pastAtc] = useScrolledPast();
-  const { add } = useCart();
+  const { add, isCheckingOut } = useCart();
 
   const [searchParams] = useSearchParams();
   const queryColor = searchParams.get('color');
@@ -328,7 +331,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
         color: v.color,
         size: v.size,
       })),
-    });
+    }, { replace: true });
   };
 
   const currentLineItem = useMemo(() => {
@@ -532,36 +535,29 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
           items={modelBundles}
         />
 
-        <button className="size-btn" onClick={() => setSizeOpen(true)}>
-          <Icon name="ruler" size={18} /> {lang === 'fr' ? 'Guide interactif : Trouver ma taille' : 'Interactive Size Guide: Find my size'}
-        </button>
+        <InlineSizeGuide onOpenCalculator={() => setSizeOpen(true)} />
 
         <div className="product__actions">
-          <button ref={atcRef} className="btn btn--dark btn--block atc" onClick={addToCart}>
-            {lang === 'fr'
-              ? `Ajouter au panier — ${bundle.title}`
-              : `Add to Cart — ${bundle.title}`}
+          <button
+            ref={atcRef}
+            className={`btn btn--dark btn--block atc ${isCheckingOut ? 'is-loading' : ''}`}
+            onClick={addToCart}
+            disabled={isCheckingOut}
+          >
+            {isCheckingOut ? (
+              lang === 'fr' ? 'Chargement en cours...' : 'Processing...'
+            ) : lang === 'fr' ? (
+              `Ajouter au panier — ${bundle.title}`
+            ) : (
+              `Add to Cart — ${bundle.title}`
+            )}
           </button>
 
-          <ShopifyBuyButton
-            lineItem={currentLineItem}
-            label={
-              lang === 'fr'
-                ? `⚡ Acheter maintenant — Paiement Express`
-                : `⚡ Buy Now — Express Checkout`
-            }
-          />
+          <ExpressPaymentButtons lineItem={currentLineItem} />
 
-          <ShopifyPaymentBadges />
-        </div>
+          <ProductTrustBlock />
 
-        <div className="product__ship">
-          <span>
-            <i className="live-dot" /> {lang === 'fr' ? 'Expédié avant le ' : 'Ships before '}<strong>{shipDate}</strong>
-          </span>
-          <span>
-            {lang === 'fr' ? 'Livraison gratuite 6-12 jours ouvrés · suivi complet' : 'Free shipping 6-12 working days · full tracking'}
-          </span>
+          <ShopifyPaymentBadges showSecurityNote={false} />
         </div>
 
         <ul className="product__badges">
