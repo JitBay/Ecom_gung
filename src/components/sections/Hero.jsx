@@ -174,7 +174,7 @@ export default function Hero({ initialHandle, onSelectModel, showModelSelector =
                 muted
                 playsInline
                 preload="metadata"
-                poster="/images/image page produit/sans-manche/1.webp"
+                poster="/videos/sleevless-poster.jpg"
                 width="600"
                 height="450"
                 onPlay={() => setIsHeroPlaying(true)}

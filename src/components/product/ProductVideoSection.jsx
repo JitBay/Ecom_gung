@@ -154,7 +154,7 @@ export default function ProductVideoSection({ modelHandle = 'vela-sculpt-sans-ma
             defaultMuted
             playsInline
             preload="none"
-            poster="/images/image page produit/sans-manche/1.webp"
+            poster="/videos/sleevless-poster.jpg"
             width="400"
             height="533"
             onPlay={() => setIsPlaying(true)}
