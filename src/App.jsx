@@ -37,6 +37,17 @@ function ScrollToTop() {
   const { pathname, hash, search } = useLocation();
 
   useEffect(() => {
+    // Dynamic canonical link per route
+    if (typeof document !== 'undefined') {
+      let canonical = document.querySelector('link[rel="canonical"]');
+      if (!canonical) {
+        canonical = document.createElement('link');
+        canonical.setAttribute('rel', 'canonical');
+        document.head.appendChild(canonical);
+      }
+      canonical.setAttribute('href', `https://www.zvar-shop.com${pathname}`);
+    }
+
     trackPageView(`${pathname}${hash}`);
 
     // FIX #3 & #5 — Do NOT send a generic Shopify page view for product pages.

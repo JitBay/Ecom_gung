@@ -140,36 +140,45 @@ function injectClarity(id) {
 
 /**
  * Injects configured third-party tracking scripts once on startup.
+ * Deferred via requestIdleCallback / setTimeout to avoid blocking initial LCP and TBT.
  */
 export function initAnalytics() {
   if (typeof window === 'undefined' || analyticsInitialized) return;
   analyticsInitialized = true;
 
-  if (META_PIXEL_ID) injectMetaPixel(META_PIXEL_ID);
-  if (TIKTOK_PIXEL_ID) injectTikTokPixel(TIKTOK_PIXEL_ID);
-  if (GA4_ID) injectGA4(GA4_ID);
-  if (CLARITY_ID) injectClarity(CLARITY_ID);
+  const runInit = () => {
+    if (META_PIXEL_ID) injectMetaPixel(META_PIXEL_ID);
+    if (TIKTOK_PIXEL_ID) injectTikTokPixel(TIKTOK_PIXEL_ID);
+    if (GA4_ID) injectGA4(GA4_ID);
+    if (CLARITY_ID) injectClarity(CLARITY_ID);
 
-  const utmContent = new URLSearchParams(window.location.search).get('utm_content');
-  if (utmContent && typeof window.clarity === 'function') {
-    window.clarity('set', 'utm_content', utmContent);
-  }
-
-  document.addEventListener('visitorConsentCollected', () => {
-    const privacy = window.Shopify?.customerPrivacy;
-    const analyticsAllowed = privacy?.analyticsProcessingAllowed
-      ? privacy.analyticsProcessingAllowed()
-      : true;
-
-    if (typeof window.clarity === 'function') {
-      window.clarity('consentv2', {
-        ad_Storage: analyticsAllowed ? 'granted' : 'denied',
-        analytics_Storage: analyticsAllowed ? 'granted' : 'denied',
-      });
+    const utmContent = new URLSearchParams(window.location.search).get('utm_content');
+    if (utmContent && typeof window.clarity === 'function') {
+      window.clarity('set', 'utm_content', utmContent);
     }
-  });
 
-  checkPurchaseConfirmation();
+    document.addEventListener('visitorConsentCollected', () => {
+      const privacy = window.Shopify?.customerPrivacy;
+      const analyticsAllowed = privacy?.analyticsProcessingAllowed
+        ? privacy.analyticsProcessingAllowed()
+        : true;
+
+      if (typeof window.clarity === 'function') {
+        window.clarity('consentv2', {
+          ad_Storage: analyticsAllowed ? 'granted' : 'denied',
+          analytics_Storage: analyticsAllowed ? 'granted' : 'denied',
+        });
+      }
+    });
+
+    checkPurchaseConfirmation();
+  };
+
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(runInit, { timeout: 2000 });
+  } else {
+    setTimeout(runInit, 1200);
+  }
 }
 
 let isInitialPageView = true;

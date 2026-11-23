@@ -12,9 +12,8 @@ export default function BlackFridayStrip({
 
   const items = dict.black_friday?.strip_items || [
     lang === 'fr' ? "Plus grande offre de l'année" : "Biggest offer of the year",
-    lang === 'fr' ? "+3 100 T-shirts vendus" : "+3,100 T-shirts sold",
+    lang === 'fr' ? "Garantie satisfait ou remboursé 30j" : "30-Day Money-Back Guarantee",
     lang === 'fr' ? "Jusqu'à -50% de réduction" : "Up to 50% off",
-    lang === 'fr' ? "1 200+ clients satisfaits" : "1,200+ happy customers",
     lang === 'fr' ? "2 T-shirts achetés = 1 offert" : "Buy 2 get 1 free",
     lang === 'fr' ? "pack découverte à 44,99 $" : "discovery pack at $44.99",
     lang === 'fr' ? "Livraison 100% gratuite & suivie" : "Free tracked shipping",

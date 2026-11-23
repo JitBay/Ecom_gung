@@ -39,7 +39,7 @@ export const nav = [
 export const announcements = [
   'Garantie satisfait ou remboursé de 30 jours',
   'Livraison suivie 100% offerte en 6 à 12 jours ouvrés · Suivi complet en direct · club zvar',
-  'Plus de 1 200 clients satisfaits portent Vela Sculpt™ au quotidien',
+  'Garantie satisfait ou remboursé de 30 jours sans risque',
 ];
 
 export const footerColumns = [

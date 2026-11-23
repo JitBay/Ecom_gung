@@ -40,6 +40,58 @@ function DedicatedProductPage({ product }) {
   const localized = getLocalizedProduct(product, lang);
   const isSleeveless = handle === 'vela-sculpt-sans-manches';
 
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+    const title = lang === 'en'
+      ? `${localized.title} | Men's Compression & Posture Shirt — ZVAR`
+      : `${localized.title} | T-Shirt Gainant & Posture Homme — ZVAR`;
+    const desc = lang === 'en'
+      ? `Men's ergonomic slimming compression top by ZVAR. Visually streamline your silhouette under clothes with comfortable all-day posture support. 30-Day Guarantee.`
+      : `Le T-shirt de compression gainant ergonomique pour homme par ZVAR. Lissez visuellement votre silhouette sous les vêtements avec un maintien postural confortable au quotidien. Garantie 30 jours.`;
+
+    document.title = title;
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', desc);
+
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute('content', title);
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc) ogDesc.setAttribute('content', desc);
+
+    // JSON-LD Structured Data
+    const scriptId = 'product-jsonld';
+    let script = document.getElementById(scriptId);
+    if (!script) {
+      script = document.createElement('script');
+      script.id = scriptId;
+      script.type = 'application/ld+json';
+      document.head.appendChild(script);
+    }
+    script.textContent = JSON.stringify({
+      '@context': 'https://schema.org/',
+      '@type': 'Product',
+      name: localized.title,
+      image: ['https://www.zvar-shop.com/images/image page produit/sans-manche/1.webp'],
+      description: desc,
+      brand: {
+        '@type': 'Brand',
+        name: 'ZVAR',
+      },
+      offers: {
+        '@type': 'Offer',
+        url: `https://www.zvar-shop.com/products/${handle}`,
+        priceCurrency: 'USD',
+        price: String(product?.price || '19.99'),
+        priceValidUntil: '2026-12-31',
+        availability: 'https://schema.org/InStock',
+        seller: {
+          '@type': 'Organization',
+          name: 'ZVAR',
+        },
+      },
+    });
+  }, [lang, localized.title, handle, product?.price]);
+
   return (
     <div className={`product-page-wrap ${handle}-product ${isSleeveless ? 'sleeveless-product' : ''}`}>
       {/* 0. BLACK FRIDAY ANNOUNCEMENT BANNER */}

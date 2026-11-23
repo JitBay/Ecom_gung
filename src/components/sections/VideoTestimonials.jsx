@@ -15,19 +15,27 @@ function getVal(field, lang) {
 export default function VideoTestimonials() {
   const [progressMap, setProgressMap] = useState({});
   const [modalItem, setModalItem] = useState(null);
+  const [activeVideoId, setActiveVideoId] = useState(null);
   const videoRefs = useRef({});
   const ref = useReveal();
   const { lang } = useLanguage();
 
-  // Autoplay all preview videos in muted loop mode immediately on mount
-  useEffect(() => {
-    Object.values(videoRefs.current).forEach((vid) => {
-      if (vid) {
-        vid.muted = true;
-        vid.play().catch(() => {});
-      }
-    });
-  }, []);
+  const toggleInlinePlay = (id, e) => {
+    if (e && e.stopPropagation) e.stopPropagation();
+    const vid = videoRefs.current[id];
+    if (!vid) return;
+
+    if (activeVideoId === id) {
+      vid.pause();
+      setActiveVideoId(null);
+    } else {
+      // Pause any other playing video
+      Object.entries(videoRefs.current).forEach(([k, v]) => {
+        if (v && k !== id) v.pause();
+      });
+      vid.play().then(() => setActiveVideoId(id)).catch(() => {});
+    }
+  };
 
   const handleTimeUpdate = (id, e) => {
     const el = e.currentTarget;
@@ -105,17 +113,17 @@ export default function VideoTestimonials() {
                 }}
                 aria-label={`${lang === 'fr' ? 'Agrandir l’avis vidéo de' : 'Enlarge video review from'} ${v.name}`}
               >
-                {/* HTML5 Vertical Video — continuously playing preview in loop */}
+                {/* HTML5 Vertical Video — user tap to play */}
                 <video
                   ref={(el) => {
                     if (el) videoRefs.current[v.id] = el;
                   }}
                   src={v.video}
-                  autoPlay
                   loop
                   muted
                   playsInline
                   preload="none"
+                  poster={v.poster || '/images/image page produit/sans-manche/1.webp'}
                   width="220"
                   height="378"
                   className="ugc-card__video"
@@ -124,6 +132,20 @@ export default function VideoTestimonials() {
 
                 {/* Subtle vignette/scrim overlay for caption legibility */}
                 <div className="ugc-card__overlay" aria-hidden="true" />
+
+                {/* Center play icon when paused */}
+                {activeVideoId !== v.id && (
+                  <button
+                    type="button"
+                    className="ugc-card__play-btn"
+                    onClick={(e) => toggleInlinePlay(v.id, e)}
+                    aria-label={lang === 'fr' ? 'Lire la vidéo' : 'Play video'}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                      <polygon points="5 3 19 12 5 21 5 3" />
+                    </svg>
+                  </button>
+                )}
 
                 {/* Top Badge & Enlarge Button */}
                 <div className="ugc-card__top">

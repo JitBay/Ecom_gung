@@ -24,8 +24,7 @@ export default function BlackFridayHero({
     chips: [
       "2 achetés = 1 offert sur tout",
       "pack découverte à 44,99 $",
-      "1 200+ clients satisfaits",
-      "+3 100 T-shirts vendus",
+      "Garantie 30 jours satisfait ou remboursé",
       "Livraison 100% gratuite & suivie",
     ],
     cta: "Découvrir les offres Black Friday",

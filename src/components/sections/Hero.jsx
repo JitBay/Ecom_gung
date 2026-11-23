@@ -85,7 +85,7 @@ export default function Hero({ initialHandle, onSelectModel, showModelSelector =
         <div className="hero__rating">
           <Stars value={5} size={17} />
           <span>
-            <strong>4.9</strong>/5 <i>|</i> <strong>1 200+</strong> {lang === 'fr' ? 'clients satisfaits' : 'happy customers'}
+            <strong>4.9</strong>/5 <i>|</i> {lang === 'fr' ? 'Garantie 30 jours' : '30-Day Guarantee'}
           </span>
         </div>
 
@@ -221,7 +221,7 @@ export default function Hero({ initialHandle, onSelectModel, showModelSelector =
             <span className="tick">
               <Icon name="check" size={12} strokeWidth={2.6} />
             </span>
-            {lang === 'fr' ? 'Adopté par plus de 1 200 clients satisfaits au quotidien' : 'Worn daily by 1,200+ happy customers'}
+            {lang === 'fr' ? 'Garantie satisfait ou remboursé sous 30 jours' : 'Risk-free 30-day money-back guarantee'}
           </p>
         </div>
       </div>

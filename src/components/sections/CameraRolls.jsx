@@ -29,12 +29,12 @@ export default function CameraRolls({ limit = 5 }) {
       <div className="container">
         <div className="section-head reveal">
           <span className="eyebrow">
-            {lang === 'fr' ? 'Témoignages vérifiés · 67 avis clients' : 'Real Men · 67 Verified Reviews'}
+            {lang === 'fr' ? 'Retours clients en images' : 'Customer Photos'}
           </span>
           <p className="rolls__score">
             <Stars value={4.9} size={15} />{' '}
             <strong>4.9 / 5</strong> ·{' '}
-            {lang === 'fr' ? 'Moins de 2% de retours · Garantie 30 Jours' : '<2% return rate · 30-Day Guarantee'}
+            {lang === 'fr' ? 'Garantie 30 Jours · Essai sans risque' : '30-Day Money-Back Guarantee'}
           </p>
           <h2 className="title">
             {lang === 'fr' ? (
@@ -45,9 +45,9 @@ export default function CameraRolls({ limit = 5 }) {
           </h2>
           <p className="subtitle">
             {lang === 'fr' ? (
-              <>Aucun script, aucun acteur rémunéré : des <strong>acheteurs vérifiés</strong> qui portent Vela Sculpt™ sous leurs chemises et T-shirts.</>
+              <>Aperçu en photos réelles : le maintien et le lissage du Vela Sculpt™ sous vos vêtements au quotidien.</>
             ) : (
-              <>No scripts, no paid actors — just <strong>verified buyers</strong> in their own photos and their own words.</>
+              <>Real customer photos: see the posture support and slimming effect of Vela Sculpt™ under daily wear.</>
             )}
           </p>
         </div>
@@ -94,7 +94,7 @@ export default function CameraRolls({ limit = 5 }) {
                     <span className="roll-card__initial">{r.name[0]}</span>
                   )}
                   <span className="verified">
-                    <Icon name="check" size={11} strokeWidth={3} /> {lang === 'fr' ? 'Achat vérifié' : 'Verified'}
+                    <Icon name="check" size={11} strokeWidth={3} /> {lang === 'fr' ? 'Avis client' : 'Customer review'}
                   </span>
                 </div>
                 <div className="roll-card__body">

@@ -563,9 +563,6 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
             {lang === 'fr' ? 'Livraison gratuite 6-12 jours ouvrés · suivi complet' : 'Free shipping 6-12 working days · full tracking'}
           </span>
         </div>
-        <p className="product__trend">
-          <Icon name="trend" size={16} /> {lang === 'fr' ? 'Plus de 280 T-shirts commandés cette semaine' : 'Over 280 T-shirts ordered this week'}
-        </p>
 
         <ul className="product__badges">
           {badgesList.map((b) => (

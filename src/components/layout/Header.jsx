@@ -16,6 +16,9 @@ export function Logo() {
         src="/images/logo.png?v=2"
         alt="zvar."
         className="logo__img"
+        width="66"
+        height="24"
+        decoding="async"
       />
     </Link>
   );
