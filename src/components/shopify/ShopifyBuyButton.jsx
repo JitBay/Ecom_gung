@@ -41,11 +41,14 @@ export default function ShopifyBuyButton({
           });
         }
       });
-      await redirectToShopifyCheckout(items, { discount: discountCode, locale: lang });
+      // Trigger direct synchronous navigation immediately to preserve iOS/Android WebKit user gesture
+      redirectToShopifyCheckout(items, { discount: discountCode, locale: lang });
     } catch (err) {
       console.error('[ShopifyBuyButton] Redirection error:', err);
     } finally {
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 3500);
     }
   };
 

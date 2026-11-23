@@ -102,7 +102,7 @@ function VariantRows({
           (imgs && imgs[0]) ||
           (colorImages && (colorImages[currentColor?.label]?.[0] || colorImages[currentColor?.id]?.[0])) ||
           productImage ||
-          '/images/image page produit/sans-manche/1.png';
+          '/images/image page produit/sans-manche/1.webp';
 
         const isFree = isTwoPlusOne && i === 2;
         const row = (

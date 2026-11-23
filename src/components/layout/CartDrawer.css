@@ -166,3 +166,20 @@
 .cart__foot small {
   color: var(--muted);
 }
+
+.cart__direct-link {
+  display: block;
+  font-size: 13px;
+  color: var(--primary, #111);
+  text-decoration: underline;
+  padding: 6px 8px;
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 6px;
+  transition: opacity 0.2s;
+  cursor: pointer;
+}
+
+.cart__direct-link:hover {
+  opacity: 0.85;
+}

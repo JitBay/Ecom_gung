@@ -2,18 +2,30 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Icon from './Icon.jsx';
 import { useLanguage } from '../../context/LanguageContext.jsx';
+import { useCart } from '../../context/CartContext.jsx';
 import { useLockScroll } from '../../lib/hooks.js';
 import './BlackFridayModal.css';
 
 export default function BlackFridayModal() {
   const [isOpen, setIsOpen] = useState(false);
   const { dict } = useLanguage();
+  const { open: isCartOpen, lines } = useCart();
   const navigate = useNavigate();
   const location = useLocation();
 
   useLockScroll(isOpen);
 
+  // Close modal immediately if user opens cart
   useEffect(() => {
+    if (isCartOpen && isOpen) {
+      setIsOpen(false);
+    }
+  }, [isCartOpen, isOpen]);
+
+  useEffect(() => {
+    // Never show if cart is open or cart has items
+    if (isCartOpen || lines.length > 0) return;
+
     // Skip auto-popup on support/legal/tracking routes so shoppers aren't interrupted
     if (
       location.pathname.startsWith('/policies') ||
@@ -23,13 +35,14 @@ export default function BlackFridayModal() {
       return;
     }
 
-    // Open after 4.5s or once user scrolls 35% of the page, once per session
-    if (sessionStorage.getItem('zvar_bf_modal_seen')) return;
+    // Open after 4.5s or once user scrolls 35% of the page, persistent once per user
+    if (localStorage.getItem('zvar_bf_modal_seen') || sessionStorage.getItem('zvar_bf_modal_seen')) return;
 
     let triggered = false;
     const triggerModal = () => {
       if (triggered) return;
       triggered = true;
+      localStorage.setItem('zvar_bf_modal_seen', '1');
       sessionStorage.setItem('zvar_bf_modal_seen', '1');
       setIsOpen(true);
       window.removeEventListener('scroll', onScroll);

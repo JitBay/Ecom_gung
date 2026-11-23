@@ -5,7 +5,7 @@
  * Synchronized with real Shopify variants from zvar-shop.com.
  */
 
-import { hasActivePixels, trackInitiateCheckout } from './analytics.js';
+import { trackInitiateCheckout } from './analytics.js';
 
 const configuredDomain =
   (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SHOPIFY_STORE_DOMAIN) || 'checkout.zvar-shop.com';
@@ -582,7 +582,7 @@ export async function syncShopifyCart(lines, options = {}) {
   const timeoutId = controller ? setTimeout(() => controller.abort(), 4000) : null;
 
   try {
-    const res = await fetch(`https://${cleanDomain}/api/2024-01/graphql.json`, {
+    const res = await fetch(`https://${cleanDomain}/api/2024-10/graphql.json`, {
       method: 'POST',
       signal: controller ? controller.signal : undefined,
       headers: {
@@ -659,32 +659,67 @@ export async function createShopifyCheckoutUrl(lines, options = {}) {
 }
 
 /**
+ * Computes an instant, synchronous checkout URL for the current cart lines.
+ * Uses the pre-synchronized Storefront API checkoutUrl if available,
+ * otherwise falls back immediately to the deterministic cart permalink.
+ *
+ * @param {Array} lines - Cart lines
+ * @param {Object} options - Checkout options (locale, shopifyCart, discount, etc.)
+ * @returns {string} Fully qualified Shopify checkout URL
+ */
+export function getInstantCheckoutUrl(lines, options = {}) {
+  if (!lines || lines.length === 0) return '';
+  if (options.checkoutUrl) return options.checkoutUrl;
+  if (options.shopifyCart?.checkoutUrl) return options.shopifyCart.checkoutUrl;
+
+  const locale = getCheckoutLocale(options);
+  return buildShopifyCartPermalink(lines, { ...options, locale });
+}
+
+/**
  * Redirects the user directly to Shopify's secure checkout page.
+ * Synchronous and in-app browser safe (WebKit/Instagram/Facebook).
  *
  * @param {Array} lines - Array of cart lines
  * @param {Object} options - Additional checkout options
  */
-export async function redirectToShopifyCheckout(lines, options = {}) {
+export function redirectToShopifyCheckout(lines, options = {}) {
   if (!lines || lines.length === 0) {
     console.warn('[Shopify] Cart is empty, cannot proceed to checkout.');
     return false;
   }
 
   const total = lines.reduce((sum, l) => sum + (Number(l.price) || 0) * (Number(l.qty) || 1), 0);
-  const startedAt = Date.now();
-  trackInitiateCheckout({ items: lines, total });
+  try {
+    trackInitiateCheckout({ items: lines, total });
+  } catch (err) {
+    console.warn('[Shopify] trackInitiateCheckout warning:', err);
+  }
 
-  const checkoutUrl = await createShopifyCheckoutUrl(lines, options);
+  const checkoutUrl = getInstantCheckoutUrl(lines, options);
+  if (!checkoutUrl) {
+    console.error('[Shopify] Could not compute checkout URL');
+    return false;
+  }
+
   console.log('[Shopify Checkout] Navigating to:', checkoutUrl);
 
-  if (typeof window !== 'undefined' && checkoutUrl) {
-    if (hasActivePixels()) {
-      const elapsed = Date.now() - startedAt;
-      if (elapsed < 120) {
-        await new Promise((resolve) => setTimeout(resolve, 120 - elapsed));
-      }
+  if (typeof window !== 'undefined') {
+    try {
+      window.location.assign(checkoutUrl);
+    } catch {
+      window.location.href = checkoutUrl;
     }
-    window.location.href = checkoutUrl;
+    // Fallback timer for WebKit webviews
+    setTimeout(() => {
+      try {
+        if (window.location.href !== checkoutUrl) {
+          window.location.href = checkoutUrl;
+        }
+      } catch {
+        // Ignored
+      }
+    }, 2000);
   }
   return true;
 }
@@ -732,7 +767,7 @@ export async function subscribeToShopifyNewsletter(rawEmail) {
   `;
 
   try {
-    const res = await fetch(`https://${cleanDomain}/api/2024-01/graphql.json`, {
+    const res = await fetch(`https://${cleanDomain}/api/2024-10/graphql.json`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

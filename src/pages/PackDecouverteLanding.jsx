@@ -33,7 +33,7 @@ export default function PackDecouverteLanding() {
       num: 1,
       title: lang === 'fr' ? 'Vela Sculpt™ — Sans manches' : 'Vela Sculpt™ — Sleeveless',
       badge: lang === 'fr' ? 'Ultra discret' : 'Ultra Discreet',
-      img: '/images/image page produit/sans-manche/1.png',
+      img: '/images/image page produit/sans-manche/1.webp',
       tagline:
         lang === 'fr'
           ? 'Discrétion 100% totale sous chemises légères, T-shirts d’été et séances de sport.'
@@ -48,7 +48,7 @@ export default function PackDecouverteLanding() {
       num: 2,
       title: lang === 'fr' ? 'Vela Sculpt™ — Demi-manches' : 'Vela Sculpt™ — Short Sleeves',
       badge: lang === 'fr' ? 'Plus populaire' : 'Most Popular',
-      img: '/images/image page produit/demi-manche/1.png',
+      img: '/images/image page produit/demi-manche/1.webp',
       tagline:
         lang === 'fr'
           ? 'Le basique indispensable sous vos chemises de travail, polos et tenues quotidiennes.'
@@ -63,7 +63,7 @@ export default function PackDecouverteLanding() {
       num: 3,
       title: lang === 'fr' ? 'Vela Sculpt™ — Manches longues' : 'Vela Sculpt™ — Long Sleeves',
       badge: lang === 'fr' ? 'Maintien renforcé' : 'Reinforced Support',
-      img: '/images/image page produit/longues-manches/1.png',
+      img: '/images/image page produit/longues-manches/1.webp',
       tagline:
         lang === 'fr'
           ? 'Compression intégrale haut du corps et maintien postural renforcé sous pulls et vestes.'

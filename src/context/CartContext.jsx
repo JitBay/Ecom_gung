@@ -112,13 +112,20 @@ export function CartProvider({ children }) {
       setShopifyCart(null);
     };
 
-    const checkout = async (options = {}) => {
+    const checkout = (options = {}) => {
       if (lines.length === 0 || isCheckingOut) return;
       setIsCheckingOut(true);
       try {
-        await redirectToShopifyCheckout(lines, { locale: activeLang, ...options });
+        redirectToShopifyCheckout(lines, {
+          locale: activeLang,
+          shopifyCart,
+          checkoutUrl: shopifyCart?.checkoutUrl,
+          ...options,
+        });
       } finally {
-        setIsCheckingOut(false);
+        setTimeout(() => {
+          setIsCheckingOut(false);
+        }, 3500);
       }
     };
 

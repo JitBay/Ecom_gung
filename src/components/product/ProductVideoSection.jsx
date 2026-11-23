@@ -8,13 +8,33 @@ export default function ProductVideoSection({ modelHandle = 'vela-sculpt-sans-ma
   const rawModel = products.find((p) => p.handle === modelHandle) || products[0];
   const localized = getLocalizedProduct(rawModel, lang);
   const videoRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.muted = true;
-      videoRef.current.volume = 0;
-    }
+    const video = videoRef.current;
+    if (!video) return undefined;
+
+    video.muted = true;
+    video.volume = 0;
+
+    const observer = typeof IntersectionObserver !== 'undefined'
+      ? new IntersectionObserver(([entry]) => {
+          if (entry.isIntersecting) {
+            video.load();
+            video.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
+          } else {
+            video.pause();
+            setIsPlaying(false);
+          }
+        }, { rootMargin: '200px 0px', threshold: 0.25 })
+      : null;
+
+    if (observer) observer.observe(video);
+
+    return () => {
+      observer?.disconnect();
+      video.pause();
+    };
   }, []);
 
   const togglePlay = (e) => {
@@ -145,16 +165,14 @@ export default function ProductVideoSection({ modelHandle = 'vela-sculpt-sans-ma
             ref={videoRef}
             src="/videos/sleevless.mp4"
             className="product-video-section__video"
-            autoPlay
             loop
             muted
             defaultMuted
             playsInline
-            preload="auto"
+            preload="metadata"
+            width="400"
+            height="533"
           >
-            <source src="/videos/sleevless.mp4" type="video/mp4" />
-            <source src="/videos/product-sleeveless.mp4" type="video/mp4" />
-            <source src="/videos/video-2.mp4" type="video/mp4" />
             Votre navigateur ne supporte pas la lecture vidéo.
           </video>
 

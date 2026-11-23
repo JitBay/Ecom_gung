@@ -4,18 +4,22 @@ import { useCart } from '../../context/CartContext.jsx';
 import { useLanguage } from '../../context/LanguageContext.jsx';
 import { useLockScroll } from '../../lib/hooks.js';
 import { price } from '../../lib/format.js';
+import { getInstantCheckoutUrl } from '../../lib/shopify.js';
 import './CartDrawer.css';
 
 const FREE_SHIPPING = 55;
 
 export default function CartDrawer() {
-  const { lines, open, setOpen, setQty, total, displayTotal, count, checkout, isCheckingOut } = useCart();
+  const { lines, open, setOpen, setQty, total, displayTotal, count, checkout, isCheckingOut, shopifyCart } = useCart();
   const { t, lang } = useLanguage();
   useLockScroll(open);
 
   const bundleShipsFree = true;
   const left = 0;
   const progress = 100;
+
+  const isInApp = typeof navigator !== 'undefined' && /FBAN|FBAV|Instagram|Line|Twitter|Snapchat|TikTok/i.test(navigator.userAgent || '');
+  const instantCheckoutUrl = lines.length > 0 ? getInstantCheckoutUrl(lines, { locale: lang, shopifyCart }) : '';
 
   return (
     <div className={`cart-backdrop ${open ? 'is-open' : ''}`} onClick={() => setOpen(false)}>
@@ -56,7 +60,7 @@ export default function CartDrawer() {
               <li key={l.id}>
                 <div className="cart__thumb">
                   <img
-                    src={l.image || '/images/image page produit/demi-manche/1.png'}
+                    src={l.image || '/images/image page produit/demi-manche/1.webp'}
                     alt={l.title}
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />
@@ -107,6 +111,18 @@ export default function CartDrawer() {
                   : 'Redirecting to Shopify...'
                 : t('cart.checkout')}
             </button>
+            {(isInApp || isCheckingOut) && instantCheckoutUrl && (
+              <a
+                href={instantCheckoutUrl}
+                className="cart__direct-link"
+                target="_self"
+                rel="noreferrer"
+              >
+                {lang === 'fr'
+                  ? 'Ne charge pas ? Cliquez ici pour le paiement direct'
+                  : "Doesn't load? Click here for direct checkout"}
+              </a>
+            )}
             <ShopifyPaymentBadges />
             <small>
               {lang === 'fr'

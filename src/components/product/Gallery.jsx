@@ -25,7 +25,7 @@ function Lightbox({ index, images, onClose, onMove, title }) {
         <Icon name="arrow" size={22} />
       </button>
       <div className="lightbox__img" onClick={(e) => e.stopPropagation()}>
-        <img src={currentSrc} alt={title || 'Vela Sculpt™'} />
+        <img src={currentSrc} alt={title || 'Vela Sculpt™'} decoding="async" />
       </div>
       <button
         className="lightbox__nav"
@@ -50,7 +50,7 @@ export default function Gallery({ images, title, activeColor, videoHref }) {
   const [active, setActive] = useState(0);
   const track = useRef(null);
 
-  const list = images && images.length > 0 ? images : ['/images/image page produit/demi-manche/1.png'];
+  const list = images && images.length > 0 ? images : ['/images/image page produit/demi-manche/1.webp'];
 
   // Reset to first slide whenever the color images change
   useEffect(() => {
@@ -112,6 +112,10 @@ export default function Gallery({ images, title, activeColor, videoHref }) {
               alt={`${title || 'Vela Sculpt™'} - ${activeColor || ''} - photo ${i + 1}`}
               className="gallery__photo"
               loading={i === 0 ? 'eager' : 'lazy'}
+              fetchPriority={i === 0 ? 'high' : 'auto'}
+              decoding="async"
+              width="800"
+              height="1000"
             />
             <span className="gallery__zoom">
               <Icon name="zoom" size={18} />

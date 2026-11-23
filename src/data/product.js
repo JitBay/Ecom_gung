@@ -32,10 +32,10 @@ export const discoveryCategories = [
       { id: 'black-or', label: 'Black Or', hex: '#241f17' },
     ],
     colorImages: {
-      Noir: '/images/image page produit/sans-manche/1.png',
-      Blanc: '/images/image page produit/sans-manche/7.png',
-      Gris: '/images/image page produit/sans-manche/19.png',
-      'Black Or': '/images/image page produit/sans-manche/13.png',
+      Noir: '/images/image page produit/sans-manche/1.webp',
+      Blanc: '/images/image page produit/sans-manche/7.webp',
+      Gris: '/images/image page produit/sans-manche/19.webp',
+      'Black Or': '/images/image page produit/sans-manche/13.webp',
     },
   },
   {
@@ -51,9 +51,9 @@ export const discoveryCategories = [
       { id: 'gris', label: 'Gris', hex: '#72757d' },
     ],
     colorImages: {
-      Noir: '/images/image page produit/demi-manche/1.png',
-      Blanc: '/images/image page produit/demi-manche/7.png',
-      Gris: '/images/image page produit/demi-manche/13.png',
+      Noir: '/images/image page produit/demi-manche/1.webp',
+      Blanc: '/images/image page produit/demi-manche/7.webp',
+      Gris: '/images/image page produit/demi-manche/13.webp',
     },
   },
   {
@@ -69,9 +69,9 @@ export const discoveryCategories = [
       { id: 'blanc', label: 'Blanc', hex: '#f4f4f6' },
     ],
     colorImages: {
-      Noir: '/images/image page produit/longues-manches/1.png',
-      'Gris chiné': '/images/image page produit/longues-manches/7.png',
-      Blanc: '/images/image page produit/longues-manches/13.png',
+      Noir: '/images/image page produit/longues-manches/1.webp',
+      'Gris chiné': '/images/image page produit/longues-manches/7.webp',
+      Blanc: '/images/image page produit/longues-manches/13.webp',
     },
   },
 ];
