@@ -472,7 +472,6 @@ export default function HomePage() {
       <section className="ixh-promise">
         <div className="ixh-promise__media">
           <video
-            src="/videos/video-2.mp4"
             className="ixh-promise__video"
             autoPlay
             loop
@@ -487,6 +486,11 @@ export default function HomePage() {
             }}
             aria-label={t('home.promise_cta')}
           >
+            <source
+              src="/videos/video-2-mobile.mp4"
+              media="(max-width: 768px)"
+              type="video/mp4"
+            />
             <source src="/videos/video-2.mp4" type="video/mp4" />
           </video>
           <div className="ixh-promise__scrim" aria-hidden="true" />

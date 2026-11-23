@@ -927,17 +927,17 @@
   transform: translateY(0);
 }
 
-@media (max-width: 699px) {
+@media (max-width: 768px) {
   .ixh-promise {
-    aspect-ratio: 16 / 9;
-    max-height: 280px;
+    aspect-ratio: 1 / 1;
+    max-height: 440px;
     height: auto;
     min-height: unset;
   }
 
   .ixh-promise__img,
   .ixh-promise__video {
-    object-position: 72% center;
+    object-position: center center;
   }
 
   .ixh-promise__action {
