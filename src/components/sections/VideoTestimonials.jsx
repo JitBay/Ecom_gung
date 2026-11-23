@@ -35,12 +35,8 @@ export default function VideoTestimonials() {
           v.pause();
         }
       });
-      vid.muted = false;
-      vid.play().then(() => setPlayingId(id)).catch(() => {
-        // Fallback with muted if browser audio policy blocks sound
-        vid.muted = true;
-        vid.play().then(() => setPlayingId(id)).catch(() => {});
-      });
+      vid.muted = true;
+      vid.play().then(() => setPlayingId(id)).catch(() => {});
     }
   };
 
@@ -120,14 +116,19 @@ export default function VideoTestimonials() {
                 }}
                 aria-label={`${lang === 'fr' ? 'Lancer la vidéo de' : 'Play video review from'} ${v.name}`}
               >
-                {/* Video — lecture déclenchée uniquement au clic */}
+                {/* Video — lecture déclenchée uniquement au clic (muet) */}
                 <video
                   ref={(el) => {
-                    if (el) videoRefs.current[v.id] = el;
+                    if (el) {
+                      videoRefs.current[v.id] = el;
+                      el.muted = true;
+                    }
                   }}
                   src={v.video}
                   poster={v.poster}
                   loop
+                  muted
+                  defaultMuted
                   playsInline
                   preload="metadata"
                   width="220"
@@ -240,16 +241,15 @@ export default function VideoTestimonials() {
             <video
               ref={(el) => {
                 if (el) {
-                  el.muted = false;
-                  el.play().catch(() => {
-                    el.muted = true;
-                    el.play().catch(() => {});
-                  });
+                  el.muted = true;
+                  el.play().catch(() => {});
                 }
               }}
               src={modalItem.video}
               poster={modalItem.poster}
               loop
+              muted
+              defaultMuted
               controls
               playsInline
               className="ugc-modal__video"
