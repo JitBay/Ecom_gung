@@ -79,10 +79,11 @@ export function CartProvider({ children }) {
       const shouldReplace = options.replace ?? true;
 
       setLines((prev) => {
+        const itemHandle = line.handle || (line.id ? line.id.split('-').slice(0, 2).join('-') : null);
         // Remplacer la configuration existante du même produit (évite d'accumuler 3 + 3 + 3 = 12 articles)
-        if (shouldReplace && line.handle) {
-          const others = prev.filter((l) => l.handle !== line.handle);
-          return [...others, { ...line, qty: lineQty }];
+        if (shouldReplace && itemHandle) {
+          const others = prev.filter((l) => (l.handle || l.id.split('-').slice(0, 2).join('-')) !== itemHandle);
+          return [...others, { ...line, handle: itemHandle, qty: lineQty }];
         }
         const found = prev.find((l) => l.id === line.id);
         if (found) return prev.map((l) => (l.id === line.id ? { ...l, qty: l.qty + lineQty } : l));

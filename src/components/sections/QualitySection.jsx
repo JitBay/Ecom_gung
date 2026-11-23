@@ -134,8 +134,10 @@ export default function QualitySection() {
                   <img
                     src={t.img}
                     alt={t.title}
+                    width="500"
+                    height="375"
                     className="tile__img"
-                    loading="eager"
+                    loading="lazy"
                     decoding="async"
                   />
                 </picture>

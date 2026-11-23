@@ -28,7 +28,7 @@ export default function LanguageSwitcher({ variant = 'pill', className = '' }) {
           aria-expanded={open}
           aria-label="Changer la langue / Switch language"
         >
-          <span className="lang-dropdown__flag">{lang === 'fr' ? '🇫🇷' : '🇬🇧'}</span>
+          <span className="lang-dropdown__flag">{lang === 'fr' ? '🇫🇷' : '🇺🇸'}</span>
           <span className="lang-dropdown__code">{lang.toUpperCase()}</span>
           <Icon name="chevron" size={12} className={`lang-dropdown__chev ${open ? 'is-open' : ''}`} />
         </button>
@@ -55,7 +55,7 @@ export default function LanguageSwitcher({ variant = 'pill', className = '' }) {
                 setOpen(false);
               }}
             >
-              <span className="lang-dropdown__flag">🇬🇧</span>
+              <span className="lang-dropdown__flag">🇺🇸</span>
               <span>English</span>
               {lang === 'en' && <Icon name="check" size={14} className="lang-dropdown__check" />}
             </button>
@@ -84,7 +84,7 @@ export default function LanguageSwitcher({ variant = 'pill', className = '' }) {
         aria-pressed={lang === 'en'}
         title="Site in English"
       >
-        <span className="lang-pill__flag">🇬🇧</span> EN
+        <span className="lang-pill__flag">🇺🇸</span> EN
       </button>
     </div>
   );

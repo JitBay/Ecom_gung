@@ -232,18 +232,18 @@ function ClassicProductPage({ product }) {
 
   const addToCart = () => {
     const detail = `${t('color_names.' + color, color)} / ${size}`;
-    for (let i = 0; i < qty; i++) {
-      add({
-        id: `${product.handle}-${color}-${size}`,
-        title: localized.title,
-        detail,
-        image: currentImages[0] || product.images[0],
-        color: colorHex[color] || '#1a1a1a',
-        price: product.price,
-        compareAt: product.compareAt,
-        freeShipping: true,
-      });
-    }
+    add({
+      id: `${product.handle}-${color}-${size}`,
+      handle: product.handle,
+      title: localized.title,
+      detail,
+      image: currentImages[0] || product.images[0],
+      color: colorHex[color] || '#1a1a1a',
+      price: product.price,
+      compareAt: product.compareAt,
+      freeShipping: true,
+      qty,
+    }, { replace: true });
   };
 
   const details = [

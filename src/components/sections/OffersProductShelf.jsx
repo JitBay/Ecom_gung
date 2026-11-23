@@ -130,6 +130,9 @@ function OfferProductCard({ p, lang, t }) {
         <img
           src={colorInfo.img}
           alt={title}
+          width="400"
+          height="400"
+          decoding="async"
           className="ixh-card__img ixh-card__img--main"
           loading="lazy"
         />
@@ -137,6 +140,9 @@ function OfferProductCard({ p, lang, t }) {
           <img
             src={colorInfo.hoverImg}
             alt={`${title} - vue alternative`}
+            width="400"
+            height="400"
+            decoding="async"
             className="ixh-card__img ixh-card__img--alt"
             loading="lazy"
             aria-hidden="true"

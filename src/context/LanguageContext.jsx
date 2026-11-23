@@ -13,7 +13,7 @@ const FR_COUNTRIES = new Set([
  * Returns 'fr' if country is French-speaking, otherwise 'en' (USA, UK, and rest of world)
  */
 export function getLanguageFromCountry(countryCode) {
-  if (!countryCode) return 'fr';
+  if (!countryCode) return 'en';
   const c = String(countryCode).toUpperCase().trim();
   return FR_COUNTRIES.has(c) ? 'fr' : 'en';
 }

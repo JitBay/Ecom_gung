@@ -148,7 +148,10 @@ function Review({ r, lang, t, onHelpful, hasVoted, onPhotoClick }) {
                 src={avatarSrc}
                 alt={r.name}
                 className="review__avatar-img"
+                width="44"
+                height="44"
                 loading="lazy"
+                decoding="async"
                 onError={(e) => {
                   e.target.style.display = 'none';
                   if (e.target.parentElement) {
@@ -218,7 +221,7 @@ function Review({ r, lang, t, onHelpful, hasVoted, onPhotoClick }) {
                   </>
                 ) : (
                   <>
-                    <img src={src} alt={`${r.name} review media ${i + 1}`} loading="lazy" />
+                    <img src={src} alt={`${r.name} review media ${i + 1}`} width="160" height="160" loading="lazy" decoding="async" />
                     <span className="review__photo-zoom" aria-hidden="true">
                       <Icon name="zoom" size={14} />
                     </span>
@@ -656,6 +659,9 @@ export default function CustomerReviews() {
               <img
                 src={activePhoto.src}
                 alt={activePhoto.title || activePhoto.name}
+                width="800"
+                height="1000"
+                decoding="async"
                 className="reviews__modal-img"
               />
             )}

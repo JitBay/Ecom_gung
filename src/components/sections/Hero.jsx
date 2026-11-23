@@ -198,6 +198,11 @@ export default function Hero({ initialHandle, onSelectModel, showModelSelector =
             <img
               src={currentProduct.images[0]}
               alt={currentProduct.title}
+              width="600"
+              height="450"
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
               className="hero__main-photo"
             />
           )}

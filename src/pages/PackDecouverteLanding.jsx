@@ -175,11 +175,20 @@ export default function PackDecouverteLanding() {
                 <img
                   src="/images/products/image-decouverte.png"
                   alt={lang === 'fr' ? 'Pack Découverte — Vue avant' : 'Discovery Pack — Front view'}
+                  width="600"
+                  height="600"
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
                   className="pdl-hero__card-img pdl-hero__card-img--main"
                 />
                 <img
                   src="/images/products/decouverte-back.png"
                   alt={lang === 'fr' ? 'Pack Découverte — Vue arrière' : 'Discovery Pack — Back view'}
+                  width="600"
+                  height="600"
+                  loading="lazy"
+                  decoding="async"
                   className="pdl-hero__card-img pdl-hero__card-img--alt"
                   aria-hidden="true"
                 />
@@ -225,7 +234,7 @@ export default function PackDecouverteLanding() {
           {cuts.map((c) => (
             <div className="pdl-cut-card" key={c.num}>
               <div className="pdl-cut-card__media">
-                <img src={c.img} alt={c.title} loading="lazy" />
+                <img src={c.img} alt={c.title} width="400" height="400" loading="lazy" decoding="async" />
                 <span className="pdl-cut-card__badge">{c.badge}</span>
                 <span className="pdl-cut-card__step">{c.num}</span>
               </div>

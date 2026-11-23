@@ -25,7 +25,7 @@ function Lightbox({ index, images, onClose, onMove, title }) {
         <Icon name="arrow" size={22} />
       </button>
       <div className="lightbox__img" onClick={(e) => e.stopPropagation()}>
-        <img src={currentSrc} alt={title || 'Vela Sculpt™'} decoding="async" />
+        <img src={currentSrc} alt={title || 'Vela Sculpt™'} decoding="async" width="900" height="1200" />
       </div>
       <button
         className="lightbox__nav"

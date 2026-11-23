@@ -182,6 +182,9 @@ function BestSellerCard({ p, lang, t }) {
           <img
             src={colorInfo.img}
             alt={title}
+            width="400"
+            height="400"
+            decoding="async"
             className="ixh-card__img ixh-card__img--main"
             loading="lazy"
           />
@@ -189,6 +192,9 @@ function BestSellerCard({ p, lang, t }) {
             <img
               src={colorInfo.hoverImg}
               alt={`${title} - alternative`}
+              width="400"
+              height="400"
+              decoding="async"
               className="ixh-card__img ixh-card__img--alt"
               loading="lazy"
               aria-hidden="true"
@@ -364,6 +370,10 @@ export default function HomePage() {
           <img
             src="/images/home/banner-1.png"
             alt="zvar. — Every Age Every Body"
+            width="1920"
+            height="800"
+            fetchPriority="high"
+            decoding="async"
             className="ixh-hero__img"
             loading="eager"
           />
@@ -540,6 +550,9 @@ export default function HomePage() {
                 <img
                   src={item.img}
                   alt={lang === 'fr' ? item.titleFr : item.titleEn}
+                  width="300"
+                  height="300"
+                  decoding="async"
                   className="ixh-tile__img"
                   loading="lazy"
                 />
