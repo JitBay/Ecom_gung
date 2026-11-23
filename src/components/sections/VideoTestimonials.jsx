@@ -239,14 +239,18 @@ export default function VideoTestimonials() {
 
             <video
               ref={(el) => {
-                if (el) el.muted = true;
+                if (el) {
+                  el.muted = false;
+                  el.play().catch(() => {
+                    el.muted = true;
+                    el.play().catch(() => {});
+                  });
+                }
               }}
               src={modalItem.video}
               poster={modalItem.poster}
-              muted
               loop
               controls
-              autoPlay
               playsInline
               className="ugc-modal__video"
             />

@@ -578,8 +578,8 @@ export const videoTestimonials = [
       en: 'Tested in the gym: firm core support without restricting breathing. Does not roll up at all.',
     },
     product: {
-      fr: 'Col rond · Demi-manches · Gris / M',
-      en: 'Crew Neck · Short Sleeves · Grey / M',
+      fr: 'Col rond · Sans manches · Noir & Bleu / L',
+      en: 'Crew Neck · Sleeveless · Black & Cyan / L',
     },
     tint: ['#1c2530', '#101720'],
   },
@@ -604,8 +604,8 @@ export const videoTestimonials = [
       en: 'Targeted compression provides great support while lifting, and the fit really highlights the chest and shoulders.',
     },
     product: {
-      fr: 'Col rond · Sans manches · Bleu / M',
-      en: 'Crew Neck · Sleeveless · Blue / M',
+      fr: 'Col rond · Demi-manches · Gris / M',
+      en: 'Crew Neck · Short Sleeves · Grey / M',
     },
     tint: ['#1e293b', '#0f172a'],
   },
