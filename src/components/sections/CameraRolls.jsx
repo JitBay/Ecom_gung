@@ -127,7 +127,7 @@ export default function CameraRolls({ limit = 5 }) {
             }
           }}
         >
-          {lang === 'fr' ? 'Consulter les 67 avis vérifiés' : 'Read all 67 verified reviews'}{' '}
+          {lang === 'fr' ? 'Consulter les avis clients' : 'Read all customer reviews'}{' '}
           <Icon name="arrow" size={16} />
         </a>
       </div>

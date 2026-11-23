@@ -443,9 +443,9 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
               window.history.pushState(null, '', '#reviews');
             }
           }}
-          title={lang === 'fr' ? 'Consulter les avis clients vérifiés' : 'Read verified customer reviews'}
+          title={lang === 'fr' ? 'Consulter les avis clients' : 'Read customer reviews'}
         >
-          <Stars value={5} size={16} /> <strong>4.9</strong> <span>/ 5 · {lang === 'fr' ? '67 avis vérifiés' : '67 verified reviews'}</span>
+          <Stars value={5} size={16} /> <strong>4.9</strong> <span>/ 5 · {lang === 'fr' ? 'Avis clients' : 'Customer reviews'}</span>
         </a>
 
         <p className="product__tagline">{localizedModel.tagline}</p>

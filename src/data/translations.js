@@ -295,7 +295,7 @@ export const translations = {
       count_label: 'avis clients',
       write_review: 'Laisser un avis',
       cancel: 'Annuler',
-      verified_buyer: 'Achat vérifié',
+      verified_buyer: 'Avis client',
       sort_recent: 'Plus récents',
       sort_high: 'Meilleures notes',
       sort_low: 'Notes les plus basses',

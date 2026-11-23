@@ -151,7 +151,7 @@ export default function VideoTestimonials() {
                 <div className="ugc-card__top">
                   <span className="ugc-card__verified">
                     <Icon name="check" size={12} strokeWidth={3} />{' '}
-                    {lang === 'fr' ? 'Achat vérifié' : 'Verified Buyer'}
+                    {lang === 'fr' ? 'Avis client' : 'Customer Review'}
                   </span>
                   <div className="ugc-card__controls">
                     <button

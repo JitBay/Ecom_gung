@@ -582,7 +582,7 @@ export async function syncShopifyCart(lines, options = {}) {
   const timeoutId = controller ? setTimeout(() => controller.abort(), 4000) : null;
 
   try {
-    const res = await fetch(`https://${cleanDomain}/api/2024-10/graphql.json`, {
+    const res = await fetch(`https://${cleanDomain}/api/2026-10/graphql.json`, {
       method: 'POST',
       signal: controller ? controller.signal : undefined,
       headers: {
@@ -767,7 +767,7 @@ export async function subscribeToShopifyNewsletter(rawEmail) {
   `;
 
   try {
-    const res = await fetch(`https://${cleanDomain}/api/2024-10/graphql.json`, {
+    const res = await fetch(`https://${cleanDomain}/api/2026-10/graphql.json`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

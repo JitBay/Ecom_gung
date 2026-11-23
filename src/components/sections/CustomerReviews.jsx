@@ -172,7 +172,7 @@ function Review({ r, lang, t, onHelpful, hasVoted, onPhotoClick }) {
             </div>
             {r.verified !== false && (
               <span className="review__verified-badge">
-                <Icon name="check" size={11} strokeWidth={3} /> {t('reviews_section.verified_buyer')}
+                <Icon name="check" size={11} strokeWidth={3} /> {t('reviews_section.verified_buyer') || (lang === 'fr' ? 'Avis client' : 'Customer Review')}
               </span>
             )}
           </div>

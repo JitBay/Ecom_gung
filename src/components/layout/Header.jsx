@@ -13,7 +13,7 @@ export function Logo() {
   return (
     <Link to="/" className="logo" aria-label="zvar. accueil">
       <img
-        src="/images/logo.png?v=2"
+        src="/images/logo.svg"
         alt="zvar."
         className="logo__img"
         width="66"

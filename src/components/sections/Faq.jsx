@@ -37,7 +37,7 @@ export default function Faq() {
               <Icon name="sparkle" size={15} /> {lang === 'fr' ? 'Maille 3D Respirante' : '3D Breathable Mesh'}
             </span>
             <span>
-              <Icon name="user" size={15} /> 1 200+ {lang === 'fr' ? 'Clients' : 'Customers'}
+              <Icon name="truck" size={15} /> {lang === 'fr' ? 'Livraison Suivie' : 'Tracked Shipping'}
             </span>
           </div>
         </div>
