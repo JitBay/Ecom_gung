@@ -17,6 +17,11 @@ export default function ExpressPaymentButtons({ lineItem = null, className = '' 
   const handleExpressClick = (method, e) => {
     if (e && e.preventDefault) e.preventDefault();
     if (loadingMethod || isCheckingOut) return;
+    if (e && e.currentTarget) {
+      e.currentTarget.disabled = true;
+      e.currentTarget.style.pointerEvents = 'none';
+      e.currentTarget.style.opacity = '0.7';
+    }
 
     setLoadingMethod(method);
 

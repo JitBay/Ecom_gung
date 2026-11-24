@@ -109,6 +109,9 @@ export default function CartDrawer() {
               onClick={(e) => {
                 e.preventDefault();
                 if (isCheckingOut) return;
+                e.currentTarget.disabled = true;
+                e.currentTarget.style.pointerEvents = 'none';
+                e.currentTarget.style.opacity = '0.7';
                 checkout();
               }}
               disabled={isCheckingOut}
