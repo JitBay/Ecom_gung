@@ -299,8 +299,18 @@ export default function CustomerReviews() {
   }, [list, starFilter, photosOnly, search, lang]);
 
   const sorted = useMemo(() => {
-    return [...filtered].sort(sorters[sort] || sorters.recent);
-  }, [filtered, sort]);
+    let arr = [...filtered].sort(sorters[sort] || sorters.recent);
+    if (lang === 'en' && sort === 'recent') {
+      // Prioritize US and Canada verified reviews first (Jason M., Chen Z.) before French reviews
+      arr.sort((a, b) => {
+        const aUS = a.country === 'US' || a.country === 'CA' ? 1 : 0;
+        const bUS = b.country === 'US' || b.country === 'CA' ? 1 : 0;
+        if (aUS !== bUS) return bUS - aUS;
+        return (b.helpful || 0) - (a.helpful || 0);
+      });
+    }
+    return arr;
+  }, [filtered, sort, lang]);
 
   const totalPages = Math.ceil(sorted.length / REVIEWS_PER_PAGE) || 1;
   const safePage = Math.min(Math.max(1, page), totalPages);

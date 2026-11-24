@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import Icon from '../ui/Icon.jsx';
 import Stars from '../ui/Stars.jsx';
 import CountryFlag from '../ui/CountryFlag.jsx';
@@ -22,7 +23,18 @@ function Highlight({ text, bold }) {
 export default function CameraRolls({ limit = 5 }) {
   const ref = useReveal();
   const { lang } = useLanguage();
-  const displayedReviews = limit ? featuredReviews.slice(0, limit) : featuredReviews;
+  const displayedReviews = useMemo(() => {
+    let list = [...featuredReviews];
+    if (lang === 'en') {
+      // Prioritize US/Canada verified buyers first (Jason M., Chen Z.) ahead of French reviews
+      list.sort((a, b) => {
+        const aUS = a.country === 'US' || a.country === 'CA' ? 1 : 0;
+        const bUS = b.country === 'US' || b.country === 'CA' ? 1 : 0;
+        return bUS - aUS;
+      });
+    }
+    return limit ? list.slice(0, limit) : list;
+  }, [lang, limit]);
 
   return (
     <section className="rolls" ref={ref}>
