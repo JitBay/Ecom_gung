@@ -3,20 +3,6 @@
 
 export const featuredReviews = [
   {
-    name: 'Fabrice C.',
-    country: 'FR',
-    flag: '🇫🇷',
-    countryName: { fr: 'France', en: 'France' },
-    meta: '🇫🇷 France · 42 ans · Taille L · Vérifié',
-    metaEn: '🇫🇷 France · 42 yrs · Size L · Verified',
-    text: 'La photo avant/après parle d’elle-même : le T-shirt lisse instantanément le ventre et rentre tout en place. Un vrai coup de boost à la confiance en soi !',
-    textEn: 'The picture speaks for itself: the shirt instantly smooths out the stomach and tucks everything in. A massive boost to self-confidence!',
-    bold: 'coup de boost à la confiance en soi',
-    boldEn: 'massive boost to self-confidence',
-    tint: '#2b6cb0',
-    photo: '/reviews/4.webp',
-  },
-  {
     name: 'Jason M.',
     country: 'US',
     flag: '🇺🇸',
@@ -43,6 +29,20 @@ export const featuredReviews = [
     boldEn: 'completely flattens my stomach',
     tint: '#374151',
     photo: '/reviews/6.webp',
+  },
+  {
+    name: 'Fabrice C.',
+    country: 'FR',
+    flag: '🇫🇷',
+    countryName: { fr: 'France', en: 'France' },
+    meta: '🇫🇷 France · 42 ans · Taille L · Vérifié',
+    metaEn: '🇫🇷 France · 42 yrs · Size L · Verified',
+    text: 'La photo avant/après parle d’elle-même : le T-shirt lisse instantanément le ventre et rentre tout en place. Un vrai coup de boost à la confiance en soi !',
+    textEn: 'The picture speaks for itself: the shirt instantly smooths out the stomach and tucks everything in. A massive boost to self-confidence!',
+    bold: 'coup de boost à la confiance en soi',
+    boldEn: 'massive boost to self-confidence',
+    tint: '#2b6cb0',
+    photo: '/reviews/4.webp',
   },
   {
     name: 'Laurent P.',
@@ -115,26 +115,6 @@ export const reviewSummary =
 
 export const reviews = [
   {
-    id: 'rev-4',
-    name: 'Fabrice C.',
-    country: 'FR',
-    flag: '🇫🇷',
-    countryName: { fr: 'France', en: 'France' },
-    date: '2026-10-28',
-    rating: 5,
-    title: {
-      fr: 'La photo parle d’elle-même !',
-      en: 'The picture speaks for itself!',
-    },
-    text: {
-      fr: 'J’ai pris une photo avant/après pour vérifier si ça marchait vraiment, et les résultats sont tout simplement bluffants. Le T-shirt lisse instantanément le ventre et rentre tout en place. Au-delà du changement physique, ça redonne vraiment le sourire et un vrai coup de boost à la confiance en soi ! Je le recommande chaudement.',
-      en: 'I took a before and after picture to see if it actually worked, and the results are just mind-blowing. The shirt instantly smooths out the stomach and tucks everything in. Beyond the physical changes, it really brings back your smile and gives a massive boost to your self-confidence! I highly recommend it.',
-    },
-    photos: ['/reviews/4.webp'],
-    verified: true,
-    helpful: 52,
-  },
-  {
     id: 'rev-5',
     name: 'Jason M.',
     country: 'US',
@@ -173,6 +153,26 @@ export const reviews = [
     photos: ['/reviews/6.webp'],
     verified: true,
     helpful: 43,
+  },
+  {
+    id: 'rev-4',
+    name: 'Fabrice C.',
+    country: 'FR',
+    flag: '🇫🇷',
+    countryName: { fr: 'France', en: 'France' },
+    date: '2026-10-28',
+    rating: 5,
+    title: {
+      fr: 'La photo parle d’elle-même !',
+      en: 'The picture speaks for itself!',
+    },
+    text: {
+      fr: 'J’ai pris une photo avant/après pour vérifier si ça marchait vraiment, et les résultats sont tout simplement bluffants. Le T-shirt lisse instantanément le ventre et rentre tout en place. Au-delà du changement physique, ça redonne vraiment le sourire et un vrai coup de boost à la confiance en soi ! Je le recommande chaudement.',
+      en: 'I took a before and after picture to see if it actually worked, and the results are just mind-blowing. The shirt instantly smooths out the stomach and tucks everything in. Beyond the physical changes, it really brings back your smile and gives a massive boost to your self-confidence! I highly recommend it.',
+    },
+    photos: ['/reviews/4.webp'],
+    verified: true,
+    helpful: 52,
   },
   {
     id: 'rev-1',

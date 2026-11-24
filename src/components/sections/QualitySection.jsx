@@ -185,8 +185,7 @@ export default function QualitySection() {
           </div>
 
           <a href="#product" className="btn btn--gold">
-            {lang === 'fr' ? 'Essayer sans risque — Garantie 30 Jours' : 'Try Risk-Free — 30-Day Guarantee'}{' '}
-            <Icon name="arrow" size={18} />
+            {lang === 'fr' ? 'Choisir ma taille ↑' : 'Choose your size ↑'}
           </a>
           <p className="quality__note">
             {lang === 'fr'

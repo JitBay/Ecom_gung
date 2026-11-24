@@ -214,8 +214,7 @@ export default function VideoTestimonials() {
         {/* Call to action */}
         <div className="ugc__cta reveal">
           <a href="#product" className="btn btn--gold">
-            {lang === 'fr' ? 'Essayer avec la garantie 30 jours' : 'Try with 30-Day Guarantee'}{' '}
-            <Icon name="arrow" size={18} />
+            {lang === 'fr' ? 'Choisir ma taille ↑' : 'Choose your size ↑'}
           </a>
         </div>
       </div>

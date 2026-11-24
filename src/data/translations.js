@@ -8,7 +8,7 @@ export const translations = {
     announcements: [
       'Garantie satisfait ou remboursé de 30 jours',
       'Livraison suivie 100% offerte en 6 à 12 jours ouvrés · Suivi complet en direct · club zvar',
-      'Plus de 1 200 clients satisfaits portent Vela Sculpt™ au quotidien',
+      '⭐ Noté 4.9/5 par nos clients vérifiés',
     ],
 
     black_friday: {
@@ -149,7 +149,7 @@ export const translations = {
     },
 
     home: {
-      eyebrow: 'Plébiscité par plus de 1 200 clients satisfaits',
+      eyebrow: '⭐ 4.9 · Plébiscité par nos clients vérifiés',
       hero_title_1: 'Every age',
       hero_title_2: 'Every body',
       hero_text:
@@ -158,8 +158,8 @@ export const translations = {
       cta_all: 'Voir toute la collection',
 
       stats: [
-        { value: '1 200+', label: 'Clients satisfaits' },
-        { value: '3 100+', label: 'Pièces vendues' },
+        { value: '4.9/5', label: 'Note moyenne' },
+        { value: '< 2%', label: 'Taux de retour' },
         { value: '7+', label: 'Pays livrés' },
         { value: '30 jours', label: 'Garantie satisfait ou remboursé' },
       ],
@@ -303,7 +303,7 @@ export const translations = {
       sort_helpful: 'Plus utiles',
       ai_title: 'Synthèse des retours clients',
       ai_badge: 'Synthèse IA certifiée',
-      ai_text: 'Plébiscité pour son invisibilité sous chemise blanche, son effet gainant immédiat sans couper le souffle et son maintien lombaire au bureau. Moins de 2% de retours constatés sur plus de 3 100 pièces expédiées.',
+      ai_text: 'Plébiscité pour son invisibilité sous chemise blanche, son effet gainant immédiat sans couper le souffle et son maintien lombaire au bureau. Moins de 2% de retours constatés sur l’ensemble des commandes.',
       ai_tag_invisible: '100% invisible sous chemise',
       ai_tag_posture: 'Maintien lombaire & dos',
       ai_tag_breathable: 'Maille respirante fraîche',
@@ -373,16 +373,16 @@ export const translations = {
     announcements: [
       'Black Friday Sale',
       '30-Day Money-Back Guarantee',
-      'Free Tracked Shipping in 6 to 12 working days · Full Live Tracking · zvar club',
-      'Over 1,200 happy customers wear Vela Sculpt™ every day',
+      'Free Tracked Shipping · 🎄 Order by Dec 10 for Christmas delivery',
+      '⭐ 4.9/5 rated by verified customers',
     ],
 
     black_friday: {
       bar_items: [
         { text: "Black Friday Sale: our biggest offer of the year", highlight: true },
         { text: "Up to 50% off storewide", highlight: false },
-        { text: "+3,100 T-shirts sold", highlight: true },
-        { text: "1,200+ happy customers", highlight: false },
+        { text: "⭐ 4.9/5 verified customer rating", highlight: true },
+        { text: "30-day money-back guarantee", highlight: false },
         { text: "Buy 2, get 1 free on all styles", highlight: true },
         { text: "3-Fits Discovery Pack special at $44.99", highlight: false },
         { text: "Free tracked shipping included", highlight: false },
@@ -390,9 +390,9 @@ export const translations = {
       ],
       strip_items: [
         "Biggest offer of the year",
-        "+3,100 T-shirts sold",
+        "⭐ 4.9/5 verified rating",
         "Up to 50% off",
-        "1,200+ happy customers",
+        "30-day money-back guarantee",
         "Buy 2 get 1 free on all styles",
         "Discovery Pack at $44.99",
         "Free tracked shipping",
@@ -407,8 +407,8 @@ export const translations = {
         chips: [
           "Buy 2, get 1 free storewide",
           "Discovery Pack at $44.99",
-          "1,200+ happy customers",
-          "+3,100 T-shirts sold",
+          "⭐ 4.9/5 verified rating",
+          "30-day trial at home",
           "Free tracked shipping",
         ],
         cta: "Explore Black Friday Deals",
@@ -506,7 +506,7 @@ export const translations = {
     cart: {
       title: 'Your cart',
       close: 'Close cart',
-      free_shipping_unlocked: '🎉 You unlocked FREE TRACKED SHIPPING in 6 to 12 working days',
+      free_shipping_unlocked: '🚚 Free tracked shipping · 🎄 Order by Dec 10 for Christmas delivery',
       free_shipping_left: 'Add {amount} more for free shipping',
       empty_title: 'Your cart is empty',
       empty_btn: 'Discover our styles',
@@ -520,7 +520,7 @@ export const translations = {
     },
 
     home: {
-      eyebrow: 'Loved by 1,200+ happy customers',
+      eyebrow: '⭐ 4.9 · Loved by US customers',
       hero_title_1: 'Every age',
       hero_title_2: 'Every body',
       hero_text:
@@ -529,8 +529,8 @@ export const translations = {
       cta_all: 'Shop all collection',
 
       stats: [
-        { value: '1,200+', label: 'Happy customers' },
-        { value: '3,100+', label: 'Pieces sold' },
+        { value: '4.9/5', label: 'Customer rating' },
+        { value: '< 2%', label: 'Return rate' },
         { value: '7+', label: 'Countries shipped' },
         { value: '30 days', label: 'Money-back guarantee' },
       ],
@@ -674,7 +674,7 @@ export const translations = {
       sort_helpful: 'Most Helpful',
       ai_title: 'Customer Feedback Summary',
       ai_badge: 'Verified AI Summary',
-      ai_text: 'Praised for invisible discreetness under white dress shirts, immediate slimming effect without restricting breathing, and comfortable lumbar support. Less than 2% return rate across 3,100+ orders.',
+      ai_text: 'Praised for invisible discreetness under white dress shirts, immediate slimming effect without restricting breathing, and comfortable lumbar support. Less than 2% return rate across all verified orders.',
       ai_tag_invisible: '100% Invisible under shirts',
       ai_tag_posture: 'Lumbar & posture support',
       ai_tag_breathable: 'All-day breathable knit',

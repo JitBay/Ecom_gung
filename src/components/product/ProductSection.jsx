@@ -514,7 +514,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
             <Icon name="lock" size={14} /> {lang === 'fr' ? 'Paiement 100% sécurisé' : '100% Secure Payment'}
           </span>
           <span>
-            <Icon name="truck" size={14} /> {lang === 'fr' ? 'Livraison 100% gratuite · 6 à 12 jours ouvrés · suivi complet' : 'Free shipping · 6 to 12 working days · full tracking'}
+            <Icon name="truck" size={14} /> {lang === 'fr' ? 'Livraison 100% gratuite · Suivi complet en direct' : '🚚 Free tracked shipping · 🎄 Order by Dec 10 for Christmas delivery'}
           </span>
           <span>
             <Icon name="shield" size={14} /> {lang === 'fr' ? 'Garantie satisfait ou remboursé 30j' : '30-Day Money-Back Guarantee'}

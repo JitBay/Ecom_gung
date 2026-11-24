@@ -135,8 +135,7 @@ export default function Hero({ initialHandle, onSelectModel, showModelSelector =
 
         <div className="hero__cta-group">
           <a href="#product" className="btn btn--dark hero__cta">
-            {lang === 'fr' ? 'Commander avec la garantie 30 jours' : 'Order with 30-Day Guarantee'}{' '}
-            <Icon name="arrow" size={18} />
+            {lang === 'fr' ? 'Choisir ma taille ↑' : 'Choose your size ↑'}
           </a>
         </div>
 
