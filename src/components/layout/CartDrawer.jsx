@@ -15,9 +15,35 @@ export default function CartDrawer() {
   const { t, lang } = useLanguage();
   useLockScroll(open);
 
-  const bundleShipsFree = true;
-  const left = 0;
-  const progress = 100;
+  const totalTanks = lines.reduce((acc, l) => {
+    const multiplier = (l.isTwoPlusOne || l.bundleId === 2 || l.bundleId === 3 || l.isDiscoveryPack) ? 3 : 1;
+    return acc + (multiplier * (l.qty || 1));
+  }, 0);
+
+  let progress = 100;
+  let progressText = '';
+
+  if (totalTanks <= 0) {
+    progress = 0;
+    progressText = lang === 'fr'
+      ? 'Ajoutez 3 articles → 1 OFFERT 🎁'
+      : 'Add 3 items → get 1 FREE 🎁';
+  } else if (totalTanks === 1) {
+    progress = 33;
+    progressText = lang === 'fr'
+      ? 'Ajoutez encore 2 articles → 1 OFFERT 🎁'
+      : 'Add 2 more → get 1 FREE 🎁';
+  } else if (totalTanks === 2) {
+    progress = 66;
+    progressText = lang === 'fr'
+      ? 'Ajoutez encore 1 article → c’est OFFERT 🎁'
+      : 'Add 1 more → it’s FREE 🎁';
+  } else {
+    progress = 100;
+    progressText = lang === 'fr'
+      ? '🎉 Vous avez débloqué 1 débardeur OFFERT !'
+      : '🎉 You unlocked 1 FREE tank!';
+  }
 
   const isInApp = typeof navigator !== 'undefined' && /FBAN|FBAV|Instagram|Line|Twitter|Snapchat|TikTok/i.test(navigator.userAgent || '');
   const instantCheckoutUrl = lines.length > 0 ? getInstantCheckoutUrl(lines, { locale: lang, shopifyCart }) : '';
@@ -35,16 +61,17 @@ export default function CartDrawer() {
         </header>
 
         <div className="cart__ship">
-          <p>
-            {left > 0 ? (
-              <>{t('cart.free_shipping_left', { amount: price(left) })}</>
-            ) : (
-              <>{t('cart.free_shipping_unlocked')}</>
-            )}
+          <p className="cart__progress-text">
+            <strong>{progressText}</strong>
           </p>
           <i>
             <i style={{ width: `${progress}%` }} />
           </i>
+          <p className="cart__deadline">
+            {lang === 'fr'
+              ? '🚚 Livraison gratuite suivie · 🎄 Commandez avant le 10 déc. pour Noël'
+              : '🚚 Free tracked shipping · 🎄 Order by Dec 10 for Christmas delivery'}
+          </p>
         </div>
 
         {lines.length === 0 ? (

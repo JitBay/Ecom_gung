@@ -37,8 +37,8 @@ export default function StickyCart({ visible, bundle, onAdd, productImage, title
             ? 'Chargement...'
             : 'Loading...'
           : lang === 'fr'
-          ? 'Ajouter au panier'
-          : 'Add to cart'}
+          ? `Ajouter au panier — ${price(bundle.price)}`
+          : `Add to cart — ${price(bundle.price)}`}
       </button>
     </div>
   );

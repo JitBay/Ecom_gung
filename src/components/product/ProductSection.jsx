@@ -6,6 +6,7 @@ import BlackFridayDeal from './BlackFridayDeal.jsx';
 import ProductDetails from './ProductDetails.jsx';
 import SizeFinder from './SizeFinder.jsx';
 import StickyCart from './StickyCart.jsx';
+import ProductCustomerPhotos from './ProductCustomerPhotos.jsx';
 import ShopifyBuyButton from '../shopify/ShopifyBuyButton.jsx';
 import ShopifyPaymentBadges from '../shopify/ShopifyPaymentBadges.jsx';
 import ExpressPaymentButtons from '../shopify/ExpressPaymentButtons.jsx';
@@ -21,6 +22,7 @@ import { useScrolledPast } from '../../lib/hooks.js';
 import { trackViewContent } from '../../lib/analytics.js';
 import { resolveShopifyVariantId } from '../../lib/shopify.js';
 import { SHOPIFY_PRODUCT_GIDS, trackShopifyProductView } from '../../lib/shopifyAnalytics.js';
+import { price } from '../../lib/format.js';
 import './ProductSection.css';
 
 export default function ProductSection({ initialModelHandle, onModelChange, showModelSelector = true, isDiscoveryOffer = false }) {
@@ -164,7 +166,16 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
 
   const [sizeOpen, setSizeOpen] = useState(false);
   const [atcRef, pastAtc] = useScrolledPast();
+  const [hasScrolled, setHasScrolled] = useState(false);
   const { add, isCheckingOut } = useCart();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setHasScrolled(window.scrollY > 300);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const [searchParams] = useSearchParams();
   const queryColor = searchParams.get('color');
@@ -411,10 +422,68 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
       </div>
 
       <div className="product__info">
+        {/* 1. Titre produit accrocheur */}
+        <h1 className="product__title">
+          {lang === 'fr'
+            ? 'Vela Sculpt™ — Paraissez plus mince sous n’importe quel vêtement, instantanément'
+            : 'Vela Sculpt™ — Look slimmer under any shirt, instantly'}
+        </h1>
+
+        {/* 2. Étoiles & Recommandation clients */}
+        <a
+          href="#reviews"
+          className="product__rating"
+          onClick={(e) => {
+            e.preventDefault();
+            const el = document.getElementById('reviews');
+            if (el) {
+              el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              window.history.pushState(null, '', '#reviews');
+            }
+          }}
+          title={lang === 'fr' ? 'Consulter les avis clients' : 'Read customer reviews'}
+        >
+          <span style={{ color: '#d4af37', fontWeight: 700 }}>⭐ 4.9</span>
+          <span className="product__rating-label" style={{ marginLeft: 6, fontWeight: 600 }}>
+            · {lang === 'fr' ? 'Recommandé par nos clients' : 'Loved by US customers'}
+          </span>
+        </a>
+
+        {/* 3. Bloc Prix barré + sous-texte par unité */}
+        <div className="product__top-pricing">
+          <div className="product__top-price-row">
+            <span className="product__top-price">{price(bundle.price)}</span>
+            {bundle.compareAt && (
+              <span className="product__top-compare">{price(bundle.compareAt)}</span>
+            )}
+            <span className="product__top-badge">
+              {bundle.isTwoPlusOne
+                ? (lang === 'fr' ? '1 OFFERT 🎁' : '1 FREE 🎁')
+                : (lang === 'fr' ? 'Offre Spéciale' : 'Special Offer')}
+            </span>
+          </div>
+          <p className="product__top-subtext">
+            {lang === 'fr'
+              ? 'Seulement 13,33 € par débardeur avec l’offre 2 Achetés = 1 Offert'
+              : 'Just $13.33 each with Buy 2, Get 1 Free'}
+          </p>
+        </div>
+
+        {/* Lien Guide des tailles bien visible */}
+        <div className="product__size-guide-row">
+          <button
+            type="button"
+            className="product__size-guide-btn"
+            onClick={() => setSizeOpen(true)}
+          >
+            <span>📏</span> {lang === 'fr' ? 'Guide des tailles — quelle taille choisir ?' : 'Size guide — which size should I get?'}
+          </button>
+        </div>
+
         {showModelSelector && (
           <div className="product__model-selector">
             <label className="product__model-label">
-              {lang === 'fr' ? '1. Choisissez votre coupe ergonomique :' : '1. Choose your ergonomic fit:'}
+              {lang === 'fr' ? 'Coupe ergonomique :' : 'Ergonomic fit:'}
             </label>
             <div className="product__model-buttons">
               {cutsList.map((p) => {
@@ -434,32 +503,11 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
           </div>
         )}
 
-        <h1 className="product__title">{localizedModel.title}</h1>
-        <a
-          href="#reviews"
-          className="product__rating"
-          onClick={(e) => {
-            e.preventDefault();
-            const el = document.getElementById('reviews');
-            if (el) {
-              el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              window.history.pushState(null, '', '#reviews');
-            }
-          }}
-          title={lang === 'fr' ? 'Consulter les avis clients' : 'Read customer reviews'}
-        >
-          <Stars value={5} size={16} /> <strong>4.9</strong> <span>/ 5 · {lang === 'fr' ? 'Avis clients' : 'Customer reviews'}</span>
-        </a>
-
-        <p className="product__tagline">{localizedModel.tagline}</p>
-
-        {/* Color swatches */}
+        {/* 4. Sélecteur couleur */}
         <div className="product__color-picker">
           <div className="product__color-header">
             <span className="product__color-label">
-              {showModelSelector
-                ? (lang === 'fr' ? '2. Couleur sélectionnée :' : '2. Selected color:')
-                : (lang === 'fr' ? 'Couleur sélectionnée :' : 'Selected color:')}{' '}
+              {lang === 'fr' ? 'Couleur sélectionnée :' : 'Selected color:'}{' '}
               <strong>{t('color_names.' + selectedColor, selectedColor)}</strong>
             </span>
           </div>
@@ -480,7 +528,66 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
           </div>
         </div>
 
-        {/* Benefits list */}
+        {/* BundlePicker (sélection des tailles et offres) */}
+        <BundlePicker
+          selectedId={bundleId}
+          onSelect={setBundleId}
+          variants={chosen}
+          onVariantChange={updateVariant}
+          productImage={currentImages[0]}
+          availableColors={availableColors}
+          colorImages={currentModel.colorImages}
+          model={currentModel}
+          items={modelBundles}
+        />
+
+        {/* 5. Bouton d'achat, garantie, avis photos & réassurance */}
+        <div className="product__actions">
+          <button
+            ref={atcRef}
+            className={`btn btn--dark btn--block atc ${isCheckingOut ? 'is-loading' : ''}`}
+            onClick={addToCart}
+            disabled={isCheckingOut}
+          >
+            {isCheckingOut ? (
+              lang === 'fr' ? 'Chargement en cours...' : 'Processing...'
+            ) : lang === 'fr' ? (
+              `Ajouter au panier — ${bundle.title}`
+            ) : (
+              `Add to cart — ${bundle.title}`
+            )}
+          </button>
+
+          <ExpressPaymentButtons lineItem={currentLineItem} />
+
+          {/* 8. Bloc garantie juste sous le bouton d'achat */}
+          <div className="product__guarantee-highlight">
+            <span className="product__guarantee-icon">🛡️</span>
+            <p>
+              {lang === 'fr'
+                ? 'Essayez-le pendant 30 jours. Pas convaincu ? Remboursement intégral sans poser de question.'
+                : 'Try it for 30 days. Don’t love it? Full refund — no questions asked.'}
+            </p>
+          </div>
+
+          {/* 9. Photos de vrais clients juste sous le bouton */}
+          <ProductCustomerPhotos
+            onScrollToReviews={() => {
+              const el = document.getElementById('reviews');
+              if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }}
+          />
+
+          <ProductTrustBlock />
+
+          <ShopifyPaymentBadges showSecurityNote={false} />
+        </div>
+
+        {/* Éléments détaillés situés sous le bloc principal d'achat */}
+        <InlineSizeGuide onOpenCalculator={() => setSizeOpen(true)} />
+
+        <BlackFridayDeal model={currentModel} isDiscovery={isDiscovery} />
+
         <ul className="benefits">
           {benefitsList.map((b) => (
             <li key={b.title}>
@@ -496,7 +603,6 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
           ))}
         </ul>
 
-        {/* Stats */}
         <div className="stats">
           {statsList.map((s) => (
             <div key={s.label}>
@@ -520,45 +626,6 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
             <Icon name="shield" size={14} /> {lang === 'fr' ? 'Garantie satisfait ou remboursé 30j' : '30-Day Money-Back Guarantee'}
           </span>
         </p>
-
-        <BlackFridayDeal model={currentModel} isDiscovery={isDiscovery} />
-
-        <BundlePicker
-          selectedId={bundleId}
-          onSelect={setBundleId}
-          variants={chosen}
-          onVariantChange={updateVariant}
-          productImage={currentImages[0]}
-          availableColors={availableColors}
-          colorImages={currentModel.colorImages}
-          model={currentModel}
-          items={modelBundles}
-        />
-
-        <InlineSizeGuide onOpenCalculator={() => setSizeOpen(true)} />
-
-        <div className="product__actions">
-          <button
-            ref={atcRef}
-            className={`btn btn--dark btn--block atc ${isCheckingOut ? 'is-loading' : ''}`}
-            onClick={addToCart}
-            disabled={isCheckingOut}
-          >
-            {isCheckingOut ? (
-              lang === 'fr' ? 'Chargement en cours...' : 'Processing...'
-            ) : lang === 'fr' ? (
-              `Ajouter au panier — ${bundle.title}`
-            ) : (
-              `Add to Cart — ${bundle.title}`
-            )}
-          </button>
-
-          <ExpressPaymentButtons lineItem={currentLineItem} />
-
-          <ProductTrustBlock />
-
-          <ShopifyPaymentBadges showSecurityNote={false} />
-        </div>
 
         <ul className="product__badges">
           {badgesList.map((b) => (
@@ -584,7 +651,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
 
       <SizeFinder open={sizeOpen} onClose={() => setSizeOpen(false)} onApply={applySize} />
       <StickyCart
-        visible={pastAtc}
+        visible={hasScrolled || pastAtc}
         bundle={bundle}
         onAdd={addToCart}
         productImage={bundle.isDiscoveryPack ? '/images/products/image-decouverte.png' : currentImages[0]}

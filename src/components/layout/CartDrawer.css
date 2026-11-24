@@ -53,20 +53,37 @@
   font-size: 13px;
 }
 
+.cart__progress-text {
+  font-size: 13.5px;
+  color: #1a1a1a;
+  margin: 0;
+}
+
 .cart__ship > i {
   display: block;
-  height: 6px;
-  margin-top: 8px;
-  border-radius: 3px;
-  background: var(--stone);
+  height: 7px;
+  margin: 8px 0;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.08);
   overflow: hidden;
 }
 
 .cart__ship i i {
   display: block;
   height: 100%;
-  background: var(--gold);
+  background: linear-gradient(90deg, #c4a265, #d4af37);
   transition: width 0.4s ease;
+  border-radius: 4px;
+}
+
+.cart__deadline {
+  margin: 8px 0 0;
+  font-size: 12px;
+  color: #475569;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .cart__empty {

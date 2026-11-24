@@ -14,6 +14,103 @@
   letter-spacing: -0.01em;
 }
 
+/* Top pricing & per-unit offer highlight */
+.product__top-pricing {
+  margin: 12px 0 14px;
+  padding: 10px 14px;
+  background: rgba(196, 162, 101, 0.08);
+  border-left: 3px solid var(--gold);
+  border-radius: 6px;
+}
+
+.product__top-pricing-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.product__top-price {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+
+.product__top-compare {
+  font-size: 17px;
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+.product__top-badge {
+  font-size: 12px;
+  font-weight: 700;
+  color: #b45309;
+  background: #fef3c7;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.product__top-deal-note {
+  margin: 4px 0 0;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #047857;
+}
+
+/* Prominent size guide link */
+.product__size-guide-row {
+  display: flex;
+  justify-content: flex-end;
+  margin: 8px 0 6px;
+}
+
+.product__size-guide-btn {
+  background: none;
+  border: none;
+  color: #1e3a8a;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 4px 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.product__size-guide-btn:hover {
+  color: #2563eb;
+}
+
+/* Compact 30-day guarantee highlight */
+.product__guarantee-highlight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0 6px;
+  padding: 10px 14px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+.product__guarantee-icon {
+  font-size: 20px;
+  flex: none;
+}
+
+.product__guarantee-text {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #1e293b;
+}
+
+.product__guarantee-text strong {
+  font-weight: 700;
+}
+
 .product__tagline {
   font-size: 15px;
   line-height: 1.5;
