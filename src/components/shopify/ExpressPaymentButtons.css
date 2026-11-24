@@ -28,7 +28,7 @@
 
 .express-checkout__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 8px;
 }
 
@@ -62,6 +62,14 @@
 
 .express-btn--shoppay {
   background: #5a31f4;
+}
+
+.express-btn--paypal {
+  background: #ffc439;
+}
+
+.express-btn--paypal:hover:not(:disabled) {
+  background: #f2ba32;
 }
 
 .express-btn--applepay {

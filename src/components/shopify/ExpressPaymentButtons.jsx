@@ -6,7 +6,7 @@ import { useCart } from '../../context/CartContext.jsx';
 import './ExpressPaymentButtons.css';
 
 /**
- * Express Checkout Buttons: Shop Pay, Apple Pay, Google Pay
+ * Express Checkout Buttons: Shop Pay, PayPal, Apple Pay, Google Pay
  * Can be used on the product page (with lineItem) or in CartDrawer (with cart lines)
  */
 export default function ExpressPaymentButtons({ lineItem = null, className = '' }) {
@@ -81,6 +81,46 @@ export default function ExpressPaymentButtons({ lineItem = null, className = '' 
               </text>
               <text x="46" y="21" fill="#FFFFFF" fontSize="11" fontWeight="600" fontFamily="system-ui, -apple-system, sans-serif" opacity="0.95">
                 Pay
+              </text>
+            </svg>
+          )}
+        </button>
+
+        {/* PayPal */}
+        <button
+          type="button"
+          className="express-btn express-btn--paypal"
+          onClick={(e) => handleExpressClick('paypal', e)}
+          disabled={isDisabled}
+          title={lang === 'fr' ? 'Payer avec PayPal' : 'Pay with PayPal'}
+          aria-label={lang === 'fr' ? 'Payer avec PayPal' : 'Pay with PayPal'}
+        >
+          {loadingMethod === 'paypal' ? (
+            <span className="express-btn__spinner express-btn__spinner--dark" />
+          ) : (
+            <svg viewBox="0 0 100 32" height="22" fill="none">
+              <path
+                d="M20 7h6.6c3.8 0 6.6 1.8 6.1 5.8-.5 4.1-3.6 6-7.3 6h-2.4l-1.6 9.2h-4.3L20 7z"
+                fill="#003087"
+              />
+              <path
+                d="M23.6 11.2h6.2c3.5 0 6 1.6 5.6 5.2-.5 3.8-3.3 5.4-6.8 5.4h-2.2l-1.5 8.2h-4.1l2.8-18.8z"
+                fill="#0079C1"
+              />
+              <path
+                d="M23.6 16.4h2.2c3.5 0 6.3-1.6 6.8-5.4.1-.7 0-1.3-.2-1.8-1.1 3-3.6 4.7-6.8 4.7h-2.2l-.7 4.5.9-2z"
+                fill="#002069"
+              />
+              <text
+                x="39"
+                y="21"
+                fill="#003087"
+                fontSize="14.5"
+                fontWeight="800"
+                fontStyle="italic"
+                fontFamily="system-ui, -apple-system, sans-serif"
+              >
+                Pay<tspan fill="#0079C1">Pal</tspan>
               </text>
             </svg>
           )}

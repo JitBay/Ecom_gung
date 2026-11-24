@@ -38,6 +38,32 @@ export default function ShopifyPaymentBadges({ className = '', showSecurityNote 
           </svg>
         </span>
 
+        {/* PayPal */}
+        <span className="shopify-badge" title="PayPal">
+          <svg viewBox="0 0 38 24" width="38" height="24" fill="none">
+            <rect width="38" height="24" rx="4" fill="#FFC439" />
+            <path
+              d="M13.2 5.5h3.6c2.1 0 3.6 1 3.3 3.2-.3 2.3-2 3.3-4 3.3h-1.3l-.9 5.5H11.5L13.2 5.5z"
+              fill="#003087"
+            />
+            <path
+              d="M15.2 8h3.4c1.9 0 3.3.9 3.1 2.9-.3 2.1-1.8 3-3.7 3h-1.2l-.8 4.6h-2.3L15.2 8z"
+              fill="#0079C1"
+            />
+            <text
+              x="21.5"
+              y="14.5"
+              fill="#003087"
+              fontSize="7"
+              fontWeight="800"
+              fontStyle="italic"
+              fontFamily="sans-serif"
+            >
+              Pal
+            </text>
+          </svg>
+        </span>
+
         {/* Google Pay */}
         <span className="shopify-badge" title="Google Pay">
           <svg viewBox="0 0 38 24" width="38" height="24" fill="none">
@@ -101,8 +127,8 @@ export default function ShopifyPaymentBadges({ className = '', showSecurityNote 
             <path d="M12 2C9.243 2 7 4.243 7 7v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7c0-2.757-2.243-5-5-5zm-3 5c0-1.654 1.346-3 3-3s3 1.346 3 3v3H9V7zm3 9a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" />
           </svg>
           {lang === 'fr'
-            ? 'Paiement 100% sécurisé via Apple Pay, Shop Pay & Cartes (SSL 256 bits)'
-            : '100% Secure Checkout via Apple Pay, Shop Pay & Cards (256-bit SSL)'}
+            ? 'Paiement 100% sécurisé via PayPal, Apple Pay, Shop Pay & Cartes (SSL 256 bits)'
+            : '100% Secure Checkout via PayPal, Apple Pay, Shop Pay & Cards (256-bit SSL)'}
         </p>
       )}
     </div>
