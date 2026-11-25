@@ -137,22 +137,10 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
         qty: 1,
         title: lang === 'fr' ? `1 ${nounFr}` : `1 ${nounEn}`,
         subtitle: lang === 'fr'
-          ? 'Idéal pour tester l’effet gainant et le maintien au quotidien.'
-          : 'Ideal for testing slimming support and all-day comfort.',
+          ? 'Idéal pour essayer l’effet gainant et le confort au quotidien.'
+          : 'Ideal for trying slimming support and all-day comfort.',
         price: p1,
         compareAt: c1,
-        badge: '',
-        freeShipping: true,
-      },
-      {
-        id: 2,
-        qty: 2,
-        title: lang === 'fr' ? `2 ${nounPluralFr}` : `2 ${nounPluralEn}`,
-        subtitle: lang === 'fr'
-          ? '1 à porter, 1 au lavage.'
-          : '1 to wear, 1 in the wash.',
-        price: p2,
-        compareAt: c2,
         badge: '',
         freeShipping: true,
       },

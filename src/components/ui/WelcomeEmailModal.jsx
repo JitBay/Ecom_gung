@@ -264,7 +264,9 @@ export default function WelcomeEmailModal() {
               </span>
               <strong className="welcome-modal-code">WELCOME10</strong>
               <span className="welcome-modal-condition">
-                {lang === 'fr' ? '— -10% dès 39$ d’achat' : '— 10% off orders $39+'}
+                {lang === 'fr'
+                  ? '— -10 % sur votre commande (soit 17,99 $)'
+                  : '— 10% off your order (just $17.99 for 1 Tank)'}
               </span>
             </div>
 
