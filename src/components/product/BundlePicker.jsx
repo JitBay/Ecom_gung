@@ -96,9 +96,14 @@ function VariantRows({
 
   return (
     <div className="variants">
-      <p className="variants__label">
-        {lang === 'fr' ? 'Couleur & taille par article :' : 'Color & Size per shirt:'}
-      </p>
+      <div className="variants__label-row">
+        <p className="variants__label">
+          {lang === 'fr' ? 'Couleur & taille par article :' : 'Color & Size per shirt:'}
+        </p>
+        <span className="variants__size-tip">
+          {lang === 'fr' ? '💡 Prenez votre taille habituelle' : '💡 Pick your usual T-shirt size'}
+        </span>
+      </div>
       {variants.map((v, i) => {
         const currentColor = colorList.find((c) => c.id === v.color) || colorList[0];
         const imgs = model ? getColorImages(model, v.color || currentColor?.label || currentColor?.id) : null;

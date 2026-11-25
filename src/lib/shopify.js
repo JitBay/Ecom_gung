@@ -413,19 +413,21 @@ function resolveCartVariantEntries(lines = []) {
     // 2. Check if this is a 2+1 Offer bundle (2 paid shirts, 3rd free)
     const isTwoPlusOne =
       Boolean(line.isTwoPlusOne) ||
-      line.bundleId === 2 ||
-      String(line.bundleId) === '2' ||
-      line.paidQty === 2 ||
-      (typeof line.id === 'string' && line.id.includes('-2-')) ||
-      (typeof line.title === 'string' && /2\s*(t-shirts?|shirts?)\s*\+\s*1\s*(offert|free)|2\+1/i.test(line.title)) ||
-      (line.price && (Math.abs(line.price - 39.98) < 0.05 || Math.abs(line.price - 49.98) < 0.05 || Math.abs(line.price - 59.98) < 0.05));
+      (typeof line.title === 'string' && /2\s*\+\s*1|buy\s*2.*get\s*1\s*free|2\s*achet[eé]s.*1\s*offert/i.test(line.title));
 
-    // 3. Check if this is a 3-shirt pack (3 paid shirts)
+    // 3. Check if this is a 2-shirt pack (2 paid shirts)
+    const isPackTwo =
+      !isTwoPlusOne &&
+      (line.bundleId === 2 ||
+       String(line.bundleId) === '2' ||
+       (Array.isArray(line.chosenVariants) && line.chosenVariants.length === 2 && !isTwoPlusOne) ||
+       (typeof line.title === 'string' && /2\s*(t-shirts?|shirts?|tanks?|d[eé]bardeurs?)/i.test(line.title) && !isTwoPlusOne));
+
+    // 4. Check if this is a 3-shirt pack (3 paid shirts)
     const isPackThree =
-      line.bundleId === 3 ||
-      String(line.bundleId) === '3' ||
-      line.paidQty === 3 ||
-      (typeof line.title === 'string' && /(pack semaine|week pack)/i.test(line.title));
+      !isTwoPlusOne &&
+      (line.bundleId === 'pack-3' ||
+       (typeof line.title === 'string' && /(pack semaine|week pack)/i.test(line.title)));
 
     if (isTwoPlusOne) {
       if (Array.isArray(line.chosenVariants) && line.chosenVariants.length >= 3) {
@@ -441,6 +443,18 @@ function resolveCartVariantEntries(lines = []) {
         addEntry(v1, 1 * lineQty);
       } else {
         addEntry(resolveShopifyVariantId(line), 3 * lineQty, detailText);
+      }
+      return;
+    }
+
+    if (isPackTwo) {
+      if (Array.isArray(line.chosenVariants) && line.chosenVariants.length >= 2) {
+        for (let i = 0; i < 2; i++) {
+          const vId = resolveShopifyVariantId({ handle: line.handle, ...line.chosenVariants[i] });
+          addEntry(vId, 1 * lineQty, i === 0 ? detailText : '');
+        }
+      } else {
+        addEntry(resolveShopifyVariantId(line), 2 * lineQty, detailText);
       }
       return;
     }

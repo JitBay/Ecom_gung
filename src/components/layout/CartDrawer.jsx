@@ -16,7 +16,14 @@ export default function CartDrawer() {
   useLockScroll(open);
 
   const totalTanks = lines.reduce((acc, l) => {
-    const multiplier = (l.isTwoPlusOne || l.bundleId === 2 || l.bundleId === 3 || l.isDiscoveryPack) ? 3 : 1;
+    let multiplier = 1;
+    if (l.isDiscoveryPack || l.isTwoPlusOne || l.bundleId === 3) {
+      multiplier = 3;
+    } else if (l.bundleId === 2 || (Array.isArray(l.chosenVariants) && l.chosenVariants.length === 2)) {
+      multiplier = 2;
+    } else {
+      multiplier = l.paidQty || 1;
+    }
     return acc + (multiplier * (l.qty || 1));
   }, 0);
 

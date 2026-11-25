@@ -107,49 +107,75 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
     }
 
     const p1 = currentModel.price;
-    const c1 = currentModel.compareAt || Math.round(p1 * 1.5);
-    let p2, c2;
-    if (currentModel.handle === 'vela-sculpt-sans-manches') {
-      p2 = 39.98;
-      c2 = 59.97;
-    } else if (currentModel.handle === 'vela-sculpt-demi-manches') {
-      p2 = 49.98;
-      c2 = 74.97;
+    const c1 = currentModel.compareAt || (p1 === 19.99 ? 39.99 : Math.round(p1 * 1.6 * 100) / 100);
+    const p2 = Math.round(p1 * 2 * 100) / 100;
+    const c2 = Math.round(c1 * 2 * 100) / 100;
+    const p3 = p2;
+    const c3 = Math.round(p1 * 3 * 100) / 100;
+    const perUnit = (p3 / 3).toFixed(2);
+
+    let nounEn = 'Tank';
+    let nounPluralEn = 'Tanks';
+    let nounFr = 'Débardeur';
+    let nounPluralFr = 'Débardeurs';
+
+    if (currentModel.handle === 'vela-sculpt-demi-manches') {
+      nounEn = 'Shirt';
+      nounPluralEn = 'Shirts';
+      nounFr = 'T-shirt';
+      nounPluralFr = 'T-shirts';
     } else if (currentModel.handle === 'vela-sculpt-manches-longues') {
-      p2 = 59.98;
-      c2 = 89.97;
-    } else {
-      p2 = Math.round(p1 * 2 * 100) / 100;
-      c2 = Math.round(p1 * 3 * 100) / 100;
+      nounEn = 'Long Sleeve';
+      nounPluralEn = 'Long Sleeves';
+      nounFr = 'Manches Longues';
+      nounPluralFr = 'Manches Longues';
     }
 
     return [
       {
         id: 1,
         qty: 1,
-        title: lang === 'fr' ? 'Pack 1 T-shirt' : 'Pack 1 Shirt',
-        subtitle: lang === 'fr' ? 'Idéal pour tester l’effet gainant et le confort au quotidien.' : 'Ideal for testing slimming support and all-day comfort.',
+        title: lang === 'fr' ? `1 ${nounFr}` : `1 ${nounEn}`,
+        subtitle: lang === 'fr'
+          ? 'Idéal pour tester l’effet gainant et le maintien au quotidien.'
+          : 'Ideal for testing slimming support and all-day comfort.',
         price: p1,
         compareAt: c1,
-        badge: lang === 'fr' ? 'Offre découverte — 1 T-shirt' : 'Intro Offer — 1 Shirt',
+        badge: '',
         freeShipping: true,
       },
       {
         id: 2,
-        qty: 3,
-        isTwoPlusOne: true,
-        title: lang === 'fr' ? 'Pack 2 T-shirts + 1 offert' : 'Pack 2 Shirts + 1 Free',
-        subtitle: lang === 'fr' ? '2 T-shirts achetés + le 3ème T-shirt 100% offert.' : 'Buy 2 shirts + get the 3rd shirt 100% free.',
+        qty: 2,
+        title: lang === 'fr' ? `2 ${nounPluralFr}` : `2 ${nounPluralEn}`,
+        subtitle: lang === 'fr'
+          ? '1 à porter, 1 au lavage.'
+          : '1 to wear, 1 in the wash.',
         price: p2,
         compareAt: c2,
-        badge: lang === 'fr' ? 'Le plus choisi — 1 T-shirt offert' : 'Most Popular — 1 FREE Shirt',
+        badge: '',
+        freeShipping: true,
+      },
+      {
+        id: 3,
+        qty: 3,
+        isTwoPlusOne: true,
+        title: lang === 'fr'
+          ? `3 ${nounPluralFr} — 2 Achetés = 1 OFFERT`
+          : `3 ${nounPluralEn} — Buy 2, Get 1 FREE`,
+        subtitle: lang === 'fr'
+          ? `2 achetés + le 3ème OFFERT (${perUnit.replace('.', ',')} € chacun)`
+          : `Buy 2, Get 1 FREE ($${perUnit} each)`,
+        price: p3,
+        compareAt: c3,
+        badge: lang === 'fr' ? '🔥 LE PLUS POPULAIRE' : '🔥 MOST POPULAR',
         freeShipping: true,
         highlight: true,
       },
     ];
-  }, [currentModel.handle, currentModel.price, currentModel.compareAt, lang]);
+  }, [currentModel.handle, currentModel.price, currentModel.compareAt, isDiscovery, lang]);
 
-  const [bundleId, setBundleId] = useState(initialModelHandle === 'pack-decouverte' ? 1 : 2);
+  const [bundleId, setBundleId] = useState(1);
   const bundle = modelBundles.find((b) => b.id === bundleId) || modelBundles[0];
 
   const [variants, setVariants] = useState(() =>
@@ -334,7 +360,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
       bundleId: bundle.id,
       isTwoPlusOne: Boolean(bundle.isTwoPlusOne),
       isDiscoveryPack: Boolean(bundle.isDiscoveryPack),
-      paidQty: bundle.isDiscoveryPack ? 1 : (bundle.isTwoPlusOne ? 2 : (bundle.id === 3 ? 3 : 1)),
+      paidQty: bundle.isDiscoveryPack ? 1 : (bundle.isTwoPlusOne ? 2 : (bundle.qty || 1)),
       chosenVariants: chosen.map((v, i) => ({
         handle: bundle.isDiscoveryPack
           ? (discoveryCategories[i]?.handle || 'pack-decouverte')
@@ -390,7 +416,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
       bundleId: bundle.id,
       isTwoPlusOne: Boolean(bundle.isTwoPlusOne),
       isDiscoveryPack: Boolean(bundle.isDiscoveryPack),
-      paidQty: bundle.isDiscoveryPack ? 1 : (bundle.isTwoPlusOne ? 2 : (bundle.id === 3 ? 3 : 1)),
+      paidQty: bundle.isDiscoveryPack ? 1 : (bundle.isTwoPlusOne ? 2 : (bundle.qty || 1)),
       chosenVariants: chosen.map((v, i) => ({
         handle: bundle.isDiscoveryPack
           ? (discoveryCategories[i]?.handle || 'pack-decouverte')
@@ -463,21 +489,14 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
             </span>
           </div>
           <p className="product__top-subtext">
-            {lang === 'fr'
-              ? 'Seulement 13,33 € par débardeur avec l’offre 2 Achetés = 1 Offert'
-              : 'Just $13.33 each with Buy 2, Get 1 Free'}
+            {bundle.isTwoPlusOne
+              ? (lang === 'fr'
+                  ? `Seulement ${currentModel.handle === 'vela-sculpt-sans-manches' ? '13,33 €' : currentModel.handle === 'vela-sculpt-demi-manches' ? '16,66 €' : '19,99 €'} par pièce avec l’offre 2 Achetés = 1 Offert`
+                  : `Just ${currentModel.handle === 'vela-sculpt-sans-manches' ? '$13.33' : currentModel.handle === 'vela-sculpt-demi-manches' ? '$16.66' : '$19.99'} each with Buy 2, Get 1 Free`)
+              : (lang === 'fr'
+                  ? `Ou seulement ${currentModel.handle === 'vela-sculpt-sans-manches' ? '13,33 €' : currentModel.handle === 'vela-sculpt-demi-manches' ? '16,66 €' : '19,99 €'} chacun avec l’offre 2 Achetés = 1 Offert`
+                  : `Or just ${currentModel.handle === 'vela-sculpt-sans-manches' ? '$13.33' : currentModel.handle === 'vela-sculpt-demi-manches' ? '$16.66' : '$19.99'} each with Buy 2, Get 1 Free`)}
           </p>
-        </div>
-
-        {/* Lien Guide des tailles bien visible */}
-        <div className="product__size-guide-row">
-          <button
-            type="button"
-            className="product__size-guide-btn"
-            onClick={() => setSizeOpen(true)}
-          >
-            <span>📏</span> {lang === 'fr' ? 'Guide des tailles — quelle taille choisir ?' : 'Size guide — which size should I get?'}
-          </button>
         </div>
 
         {showModelSelector && (
@@ -528,6 +547,22 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
           </div>
         </div>
 
+        {/* Guide des tailles bien visible juste au-dessus du sélecteur de taille */}
+        <div className="product__size-guide-row">
+          <div className="product__size-guide-phrase">
+            <span>💡</span>
+            <span>{lang === 'fr' ? 'Choisissez votre taille habituelle de T-shirt.' : 'Pick your usual T-shirt size.'}</span>
+          </div>
+          <button
+            type="button"
+            className="product__size-guide-btn"
+            onClick={() => setSizeOpen(true)}
+          >
+            <span>📏</span>
+            <span>{lang === 'fr' ? 'Guide des tailles — quelle taille choisir ?' : 'Size guide — which size should I get?'}</span>
+          </button>
+        </div>
+
         {/* BundlePicker (sélection des tailles et offres) */}
         <BundlePicker
           selectedId={bundleId}
@@ -541,7 +576,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
           items={modelBundles}
         />
 
-        {/* 5. Bouton d'achat, garantie, avis photos & réassurance */}
+        {/* 5. Bouton d'achat, rassurance taille/échange, garantie, avis photos & réassurance */}
         <div className="product__actions">
           <button
             ref={atcRef}
@@ -552,11 +587,31 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
             {isCheckingOut ? (
               lang === 'fr' ? 'Chargement en cours...' : 'Processing...'
             ) : lang === 'fr' ? (
-              `Ajouter au panier — ${bundle.title}`
+              `Ajouter au panier — ${price(bundle.price)}`
             ) : (
-              `Add to cart — ${bundle.title}`
+              `Add to cart — ${price(bundle.price)}`
             )}
           </button>
+
+          {/* Rassurance Taille + Échange (2 lignes sous le bouton Add to cart) */}
+          <div className="product__atc-reassurance">
+            <div className="product__atc-reassurance-item">
+              <span className="product__atc-reassurance-icon" aria-hidden="true">📏</span>
+              <span className="product__atc-reassurance-text">
+                {lang === 'fr'
+                  ? 'Un doute sur votre taille ? Mauvaise taille = Échange 100% GRATUIT.'
+                  : 'Not sure about your size? Wrong size = FREE exchange.'}
+              </span>
+            </div>
+            <div className="product__atc-reassurance-item">
+              <span className="product__atc-reassurance-icon" aria-hidden="true">🚚</span>
+              <span className="product__atc-reassurance-text">
+                {lang === 'fr'
+                  ? 'Livraison suivie gratuite · Zéro frais cachés'
+                  : 'Free tracked shipping · No hidden fees'}
+              </span>
+            </div>
+          </div>
 
           <ExpressPaymentButtons lineItem={currentLineItem} />
 
