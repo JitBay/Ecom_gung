@@ -23,7 +23,7 @@ export default function WelcomeEmailModal() {
 
   useLockScroll(isOpen);
 
-  // Close modal if cart opens
+  // Close modal if cart drawer opens
   useEffect(() => {
     if (isCartOpen && isOpen) {
       setIsOpen(false);
@@ -31,42 +31,63 @@ export default function WelcomeEmailModal() {
   }, [isCartOpen, isOpen]);
 
   useEffect(() => {
-    // Check if user already saw or interacted with the welcome modal
     if (typeof window === 'undefined') return;
+
+    // Remove obsolete legacy popup keys from previous versions
+    try {
+      localStorage.removeItem('zvar_bf_modal_seen');
+      localStorage.removeItem('zvar_welcome10_seen');
+    } catch {}
+
+    // Check if test override is present in query parameters (e.g. ?popup=1 or ?bf=1)
+    const isTestParam =
+      location.search.includes('popup') ||
+      location.search.includes('bf') ||
+      location.search.includes('modal') ||
+      location.search.includes('test');
+
+    // Skip on legal/support routes unless forced with URL param
     if (
-      localStorage.getItem('zvar_welcome10_seen') ||
-      sessionStorage.getItem('zvar_welcome10_seen')
+      !isTestParam &&
+      (location.pathname.startsWith('/policies') ||
+        location.pathname === '/pages/contact' ||
+        location.pathname === '/pages/suivi-commande')
     ) {
       return;
     }
 
-    // Skip on legal/support routes
-    if (
-      location.pathname.startsWith('/policies') ||
-      location.pathname === '/pages/contact' ||
-      location.pathname === '/pages/suivi-commande'
-    ) {
+    // Check if already seen in this session (or within 24h)
+    const seenSession = sessionStorage.getItem('zvar_bf_popup_seen_v3');
+    const seenLocalTs = localStorage.getItem('zvar_bf_popup_ts_v3');
+    const isRecentlySeen =
+      seenLocalTs && Date.now() - Number(seenLocalTs) < 24 * 60 * 60 * 1000;
+
+    if (!isTestParam && (seenSession || isRecentlySeen)) {
       return;
     }
 
     let triggered = false;
     const triggerModal = () => {
       if (triggered) return;
-      // Do not open if cart is already open
       if (isCartOpen) return;
       triggered = true;
-      localStorage.setItem('zvar_welcome10_seen', '1');
-      sessionStorage.setItem('zvar_welcome10_seen', '1');
+
+      try {
+        sessionStorage.setItem('zvar_bf_popup_seen_v3', '1');
+        localStorage.setItem('zvar_bf_popup_ts_v3', String(Date.now()));
+      } catch {}
+
       setIsOpen(true);
       cleanup();
     };
 
-    // 1. Timer: 15 seconds
-    const timer = setTimeout(triggerModal, 15000);
+    // 1. Timer: 8 seconds (or 1 second in test mode)
+    const delay = isTestParam ? 1000 : 8000;
+    const timer = setTimeout(triggerModal, delay);
 
     // 2. Exit intent on desktop (cursor leaves top of viewport)
     const handleMouseLeave = (e) => {
-      if (e.clientY <= 12 && !triggered) {
+      if (e.clientY <= 15 && !triggered) {
         triggerModal();
       }
     };
@@ -78,18 +99,24 @@ export default function WelcomeEmailModal() {
     };
 
     return cleanup;
-  }, [location.pathname, isCartOpen]);
+  }, [location.pathname, location.search, isCartOpen]);
 
   const handleClose = () => {
     setIsOpen(false);
-    localStorage.setItem('zvar_welcome10_seen', '1');
-    sessionStorage.setItem('zvar_welcome10_seen', '1');
+    try {
+      sessionStorage.setItem('zvar_bf_popup_seen_v3', '1');
+      localStorage.setItem('zvar_bf_popup_ts_v3', String(Date.now()));
+    } catch {}
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !email.includes('@')) {
-      setErrorMsg(lang === 'fr' ? 'Veuillez saisir une adresse e-mail valide.' : 'Please enter a valid email address.');
+      setErrorMsg(
+        lang === 'fr'
+          ? 'Veuillez saisir une adresse e-mail valide.'
+          : 'Please enter a valid email address.'
+      );
       return;
     }
 
@@ -100,18 +127,26 @@ export default function WelcomeEmailModal() {
       const res = await subscribeToShopifyNewsletter(email);
       if (res.ok) {
         setStatus('success');
-        sessionStorage.setItem('zvar_discount_code', 'WELCOME10');
+        try {
+          sessionStorage.setItem('zvar_discount_code', 'WELCOME10');
+        } catch {}
       } else {
         setStatus('error');
         setErrorMsg(
           res.error === 'INVALID_EMAIL'
             ? (lang === 'fr' ? 'Adresse e-mail invalide.' : 'Invalid email address.')
-            : (lang === 'fr' ? 'Une erreur est survenue. Veuillez réessayer.' : 'Something went wrong. Please try again.')
+            : (lang === 'fr'
+                ? 'Une erreur est survenue. Veuillez réessayer.'
+                : 'Something went wrong. Please try again.')
         );
       }
     } catch {
       setStatus('error');
-      setErrorMsg(lang === 'fr' ? 'Connexion impossible. Réessayez plus tard.' : 'Connection failed. Try again later.');
+      setErrorMsg(
+        lang === 'fr'
+          ? 'Connexion impossible. Réessayez plus tard.'
+          : 'Connection failed. Try again later.'
+      );
     }
   };
 
@@ -127,7 +162,7 @@ export default function WelcomeEmailModal() {
 
   const isBfActive = Date.now() <= BF_DEADLINE_MS;
 
-  // Texts dynamically switching between Black Friday and Regular Welcome Modal
+  // Content dynamically switching between Black Friday and standard Welcome Offer
   const content = isBfActive
     ? {
         badge: '🔥 BLACK FRIDAY',
@@ -187,9 +222,7 @@ export default function WelcomeEmailModal() {
           {content.title}
         </h2>
 
-        <p className="welcome-modal-desc">
-          {content.text}
-        </p>
+        <p className="welcome-modal-desc">{content.text}</p>
 
         {status !== 'success' ? (
           <form className="welcome-modal-form" onSubmit={handleSubmit}>
@@ -206,20 +239,22 @@ export default function WelcomeEmailModal() {
               />
               <button
                 type="submit"
-                className={`btn btn--gold welcome-modal-submit ${status === 'loading' ? 'is-loading' : ''}`}
+                className={`btn btn--gold welcome-modal-submit ${
+                  status === 'loading' ? 'is-loading' : ''
+                }`}
                 disabled={status === 'loading'}
               >
                 {status === 'loading'
-                  ? (lang === 'fr' ? 'Validation...' : 'Joining...')
+                  ? lang === 'fr'
+                    ? 'Validation...'
+                    : 'Joining...'
                   : content.btn}
               </button>
             </div>
 
             {errorMsg && <p className="welcome-modal-error">{errorMsg}</p>}
 
-            <p className="welcome-modal-subtext">
-              {content.subtext}
-            </p>
+            <p className="welcome-modal-subtext">{content.subtext}</p>
           </form>
         ) : (
           <div className="welcome-modal-success">
@@ -240,12 +275,20 @@ export default function WelcomeEmailModal() {
                 onClick={handleCopyCode}
               >
                 {copied
-                  ? (lang === 'fr' ? '✓ Code copié !' : '✓ Code Copied!')
-                  : (lang === 'fr' ? 'Copier le code & Continuer' : 'Copy Code & Shop Now')}
+                  ? lang === 'fr'
+                    ? '✓ Code copié !'
+                    : '✓ Code Copied!'
+                  : lang === 'fr'
+                  ? 'Copier le code & Continuer'
+                  : 'Copy Code & Shop Now'}
               </button>
             </div>
 
-            <button type="button" className="welcome-modal-dismiss-link" onClick={handleClose}>
+            <button
+              type="button"
+              className="welcome-modal-dismiss-link"
+              onClick={handleClose}
+            >
               {lang === 'fr' ? 'Fermer et explorer les offres' : 'Close and explore deals'}
             </button>
           </div>
