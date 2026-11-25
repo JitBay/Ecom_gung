@@ -11,12 +11,11 @@ export default function BlackFridayStrip({
   const navigate = useNavigate();
 
   const items = dict.black_friday?.strip_items || [
-    lang === 'fr' ? "Plus grande offre de l'année" : "Biggest offer of the year",
+    lang === 'fr' ? "Black Friday : 2 achetés = 1 offert" : "Black Friday: Buy 2, Get 1 FREE",
+    lang === 'fr' ? "2 T-shirts achetés = 1 offert" : "Buy 2, Get 1 FREE",
+    lang === 'fr' ? "Livraison 100% gratuite & suivie" : "Free US Shipping",
     lang === 'fr' ? "Garantie satisfait ou remboursé 30j" : "30-Day Money-Back Guarantee",
-    lang === 'fr' ? "Jusqu'à -50% de réduction" : "Up to 50% off",
-    lang === 'fr' ? "2 T-shirts achetés = 1 offert" : "Buy 2 get 1 free",
-    lang === 'fr' ? "pack découverte à 44,99 $" : "discovery pack at $44.99",
-    lang === 'fr' ? "Livraison 100% gratuite & suivie" : "Free tracked shipping",
+    lang === 'fr' ? "Échange de taille 100% gratuit" : "Wrong size = Free exchange",
   ];
 
   const handleClick = (e) => {

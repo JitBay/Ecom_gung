@@ -166,13 +166,13 @@ export default function WelcomeEmailModal() {
   const content = isBfActive
     ? {
         badge: '🔥 BLACK FRIDAY',
-        title: lang === 'fr' ? '-10 % en plus' : 'Extra 10% OFF',
+        title: lang === 'fr' ? '2 $ de réduction sur votre 1er débardeur' : '$2 off your first tank',
         text:
           lang === 'fr'
-            ? '2 achetés = 1 offert + 10 % sur votre 1ère commande.'
-            : 'Buy 2, Get 1 FREE + 10% off your first order.',
+            ? 'Profitez du code WELCOME10 sur votre 1er débardeur (17,99 $ au lieu de 19,99 $).'
+            : 'Get $2 off your first tank with code WELCOME10 ($17.99 instead of $19.99).',
         placeholder: lang === 'fr' ? 'Entrez votre adresse e-mail' : 'Enter your email',
-        btn: lang === 'fr' ? 'DÉBLOQUER MON OFFRE' : 'UNLOCK MY DEAL',
+        btn: lang === 'fr' ? 'DÉBLOQUER MON CODE' : 'UNLOCK MY CODE',
         subtext:
           lang === 'fr'
             ? 'Fin le 30 nov. · Pas de spam, désinscription en 1 clic.'
@@ -182,14 +182,14 @@ export default function WelcomeEmailModal() {
         badge: lang === 'fr' ? '🎁 OFFRE DE BIENVENUE' : '🎁 WELCOME OFFER',
         title:
           lang === 'fr'
-            ? 'Obtenez 10% de réduction sur votre 1ère commande 🎁'
-            : 'Get 10% off your first order 🎁',
+            ? '2 $ de réduction sur votre 1er débardeur'
+            : '$2 off your first tank',
         text:
           lang === 'fr'
-            ? 'Rejoignez la liste pour recevoir vos offres exclusives.'
-            : 'Join our list for exclusive offers & product updates.',
+            ? 'Rejoignez la liste VIP pour recevoir votre code WELCOME10.'
+            : 'Join our VIP list & get code WELCOME10 on your first tank.',
         placeholder: lang === 'fr' ? 'Entrez votre adresse e-mail' : 'Enter your email address',
-        btn: lang === 'fr' ? 'Obtenir mes -10%' : 'Get My 10% Off',
+        btn: lang === 'fr' ? 'Obtenir mes 2 $ de réduction' : 'Get My $2 Off',
         subtext:
           lang === 'fr'
             ? '🔒 Pas de spam. Désinscription possible en 1 clic à tout moment.'
@@ -265,8 +265,8 @@ export default function WelcomeEmailModal() {
               <strong className="welcome-modal-code">WELCOME10</strong>
               <span className="welcome-modal-condition">
                 {lang === 'fr'
-                  ? '— -10 % sur votre commande (soit 17,99 $)'
-                  : '— 10% off your order (just $17.99 for 1 Tank)'}
+                  ? '— 2 $ de réduction sur votre 1er débardeur (soit 17,99 $)'
+                  : '— $2 off your first tank (just $17.99)'}
               </span>
             </div>
 

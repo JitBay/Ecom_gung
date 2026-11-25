@@ -432,9 +432,6 @@ export default function HomePage() {
       {/* 3. BLACK FRIDAY ANNOUNCEMENT BANNER */}
       <BlackFridayHero targetId="bestsellers" />
 
-      {/* DIAGONAL RUBAN / RIBBON OFFER */}
-      <BlackFridayStrip targetId="bestsellers" />
-
       {/* 4. BEST SELLERS SHELF */}
       <section className="ixh-bs" id="bestsellers">
         <div className="ixh-bs__head">

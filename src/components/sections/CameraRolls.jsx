@@ -77,7 +77,7 @@ export default function CameraRolls() {
             const detail = item.detail[lang] || item.detail.fr;
 
             return (
-              <article className="roll-card reveal" key={item.id} style={{ transitionDelay: `${i * 80}ms` }}>
+              <article className="roll-card" key={item.id} style={{ transitionDelay: `${i * 80}ms` }}>
                 <div className="roll-card__photo" style={{ '--tint': item.tint }}>
                   <img
                     src={item.photo}
