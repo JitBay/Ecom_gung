@@ -6,6 +6,7 @@ import Header from './components/layout/Header.jsx';
 import Footer from './components/layout/Footer.jsx';
 import CartDrawer from './components/layout/CartDrawer.jsx';
 import BlackFridayModal from './components/ui/BlackFridayModal.jsx';
+import WelcomeEmailModal from './components/ui/WelcomeEmailModal.jsx';
 import HomePage from './pages/HomePage.jsx';
 import LandingPage from './pages/LandingPage.jsx';
 import CollectionPage from './pages/CollectionPage.jsx';
@@ -178,7 +179,7 @@ export default function App() {
         </main>
         <Footer />
         <CartDrawer />
-        <BlackFridayModal />
+        <WelcomeEmailModal />
       </CartProvider>
     </LanguageProvider>
   </BrowserRouter>

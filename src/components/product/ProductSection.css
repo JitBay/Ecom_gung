@@ -256,6 +256,23 @@
   }
 }
 
+.product__rating-box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin: 10px 0 18px;
+}
+
+.product__rating-box .product__rating {
+  margin: 0;
+}
+
+.product__judgeme-wrapper {
+  width: 100%;
+  clear: both;
+}
+
 .product__rating {
   display: inline-flex;
   align-items: center;

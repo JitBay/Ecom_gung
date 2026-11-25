@@ -195,6 +195,8 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
   const [hasScrolled, setHasScrolled] = useState(false);
   const { add, isCheckingOut } = useCart();
 
+  const numericProductId = (SHOPIFY_PRODUCT_GIDS[isDiscovery ? 'pack-decouverte' : currentModel.handle] || '').replace('gid://shopify/Product/', '') || '16228231905614';
+
   useEffect(() => {
     const handleScroll = () => {
       setHasScrolled(window.scrollY > 300);
@@ -202,6 +204,25 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Reload Judge.me widgets when switching product
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const initJdgm = () => {
+        if (window.jdgm) {
+          if (typeof window.jdgm.initializeWidgets === 'function') {
+            window.jdgm.initializeWidgets();
+          }
+          if (typeof window.jdgm.reload === 'function') {
+            window.jdgm.reload();
+          }
+        }
+      };
+      initJdgm();
+      const t = setTimeout(initJdgm, 1200);
+      return () => clearTimeout(t);
+    }
+  }, [numericProductId]);
 
   const [searchParams] = useSearchParams();
   const queryColor = searchParams.get('color');
@@ -456,24 +477,32 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
         </h1>
 
         {/* 2. Étoiles & Recommandation clients */}
-        <a
-          href="#reviews"
-          className="product__rating"
-          onClick={(e) => {
-            e.preventDefault();
-            const el = document.getElementById('reviews');
-            if (el) {
-              el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              window.history.pushState(null, '', '#reviews');
-            }
-          }}
-          title={lang === 'fr' ? 'Consulter les avis clients' : 'Read customer reviews'}
-        >
-          <span style={{ color: '#d4af37', fontWeight: 700 }}>⭐ 4.9</span>
-          <span className="product__rating-label" style={{ marginLeft: 6, fontWeight: 600 }}>
-            · {lang === 'fr' ? 'Recommandé par nos clients' : 'Loved by US customers'}
-          </span>
-        </a>
+        <div className="product__rating-box">
+          <div
+            className="jdgm-widget jdgm-preview-badge"
+            data-id={numericProductId}
+            data-template="index"
+            data-auto-install="false"
+          />
+          <a
+            href="#reviews"
+            className="product__rating"
+            onClick={(e) => {
+              e.preventDefault();
+              const el = document.getElementById('judgeme-reviews') || document.getElementById('reviews');
+              if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                window.history.pushState(null, '', '#reviews');
+              }
+            }}
+            title={lang === 'fr' ? 'Consulter les avis clients' : 'Read customer reviews'}
+          >
+            <span style={{ color: '#d4af37', fontWeight: 700 }}>⭐ 4.9</span>
+            <span className="product__rating-label" style={{ marginLeft: 6, fontWeight: 600 }}>
+              · {lang === 'fr' ? 'Recommandé par nos clients' : 'Loved by US customers'}
+            </span>
+          </a>
+        </div>
 
         {/* 3. Bloc Prix barré + sous-texte par unité */}
         <div className="product__top-pricing">
@@ -699,6 +728,16 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
               ? 'Portez votre vêtement Vela Sculpt™ au travail ou en sortie. S’il ne vous apporte pas un confort absolu et un lissage impeccable, demandez un remboursement intégral sans justification.'
               : 'Wear your Vela Sculpt™ wear to work or casually. If it does not provide total comfort and confidence, ask for a full refund.'}
           </p>
+        </div>
+
+        {/* Widget officiel d'avis Judge.me */}
+        <div className="product__judgeme-wrapper" id="judgeme-reviews" style={{ marginTop: '2.5rem', marginBottom: '1.5rem' }}>
+          <div
+            id="judgeme_product_reviews"
+            className="jdgm-widget jdgm-review-widget"
+            data-id={numericProductId}
+            data-auto-install="false"
+          />
         </div>
 
         <ProductDetails model={currentModel} />
