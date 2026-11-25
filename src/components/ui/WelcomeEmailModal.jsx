@@ -7,6 +7,9 @@ import { useLockScroll } from '../../lib/hooks.js';
 import { subscribeToShopifyNewsletter } from '../../lib/shopify.js';
 import './WelcomeEmailModal.css';
 
+// November 30, 2026 23:59:59 EST (New York UTC-5 = 2026-12-01T04:59:59Z)
+const BF_DEADLINE_MS = new Date('2026-12-01T04:59:59Z').getTime();
+
 export default function WelcomeEmailModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState('');
@@ -15,7 +18,7 @@ export default function WelcomeEmailModal() {
   const [copied, setCopied] = useState(false);
 
   const { lang } = useLanguage();
-  const { open: isCartOpen, lines } = useCart();
+  const { open: isCartOpen } = useCart();
   const location = useLocation();
 
   useLockScroll(isOpen);
@@ -49,7 +52,7 @@ export default function WelcomeEmailModal() {
     let triggered = false;
     const triggerModal = () => {
       if (triggered) return;
-      // Do not open if user already added items to cart
+      // Do not open if cart is already open
       if (isCartOpen) return;
       triggered = true;
       localStorage.setItem('zvar_welcome10_seen', '1');
@@ -122,6 +125,42 @@ export default function WelcomeEmailModal() {
 
   if (!isOpen) return null;
 
+  const isBfActive = Date.now() <= BF_DEADLINE_MS;
+
+  // Texts dynamically switching between Black Friday and Regular Welcome Modal
+  const content = isBfActive
+    ? {
+        badge: '🔥 BLACK FRIDAY',
+        title: lang === 'fr' ? '-10 % en plus' : 'Extra 10% OFF',
+        text:
+          lang === 'fr'
+            ? '2 achetés = 1 offert + 10 % sur votre 1ère commande.'
+            : 'Buy 2, Get 1 FREE + 10% off your first order.',
+        placeholder: lang === 'fr' ? 'Entrez votre adresse e-mail' : 'Enter your email',
+        btn: lang === 'fr' ? 'DÉBLOQUER MON OFFRE' : 'UNLOCK MY DEAL',
+        subtext:
+          lang === 'fr'
+            ? 'Fin le 30 nov. · Pas de spam, désinscription en 1 clic.'
+            : 'Ends Nov 30 · No spam, unsubscribe anytime.',
+      }
+    : {
+        badge: lang === 'fr' ? '🎁 OFFRE DE BIENVENUE' : '🎁 WELCOME OFFER',
+        title:
+          lang === 'fr'
+            ? 'Obtenez 10% de réduction sur votre 1ère commande 🎁'
+            : 'Get 10% off your first order 🎁',
+        text:
+          lang === 'fr'
+            ? 'Rejoignez la liste pour recevoir vos offres exclusives.'
+            : 'Join our list for exclusive offers & product updates.',
+        placeholder: lang === 'fr' ? 'Entrez votre adresse e-mail' : 'Enter your email address',
+        btn: lang === 'fr' ? 'Obtenir mes -10%' : 'Get My 10% Off',
+        subtext:
+          lang === 'fr'
+            ? '🔒 Pas de spam. Désinscription possible en 1 clic à tout moment.'
+            : '🔒 No spam. Unsubscribe anytime in 1 click.',
+      };
+
   return (
     <div
       className="welcome-modal-backdrop"
@@ -140,18 +179,16 @@ export default function WelcomeEmailModal() {
           <Icon name="close" size={20} />
         </button>
 
-        <div className="welcome-modal-badge">
-          <span>🎁 {lang === 'fr' ? 'OFFRE DE BIENVENUE' : 'WELCOME OFFER'}</span>
+        <div className={`welcome-modal-badge ${isBfActive ? 'is-bf' : ''}`}>
+          <span>{content.badge}</span>
         </div>
 
         <h2 className="welcome-modal-title" id="welcome-modal-title">
-          {lang === 'fr' ? 'Obtenez 10% de réduction sur votre 1ère commande 🎁' : 'Get 10% off your first order 🎁'}
+          {content.title}
         </h2>
 
         <p className="welcome-modal-desc">
-          {lang === 'fr'
-            ? 'Rejoignez la liste pour nos offres exclusives du Black Friday.'
-            : 'Join the list for Black Friday deals.'}
+          {content.text}
         </p>
 
         {status !== 'success' ? (
@@ -162,7 +199,7 @@ export default function WelcomeEmailModal() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder={lang === 'fr' ? 'Entrez votre adresse e-mail' : 'Enter your email address'}
+                placeholder={content.placeholder}
                 className="welcome-modal-input"
                 disabled={status === 'loading'}
                 autoFocus
@@ -174,16 +211,14 @@ export default function WelcomeEmailModal() {
               >
                 {status === 'loading'
                   ? (lang === 'fr' ? 'Validation...' : 'Joining...')
-                  : (lang === 'fr' ? 'Obtenir mes -10%' : 'Get My 10% Off')}
+                  : content.btn}
               </button>
             </div>
 
             {errorMsg && <p className="welcome-modal-error">{errorMsg}</p>}
 
             <p className="welcome-modal-subtext">
-              {lang === 'fr'
-                ? '🔒 Pas de spam. Désinscription possible en 1 clic à tout moment.'
-                : '🔒 No spam. Unsubscribe anytime in 1 click.'}
+              {content.subtext}
             </p>
           </form>
         ) : (

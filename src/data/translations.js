@@ -122,6 +122,7 @@ export const translations = {
       why_us: 'Pourquoi Zvar ?',
       guarantee: 'Garantie 30 jours',
       reviews: 'Avis clients',
+      about: 'À propos',
     },
 
     header: {
@@ -493,6 +494,7 @@ export const translations = {
       why_us: 'Why Zvar?',
       guarantee: '30-Day Guarantee',
       reviews: 'Reviews',
+      about: 'About us',
     },
 
     header: {
