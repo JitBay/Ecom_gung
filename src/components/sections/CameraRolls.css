@@ -53,9 +53,6 @@
   background: var(--white);
   border-radius: var(--radius);
   box-shadow: 0 10px 30px rgba(74, 69, 62, 0.08);
-  opacity: 1 !important;
-  transform: none !important;
-  visibility: visible !important;
 }
 
 .roll-card__photo {

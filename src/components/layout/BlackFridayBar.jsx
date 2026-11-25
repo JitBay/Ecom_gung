@@ -8,11 +8,13 @@ export default function BlackFridayBar() {
   const location = useLocation();
 
   const items = dict.black_friday?.bar_items || [
-    { text: "Black Friday : 2 achetés = 1 offert", highlight: true },
-    { text: "2 T-shirts achetés = 1 offert sur tous les modèles", highlight: false },
-    { text: "Livraison 100% gratuite & suivie", highlight: true },
+    { text: "Black Friday : notre plus grande offre de l'année", highlight: true },
+    { text: "Jusqu'à -50% de réduction", highlight: false },
+    { text: "+3 100 T-shirts vendus", highlight: true },
+    { text: "1 200+ clients satisfaits", highlight: false },
+    { text: "2 T-shirts achetés = 1 offert", highlight: false },
+    { text: "Livraison 100% gratuite & suivie", highlight: false },
     { text: "Garantie 30 jours satisfait ou remboursé", highlight: false },
-    { text: "Échange de taille 100% gratuit", highlight: false },
   ];
 
   const handleClick = (e) => {

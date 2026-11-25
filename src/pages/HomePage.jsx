@@ -236,10 +236,9 @@ function BestSellerCard({ p, lang, t }) {
 
       <div className="ixh-card__info">
         <div className="ixh-card__rating">
-          <span style={{ fontSize: '12px' }}>🛡️</span>
-          <span className="ixh-card__reviews" style={{ fontWeight: 600, color: 'var(--ink)' }}>
-            {lang === 'fr' ? 'Garantie essai 30 jours' : '30-Day Risk-Free Trial'}
-          </span>
+          <Stars value={p.rating} size={12} />
+          <strong>{p.rating}</strong>
+          <span className="ixh-card__reviews">· {p.reviewsCount}</span>
         </div>
 
         <Link to={targetUrl} className="ixh-card__name">
@@ -431,6 +430,9 @@ export default function HomePage() {
 
       {/* 3. BLACK FRIDAY ANNOUNCEMENT BANNER */}
       <BlackFridayHero targetId="bestsellers" />
+
+      {/* DIAGONAL RUBAN / RIBBON OFFER */}
+      <BlackFridayStrip targetId="bestsellers" />
 
       {/* 4. BEST SELLERS SHELF */}
       <section className="ixh-bs" id="bestsellers">

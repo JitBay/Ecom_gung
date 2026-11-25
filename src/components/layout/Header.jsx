@@ -45,7 +45,7 @@ function AnnouncementBar() {
 function MobileMenu({ open, onClose }) {
   useLockScroll(open);
   const [modelsOpen, setModelsOpen] = useState(false);
-  const { t, dict, lang } = useLanguage();
+  const { t, dict } = useLanguage();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -80,7 +80,6 @@ function MobileMenu({ open, onClose }) {
     { label: t('nav.offers'), to: '/pages/offres' },
     { label: t('nav.why_us'), to: '/#why-vela-labs' },
     { label: t('nav.guarantee'), to: '/pages/garantie' },
-    { label: t('nav.about', 'About us'), to: '/pages/about' },
   ];
 
   return (
@@ -166,7 +165,7 @@ export default function Header() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownTimeoutRef = useRef(null);
   const { count, setOpen } = useCart();
-  const { t, lang } = useLanguage();
+  const { t } = useLanguage();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -232,7 +231,6 @@ export default function Header() {
     { label: t('nav.offers'), to: '/pages/offres' },
     { label: t('nav.why_us'), to: '/#why-vela-labs' },
     { label: t('nav.guarantee'), to: '/pages/garantie' },
-    { label: t('nav.about', 'About us'), to: '/pages/about' },
   ];
 
   useEffect(() => {

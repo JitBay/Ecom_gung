@@ -8,48 +8,50 @@ export const translations = {
     announcements: [
       'Garantie satisfait ou remboursé de 30 jours',
       'Livraison suivie 100% offerte en 6 à 12 jours ouvrés · Suivi complet en direct · club zvar',
-      '🛡️ Garantie 30 jours satisfait ou remboursé · Essai sans risque',
+      '⭐ Noté 4.9/5 par nos clients vérifiés',
     ],
 
     black_friday: {
       bar_items: [
-        { text: "Black Friday : 2 achetés = 1 offert", highlight: true },
-        { text: "2 T-shirts achetés = 1 offert sur tous les modèles", highlight: false },
-        { text: "Livraison 100% gratuite & suivie", highlight: true },
-        { text: "Échange de taille 100% gratuit", highlight: false },
+        { text: "Black Friday Sale : notre plus grande offre de l'année", highlight: true },
+        { text: "Jusqu'à -50% sur toute la collection", highlight: false },
+        { text: "Garantie 30 jours satisfait ou remboursé", highlight: true },
+        { text: "2 T-shirts achetés = 1 offert sur tous les modèles", highlight: true },
         { text: "Offre Pack Découverte 3 coupes à 44,99 $", highlight: false },
+        { text: "Livraison 100% gratuite & suivie", highlight: false },
       ],
       strip_items: [
-        "Black Friday : 2 achetés = 1 offert",
+        "Plus grande offre de l'année",
+        "Garantie satisfait ou remboursé 30j",
+        "Jusqu'à -50% de réduction",
         "2 T-shirts achetés = 1 offert",
+        "pack découverte à 44,99 $",
         "Livraison 100% gratuite & suivie",
-        "Échange de taille 100% gratuit",
-        "Pack découverte à 44,99 $",
       ],
       hero: {
-        eyebrow: "Black Friday Sale · Événement exclusif",
-        kicker: "Offre Black Friday",
-        discount: "2 achetés = 1 offert",
+        eyebrow: "Black Friday Sale · Plus grande offre de l'année",
+        kicker: "Événement exclusif",
+        discount: "Jusqu'à -50%",
         regularPrice: "",
         text: "Notre grand événement Black Friday est ouvert sur l'ensemble de la collection Vela Sculpt™ : 2 T-shirts achetés = le 3ème offert sur toutes nos coupes, ou le pack découverte 3 coupes à seulement 44,99 $.",
         chips: [
           "2 achetés = 1 offert sur tout",
-          "Pack découverte à 44,99 $",
+          "pack découverte à 44,99 $",
+          "Garantie 30 jours satisfait ou remboursé",
           "Livraison 100% gratuite & suivie",
-          "Échange de taille 100% gratuit",
         ],
-        cta: "Profiter de l'offre 2 achetés = 1 offert",
+        cta: "Découvrir les offres Black Friday",
       },
       modal: {
         eyebrow: "Black Friday Sale · Événement officiel",
         title_prefix: "Black Friday Sale :",
-        title_highlight: "2 achetés = 1 offert",
+        title_highlight: "Jusqu'à -50%",
         title_suffix: "",
         text: "Profitez de notre plus grand événement promotionnel de l'année sur l'ensemble de notre gamme ergonomique masculine Vela Sculpt™.",
         perks: [
           { title: "2 achetés = 1 offert", desc: "Le 3ème T-shirt 100% offert sur tous nos modèles" },
-          { title: "Pack découverte à 44,99 $", desc: "1 débardeur + 1 demi-manches + 1 manches longues · 30 $ d'économie" },
-          { title: "Livraison suivie gratuite", desc: "Expédition express prioritaire & échange offert" },
+          { title: "pack découverte à 44,99 $", desc: "1 débardeur + 1 demi-manches + 1 manches longues · 30 $ d'économie" },
+          { title: "Livraison suivie gratuite", desc: "Expédition express prioritaire & garantie 30 jours" },
         ],
         cta: "Profiter des offres Black Friday",
         dismiss: "Continuer sans l'offre",
@@ -120,7 +122,6 @@ export const translations = {
       why_us: 'Pourquoi Zvar ?',
       guarantee: 'Garantie 30 jours',
       reviews: 'Avis clients',
-      about: 'À propos',
     },
 
     header: {
@@ -148,7 +149,7 @@ export const translations = {
     },
 
     home: {
-      eyebrow: '🛡️ Garantie satisfait ou remboursé 30 jours · Essai sans risque',
+      eyebrow: '⭐ 4.9 · Plébiscité par nos clients vérifiés',
       hero_title_1: 'Every age',
       hero_title_2: 'Every body',
       hero_text:
@@ -157,10 +158,10 @@ export const translations = {
       cta_all: 'Voir toute la collection',
 
       stats: [
-        { value: '30 jours', label: 'Essai sans risque' },
-        { value: '0 €', label: 'Échange de taille offert' },
-        { value: 'Offerte', label: 'Livraison gratuite' },
-        { value: '100%', label: 'Discret sous vos vêtements' },
+        { value: '4.9/5', label: 'Note moyenne' },
+        { value: '< 2%', label: 'Taux de retour' },
+        { value: '7+', label: 'Pays livrés' },
+        { value: '30 jours', label: 'Garantie satisfait ou remboursé' },
       ],
 
       cats_aria: 'Acheter par catégorie',
@@ -224,8 +225,8 @@ export const translations = {
           desc: '30 jours pour tester et décider. Remboursement intégral si non satisfait.',
         },
         {
-          title: 'Échange de taille 100% gratuit',
-          desc: 'Un doute sur votre taille ? Nous prenons en charge votre premier échange sans frais.',
+          title: 'Moins de 2% de retours',
+          desc: 'Une coupe ergonomique et des matières haut de gamme plébiscitées.',
         },
         {
           title: 'Support client humain',
@@ -373,48 +374,55 @@ export const translations = {
       'Black Friday Sale',
       '30-Day Money-Back Guarantee',
       'Free Tracked Shipping · 🎄 Order by Dec 10 for Christmas delivery',
-      '🛡️ 30-Day Money-Back Guarantee · Risk-Free Trial',
+      '⭐ 4.9/5 rated by verified customers',
     ],
 
     black_friday: {
       bar_items: [
-        { text: "Black Friday: Buy 2, Get 1 FREE", highlight: true },
-        { text: "Buy 2, get 1 free on all styles", highlight: false },
-        { text: "Free US Shipping included", highlight: true },
-        { text: "Wrong size = Free exchange", highlight: false },
+        { text: "Black Friday Sale: our biggest offer of the year", highlight: true },
+        { text: "Up to 50% off storewide", highlight: false },
+        { text: "⭐ 4.9/5 verified customer rating", highlight: true },
+        { text: "30-day money-back guarantee", highlight: false },
+        { text: "Buy 2, get 1 free on all styles", highlight: true },
         { text: "3-Fits Discovery Pack special at $44.99", highlight: false },
+        { text: "Free tracked shipping included", highlight: false },
+        { text: "30-day money-back guarantee", highlight: false },
       ],
       strip_items: [
-        "Black Friday: Buy 2, Get 1 FREE",
-        "Buy 2, Get 1 FREE",
-        "Free US Shipping",
-        "Wrong size = Free exchange",
+        "Biggest offer of the year",
+        "⭐ 4.9/5 verified rating",
+        "Up to 50% off",
+        "30-day money-back guarantee",
+        "Buy 2 get 1 free on all styles",
         "Discovery Pack at $44.99",
+        "Free tracked shipping",
+        "30-day money-back guarantee",
       ],
       hero: {
-        eyebrow: "Black Friday Sale · Official Event",
-        kicker: "Black Friday Deal",
-        discount: "Buy 2, Get 1 FREE",
+        eyebrow: "Black Friday Sale · Biggest offer of the year",
+        kicker: "Exclusive Event",
+        discount: "Up to 50% off",
         regularPrice: "",
-        text: "Black Friday is live across the entire Vela Sculpt™ compression collection: Buy 2 T-shirts, get the 3rd 100% FREE on all styles, plus our 3-fit discovery pack at an exclusive rate.",
+        text: "Unlock our official Black Friday promotions across the entire Vela Sculpt™ compression collection: Buy 2 T-shirts, get the 3rd 100% free on all styles, plus our 3-fit discovery pack at an exclusive rate.",
         chips: [
           "Buy 2, get 1 free storewide",
           "Discovery Pack at $44.99",
-          "Free US Shipping",
-          "Wrong size = Free exchange",
+          "⭐ 4.9/5 verified rating",
+          "30-day trial at home",
+          "Free tracked shipping",
         ],
-        cta: "Explore Buy 2, Get 1 FREE Deals",
+        cta: "Explore Black Friday Deals",
       },
       modal: {
         eyebrow: "Black Friday Sale · Official Event",
         title_prefix: "Black Friday Sale:",
-        title_highlight: "Buy 2, Get 1 FREE",
+        title_highlight: "Up to 50% OFF",
         title_suffix: "",
-        text: "Our biggest event of the year is now live! Buy 2 T-shirts, get 1 FREE across our entire ergonomic posture and shapewear collection.",
+        text: "Our biggest event of the year is now live! Enjoy sitewide discounts across our entire ergonomic posture and shapewear collection.",
         perks: [
           { title: "Buy 2, Get 1 Free", desc: "The 3rd T-shirt 100% free on all individual styles" },
-          { title: "Discovery Pack at $44.99", desc: "1 Tank + 1 Short + 1 Long Sleeves included · $30 savings" },
-          { title: "Free US Shipping", desc: "Priority dispatch included + free size exchange" },
+          { title: "discovery pack at $44.99", desc: "1 Tank + 1 Short + 1 Long Sleeves included · $30 savings" },
+          { title: "Free Tracked Shipping", desc: "Priority dispatch included + 30-day money-back guarantee" },
         ],
         cta: "Claim Black Friday Deals",
         dismiss: "Continue without offer",
@@ -485,7 +493,6 @@ export const translations = {
       why_us: 'Why Zvar?',
       guarantee: '30-Day Guarantee',
       reviews: 'Reviews',
-      about: 'About us',
     },
 
     header: {
@@ -513,7 +520,7 @@ export const translations = {
     },
 
     home: {
-      eyebrow: '🛡️ 30-Day Money-Back Guarantee · Risk-Free Trial',
+      eyebrow: '⭐ 4.9 · Loved by US customers',
       hero_title_1: 'Every age',
       hero_title_2: 'Every body',
       hero_text:
@@ -522,10 +529,10 @@ export const translations = {
       cta_all: 'Shop all collection',
 
       stats: [
-        { value: '30 days', label: 'Risk-free trial' },
-        { value: 'Free', label: 'Size exchange & support' },
-        { value: 'Free', label: 'US Shipping' },
-        { value: '100%', label: 'Discreet under your clothes' },
+        { value: '4.9/5', label: 'Customer rating' },
+        { value: '< 2%', label: 'Return rate' },
+        { value: '7+', label: 'Countries shipped' },
+        { value: '30 days', label: 'Money-back guarantee' },
       ],
 
       cats_aria: 'Shop by category',
@@ -589,8 +596,8 @@ export const translations = {
           desc: 'Thirty days to decide. Full refund if it’s not right.',
         },
         {
-          title: '100% Free Size Exchange',
-          desc: 'Not sure about your size? We cover your first size exchange at no extra charge.',
+          title: 'Under 2% Come Back',
+          desc: 'Precision ergonomic fit and premium fabrics loved by customers.',
         },
         {
           title: 'Real Human Support',

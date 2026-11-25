@@ -98,7 +98,7 @@ export default function Footer() {
         { label: t('nav.offers'), to: '/pages/offres' },
         { label: t('nav.why_us'), to: '/pages/notre-technologie' },
         { label: t('nav.guarantee'), to: '/pages/garantie' },
-        { label: lang === 'fr' ? 'À propos de nous' : 'About us', to: '/pages/about' },
+        { label: t('nav.reviews'), to: '/#reviews' },
       ],
     },
     {

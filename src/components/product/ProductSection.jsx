@@ -137,10 +137,22 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
         qty: 1,
         title: lang === 'fr' ? `1 ${nounFr}` : `1 ${nounEn}`,
         subtitle: lang === 'fr'
-          ? 'Idéal pour essayer l’effet gainant et le confort au quotidien.'
-          : 'Ideal for trying slimming support and all-day comfort.',
+          ? 'Idéal pour tester l’effet gainant et le maintien au quotidien.'
+          : 'Ideal for testing slimming support and all-day comfort.',
         price: p1,
         compareAt: c1,
+        badge: '',
+        freeShipping: true,
+      },
+      {
+        id: 2,
+        qty: 2,
+        title: lang === 'fr' ? `2 ${nounPluralFr}` : `2 ${nounPluralEn}`,
+        subtitle: lang === 'fr'
+          ? '1 à porter, 1 au lavage.'
+          : '1 to wear, 1 in the wash.',
+        price: p2,
+        compareAt: c2,
         badge: '',
         freeShipping: true,
       },
@@ -464,7 +476,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
             : 'Vela Sculpt™ — Look slimmer under any shirt, instantly'}
         </h1>
 
-        {/* 2. Badge Judge.me */}
+        {/* 2. Étoiles & Recommandation clients */}
         <div className="product__rating-box">
           <div
             className="jdgm-widget jdgm-preview-badge"
@@ -472,6 +484,24 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
             data-template="index"
             data-auto-install="false"
           />
+          <a
+            href="#reviews"
+            className="product__rating"
+            onClick={(e) => {
+              e.preventDefault();
+              const el = document.getElementById('judgeme-reviews') || document.getElementById('reviews');
+              if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                window.history.pushState(null, '', '#reviews');
+              }
+            }}
+            title={lang === 'fr' ? 'Consulter les avis clients' : 'Read customer reviews'}
+          >
+            <span style={{ color: '#d4af37', fontWeight: 700 }}>⭐ 4.9</span>
+            <span className="product__rating-label" style={{ marginLeft: 6, fontWeight: 600 }}>
+              · {lang === 'fr' ? 'Recommandé par nos clients' : 'Loved by US customers'}
+            </span>
+          </a>
         </div>
 
         {/* 3. Bloc Prix barré + sous-texte par unité */}
@@ -614,8 +644,23 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
 
           <ExpressPaymentButtons lineItem={currentLineItem} />
 
-          {/* 9. Photos produit en conditions réelles sous le bouton */}
-          <ProductCustomerPhotos />
+          {/* 8. Bloc garantie juste sous le bouton d'achat */}
+          <div className="product__guarantee-highlight">
+            <span className="product__guarantee-icon">🛡️</span>
+            <p>
+              {lang === 'fr'
+                ? 'Essayez-le pendant 30 jours. Pas convaincu ? Remboursement intégral sans poser de question.'
+                : 'Try it for 30 days. Don’t love it? Full refund — no questions asked.'}
+            </p>
+          </div>
+
+          {/* 9. Photos de vrais clients juste sous le bouton */}
+          <ProductCustomerPhotos
+            onScrollToReviews={() => {
+              const el = document.getElementById('reviews');
+              if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }}
+          />
 
           <ProductTrustBlock />
 
@@ -662,7 +707,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
             <Icon name="truck" size={14} /> {lang === 'fr' ? 'Livraison 100% gratuite · Suivi complet en direct' : '🚚 Free tracked shipping · 🎄 Order by Dec 10 for Christmas delivery'}
           </span>
           <span>
-            <Icon name="check" size={14} /> {lang === 'fr' ? '1er échange de taille offert' : 'Free size exchange'}
+            <Icon name="shield" size={14} /> {lang === 'fr' ? 'Garantie satisfait ou remboursé 30j' : '30-Day Money-Back Guarantee'}
           </span>
         </p>
 
@@ -674,6 +719,16 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
             </li>
           ))}
         </ul>
+
+        <div className="guarantee">
+          <Icon name="shield" size={24} />
+          <p>
+            <strong>{lang === 'fr' ? 'Garantie satisfait ou remboursé de 30 jours.' : '30-Day Money-Back Guarantee.'}</strong>{' '}
+            {lang === 'fr'
+              ? 'Portez votre vêtement Vela Sculpt™ au travail ou en sortie. S’il ne vous apporte pas un confort absolu et un lissage impeccable, demandez un remboursement intégral sans justification.'
+              : 'Wear your Vela Sculpt™ wear to work or casually. If it does not provide total comfort and confidence, ask for a full refund.'}
+          </p>
+        </div>
 
         {/* Widget officiel d'avis Judge.me */}
         <div className="product__judgeme-wrapper" id="judgeme-reviews" style={{ marginTop: '2.5rem', marginBottom: '1.5rem' }}>

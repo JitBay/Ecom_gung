@@ -228,13 +228,13 @@ export const benefitsEn = [
 export const stats = [
   { value: '30', unit: 'Jours', label: 'Garantie satisfait ou remboursé' },
   { value: '100', unit: '%', label: 'Discret sous vos vêtements' },
-  { value: '0', unit: '€', label: '1er échange de taille offert' },
+  { value: '4.9', unit: '/5', label: 'Note moyenne de satisfaction' },
 ];
 
 export const statsEn = [
   { value: '30', unit: 'Days', label: 'Money-back guarantee' },
   { value: '100', unit: '%', label: 'Discreet under your clothes' },
-  { value: 'Free', unit: '', label: '1st size exchange free' },
+  { value: '4.9', unit: '/5', label: 'Average customer rating' },
 ];
 
 export const bundles = [

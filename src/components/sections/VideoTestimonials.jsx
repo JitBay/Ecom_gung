@@ -69,27 +69,27 @@ export default function VideoTestimonials() {
         <div className="section-head reveal">
           <span className="eyebrow">
             <Icon name="sparkle" size={13} />{' '}
-            {lang === 'fr' ? 'Démonstrations en vidéo' : 'Video Demonstrations'}
+            {lang === 'fr' ? 'Avis clients en vidéo' : 'Verified Buyer Videos'}
           </span>
           <h2 className="title">
             {lang === 'fr' ? (
               <>
                 Ne nous croyez pas sur parole.
                 <br />
-                <em>Aperçu en mouvement.</em>
+                <em>Écoutez leurs retours.</em>
               </>
             ) : (
               <>
                 Don’t take our word for it.
                 <br />
-                <em>See it in action.</em>
+                <em>Watch theirs.</em>
               </>
             )}
           </h2>
           <p className="subtitle">
             {lang === 'fr'
-              ? 'Démonstrations en direct : résultat visible et maintien postural sous n’importe quel vêtement.'
-              : 'Live demonstrations: visible shaping and posture support under everyday shirts & tees.'}
+              ? 'Cinq acheteurs vérifiés, filmés en direct avec leurs propres mots — résultat visible et maintien postural sous la chemise.'
+              : 'Five verified buyers, unscripted in their own words — visible shaping and postural support under shirts & tees.'}
           </p>
         </div>
 
@@ -157,8 +157,8 @@ export default function VideoTestimonials() {
                 {/* Top Badge & Enlarge Button */}
                 <div className="ugc-card__top">
                   <span className="ugc-card__verified">
-                    <Icon name="play" size={12} strokeWidth={2.5} />{' '}
-                    {lang === 'fr' ? 'Démonstration' : 'Demonstration'}
+                    <Icon name="check" size={12} strokeWidth={3} />{' '}
+                    {lang === 'fr' ? 'Avis client' : 'Customer Review'}
                   </span>
                   <div className="ugc-card__controls">
                     <button

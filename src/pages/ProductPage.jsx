@@ -5,6 +5,9 @@ import Icon from '../components/ui/Icon.jsx';
 import Stars from '../components/ui/Stars.jsx';
 import Gallery from '../components/product/Gallery.jsx';
 import SizeFinder from '../components/product/SizeFinder.jsx';
+import BlackFridayHero from '../components/sections/BlackFridayHero.jsx';
+import BlackFridayStrip from '../components/sections/BlackFridayStrip.jsx';
+import Hero from '../components/sections/Hero.jsx';
 import CameraRolls from '../components/sections/CameraRolls.jsx';
 import ProductSection from '../components/product/ProductSection.jsx';
 import NotFound from './NotFound.jsx';
@@ -91,24 +94,27 @@ function DedicatedProductPage({ product }) {
 
   return (
     <div className={`product-page-wrap ${handle}-product ${isSleeveless ? 'sleeveless-product' : ''}`}>
-      {/* THIN BLACK FRIDAY ANNOUNCEMENT STRIP */}
-      <div className="product-page__thin-banner">
-        <span className="product-page__thin-fire">🔥</span>
-        <strong>{lang === 'fr' ? 'Black Friday : 2 achetés = 1 offert' : 'Black Friday: Buy 2, Get 1 FREE'}</strong>
-        <span className="product-page__thin-note">
-          {lang === 'fr' ? '· Livraison gratuite & échanges offerts' : '· Free shipping & free size exchange'}
-        </span>
-      </div>
+      {/* 0. BLACK FRIDAY ANNOUNCEMENT BANNER */}
+      <BlackFridayHero targetId="bm-deal" slim={true} />
+      {/* 1. HERO BANNER & CAMERA ROLLS (5 REVIEWS): ONLY FOR SLEEVELESS (REMOVED FROM SHORT AND LONG AS REQUESTED) */}
+      {isSleeveless && (
+        <>
+          <Hero initialHandle={handle} showModelSelector={false} />
+          <CameraRolls limit={5} />
+        </>
+      )}
 
-      {/* 1. MAIN PRODUCT CONFIGURATOR & BUNDLE BUILDER (ABOVE THE FOLD: PHOTO, PRICE, SIZE, ATC) */}
+
+
+      {/* 2. MAIN PRODUCT CONFIGURATOR & BUNDLE BUILDER (PACK 1, 2, 3 WITH MULTI-COLOR CHOICES) */}
       <ProductSection initialModelHandle={handle} showModelSelector={false} />
 
       <Suspense fallback={<div style={{ minHeight: '120px' }} />}>
-        {/* 2. LIFESTYLE EVERYDAY PHOTOS */}
-        {isSleeveless && <CameraRolls limit={5} />}
-
         {/* 3. REAL-WORLD PRODUCT VIDEO DEMO: ONLY FOR SLEEVELESS (REMOVED FROM SHORT & LONG) */}
         {isSleeveless && <ProductVideoSection modelHandle={handle} />}
+
+        {/* DIAGONAL RUBAN / RIBBON OFFER */}
+        <BlackFridayStrip targetId="bm-deal" reversed={true} />
 
         {/* 4. OTHER ERGONOMIC FITS */}
         <RelatedProducts exclude={handle} />
@@ -317,12 +323,9 @@ function ClassicProductPage({ product }) {
                 window.history.pushState(null, '', '#reviews');
               }
             }}
-            title={lang === 'fr' ? 'Garantie satisfait ou remboursé 30 jours' : '30-Day Money-Back Guarantee'}
+            title={lang === 'fr' ? 'Consulter les avis clients vérifiés' : 'Read verified customer reviews'}
           >
-            <span style={{ color: '#d4af37', fontWeight: 700 }}>🛡️ 100%</span>
-            <span style={{ marginLeft: 6, fontWeight: 600 }}>
-              · {lang === 'fr' ? 'Garantie satisfait ou remboursé 30 jours' : '30-Day Money-Back Guarantee'}
-            </span>
+            <Stars value={product.rating || 4.9} size={15} /> <strong>{product.rating || 4.9}</strong> / 5 · {product.reviewCount || 67} {t('product_page.reviews_count')}
           </a>
 
           <p className="pp__tagline" style={{ color: 'var(--muted)', fontSize: 15, marginBottom: 14 }}>

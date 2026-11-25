@@ -112,7 +112,7 @@ export default function HowItWorksModal({ open, onClose }) {
           </span>
           <span>
             <Icon name="check" size={13} strokeWidth={2.8} />
-            {lang === 'fr' ? 'Garantie essai 30 jours' : '30-day risk-free trial'}
+            {lang === 'fr' ? 'Moins de 2% de retours' : 'Under 2% return rate'}
           </span>
           <span>
             <Icon name="check" size={13} strokeWidth={2.8} />
