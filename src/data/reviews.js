@@ -330,7 +330,7 @@ export const reviews = [
       fr: 'J’ai pris la version manches longues blanche pour mes séances de sport et mes activités en extérieur. Le look est vraiment moderne avec les motifs cyan ; ça ne ressemble pas du tout à une gaine classique. Le tissu épouse parfaitement le torse, souligne les épaules et procure un réel boost de confiance. Je le recommande à 100%.',
       en: 'I got the white long-sleeve version for my workouts and outdoor activities. The look is really modern with the cyan patterns; it doesn’t look like typical shapewear at all. The fabric perfectly hugs the chest, highlights the shoulders, and gives a real confidence boost. I recommend it 100%.',
     },
-    photos: ['/reviews/14.webp'],
+    photos: ['/reviews/16.webp'],
     verified: true,
     helpful: 29,
   },
