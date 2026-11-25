@@ -21,6 +21,7 @@ import LegalNoticePage from './pages/LegalNoticePage.jsx';
 import ContactPage from './pages/ContactPage.jsx';
 import SizeGuidePage from './pages/SizeGuidePage.jsx';
 import TrackOrderPage from './pages/TrackOrderPage.jsx';
+import AboutPage from './pages/AboutPage.jsx';
 import NotFound from './pages/NotFound.jsx';
 import { HERO_PRODUCT } from './data/catalog.js';
 import { initAnalytics, trackPageView } from './lib/analytics.js';
@@ -159,6 +160,10 @@ export default function App() {
             <Route path="/pages/guide-tailles" element={<SizeGuidePage />} />
             <Route path="/pages/suivi-commande" element={<TrackOrderPage />} />
             <Route path="/pages/contact" element={<ContactPage />} />
+            <Route path="/pages/about" element={<AboutPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/pages/a-propos" element={<AboutPage />} />
+            <Route path="/a-propos" element={<AboutPage />} />
 
             {/* Legal Pages */}
             <Route path="/policies/privacy-policy" element={<PrivacyPolicyPage />} />

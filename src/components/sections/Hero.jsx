@@ -83,9 +83,9 @@ export default function Hero({ initialHandle, onSelectModel, showModelSelector =
     <section className="hero">
       <div className="hero__text">
         <div className="hero__rating">
-          <Stars value={5} size={17} />
+          <span style={{ fontSize: '15px' }}>🛡️</span>
           <span>
-            <strong>4.9</strong>/5 <i>|</i> {lang === 'fr' ? 'Garantie 30 jours' : '30-Day Guarantee'}
+            {lang === 'fr' ? 'Garantie satisfait ou remboursé 30 jours · Essai sans risque' : '30-Day Money-Back Guarantee · Risk-Free Trial'}
           </span>
         </div>
 

@@ -476,7 +476,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
             : 'Vela Sculpt™ — Look slimmer under any shirt, instantly'}
         </h1>
 
-        {/* 2. Étoiles & Recommandation clients */}
+        {/* 2. Badge Judge.me + Garantie 30 jours sans risque */}
         <div className="product__rating-box">
           <div
             className="jdgm-widget jdgm-preview-badge"
@@ -495,11 +495,11 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
                 window.history.pushState(null, '', '#reviews');
               }
             }}
-            title={lang === 'fr' ? 'Consulter les avis clients' : 'Read customer reviews'}
+            title={lang === 'fr' ? 'Garantie 30 jours sans risque' : '30-Day Risk-Free Trial'}
           >
-            <span style={{ color: '#d4af37', fontWeight: 700 }}>⭐ 4.9</span>
+            <span style={{ color: '#d4af37', fontWeight: 700 }}>🛡️</span>
             <span className="product__rating-label" style={{ marginLeft: 6, fontWeight: 600 }}>
-              · {lang === 'fr' ? 'Recommandé par nos clients' : 'Loved by US customers'}
+              {lang === 'fr' ? 'Garantie 30 jours · Essai sans risque' : '30-Day Money-Back Guarantee · Risk-Free Trial'}
             </span>
           </a>
         </div>
@@ -654,13 +654,8 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
             </p>
           </div>
 
-          {/* 9. Photos de vrais clients juste sous le bouton */}
-          <ProductCustomerPhotos
-            onScrollToReviews={() => {
-              const el = document.getElementById('reviews');
-              if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }}
-          />
+          {/* 9. Photos produit en conditions réelles sous le bouton */}
+          <ProductCustomerPhotos />
 
           <ProductTrustBlock />
 

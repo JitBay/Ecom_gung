@@ -90,9 +90,8 @@ export default function PackDecouverteLanding() {
             </span>
 
             <div className="pdl-hero__rating">
-              <Stars value={5} size={16} />
-              <strong>4.9 / 5</strong>
-              <span>· {lang === 'fr' ? '70 avis vérifiés' : '70 verified reviews'}</span>
+              <span style={{ fontSize: '15px' }}>🛡️</span>
+              <span>· {lang === 'fr' ? 'Garantie satisfait ou remboursé 30 jours' : '30-Day Money-Back Guarantee'}</span>
             </div>
 
             <h1 className="pdl-hero__title">

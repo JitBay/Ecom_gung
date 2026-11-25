@@ -80,6 +80,7 @@ function MobileMenu({ open, onClose }) {
     { label: t('nav.offers'), to: '/pages/offres' },
     { label: t('nav.why_us'), to: '/#why-vela-labs' },
     { label: t('nav.guarantee'), to: '/pages/garantie' },
+    { label: lang === 'fr' ? 'À propos' : 'About us', to: '/pages/about' },
   ];
 
   return (
@@ -231,6 +232,7 @@ export default function Header() {
     { label: t('nav.offers'), to: '/pages/offres' },
     { label: t('nav.why_us'), to: '/#why-vela-labs' },
     { label: t('nav.guarantee'), to: '/pages/garantie' },
+    { label: lang === 'fr' ? 'À propos' : 'About us', to: '/pages/about' },
   ];
 
   useEffect(() => {

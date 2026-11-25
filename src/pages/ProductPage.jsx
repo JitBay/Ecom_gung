@@ -323,9 +323,12 @@ function ClassicProductPage({ product }) {
                 window.history.pushState(null, '', '#reviews');
               }
             }}
-            title={lang === 'fr' ? 'Consulter les avis clients vérifiés' : 'Read verified customer reviews'}
+            title={lang === 'fr' ? 'Garantie satisfait ou remboursé 30 jours' : '30-Day Money-Back Guarantee'}
           >
-            <Stars value={product.rating || 4.9} size={15} /> <strong>{product.rating || 4.9}</strong> / 5 · {product.reviewCount || 67} {t('product_page.reviews_count')}
+            <span style={{ color: '#d4af37', fontWeight: 700 }}>🛡️ 100%</span>
+            <span style={{ marginLeft: 6, fontWeight: 600 }}>
+              · {lang === 'fr' ? 'Garantie satisfait ou remboursé 30 jours' : '30-Day Money-Back Guarantee'}
+            </span>
           </a>
 
           <p className="pp__tagline" style={{ color: 'var(--muted)', fontSize: 15, marginBottom: 14 }}>

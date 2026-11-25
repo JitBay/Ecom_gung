@@ -8,7 +8,7 @@ export const translations = {
     announcements: [
       'Garantie satisfait ou remboursé de 30 jours',
       'Livraison suivie 100% offerte en 6 à 12 jours ouvrés · Suivi complet en direct · club zvar',
-      '⭐ Noté 4.9/5 par nos clients vérifiés',
+      '🛡️ Garantie 30 jours satisfait ou remboursé · Essai sans risque',
     ],
 
     black_friday: {
@@ -149,7 +149,7 @@ export const translations = {
     },
 
     home: {
-      eyebrow: '⭐ 4.9 · Plébiscité par nos clients vérifiés',
+      eyebrow: '🛡️ Garantie satisfait ou remboursé 30 jours · Essai sans risque',
       hero_title_1: 'Every age',
       hero_title_2: 'Every body',
       hero_text:
@@ -158,10 +158,10 @@ export const translations = {
       cta_all: 'Voir toute la collection',
 
       stats: [
-        { value: '4.9/5', label: 'Note moyenne' },
-        { value: '< 2%', label: 'Taux de retour' },
+        { value: '30 jours', label: 'Essai sans risque' },
+        { value: '0 €', label: 'Échange de taille offert' },
         { value: '7+', label: 'Pays livrés' },
-        { value: '30 jours', label: 'Garantie satisfait ou remboursé' },
+        { value: '100%', label: 'Discret sous vos vêtements' },
       ],
 
       cats_aria: 'Acheter par catégorie',
@@ -225,8 +225,8 @@ export const translations = {
           desc: '30 jours pour tester et décider. Remboursement intégral si non satisfait.',
         },
         {
-          title: 'Moins de 2% de retours',
-          desc: 'Une coupe ergonomique et des matières haut de gamme plébiscitées.',
+          title: 'Échange de taille 100% gratuit',
+          desc: 'Un doute sur votre taille ? Nous prenons en charge votre premier échange sans frais.',
         },
         {
           title: 'Support client humain',
@@ -374,14 +374,14 @@ export const translations = {
       'Black Friday Sale',
       '30-Day Money-Back Guarantee',
       'Free Tracked Shipping · 🎄 Order by Dec 10 for Christmas delivery',
-      '⭐ 4.9/5 rated by verified customers',
+      '🛡️ 30-Day Money-Back Guarantee · Risk-Free Trial',
     ],
 
     black_friday: {
       bar_items: [
         { text: "Black Friday Sale: our biggest offer of the year", highlight: true },
         { text: "Up to 50% off storewide", highlight: false },
-        { text: "⭐ 4.9/5 verified customer rating", highlight: true },
+        { text: "🛡️ 30-Day Risk-Free Trial Guarantee", highlight: true },
         { text: "30-day money-back guarantee", highlight: false },
         { text: "Buy 2, get 1 free on all styles", highlight: true },
         { text: "3-Fits Discovery Pack special at $44.99", highlight: false },
@@ -390,7 +390,7 @@ export const translations = {
       ],
       strip_items: [
         "Biggest offer of the year",
-        "⭐ 4.9/5 verified rating",
+        "🛡️ 30-Day Money-Back Guarantee",
         "Up to 50% off",
         "30-day money-back guarantee",
         "Buy 2 get 1 free on all styles",
@@ -407,7 +407,7 @@ export const translations = {
         chips: [
           "Buy 2, get 1 free storewide",
           "Discovery Pack at $44.99",
-          "⭐ 4.9/5 verified rating",
+          "🛡️ 30-Day Money-Back Guarantee",
           "30-day trial at home",
           "Free tracked shipping",
         ],
@@ -520,7 +520,7 @@ export const translations = {
     },
 
     home: {
-      eyebrow: '⭐ 4.9 · Loved by US customers',
+      eyebrow: '🛡️ 30-Day Money-Back Guarantee · Risk-Free Trial',
       hero_title_1: 'Every age',
       hero_title_2: 'Every body',
       hero_text:
@@ -529,10 +529,10 @@ export const translations = {
       cta_all: 'Shop all collection',
 
       stats: [
-        { value: '4.9/5', label: 'Customer rating' },
-        { value: '< 2%', label: 'Return rate' },
+        { value: '30 days', label: 'Risk-free trial' },
+        { value: 'Free', label: 'Size exchange & support' },
         { value: '7+', label: 'Countries shipped' },
-        { value: '30 days', label: 'Money-back guarantee' },
+        { value: '100%', label: 'Discreet under your clothes' },
       ],
 
       cats_aria: 'Shop by category',
@@ -596,8 +596,8 @@ export const translations = {
           desc: 'Thirty days to decide. Full refund if it’s not right.',
         },
         {
-          title: 'Under 2% Come Back',
-          desc: 'Precision ergonomic fit and premium fabrics loved by customers.',
+          title: '100% Free Size Exchange',
+          desc: 'Not sure about your size? We cover your first size exchange at no extra charge.',
         },
         {
           title: 'Real Human Support',

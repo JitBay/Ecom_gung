@@ -33,7 +33,7 @@ export const nav = [
   { label: 'Nos Packs & Offres', to: '/pages/offres' },
   { label: 'Pourquoi Zvar ?', to: '/pages/notre-technologie' },
   { label: 'Garantie 30 Jours', to: '/pages/garantie' },
-  { label: 'Avis Clients', to: '/#reviews' },
+  { label: 'À propos', to: '/pages/about' },
 ];
 
 export const announcements = [
@@ -51,7 +51,7 @@ export const footerColumns = [
       { label: 'Nos Packs & Offres', to: '/pages/offres' },
       { label: 'Notre Technologie', to: '/pages/notre-technologie' },
       { label: 'Garantie 30 Jours', to: '/pages/garantie' },
-      { label: 'Avis Vérifiés', to: '/#reviews' },
+      { label: 'À propos de nous', to: '/pages/about' },
     ],
   },
   {
