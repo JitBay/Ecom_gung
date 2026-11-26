@@ -1,4 +1,13 @@
 /* Desktop: 2-column grid of images. Mobile: swipe carousel. */
+@media (min-width: 990px) {
+  .product__gallery {
+    position: sticky;
+    top: 90px; /* header height + small gap */
+    align-self: flex-start; /* or start, if grid */
+    max-height: calc(100vh - 110px);
+  }
+}
+
 .gallery__track {
   display: grid;
   grid-template-columns: 1fr 1fr;

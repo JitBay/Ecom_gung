@@ -7,6 +7,15 @@
   padding-bottom: clamp(48px, 7vw, 88px);
 }
 
+@media (min-width: 990px) {
+  .product__gallery {
+    position: sticky;
+    top: 90px; /* header height + small gap */
+    align-self: flex-start; /* or start, if grid */
+    max-height: calc(100vh - 110px);
+  }
+}
+
 .product__title {
   font-size: clamp(24px, 2.4vw, 30px);
   font-weight: 600;

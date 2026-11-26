@@ -479,7 +479,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
 
   return (
     <section className="product container" id="product">
-      <div className="product__media">
+      <div className="product__media product__gallery">
         <Gallery
           images={currentImages}
           title={localizedModel.title}
