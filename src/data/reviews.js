@@ -435,26 +435,6 @@ export const reviews = [
     helpful: 29,
   },
   {
-    id: 'rev-20',
-    name: 'Marc D.',
-    country: 'IT',
-    flag: '🇮🇹',
-    countryName: { fr: 'Italie', en: 'Italy' },
-    date: '2026-10-10',
-    rating: 5,
-    title: {
-      fr: 'Avis en salle : respirant et ultra résistant',
-      en: 'Gym review: breathable and super durable',
-    },
-    text: {
-      fr: 'Testé en musculation et cardio : gainage ferme sur la sangle abdominale sans restreindre la respiration. Ne remonte pas du tout à l’effort.',
-      en: 'Tested in the gym and cardio: firm core support without restricting breathing. Does not roll up at all during workouts.',
-    },
-    photos: ['/reviews/12.webp'],
-    verified: true,
-    helpful: 42,
-  },
-  {
     id: 'rev-15',
     name: 'Thierry M.',
     country: 'FR',
@@ -559,7 +539,6 @@ export const reviews = [
 export const videoTestimonials = [
   {
     id: 'ugc-20',
-    reviewId: 'rev-20',
     name: 'Marc D.',
     age: 29,
     rating: 5,
