@@ -291,7 +291,7 @@ export const translations = {
     },
 
     reviews_section: {
-      title: 'Avis clients vérifiés',
+      title: 'Avis clients',
       count_label: 'avis clients',
       write_review: 'Laisser un avis',
       cancel: 'Annuler',
@@ -381,7 +381,7 @@ export const translations = {
       bar_items: [
         { text: "Black Friday: Buy 2, Get 1 FREE", highlight: true },
         { text: "Buy 2, get 1 free on all styles", highlight: false },
-        { text: "⭐ 4.9/5 verified customer rating", highlight: true },
+        { text: "⭐ 4.9/5 customer rating", highlight: true },
         { text: "Free US Shipping included", highlight: true },
         { text: "Wrong size = Free exchange", highlight: false },
         { text: "3-Fits Discovery Pack special at $44.99", highlight: false },
@@ -656,7 +656,7 @@ export const translations = {
     },
 
     reviews_section: {
-      title: 'Verified Customer Reviews',
+      title: 'Customer Reviews',
       count_label: 'customer reviews',
       write_review: 'Write a review',
       cancel: 'Cancel',

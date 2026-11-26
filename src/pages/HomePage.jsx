@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 import QualitySection from '../components/sections/QualitySection.jsx';
 import BlackFridayHero from '../components/sections/BlackFridayHero.jsx';
 import BlackFridayStrip from '../components/sections/BlackFridayStrip.jsx';
-import CustomerReviews from '../components/sections/CustomerReviews.jsx';
 import Stars from '../components/ui/Stars.jsx';
 import HowItWorksModal from '../components/ui/HowItWorksModal.jsx';
 import { brand } from '../data/site.js';
@@ -617,9 +616,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* 9. AVIS CLIENTS / REVIEWS */}
-      <CustomerReviews />
 
       {/* 10. TRUST STRIP */}
       <section className="ionix-trust" aria-label={t('home.trust_title')}>
