@@ -7,25 +7,25 @@ const tilesFr = [
   {
     title: 'Design sculpt anatomique',
     sub: 'Gainage 3D ciblé & soutien abdominal',
-    img: '/images/textile/anatomical-sculpt.png',
+    img: '/images/textile/anatomical-sculpt.webp',
     webp: '/images/textile/anatomical-sculpt.webp',
   },
   {
     title: 'Coupe athlétique',
     sub: 'Maintien postural naturel & silhouette redressée',
-    img: '/images/textile/athletic-fit.png',
+    img: '/images/textile/athletic-fit.webp',
     webp: '/images/textile/athletic-fit.webp',
   },
   {
     title: 'Performance respirante',
     sub: 'Maille micro-aérée & évacuation active de la sueur',
-    img: '/images/textile/breathable-performance.png',
+    img: '/images/textile/breathable-performance.webp',
     webp: '/images/textile/breathable-performance.webp',
   },
   {
     title: 'Finition & textile premium',
     sub: 'Coutures ultra-plates seconde peau invisibles',
-    img: '/images/textile/premium-fabric.png',
+    img: '/images/textile/premium-fabric.webp',
     webp: '/images/textile/premium-fabric.webp',
   },
 ];
@@ -34,25 +34,25 @@ const tilesEn = [
   {
     title: 'Anatomical Sculpt Design',
     sub: 'Targeted 3D midsection & core shaping',
-    img: '/images/textile/anatomical-sculpt.png',
+    img: '/images/textile/anatomical-sculpt.webp',
     webp: '/images/textile/anatomical-sculpt.webp',
   },
   {
     title: 'Athletic Fit',
     sub: 'Ergonomic contouring & natural posture support',
-    img: '/images/textile/athletic-fit.png',
+    img: '/images/textile/athletic-fit.webp',
     webp: '/images/textile/athletic-fit.webp',
   },
   {
     title: 'Breathable Performance',
     sub: 'Micro-ventilated mesh & active thermal regulation',
-    img: '/images/textile/breathable-performance.png',
+    img: '/images/textile/breathable-performance.webp',
     webp: '/images/textile/breathable-performance.webp',
   },
   {
     title: 'Premium Fabric & Finishing',
     sub: 'Ultra-flat bonded seams & second-skin feel',
-    img: '/images/textile/premium-fabric.png',
+    img: '/images/textile/premium-fabric.webp',
     webp: '/images/textile/premium-fabric.webp',
   },
 ];

@@ -32,18 +32,18 @@ const bestSellersBase = [
     colorData: {
       Noir: {
         hex: '#1a1a1a',
-        img: '/images/products/image-decouverte.png',
-        hoverImg: '/images/products/decouverte-back.png',
+        img: '/images/products/image-decouverte.webp',
+        hoverImg: '/images/products/decouverte-back.webp',
       },
       Blanc: {
         hex: '#f4f4f6',
-        img: '/images/products/image-decouverte.png',
-        hoverImg: '/images/products/decouverte-back.png',
+        img: '/images/products/image-decouverte.webp',
+        hoverImg: '/images/products/decouverte-back.webp',
       },
       Gris: {
         hex: '#72757d',
-        img: '/images/products/image-decouverte.png',
-        hoverImg: '/images/products/decouverte-back.png',
+        img: '/images/products/image-decouverte.webp',
+        hoverImg: '/images/products/decouverte-back.webp',
       },
     },
   },
@@ -288,7 +288,7 @@ const lifestyleItems = [
     titleEn: 'Sleeveless · Tank Top',
     taglineFr: 'Discrétion 100% invisible sous chemises & liberté totale',
     taglineEn: '100% invisible under shirts with maximum arm freedom',
-    img: '/images/home/1.png',
+    img: '/images/home/1.webp',
     to: '/products/vela-sculpt-sans-manches',
   },
   {
@@ -297,7 +297,7 @@ const lifestyleItems = [
     titleEn: 'Short Sleeves',
     taglineFr: 'Le basique quotidien sous polos et chemises de bureau',
     taglineEn: 'Everyday posture and smoothing under polos and office wear',
-    img: '/images/home/2.png',
+    img: '/images/home/2.webp',
     to: '/products/vela-sculpt-demi-manches',
   },
   {
@@ -306,7 +306,7 @@ const lifestyleItems = [
     titleEn: 'Long Sleeves',
     taglineFr: 'Gainage intégral haut du corps & maintien postural renforcé',
     taglineEn: 'Full upper-body compression & reinforced postural support',
-    img: '/images/home/3.png',
+    img: '/images/home/3.webp',
     to: '/products/vela-sculpt-manches-longues',
   },
 ];
@@ -365,9 +365,9 @@ export default function HomePage() {
       {/* 1. HERO SECTION */}
       <section className="ixh-hero">
         <picture className="ixh-hero__media">
-          <source media="(max-width: 699px)" srcSet="/images/home/banner-3.png" />
+          <source media="(max-width: 699px)" srcSet="/images/home/banner-3.webp" />
           <img
-            src="/images/home/banner-1.png"
+            src="/images/home/banner-1.webp"
             alt="zvar. — Every Age Every Body"
             width="1920"
             height="800"
@@ -483,9 +483,21 @@ export default function HomePage() {
             loop
             muted
             playsInline
-            preload="auto"
+            preload="none"
             ref={(el) => {
-              if (el) {
+              if (el && typeof IntersectionObserver !== 'undefined') {
+                const obs = new IntersectionObserver(
+                  ([entry]) => {
+                    if (entry.isIntersecting) {
+                      el.muted = true;
+                      el.play().catch(() => {});
+                      obs.disconnect();
+                    }
+                  },
+                  { rootMargin: '200px' }
+                );
+                obs.observe(el);
+              } else if (el) {
                 el.muted = true;
                 el.play().catch(() => {});
               }

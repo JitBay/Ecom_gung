@@ -262,6 +262,13 @@
   align-items: center;
   gap: 12px;
   margin: 10px 0 18px;
+  min-height: 24px;
+}
+
+.product__rating-box .jdgm-preview-badge {
+  min-height: 20px;
+  display: inline-flex;
+  align-items: center;
 }
 
 .product__rating-box .product__rating {

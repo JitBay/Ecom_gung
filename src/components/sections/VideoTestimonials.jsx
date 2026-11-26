@@ -116,7 +116,7 @@ export default function VideoTestimonials() {
                 }}
                 aria-label={`${lang === 'fr' ? 'Lancer la vidéo de' : 'Play video review from'} ${v.name}`}
               >
-                {/* Video — lecture déclenchée uniquement au clic (muet) */}
+                {/* Video — lecture déclenchée uniquement au clic (muet), chargement différé sans gaspillage réseau */}
                 <video
                   ref={(el) => {
                     if (el) {
@@ -130,7 +130,7 @@ export default function VideoTestimonials() {
                   muted
                   defaultMuted
                   playsInline
-                  preload="metadata"
+                  preload="none"
                   width="220"
                   height="378"
                   className="ugc-card__video"

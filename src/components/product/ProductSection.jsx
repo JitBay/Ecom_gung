@@ -369,7 +369,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
       : `${localizedModel.title} — ${bundle.title}`;
 
     const itemImage = bundle.isDiscoveryPack
-      ? '/images/products/image-decouverte.png'
+      ? '/images/products/image-decouverte.webp'
       : (currentImages[0] || currentModel.images[0]);
 
     add({
@@ -415,7 +415,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
       : `${localizedModel.title} — ${bundle.title}`;
 
     const itemImage = bundle.isDiscoveryPack
-      ? '/images/products/image-decouverte.png'
+      ? '/images/products/image-decouverte.webp'
       : (currentImages[0] || currentModel.images[0]);
 
     return {
@@ -545,30 +545,32 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
           </div>
         )}
 
-        {/* 4. Sélecteur couleur */}
-        <div className="product__color-picker">
-          <div className="product__color-header">
-            <span className="product__color-label">
-              {lang === 'fr' ? 'Couleur sélectionnée :' : 'Selected color:'}{' '}
-              <strong>{t('color_names.' + selectedColor, selectedColor)}</strong>
-            </span>
-          </div>
+        {/* 4. Sélecteur couleur (uniquement pour les produits individuels, car le Pack Découverte a ses propres sélecteurs par article) */}
+        {!isDiscovery && (
+          <div className="product__color-picker">
+            <div className="product__color-header">
+              <span className="product__color-label">
+                {lang === 'fr' ? 'Couleur sélectionnée :' : 'Selected color:'}{' '}
+                <strong>{t('color_names.' + selectedColor, selectedColor)}</strong>
+              </span>
+            </div>
 
-          <div className="product__color-swatches">
-            {currentModel.colors.map((c) => (
-              <button
-                key={c}
-                type="button"
-                className={`product__color-swatch-btn ${c === selectedColor ? 'is-active is-selected' : ''}`}
-                onClick={() => handleSelectColor(c)}
-                title={t('color_names.' + c, c)}
-              >
-                <span className="product__color-dot" style={{ background: colorHex[c] || '#1a1a1a' }} />
-                <span className="product__color-name">{t('color_names.' + c, c)}</span>
-              </button>
-            ))}
+            <div className="product__color-swatches">
+              {currentModel.colors.map((c) => (
+                <button
+                  key={c}
+                  type="button"
+                  className={`product__color-swatch-btn ${c === selectedColor ? 'is-active is-selected' : ''}`}
+                  onClick={() => handleSelectColor(c)}
+                  title={t('color_names.' + c, c)}
+                >
+                  <span className="product__color-dot" style={{ background: colorHex[c] || '#1a1a1a' }} />
+                  <span className="product__color-name">{t('color_names.' + c, c)}</span>
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Guide des tailles bien visible juste au-dessus du sélecteur de taille */}
         <div className="product__size-guide-row">
@@ -744,7 +746,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
         visible={hasScrolled || pastAtc}
         bundle={bundle}
         onAdd={addToCart}
-        productImage={bundle.isDiscoveryPack ? '/images/products/image-decouverte.png' : currentImages[0]}
+        productImage={bundle.isDiscoveryPack ? '/images/products/image-decouverte.webp' : currentImages[0]}
         title={
           bundle.isDiscoveryPack
             ? (lang === 'fr' ? 'Pack Découverte — 3 Coupes' : 'Discovery Pack — 3 Fits')

@@ -173,7 +173,7 @@ export default function PackDecouverteLanding() {
               </span>
               <div className="pdl-hero__img-wrap">
                 <img
-                  src="/images/products/image-decouverte.png"
+                  src="/images/products/image-decouverte.webp"
                   alt={lang === 'fr' ? 'Pack Découverte — Vue avant' : 'Discovery Pack — Front view'}
                   width="600"
                   height="600"
@@ -183,7 +183,7 @@ export default function PackDecouverteLanding() {
                   className="pdl-hero__card-img pdl-hero__card-img--main"
                 />
                 <img
-                  src="/images/products/decouverte-back.png"
+                  src="/images/products/decouverte-back.webp"
                   alt={lang === 'fr' ? 'Pack Découverte — Vue arrière' : 'Discovery Pack — Back view'}
                   width="600"
                   height="600"
