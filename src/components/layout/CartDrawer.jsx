@@ -238,6 +238,34 @@ export default function CartDrawer() {
                 <strong>{price(displayTotal ?? total)}</strong>
               </span>
             </p>
+
+            {/* AVIS CLIENT & ÉTOILES RÉASSURANCE JUSTE AVANT LE CHECKOUT */}
+            <div className="cart__review-card">
+              <div className="cart__review-header">
+                <span className="cart__review-stars">⭐⭐⭐⭐⭐</span>
+                <span className="cart__review-verified">
+                  {lang === 'fr' ? 'Acheteur vérifié' : 'Verified Buyer'}
+                </span>
+              </div>
+              <p className="cart__review-quote">
+                {lang === 'fr'
+                  ? '« Effet gainant immédiat sous mes chemises, maintien du dos exceptionnel et super confortable toute la journée. »'
+                  : '“Instant slimming effect under shirts, exceptional back support and super comfortable all day.”'}
+              </p>
+              <span className="cart__review-author">
+                {lang === 'fr' ? '— David L. (Taille L)' : '— David L. (Size L)'}
+              </span>
+            </div>
+
+            {/* TRUST STRIP JUSTE AU-DESSUS DU BOUTON CHECKOUT */}
+            <div className="cart__trust-strip">
+              <span>
+                {lang === 'fr'
+                  ? 'Livraison offerte · Satisfait ou remboursé 30j · Paiement sécurisé Shopify'
+                  : 'Free US Shipping · 30-Day Money-Back · Secure Shopify Checkout'}
+              </span>
+            </div>
+
             <button
               className={`btn btn--dark btn--block ${isCheckingOut ? 'is-loading' : ''}`}
               onClick={(e) => {

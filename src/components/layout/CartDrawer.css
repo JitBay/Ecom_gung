@@ -281,6 +281,73 @@
   text-decoration: line-through;
 }
 
+.cart__review-card {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px 14px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.cart__review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart__review-stars {
+  font-size: 13px;
+  letter-spacing: 2px;
+}
+
+.cart__review-verified {
+  font-size: 11px;
+  font-weight: 600;
+  color: #15803d;
+  background: rgba(22, 163, 74, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.cart__review-verified::before {
+  content: "✓";
+  font-weight: 700;
+}
+
+.cart__review-quote {
+  font-size: 12px;
+  line-height: 1.45;
+  color: #334155;
+  font-style: italic;
+  margin: 0;
+}
+
+.cart__review-author {
+  font-size: 11px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.cart__trust-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #475569;
+  text-align: center;
+  padding: 6px 8px;
+  background: #f1f5f9;
+  border-radius: 6px;
+  letter-spacing: 0.01em;
+}
+
 .cart__foot small {
   color: var(--muted);
 }
