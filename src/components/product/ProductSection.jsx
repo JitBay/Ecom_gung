@@ -166,19 +166,22 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
   const [bundleId, setBundleId] = useState(1);
   const bundle = modelBundles.find((b) => b.id === bundleId) || modelBundles[0];
 
-  const [variants, setVariants] = useState(() =>
-    initialModelHandle === 'pack-decouverte' || isDiscoveryOffer
-      ? discoveryCategories.map((c) => ({
-          handle: c.handle,
-          color: c.defaultColor || 'noir',
-          size: 'L',
-        }))
-      : Array.from({ length: 4 }, (_, i) => ({
-          handle: initialModelHandle || cutsList[0].handle,
-          color: availableColors[i % availableColors.length]?.id || 'noir',
-          size: 'L',
-        }))
-  );
+  const [variants, setVariants] = useState(() => {
+    if (initialModelHandle === 'pack-decouverte' || isDiscoveryOffer) {
+      return discoveryCategories.map((c) => ({
+        handle: c.handle,
+        color: c.defaultColor || 'noir',
+        size: 'L',
+      }));
+    }
+    const defaultColorId = availableColors[0]?.id || 'noir';
+    return [
+      { handle: initialModelHandle || cutsList[0].handle, color: defaultColorId, size: 'L' },
+      { handle: initialModelHandle || cutsList[0].handle, color: defaultColorId, size: 'L' },
+      { handle: initialModelHandle || cutsList[0].handle, color: defaultColorId, size: 'L' },
+      { handle: initialModelHandle || cutsList[0].handle, color: defaultColorId, size: 'L' },
+    ];
+  });
 
   const [sizeOpen, setSizeOpen] = useState(false);
   const [atcRef, pastAtc] = useScrolledPast();
@@ -267,9 +270,21 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
 
   const updateVariant = (i, patch) => {
     let nextColor = patch.color;
-    setVariants((vs) =>
-      vs.map((v, j) => {
-        if (j !== i) return v;
+    setVariants((vs) => {
+      const item3MatchesItem1 = !isDiscovery && vs[0] && vs[2] && vs[0].color === vs[2].color && vs[0].size === vs[2].size;
+
+      return vs.map((v, j) => {
+        if (j !== i) {
+          // If customer updates item 1, and the free 3rd item (index 2) still matches item 1, auto-sync item 3
+          if (i === 0 && j === 2 && item3MatchesItem1 && !isDiscovery) {
+            return {
+              ...v,
+              color: patch.color !== undefined ? patch.color : v.color,
+              size: patch.size !== undefined ? patch.size : v.size,
+            };
+          }
+          return v;
+        }
         const next = { ...v, ...patch };
         if (patch.handle && patch.handle !== v.handle) {
           const nextModel = products.find((p) => p.handle === patch.handle) || products[0];
@@ -282,8 +297,8 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
           }
         }
         return next;
-      })
-    );
+      });
+    });
 
     const activeHandle = patch.handle || variants[i]?.handle || (isDiscovery ? discoveryCategories[i]?.handle : currentModel.handle);
     if (activeHandle) {
@@ -337,7 +352,15 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
         );
       }
     } else if (matched) {
-      setVariants((vs) => vs.map((v) => ({ ...v, color: matched.id })));
+      setVariants((vs) => {
+        const item3MatchesItem1 = vs[0] && vs[2] && vs[0].color === vs[2].color && vs[0].size === vs[2].size;
+        return vs.map((v, idx) => {
+          if (idx === 0 || (idx === 2 && item3MatchesItem1)) {
+            return { ...v, color: matched.id };
+          }
+          return v;
+        });
+      });
     }
   };
 

@@ -47,9 +47,25 @@ export default function CartDrawer() {
       : 'Add 1 more → it’s FREE 🎁';
   } else {
     progress = 100;
+    const primaryHandle = lines.find((l) => l.handle && l.handle !== 'pack-decouverte')?.handle ||
+                          lines[0]?.handle || '';
+
+    let freeNounEn = 'tank';
+    let freeNounFr = 'débardeur';
+    if (primaryHandle === 'vela-sculpt-demi-manches') {
+      freeNounEn = 'shirt';
+      freeNounFr = 't-shirt';
+    } else if (primaryHandle === 'vela-sculpt-manches-longues') {
+      freeNounEn = 'long sleeve';
+      freeNounFr = 'manches longues';
+    } else if (primaryHandle === 'vela-sculpt-sans-manches') {
+      freeNounEn = 'tank';
+      freeNounFr = 'débardeur';
+    }
+
     progressText = lang === 'fr'
-      ? '🎉 Vous avez débloqué 1 débardeur OFFERT !'
-      : '🎉 You unlocked 1 FREE tank!';
+      ? `🎉 Vous avez débloqué 1 ${freeNounFr} OFFERT !`
+      : `🎉 You unlocked 1 FREE ${freeNounEn}!`;
   }
 
   const isInApp = typeof navigator !== 'undefined' && /FBAN|FBAV|Instagram|Line|Twitter|Snapchat|TikTok/i.test(navigator.userAgent || '');

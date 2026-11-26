@@ -240,11 +240,25 @@ function VariantRows({
         );
 
         if (isFree) {
+          let freeNounEn = 'tank';
+          let freeNounFr = 'débardeur';
+          if (model?.handle === 'vela-sculpt-demi-manches') {
+            freeNounEn = 'shirt';
+            freeNounFr = 't-shirt';
+          } else if (model?.handle === 'vela-sculpt-manches-longues') {
+            freeNounEn = 'long sleeve';
+            freeNounFr = 'manches longues';
+          }
+
           return (
             <div className="variant-free-box" key={i}>
               <div className="variant-free-banner">
                 <Icon name="gift" size={14} />
-                <span>{lang === 'fr' ? '3ᵉ produit 100% offert' : '3rd item 100% FREE'}</span>
+                <span>
+                  {lang === 'fr'
+                    ? `3ᵉ ${freeNounFr} 100% offert`
+                    : `3rd ${freeNounEn} 100% FREE`}
+                </span>
               </div>
               {row}
             </div>
