@@ -259,10 +259,19 @@ export default function CartDrawer() {
 
             {/* TRUST STRIP JUSTE AU-DESSUS DU BOUTON CHECKOUT */}
             <div className="cart__trust-strip">
-              <span>
-                {lang === 'fr'
-                  ? 'Livraison offerte · Satisfait ou remboursé 30j · Paiement sécurisé Shopify'
-                  : 'Free US Shipping · 30-Day Money-Back · Secure Shopify Checkout'}
+              <span className="cart__trust-item">
+                <Icon name="truck" size={13} />{' '}
+                {lang === 'fr' ? 'Livraison offerte' : 'Free US Shipping'}
+              </span>
+              <span className="cart__trust-sep">·</span>
+              <span className="cart__trust-item">
+                <Icon name="shield" size={13} />{' '}
+                {lang === 'fr' ? 'Satisfait ou remboursé 30j' : '30-Day Money-Back'}
+              </span>
+              <span className="cart__trust-sep">·</span>
+              <span className="cart__trust-item">
+                <Icon name="lock" size={13} />{' '}
+                {lang === 'fr' ? 'Paiement sécurisé Shopify' : 'Secure Shopify Checkout'}
               </span>
             </div>
 
