@@ -12,7 +12,7 @@ import CameraRolls from '../components/sections/CameraRolls.jsx';
 import ProductSection from '../components/product/ProductSection.jsx';
 import NotFound from './NotFound.jsx';
 import PackDecouverteLanding from './PackDecouverteLanding.jsx';
-import { colorHex, collectionUrl, getProduct, getLocalizedProduct, getColorImages } from '../data/catalog.js';
+import { colorHex, collectionUrl, getProduct, getLocalizedProduct, getColorImages, matchProductColor } from '../data/catalog.js';
 import { brand } from '../data/site.js';
 import { fabric, shipping } from '../data/product.js';
 import { useCart } from '../context/CartContext.jsx';
@@ -209,8 +209,7 @@ function ClassicProductPage({ product }) {
 
   useEffect(() => {
     if (!product) return;
-    const validColor = paramColor && product.colors?.find((c) => c.toLowerCase() === paramColor.toLowerCase());
-    const finalColor = validColor || product.colors?.[0] || 'Noir';
+    const finalColor = matchProductColor(product.colors, paramColor);
     setColor(finalColor);
     setSize('L');
     setQty(1);

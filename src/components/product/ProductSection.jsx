@@ -15,7 +15,7 @@ import InlineSizeGuide from './InlineSizeGuide.jsx';
 import Icon from '../ui/Icon.jsx';
 import Stars from '../ui/Stars.jsx';
 import { badges, badgesEn, benefits, benefitsEn, colors, discoveryCategories, stats, statsEn } from '../../data/product.js';
-import { colorHex, getColorImages, getLocalizedProduct, products } from '../../data/catalog.js';
+import { colorHex, getColorImages, getLocalizedProduct, matchProductColor, products } from '../../data/catalog.js';
 import { useCart } from '../../context/CartContext.jsx';
 import { useLanguage } from '../../context/LanguageContext.jsx';
 import { useScrolledPast } from '../../lib/hooks.js';
@@ -236,32 +236,21 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
       });
       return;
     }
-    const validQuery = queryColor && currentModel.colors.find(
-      (c) => c.toLowerCase() === queryColor.toLowerCase()
+    const colorToUse = matchProductColor(
+      currentModel.colors,
+      queryColor || selectedColor || currentModel.colors[0] || 'Noir'
     );
-    // Preserve currently selected color if available in the newly switched model
-    const currentValid = selectedColor && currentModel.colors.find(
-      (c) => c.toLowerCase() === selectedColor.toLowerCase()
-    );
-    const colorToUse = validQuery || currentValid || currentModel.colors[0] || 'Noir';
     setSelectedColor(colorToUse);
     const matchingAvail = availableColors.find(
       (c) => c.label.toLowerCase() === colorToUse.toLowerCase()
     );
     const colorId = matchingAvail?.id || 'noir';
     setVariants((vs) =>
-      vs.map((v) => {
-        const itemHandle = v.handle || currentModel.handle;
-        const itemModel = products.find((p) => p.handle === itemHandle) || currentModel;
-        const hasCurrentColor = itemModel.colors.some(
-          (c) => c.toLowerCase() === (v.color || '').toLowerCase()
-        );
-        return {
-          ...v,
-          handle: itemHandle,
-          color: hasCurrentColor ? v.color : colorId,
-        };
-      })
+      vs.map((v) => ({
+        ...v,
+        handle: currentModel.handle,
+        color: matchProductColor(currentModel.colors, v.color) === colorToUse ? v.color : colorId,
+      }))
     );
   }, [currentModel.handle, availableColors, queryColor, isDiscovery]);
 
@@ -305,9 +294,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
       setSelectedHandle(activeHandle);
       const activeModel = products.find((p) => p.handle === activeHandle) || currentModel;
       const targetColor = nextColor || patch.color || variants[i]?.color || activeModel.colors[0];
-      const matched = activeModel.colors.find(
-        (c) => c.toLowerCase() === (targetColor || '').toLowerCase()
-      ) || activeModel.colors[0];
+      const matched = matchProductColor(activeModel.colors, targetColor);
       setSelectedColor(matched);
     }
   };
@@ -316,7 +303,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
     setSelectedHandle(handle);
     const m = products.find((p) => p.handle === handle) || products[0];
     if (m) {
-      const c = m.colors.find((col) => col.toLowerCase() === (colorId || '').toLowerCase()) || m.colors[0];
+      const c = matchProductColor(m.colors, colorId);
       setSelectedColor(c);
     }
   };
@@ -327,12 +314,13 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
   };
 
   const handleSelectColor = (colorName) => {
-    setSelectedColor(colorName);
+    const matchedColor = matchProductColor(currentModel.colors, colorName);
+    setSelectedColor(matchedColor);
     // Update ?color= in the browser URL while preserving all existing parameters (UTMs, etc.)
     if (typeof window !== 'undefined') {
       try {
         const params = new URLSearchParams(window.location.search);
-        params.set('color', colorName);
+        params.set('color', matchedColor);
         const nextSearch = params.toString();
         const nextUrl = `${window.location.pathname}${nextSearch ? `?${nextSearch}` : ''}${window.location.hash}`;
         window.history.replaceState({}, '', nextUrl);
@@ -341,9 +329,9 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
       }
     }
     const matched = availableColors.find(
-      (c) => c.label.toLowerCase() === colorName.toLowerCase() || c.id === colorName.toLowerCase()
+      (c) => c.label.toLowerCase() === matchedColor.toLowerCase() || c.id === matchedColor.toLowerCase()
     );
-    const colorId = matched?.id || colorName.toLowerCase().replace(/\s+/g, '-');
+    const colorId = matched?.id || matchedColor.toLowerCase().replace(/\s+/g, '-');
     if (isDiscovery) {
       const cutIdx = discoveryCategories.findIndex((p) => p.handle === selectedHandle);
       if (cutIdx !== -1) {
@@ -390,8 +378,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
           : currentModel.handle;
         const itemCut = products.find((p) => p.handle === itemCutHandle) || currentModel;
         const locCut = getLocalizedProduct(itemCut, lang);
-        const catColors = itemCut.colors;
-        const matchedColor = catColors.find((c) => c.toLowerCase() === (v.color || '').toLowerCase()) || catColors[0];
+        const matchedColor = matchProductColor(itemCut.colors, v.color);
         const colorLabel = t('color_names.' + matchedColor, matchedColor);
         const cutName = locCut.shortTitle || locCut.title;
         return `${cutName} : ${colorLabel} / ${v.size}`;
@@ -440,8 +427,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
           : currentModel.handle;
         const itemCut = products.find((p) => p.handle === itemCutHandle) || currentModel;
         const locCut = getLocalizedProduct(itemCut, lang);
-        const catColors = itemCut.colors;
-        const matchedColor = catColors.find((c) => c.toLowerCase() === (v.color || '').toLowerCase()) || catColors[0];
+        const matchedColor = matchProductColor(itemCut.colors, v.color);
         const colorLabel = t('color_names.' + matchedColor, matchedColor);
         const cutName = locCut.shortTitle || locCut.title;
         return `${cutName} : ${colorLabel} / ${v.size}`;

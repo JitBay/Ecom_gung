@@ -1,6 +1,6 @@
 import Icon from '../ui/Icon.jsx';
 import { bundles as defaultBundles, colors as defaultColors, discoveryCategories, sizes } from '../../data/product.js';
-import { colorHex, getColorImages, getLocalizedProduct, products } from '../../data/catalog.js';
+import { colorHex, getColorImages, getLocalizedProduct, matchProductColor, products } from '../../data/catalog.js';
 import { useLanguage } from '../../context/LanguageContext.jsx';
 import { price } from '../../lib/format.js';
 import './BundlePicker.css';
@@ -43,8 +43,9 @@ function VariantRows({
               hex: found?.hex || colorHex[c] || '#1a1a1a',
             };
           });
-          const currentColor = cutColors.find((c) => c.id === v.color || c.label.toLowerCase() === (v.color || '').toLowerCase()) || cutColors[0];
-          const imgs = getColorImages(cutProduct, v.color || currentColor?.label);
+          const matchedColorLabel = matchProductColor(cutProduct.colors, v.color);
+          const currentColor = cutColors.find((c) => c.label === matchedColorLabel) || cutColors[0];
+          const imgs = getColorImages(cutProduct, matchedColorLabel);
           const colorImg = (imgs && imgs[0]) || cutProduct.colorImages?.[cutProduct.colors[0]]?.[0] || '/images/image page produit/demi-manche/1.webp';
           const isCardActive = selectedHandle === cutProduct.handle;
 
@@ -181,8 +182,9 @@ function VariantRows({
             hex: found?.hex || colorHex[c] || '#1a1a1a',
           };
         });
-        const currentColor = cutColors.find((c) => c.id === v.color || c.label.toLowerCase() === (v.color || '').toLowerCase()) || cutColors[0];
-        const imgs = getColorImages(cutProduct, v.color || currentColor?.label);
+        const matchedColorLabel = matchProductColor(cutProduct.colors, v.color);
+        const currentColor = cutColors.find((c) => c.label === matchedColorLabel) || cutColors[0];
+        const imgs = getColorImages(cutProduct, matchedColorLabel);
         const colorImg = (imgs && imgs[0]) || cutProduct.colorImages?.[cutProduct.colors[0]]?.[0] || '/images/image page produit/sans-manche/1.webp';
 
         const isFree = isTwoPlusOne && i === 2;

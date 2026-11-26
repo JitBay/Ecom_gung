@@ -4,17 +4,30 @@
 export const colorHex = {
   Noir: '#1a1a1a',
   noir: '#1a1a1a',
+  Black: '#1a1a1a',
+  black: '#1a1a1a',
   Blanc: '#f4f4f6',
   blanc: '#f4f4f6',
+  White: '#f4f4f6',
+  white: '#f4f4f6',
   Gris: '#72757d',
   gris: '#72757d',
+  Grey: '#72757d',
+  grey: '#72757d',
+  Gray: '#72757d',
+  gray: '#72757d',
   'Gris chiné': '#5a5d66',
   'Gris Chiné': '#5a5d66',
   'gris-chine': '#5a5d66',
   'gris chine': '#5a5d66',
+  'Heather Grey': '#5a5d66',
+  'heather-grey': '#5a5d66',
+  'heather grey': '#5a5d66',
   'Black Or': '#241f17',
   'black-or': '#241f17',
   'black or': '#241f17',
+  'Black & Gold': '#241f17',
+  'black & gold': '#241f17',
 };
 
 export const HERO_PRODUCT = 'vela-sculpt-sans-manches';
@@ -301,43 +314,85 @@ export const products = [
   },
 ];
 
-export const getColorImages = (product, color) => {
-  if (!product) return [];
-  if (!product.colorImages) return product.images || [];
-  if (!color) {
-    const firstColor = Object.keys(product.colorImages)[0];
-    return product.colorImages[firstColor] || product.images || [];
+export function normalizeColorCategory(str) {
+  if (!str) return 'noir';
+  const s = String(str).toLowerCase().trim();
+  if (
+    s.includes('black-or') ||
+    s.includes('black or') ||
+    s.includes('noir or') ||
+    s.includes('noir-or') ||
+    s.includes('noir doré') ||
+    s.includes('black & gold') ||
+    s === '#241f17' ||
+    s === '#221e17'
+  ) {
+    return 'black-or';
+  }
+  if (s.includes('blanc') || s.includes('white') || s === '#f4f4f6' || s === '#f8f8fa') {
+    return 'blanc';
+  }
+  if (
+    s.includes('gris') ||
+    s.includes('grey') ||
+    s.includes('gray') ||
+    s.includes('heather') ||
+    s === '#72757d' ||
+    s === '#63666f' ||
+    s === '#5a5d66'
+  ) {
+    return 'gris';
+  }
+  if (s.includes('noir') || s.includes('black') || s === '#1a1a1a') {
+    return 'noir';
+  }
+  return s;
+}
+
+export function matchProductColor(colorsList = [], inputColor = '') {
+  if (!colorsList || colorsList.length === 0) return '';
+  if (!inputColor) return colorsList[0];
+
+  const trimmed = String(inputColor).trim();
+
+  // 1. Exact match (case-insensitive)
+  const exact = colorsList.find((c) => c.toLowerCase() === trimmed.toLowerCase());
+  if (exact) return exact;
+
+  // 2. Normalized category match (noir, blanc, gris, black-or)
+  const cat = normalizeColorCategory(trimmed);
+  for (const c of colorsList) {
+    if (normalizeColorCategory(c) === cat) {
+      return c;
+    }
   }
 
-  // 1. Direct exact key match
-  if (product.colorImages[color]) {
-    return product.colorImages[color];
-  }
-
-  // 2. Normalized match (case, accents, whitespace, and hyphens insensitive)
+  // 3. Normalized string match (accents, spaces, hyphens stripped)
   const norm = (s) =>
     String(s || '')
       .toLowerCase()
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '')
       .replace(/[-_\s]+/g, '');
+  const target = norm(trimmed);
+  const foundNorm = colorsList.find((c) => {
+    const nc = norm(c);
+    return nc === target || (target && (nc.includes(target) || target.includes(nc)));
+  });
+  if (foundNorm) return foundNorm;
 
-  const target = norm(color);
-  for (const [key, imgs] of Object.entries(product.colorImages)) {
-    if (norm(key) === target) {
-      return imgs;
-    }
+  return colorsList[0];
+}
+
+export const getColorImages = (product, color) => {
+  if (!product) return [];
+  if (!product.colorImages) return product.images || [];
+
+  const matched = matchProductColor(product.colors || Object.keys(product.colorImages), color);
+  if (matched && product.colorImages[matched]) {
+    return product.colorImages[matched];
   }
 
-  // 3. Substring match (e.g. 'gris' vs 'gris chine')
-  for (const [key, imgs] of Object.entries(product.colorImages)) {
-    const k = norm(key);
-    if (k.includes(target) || target.includes(k)) {
-      return imgs;
-    }
-  }
-
-  // 4. Default to first color images or flat images
   const firstColor = Object.keys(product.colorImages)[0];
   return product.colorImages[firstColor] || product.images || [];
 };
