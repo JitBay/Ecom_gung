@@ -165,16 +165,14 @@ function VariantRows({
     <div className="variants">
       <div className="variants__label-row">
         <p className="variants__label">
-          {lang === 'fr' ? 'Modèle, couleur & taille par article :' : 'Fit, Color & Size per shirt:'}
+          {lang === 'fr' ? 'Couleur & taille par article :' : 'Color & Size per shirt:'}
         </p>
         <span className="variants__size-tip">
           {lang === 'fr' ? '💡 Prenez votre taille habituelle' : '💡 Pick your usual T-shirt size'}
         </span>
       </div>
       {variants.map((v, i) => {
-        const cutHandle = v.handle || model?.handle || 'vela-sculpt-sans-manches';
-        const cutProduct = products.find((p) => p.handle === cutHandle) || model || products[0];
-        const locCut = getLocalizedProduct(cutProduct, lang);
+        const cutProduct = model || products[0];
         const cutColors = cutProduct.colors.map((c) => {
           const found = defaultColors.find((col) => col.label.toLowerCase() === c.toLowerCase() || col.id === c.toLowerCase());
           return {
@@ -193,7 +191,7 @@ function VariantRows({
             <div className="variant__thumb">
               <img
                 src={colorImg}
-                alt={locCut.shortTitle || locCut.title}
+                alt={currentColor?.label || 'Miniature'}
                 width="60"
                 height="60"
                 loading="lazy"
@@ -202,33 +200,7 @@ function VariantRows({
               />
             </div>
 
-            {/* 1. Sélecteur de modèle / coupe (T-shirt) */}
-            <label className="select select--cut" onClick={(e) => e.stopPropagation()}>
-              <select
-                value={cutHandle}
-                onFocus={() => onSelectCut && onSelectCut(cutProduct.handle, currentColor.id)}
-                onChange={(e) => {
-                  const newHandle = e.target.value;
-                  const nextProd = products.find((p) => p.handle === newHandle) || products[0];
-                  const nextColorId = nextProd.colors[0].toLowerCase().replace(/\s+/g, '-');
-                  onChange(i, { handle: newHandle, color: nextColorId });
-                  onSelectCut && onSelectCut(newHandle, nextColorId);
-                }}
-                aria-label={lang === 'fr' ? `Modèle article ${i + 1}` : `Model item ${i + 1}`}
-              >
-                {cutsList.map((cp) => {
-                  const lcp = getLocalizedProduct(cp, lang);
-                  return (
-                    <option key={cp.handle} value={cp.handle}>
-                      {lcp.shortTitle}
-                    </option>
-                  );
-                })}
-              </select>
-              <Icon name="chevron" size={14} />
-            </label>
-
-            {/* 2. Sélecteur de couleur */}
+            {/* 1. Sélecteur de couleur */}
             <label className="select" onClick={(e) => e.stopPropagation()}>
               <span className="select__dot" style={{ background: currentColor?.hex || '#1a1a1a' }} />
               <select
@@ -250,7 +222,7 @@ function VariantRows({
               <Icon name="chevron" size={14} />
             </label>
 
-            {/* 3. Sélecteur de taille */}
+            {/* 2. Sélecteur de taille */}
             <label className="select" onClick={(e) => e.stopPropagation()}>
               <select
                 value={v.size || 'L'}

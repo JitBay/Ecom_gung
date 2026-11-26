@@ -362,7 +362,9 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
   const addToCart = () => {
     const detail = chosen
       .map((v, i) => {
-        const itemCutHandle = v.handle || (bundle.isDiscoveryPack ? discoveryCategories[i]?.handle : currentModel.handle);
+        const itemCutHandle = bundle.isDiscoveryPack
+          ? (v.handle || discoveryCategories[i]?.handle || 'vela-sculpt-sans-manches')
+          : currentModel.handle;
         const itemCut = products.find((p) => p.handle === itemCutHandle) || currentModel;
         const locCut = getLocalizedProduct(itemCut, lang);
         const catColors = itemCut.colors;
@@ -398,7 +400,9 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
       isDiscoveryPack: Boolean(bundle.isDiscoveryPack),
       paidQty: bundle.isDiscoveryPack ? 1 : (bundle.isTwoPlusOne ? 2 : (bundle.qty || 1)),
       chosenVariants: chosen.map((v, i) => ({
-        handle: v.handle || (bundle.isDiscoveryPack ? (discoveryCategories[i]?.handle || 'pack-decouverte') : currentModel.handle),
+        handle: bundle.isDiscoveryPack
+          ? (v.handle || discoveryCategories[i]?.handle || 'pack-decouverte')
+          : currentModel.handle,
         color: v.color,
         size: v.size,
       })),
@@ -408,7 +412,9 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
   const currentLineItem = useMemo(() => {
     const detail = chosen
       .map((v, i) => {
-        const itemCutHandle = v.handle || (bundle.isDiscoveryPack ? discoveryCategories[i]?.handle : currentModel.handle);
+        const itemCutHandle = bundle.isDiscoveryPack
+          ? (v.handle || discoveryCategories[i]?.handle || 'vela-sculpt-sans-manches')
+          : currentModel.handle;
         const itemCut = products.find((p) => p.handle === itemCutHandle) || currentModel;
         const locCut = getLocalizedProduct(itemCut, lang);
         const catColors = itemCut.colors;
@@ -444,7 +450,9 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
       isDiscoveryPack: Boolean(bundle.isDiscoveryPack),
       paidQty: bundle.isDiscoveryPack ? 1 : (bundle.isTwoPlusOne ? 2 : (bundle.qty || 1)),
       chosenVariants: chosen.map((v, i) => ({
-        handle: v.handle || (bundle.isDiscoveryPack ? (discoveryCategories[i]?.handle || 'pack-decouverte') : currentModel.handle),
+        handle: bundle.isDiscoveryPack
+          ? (v.handle || discoveryCategories[i]?.handle || 'pack-decouverte')
+          : currentModel.handle,
         color: v.color,
         size: v.size,
       })),

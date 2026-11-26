@@ -137,53 +137,53 @@ export default function App() {
       <BrowserRouter basename={import.meta.env.BASE_URL}>
         <LanguageProvider>
           <CartProvider>
-          <ScrollToTop />
-          <Header />
-          <main>
-            <Routes>
-              {/* Home & Direct Sales Landing */}
-              <Route path="/" element={<HomePage />} />
-              <Route path="/landing" element={<LandingPage />} />
-              <Route path="/landing/pack-decouverte" element={<ProductPage handle="pack-decouverte" />} />
-              <Route path="/pages/pack-decouverte" element={<ProductPage handle="pack-decouverte" />} />
+            <ScrollToTop />
+            <Header />
+            <main>
+              <Routes>
+                {/* Home & Direct Sales Landing */}
+                <Route path="/" element={<HomePage />} />
+                <Route path="/landing" element={<LandingPage />} />
+                <Route path="/landing/pack-decouverte" element={<ProductPage handle="pack-decouverte" />} />
+                <Route path="/pages/pack-decouverte" element={<ProductPage handle="pack-decouverte" />} />
 
-              {/* Catalog & Products */}
-              <Route path="/collections/:handle" element={<CollectionPage />} />
-              <Route path="/products/:handle" element={<ProductRoute />} />
+                {/* Catalog & Products */}
+                <Route path="/collections/:handle" element={<CollectionPage />} />
+                <Route path="/products/:handle" element={<ProductRoute />} />
 
-              {/* Content & Offer Pages */}
-              <Route path="/pages/offres" element={<OffersPage />} />
-              <Route path="/pages/notre-technologie" element={<TechnologyPage />} />
-              <Route path="/pages/why-vela-labs" element={<Navigate to="/pages/notre-technologie" replace />} />
-              <Route path="/why-vela-labs" element={<Navigate to="/pages/notre-technologie" replace />} />
-              <Route path="/pages/garantie" element={<GuaranteePage />} />
-              <Route path="/pages/guide-tailles" element={<SizeGuidePage />} />
-              <Route path="/pages/suivi-commande" element={<TrackOrderPage />} />
-              <Route path="/pages/contact" element={<ContactPage />} />
+                {/* Content & Offer Pages */}
+                <Route path="/pages/offres" element={<OffersPage />} />
+                <Route path="/pages/notre-technologie" element={<TechnologyPage />} />
+                <Route path="/pages/why-vela-labs" element={<Navigate to="/pages/notre-technologie" replace />} />
+                <Route path="/why-vela-labs" element={<Navigate to="/pages/notre-technologie" replace />} />
+                <Route path="/pages/garantie" element={<GuaranteePage />} />
+                <Route path="/pages/guide-tailles" element={<SizeGuidePage />} />
+                <Route path="/pages/suivi-commande" element={<TrackOrderPage />} />
+                <Route path="/pages/contact" element={<ContactPage />} />
 
-              {/* Legal Pages */}
-              <Route path="/policies/privacy-policy" element={<PrivacyPolicyPage />} />
-              <Route path="/policies/terms-of-service" element={<TermsPage />} />
-              <Route path="/policies/refund-policy" element={<RefundPolicyPage />} />
-              <Route path="/policies/legal-notice" element={<LegalNoticePage />} />
+                {/* Legal Pages */}
+                <Route path="/policies/privacy-policy" element={<PrivacyPolicyPage />} />
+                <Route path="/policies/terms-of-service" element={<TermsPage />} />
+                <Route path="/policies/refund-policy" element={<RefundPolicyPage />} />
+                <Route path="/policies/legal-notice" element={<LegalNoticePage />} />
 
-              {/* Legacy Collection 301-style Redirects */}
-              <Route path="/collections/frontpage" element={<Navigate to="/collections/all" replace />} />
-              <Route path="/collections/sculpt-collection" element={<Navigate to="/collections/all" replace />} />
-              <Route path="/collections/sculpt-swim" element={<Navigate to="/collections/all" replace />} />
-              <Route path="/collections/posture-support" element={<Navigate to="/collections/all" replace />} />
-              <Route path="/collections/wellness-supplements" element={<Navigate to="/collections/all" replace />} />
+                {/* Legacy Collection 301-style Redirects */}
+                <Route path="/collections/frontpage" element={<Navigate to="/collections/all" replace />} />
+                <Route path="/collections/sculpt-collection" element={<Navigate to="/collections/all" replace />} />
+                <Route path="/collections/sculpt-swim" element={<Navigate to="/collections/all" replace />} />
+                <Route path="/collections/posture-support" element={<Navigate to="/collections/all" replace />} />
+                <Route path="/collections/wellness-supplements" element={<Navigate to="/collections/all" replace />} />
 
-              {/* Fallback 404 */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-        </main>
-          <Footer />
-          <CartDrawer />
-          <WelcomeEmailModal />
-        </CartProvider>
-      </LanguageProvider>
-    </BrowserRouter>
-  </ErrorBoundary>
+                {/* Fallback 404 */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </main>
+            <Footer />
+            <CartDrawer />
+            <WelcomeEmailModal />
+          </CartProvider>
+        </LanguageProvider>
+      </BrowserRouter>
+    </ErrorBoundary>
   );
 }
