@@ -323,11 +323,17 @@
   border: 1px solid #e7dfd2;
   border-radius: 10px;
   padding: 10px 12px;
-  transition: border-color 0.2s, background 0.2s;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
 }
 
 .discovery-variant-card:hover {
   border-color: var(--gold);
+}
+
+.discovery-variant-card.is-active {
+  border: 2px solid var(--gold);
+  background: var(--white);
+  box-shadow: 0 4px 16px rgba(201, 169, 110, 0.22);
 }
 
 .discovery-variant-card__header {

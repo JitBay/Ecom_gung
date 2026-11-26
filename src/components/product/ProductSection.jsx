@@ -219,12 +219,15 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
   useEffect(() => {
     if (isDiscovery) {
       setBundleId(1);
-      setVariants(
-        discoveryCategories.map((c) => ({
+      setVariants((prev) => {
+        if (prev && prev.length === discoveryCategories.length) {
+          return prev;
+        }
+        return discoveryCategories.map((c) => ({
           color: c.defaultColor || 'noir',
           size: 'L',
-        }))
-      );
+        }));
+      });
       return;
     }
     const validQuery = queryColor && currentModel.colors.find(
@@ -256,6 +259,9 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
     if (patch.color) {
       if (isDiscovery) {
         const cat = discoveryCategories[i];
+        if (cat?.handle) {
+          setSelectedHandle(cat.handle);
+        }
         const cObj = cat?.colors.find((c) => c.id === patch.color);
         if (cObj) {
           setSelectedColor(cObj.label);
@@ -267,6 +273,17 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
         if (matched) {
           setSelectedColor(matched.label);
         }
+      }
+    }
+  };
+
+  const handleSelectCut = (handle, colorId) => {
+    setSelectedHandle(handle);
+    const cat = discoveryCategories.find((c) => c.handle === handle);
+    if (cat) {
+      const cObj = cat.colors.find((c) => c.id === colorId) || cat.colors[0];
+      if (cObj) {
+        setSelectedColor(cObj.label);
       }
     }
   };
@@ -295,7 +312,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
     );
     const colorId = matched?.id || colorName.toLowerCase().replace(/\s+/g, '-');
     if (isDiscovery) {
-      const cutIdx = cutsList.findIndex((p) => p.handle === selectedHandle);
+      const cutIdx = discoveryCategories.findIndex((p) => p.handle === selectedHandle);
       if (cutIdx !== -1) {
         setVariants((vs) =>
           vs.map((v, i) => (i === cutIdx ? { ...v, color: colorId } : v))
@@ -586,6 +603,8 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
           onSelect={setBundleId}
           variants={chosen}
           onVariantChange={updateVariant}
+          onSelectCut={handleSelectCut}
+          selectedHandle={selectedHandle}
           productImage={currentImages[0]}
           availableColors={availableColors}
           colorImages={currentModel.colorImages}

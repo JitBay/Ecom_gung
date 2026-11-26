@@ -8,6 +8,8 @@ import './BundlePicker.css';
 function VariantRows({
   variants,
   onChange,
+  onSelectCut,
+  selectedHandle,
   productImage,
   availableColors,
   colorImages,
@@ -39,9 +41,15 @@ function VariantRows({
             cat.colorImages['Noir'];
           const catTitle = lang === 'fr' ? cat.titleFr : cat.titleEn;
           const catBadge = lang === 'fr' ? cat.badgeFr : cat.badgeEn;
+          const isCardActive = selectedHandle === cat.handle;
 
           return (
-            <div className="discovery-variant-card" key={cat.handle || i}>
+            <div
+              className={`discovery-variant-card ${isCardActive ? 'is-active' : ''}`}
+              key={cat.handle || i}
+              onClick={() => onSelectCut && onSelectCut(cat.handle, v.color)}
+              style={{ cursor: 'pointer' }}
+            >
               <div className="discovery-variant-card__header">
                 <span className="discovery-variant-card__number">{i + 1}</span>
                 <strong className="discovery-variant-card__title">{catTitle}</strong>
@@ -59,7 +67,7 @@ function VariantRows({
                     style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}
                   />
                 </div>
-                <label className="select">
+                <label className="select" onClick={(e) => e.stopPropagation()}>
                   <span className="select__dot" style={{ background: currentColor.hex }} />
                   <select
                     value={v.color}
@@ -74,20 +82,20 @@ function VariantRows({
                   </select>
                   <Icon name="chevron" size={14} />
                 </label>
-                <label className="select">
+                <label className="select" onClick={(e) => e.stopPropagation()}>
                   <select
                     value={v.size}
                     onChange={(e) => onChange(i, { size: e.target.value })}
                     aria-label={`Taille ${catTitle}`}
                   >
                     {sizes.map((s) => (
-                  <option key={s}>{s}</option>
-                ))}
-              </select>
-              <Icon name="chevron" size={14} />
-            </label>
-          </div>
-        </div>
+                      <option key={s}>{s}</option>
+                    ))}
+                  </select>
+                  <Icon name="chevron" size={14} />
+                </label>
+              </div>
+            </div>
           );
         })}
       </div>
@@ -175,7 +183,20 @@ function VariantRows({
   );
 }
 
-function BundleCard({ bundle, selected, onSelect, variants, onVariantChange, productImage, availableColors, colorImages, model, lang }) {
+function BundleCard({
+  bundle,
+  selected,
+  onSelect,
+  variants,
+  onVariantChange,
+  onSelectCut,
+  selectedHandle,
+  productImage,
+  availableColors,
+  colorImages,
+  model,
+  lang,
+}) {
   const marqueeText = lang === 'fr' ? 'Offre limitée' : 'Limited Offer';
   const marquee = Array(12).fill(marqueeText).join(' • ');
 
@@ -207,6 +228,8 @@ function BundleCard({ bundle, selected, onSelect, variants, onVariantChange, pro
           <VariantRows
             variants={variants}
             onChange={onVariantChange}
+            onSelectCut={onSelectCut}
+            selectedHandle={selectedHandle}
             productImage={productImage}
             availableColors={availableColors}
             colorImages={colorImages}
@@ -247,6 +270,8 @@ export default function BundlePicker({
   onSelect,
   variants,
   onVariantChange,
+  onSelectCut,
+  selectedHandle,
   productImage,
   availableColors,
   colorImages,
@@ -273,6 +298,8 @@ export default function BundlePicker({
             onSelect={() => onSelect(b.id)}
             variants={variants}
             onVariantChange={onVariantChange}
+            onSelectCut={onSelectCut}
+            selectedHandle={selectedHandle}
             productImage={productImage}
             availableColors={availableColors}
             colorImages={colorImages}

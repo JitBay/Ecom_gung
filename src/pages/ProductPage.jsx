@@ -1,5 +1,5 @@
 import { useEffect, useState, lazy, Suspense } from 'react';
-import { Link, useParams, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import Accordion from '../components/ui/Accordion.jsx';
 import Icon from '../components/ui/Icon.jsx';
 import Stars from '../components/ui/Stars.jsx';
@@ -34,6 +34,7 @@ const CustomerReviews = lazy(() => import('../components/sections/CustomerReview
  * Dedicated high-conversion sales landing for all cuts (Sans Manches, Demi-Manches, Manches Longues)
  */
 function DedicatedProductPage({ product }) {
+  const navigate = useNavigate();
   const { lang, t, dict } = useLanguage();
   const trustItems = dict.home?.trust || [];
   const handle = product?.handle || 'vela-sculpt-sans-manches';
@@ -104,7 +105,15 @@ function DedicatedProductPage({ product }) {
       </div>
 
       {/* 1. MAIN PRODUCT CONFIGURATOR & BUNDLE BUILDER (ABOVE THE FOLD: PHOTO, PRICE, SIZE, ATC) */}
-      <ProductSection initialModelHandle={handle} showModelSelector={false} />
+      <ProductSection
+        initialModelHandle={handle}
+        showModelSelector={true}
+        onModelChange={(newHandle) => {
+          if (newHandle && newHandle !== handle) {
+            navigate(`/products/${newHandle}`);
+          }
+        }}
+      />
 
       <Suspense fallback={<div style={{ minHeight: '120px' }} />}>
         {/* 2. LIFESTYLE CAMERA ROLLS WITH CUSTOMER PHOTOS */}
