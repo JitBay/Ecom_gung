@@ -247,11 +247,18 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
     );
     const colorId = matchingAvail?.id || 'noir';
     setVariants((vs) =>
-      vs.map((v) => ({
-        handle: v.handle || currentModel.handle,
-        ...v,
-        color: colorId,
-      }))
+      vs.map((v) => {
+        const itemHandle = v.handle || currentModel.handle;
+        const itemModel = products.find((p) => p.handle === itemHandle) || currentModel;
+        const hasCurrentColor = itemModel.colors.some(
+          (c) => c.toLowerCase() === (v.color || '').toLowerCase()
+        );
+        return {
+          ...v,
+          handle: itemHandle,
+          color: hasCurrentColor ? v.color : colorId,
+        };
+      })
     );
   }, [currentModel.handle, availableColors, queryColor, isDiscovery]);
 
@@ -259,6 +266,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
   const chosen = variants.slice(0, bundle.qty);
 
   const updateVariant = (i, patch) => {
+    let nextColor = patch.color;
     setVariants((vs) =>
       vs.map((v, j) => {
         if (j !== i) return v;
@@ -270,6 +278,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
           );
           if (!hasColor) {
             next.color = 'noir';
+            nextColor = 'noir';
           }
         }
         return next;
@@ -280,7 +289,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
     if (activeHandle) {
       setSelectedHandle(activeHandle);
       const activeModel = products.find((p) => p.handle === activeHandle) || currentModel;
-      const targetColor = patch.color || variants[i]?.color || activeModel.colors[0];
+      const targetColor = nextColor || patch.color || variants[i]?.color || activeModel.colors[0];
       const matched = activeModel.colors.find(
         (c) => c.toLowerCase() === (targetColor || '').toLowerCase()
       ) || activeModel.colors[0];

@@ -22,13 +22,12 @@ import { SHOPIFY_PRODUCT_GIDS, trackShopifyProductView } from '../lib/shopifyAna
 import { resolveShopifyVariantId } from '../lib/shopify.js';
 import './ProductPage.css';
 
-// Lazy load below-the-fold heavy sections to optimize initial mobile LCP & INP
-const ProductVideoSection = lazy(() => import('../components/product/ProductVideoSection.jsx'));
-const RelatedProducts = lazy(() => import('../components/sections/RelatedProducts.jsx'));
-const VideoTestimonials = lazy(() => import('../components/sections/VideoTestimonials.jsx'));
-const QualitySection = lazy(() => import('../components/sections/QualitySection.jsx'));
-const Faq = lazy(() => import('../components/sections/Faq.jsx'));
-const CustomerReviews = lazy(() => import('../components/sections/CustomerReviews.jsx'));
+import ProductVideoSection from '../components/product/ProductVideoSection.jsx';
+import RelatedProducts from '../components/sections/RelatedProducts.jsx';
+import VideoTestimonials from '../components/sections/VideoTestimonials.jsx';
+import QualitySection from '../components/sections/QualitySection.jsx';
+import Faq from '../components/sections/Faq.jsx';
+import CustomerReviews from '../components/sections/CustomerReviews.jsx';
 
 /**
  * Dedicated high-conversion sales landing for all cuts (Sans Manches, Demi-Manches, Manches Longues)
@@ -125,8 +124,7 @@ function DedicatedProductPage({ product }) {
         }}
       />
 
-      <Suspense fallback={<div style={{ minHeight: '120px' }} />}>
-        {/* 2. LIFESTYLE CAMERA ROLLS WITH CUSTOMER PHOTOS */}
+      {/* 2. LIFESTYLE CAMERA ROLLS WITH CUSTOMER PHOTOS */}
         {isSleeveless && <CameraRolls limit={5} />}
 
         {/* 3. REAL-WORLD PRODUCT VIDEO DEMO: ONLY FOR SLEEVELESS (REMOVED FROM SHORT & LONG) */}
@@ -149,7 +147,6 @@ function DedicatedProductPage({ product }) {
 
         {/* 8. VERIFIED CUSTOMER REVIEWS */}
         <CustomerReviews />
-      </Suspense>
 
       {/* 9. TRUST BADGES STRIP */}
       <section className="ionix-trust" aria-label={t('home.trust_title')}>

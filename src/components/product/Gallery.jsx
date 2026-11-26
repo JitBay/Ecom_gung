@@ -52,6 +52,7 @@ export default function Gallery({ images, title, activeColor, videoHref }) {
   const track = useRef(null);
 
   const list = images && images.length > 0 ? images : ['/images/image page produit/demi-manche/1.webp'];
+  const imagesKey = (images || []).join('|');
 
   // Reset to first slide whenever the color images change
   useEffect(() => {
@@ -67,7 +68,7 @@ export default function Gallery({ images, title, activeColor, videoHref }) {
         track.current.scrollLeft = 0;
       }
     }
-  }, [images]);
+  }, [imagesKey]);
 
   const onScroll = () => {
     const el = track.current;

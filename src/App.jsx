@@ -1,4 +1,4 @@
-import { useEffect, lazy, Suspense } from 'react';
+import { useEffect } from 'react';
 import { BrowserRouter, Navigate, Route, Routes, useLocation, useParams } from 'react-router-dom';
 import { LanguageProvider } from './context/LanguageContext.jsx';
 import { CartProvider } from './context/CartContext.jsx';
@@ -8,20 +8,20 @@ import CartDrawer from './components/layout/CartDrawer.jsx';
 import WelcomeEmailModal from './components/ui/WelcomeEmailModal.jsx';
 import HomePage from './pages/HomePage.jsx';
 import ProductPage from './pages/ProductPage.jsx';
-
-const LandingPage = lazy(() => import('./pages/LandingPage.jsx'));
-const CollectionPage = lazy(() => import('./pages/CollectionPage.jsx'));
-const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage.jsx'));
-const GuaranteePage = lazy(() => import('./pages/GuaranteePage.jsx'));
-const OffersPage = lazy(() => import('./pages/OffersPage.jsx'));
-const TechnologyPage = lazy(() => import('./pages/TechnologyPage.jsx'));
-const RefundPolicyPage = lazy(() => import('./pages/RefundPolicyPage.jsx'));
-const TermsPage = lazy(() => import('./pages/TermsPage.jsx'));
-const LegalNoticePage = lazy(() => import('./pages/LegalNoticePage.jsx'));
-const ContactPage = lazy(() => import('./pages/ContactPage.jsx'));
-const SizeGuidePage = lazy(() => import('./pages/SizeGuidePage.jsx'));
-const TrackOrderPage = lazy(() => import('./pages/TrackOrderPage.jsx'));
+import LandingPage from './pages/LandingPage.jsx';
+import CollectionPage from './pages/CollectionPage.jsx';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage.jsx';
+import GuaranteePage from './pages/GuaranteePage.jsx';
+import OffersPage from './pages/OffersPage.jsx';
+import TechnologyPage from './pages/TechnologyPage.jsx';
+import RefundPolicyPage from './pages/RefundPolicyPage.jsx';
+import TermsPage from './pages/TermsPage.jsx';
+import LegalNoticePage from './pages/LegalNoticePage.jsx';
+import ContactPage from './pages/ContactPage.jsx';
+import SizeGuidePage from './pages/SizeGuidePage.jsx';
+import TrackOrderPage from './pages/TrackOrderPage.jsx';
 import NotFound from './pages/NotFound.jsx';
+import ErrorBoundary from './components/ui/ErrorBoundary.jsx';
 import { HERO_PRODUCT } from './data/catalog.js';
 import { initAnalytics, trackPageView } from './lib/analytics.js';
 import { AnalyticsPageType, trackShopifyPageView, useZvarShopifyCookies } from './lib/shopifyAnalytics.js';
@@ -133,13 +133,13 @@ export default function App() {
   }, []);
 
   return (
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
-      <LanguageProvider>
-        <CartProvider>
-        <ScrollToTop />
-        <Header />
-        <main>
-          <Suspense fallback={<div style={{ minHeight: '50vh' }} />}>
+    <ErrorBoundary>
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
+        <LanguageProvider>
+          <CartProvider>
+          <ScrollToTop />
+          <Header />
+          <main>
             <Routes>
               {/* Home & Direct Sales Landing */}
               <Route path="/" element={<HomePage />} />
@@ -177,13 +177,13 @@ export default function App() {
               {/* Fallback 404 */}
               <Route path="*" element={<NotFound />} />
             </Routes>
-          </Suspense>
         </main>
-        <Footer />
-        <CartDrawer />
-        <WelcomeEmailModal />
-      </CartProvider>
-    </LanguageProvider>
-  </BrowserRouter>
+          <Footer />
+          <CartDrawer />
+          <WelcomeEmailModal />
+        </CartProvider>
+      </LanguageProvider>
+    </BrowserRouter>
+  </ErrorBoundary>
   );
 }

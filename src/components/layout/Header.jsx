@@ -46,7 +46,7 @@ function AnnouncementBar() {
 function MobileMenu({ open, onClose }) {
   useLockScroll(open);
   const [modelsOpen, setModelsOpen] = useState(false);
-  const { t, dict } = useLanguage();
+  const { t, dict, lang } = useLanguage();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -166,7 +166,7 @@ export default function Header() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownTimeoutRef = useRef(null);
   const { count, setOpen } = useCart();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const location = useLocation();
   const navigate = useNavigate();
 
