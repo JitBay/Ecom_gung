@@ -5,13 +5,14 @@ import { useLanguage } from '../../context/LanguageContext.jsx';
 import './Gallery.css';
 
 function Lightbox({ index, images, onClose, onMove, title }) {
+  const { lang } = useLanguage();
   useLockScroll(index !== null);
   if (index === null || !images || images.length === 0) return null;
   const currentSrc = images[index];
 
   return (
-    <div className="lightbox" onClick={onClose} role="dialog" aria-label="Image agrandie">
-      <button className="lightbox__close" aria-label="Fermer">
+    <div className="lightbox" onClick={onClose} role="dialog" aria-label={lang === 'fr' ? 'Image agrandie' : 'Enlarged photo'}>
+      <button className="lightbox__close" aria-label={lang === 'fr' ? 'Fermer' : 'Close'}>
         <Icon name="close" size={26} />
       </button>
       <button
@@ -20,7 +21,7 @@ function Lightbox({ index, images, onClose, onMove, title }) {
           e.stopPropagation();
           onMove(-1);
         }}
-        aria-label="Image précédente"
+        aria-label={lang === 'fr' ? 'Image précédente' : 'Previous image'}
       >
         <Icon name="arrow" size={22} />
       </button>
@@ -33,7 +34,7 @@ function Lightbox({ index, images, onClose, onMove, title }) {
           e.stopPropagation();
           onMove(1);
         }}
-        aria-label="Image suivante"
+        aria-label={lang === 'fr' ? 'Image suivante' : 'Next image'}
       >
         <Icon name="arrow" size={22} />
       </button>
@@ -105,7 +106,7 @@ export default function Gallery({ images, title, activeColor, videoHref }) {
             onKeyDown={(e) => {
               if (e.key === 'Enter') setZoom(i);
             }}
-            aria-label={`Agrandir la photo ${i + 1}`}
+            aria-label={lang === 'fr' ? `Agrandir la photo ${i + 1}` : `Enlarge photo ${i + 1}`}
           >
             <img
               src={src}

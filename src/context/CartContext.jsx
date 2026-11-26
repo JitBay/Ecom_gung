@@ -206,7 +206,19 @@ export function CartProvider({ children }) {
       }
     };
 
-    const count = lines.reduce((n, l) => n + l.qty, 0);
+    const count = lines.reduce((n, l) => {
+      let multiplier = 1;
+      if (l.isDiscoveryPack || l.isTwoPlusOne || l.bundleId === 3 || String(l.bundleId) === '3') {
+        multiplier = 3;
+      } else if (l.bundleId === 2 || String(l.bundleId) === '2' || (Array.isArray(l.chosenVariants) && l.chosenVariants.length === 2)) {
+        multiplier = 2;
+      } else if (l.paidQty && l.paidQty > 1) {
+        multiplier = l.paidQty;
+      } else if (Array.isArray(l.chosenVariants) && l.chosenVariants.length > 0) {
+        multiplier = l.chosenVariants.length;
+      }
+      return n + multiplier * (l.qty || 1);
+    }, 0);
     const localTotal = lines.reduce((n, l) => n + l.qty * l.price, 0);
     const displayTotal =
       shopifyCart && typeof shopifyCart.subtotal === 'number' && shopifyCart.subtotal > 0

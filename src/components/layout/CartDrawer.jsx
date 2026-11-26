@@ -134,7 +134,11 @@ export default function CartDrawer() {
 
         {lines.length > 0 && (
           <footer className="cart__foot">
-            <p>
+            <p className="cart__shipping-row">
+              <span>{lang === 'fr' ? 'Livraison :' : 'Shipping:'}</span>
+              <strong className="cart__shipping-free">{lang === 'fr' ? 'OFFERTE (Gratuit)' : 'FREE'}</strong>
+            </p>
+            <p className="cart__subtotal-row">
               <span>{t('cart.subtotal')}</span>
               <strong>{price(displayTotal ?? total)}</strong>
             </p>

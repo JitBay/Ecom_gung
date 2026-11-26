@@ -10,8 +10,9 @@ import { useLockScroll } from '../../lib/hooks.js';
 import './Header.css';
 
 export function Logo() {
+  const { lang } = useLanguage();
   return (
-    <Link to="/" className="logo" aria-label="zvar. accueil">
+    <Link to="/" className="logo" aria-label={lang === 'fr' ? 'zvar. accueil' : 'zvar. home'}>
       <img
         src="/images/logo.svg"
         alt="zvar."
@@ -84,7 +85,7 @@ function MobileMenu({ open, onClose }) {
 
   return (
     <div className={`drawer-backdrop ${open ? 'is-open' : ''}`} onClick={onClose}>
-      <nav className="mobile-menu" onClick={(e) => e.stopPropagation()} aria-label="Menu principal mobile">
+      <nav className="mobile-menu" onClick={(e) => e.stopPropagation()} aria-label={lang === 'fr' ? 'Menu principal mobile' : 'Mobile menu'}>
         <div className="mobile-menu__top">
           <Logo />
           <button onClick={onClose} aria-label={t('header.menu_close')}>
@@ -103,7 +104,7 @@ function MobileMenu({ open, onClose }) {
                     <button
                       className="mobile-menu__toggle"
                       onClick={() => setModelsOpen(!modelsOpen)}
-                      aria-label="Afficher les sous-catégories"
+                      aria-label={lang === 'fr' ? 'Afficher les sous-catégories' : 'Show subcategories'}
                     >
                       <Icon name="chevron" size={16} />
                     </button>
@@ -252,7 +253,7 @@ export default function Header() {
               <Logo />
             </div>
 
-            <nav className="header__nav" aria-label="Menu principal" onMouseLeave={handleCloseDropdown}>
+            <nav className="header__nav" aria-label={lang === 'fr' ? 'Menu principal' : 'Main menu'} onMouseLeave={handleCloseDropdown}>
               {navItems.map((item) => {
                 if (item.children) {
                   return (
@@ -319,7 +320,7 @@ export default function Header() {
               <Link to="/pages/garantie" className="badge-guarantee-head hide-mobile">
                 <Icon name="shield" size={14} /> {t('header.guarantee_pill')}
               </Link>
-              <button className="icon-btn cart-btn" onClick={() => setOpen(true)} aria-label={`${t('header.cart_aria')}, ${count} articles`}>
+              <button className="icon-btn cart-btn" onClick={() => setOpen(true)} aria-label={`${t('header.cart_aria')}, ${count} ${lang === 'fr' ? 'articles' : 'items'}`}>
                 <Icon name="bag" size={22} />
                 {count > 0 && <span className="cart-btn__count">{count}</span>}
               </button>

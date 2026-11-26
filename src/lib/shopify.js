@@ -541,18 +541,12 @@ export async function syncShopifyCart(lines, options = {}) {
   const locale = getCheckoutLocale(options);
   const countryCode = getCheckoutCountryCode(options, locale);
   const { variantMap, orderNote } = resolveCartVariantEntries(lines);
-  const attrKey = locale === 'fr' ? 'Sélection' : 'Selection';
 
   const cartLines = Array.from(variantMap.entries()).map(([variantId, entry]) => {
-    const item = {
+    return {
       merchandiseId: `gid://shopify/ProductVariant/${variantId}`,
       quantity: entry.qty,
     };
-    const combinedDetail = Array.from(entry.details).join(' | ').trim();
-    if (combinedDetail) {
-      item.attributes = [{ key: attrKey, value: combinedDetail.slice(0, 255) }];
-    }
-    return item;
   });
 
   const input = {

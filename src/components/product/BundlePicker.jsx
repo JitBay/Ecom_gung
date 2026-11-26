@@ -90,7 +90,7 @@ function VariantRows({
                       onChange(i, { color: newColorId });
                       onSelectCut && onSelectCut(cutProduct.handle, newColorId);
                     }}
-                    aria-label={`Couleur article ${i + 1}`}
+                    aria-label={lang === 'fr' ? `Couleur article ${i + 1}` : `Color item ${i + 1}`}
                   >
                     {cutColors.map((c) => (
                       <option key={c.id} value={c.id}>
@@ -113,7 +113,7 @@ function VariantRows({
                     value={v.size || 'L'}
                     onFocus={() => onSelectCut && onSelectCut(cutProduct.handle, currentColor.id)}
                     onChange={(e) => onChange(i, { size: e.target.value })}
-                    aria-label={`Taille article ${i + 1}`}
+                    aria-label={lang === 'fr' ? `Taille article ${i + 1}` : `Size item ${i + 1}`}
                   >
                     {sizes.map((s) => (
                       <option key={s}>{s}</option>
@@ -169,7 +169,7 @@ function VariantRows({
               <select
                 value={currentColor?.id || v.color}
                 onChange={(e) => onChange(i, { color: e.target.value })}
-                aria-label={`Couleur article ${i + 1}`}
+                aria-label={lang === 'fr' ? `Couleur article ${i + 1}` : `Color item ${i + 1}`}
               >
                 {colorList.map((c) => (
                   <option key={c.id} value={c.id}>
@@ -185,7 +185,7 @@ function VariantRows({
               <select
                 value={v.size || 'L'}
                 onChange={(e) => onChange(i, { size: e.target.value })}
-                aria-label={`Taille article ${i + 1}`}
+                aria-label={lang === 'fr' ? `Taille article ${i + 1}` : `Size item ${i + 1}`}
               >
                 {sizes.map((s) => (
                   <option key={s}>{s}</option>
@@ -232,9 +232,25 @@ function BundleCard({
   const marquee = Array(12).fill(marqueeText).join(' • ');
 
   const card = (
-    <div className={`bundle ${selected ? 'is-selected' : ''}`} onClick={onSelect}>
-      <div className="bundle__head">
-        <span className="radio" aria-hidden="true" />
+    <div
+      className={`bundle ${selected ? 'is-selected' : ''}`}
+      onClick={onSelect}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onSelect();
+        }
+      }}
+    >
+      <div className="bundle__head" onClick={onSelect}>
+        <span
+          className="radio"
+          aria-hidden="true"
+          onClick={onSelect}
+          style={{ cursor: 'pointer' }}
+        />
         <div className="bundle__title">
           <p>
             <strong>{bundle.title}</strong>
@@ -284,7 +300,11 @@ function BundleCard({
     <li>
       <input type="radio" name="bundle" className="sr-only" checked={selected} onChange={onSelect} aria-label={bundle.title} />
       {bundle.highlight ? (
-        <div className="offer-frame">
+        <div
+          className="offer-frame"
+          onClick={onSelect}
+          style={{ cursor: 'pointer' }}
+        >
           <span className="offer-frame__text is-top">{marquee}</span>
           {card}
           <span className="offer-frame__text is-bottom">{marquee}</span>

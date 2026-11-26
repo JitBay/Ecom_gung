@@ -12,7 +12,7 @@ export default function StickyCart({ visible, bundle, onAdd, productImage, title
       <div className="sticky-cart__thumb">
         <img
           src={productImage || '/images/image page produit/demi-manche/1.webp'}
-          alt="Miniature"
+          alt={lang === 'fr' ? 'Miniature' : 'Thumbnail'}
           width="48"
           height="48"
           loading="lazy"

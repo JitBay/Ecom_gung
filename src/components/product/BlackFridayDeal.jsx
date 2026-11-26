@@ -10,7 +10,7 @@ export default function BlackFridayDeal({ model, isDiscovery = false }) {
   const saleBadge = lang === 'fr' ? (isPack ? 'Offre star' : 'Black Friday') : (isPack ? 'Star Deal' : 'Sale');
 
   return (
-    <div className="ixbm-deal" id="bm-deal" role="note" aria-label="Offre Black Friday">
+    <div className="ixbm-deal" id="bm-deal" role="note" aria-label={lang === 'fr' ? 'Offre Black Friday' : 'Black Friday Offer'}>
       <div className="ixbm-deal__head">
         <span className="ixbm-deal__sale">{saleBadge}</span>
         <span className="ixbm-deal__tag">{d.tag}</span>

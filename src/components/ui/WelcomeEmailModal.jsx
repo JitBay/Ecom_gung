@@ -145,13 +145,13 @@ export default function WelcomeEmailModal() {
         </div>
 
         <h2 className="welcome-modal-title" id="welcome-modal-title">
-          {lang === 'fr' ? 'Obtenez 10% de réduction sur votre 1ère commande 🎁' : 'Get 10% off your first order 🎁'}
+          {lang === 'fr' ? '2 $ de réduction sur votre 1er débardeur — code WELCOME10' : '$2 off your first tank — code WELCOME10'}
         </h2>
 
         <p className="welcome-modal-desc">
           {lang === 'fr'
-            ? 'Rejoignez la liste pour nos offres exclusives du Black Friday.'
-            : 'Join the list for Black Friday deals.'}
+            ? 'Inscrivez-vous pour recevoir votre réduction immédiate et nos offres exclusives.'
+            : 'Sign up to claim your instant discount and access exclusive deals.'}
         </p>
 
         {status !== 'success' ? (

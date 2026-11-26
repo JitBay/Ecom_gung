@@ -510,7 +510,7 @@ export default function CustomerReviews() {
           {photosOnly && (
             <span className="reviews__chip">
               {t('reviews_section.filter_photos')}
-              <button type="button" onClick={() => { setPhotosOnly(false); setPage(1); }} aria-label="Supprimer filtre">
+              <button type="button" onClick={() => { setPhotosOnly(false); setPage(1); }} aria-label={lang === 'fr' ? 'Supprimer le filtre' : 'Remove filter'}>
                 <Icon name="close" size={11} />
               </button>
             </span>
@@ -518,7 +518,7 @@ export default function CustomerReviews() {
           {search.trim() && (
             <span className="reviews__chip">
               « {search} »
-              <button type="button" onClick={() => { setSearch(''); setPage(1); }} aria-label="Supprimer filtre">
+              <button type="button" onClick={() => { setSearch(''); setPage(1); }} aria-label={lang === 'fr' ? 'Supprimer le filtre' : 'Remove filter'}>
                 <Icon name="close" size={11} />
               </button>
             </span>

@@ -190,7 +190,7 @@ export default function Footer() {
               ))}
             </ul>
           </div>
-          <div className="footer__pay" aria-label="Moyens de paiement acceptés : Visa, Mastercard, Apple Pay, American Express">
+          <div className="footer__pay" aria-label={lang === 'fr' ? 'Moyens de paiement acceptés' : 'Accepted payment methods'}>
             <span className="footer__pay-card" title="Visa" aria-label="Visa">
               <svg viewBox="0 0 38 24" width="38" height="24" fill="none">
                 <rect width="38" height="24" rx="4" fill="#ffffff" stroke="#e0e0e0" />

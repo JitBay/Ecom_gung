@@ -96,7 +96,17 @@ function DedicatedProductPage({ product }) {
   return (
     <div className={`product-page-wrap ${handle}-product ${isSleeveless ? 'sleeveless-product' : ''}`}>
       {/* THIN BLACK FRIDAY ANNOUNCEMENT STRIP */}
-      <div className="product-page__thin-banner">
+      <div
+        className="product-page__thin-banner"
+        onClick={() => {
+          const target = document.querySelector('.bundles') || document.getElementById('product');
+          if (target) target.scrollIntoView({ behavior: 'smooth' });
+        }}
+        style={{ cursor: 'pointer' }}
+        role="button"
+        tabIndex={0}
+        aria-label={lang === 'fr' ? 'Accéder aux offres' : 'View special bundle offers'}
+      >
         <span className="product-page__thin-fire">🔥</span>
         <strong>{lang === 'fr' ? 'Black Friday : 2 achetés = 1 offert' : 'Black Friday: Buy 2, Get 1 FREE'}</strong>
         <span className="product-page__thin-note">

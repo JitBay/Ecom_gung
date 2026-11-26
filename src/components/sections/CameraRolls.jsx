@@ -76,7 +76,24 @@ export default function CameraRolls({ limit = 5 }) {
                     bold: r.boldEn || r.bold,
                   };
             return (
-              <article className="roll-card reveal" key={r.name + i} style={{ transitionDelay: `${i * 80}ms` }}>
+              <article
+                className="roll-card reveal"
+                key={r.name + i}
+                style={{ transitionDelay: `${i * 80}ms`, cursor: 'pointer' }}
+                onClick={() => {
+                  const target = document.getElementById('product') || document.querySelector('.bundles');
+                  if (target) target.scrollIntoView({ behavior: 'smooth' });
+                }}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    const target = document.getElementById('product') || document.querySelector('.bundles');
+                    if (target) target.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+                aria-label={lang === 'fr' ? 'Voir l’offre produit' : 'View product offer'}
+              >
                 <div className="roll-card__photo" style={{ '--tint': r.tint }}>
                   {r.photo ? (
                     r.photo.endsWith('.mp4') ? (

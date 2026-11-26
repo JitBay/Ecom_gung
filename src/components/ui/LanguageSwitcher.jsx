@@ -26,7 +26,7 @@ export default function LanguageSwitcher({ variant = 'pill', className = '' }) {
           className="lang-dropdown__btn"
           onClick={() => setOpen(!open)}
           aria-expanded={open}
-          aria-label="Changer la langue / Switch language"
+          aria-label={lang === 'fr' ? 'Changer la langue' : 'Switch language'}
         >
           <span className="lang-dropdown__flag">{lang === 'fr' ? '🇫🇷' : '🇺🇸'}</span>
           <span className="lang-dropdown__code">{lang.toUpperCase()}</span>
@@ -66,7 +66,7 @@ export default function LanguageSwitcher({ variant = 'pill', className = '' }) {
   }
 
   return (
-    <div className={`lang-pill ${className}`} role="group" aria-label="Langue / Language">
+    <div className={`lang-pill ${className}`} role="group" aria-label={lang === 'fr' ? 'Langue' : 'Language'}>
       <button
         type="button"
         className={`lang-pill__btn ${lang === 'fr' ? 'is-active' : ''}`}

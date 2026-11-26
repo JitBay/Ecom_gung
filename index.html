@@ -46,30 +46,58 @@
       window.__fbq_initial_pageview_fired = true;
     </script>
 
-    <!-- Microsoft Clarity -->
-    <script type="text/javascript">
-      (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-      })(window, document, "clarity", "script", "zgp7k9bahj");
-    </script>
-
-    <!-- Judge.me Headless Reviews Script -->
+    <!-- Facebook & In-App WebView safe error handler -->
     <script>
-      window.jdgm = window.jdgm || {};
-      window.jdgm.SHOP_DOMAIN = 'msxkej-wu.myshopify.com';
-      window.jdgm.PLATFORM = 'shopify';
+      window.addEventListener('error', function(e) {
+        if (e && e.message && (e.message.indexOf('Java object is gone') !== -1 || e.message.indexOf('postMessage') !== -1)) {
+          e.stopImmediatePropagation();
+          e.preventDefault();
+          return true;
+        }
+      }, true);
     </script>
-    <script data-cfasync="false" type="text/javascript" async src="https://cdn.judge.me/widget_preloads.js"></script>
-    <script data-cfasync="false" type="text/javascript" async src="https://cdn.judge.me/shopify_v2.js"></script>
 
-    <!-- Shopify Inbox Chat for Storefront -->
-    <script
-      src="https://cdn.shopify.com/shopifycloud/shopify_chat/storefront/shopify_chat.js?api_env=production&button_color=%23141414&button_style=icon_text&icon=chat_bubble&shop_id=msxkej-wu.myshopify.com"
-      async
-    ></script>
-    <script src="https://inbox.shopify.com/chat?shop=msxkej-wu.myshopify.com" async></script>
+    <!-- Preload critical Hero Image for sub-2.5s LCP -->
+    <link rel="preload" as="image" href="/images/image page produit/sans-manche/1.webp" type="image/webp" fetchpriority="high" />
+
+    <!-- Defer non-critical scripts (Clarity, Judge.me, Shopify chat) after window load -->
+    <script>
+      window.addEventListener('load', function() {
+        var runDeferred = function() {
+          // Microsoft Clarity
+          (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "zgp7k9bahj");
+
+          // Judge.me
+          window.jdgm = window.jdgm || {};
+          window.jdgm.SHOP_DOMAIN = 'msxkej-wu.myshopify.com';
+          window.jdgm.PLATFORM = 'shopify';
+          var s1 = document.createElement('script');
+          s1.src = 'https://cdn.judge.me/widget_preloads.js';
+          s1.async = true;
+          document.head.appendChild(s1);
+          var s2 = document.createElement('script');
+          s2.src = 'https://cdn.judge.me/shopify_v2.js';
+          s2.async = true;
+          document.head.appendChild(s2);
+
+          // Shopify Chat
+          var sc1 = document.createElement('script');
+          sc1.src = 'https://cdn.shopify.com/shopifycloud/shopify_chat/storefront/shopify_chat.js?api_env=production&button_color=%23141414&button_style=icon_text&icon=chat_bubble&shop_id=msxkej-wu.myshopify.com';
+          sc1.async = true;
+          document.head.appendChild(sc1);
+        };
+
+        if ('requestIdleCallback' in window) {
+          window.requestIdleCallback(runDeferred, { timeout: 1500 });
+        } else {
+          setTimeout(runDeferred, 1000);
+        }
+      });
+    </script>
 
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

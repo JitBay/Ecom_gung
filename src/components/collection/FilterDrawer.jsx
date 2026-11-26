@@ -18,7 +18,7 @@ export default function FilterDrawer({ open, onClose, items, value, onApply }) {
 
   return (
     <div className={`drawer-backdrop ${open ? 'is-open' : ''}`} onClick={onClose}>
-      <aside className="filters" onClick={(e) => e.stopPropagation()} aria-label="Filtres et options de tri">
+      <aside className="filters" onClick={(e) => e.stopPropagation()} aria-label={lang === 'fr' ? 'Filtres et options de tri' : 'Filters and sorting options'}>
         <header className="filters__head">
           <h2>{lang === 'fr' ? 'Filtres & Tri' : 'Filters & Sort'}</h2>
           <button onClick={onClose} aria-label={lang === 'fr' ? 'Fermer les filtres' : 'Close filters'}>
