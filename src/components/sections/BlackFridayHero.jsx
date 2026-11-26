@@ -18,7 +18,7 @@ export default function BlackFridayHero({
   const bf = dict.black_friday?.hero || {
     eyebrow: "Black Friday Sale · Plus grande offre de l'année",
     kicker: "Événement Exclusif",
-    discount: "Jusqu'à -50%",
+    discount: "2 achetés = 1 offert",
     regularPrice: "",
     text: "Notre grand événement Black Friday est ouvert sur l'ensemble de la collection Vela Sculpt™ : 2 T-shirts achetés = le 3ème offert sur toutes nos coupes, ou le pack découverte 3 coupes à seulement 44,99 $.",
     chips: [

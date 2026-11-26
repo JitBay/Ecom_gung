@@ -105,9 +105,6 @@ export default function CameraRolls({ limit = 5 }) {
                   ) : (
                     <span className="roll-card__initial">{r.name[0]}</span>
                   )}
-                  <span className="verified">
-                    <Icon name="check" size={11} strokeWidth={3} /> {lang === 'fr' ? 'Avis client' : 'Customer review'}
-                  </span>
                 </div>
                 <div className="roll-card__body">
                   <Stars value={5} size={14} />

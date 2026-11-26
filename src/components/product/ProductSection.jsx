@@ -145,18 +145,6 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
         freeShipping: true,
       },
       {
-        id: 2,
-        qty: 2,
-        title: lang === 'fr' ? `2 ${nounPluralFr}` : `2 ${nounPluralEn}`,
-        subtitle: lang === 'fr'
-          ? '1 à porter, 1 au lavage.'
-          : '1 to wear, 1 in the wash.',
-        price: p2,
-        compareAt: c2,
-        badge: '',
-        freeShipping: true,
-      },
-      {
         id: 3,
         qty: 3,
         isTwoPlusOne: true,

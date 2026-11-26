@@ -94,22 +94,22 @@ function DedicatedProductPage({ product }) {
 
   return (
     <div className={`product-page-wrap ${handle}-product ${isSleeveless ? 'sleeveless-product' : ''}`}>
-      {/* 0. BLACK FRIDAY ANNOUNCEMENT BANNER */}
-      <BlackFridayHero targetId="bm-deal" slim={true} />
-      {/* 1. HERO BANNER & CAMERA ROLLS (5 REVIEWS): ONLY FOR SLEEVELESS (REMOVED FROM SHORT AND LONG AS REQUESTED) */}
-      {isSleeveless && (
-        <>
-          <Hero initialHandle={handle} showModelSelector={false} />
-          <CameraRolls limit={5} />
-        </>
-      )}
+      {/* THIN BLACK FRIDAY ANNOUNCEMENT STRIP */}
+      <div className="product-page__thin-banner">
+        <span className="product-page__thin-fire">🔥</span>
+        <strong>{lang === 'fr' ? 'Black Friday : 2 achetés = 1 offert' : 'Black Friday: Buy 2, Get 1 FREE'}</strong>
+        <span className="product-page__thin-note">
+          {lang === 'fr' ? '· Livraison gratuite & échanges offerts' : '· Free shipping & free size exchange'}
+        </span>
+      </div>
 
-
-
-      {/* 2. MAIN PRODUCT CONFIGURATOR & BUNDLE BUILDER (PACK 1, 2, 3 WITH MULTI-COLOR CHOICES) */}
+      {/* 1. MAIN PRODUCT CONFIGURATOR & BUNDLE BUILDER (ABOVE THE FOLD: PHOTO, PRICE, SIZE, ATC) */}
       <ProductSection initialModelHandle={handle} showModelSelector={false} />
 
       <Suspense fallback={<div style={{ minHeight: '120px' }} />}>
+        {/* 2. LIFESTYLE CAMERA ROLLS WITH CUSTOMER PHOTOS */}
+        {isSleeveless && <CameraRolls limit={5} />}
+
         {/* 3. REAL-WORLD PRODUCT VIDEO DEMO: ONLY FOR SLEEVELESS (REMOVED FROM SHORT & LONG) */}
         {isSleeveless && <ProductVideoSection modelHandle={handle} />}
 

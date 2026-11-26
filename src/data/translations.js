@@ -13,25 +13,25 @@ export const translations = {
 
     black_friday: {
       bar_items: [
-        { text: "Black Friday Sale : notre plus grande offre de l'année", highlight: true },
-        { text: "Jusqu'à -50% sur toute la collection", highlight: false },
+        { text: "Black Friday : 2 achetés = 1 offert", highlight: true },
+        { text: "2 T-shirts achetés = 1 offert sur tous les modèles", highlight: false },
         { text: "Garantie 30 jours satisfait ou remboursé", highlight: true },
-        { text: "2 T-shirts achetés = 1 offert sur tous les modèles", highlight: true },
         { text: "Offre Pack Découverte 3 coupes à 44,99 $", highlight: false },
         { text: "Livraison 100% gratuite & suivie", highlight: false },
+        { text: "Échange de taille 100% gratuit", highlight: false },
       ],
       strip_items: [
-        "Plus grande offre de l'année",
-        "Garantie satisfait ou remboursé 30j",
-        "Jusqu'à -50% de réduction",
+        "Black Friday : 2 achetés = 1 offert",
         "2 T-shirts achetés = 1 offert",
+        "Garantie satisfait ou remboursé 30j",
+        "Échange de taille 100% gratuit",
         "pack découverte à 44,99 $",
         "Livraison 100% gratuite & suivie",
       ],
       hero: {
         eyebrow: "Black Friday Sale · Plus grande offre de l'année",
         kicker: "Événement exclusif",
-        discount: "Jusqu'à -50%",
+        discount: "2 achetés = 1 offert",
         regularPrice: "",
         text: "Notre grand événement Black Friday est ouvert sur l'ensemble de la collection Vela Sculpt™ : 2 T-shirts achetés = le 3ème offert sur toutes nos coupes, ou le pack découverte 3 coupes à seulement 44,99 $.",
         chips: [
@@ -45,7 +45,7 @@ export const translations = {
       modal: {
         eyebrow: "Black Friday Sale · Événement officiel",
         title_prefix: "Black Friday Sale :",
-        title_highlight: "Jusqu'à -50%",
+        title_highlight: "2 achetés = 1 offert",
         title_suffix: "",
         text: "Profitez de notre plus grand événement promotionnel de l'année sur l'ensemble de notre gamme ergonomique masculine Vela Sculpt™.",
         perks: [
@@ -158,10 +158,10 @@ export const translations = {
       cta_all: 'Voir toute la collection',
 
       stats: [
-        { value: '4.9/5', label: 'Note moyenne' },
-        { value: '< 2%', label: 'Taux de retour' },
-        { value: '7+', label: 'Pays livrés' },
-        { value: '30 jours', label: 'Garantie satisfait ou remboursé' },
+        { value: '30 jours', label: 'Essai sans risque' },
+        { value: '0 €', label: 'Échange de taille offert' },
+        { value: 'Offerte', label: 'Livraison gratuite' },
+        { value: '100%', label: 'Discret sous vos vêtements' },
       ],
 
       cats_aria: 'Acheter par catégorie',
@@ -225,8 +225,8 @@ export const translations = {
           desc: '30 jours pour tester et décider. Remboursement intégral si non satisfait.',
         },
         {
-          title: 'Moins de 2% de retours',
-          desc: 'Une coupe ergonomique et des matières haut de gamme plébiscitées.',
+          title: 'Échange de taille gratuit',
+          desc: 'Mauvaise taille ? Nous échangeons votre vêtement gratuitement sans tracas.',
         },
         {
           title: 'Support client humain',
@@ -379,50 +379,44 @@ export const translations = {
 
     black_friday: {
       bar_items: [
-        { text: "Black Friday Sale: our biggest offer of the year", highlight: true },
-        { text: "Up to 50% off storewide", highlight: false },
+        { text: "Black Friday: Buy 2, Get 1 FREE", highlight: true },
+        { text: "Buy 2, get 1 free on all styles", highlight: false },
         { text: "⭐ 4.9/5 verified customer rating", highlight: true },
-        { text: "30-day money-back guarantee", highlight: false },
-        { text: "Buy 2, get 1 free on all styles", highlight: true },
+        { text: "Free US Shipping included", highlight: true },
+        { text: "Wrong size = Free exchange", highlight: false },
         { text: "3-Fits Discovery Pack special at $44.99", highlight: false },
-        { text: "Free tracked shipping included", highlight: false },
-        { text: "30-day money-back guarantee", highlight: false },
       ],
       strip_items: [
-        "Biggest offer of the year",
-        "⭐ 4.9/5 verified rating",
-        "Up to 50% off",
-        "30-day money-back guarantee",
+        "Black Friday: Buy 2, Get 1 FREE",
         "Buy 2 get 1 free on all styles",
+        "Free US Shipping",
+        "Wrong size = Free exchange",
         "Discovery Pack at $44.99",
-        "Free tracked shipping",
-        "30-day money-back guarantee",
       ],
       hero: {
         eyebrow: "Black Friday Sale · Biggest offer of the year",
         kicker: "Exclusive Event",
-        discount: "Up to 50% off",
+        discount: "Buy 2, Get 1 FREE",
         regularPrice: "",
         text: "Unlock our official Black Friday promotions across the entire Vela Sculpt™ compression collection: Buy 2 T-shirts, get the 3rd 100% free on all styles, plus our 3-fit discovery pack at an exclusive rate.",
         chips: [
           "Buy 2, get 1 free storewide",
           "Discovery Pack at $44.99",
-          "⭐ 4.9/5 verified rating",
-          "30-day trial at home",
-          "Free tracked shipping",
+          "Free US Shipping",
+          "Wrong size = Free exchange",
         ],
         cta: "Explore Black Friday Deals",
       },
       modal: {
         eyebrow: "Black Friday Sale · Official Event",
         title_prefix: "Black Friday Sale:",
-        title_highlight: "Up to 50% OFF",
+        title_highlight: "Buy 2, Get 1 FREE",
         title_suffix: "",
-        text: "Our biggest event of the year is now live! Enjoy sitewide discounts across our entire ergonomic posture and shapewear collection.",
+        text: "Our biggest event of the year is now live! Buy 2, Get 1 FREE across our entire ergonomic posture and shapewear collection.",
         perks: [
           { title: "Buy 2, Get 1 Free", desc: "The 3rd T-shirt 100% free on all individual styles" },
           { title: "discovery pack at $44.99", desc: "1 Tank + 1 Short + 1 Long Sleeves included · $30 savings" },
-          { title: "Free Tracked Shipping", desc: "Priority dispatch included + 30-day money-back guarantee" },
+          { title: "Free US Shipping", desc: "Priority dispatch included + free size exchange" },
         ],
         cta: "Claim Black Friday Deals",
         dismiss: "Continue without offer",
@@ -529,10 +523,10 @@ export const translations = {
       cta_all: 'Shop all collection',
 
       stats: [
-        { value: '4.9/5', label: 'Customer rating' },
-        { value: '< 2%', label: 'Return rate' },
-        { value: '7+', label: 'Countries shipped' },
-        { value: '30 days', label: 'Money-back guarantee' },
+        { value: '30 days', label: 'Risk-free trial' },
+        { value: 'Free', label: 'Size exchange & support' },
+        { value: 'Free', label: 'US Shipping' },
+        { value: '100%', label: 'Discreet under your clothes' },
       ],
 
       cats_aria: 'Shop by category',
@@ -596,8 +590,8 @@ export const translations = {
           desc: 'Thirty days to decide. Full refund if it’s not right.',
         },
         {
-          title: 'Under 2% Come Back',
-          desc: 'Precision ergonomic fit and premium fabrics loved by customers.',
+          title: 'Free Size Exchange',
+          desc: 'Wrong size? We exchange your shirt for free with zero hassle.',
         },
         {
           title: 'Real Human Support',

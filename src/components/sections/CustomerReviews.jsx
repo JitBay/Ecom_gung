@@ -173,11 +173,6 @@ function Review({ r, lang, t, onHelpful, hasVoted, onPhotoClick }) {
                 </span>
               )}
             </div>
-            {r.verified !== false && (
-              <span className="review__verified-badge">
-                <Icon name="check" size={11} strokeWidth={3} /> {t('reviews_section.verified_buyer') || (lang === 'fr' ? 'Avis client' : 'Customer Review')}
-              </span>
-            )}
           </div>
         </div>
         <time className="review__date" dateTime={r.date}>
@@ -454,22 +449,6 @@ export default function CustomerReviews() {
         />
       )}
 
-      <div className="reviews__ai">
-        <div className="reviews__ai-head">
-          <span className="reviews__ai-badge">
-            <Icon name="sparkle" size={13} /> {t('reviews_section.ai_badge')}
-          </span>
-          <strong>{t('reviews_section.ai_title')}</strong>
-        </div>
-        <p className="reviews__ai-text">{t('reviews_section.ai_text')}</p>
-        <div className="reviews__ai-tags">
-          <span className="reviews__ai-tag">✓ {t('reviews_section.ai_tag_invisible')}</span>
-          <span className="reviews__ai-tag">✓ {t('reviews_section.ai_tag_posture')}</span>
-          <span className="reviews__ai-tag">✓ {t('reviews_section.ai_tag_breathable')}</span>
-          <span className="reviews__ai-tag">✓ {t('reviews_section.ai_tag_returns')}</span>
-          <span className="reviews__ai-tag">✓ {t('reviews_section.ai_tag_fit')}</span>
-        </div>
-      </div>
       {/* Toolbar: Search and Filter Chips */}
       <div className="reviews__toolbar">
         <div className="reviews__search">

@@ -88,7 +88,7 @@ export default function ProductCustomerPhotos({ onScrollToReviews }) {
                 className="product-customer-photo-card__img"
               />
               <span className="product-customer-photo-card__verified">
-                ✓ {item.flag}
+                {item.flag}
               </span>
             </div>
             <div className="product-customer-photo-card__info">
