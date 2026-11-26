@@ -1,3 +1,4 @@
+import { useState, useEffect, useMemo } from 'react';
 import Icon from '../ui/Icon.jsx';
 import ShopifyPaymentBadges from '../shopify/ShopifyPaymentBadges.jsx';
 import ExpressPaymentButtons from '../shopify/ExpressPaymentButtons.jsx';
@@ -14,6 +15,60 @@ export default function CartDrawer() {
   const { lines, open, setOpen, setQty, total, displayTotal, count, checkout, isCheckingOut, shopifyCart } = useCart();
   const { t, lang } = useLanguage();
   useLockScroll(open);
+
+  const [timeLeft, setTimeLeft] = useState(600);
+
+  useEffect(() => {
+    if (lines.length === 0) {
+      try {
+        sessionStorage.removeItem('zvar_cart_timer_expires');
+      } catch {
+        // ignore
+      }
+      setTimeLeft(600);
+      return;
+    }
+
+    let expires = null;
+    try {
+      expires = sessionStorage.getItem('zvar_cart_timer_expires');
+    } catch {
+      // ignore
+    }
+
+    const now = Date.now();
+    if (!expires || isNaN(Number(expires)) || Number(expires) <= now) {
+      expires = String(now + 600 * 1000);
+      try {
+        sessionStorage.setItem('zvar_cart_timer_expires', expires);
+      } catch {
+        // ignore
+      }
+    }
+
+    const tick = () => {
+      const remaining = Math.max(0, Math.floor((Number(expires) - Date.now()) / 1000));
+      setTimeLeft(remaining);
+    };
+
+    tick();
+    const timer = setInterval(tick, 1000);
+    return () => clearInterval(timer);
+  }, [lines.length]);
+
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
+  const formattedTimer = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+  const totalOriginal = useMemo(() => {
+    return lines.reduce((sum, l) => {
+      const orig = l.compareAt && l.compareAt > l.price ? l.compareAt : l.price;
+      return sum + (orig * (l.qty || 1));
+    }, 0);
+  }, [lines]);
+
+  const currentTotal = displayTotal ?? total;
+  const totalSavings = Math.max(0, Math.round((totalOriginal - currentTotal) * 100) / 100);
 
   const totalTanks = lines.reduce((acc, l) => {
     let multiplier = 1;
@@ -82,6 +137,18 @@ export default function CartDrawer() {
             <Icon name="close" size={24} />
           </button>
         </header>
+
+        {lines.length > 0 && (
+          <div className="cart__timer-bar">
+            <span className="cart__timer-icon">
+              <Icon name="clock" size={15} />
+            </span>
+            <span className="cart__timer-text">
+              {lang === 'fr' ? 'Panier réservé pendant ' : 'Cart reserved for '}
+              <strong className="cart__timer-clock">{formattedTimer}</strong>
+            </span>
+          </div>
+        )}
 
         <div className="cart__ship">
           <p className="cart__progress-text">
@@ -154,9 +221,22 @@ export default function CartDrawer() {
               <span>{lang === 'fr' ? 'Livraison :' : 'Shipping:'}</span>
               <strong className="cart__shipping-free">{lang === 'fr' ? 'OFFERTE (Gratuit)' : 'FREE'}</strong>
             </p>
+            {totalSavings > 0 && (
+              <p className="cart__savings-row">
+                <span>{lang === 'fr' ? 'Vous économisez :' : 'You save:'}</span>
+                <strong className="cart__savings-amount">
+                  {price(totalSavings)}
+                </strong>
+              </p>
+            )}
             <p className="cart__subtotal-row">
               <span>{t('cart.subtotal')}</span>
-              <strong>{price(displayTotal ?? total)}</strong>
+              <span className="cart__subtotal-values">
+                {totalSavings > 0 && (
+                  <s className="cart__subtotal-compare">{price(totalOriginal)}</s>
+                )}
+                <strong>{price(displayTotal ?? total)}</strong>
+              </span>
             </p>
             <button
               className={`btn btn--dark btn--block ${isCheckingOut ? 'is-loading' : ''}`}

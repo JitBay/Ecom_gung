@@ -47,6 +47,55 @@
   font-weight: 600;
 }
 
+.cart__timer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: #fffbeb;
+  border-bottom: 1px solid #fef3c7;
+  color: #92400e;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.cart__timer-icon {
+  display: inline-flex;
+  align-items: center;
+  color: #d97706;
+  animation: pulse-cart-timer 2s infinite ease-in-out;
+}
+
+@keyframes pulse-cart-timer {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.8;
+  }
+}
+
+.cart__timer-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cart__timer-clock {
+  font-weight: 700;
+  color: #b45309;
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  background: rgba(217, 119, 6, 0.12);
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
 .cart__ship {
   padding: 14px 22px;
   background: var(--cream-2);
@@ -198,9 +247,38 @@
   border-radius: 4px;
 }
 
+.cart__savings-row {
+  font-size: 14px;
+  color: #15803d;
+  font-weight: 600;
+}
+
+.cart__savings-amount {
+  color: #15803d;
+  font-weight: 700;
+  font-size: 13.5px;
+  background: rgba(22, 163, 74, 0.1);
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+}
+
 .cart__subtotal-row {
   font-size: 16px;
   font-weight: 600;
+}
+
+.cart__subtotal-values {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cart__subtotal-compare {
+  font-size: 14px;
+  color: var(--muted-2);
+  font-weight: 400;
+  text-decoration: line-through;
 }
 
 .cart__foot small {
