@@ -95,68 +95,144 @@ export default function Gallery({ images, title, activeColor, videoHref }) {
   const move = (step) => setZoom((z) => (z + step + list.length) % list.length);
 
   return (
-    <div className="gallery">
-      <div className="gallery__track" ref={track} onScroll={onScroll}>
-        {list.map((src, i) => (
-          <div
-            key={`${src}-${i}`}
-            className="gallery__slide"
-            onClick={() => setZoom(i)}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') setZoom(i);
-            }}
-            aria-label={lang === 'fr' ? `Agrandir la photo ${i + 1}` : `Enlarge photo ${i + 1}`}
-          >
-            <img
-              src={src}
-              alt={`${title || 'Vela Sculpt™'} - ${activeColor || ''} - photo ${i + 1}`}
-              className="gallery__photo"
-              loading={i === 0 ? 'eager' : 'lazy'}
-              fetchPriority={i === 0 ? 'high' : 'auto'}
-              decoding="async"
-              width="800"
-              height="1000"
-            />
-            <span className="gallery__zoom">
-              <Icon name="zoom" size={18} />
-            </span>
-            {i === 0 && videoHref && (
+    <div className="gallery product__gallery">
+      {/* DESKTOP (≥ 990px): One main image + row of thumbnails */}
+      <div className="gallery__desktop">
+        <div
+          className="gallery__desktop-main"
+          onClick={() => setZoom(active)}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') setZoom(active);
+          }}
+          aria-label={lang === 'fr' ? `Agrandir la photo ${active + 1}` : `Enlarge photo ${active + 1}`}
+        >
+          <img
+            key={`${activeColor}-${active}`}
+            src={list[active] || list[0]}
+            alt={`${title || 'Vela Sculpt™'} - ${activeColor || ''} - photo ${active + 1}`}
+            className="gallery__desktop-photo"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+            width="800"
+            height="1000"
+          />
+          <span className="gallery__zoom">
+            <Icon name="zoom" size={18} />
+          </span>
+          {active === 0 && videoHref && (
+            <button
+              type="button"
+              className="gallery__video-pill"
+              onClick={(e) => {
+                e.stopPropagation();
+                const target = document.querySelector(videoHref);
+                if (target) {
+                  target.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              aria-label={lang === 'fr' ? 'Voir la vidéo du produit' : 'Watch product video'}
+            >
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="5 3 19 12 5 21 5 3" />
+              </svg>
+              <span>{lang === 'fr' ? 'Vidéo en action' : 'Video demo'}</span>
+            </button>
+          )}
+        </div>
+
+        {list.length > 1 && (
+          <div className="gallery__desktop-thumbs" role="tablist" aria-label="Product thumbnails">
+            {list.map((src, i) => (
               <button
+                key={`${src}-${i}`}
                 type="button"
-                className="gallery__video-pill"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  const target = document.querySelector(videoHref);
-                  if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-                aria-label={lang === 'fr' ? 'Voir la vidéo du produit' : 'Watch product video'}
+                className={`gallery__desktop-thumb ${i === active ? 'is-active' : ''}`}
+                onClick={() => setActive(i)}
+                aria-label={`Photo ${i + 1}`}
+                role="tab"
+                aria-selected={i === active}
               >
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
-                  <polygon points="5 3 19 12 5 21 5 3" />
-                </svg>
-                <span>{lang === 'fr' ? 'Vidéo en action' : 'Video demo'}</span>
+                <img
+                  src={src}
+                  alt=""
+                  width="72"
+                  height="90"
+                  loading="lazy"
+                  decoding="async"
+                />
               </button>
-            )}
+            ))}
           </div>
-        ))}
+        )}
       </div>
 
-      {list.length > 1 && (
-        <div className="gallery__dots">
-          {list.map((_, i) => (
-            <button
-              key={i}
-              className={`gallery__dot ${i === active ? 'is-active' : ''}`}
-              onClick={() => goTo(i)}
-              aria-label={`Photo ${i + 1}`}
-            />
+      {/* MOBILE (< 990px): Swipe carousel with dots */}
+      <div className="gallery__mobile">
+        <div className="gallery__track" ref={track} onScroll={onScroll}>
+          {list.map((src, i) => (
+            <div
+              key={`${src}-${i}`}
+              className="gallery__slide"
+              onClick={() => setZoom(i)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') setZoom(i);
+              }}
+              aria-label={lang === 'fr' ? `Agrandir la photo ${i + 1}` : `Enlarge photo ${i + 1}`}
+            >
+              <img
+                src={src}
+                alt={`${title || 'Vela Sculpt™'} - ${activeColor || ''} - photo ${i + 1}`}
+                className="gallery__photo"
+                loading={i === 0 ? 'eager' : 'lazy'}
+                fetchPriority={i === 0 ? 'high' : 'auto'}
+                decoding="async"
+                width="800"
+                height="1000"
+              />
+              <span className="gallery__zoom">
+                <Icon name="zoom" size={18} />
+              </span>
+              {i === 0 && videoHref && (
+                <button
+                  type="button"
+                  className="gallery__video-pill"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const target = document.querySelector(videoHref);
+                    if (target) {
+                      target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                  aria-label={lang === 'fr' ? 'Voir la vidéo du produit' : 'Watch product video'}
+                >
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                  </svg>
+                  <span>{lang === 'fr' ? 'Vidéo en action' : 'Video demo'}</span>
+                </button>
+              )}
+            </div>
           ))}
         </div>
-      )}
+
+        {list.length > 1 && (
+          <div className="gallery__dots">
+            {list.map((_, i) => (
+              <button
+                key={i}
+                className={`gallery__dot ${i === active ? 'is-active' : ''}`}
+                onClick={() => goTo(i)}
+                aria-label={`Photo ${i + 1}`}
+              />
+            ))}
+          </div>
+        )}
+      </div>
 
       <Lightbox index={zoom} images={list} onClose={() => setZoom(null)} onMove={move} title={title} />
     </div>

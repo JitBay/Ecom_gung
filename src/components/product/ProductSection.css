@@ -674,7 +674,7 @@
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
-    overflow: hidden;
+    overflow-x: clip;
   }
   .product {
     grid-template-columns: minmax(0, 1fr);
@@ -682,7 +682,7 @@
     max-width: 100%;
     padding-top: 0;
     gap: 20px;
-    overflow: hidden;
+    overflow-x: clip;
   }
   .product__media {
     width: 100%;
@@ -692,7 +692,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    overflow-x: clip;
   }
   .product__info {
     width: 100%;
@@ -701,7 +701,7 @@
     padding-left: var(--gutter);
     padding-right: var(--gutter);
     box-sizing: border-box;
-    overflow: hidden;
+    overflow-x: clip;
   }
 }
 
