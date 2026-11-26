@@ -167,12 +167,14 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
   const bundle = modelBundles.find((b) => b.id === bundleId) || modelBundles[0];
 
   const [variants, setVariants] = useState(() =>
-    initialModelHandle === 'pack-decouverte'
+    initialModelHandle === 'pack-decouverte' || isDiscoveryOffer
       ? discoveryCategories.map((c) => ({
+          handle: c.handle,
           color: c.defaultColor || 'noir',
           size: 'L',
         }))
       : Array.from({ length: 4 }, (_, i) => ({
+          handle: initialModelHandle || cutsList[0].handle,
           color: availableColors[i % availableColors.length]?.id || 'noir',
           size: 'L',
         }))
@@ -220,10 +222,11 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
     if (isDiscovery) {
       setBundleId(1);
       setVariants((prev) => {
-        if (prev && prev.length === discoveryCategories.length) {
+        if (prev && prev.length === discoveryCategories.length && prev[0].handle) {
           return prev;
         }
         return discoveryCategories.map((c) => ({
+          handle: c.handle,
           color: c.defaultColor || 'noir',
           size: 'L',
         }));
@@ -245,6 +248,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
     const colorId = matchingAvail?.id || 'noir';
     setVariants((vs) =>
       vs.map((v) => ({
+        handle: v.handle || currentModel.handle,
         ...v,
         color: colorId,
       }))
@@ -255,36 +259,41 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
   const chosen = variants.slice(0, bundle.qty);
 
   const updateVariant = (i, patch) => {
-    setVariants((vs) => vs.map((v, j) => (j === i ? { ...v, ...patch } : v)));
-    if (patch.color) {
-      if (isDiscovery) {
-        const cat = discoveryCategories[i];
-        if (cat?.handle) {
-          setSelectedHandle(cat.handle);
+    setVariants((vs) =>
+      vs.map((v, j) => {
+        if (j !== i) return v;
+        const next = { ...v, ...patch };
+        if (patch.handle && patch.handle !== v.handle) {
+          const nextModel = products.find((p) => p.handle === patch.handle) || products[0];
+          const hasColor = nextModel.colors.some(
+            (c) => c.toLowerCase() === (next.color || '').toLowerCase()
+          );
+          if (!hasColor) {
+            next.color = 'noir';
+          }
         }
-        const cObj = cat?.colors.find((c) => c.id === patch.color);
-        if (cObj) {
-          setSelectedColor(cObj.label);
-        }
-      } else {
-        const matched = availableColors.find(
-          (c) => c.id === patch.color || c.label.toLowerCase() === patch.color.toLowerCase()
-        );
-        if (matched) {
-          setSelectedColor(matched.label);
-        }
-      }
+        return next;
+      })
+    );
+
+    const activeHandle = patch.handle || variants[i]?.handle || (isDiscovery ? discoveryCategories[i]?.handle : currentModel.handle);
+    if (activeHandle) {
+      setSelectedHandle(activeHandle);
+      const activeModel = products.find((p) => p.handle === activeHandle) || currentModel;
+      const targetColor = patch.color || variants[i]?.color || activeModel.colors[0];
+      const matched = activeModel.colors.find(
+        (c) => c.toLowerCase() === (targetColor || '').toLowerCase()
+      ) || activeModel.colors[0];
+      setSelectedColor(matched);
     }
   };
 
   const handleSelectCut = (handle, colorId) => {
     setSelectedHandle(handle);
-    const cat = discoveryCategories.find((c) => c.handle === handle);
-    if (cat) {
-      const cObj = cat.colors.find((c) => c.id === colorId) || cat.colors[0];
-      if (cObj) {
-        setSelectedColor(cObj.label);
-      }
+    const m = products.find((p) => p.handle === handle) || products[0];
+    if (m) {
+      const c = m.colors.find((col) => col.toLowerCase() === (colorId || '').toLowerCase()) || m.colors[0];
+      setSelectedColor(c);
     }
   };
 
@@ -342,26 +351,18 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
   };
 
   const addToCart = () => {
-    let detail;
-    if (bundle.isDiscoveryPack) {
-      detail = chosen
-        .map((v, i) => {
-          const cat = discoveryCategories[i] || discoveryCategories[0];
-          const c = cat.colors.find((col) => col.id === v.color) || cat.colors[0];
-          const colorLabel = t('color_names.' + c.label, c.label);
-          const catName = lang === 'fr' ? cat.titleFr : cat.titleEn;
-          return `${catName} : ${colorLabel} / ${v.size}`;
-        })
-        .join(' · ');
-    } else {
-      detail = chosen
-        .map((v) => {
-          const c = availableColors.find((col) => col.id === v.color) || availableColors[0];
-          const colorLabel = t('color_names.' + c.label, c.label);
-          return `${colorLabel} / ${v.size}`;
-        })
-        .join(', ');
-    }
+    const detail = chosen
+      .map((v, i) => {
+        const itemCutHandle = v.handle || (bundle.isDiscoveryPack ? discoveryCategories[i]?.handle : currentModel.handle);
+        const itemCut = products.find((p) => p.handle === itemCutHandle) || currentModel;
+        const locCut = getLocalizedProduct(itemCut, lang);
+        const catColors = itemCut.colors;
+        const matchedColor = catColors.find((c) => c.toLowerCase() === (v.color || '').toLowerCase()) || catColors[0];
+        const colorLabel = t('color_names.' + matchedColor, matchedColor);
+        const cutName = locCut.shortTitle || locCut.title;
+        return `${cutName} : ${colorLabel} / ${v.size}`;
+      })
+      .join(' · ');
 
     const itemTitle = bundle.isDiscoveryPack
       ? (lang === 'fr' ? 'Pack Découverte — 3 Coupes' : 'Discovery Pack — 3 Fits')
@@ -388,9 +389,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
       isDiscoveryPack: Boolean(bundle.isDiscoveryPack),
       paidQty: bundle.isDiscoveryPack ? 1 : (bundle.isTwoPlusOne ? 2 : (bundle.qty || 1)),
       chosenVariants: chosen.map((v, i) => ({
-        handle: bundle.isDiscoveryPack
-          ? (discoveryCategories[i]?.handle || 'pack-decouverte')
-          : currentModel.handle,
+        handle: v.handle || (bundle.isDiscoveryPack ? (discoveryCategories[i]?.handle || 'pack-decouverte') : currentModel.handle),
         color: v.color,
         size: v.size,
       })),
@@ -398,26 +397,18 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
   };
 
   const currentLineItem = useMemo(() => {
-    let detail;
-    if (bundle.isDiscoveryPack) {
-      detail = chosen
-        .map((v, i) => {
-          const cat = discoveryCategories[i] || discoveryCategories[0];
-          const c = cat.colors.find((col) => col.id === v.color) || cat.colors[0];
-          const colorLabel = t('color_names.' + c.label, c.label);
-          const catName = lang === 'fr' ? cat.titleFr : cat.titleEn;
-          return `${catName} : ${colorLabel} / ${v.size}`;
-        })
-        .join(' · ');
-    } else {
-      detail = chosen
-        .map((v) => {
-          const c = availableColors.find((col) => col.id === v.color) || availableColors[0];
-          const colorLabel = t('color_names.' + c.label, c.label);
-          return `${colorLabel} / ${v.size}`;
-        })
-        .join(', ');
-    }
+    const detail = chosen
+      .map((v, i) => {
+        const itemCutHandle = v.handle || (bundle.isDiscoveryPack ? discoveryCategories[i]?.handle : currentModel.handle);
+        const itemCut = products.find((p) => p.handle === itemCutHandle) || currentModel;
+        const locCut = getLocalizedProduct(itemCut, lang);
+        const catColors = itemCut.colors;
+        const matchedColor = catColors.find((c) => c.toLowerCase() === (v.color || '').toLowerCase()) || catColors[0];
+        const colorLabel = t('color_names.' + matchedColor, matchedColor);
+        const cutName = locCut.shortTitle || locCut.title;
+        return `${cutName} : ${colorLabel} / ${v.size}`;
+      })
+      .join(' · ');
 
     const itemTitle = bundle.isDiscoveryPack
       ? (lang === 'fr' ? 'Pack Découverte — 3 Coupes' : 'Discovery Pack — 3 Fits')
@@ -444,9 +435,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
       isDiscoveryPack: Boolean(bundle.isDiscoveryPack),
       paidQty: bundle.isDiscoveryPack ? 1 : (bundle.isTwoPlusOne ? 2 : (bundle.qty || 1)),
       chosenVariants: chosen.map((v, i) => ({
-        handle: bundle.isDiscoveryPack
-          ? (discoveryCategories[i]?.handle || 'pack-decouverte')
-          : currentModel.handle,
+        handle: v.handle || (bundle.isDiscoveryPack ? (discoveryCategories[i]?.handle || 'pack-decouverte') : currentModel.handle),
         color: v.color,
         size: v.size,
       })),

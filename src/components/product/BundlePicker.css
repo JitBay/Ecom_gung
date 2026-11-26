@@ -173,8 +173,20 @@
 .variant {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.select--cut {
+  flex: 1.3;
+  min-width: 120px;
+}
+
+.select--cut select {
+  font-weight: 600;
+  font-size: 13px;
+  width: 100%;
 }
 
 .variant__thumb {

@@ -1,9 +1,11 @@
 import Icon from '../ui/Icon.jsx';
 import { bundles as defaultBundles, colors as defaultColors, discoveryCategories, sizes } from '../../data/product.js';
-import { getColorImages, products } from '../../data/catalog.js';
+import { colorHex, getColorImages, getLocalizedProduct, products } from '../../data/catalog.js';
 import { useLanguage } from '../../context/LanguageContext.jsx';
 import { price } from '../../lib/format.js';
 import './BundlePicker.css';
+
+const cutsList = products.slice(0, 3);
 
 function VariantRows({
   variants,
@@ -19,47 +21,49 @@ function VariantRows({
   isDiscoveryPack,
 }) {
   const { t } = useLanguage();
-  const colorList = availableColors && availableColors.length ? availableColors : defaultColors;
 
   if (isDiscoveryPack) {
     return (
       <div className="discovery-variants">
         <p className="variants__label">
           {lang === 'fr'
-            ? 'Personnalisez vos 3 coupes (couleur & taille) :'
-            : 'Customize your 3 fits (Color & Size):'}
+            ? 'Personnalisez vos 3 coupes (modèle, couleur & taille) :'
+            : 'Customize your 3 fits (Model, Color & Size):'}
         </p>
         {variants.map((v, i) => {
-          const cat = discoveryCategories[i] || discoveryCategories[0];
-          const catColors = cat.colors;
-          const currentColor = catColors.find((c) => c.id === v.color) || catColors[0];
-          const matchingCut = products.find((p) => p.handle === cat.handle) || products[i];
-          const imgs = matchingCut ? getColorImages(matchingCut, v.color || currentColor?.label) : null;
-          const colorImg =
-            (imgs && imgs[0]) ||
-            cat.colorImages[currentColor.label] ||
-            cat.colorImages['Noir'];
-          const catTitle = lang === 'fr' ? cat.titleFr : cat.titleEn;
-          const catBadge = lang === 'fr' ? cat.badgeFr : cat.badgeEn;
-          const isCardActive = selectedHandle === cat.handle;
+          const cutHandle = v.handle || discoveryCategories[i]?.handle || 'vela-sculpt-sans-manches';
+          const cutProduct = products.find((p) => p.handle === cutHandle) || products[0];
+          const locCut = getLocalizedProduct(cutProduct, lang);
+          const cutColors = cutProduct.colors.map((c) => {
+            const found = defaultColors.find((col) => col.label.toLowerCase() === c.toLowerCase() || col.id === c.toLowerCase());
+            return {
+              id: found?.id || c.toLowerCase().replace(/\s+/g, '-'),
+              label: c,
+              hex: found?.hex || colorHex[c] || '#1a1a1a',
+            };
+          });
+          const currentColor = cutColors.find((c) => c.id === v.color || c.label.toLowerCase() === (v.color || '').toLowerCase()) || cutColors[0];
+          const imgs = getColorImages(cutProduct, v.color || currentColor?.label);
+          const colorImg = (imgs && imgs[0]) || cutProduct.colorImages?.[cutProduct.colors[0]]?.[0] || '/images/image page produit/demi-manche/1.webp';
+          const isCardActive = selectedHandle === cutProduct.handle;
 
           return (
             <div
               className={`discovery-variant-card ${isCardActive ? 'is-active' : ''}`}
-              key={cat.handle || i}
-              onClick={() => onSelectCut && onSelectCut(cat.handle, v.color)}
+              key={i}
+              onClick={() => onSelectCut && onSelectCut(cutProduct.handle, currentColor.id)}
               style={{ cursor: 'pointer' }}
             >
               <div className="discovery-variant-card__header">
                 <span className="discovery-variant-card__number">{i + 1}</span>
-                <strong className="discovery-variant-card__title">{catTitle}</strong>
-                {catBadge && <span className="discovery-variant-card__badge">{catBadge}</span>}
+                <strong className="discovery-variant-card__title">{locCut.shortTitle || locCut.title}</strong>
+                {locCut.badge && <span className="discovery-variant-card__badge">{locCut.badge}</span>}
               </div>
               <div className="variant">
                 <div className="variant__thumb">
                   <img
                     src={colorImg}
-                    alt={catTitle}
+                    alt={locCut.shortTitle || locCut.title}
                     width="60"
                     height="60"
                     loading="lazy"
@@ -67,14 +71,38 @@ function VariantRows({
                     style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}
                   />
                 </div>
+
+                {/* 1. Sélecteur de modèle / coupe (T-shirt) */}
+                <label className="select select--cut" onClick={(e) => e.stopPropagation()}>
+                  <select
+                    value={cutHandle}
+                    onChange={(e) => {
+                      const newHandle = e.target.value;
+                      onChange(i, { handle: newHandle });
+                    }}
+                    aria-label={`Modèle article ${i + 1}`}
+                  >
+                    {cutsList.map((cp) => {
+                      const lcp = getLocalizedProduct(cp, lang);
+                      return (
+                        <option key={cp.handle} value={cp.handle}>
+                          {lcp.shortTitle}
+                        </option>
+                      );
+                    })}
+                  </select>
+                  <Icon name="chevron" size={14} />
+                </label>
+
+                {/* 2. Sélecteur de couleur */}
                 <label className="select" onClick={(e) => e.stopPropagation()}>
                   <span className="select__dot" style={{ background: currentColor.hex }} />
                   <select
-                    value={v.color}
+                    value={currentColor.id}
                     onChange={(e) => onChange(i, { color: e.target.value })}
-                    aria-label={`Couleur ${catTitle}`}
+                    aria-label={`Couleur article ${i + 1}`}
                   >
-                    {catColors.map((c) => (
+                    {cutColors.map((c) => (
                       <option key={c.id} value={c.id}>
                         {t('color_names.' + c.label, c.label)}
                       </option>
@@ -82,11 +110,13 @@ function VariantRows({
                   </select>
                   <Icon name="chevron" size={14} />
                 </label>
+
+                {/* 3. Sélecteur de taille */}
                 <label className="select" onClick={(e) => e.stopPropagation()}>
                   <select
-                    value={v.size}
+                    value={v.size || 'L'}
                     onChange={(e) => onChange(i, { size: e.target.value })}
-                    aria-label={`Taille ${catTitle}`}
+                    aria-label={`Taille article ${i + 1}`}
                   >
                     {sizes.map((s) => (
                       <option key={s}>{s}</option>
@@ -106,20 +136,27 @@ function VariantRows({
     <div className="variants">
       <div className="variants__label-row">
         <p className="variants__label">
-          {lang === 'fr' ? 'Couleur & taille par article :' : 'Color & Size per shirt:'}
+          {lang === 'fr' ? 'Modèle, couleur & taille par article :' : 'Model, Color & Size per shirt:'}
         </p>
         <span className="variants__size-tip">
           {lang === 'fr' ? '💡 Prenez votre taille habituelle' : '💡 Pick your usual T-shirt size'}
         </span>
       </div>
       {variants.map((v, i) => {
-        const currentColor = colorList.find((c) => c.id === v.color) || colorList[0];
-        const imgs = model ? getColorImages(model, v.color || currentColor?.label || currentColor?.id) : null;
-        const colorImg =
-          (imgs && imgs[0]) ||
-          (colorImages && (colorImages[currentColor?.label]?.[0] || colorImages[currentColor?.id]?.[0])) ||
-          productImage ||
-          '/images/image page produit/sans-manche/1.webp';
+        const cutHandle = v.handle || model?.handle || 'vela-sculpt-sans-manches';
+        const cutProduct = products.find((p) => p.handle === cutHandle) || model || products[0];
+        const locCut = getLocalizedProduct(cutProduct, lang);
+        const cutColors = cutProduct.colors.map((c) => {
+          const found = defaultColors.find((col) => col.label.toLowerCase() === c.toLowerCase() || col.id === c.toLowerCase());
+          return {
+            id: found?.id || c.toLowerCase().replace(/\s+/g, '-'),
+            label: c,
+            hex: found?.hex || colorHex[c] || '#1a1a1a',
+          };
+        });
+        const currentColor = cutColors.find((c) => c.id === v.color || c.label.toLowerCase() === (v.color || '').toLowerCase()) || cutColors[0];
+        const imgs = getColorImages(cutProduct, v.color || currentColor?.label);
+        const colorImg = (imgs && imgs[0]) || cutProduct.colorImages?.[cutProduct.colors[0]]?.[0] || '/images/image page produit/demi-manche/1.webp';
 
         const isFree = isTwoPlusOne && i === 2;
         const row = (
@@ -127,7 +164,7 @@ function VariantRows({
             <div className="variant__thumb">
               <img
                 src={colorImg}
-                alt={currentColor?.label || 'Miniature'}
+                alt={locCut.shortTitle || locCut.title}
                 width="60"
                 height="60"
                 loading="lazy"
@@ -135,14 +172,38 @@ function VariantRows({
                 style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}
               />
             </div>
-            <label className="select">
+
+            {/* 1. Sélecteur de modèle / coupe (T-shirt) */}
+            <label className="select select--cut" onClick={(e) => e.stopPropagation()}>
+              <select
+                value={cutHandle}
+                onChange={(e) => {
+                  const newHandle = e.target.value;
+                  onChange(i, { handle: newHandle });
+                }}
+                aria-label={`Modèle article ${i + 1}`}
+              >
+                {cutsList.map((cp) => {
+                  const lcp = getLocalizedProduct(cp, lang);
+                  return (
+                    <option key={cp.handle} value={cp.handle}>
+                      {lcp.shortTitle}
+                    </option>
+                  );
+                })}
+              </select>
+              <Icon name="chevron" size={14} />
+            </label>
+
+            {/* 2. Sélecteur de couleur */}
+            <label className="select" onClick={(e) => e.stopPropagation()}>
               <span className="select__dot" style={{ background: currentColor?.hex || '#1a1a1a' }} />
               <select
-                value={v.color}
+                value={currentColor.id}
                 onChange={(e) => onChange(i, { color: e.target.value })}
                 aria-label={`Couleur article ${i + 1}`}
               >
-                {colorList.map((c) => (
+                {cutColors.map((c) => (
                   <option key={c.id} value={c.id}>
                     {t('color_names.' + c.label, c.label)}
                   </option>
@@ -150,9 +211,11 @@ function VariantRows({
               </select>
               <Icon name="chevron" size={14} />
             </label>
-            <label className="select">
+
+            {/* 3. Sélecteur de taille */}
+            <label className="select" onClick={(e) => e.stopPropagation()}>
               <select
-                value={v.size}
+                value={v.size || 'L'}
                 onChange={(e) => onChange(i, { size: e.target.value })}
                 aria-label={`Taille article ${i + 1}`}
               >
