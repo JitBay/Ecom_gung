@@ -21,7 +21,7 @@ const LegalNoticePage = lazy(() => import('./pages/LegalNoticePage.jsx'));
 const ContactPage = lazy(() => import('./pages/ContactPage.jsx'));
 const SizeGuidePage = lazy(() => import('./pages/SizeGuidePage.jsx'));
 const TrackOrderPage = lazy(() => import('./pages/TrackOrderPage.jsx'));
-const NotFound = lazy(() => import('./pages/NotFound.jsx'));
+import NotFound from './pages/NotFound.jsx';
 import { HERO_PRODUCT } from './data/catalog.js';
 import { initAnalytics, trackPageView } from './lib/analytics.js';
 import { AnalyticsPageType, trackShopifyPageView, useZvarShopifyCookies } from './lib/shopifyAnalytics.js';
