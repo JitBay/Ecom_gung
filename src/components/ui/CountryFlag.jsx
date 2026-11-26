@@ -1,5 +1,5 @@
-export default function CountryFlag({ code = 'FR', className = '', size = 'md' }) {
-  const c = String(code || 'FR').toUpperCase();
+export default function CountryFlag({ code = 'US', className = '', size = 'md' }) {
+  const c = String(code || 'US').toUpperCase();
   const width = size === 'sm' ? 16 : size === 'lg' ? 24 : 20;
   const height = size === 'sm' ? 11 : size === 'lg' ? 17 : 14;
 
@@ -109,15 +109,17 @@ export default function CountryFlag({ code = 'FR', className = '', size = 'md' }
     );
   }
 
-  // Fallback default flag (France)
+  // Fallback default flag (United States)
   return (
-    <span className={`country-flag country-flag--fr ${className}`} style={flagStyle} title="France">
-      <svg viewBox="0 0 640 480" width="100%" height="100%" preserveAspectRatio="none">
-        <g fillRule="evenodd" strokeWidth="1pt">
-          <path fill="#fff" d="M0 0h640v480H0z" />
-          <path fill="#00267f" d="M0 0h213.3v480H0z" />
-          <path fill="#f31830" d="M426.7 0H640v480H426.7z" />
-        </g>
+    <span className={`country-flag country-flag--us ${className}`} style={flagStyle} title="United States">
+      <svg viewBox="0 0 640 480" width="100%" height="100%">
+        <path fill="#bd3d44" d="M0 0h640v480H0z" />
+        <path stroke="#fff" strokeWidth="37" d="M0 55.5h640M0 129.5h640M0 203.5h640M0 277.5h640M0 351.5h640M0 425.5h640" />
+        <path fill="#192f5d" d="M0 0h260v259H0z" />
+        <marker id="us-a-fallback" markerHeight="30" markerWidth="30">
+          <path fill="#fff" d="m14 0 9 27L0 10h28L5 27z" />
+        </marker>
+        <path fill="none" markerMid="url(#us-a-fallback)" d="m0 0 16 11h48 48 48 48 48L16 33h48 48 48 48 48L16 55h48 48 48 48 48L16 77h48 48 48 48 48L16 99h48 48 48 48 48L16 121h48 48 48 48 48L16 143h48 48 48 48 48L16 165h48 48 48 48 48L16 187h48 48 48 48 48" />
       </svg>
     </span>
   );

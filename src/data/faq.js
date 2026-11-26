@@ -33,7 +33,7 @@ export const faq = [
   {
     tag: 'Livraison & Suivi',
     q: 'Quels sont les délais et modalités d’expédition ?',
-    a: 'Toutes les commandes sont préparées sous 24 à 48 heures ouvrées. La livraison en France et en Europe prend entre 6 à 12 jours ouvrés avec un numéro de suivi complet en direct avec suivi en direct. La livraison est 100% gratuite et offerte sur l’ensemble de vos commandes.',
+    a: 'Toutes les commandes sont préparées sous 24 à 48 heures ouvrées. La livraison aux États-Unis prend entre 6 à 12 jours ouvrés avec un numéro de suivi complet en direct. La livraison est 100% gratuite et offerte sur l’ensemble de vos commandes.',
   },
 ];
 
@@ -71,6 +71,6 @@ export const faqEn = [
   {
     tag: 'Shipping & Tracking',
     q: 'What are the delivery times and shipping terms?',
-    a: 'All orders are packed and dispatched within 24 to 48 business hours. Delivery across Europe takes between 6 to 12 working days with full end-to-end tracking. 100% Free tracked shipping is included on all orders.',
+    a: 'All orders are packed and dispatched within 24 to 48 business hours. Delivery to the United States takes between 6 to 12 working days with full end-to-end tracking. 100% Free tracked shipping is included on all orders.',
   },
 ];

@@ -357,24 +357,12 @@ function getCheckoutLocale(options = {}) {
 }
 
 /**
- * Resolves buyer country code aligned with Shopify Markets ('FR' or 'US').
+ * Resolves buyer country code aligned with Shopify Markets ('US' only for United States delivery).
  */
-function getCheckoutCountryCode(options = {}, locale = 'fr') {
+function getCheckoutCountryCode(options = {}, locale = 'en') {
   const explicit = String(options.countryCode || '').toUpperCase().trim();
-  if (/^[A-Z]{2}$/.test(explicit)) return explicit;
-
-  try {
-    const geo = String(
-      (typeof sessionStorage !== 'undefined' ? sessionStorage.getItem('zvar_geo_country') : '') || ''
-    )
-      .toUpperCase()
-      .trim();
-    if (geo === 'FR' || geo === 'US') return geo;
-  } catch {
-    // Session storage unavailable
-  }
-
-  return locale === 'fr' ? 'FR' : 'US';
+  if (explicit === 'US') return explicit;
+  return 'US';
 }
 
 /**

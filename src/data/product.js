@@ -302,8 +302,8 @@ export const fabricEn = [
 export const shipping = {
   lines: [
     'Préparation & expédition : 24 à 48 heures ouvrées',
-    'Livraison en France & Europe : 6 à 12 jours ouvrés',
-    'Numéro de suivi complet en direct avec suivi en direct fourni par email dès expédition',
+    'Livraison aux États-Unis (USA) : 6 à 12 jours ouvrés (100% gratuite & suivie)',
+    'Numéro de suivi complet en direct fourni par email dès expédition',
     'Livraison 100% gratuite et suivie sur toutes les commandes',
   ],
   returns:
@@ -313,7 +313,7 @@ export const shipping = {
 export const shippingEn = {
   lines: [
     'Order processing & dispatch: 24 to 48 business hours',
-    'Delivery across Europe: 6 to 12 working days',
+    'Delivery to the United States (US): 6 to 12 working days (100% Free & Tracked)',
     'Full live tracking number provided via email upon dispatch',
     '100% Free tracked shipping on all orders',
   ],

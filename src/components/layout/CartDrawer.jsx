@@ -261,7 +261,7 @@ export default function CartDrawer() {
             <div className="cart__trust-strip">
               <span className="cart__trust-item">
                 <Icon name="truck" size={13} />{' '}
-                {lang === 'fr' ? 'Livraison offerte' : 'Free US Shipping'}
+                {lang === 'fr' ? 'Livraison offerte aux USA' : 'Free US Shipping'}
               </span>
               <span className="cart__trust-sep">·</span>
               <span className="cart__trust-item">

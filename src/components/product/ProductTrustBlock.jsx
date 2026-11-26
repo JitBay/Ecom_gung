@@ -42,7 +42,7 @@ export default function ProductTrustBlock({ className = '' }) {
         </div>
         <div className="product-trust-content">
           <strong>
-            {lang === 'fr' ? 'Livraison 100% Gratuite & Suivie' : 'Free Tracked Shipping'}
+            {lang === 'fr' ? 'Livraison 100% Gratuite & Suivie (USA)' : 'Free US Tracked Shipping'}
           </strong>
           <span>
             {lang === 'fr' ? 'Arrivée estimée chez vous : ' : 'Estimated Delivery: '}
