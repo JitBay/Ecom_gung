@@ -98,7 +98,7 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
               ? '1 Débardeur + 1 Demi-manches + 1 Manches longues inclus'
               : '1 Tank Top + 1 Short Sleeves + 1 Long Sleeves included',
           price: 44.99,
-          compareAt: 74.97,
+          compareAt: 104.97,
           badge: lang === 'fr' ? 'Offre Découverte Black Friday' : 'Black Friday Discovery Offer',
           freeShipping: true,
           highlight: true,
@@ -107,11 +107,13 @@ export default function ProductSection({ initialModelHandle, onModelChange, show
     }
 
     const p1 = currentModel.price;
-    const c1 = currentModel.compareAt || (p1 === 19.99 ? 39.99 : Math.round(p1 * 1.6 * 100) / 100);
+    const c1 = currentModel.compareAt || (p1 === 19.99 ? 34.99 : Math.round(p1 * 1.6 * 100) / 100);
     const p2 = Math.round(p1 * 2 * 100) / 100;
     const c2 = Math.round(c1 * 2 * 100) / 100;
     const p3 = p2;
-    const c3 = Math.round(p1 * 3 * 100) / 100;
+    const c3 = currentModel.handle === 'vela-sculpt-sans-manches'
+      ? 104.97
+      : Math.round(c1 * 3 * 100) / 100;
     const perUnit = (p3 / 3).toFixed(2);
 
     let nounEn = 'Tank';

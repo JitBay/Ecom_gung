@@ -95,7 +95,7 @@ export default function Gallery({ images, title, activeColor, videoHref }) {
   const move = (step) => setZoom((z) => (z + step + list.length) % list.length);
 
   return (
-    <div className="gallery product__gallery">
+    <div className="gallery">
       {/* DESKTOP (≥ 990px): One main image + row of thumbnails */}
       <div className="gallery__desktop">
         <div

@@ -19,7 +19,7 @@ const offersCardsData = [
     rating: 4.9,
     reviewsCount: '67',
     price: 39.98,
-    compareAt: 89.97,
+    compareAt: 104.97,
     urlBase: '/products/vela-sculpt-sans-manches',
     colorData: {
       Noir: {

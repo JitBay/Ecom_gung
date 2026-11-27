@@ -243,9 +243,6 @@ export default function CartDrawer() {
             <div className="cart__review-card">
               <div className="cart__review-header">
                 <span className="cart__review-stars">⭐⭐⭐⭐⭐</span>
-                <span className="cart__review-verified">
-                  {lang === 'fr' ? 'Acheteur vérifié' : 'Verified Buyer'}
-                </span>
               </div>
               <p className="cart__review-quote">
                 {lang === 'fr'

@@ -204,7 +204,7 @@ export default function PackDecouverteLanding() {
                 </div>
                 <div className="pdl-hero__card-price">
                   <strong>44,99 $</strong>
-                  <s>74,97 $</s>
+                  <s>104,97 $</s>
                 </div>
               </div>
             </div>
@@ -259,19 +259,19 @@ export default function PackDecouverteLanding() {
             <div className="pdl-value-strip__content">
               <h3>
                 {lang === 'fr'
-                  ? 'Valeur totale si acheté séparément : 74,97 $ · Offre spéciale pack à 44,99 $'
-                  : 'Total value if bought separately: $74.97 · Special bundle price $44.99'}
+                  ? 'Valeur totale si acheté séparément : 104,97 $ · Offre spéciale pack à 44,99 $'
+                  : 'Total value if bought separately: $104.97 · Special bundle price $44.99'}
               </h3>
               <p>
                 {lang === 'fr'
-                  ? 'En commandant le Pack Découverte, vous bénéficiez du tarif privilégié de 44,99 $ · 30 $ d\'économie avec la livraison suivie offerte en 6 à 12 jours ouvrés avec suivi complet.'
-                  : 'By ordering the Discovery Pack, you get the special bundled price of $44.99 · save $30 plus free tracked shipping in 6 to 12 working days with full tracking.'}
+                  ? 'En commandant le Pack Découverte, vous bénéficiez du tarif privilégié de 44,99 $ · 60 $ d\'économie avec la livraison suivie offerte en 6 à 12 jours ouvrés avec suivi complet.'
+                  : 'By ordering the Discovery Pack, you get the special bundled price of $44.99 · save $60 plus free tracked shipping in 6 to 12 working days with full tracking.'}
               </p>
             </div>
             <div className="pdl-value-strip__action">
               <div className="pdl-value-strip__price">
                 <strong>44,99 $</strong>
-                <s>74,97 $</s>
+                <s>104,97 $</s>
               </div>
               <a href="#product" className="btn btn--gold">
                 {lang === 'fr' ? 'Personnaliser mon pack' : 'Customize My Pack'}

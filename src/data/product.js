@@ -255,7 +255,7 @@ export const bundles = [
     title: 'Pack 2 T-shirts + 1 offert',
     subtitle: '2 T-shirts achetés + le 3ème T-shirt 100% offert.',
     price: 49.98,
-    compareAt: 74.97,
+    compareAt: 104.97,
     badge: 'Le plus choisi — 1 T-shirt offert',
     freeShipping: true,
     highlight: true,

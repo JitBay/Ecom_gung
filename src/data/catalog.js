@@ -267,7 +267,7 @@ export const products = [
     badge: 'Offre Découverte Black Friday',
     modelType: 'pack-decouverte',
     price: 44.99,
-    compareAt: 74.97,
+    compareAt: 104.97,
     rating: 4.9,
     reviewCount: 70,
     colors: ['Noir', 'Blanc', 'Gris'],
